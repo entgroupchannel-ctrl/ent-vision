@@ -399,13 +399,13 @@ const RuggedTablet = () => {
           </div>
         </section>
 
-        {/* EM Rugged Tablets */}
+        {/* Rugged Tablets - Windows & Android */}
         <section id="em-rugged">
           <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-            EM <span className="text-gradient">Rugged Tablet</span>
+            Rugged <span className="text-gradient">Tablet Collection</span>
           </h2>
-          <p className="text-sm text-muted-foreground mb-6">Rugged Tablet ระดับมืออาชีพ สำหรับงานอุตสาหกรรม โลจิสติกส์ และการแพทย์</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <p className="text-sm text-muted-foreground mb-6">แท็บเล็ตทนทานระดับอุตสาหกรรม Windows & Android พร้อมมาตรฐาน IP65-IP68</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {emRuggedTablets.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
