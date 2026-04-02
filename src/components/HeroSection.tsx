@@ -88,7 +88,7 @@ const HeroSection = () => {
 
         <div className="relative z-10 max-w-4xl mx-auto">
           <p className="text-sm md:text-base text-primary font-semibold tracking-widest uppercase mb-4 animate-fade-up">
-            สวัสดีจาก ENT GROUP
+            Mini PC Factory Outlet
           </p>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 animate-fade-up" style={{ animationDelay: "0.1s" }}>
             โซลูชัน <span className="text-gradient">Industrial Computing</span> สำหรับประเทศไทย
