@@ -202,7 +202,7 @@ const specs = [
 ];
 
 const addons = [
-  { icon: Wifi, name: "4G/LTE Module", desc: "เพิ่มซิมการ์ด เชื่อมต่ออินเตอร์เน็ตได้ทุกที่", price: "2,900" },
+  { icon: Wifi, name: "4G/LTE Module", desc: "เพิ่มซิมการ์ด เชื่อมต่ออินเตอร์เน็ตได้ทุกที่", price: "Call" },
   { icon: HardDrive, name: "SSD/HDD เพิ่มเติม", desc: "อัปเกรด Storage ตามต้องการ", price: "สอบถาม" },
   { icon: MemoryStick, name: "RAM เพิ่มเติม", desc: "อัปเกรด RAM สูงสุด 64GB", price: "สอบถาม" },
   { icon: Layers, name: "COM RS422/RS485", desc: "เพิ่มพอร์ต Serial สำหรับอุปกรณ์อุตสาหกรรม", price: "900" },
