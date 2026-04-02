@@ -41,7 +41,8 @@ const highlights = [
   {
     name: "Rugged Tablet",
     image: "https://static.wixstatic.com/media/0597a3_1f3ca942da0a4a3d834c5e7e2cf03b7a~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_36_56.png",
-    href: "https://www.entgroup.co.th/gole-series",
+    href: "/rugged-tablet",
+    internal: true,
   },
   {
     name: "EPC Panel PC",
