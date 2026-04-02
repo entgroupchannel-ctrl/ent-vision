@@ -551,42 +551,45 @@ const EPCSeries = () => {
             Price List <span className="text-gradient">ราคาสินค้า</span>
           </h2>
 
-          <Tabs defaultValue="wide-price" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-6">
+          <Tabs defaultValue="square-price" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-6">
+              <TabsTrigger value="square-price">จอแบบสี่เหลี่ยมจตุรัส</TabsTrigger>
               <TabsTrigger value="wide-price">จอภาพแบบสี่เหลี่ยมผืนผ้า</TabsTrigger>
-              <TabsTrigger value="options">Windows License / Options</TabsTrigger>
+              <TabsTrigger value="options">Windows / Options</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="wide-price">
-              <div className="card-surface overflow-hidden">
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="bg-primary/10">
-                        <TableHead className="text-primary font-bold">Display Size</TableHead>
-                        <TableHead className="text-primary font-bold">Resolution</TableHead>
-                        <TableHead className="text-primary font-bold">Processor</TableHead>
-                        <TableHead className="text-primary font-bold">Model</TableHead>
-                        <TableHead className="text-primary font-bold">Configuration</TableHead>
-                        <TableHead className="text-primary font-bold text-right">Price</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {priceListWide.map((row, i) => (
-                        <TableRow key={i}>
-                          <TableCell>{row.size}</TableCell>
-                          <TableCell>{row.res}</TableCell>
-                          <TableCell className="text-sm">{row.cpu}</TableCell>
-                          <TableCell className="font-mono text-sm">{row.model}</TableCell>
-                          <TableCell className="text-sm text-muted-foreground">{row.config}</TableCell>
-                          <TableCell className="text-right font-bold text-primary">{row.price}</TableCell>
+            {["square-price", "wide-price"].map((tabValue) => (
+              <TabsContent key={tabValue} value={tabValue}>
+                <div className="card-surface overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow className="bg-primary/10">
+                          <TableHead className="text-primary font-bold">Display Size</TableHead>
+                          <TableHead className="text-primary font-bold">Resolution</TableHead>
+                          <TableHead className="text-primary font-bold">Processor</TableHead>
+                          <TableHead className="text-primary font-bold">Model</TableHead>
+                          <TableHead className="text-primary font-bold">Configuration</TableHead>
+                          <TableHead className="text-primary font-bold text-right">Price</TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                      </TableHeader>
+                      <TableBody>
+                        {(tabValue === "square-price" ? priceListSquare : priceListWide).map((row, i) => (
+                          <TableRow key={i}>
+                            <TableCell>{row.size}</TableCell>
+                            <TableCell>{row.res}</TableCell>
+                            <TableCell className="text-sm">{row.cpu}</TableCell>
+                            <TableCell className="font-mono text-sm">{row.model}</TableCell>
+                            <TableCell className="text-sm text-muted-foreground">{row.config}</TableCell>
+                            <TableCell className="text-right font-bold text-primary">{row.price}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
                 </div>
-              </div>
-            </TabsContent>
+              </TabsContent>
+            ))}
 
             <TabsContent value="options">
               <div className="card-surface overflow-hidden">
