@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   ArrowLeft, ExternalLink, Shield, Wind, Monitor, Cpu, Zap, Factory,
   Phone, MessageCircle, ChevronLeft, ChevronRight, Settings, Wifi,
-  HardDrive, MemoryStick, Layers
+  HardDrive, MemoryStick, Layers, RectangleHorizontal, Square
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
@@ -12,6 +12,14 @@ import gty121Rear from "@/assets/gty121-rear.png";
 import gty156Side from "@/assets/gty156-side.jpg";
 import gty156Front from "@/assets/gty156-front.png";
 import gty156Rear from "@/assets/gty156-rear.png";
+import panelpcWideLineup from "@/assets/panelpc-wide-lineup.png";
+import panelpcSquareLineup from "@/assets/panelpc-square-lineup.png";
+import industryFactory from "@/assets/industry-factory.jpg";
+import industryHospital from "@/assets/industry-hospital.jpg";
+import industryKiosk from "@/assets/industry-kiosk.jpg";
+import industryWarehouse from "@/assets/industry-warehouse.jpg";
+import industryBuilding from "@/assets/industry-building.jpg";
+import industryFood from "@/assets/industry-food.jpg";
 
 /* ─── Data ─── */
 
