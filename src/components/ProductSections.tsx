@@ -3,16 +3,18 @@ import outdoorDisplayBanner from "@/assets/outdoor-display-banner.jpg";
 import waterproofPcBanner from "@/assets/waterproof-pc-banner.jpg";
 import ruggedDevicesBanner from "@/assets/rugged-devices-banner.jpg";
 import volktekBanner from "@/assets/volktek-banner.jpg";
+import touchscreenBanner from "@/assets/touchscreen-kiosk-banner.jpg";
 
 const sections = [
   {
     title: "หน้าจอสัมผัสและคีออสก์",
-    description: "เราเป็นผู้ผลิตและซัพพลายเออร์หน้าจอสัมผัสและคีออสก์แบบสัมผัสคาปาซิทีฟ เรานำโซลูชันหน้าจอสัมผัสเพื่อปรับปรุงประสิทธิภาพการดำเนินงาน ให้ประสบการณ์ของลูกค้า รวมถึงความพึงพอใจในการใช้ชีวิตของผู้คน",
-    image: "https://static.wixstatic.com/media/0597a3_5453527d666d4a7a82b7cb8d89360b84~mv2.png/v1/fill/w_1253,h_452,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-29%20at%2014_11_01.png",
+    description: "โซลูชันหน้าจอสัมผัสคาปาซิทีฟครบวงจร — POS, คีออสก์, Panel PC สำหรับร้านค้า โรงงาน และงานบริการ",
+    image: touchscreenBanner,
+    fullBackground: true,
     links: [
-      { label: "EPC Series", href: "https://www.entgroup.co.th/epc-series" },
-      { label: "EPC Box Series", href: "https://www.entgroup.co.th/epcboxseries" },
-      { label: "Touch Work", href: "https://www.entgroup.co.th/touchwork" },
+      { label: "EPC Series", href: "/epc-series" },
+      { label: "EPC Box Series", href: "/epc-box-series" },
+      { label: "KIOSK สำเร็จรูป", href: "/smart-display?tab=kiosk" },
     ],
   },
   {
