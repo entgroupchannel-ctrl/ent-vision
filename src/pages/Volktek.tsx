@@ -185,6 +185,13 @@ const Volktek = () => {
           </div>
         </section>
 
+        {/* Certifications Headline */}
+        <section className="card-surface p-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground leading-relaxed">
+            ผลิตภัณฑ์ Volktek Ethernet ได้รับการรับรองระดับสากลสำหรับการใช้งานในอุตสาหกรรมและเชิงพาณิชย์ และสอดคล้องกับมาตรฐานตลาดเพื่อความปลอดภัยและการทำงานที่แม่นยำ
+          </h2>
+        </section>
+
         {/* Certifications Banner */}
         <section className="card-surface overflow-hidden">
           <img
@@ -193,13 +200,6 @@ const Volktek = () => {
             className="w-full h-auto"
             loading="lazy"
           />
-        </section>
-
-        {/* Certifications Headline */}
-        <section className="card-surface p-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground leading-relaxed">
-            ผลิตภัณฑ์ Volktek Ethernet ได้รับการรับรองระดับสากลสำหรับการใช้งานในอุตสาหกรรมและเชิงพาณิชย์ และสอดคล้องกับมาตรฐานตลาดเพื่อความปลอดภัยและการทำงานที่แม่นยำ
-          </h2>
         </section>
 
         {/* Features */}
