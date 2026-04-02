@@ -9,6 +9,7 @@ import GTSeries from "./pages/GTSeries.tsx";
 import EPCBoxSeries from "./pages/EPCBoxSeries.tsx";
 import MiniPC from "./pages/MiniPC.tsx";
 import WaterproofPC from "./pages/WaterproofPC.tsx";
+import Volktek from "./pages/Volktek.tsx";
 import GKSeries from "./pages/GKSeries.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
