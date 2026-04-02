@@ -163,7 +163,7 @@ const WaterproofPC = () => {
           </Link>
           <div className="flex flex-col md:flex-row items-center gap-8 py-6">
             <div className="md:w-1/2">
-              <Badge className="bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20 mb-3">IP67 & IP69K Certified</Badge>
+              <Badge className="bg-primary/10 text-primary border-primary/20 mb-3">IP67 & IP69K Certified</Badge>
               <h1 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">
                 Waterproof <span className="text-gradient">Panel PC</span>
               </h1>
