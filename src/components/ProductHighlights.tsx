@@ -1,10 +1,12 @@
 import { ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const highlights = [
   {
     name: "GT Series",
     image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
-    href: "https://www.entgroup.co.th/gt-series",
+    href: "/gt-series",
+    internal: true,
   },
   {
     name: "EPC Box Series",
