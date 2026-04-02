@@ -11,6 +11,7 @@ import MiniPC from "./pages/MiniPC.tsx";
 import WaterproofPC from "./pages/WaterproofPC.tsx";
 import Volktek from "./pages/Volktek.tsx";
 import EPCSeries from "./pages/EPCSeries.tsx";
+import RuggedTablet from "./pages/RuggedTablet.tsx";
 import GKSeries from "./pages/GKSeries.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
