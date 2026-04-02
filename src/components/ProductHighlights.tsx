@@ -57,27 +57,38 @@ const ProductHighlights = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {highlights.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group card-surface p-4 flex flex-col items-center text-center hover:border-primary/30 transition-all hover:-translate-y-1"
-            >
-              <div className="w-full aspect-square flex items-center justify-center mb-4 overflow-hidden rounded-lg bg-secondary/50">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-sm md:text-base font-semibold text-foreground group-hover:text-primary transition-colors">
-                {item.name}
-              </h3>
-            </a>
-          ))}
+          {highlights.map((item) => {
+            const className = "group card-surface p-4 flex flex-col items-center text-center hover:border-primary/30 transition-all hover:-translate-y-1";
+            const content = (
+              <>
+                <div className="w-full aspect-square flex items-center justify-center mb-4 overflow-hidden rounded-lg bg-secondary/50">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-sm md:text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                  {item.name}
+                </h3>
+              </>
+            );
+
+            if ((item as any).internal) {
+              return (
+                <Link key={item.name} to={item.href} className={className}>
+                  {content}
+                </Link>
+              );
+            }
+
+            return (
+              <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className={className}>
+                {content}
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
