@@ -96,7 +96,7 @@ const HeroSection = () => {
                 {l.label}
               </a>
             )
-          ))}
+          )}
           <div className="flex items-center justify-between mt-4 gap-3">
             <ThemeToggle />
             <button
