@@ -76,7 +76,31 @@ const indoorProducts = [
   },
 ];
 
-const outdoorFeatures = [
+const fpmTouchMonitors = [
+  { no: 1, model: "FPM-0801A", config: '8"/1024x768/300nits/Resistive', price: "10,990" },
+  { no: 2, model: "FPM-0802A", config: '8"/1024x768/300nits/Capacitive', price: "12,990" },
+  { no: 3, model: "FPM-1001A", config: '10"/1024x768/300nits/Resistive', price: "12,990" },
+  { no: 4, model: "FPM-1002A", config: '10"/1024x768/300nits/Capacitive', price: "14,990" },
+  { no: 5, model: "FPM-1202A", config: '12"/1024x768/300nits/Capacitive', price: "15,990" },
+  { no: 6, model: "FPM-1501A", config: '15"/1024x768/300nits/Resistive', price: "17,990" },
+  { no: 7, model: "FPM-1502A", config: '15"/1024x768/300nits/Capacitive', price: "19,990" },
+  { no: 8, model: "FPM-1702A", config: '17"/1280x1024/300nits/Capacitive', price: "21,990" },
+  { no: 9, model: "FPM-1902A", config: '19"/1280x1024/300nits/Capacitive', price: "21,990" },
+  { no: 10, model: "FPM-1502K", config: '16"/1920x1080/300nits/Capacitive', price: "19,990" },
+  { no: 11, model: "FPM-2102K", config: '21.5"/1920x1080/300nits/Capacitive', price: "24,990" },
+  { no: 12, model: "FPM-2402KA", config: '24"/1920x1080/300nits/Capacitive', price: "Call" },
+];
+
+const fpmDatasheets = [
+  { model: "FPM-0801A", href: "https://www.entgroup.co.th/_files/ugd/005637_5e44d2b9d7cc48fa9c409252e62d861d.pdf" },
+  { model: "FPM-100XA", href: "https://www.entgroup.co.th/_files/ugd/005637_5d760f5082bb435aaa29a55ab6298a02.pdf" },
+  { model: "FPM-150XA", href: "https://www.entgroup.co.th/_files/ugd/005637_69e01e1d7ddb4da6a215f9b617bf7bd4.pdf" },
+  { model: "FPM-1202A", href: "https://www.entgroup.co.th/_files/ugd/005637_a3754cf13eaa40b09346e93fdb46c16a.pdf" },
+  { model: "FPM-1702A", href: "https://www.entgroup.co.th/_files/ugd/005637_8753cbe1d9c5428b8b55f81c9b98ee3a.pdf" },
+  { model: "FPM-1902A", href: "https://www.entgroup.co.th/_files/ugd/005637_2e25c9d6f2974be5bcfbcf356f82f568.pdf" },
+  { model: "FPM-2102K", href: "https://www.entgroup.co.th/_files/ugd/005637_ccc895a9d8314d8396843387d8120e18.pdf" },
+  { model: "FPM-2402KA", href: "https://www.entgroup.co.th/_files/ugd/005637_21234f29c0c045f380e17e101ce14e17.pdf" },
+];
   { icon: Sun, title: "ความสว่าง 1000–1600 Nits", desc: "มองเห็นชัดแม้กลางแดดจ้า" },
   { icon: Shield, title: "ทนทุกสภาพอากาศ", desc: "ทนฝุ่น ความชื้น อากาศร้อน-เย็น" },
   { icon: Monitor, title: "หลายขนาดให้เลือก", desc: '12", 17", 19", 21", 27", 32"' },
