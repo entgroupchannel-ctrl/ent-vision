@@ -45,7 +45,7 @@ const productBanners = [
 
 const ProductBanners = () => {
   return (
-    <section className="section-padding bg-surface/50">
+    <section className="pt-16 md:pt-24 pb-8 md:pb-12 px-4 md:px-8 bg-surface/50">
       <div className="container max-w-7xl mx-auto space-y-8">
         {productBanners.map((banner, i) =>
           banner.fullBackground ? (
