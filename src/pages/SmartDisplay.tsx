@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
-import smartDisplayHero from "@/assets/smart-display-hero.jpg";
+import smartDisplayHero from "@/assets/smart-display-hero.avif";
 
 /* ─── Data ─── */
 
