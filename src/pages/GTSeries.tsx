@@ -808,6 +808,32 @@ const GTSeries = () => {
                 </div>
               </div>
 
+              {/* Video Section */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT1200</h3>
+                </div>
+                <a href="https://www.entgroup.co.th/gt-series-2023" target="_blank" rel="noopener noreferrer" className="block relative group">
+                  <img
+                    src="https://static.wixstatic.com/media/005637_8fbc98531f7d46429391aeb758636e01~mv2.jpg/v1/crop/x_0,y_142,w_4404,h_1523/fill/w_1271,h_440,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ad2GTSeries2023.jpg"
+                    alt="GT1200 Video"
+                    className="w-full aspect-video object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                    <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Play className="text-primary-foreground ml-1" size={28} fill="currentColor" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4">
+                    <span className="text-white text-sm font-semibold bg-black/60 px-3 py-1 rounded-full">
+                      GT1200 Intro — 02:21
+                    </span>
+                  </div>
+                </a>
+              </div>
+
               <div className="text-center">
                 <a
                   href="https://www.entgroup.co.th/_files/ugd/0597a3_b016e32d02cf4accaa6709406df39692.pdf"
