@@ -1,6 +1,7 @@
 import { ExternalLink } from "lucide-react";
 import outdoorDisplayBanner from "@/assets/outdoor-display-banner.jpg";
 import waterproofPcBanner from "@/assets/waterproof-pc-banner.jpg";
+import ruggedDevicesBanner from "@/assets/rugged-devices-banner.jpg";
 
 const sections = [
   {
@@ -29,10 +30,11 @@ const sections = [
     links: [{ label: "ข้อมูลเพิ่มเติม", href: "https://www.entgroup.co.th/wp-pc" }],
   },
   {
-    title: "Rugged Devices",
-    description: "",
-    image: "https://static.wixstatic.com/media/0597a3_1fb35f4acfc247a4b87385bbc7414fd9~mv2.png/v1/fill/w_1254,h_459,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-11-05%20at%2011_31_49.png",
-    links: [{ label: "ข้อมูลเพิ่มเติม", href: "https://www.entgroup.co.th/rugged" }],
+    title: "Rugged Devices — ทนร้อน ทนกระแทก เกรดทหาร",
+    description: "Tablet, Notebook และ Handheld สำหรับงานคลังสินค้า งานภาคสนาม สแกน QR/Barcode กันระเบิด MIL-STD-810G มีให้เลือกหลายรุ่น",
+    image: ruggedDevicesBanner,
+    fullBackground: true,
+    links: [{ label: "ดูรุ่นทั้งหมด", href: "/rugged-tablet" }],
   },
   {
     title: "Volktek Industrial Switch",
