@@ -63,16 +63,16 @@ const gtModels = [
   },
   {
     name: "GT2000",
-    tagline: "ยอดนิยม 8 USB",
-    cpu: "Intel Celeron 1037U / Core i5",
-    ram: "4 GB",
+    tagline: "ยอดนิยม 8 USB + 4 COM",
+    cpu: "Intel Celeron 1037U / Core i5-3317U",
+    ram: "4 GB DDR3L",
     storage: "SSD 256 GB",
     ports: "USB 8 (4×3.0+4×2.0), COM 4, LAN 2, VGA+HDMI",
     size: "23.4×15×4.8 cm / 1.5 kg",
     image: "https://static.wixstatic.com/media/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg/v1/fill/w_268,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg",
-    href: "https://www.entgroup.co.th/mini-pc-gt2000",
+    tab: "gt2000",
     highlight: "ยอดนิยม",
-    price: "สอบถาม",
+    price: "15,990",
   },
   {
     name: "GT3000",
@@ -191,6 +191,7 @@ const galleryImages = [
 const modelTabs = [
   { id: "overview", label: "รุ่นทั้งหมด" },
   { id: "gt1000", label: "GT1000" },
+  { id: "gt2000", label: "GT2000" },
   { id: "gt1400", label: "GT1400" },
   { id: "gt1200", label: "GT1200" },
 ];
@@ -594,6 +595,374 @@ const GTSeries = () => {
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
                 >
                   <Download size={16} /> ดาวน์โหลด Datasheet GT1000
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: GT2000 Detail */}
+          {activeTab === "gt2000" && (
+            <div className="space-y-8 animate-fade-in">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_daa67000acbe4cba9d7c0564e200aab3~mv2.png/v1/fill/w_900,h_250,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_42_26.png"
+                  alt="GT2000 Logo"
+                  className="w-full h-[200px] md:h-[280px] object-contain bg-background p-8"
+                />
+              </div>
+
+              {/* Description + Product Image */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      Best Seller · 8 USB · 4 COM
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">2000</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Industrial PC คือเครื่องคอมพิวเตอร์เกรดอุตสาหกรรมขนาดเล็ก ที่ถูกออกแบบมาเพื่อรองรับการทำงาน
+                      ในสภาวะแวดล้อมที่มีอุณหภูมิสูง ฝุ่นละอองหนาแน่น โดยออกแบบให้มีการระบายความร้อนได้ดีและทนความร้อนได้สูง
+                      จึงเป็นเหตุผลที่ทำให้ GT2000 ทำงานได้อย่างมีประสิทธิภาพเหมาะสมกับงานอุตสาหกรรมทุกประเภทในปัจจุบัน
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-2">🔇 Fanless Design — Silent Workhorse</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      GT2000 ใช้ระบบ Fanless Design เงียบ 0 เดซิเบล โดยใช้โครงสร้าง Full Aluminum Alloy สีดำแบบ brushed finish
+                      ทำหน้าที่เป็น heatsink ขนาดใหญ่ ระบายความร้อนแบบ passive cooling ไม่มีพัดลม ทำงานได้ 24 ชั่วโมงต่อเนื่อง
+                      ทนอุณหภูมิ 0-60°C เหมาะสำหรับสภาพแวดล้อมโรงงานที่มีฝุ่นละออง เพราะไม่มีการดูดอากาศ
+                    </p>
+                  </div>
+
+                  {/* Key Specs Grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU</div>
+                      <div className="text-xs text-muted-foreground mt-1">Intel Celeron 1037U / Core i5-3317U</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM & Storage</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR3L 4–8 GB / SSD 128–512 GB</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">8 USB + 4 COM</div>
+                      <div className="text-xs text-muted-foreground mt-1">USB 3.0×4 + 2.0×4, RS232×4</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Wind className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">15W TDP</div>
+                      <div className="text-xs text-muted-foreground mt-1">Fanless 0 dB ทำงาน 24/7</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product Images */}
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg/v1/fill/w_536,h_954,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg"
+                      alt="GT2000 Front"
+                      className="w-full object-contain p-4"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      "https://static.wixstatic.com/media/005637_58feaede6057451aa5fd7afe6ec6f880~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_58feaede6057451aa5fd7afe6ec6f880~mv2.jpg",
+                      "https://static.wixstatic.com/media/005637_ab944bafb9764a7c9fec363c2e2c8ef5~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_ab944bafb9764a7c9fec363c2e2c8ef5~mv2.jpg",
+                      "https://static.wixstatic.com/media/005637_bade0d66426d44dea1328e1b2eb149b1~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_bade0d66426d44dea1328e1b2eb149b1~mv2.jpg",
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden">
+                        <img src={img} alt={`GT2000 มุมมอง ${i + 2}`} className="w-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      "https://static.wixstatic.com/media/005637_9a8e5e98c73b46a8981bfbd6ef8f682c~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_9a8e5e98c73b46a8981bfbd6ef8f682c~mv2.jpg",
+                      "https://static.wixstatic.com/media/005637_78842837709848ea983945436f0822ee~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_78842837709848ea983945436f0822ee~mv2.jpg",
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden">
+                        <img src={img} alt={`GT2000 ติดตั้งจริง ${i + 1}`} className="w-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Chassis Cooling Technology */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  🌡️ Chassis Cooling Technology
+                </h4>
+                <div className="grid md:grid-cols-2 gap-6 items-center">
+                  <div>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      GT2000 ใช้เทคโนโลยี Chassis Cooling ที่โดดเด่น โดยตัวเครื่องทั้งหมดทำหน้าที่เป็น heatsink ยักษ์
+                      ด้วยครีบระบายความร้อนอลูมิเนียมที่ออกแบบมาพิเศษ ทำให้ความร้อนกระจายออกจากพื้นผิวทั้งหมดอย่างมีประสิทธิภาพ
+                    </p>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li className="flex items-start gap-2"><span className="text-primary font-bold">✓</span> เงียบสนิท 0 เดซิเบล — ไม่มีพัดลม</li>
+                      <li className="flex items-start gap-2"><span className="text-primary font-bold">✓</span> โครงสร้างอลูมิเนียมแข็งแรงทนทาน</li>
+                      <li className="flex items-start gap-2"><span className="text-primary font-bold">✓</span> ประหยัดไฟเพียง 15W ทำงาน 24/7</li>
+                      <li className="flex items-start gap-2"><span className="text-primary font-bold">✓</span> ไม่ดูดอากาศ ปลอดฝุ่น เหมาะกับโรงงาน</li>
+                      <li className="flex items-start gap-2"><span className="text-primary font-bold">✓</span> ไม่มีชิ้นส่วนเคลื่อนไหว = เสถียรสูง</li>
+                    </ul>
+                  </div>
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/3e5003_6bf58ba61ae245ea82f96cb2171fb9b7~mv2.jpg/v1/fill/w_732,h_264,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/8.jpg"
+                      alt="GT2000 Chassis Cooling"
+                      className="w-full rounded-lg"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* CPU Detail */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  ⚡ CPU — Intel Celeron 1037U
+                </h4>
+                <div className="grid md:grid-cols-2 gap-6 items-center">
+                  <div className="overflow-hidden rounded-lg">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_2f4f2a02ac1542fb8ce44f6b78f5c5f9~mv2.png/v1/fill/w_657,h_346,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_52_19.png"
+                      alt="GT2000 CPU Detail"
+                      className="w-full"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      Intel Celeron 1037U (22nm Ivy Bridge) แบบ dual-core 2 threads ความเร็ว 1.8GHz
+                      พร้อม Intel Ivy Bridge Graphics Controller รองรับความละเอียด 1920×1080 HD
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed">
+                      ออกแบบมาเพื่องานอุตสาหกรรมที่ต้องการความเสถียรสูง ประหยัดไฟเพียง 15W ทำงาน 24 ชั่วโมงต่อเนื่อง
+                      เหมาะสำหรับการควบคุมเครื่องจักร ระบบ monitoring และ<strong className="text-foreground"> รองรับ Windows XP</strong> ที่หายากในยุคปัจจุบัน
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* I/O Port Diagram */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  🔌 I/O Port — ครบครันสำหรับงานอุตสาหกรรม
+                </h4>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_126df8ab2d554a9a8b4a6074fe4f7647~mv2.png/v1/crop/x_0,y_0,w_2136,h_669/fill/w_1235,h_387,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_59_44.png"
+                      alt="GT2000 I/O Ports Front"
+                      className="w-full rounded-lg"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_dac94b90d7444622918e2fe4f69de597~mv2.png/v1/fill/w_600,h_244,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_55_25.png"
+                      alt="GT2000 I/O Ports Rear"
+                      className="w-full rounded-lg"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                  {[
+                    { label: "USB 8 ports", desc: "4× USB 3.0 + 4× USB 2.0 — barcode, camera, external storage" },
+                    { label: "Dual Display", desc: "HDMI + VGA — 2 หน้าจอสำหรับ control room & monitoring" },
+                    { label: "2 Gigabit LAN", desc: "แยกเครือข่ายระบบผลิตและ office เพิ่มความปลอดภัย" },
+                    { label: "4 RS232 COM Port", desc: "เชื่อมต่อเครื่องจักรเก่า PLC และ sensors" },
+                    { label: "Audio Port", desc: "สำหรับระบบแจ้งเตือน" },
+                    { label: "ขนาดกะทัดรัด", desc: "23.4×15×4.8 cm น้ำหนัก 1.5 kg — wall mount ได้" },
+                  ].map((item, i) => (
+                    <div key={i} className="card-surface p-3">
+                      <div className="font-bold text-foreground mb-1">{item.label}</div>
+                      <div className="text-xs text-muted-foreground">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Port Diagram Full */}
+              <div className="card-surface p-4 overflow-hidden">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_4843a18b6dfe4330bd22479aadd69b1d~mv2.png/v1/fill/w_1058,h_1208,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2013_21_27.png"
+                  alt="GT2000 Full Port Diagram"
+                  className="w-full max-w-2xl mx-auto rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* OS Support */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  💻 รองรับ OS หลากหลาย — รวมถึง Windows XP!
+                </h4>
+                <div className="grid md:grid-cols-2 gap-6 items-center">
+                  <div>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      GT2000 รองรับระบบปฏิบัติการหลากหลาย ตั้งแต่ Windows 7, 8, 10, Linux และที่เด่นที่สุดคือ
+                      <strong className="text-foreground"> Windows XP</strong> ซึ่งหายากมากในยุคปัจจุบัน
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed">
+                      จุดเด่นนี้ทำให้ GT2000 เป็นตัวเลือกเฉพาะสำหรับโรงงานที่ยังใช้เครื่องจักรเก่าหรือซอฟต์แวร์ legacy
+                      ที่ต้องการ XP เป็นพิเศษ ให้ความยืดหยุ่นในการใช้งานและขยายอายุการใช้งานของระบบเดิมได้อย่างมีประสิทธิภาพ
+                    </p>
+                  </div>
+                  <div className="overflow-hidden rounded-lg">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_b5efadfa0e7b40619c90fec704966b11~mv2.png/v1/fill/w_663,h_422,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_45_39.png"
+                      alt="GT2000 OS Support"
+                      className="w-full"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Dimension */}
+              <div className="card-surface p-6 text-center">
+                <h4 className="text-lg font-display font-bold text-foreground mb-4">📐 ขนาดกะทัดรัด</h4>
+                <p className="text-muted-foreground mb-4">
+                  เพียง 23.4 × 15 × 4.8 cm น้ำหนัก 1.5 kg — ประมาณขนาดหนังสือเล่มใหญ่ ประหยัดพื้นที่ติดตั้ง wall mount ได้ เคลื่อนย้ายสะดวก
+                </p>
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_46573ca6a9a644e29b30118c4f839098~mv2.png/v1/fill/w_436,h_406,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2013_36_44.png"
+                  alt="GT2000 Dimensions"
+                  className="max-w-sm mx-auto rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Spec Summary */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_8cc69bc674294dc9907277ccf8235ad1~mv2.png/v1/fill/w_1036,h_700,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2013_34_30.png"
+                    alt="GT2000 Spec Summary"
+                    className="w-full max-w-xl mx-auto rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* GT2000 Price Table */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT2000 Price List</h3>
+                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น</p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-secondary/50">
+                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                        <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
+                        <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      {[
+                        { cpu: "Celeron 1037U", config: "RAM DDR3L 4GB + SSD 128GB + WIFI", price: "16,990" },
+                        { cpu: "Celeron 1037U", config: "RAM DDR3L 4GB + SSD 256GB + WIFI", price: "15,990" },
+                        { cpu: "Celeron 1037U", config: "RAM DDR3L 8GB + SSD 128GB + WIFI", price: "15,990" },
+                        { cpu: "Celeron 1037U", config: "RAM DDR3L 8GB + SSD 256GB + WIFI", price: "16,990" },
+                        { cpu: "Core i5-3317U", config: "RAM DDR3L 4GB + SSD 128GB + WIFI", price: "18,990" },
+                        { cpu: "Core i5-3317U", config: "RAM DDR3L 4GB + SSD 256GB + WIFI", price: "19,990" },
+                        { cpu: "Core i5-3317U", config: "RAM DDR3L 4GB + SSD 512GB + WIFI", price: "21,990" },
+                        { cpu: "Core i5-3317U", config: "RAM DDR3L 8GB + SSD 128GB + WIFI", price: "18,990" },
+                      ].map((item, i) => (
+                        <tr key={i} className="hover:bg-secondary/30 transition-colors">
+                          <td className="p-3 text-foreground font-medium">{item.cpu}</td>
+                          <td className="p-3 text-muted-foreground">{item.config}</td>
+                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Video Section */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT2000</h3>
+                </div>
+                <div className="grid md:grid-cols-2 gap-0 md:divide-x divide-border">
+                  <a
+                    href="https://www.youtube.com/watch?v=XLhFAF_8Da4"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative group"
+                  >
+                    <img
+                      src="https://img.youtube.com/vi/XLhFAF_8Da4/maxresdefault.jpg"
+                      alt="เปิดตัวน้องใหม่ Mini GT2000"
+                      className="w-full aspect-video object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">เปิดตัว Mini GT2000 — 04:53</span>
+                    </div>
+                  </a>
+                  <a
+                    href="https://www.youtube.com/watch?v=ifkzyVY9Z-g"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative group"
+                  >
+                    <img
+                      src="https://img.youtube.com/vi/ifkzyVY9Z-g/maxresdefault.jpg"
+                      alt="การเลือกซื้อคอมพิวเตอร์สำหรับงานอุตสาหกรรม GT Series"
+                      className="w-full aspect-video object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">การเลือกซื้อ GT Series — 14:20</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              {/* Datasheet CTA */}
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/3e5003_2ec45fc02f844ea7a10372cb6b9006bd.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> Datasheet GT2000 Celeron
+                </a>
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/005637_8c19b311f6864f2281173416d4678d2d.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-surface-hover transition-colors"
+                >
+                  <Download size={16} /> Datasheet GT2000 Core i5
                 </a>
               </div>
             </div>
