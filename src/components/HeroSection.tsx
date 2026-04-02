@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Search, Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import heroIndustrial from "@/assets/hero-industrial.jpg";
