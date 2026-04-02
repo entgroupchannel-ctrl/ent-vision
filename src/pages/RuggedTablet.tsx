@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Shield, Droplets, Battery, Smartphone, Monitor, Download, ChevronLeft, ChevronRight, Wifi } from "lucide-react";
+import ruggedHero from "@/assets/rugged-tablet-hero.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -222,19 +223,15 @@ const RuggedTablet = () => {
     <div className="min-h-screen bg-background">
       {/* Hero */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/5" />
+        {/* Hero Background */}
+        <div className="absolute inset-0">
+          <img src={ruggedHero} alt="" className="w-full h-full object-cover" width={1920} height={640} />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
+        </div>
         <div className="container max-w-7xl mx-auto px-4 py-6 relative z-10">
           <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-4">
             <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
           </Link>
-
-          <div className="card-surface overflow-hidden mb-8">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_8b5479cc6a1342db890862413f797f37~mv2.png/v1/fill/w_849,h_474,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%81%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD%20Gole%20Rugged%20Banner.png"
-              alt="Rugged Tablet Banner"
-              className="w-full h-auto"
-            />
-          </div>
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
@@ -423,6 +420,18 @@ const RuggedTablet = () => {
             {pipoModels.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
+          </div>
+        </section>
+
+        {/* Buying Guide Banner */}
+        <section>
+          <div className="card-surface overflow-hidden">
+            <img
+              src="https://static.wixstatic.com/media/0597a3_8b5479cc6a1342db890862413f797f37~mv2.png/v1/fill/w_849,h_474,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%81%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD%20Gole%20Rugged%20Banner.png"
+              alt="คู่มือเลือกซื้อ PC และแท็บเล็ตหน้าจอสัมผัส"
+              className="w-full h-auto"
+              loading="lazy"
+            />
           </div>
         </section>
 
