@@ -1,5 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import outdoorDisplayBanner from "@/assets/outdoor-display-banner.jpg";
+import waterproofPcBanner from "@/assets/waterproof-pc-banner.jpg";
 
 const sections = [
   {
