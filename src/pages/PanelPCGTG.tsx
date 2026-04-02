@@ -226,6 +226,7 @@ const fmt = (n: number) => n.toLocaleString();
 /* ─── Component ─── */
 
 const PanelPC = () => {
+  const [showLineQR, setShowLineQR] = useState(false);
   const [activeCpu, setActiveCpu] = useState("j1900");
   const [coolingFilter, setCoolingFilter] = useState<"all" | "FANLESS" | "FAN">("all");
   const [sizeFilter, setSizeFilter] = useState<"all" | "small" | "medium" | "large">("all");
@@ -785,11 +786,49 @@ import gtgSeries from "@/assets/gtg-series.png";
             <a href="tel:0957391053" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary transition-colors">
               <Phone size={18} /> 095-739-1053
             </a>
-            <a href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[hsl(142,70%,45%)] text-white font-bold hover:opacity-90 transition-opacity">
+            <button onClick={() => setShowLineQR(true)}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[hsl(142,70%,45%)] text-white font-bold hover:opacity-90 transition-opacity cursor-pointer">
               <MessageCircle size={18} /> Line @entgroup
-            </a>
+            </button>
           </div>
+
+          {/* LINE QR Dialog */}
+          {showLineQR && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowLineQR(false)}>
+              <div className="bg-background rounded-2xl p-8 max-w-sm w-full mx-4 shadow-2xl border border-border" onClick={(e) => e.stopPropagation()}>
+                <div className="text-center">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(142,70%,45%)]/10 text-[hsl(142,70%,45%)] text-sm font-bold mb-4">
+                    <MessageCircle size={16} /> LINE Official
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground mb-2">เพิ่มเพื่อน @entgroup</h3>
+                  <p className="text-sm text-muted-foreground mb-6">สแกน QR Code หรือกดปุ่มด้านล่างเพื่อเพิ่มเพื่อน</p>
+                  <div className="bg-white rounded-xl p-4 mb-6 inline-block">
+                    <img
+                      src="https://qr-official.line.me/gs/M_entgroup_BW.png"
+                      alt="LINE QR Code @entgroup"
+                      className="w-48 h-48 object-contain"
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <a
+                      href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 w-full px-6 py-3 rounded-xl bg-[hsl(142,70%,45%)] text-white font-bold hover:opacity-90 transition-opacity"
+                    >
+                      <MessageCircle size={18} /> เพิ่มเพื่อนใน LINE
+                    </a>
+                    <button
+                      onClick={() => setShowLineQR(false)}
+                      className="w-full px-6 py-3 rounded-xl border border-border text-muted-foreground font-medium hover:bg-secondary transition-colors"
+                    >
+                      ปิด
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
             {[{ label: "📦 Sample", time: "3–5 วัน" }, { label: "📦 50 ชิ้น", time: "10–15 วัน" }, { label: "📦 100+", time: "15–30 วัน" }].map((lt) => (
               <div key={lt.label} className="card-surface p-4 text-center">
