@@ -86,10 +86,16 @@ const HeroSection = () => {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 z-30 bg-card border-b border-border p-6 animate-fade-in">
-          {navLinks.map((l) => (
-            <a key={l.label} href={l.href} onClick={() => setMobileMenuOpen(false)} className="block py-3 text-foreground font-medium">
-              {l.label}
-            </a>
+          {navLinks.map((l) =>
+            l.href.startsWith("/") ? (
+              <Link key={l.label} to={l.href} onClick={() => setMobileMenuOpen(false)} className="block py-3 text-foreground font-medium">
+                {l.label}
+              </Link>
+            ) : (
+              <a key={l.label} href={l.href} onClick={() => setMobileMenuOpen(false)} className="block py-3 text-foreground font-medium">
+                {l.label}
+              </a>
+            )
           ))}
           <div className="flex items-center justify-between mt-4 gap-3">
             <ThemeToggle />
