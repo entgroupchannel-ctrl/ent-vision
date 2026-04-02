@@ -194,15 +194,6 @@ const Volktek = () => {
           <img src={volktekCertifications} alt="Volktek Certifications - Profinet, Modbus, CE, FCC, RoHS, DNV GL" className="w-full max-w-4xl mx-auto h-auto" />
         </section>
 
-        {/* Certifications Banner */}
-        <section className="card-surface overflow-hidden">
-          <img
-            src="https://static.wixstatic.com/media/0597a3_146ea60e05f840d080033b7e61ad1574~mv2.png/v1/fill/w_1296,h_479,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2012_45_34.png"
-            alt="Volktek Certifications"
-            className="w-full h-auto"
-            loading="lazy"
-          />
-        </section>
 
         {/* Features */}
         <section>
