@@ -76,6 +76,32 @@ const indoorProducts = [
   },
 ];
 
+const fpmTouchMonitors = [
+  { no: 1, model: "FPM-0801A", config: '8"/1024x768/300nits/Resistive', price: "10,990" },
+  { no: 2, model: "FPM-0802A", config: '8"/1024x768/300nits/Capacitive', price: "12,990" },
+  { no: 3, model: "FPM-1001A", config: '10"/1024x768/300nits/Resistive', price: "12,990" },
+  { no: 4, model: "FPM-1002A", config: '10"/1024x768/300nits/Capacitive', price: "14,990" },
+  { no: 5, model: "FPM-1202A", config: '12"/1024x768/300nits/Capacitive', price: "15,990" },
+  { no: 6, model: "FPM-1501A", config: '15"/1024x768/300nits/Resistive', price: "17,990" },
+  { no: 7, model: "FPM-1502A", config: '15"/1024x768/300nits/Capacitive', price: "19,990" },
+  { no: 8, model: "FPM-1702A", config: '17"/1280x1024/300nits/Capacitive', price: "21,990" },
+  { no: 9, model: "FPM-1902A", config: '19"/1280x1024/300nits/Capacitive', price: "21,990" },
+  { no: 10, model: "FPM-1502K", config: '16"/1920x1080/300nits/Capacitive', price: "19,990" },
+  { no: 11, model: "FPM-2102K", config: '21.5"/1920x1080/300nits/Capacitive', price: "24,990" },
+  { no: 12, model: "FPM-2402KA", config: '24"/1920x1080/300nits/Capacitive', price: "Call" },
+];
+
+const fpmDatasheets = [
+  { model: "FPM-0801A", href: "https://www.entgroup.co.th/_files/ugd/005637_5e44d2b9d7cc48fa9c409252e62d861d.pdf" },
+  { model: "FPM-100XA", href: "https://www.entgroup.co.th/_files/ugd/005637_5d760f5082bb435aaa29a55ab6298a02.pdf" },
+  { model: "FPM-150XA", href: "https://www.entgroup.co.th/_files/ugd/005637_69e01e1d7ddb4da6a215f9b617bf7bd4.pdf" },
+  { model: "FPM-1202A", href: "https://www.entgroup.co.th/_files/ugd/005637_a3754cf13eaa40b09346e93fdb46c16a.pdf" },
+  { model: "FPM-1702A", href: "https://www.entgroup.co.th/_files/ugd/005637_8753cbe1d9c5428b8b55f81c9b98ee3a.pdf" },
+  { model: "FPM-1902A", href: "https://www.entgroup.co.th/_files/ugd/005637_2e25c9d6f2974be5bcfbcf356f82f568.pdf" },
+  { model: "FPM-2102K", href: "https://www.entgroup.co.th/_files/ugd/005637_ccc895a9d8314d8396843387d8120e18.pdf" },
+  { model: "FPM-2402KA", href: "https://www.entgroup.co.th/_files/ugd/005637_21234f29c0c045f380e17e101ce14e17.pdf" },
+];
+
 const outdoorFeatures = [
   { icon: Sun, title: "ความสว่าง 1000–1600 Nits", desc: "มองเห็นชัดแม้กลางแดดจ้า" },
   { icon: Shield, title: "ทนทุกสภาพอากาศ", desc: "ทนฝุ่น ความชื้น อากาศร้อน-เย็น" },
@@ -237,6 +263,99 @@ const SmartDisplay = () => {
                 </div>
                 <div className="card-surface overflow-hidden">
                   <img src="https://static.wixstatic.com/media/0597a3_57760701aff84e30b2efd1cdda15df62~mv2.png/v1/crop/x_0,y_0,w_1836,h_1127/fill/w_1223,h_751,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-09%20at%2013_20_59.png" alt="Display showcase" className="w-full object-cover" loading="lazy" />
+                </div>
+              </div>
+
+              {/* Industrial Touch Monitor — FPM Series */}
+              <div className="mt-16">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">Touch Only</span>
+                  <span className="px-3 py-1 rounded-full bg-accent/10 text-accent-foreground text-xs font-bold">เกรดอุตสาหกรรม</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-2">
+                  Industrial Touch Monitor — <span className="text-primary">FPM Series</span>
+                </h3>
+                <p className="text-muted-foreground max-w-3xl mb-3">
+                  จอภาพสัมผัสเกรดอุตสาหกรรม IP65 สำหรับงาน HMI, CNC, Factory Automation, ระบบทหาร และ Big Data — เชื่อมต่อ USB + HDMI กับคอมพิวเตอร์ที่มีอยู่ เปลี่ยนเป็นระบบสัมผัสได้ทันที
+                </p>
+                <div className="flex flex-wrap gap-4 mb-8 text-sm text-muted-foreground">
+                  <span>✅ ขนาด 8"–24"</span>
+                  <span>✅ Capacitive / Resistive Touch</span>
+                  <span>✅ IP65 Front Panel</span>
+                  <span>✅ Wide & Square Screen</span>
+                  <span>✅ สูงสุด 1000 Nits</span>
+                  <span>✅ ทำงาน 24/7</span>
+                </div>
+
+                {/* Product image */}
+                <div className="card-surface overflow-hidden rounded-xl mb-8">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_7ae90fd5a4fd425d9cc9efad0a31c636~mv2.png/v1/fill/w_1317,h_485,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_7ae90fd5a4fd425d9cc9efad0a31c636~mv2.png"
+                    alt="FPM Series Industrial Touch Monitor"
+                    className="w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+
+                {/* Price table */}
+                <div className="card-surface overflow-hidden rounded-xl">
+                  <div className="p-4 border-b border-border bg-secondary/30">
+                    <h4 className="font-bold text-foreground">ราคา FPM Touch Monitor — เริ่มต้น ฿10,990</h4>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-border bg-secondary/20">
+                          <th className="text-left p-3 font-semibold text-muted-foreground">#</th>
+                          <th className="text-left p-3 font-semibold text-muted-foreground">รุ่น</th>
+                          <th className="text-left p-3 font-semibold text-muted-foreground">สเปค</th>
+                          <th className="text-right p-3 font-semibold text-muted-foreground">ราคา (฿)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {fpmTouchMonitors.map((item) => (
+                          <tr key={item.no} className="border-b border-border/50 hover:bg-secondary/20 transition-colors">
+                            <td className="p-3 text-muted-foreground">{item.no}</td>
+                            <td className="p-3 font-semibold text-foreground">{item.model}</td>
+                            <td className="p-3 text-muted-foreground">{item.config}</td>
+                            <td className="p-3 text-right font-bold text-primary">{item.price}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Datasheet downloads */}
+                <div className="mt-6">
+                  <h4 className="font-bold text-foreground mb-3 flex items-center gap-2"><Download size={16} /> ดาวน์โหลด Datasheet</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {fpmDatasheets.map((d) => (
+                      <a
+                        key={d.model}
+                        href={d.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-secondary hover:border-primary/30 transition-all"
+                      >
+                        <Download size={12} /> {d.model}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Gallery */}
+                <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {[
+                    "https://static.wixstatic.com/media/0597a3_bcb05795214544aaaa6de89e36e1240d~mv2.jpg/v1/fill/w_242,h_161,q_90,enc_avif,quality_auto/0597a3_bcb05795214544aaaa6de89e36e1240d~mv2.jpg",
+                    "https://static.wixstatic.com/media/0597a3_5296e6c18d9c46eda07b3c9a4747484d~mv2.jpg/v1/fill/w_242,h_161,q_90,enc_avif,quality_auto/0597a3_5296e6c18d9c46eda07b3c9a4747484d~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_c40ca1d586a44b1ca9fc90cf2c49af6a~mv2.jpg/v1/fill/w_276,h_254,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0148.jpg",
+                    "https://static.wixstatic.com/media/005637_6ba3b2af125d4948b5d9d6c626135c1f~mv2.jpg/v1/fill/w_278,h_254,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0140.jpg",
+                  ].map((src, i) => (
+                    <div key={i} className="card-surface overflow-hidden rounded-xl">
+                      <img src={src} alt={`FPM installation ${i + 1}`} className="w-full h-40 object-cover" loading="lazy" />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
