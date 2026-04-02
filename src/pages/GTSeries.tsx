@@ -900,11 +900,12 @@ const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
       />
     </div>
     <div className="p-5">
-      <h3 className="text-xl font-display font-bold text-foreground mb-3 group-hover:text-primary transition-colors flex items-center gap-2">
+      <h3 className="text-xl font-display font-bold text-foreground mb-1 group-hover:text-primary transition-colors flex items-center gap-2">
         {model.name}
         {model.tab && <span className="text-xs text-primary font-normal">ดูรายละเอียด →</span>}
         {model.href && !model.tab && <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />}
       </h3>
+      <p className="text-xs font-semibold text-primary mb-3">"{model.tagline}"</p>
       <div className="space-y-2 text-sm">
         <div className="flex items-start gap-2">
           <Cpu size={14} className="text-primary mt-0.5 shrink-0" />
@@ -919,6 +920,12 @@ const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
           <span className="text-muted-foreground">{model.ports}</span>
         </div>
       </div>
+      {model.price && (
+        <div className="mt-3 pt-3 border-t border-border">
+          <span className="text-sm text-muted-foreground">เริ่มต้น </span>
+          <span className="font-bold text-foreground">{model.price.startsWith("สอบถาม") ? model.price : `฿${model.price}`}</span>
+        </div>
+      )}
     </div>
   </>
 );
