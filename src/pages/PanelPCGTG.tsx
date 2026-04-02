@@ -226,6 +226,7 @@ const fmt = (n: number) => n.toLocaleString();
 /* ─── Component ─── */
 
 const PanelPC = () => {
+  const [showLineQR, setShowLineQR] = useState(false);
   const [activeCpu, setActiveCpu] = useState("j1900");
   const [coolingFilter, setCoolingFilter] = useState<"all" | "FANLESS" | "FAN">("all");
   const [sizeFilter, setSizeFilter] = useState<"all" | "small" | "medium" | "large">("all");
