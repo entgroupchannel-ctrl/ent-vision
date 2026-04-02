@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/hooks/use-theme";
 import Index from "./pages/Index.tsx";
 import GTSeries from "./pages/GTSeries.tsx";
+import EPCBoxSeries from "./pages/EPCBoxSeries.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/gt-series" element={<GTSeries />} />
+            <Route path="/epc-box-series" element={<EPCBoxSeries />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
