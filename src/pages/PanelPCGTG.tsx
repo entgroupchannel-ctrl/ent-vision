@@ -246,7 +246,7 @@ const PanelPC = () => {
               <img src={logo} alt="ENT GROUP" className="h-8 w-auto" />
             </Link>
             <span className="text-muted-foreground">/</span>
-            <span className="text-sm font-semibold text-foreground">Panel PC</span>
+            <span className="text-sm font-semibold text-foreground">GTY/GTG Panel PC</span>
           </div>
           <div className="flex items-center gap-3">
             <ThemeToggle />
