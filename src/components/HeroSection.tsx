@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Search, Menu, X } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const searchTags = [
