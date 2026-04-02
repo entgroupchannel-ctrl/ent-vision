@@ -35,7 +35,8 @@ const highlights = [
   {
     name: "Volktek",
     image: "https://static.wixstatic.com/media/0597a3_756a4a09e31d4b6d85eb8da1da91f781~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_39_10.png",
-    href: "https://www.entgroup.co.th/volktek",
+    href: "/volktek",
+    internal: true,
   },
   {
     name: "Rugged Tablet",
