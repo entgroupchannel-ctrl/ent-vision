@@ -516,7 +516,7 @@ const PanelPC = () => {
           </div>
         </div>
       </section>
-
+import gtgSeries from "@/assets/gtg-series.png";
 
       <section className="section-padding bg-surface/50">
         <div className="container max-w-7xl mx-auto">
