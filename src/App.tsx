@@ -8,6 +8,7 @@ import Index from "./pages/Index.tsx";
 import GTSeries from "./pages/GTSeries.tsx";
 import EPCBoxSeries from "./pages/EPCBoxSeries.tsx";
 import MiniPC from "./pages/MiniPC.tsx";
+import WaterproofPC from "./pages/WaterproofPC.tsx";
 import GKSeries from "./pages/GKSeries.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
