@@ -394,12 +394,11 @@ const GTSeries = () => {
           {activeTab === "gt1000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden">
+              <div className="card-surface overflow-hidden rounded-2xl">
                 <img
-                  src="https://static.wixstatic.com/media/3e5003_1654215f900c48fdbc594d46658d067b~mv2.jpg/v1/fill/w_1270,h_590,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/22.jpg"
+                  src={gt1000Hero}
                   alt="GT1000 Industrial PC"
-                  className="w-full"
-                  loading="lazy"
+                  className="w-full h-[300px] md:h-[400px] object-cover"
                 />
               </div>
 
