@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import smartDisplayBanner from "@/assets/smart-display-banner.avif";
 
 const productBanners = [
   {
