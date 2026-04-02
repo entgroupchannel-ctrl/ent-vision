@@ -101,6 +101,8 @@ const fpmDatasheets = [
   { model: "FPM-2102K", href: "https://www.entgroup.co.th/_files/ugd/005637_ccc895a9d8314d8396843387d8120e18.pdf" },
   { model: "FPM-2402KA", href: "https://www.entgroup.co.th/_files/ugd/005637_21234f29c0c045f380e17e101ce14e17.pdf" },
 ];
+
+const outdoorFeatures = [
   { icon: Sun, title: "ความสว่าง 1000–1600 Nits", desc: "มองเห็นชัดแม้กลางแดดจ้า" },
   { icon: Shield, title: "ทนทุกสภาพอากาศ", desc: "ทนฝุ่น ความชื้น อากาศร้อน-เย็น" },
   { icon: Monitor, title: "หลายขนาดให้เลือก", desc: '12", 17", 19", 21", 27", 32"' },
