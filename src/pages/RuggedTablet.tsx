@@ -406,7 +406,7 @@ const categories = [
 const ITEMS_PER_PAGE = 10;
 
 /* ───── Product Card ───── */
-const ProductCard = ({ product }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string } }) => (
+const ProductCard = ({ product }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string } }) => (
   <div className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
     {product.image && (
       <div className="bg-secondary/30 p-4 flex items-center justify-center h-48">
@@ -422,7 +422,14 @@ const ProductCard = ({ product }: { product: { name: string; size?: string; high
       {product.price && (
         <p className="text-sm font-bold text-primary">{product.price}</p>
       )}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
+        {product.productUrl && (
+          <Button variant="outline" size="sm" asChild className="flex-1">
+            <a href={product.productUrl} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
+            </a>
+          </Button>
+        )}
         {product.datasheet && (
           <Button variant="outline" size="sm" asChild className="flex-1">
             <a href={product.datasheet} target="_blank" rel="noopener noreferrer">
