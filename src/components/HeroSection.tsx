@@ -59,11 +59,17 @@ const HeroSection = () => {
           <img src={logo} alt="ENT GROUP" className="h-10 w-auto brightness-0 invert" />
         </a>
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((l) => (
-            <a key={l.label} href={l.href} className="text-sm font-medium text-white/70 hover:text-white transition-colors">
-              {l.label}
-            </a>
-          ))}
+          {navLinks.map((l) =>
+            l.href.startsWith("/") ? (
+              <Link key={l.label} to={l.href} className="text-sm font-medium text-white/70 hover:text-white transition-colors">
+                {l.label}
+              </Link>
+            ) : (
+              <a key={l.label} href={l.href} className="text-sm font-medium text-white/70 hover:text-white transition-colors">
+                {l.label}
+              </a>
+            )
+          )}
           <ThemeToggle />
           <button
             onClick={() => setShowLineQR(true)}
