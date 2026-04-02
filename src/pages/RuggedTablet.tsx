@@ -362,7 +362,6 @@ const categories = [
   { id: "aio", label: "All-in-One PC" },
   { id: "handheld", label: "Handheld & PDA" },
   { id: "tpc", label: "TPC Series" },
-  { id: "pipo", label: "PIPO" },
   { id: "pricelist", label: "Price List" },
   { id: "downloads", label: "Downloads" },
 ];
