@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Search, Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import heroIndustrial from "@/assets/hero-industrial.jpg";
@@ -19,6 +20,7 @@ const searchTags = [
 
 const navLinks = [
   { label: "สินค้า", href: "#products" },
+  { label: "Smart Display", href: "/smart-display" },
   { label: "บริการ", href: "#services" },
   { label: "โปรโมชั่น", href: "#promotions" },
   { label: "ติดต่อเรา", href: "#contact" },
@@ -57,11 +59,17 @@ const HeroSection = () => {
           <img src={logo} alt="ENT GROUP" className="h-10 w-auto brightness-0 invert" />
         </a>
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((l) => (
-            <a key={l.label} href={l.href} className="text-sm font-medium text-white/70 hover:text-white transition-colors">
-              {l.label}
-            </a>
-          ))}
+          {navLinks.map((l) =>
+            l.href.startsWith("/") ? (
+              <Link key={l.label} to={l.href} className="text-sm font-medium text-white/70 hover:text-white transition-colors">
+                {l.label}
+              </Link>
+            ) : (
+              <a key={l.label} href={l.href} className="text-sm font-medium text-white/70 hover:text-white transition-colors">
+                {l.label}
+              </a>
+            )
+          )}
           <ThemeToggle />
           <button
             onClick={() => setShowLineQR(true)}
@@ -78,11 +86,17 @@ const HeroSection = () => {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 z-30 bg-card border-b border-border p-6 animate-fade-in">
-          {navLinks.map((l) => (
-            <a key={l.label} href={l.href} onClick={() => setMobileMenuOpen(false)} className="block py-3 text-foreground font-medium">
-              {l.label}
-            </a>
-          ))}
+          {navLinks.map((l) =>
+            l.href.startsWith("/") ? (
+              <Link key={l.label} to={l.href} onClick={() => setMobileMenuOpen(false)} className="block py-3 text-foreground font-medium">
+                {l.label}
+              </Link>
+            ) : (
+              <a key={l.label} href={l.href} onClick={() => setMobileMenuOpen(false)} className="block py-3 text-foreground font-medium">
+                {l.label}
+              </a>
+            )
+          )}
           <div className="flex items-center justify-between mt-4 gap-3">
             <ThemeToggle />
             <button
