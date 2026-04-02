@@ -63,14 +63,17 @@ const HeroSection = () => {
               {l.label}
             </a>
           ))}
-          <a
-            href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 block text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
-          >
-            LINE @entgroup
-          </a>
+          <div className="flex items-center justify-between mt-4 gap-3">
+            <ThemeToggle />
+            <a
+              href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
+            >
+              LINE @entgroup
+            </a>
+          </div>
         </div>
       )}
 
