@@ -1558,6 +1558,328 @@ const GTSeries = () => {
             </div>
           )}
 
+          {/* Tab: GT5000 Detail */}
+          {activeTab === "gt5000" && (
+            <div className="space-y-8 animate-fade-in">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_f34de018f5de4ff9a3c4704536bd6731~mv2.png/v1/fill/w_886,h_276,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_17_08.png"
+                  alt="GT5000 Logo"
+                  className="w-full h-[180px] md:h-[250px] object-contain bg-background p-8"
+                />
+              </div>
+
+              {/* Description + Product Image */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      GPIO · SIM Slot · RS485/RS422 · IoT Ready
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">5000</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Industrial PC คือเครื่องคอมพิวเตอร์เกรดอุตสาหกรรมขนาดเล็ก ที่ถูกออกแบบมาเพื่อรองรับการทำงาน
+                      ในสภาวะแวดล้อมที่มีอุณหภูมิสูง ฝุ่นละอองหนาแน่น โดยออกแบบให้มีการระบายความร้อนได้ดีและทนความร้อนได้สูง
+                      จึงเป็นเหตุผลที่ทำให้ GT5000 ทำงานได้อย่างมีประสิทธิภาพเหมาะสมกับงานอุตสาหกรรมทุกประเภท
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-2">📡 GPIO + SIM + RS485/RS422 — IoT Ready</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      GT5000 มีพอร์ต GPIO และ RS232 × 6 ช่อง พิเศษยิ่งกว่านั้น COM1 + COM2 สามารถตั้งค่าเป็น RS485/RS422 ได้
+                      พร้อมช่อง Micro SIM with PUSH function สำหรับเชื่อมต่อ 4G/5G ทำให้พร้อมสำหรับงาน IoT ทันที
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-secondary">
+                    <h4 className="font-bold text-foreground mb-2">⚡ GPIO คืออะไร?</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      GPIO (General Purpose Input/Output) คือพอร์ตเอนกประสงค์ที่สามารถควบคุมให้เป็น "1" หรือ "0" ได้ตามใจชอบ
+                      โดยควบคุมแต่ละ PIN เหมือนไมโครคอนโทรลเลอร์ นำไปต่อยอดได้หลากหลาย เช่น ควบคุมการเปิด/ปิดอุปกรณ์
+                      ต่อกับจอ LCD, relay, sensor โดยตรง
+                    </p>
+                  </div>
+
+                  {/* Key Specs Grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU</div>
+                      <div className="text-xs text-muted-foreground mt-1">Intel Core i5-4200U / i7-4500U</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM & Storage</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR3L 4–8 GB / SSD 128 GB – 1 TB</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">6 COM + GPIO + SIM</div>
+                      <div className="text-xs text-muted-foreground mt-1">RS232/RS485/RS422, Micro SIM</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Wind className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Fanless 24/7</div>
+                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB ทนอุณหภูมิ 0-60°C</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product Images */}
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_68700c8f94f94588be18d47414929b55f000.jpg/v1/fill/w_592,h_1044,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_68700c8f94f94588be18d47414929b55f000.jpg"
+                      alt="GT5000 Front"
+                      className="w-full object-contain p-4"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Port & Connectivity */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  🔌 Port Connectivity — ครบจบในเครื่องเดียว
+                </h4>
+                <img
+                  src="https://static.wixstatic.com/media/3e5003_617b36aa9ca7485aa099fb80f46364de~mv2.jpg/v1/fill/w_1300,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.jpg"
+                  alt="GT5000 Port Overview"
+                  className="w-full rounded-lg mb-6"
+                  loading="lazy"
+                />
+                <div className="grid md:grid-cols-2 gap-6">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_bb9ec7f103ed423a84c3e1af33441b01~mv2.png/v1/fill/w_600,h_267,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_01_59.png"
+                    alt="GT5000 Front Ports"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_f5f0f43a56cf42129538582fe0075a6f~mv2.png/v1/fill/w_600,h_434,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_52_38.png"
+                    alt="GT5000 Rear Ports"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                  {[
+                    { label: "6 COM Port", desc: "RS232 × 6 — COM1+COM2 ตั้งค่าเป็น RS485/RS422 ได้" },
+                    { label: "GPIO Port", desc: "ควบคุมอุปกรณ์ภายนอก relay, sensor, LCD โดยตรง" },
+                    { label: "Micro SIM Slot", desc: "รองรับ 4G/5G SIM พร้อม PUSH function" },
+                    { label: "USB 8 ports", desc: "เชื่อมต่อ barcode, camera, storage พร้อมกัน" },
+                    { label: "Dual Display", desc: "VGA + HDMI — 2 หน้าจอ control & monitoring" },
+                    { label: "2 Gigabit LAN", desc: "แยกเครือข่ายระบบผลิตและ office" },
+                  ].map((item, i) => (
+                    <div key={i} className="card-surface p-3">
+                      <div className="font-bold text-foreground mb-1">{item.label}</div>
+                      <div className="text-xs text-muted-foreground">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* GPIO Detail */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_cda761cbfb2749c89f401db85687eca3~mv2.png/v1/fill/w_854,h_256,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GPIO002.png"
+                    alt="GT5000 GPIO Port"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_7fa9f95958144fafb0ad73bbecf655b8~mv2.png/v1/crop/x_84,y_40,w_704,h_606/fill/w_403,h_346,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_46_44.png"
+                    alt="GT5000 SIM Slot"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Detailed Spec Diagrams */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_ddb56bce25de4abea0a2d39bffb2d713~mv2.png/v1/fill/w_600,h_253,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_23_24.png"
+                    alt="GT5000 Spec Detail 1"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_16a85cbfb5e044ccb23d787b4a8bf214~mv2.png/v1/fill/w_438,h_375,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_19_01.png"
+                    alt="GT5000 Spec Detail 2"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Additional Spec Images */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_f9c12154e3784f19820dc6c92ab1233a~mv2.png/v1/fill/w_501,h_253,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_55_02.png"
+                    alt="GT5000 Internal"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_0fb82b9a50ee42979d68ae304d18184f~mv2.png/v1/fill/w_501,h_289,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_39_48.png"
+                    alt="GT5000 Application"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Real-world Photos */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/3e5003_353f2e1c28cd4ced91fa948dd3a20563~mv2_d_2000_2000_s_2.jpg/v1/crop/x_0,y_10,w_2000,h_1395/fill/w_420,h_289,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/5.jpg",
+                  "https://static.wixstatic.com/media/3e5003_3b9a3c13be6d40818c8d1ea360ec47e5~mv2_d_2000_2000_s_2.jpg/v1/crop/x_5,y_629,w_1995,h_1366/fill/w_420,h_289,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/55.jpg",
+                  "https://static.wixstatic.com/media/3e5003_49a9b217d7a34a91a854b102d6b82ab2~mv2.jpg/v1/fill/w_449,h_289,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/workshop-assembling-televisions_88135-20.jpg",
+                  "https://static.wixstatic.com/media/0597a3_7717b28cf6f342e28792f638f1897be6~mv2.jpg/v1/fill/w_454,h_456,q_90,enc_avif,quality_auto/0597a3_7717b28cf6f342e28792f638f1897be6~mv2.jpg",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden">
+                    <img src={img} alt={`GT5000 ใช้งานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Application Photos */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/0597a3_7e0cb5260eb24a959851af54ee40888a~mv2.jpg/v1/fill/w_454,h_454,q_90,enc_avif,quality_auto/0597a3_7e0cb5260eb24a959851af54ee40888a~mv2.jpg",
+                  "https://static.wixstatic.com/media/0597a3_2fe2c45da02a451db7bd76de10edea54~mv2.jpg/v1/fill/w_454,h_456,q_90,enc_avif,quality_auto/0597a3_2fe2c45da02a451db7bd76de10edea54~mv2.jpg",
+                  "https://static.wixstatic.com/media/0597a3_93b14d0607e34448872fe4f1036ae10e~mv2.jpg/v1/fill/w_454,h_454,q_90,enc_avif,quality_auto/0597a3_93b14d0607e34448872fe4f1036ae10e~mv2.jpg",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden aspect-square">
+                    <img src={img} alt={`GT5000 Application ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* GT5000 Price Table */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT5000 Price List</h3>
+                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿19,490</p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-secondary/50">
+                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                        <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
+                        <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
+                        <th className="text-left p-3 font-semibold text-foreground">หมายเหตุ</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      {[
+                        { cpu: "i5-4200U", config: "RAM 4GB + SSD 128GB + WIFI", price: "19,490", remark: "" },
+                        { cpu: "i5-4200U", config: "RAM 4GB + SSD 256GB + WIFI", price: "20,090", remark: "" },
+                        { cpu: "i5-4200U", config: "RAM 8GB + SSD 128GB + WIFI", price: "19,790", remark: "" },
+                        { cpu: "i5-4200U", config: "RAM 8GB + SSD 128GB + WIFI", price: "22,690", remark: "รวม WIN 10 OEM + AC 5G WIFI" },
+                        { cpu: "i5-4200U", config: "RAM 8GB + SSD 256GB + WIFI", price: "20,490", remark: "" },
+                        { cpu: "i5-4200U", config: "RAM 8GB + SSD 512GB + WIFI", price: "22,090", remark: "" },
+                        { cpu: "i5-4200U", config: "RAM 8GB + SSD 1TB + WIFI", price: "28,690", remark: "" },
+                        { cpu: "i7-4500U", config: "RAM 4GB + SSD 128GB + WIFI", price: "22,090", remark: "" },
+                        { cpu: "i7-4500U", config: "RAM 4GB + SSD 256GB + WIFI", price: "22,690", remark: "" },
+                        { cpu: "i7-4500U", config: "RAM 8GB + SSD 128GB + WIFI", price: "22,690", remark: "" },
+                        { cpu: "i7-4500U", config: "RAM 8GB + SSD 256GB + WIFI", price: "23,390", remark: "" },
+                        { cpu: "i7-4500U", config: "RAM 8GB + SSD 256GB + 1TB SSD + WIFI", price: "28,590", remark: "" },
+                        { cpu: "i7-4500U", config: "RAM 8GB + SSD 512GB + WIFI", price: "24,690", remark: "" },
+                      ].map((item, i) => (
+                        <tr key={i} className="hover:bg-secondary/30 transition-colors">
+                          <td className="p-3 text-foreground font-medium">{item.cpu}</td>
+                          <td className="p-3 text-muted-foreground">{item.config}</td>
+                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                          <td className="p-3 text-xs text-muted-foreground">{item.remark}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Video Section */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT5000</h3>
+                </div>
+                <div className="grid md:grid-cols-2 gap-0 md:divide-x divide-border">
+                  <a
+                    href="https://www.youtube.com/watch?v=ifkzyVY9Z-g"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative group"
+                  >
+                    <img
+                      src="https://img.youtube.com/vi/ifkzyVY9Z-g/maxresdefault.jpg"
+                      alt="การเลือกซื้อคอมพิวเตอร์สำหรับงานอุตสาหกรรม GT Series"
+                      className="w-full aspect-video object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">การเลือกซื้อ GT Series — 14:20</span>
+                    </div>
+                  </a>
+                  <div className="flex flex-col gap-4 p-6 bg-secondary/30">
+                    <div className="text-center">
+                      <Play className="mx-auto text-primary mb-2" size={28} />
+                      <p className="text-sm font-semibold text-foreground mb-1">GT5000 Port Specification</p>
+                      <p className="text-xs text-muted-foreground mb-1">ความยาว 02:30</p>
+                    </div>
+                    <div className="text-center border-t border-border pt-4">
+                      <Play className="mx-auto text-primary mb-2" size={28} />
+                      <p className="text-sm font-semibold text-foreground mb-1">GT5000 Sale Scenario Discussion</p>
+                      <p className="text-xs text-muted-foreground mb-1">ความยาว 04:44</p>
+                    </div>
+                    <a
+                      href="https://www.entgroup.co.th/gt5000"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1 mt-2 text-xs text-primary hover:underline"
+                    >
+                      ดูวิดีโอทั้งหมดที่เว็บต้นทาง <ExternalLink size={12} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Datasheet CTA */}
+              <div className="text-center">
+                <a
+                  href="https://www.entgroup.co.th/epc-series"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> ดาวน์โหลด Datasheet GT5000
+                </a>
+              </div>
+            </div>
+          )}
+
           {/* Tab: GT1400 Detail */}
           {activeTab === "gt1400" && (
             <div className="space-y-8 animate-fade-in">
