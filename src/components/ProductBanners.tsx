@@ -61,9 +61,12 @@ const ProductBanners = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
               <div className="relative z-10 p-8 md:p-12 max-w-lg">
-                <h3 className="text-2xl md:text-3xl font-display font-bold mb-4 text-white">
+                <h3 className="text-2xl md:text-3xl font-display font-bold mb-2 text-white">
                   {banner.title}
                 </h3>
+                {banner.subtitle && (
+                  <p className="text-white/80 text-sm md:text-base mb-4">{banner.subtitle}</p>
+                )}
                 <div className="flex flex-wrap gap-3">
                   {banner.links.map((link) => (
                     <a
