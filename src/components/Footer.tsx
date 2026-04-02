@@ -1,5 +1,5 @@
 import { MessageCircle } from "lucide-react";
-
+import logo from "@/assets/logo-entgroup.avif";
 const Footer = () => {
   return (
     <footer className="border-t border-border" id="contact">
@@ -26,8 +26,8 @@ const Footer = () => {
 
       {/* Bottom */}
       <div className="px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="text-2xl font-display font-bold">
-          ENT <span className="text-gradient">GROUP</span>
+        <div>
+          <img src={logo} alt="ENT GROUP" className="h-8 w-auto" />
         </div>
         <p className="text-sm text-muted-foreground">
           © {new Date().getFullYear()} ENT GROUP Co., Ltd. All rights reserved.
