@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor } from "lucide-react";
+import { useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 
@@ -26,7 +27,7 @@ const gtModels = [
     ports: "USB 6, COM 2, LAN 2, VGA+HDMI",
     size: "ขนาดเล็กกระทัดรัด",
     image: "https://static.wixstatic.com/media/0597a3_02acff57b2204d11a615e5e8b37392b6~mv2.png/v1/fill/w_419,h_378,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_02acff57b2204d11a615e5e8b37392b6~mv2.png",
-    href: "https://www.entgroup.co.th/ipc-gt1000",
+    tab: "gt1000",
     highlight: "เริ่มต้น",
   },
   {
@@ -37,7 +38,7 @@ const gtModels = [
     ports: "USB 6, COM 2, LAN 2, HDMI",
     size: "ดีไซน์ใหม่ล่าสุด",
     image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
-    href: "https://www.entgroup.co.th/gt-series-2023",
+    tab: "gt1200",
     highlight: "NEW!",
     badge: true,
   },
@@ -150,7 +151,23 @@ const galleryImages = [
   "https://static.wixstatic.com/media/005637_46e268297fcb4d51bf53ff1995af7bda~mv2.jpg/v1/fill/w_348,h_347,q_90,enc_avif,quality_auto/005637_46e268297fcb4d51bf53ff1995af7bda~mv2.jpg",
 ];
 
+const modelTabs = [
+  { id: "overview", label: "รุ่นทั้งหมด" },
+  { id: "gt1000", label: "GT1000" },
+  { id: "gt1400", label: "GT1400" },
+  { id: "gt1200", label: "GT1200" },
+];
+
 const GTSeries = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "overview");
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    setSearchParams({ tab });
+    window.scrollTo({ top: document.getElementById("models")?.offsetTop ? document.getElementById("models")!.offsetTop - 80 : 0, behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Nav */}
@@ -282,10 +299,10 @@ const GTSeries = () => {
         </div>
       </section>
 
-      {/* All Models */}
+      {/* Models Section with Tabs */}
       <section className="section-padding" id="models">
         <div className="container max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">All Models</span>
             <h2 className="text-3xl md:text-5xl font-display font-bold">
               รุ่น<span className="text-gradient">ทั้งหมด</span>
@@ -295,266 +312,415 @@ const GTSeries = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {gtModels.map((model) => (
-              <a
-                key={model.name}
-                href={model.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group card-surface overflow-hidden hover:border-primary/30 transition-all hover:-translate-y-1"
+          {/* Tab Navigation */}
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
+            {modelTabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => handleTabChange(tab.id)}
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                  activeTab === tab.id
+                    ? "bg-primary text-primary-foreground shadow-lg"
+                    : "bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground border border-border"
+                }`}
               >
-                {/* Badge */}
-                <div className="relative bg-secondary/50 p-6 flex items-center justify-center min-h-[200px]">
-                  {model.badge && (
-                    <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-primary text-primary-foreground text-[11px] font-bold">
-                      {model.highlight}
-                    </span>
-                  )}
-                  {!model.badge && (
-                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground text-[11px] font-medium border border-border">
-                      {model.highlight}
-                    </span>
-                  )}
-                  <img
-                    src={model.image}
-                    alt={model.name}
-                    className="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
+                {tab.label}
+                {tab.id === "gt1400" && (
+                  <span className="ml-1.5 px-1.5 py-0.5 rounded-full bg-primary-foreground/20 text-[10px]">NEW</span>
+                )}
+              </button>
+            ))}
+          </div>
 
-                {/* Info */}
-                <div className="p-5">
-                  <h3 className="text-xl font-display font-bold text-foreground mb-3 group-hover:text-primary transition-colors flex items-center gap-2">
-                    {model.name}
-                    <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </h3>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-start gap-2">
-                      <Cpu size={14} className="text-primary mt-0.5 shrink-0" />
-                      <span className="text-muted-foreground">{model.cpu}</span>
+          {/* Tab: Overview - All Models Grid */}
+          {activeTab === "overview" && (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {gtModels.map((model) => (
+                <button
+                  key={model.name}
+                  onClick={() => model.tab ? handleTabChange(model.tab) : undefined}
+                  className={`group card-surface overflow-hidden hover:border-primary/30 transition-all hover:-translate-y-1 text-left ${model.tab ? "cursor-pointer" : ""}`}
+                >
+                  {model.href && !model.tab ? (
+                    <a href={model.href} target="_blank" rel="noopener noreferrer" className="block">
+                      <ModelCard model={model} />
+                    </a>
+                  ) : (
+                    <ModelCard model={model} />
+                  )}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Tab: GT1000 Detail */}
+          {activeTab === "gt1000" && (
+            <div className="space-y-8 animate-fade-in">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden">
+                <img
+                  src="https://static.wixstatic.com/media/3e5003_1654215f900c48fdbc594d46658d067b~mv2.jpg/v1/fill/w_1270,h_590,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/22.jpg"
+                  alt="GT1000 Industrial PC"
+                  className="w-full"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Description */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      Best Seller
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">1000</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Industrial PC คือเครื่องคอมพิวเตอร์เกรดอุตสาหกรรมขนาดเล็ก ที่ถูกออกแบบมาเพื่อรองรับการทำงาน
+                      ในสภาวแวดล้อมที่มีอุณหภูมิสูง ฝุ่นละอองหนาแน่น โดยออกแบบให้มีการระบายความร้อนได้ดีและทนความร้อนได้สูง
+                      จึงเป็นเหตุผลที่ทำให้ GT1000 ทำงานได้อย่างมีประสิทธิภาพเหมาะสมกับงานอุตสาหกรรมทุกประเภท
+                    </p>
+                  </div>
+
+                  <p className="text-muted-foreground leading-relaxed">
+                    รองรับได้หลากหลายกิจกรรม — โรงงานอุตสาหกรรม โรงเรียน มหาวิทยาลัย Factory Automation, IOT,
+                    KIOSK, HMI, Digital Signage, Queue System, รถโดยสาร รถไฟฟ้า ตู้คอนโทรลและงานที่ต้องการความทนทานเป็นพิเศษ
+                  </p>
+
+                  {/* Key Specs */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU</div>
+                      <div className="text-xs text-muted-foreground mt-1">Intel Celeron N2920 / N3520</div>
                     </div>
-                    <div className="flex items-start gap-2">
-                      <Server size={14} className="text-primary mt-0.5 shrink-0" />
-                      <span className="text-muted-foreground">RAM {model.ram} / {model.storage}</span>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR3L 4–8 GB</div>
                     </div>
-                    <div className="flex items-start gap-2">
-                      <Zap size={14} className="text-primary mt-0.5 shrink-0" />
-                      <span className="text-muted-foreground">{model.ports}</span>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">2 LAN</div>
+                      <div className="text-xs text-muted-foreground mt-1">USB 6, COM 2, VGA+HDMI</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Wind className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Fanless</div>
+                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB ทำงาน 24/7</div>
                     </div>
                   </div>
                 </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* GT1400 Detail */}
-      <section className="section-padding bg-surface/50" id="gt1400">
-        <div className="container max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-4">
-              NEW 2023
-            </span>
-            <h2 className="text-3xl md:text-5xl font-display font-bold">
-              GT<span className="text-gradient">1400</span>
-            </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-              Industrial Grade Computer รุ่นใหม่ล่าสุด รองรับ CPU ตั้งแต่ i5-8305G ไปจนถึง i7-13650HX
-              พร้อม 4 LAN Ports และ DDR4/DDR5 Support
-            </p>
-          </div>
-
-          {/* GT1400 Hero Image */}
-          <div className="card-surface p-4 mb-8 overflow-hidden">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_88afd8cf4a5a42a6b36b4880d59e9ebe~mv2.png/v1/fill/w_1293,h_474,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_12_53.png"
-              alt="GT1400 Industrial PC"
-              className="w-full rounded-lg"
-              loading="lazy"
-            />
-          </div>
-
-          {/* GT1400 Key Specs */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <div className="card-surface p-5 text-center">
-              <Cpu className="mx-auto text-primary mb-2" size={28} />
-              <div className="font-bold text-foreground text-sm">CPU</div>
-              <div className="text-xs text-muted-foreground mt-1">i5-8305G / i7-12650HX / i7-13650HX</div>
-            </div>
-            <div className="card-surface p-5 text-center">
-              <Server className="mx-auto text-primary mb-2" size={28} />
-              <div className="font-bold text-foreground text-sm">RAM</div>
-              <div className="text-xs text-muted-foreground mt-1">DDR4/DDR5 สูงสุด 64GB</div>
-            </div>
-            <div className="card-surface p-5 text-center">
-              <Shield className="mx-auto text-primary mb-2" size={28} />
-              <div className="font-bold text-foreground text-sm">4 LAN Ports</div>
-              <div className="text-xs text-muted-foreground mt-1">Intel i225V Gigabit</div>
-            </div>
-            <div className="card-surface p-5 text-center">
-              <Zap className="mx-auto text-primary mb-2" size={28} />
-              <div className="font-bold text-foreground text-sm">Storage</div>
-              <div className="text-xs text-muted-foreground mt-1">M.2 NVMe + SATA SSD + HDD</div>
-            </div>
-          </div>
-
-          {/* GT1400 Images Grid */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className="card-surface overflow-hidden">
-              <img src="https://static.wixstatic.com/media/0597a3_f51ed7e9e2004c9c8bc65d0f7b6e105b~mv2.png/v1/fill/w_403,h_362,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_f51ed7e9e2004c9c8bc65d0f7b6e105b~mv2.png" alt="GT1400 Front" className="w-full h-full object-cover" loading="lazy" />
-            </div>
-            <div className="card-surface overflow-hidden">
-              <img src="https://static.wixstatic.com/media/0597a3_4fab26c2e6db4c98b51255f267efe896~mv2.png/v1/fill/w_403,h_362,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_4fab26c2e6db4c98b51255f267efe896~mv2.png" alt="GT1400 Side" className="w-full h-full object-cover" loading="lazy" />
-            </div>
-            <div className="card-surface overflow-hidden">
-              <img src="https://static.wixstatic.com/media/0597a3_143384b5a7b54eda886f119a889f9470~mv2.png/v1/fill/w_403,h_362,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_143384b5a7b54eda886f119a889f9470~mv2.png" alt="GT1400 Back" className="w-full h-full object-cover" loading="lazy" />
-            </div>
-          </div>
-
-          {/* GT1400 Price Table */}
-          <div className="card-surface overflow-hidden mb-8">
-            <div className="p-5 border-b border-border">
-              <h3 className="text-lg font-display font-bold text-foreground">GT1400 Price List</h3>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-secondary/50">
-                    <th className="text-left p-3 font-semibold text-foreground">Processor</th>
-                    <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
-                    <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
-                    <th className="text-left p-3 font-semibold text-foreground">หมายเหตุ</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  {[
-                    { cpu: "i5-8305G", config: "DDR4 RAM 4GB / SSD 128GB / WIFI", price: "28,990", remark: "" },
-                    { cpu: "i5-8305G", config: "DDR4 RAM 8GB / SSD 128GB / WIFI", price: "29,190", remark: "" },
-                    { cpu: "i5-8305G", config: "DDR4 RAM 4GB / SSD 256GB / WIFI", price: "29,590", remark: "4 LAN Ports" },
-                    { cpu: "i5-8305G", config: "DDR4 RAM 8GB / SSD 256GB / WIFI", price: "29,990", remark: "DDR4/DDR5 Support" },
-                    { cpu: "i7-12650HX", config: "DDR5 RAM 8GB / SSD 128GB / WIFI", price: "34,690", remark: "Industrial Grade" },
-                    { cpu: "i7-12650HX", config: "DDR5 RAM 8GB / SSD 256GB / WIFI", price: "35,290", remark: "" },
-                    { cpu: "i7-12650HX", config: "DDR5 RAM 16GB / SSD 128GB / WIFI", price: "36,490", remark: "" },
-                    { cpu: "i7-12650HX", config: "DDR5 RAM 16GB / SSD 256GB / WIFI", price: "36,990", remark: "" },
-                    { cpu: "i7-13650HX", config: "DDR5 RAM 8GB / SSD 128GB / WIFI", price: "37,790", remark: "" },
-                    { cpu: "i7-13650HX", config: "DDR5 RAM 8GB / SSD 256GB / WIFI", price: "38,390", remark: "" },
-                    { cpu: "i7-13650HX", config: "DDR5 RAM 16GB / SSD 128GB / WIFI", price: "39,590", remark: "" },
-                    { cpu: "i7-13650HX", config: "DDR5 RAM 16GB / SSD 256GB / WIFI", price: "39,990", remark: "" },
-                  ].map((item, i) => (
-                    <tr key={i} className="hover:bg-secondary/30 transition-colors">
-                      <td className="p-3 text-foreground font-medium">{item.cpu}</td>
-                      <td className="p-3 text-muted-foreground">{item.config}</td>
-                      <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
-                      <td className="p-3 text-xs text-muted-foreground">{item.remark}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* GT1400 Spec & Datasheet */}
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="card-surface p-6">
-              <img
-                src="https://static.wixstatic.com/media/0597a3_c97635d4da504d00ae26c381e3b61efd~mv2.png/v1/fill/w_892,h_477,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_02_11.png"
-                alt="GT1400 Ports"
-                className="w-full rounded-lg"
-                loading="lazy"
-              />
-            </div>
-            <div className="card-surface p-6">
-              <img
-                src="https://static.wixstatic.com/media/0597a3_0de9b63b73b742a38464eff7ebf651cc~mv2.png/v1/fill/w_1271,h_715,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_25_12.png"
-                alt="GT1400 Specification"
-                className="w-full rounded-lg"
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          <div className="text-center">
-            <a
-              href="https://www.entgroup.co.th/_files/ugd/0597a3_df771f1787184c4ea82b8ca5ed7abc17.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
-            >
-              <ExternalLink size={16} /> ดาวน์โหลด Datasheet GT1400
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* GT1200 Detail */}
-      <section className="section-padding" id="gt1200">
-        <div className="container max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-4">
-              NEW 2023
-            </span>
-            <h2 className="text-3xl md:text-5xl font-display font-bold">
-              GT<span className="text-gradient">1200</span>
-            </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-              รุ่นคอมแพกต์ ดีไซน์กระทัดรัด รองรับ CPU ตั้งแต่ i3-6157U ไปจนถึง i7-10510U
-              เหมาะกับงาน KIOSK, Digital Signage และ Factory Automation
-            </p>
-          </div>
-
-          {/* GT1200 Images Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-            {[
-              "https://static.wixstatic.com/media/0597a3_3a64dd92132a4f54b2a9f0eb03b87ed4~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
-              "https://static.wixstatic.com/media/0597a3_5beadd75a18f441fac4637410ada9e1a~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.png",
-              "https://static.wixstatic.com/media/0597a3_7a9597a364a54709bdb4bcb6a6fbd4a2~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5.png",
-              "https://static.wixstatic.com/media/0597a3_e67ca0fcac944ce98203bedb443924c8~mv2.png/v1/fill/w_390,h_353,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_e67ca0fcac944ce98203bedb443924c8~mv2.png",
-              "https://static.wixstatic.com/media/0597a3_49e41d9895654282a8b6af3994fc6a55~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_49e41d9895654282a8b6af3994fc6a55~mv2.png",
-              "https://static.wixstatic.com/media/0597a3_ada2a84013274204b1f69dfa9eec7b75~mv2.png/v1/fill/w_390,h_353,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_ada2a84013274204b1f69dfa9eec7b75~mv2.png",
-            ].map((img, i) => (
-              <div key={i} className="card-surface overflow-hidden">
-                <img src={img} alt={`GT1200 มุมมอง ${i + 1}`} className="w-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                {/* Product Images */}
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_02acff57b2204d11a615e5e8b37392b6~mv2.png/v1/fill/w_419,h_378,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_02acff57b2204d11a615e5e8b37392b6~mv2.png"
+                      alt="GT1000 Front"
+                      className="w-full object-contain p-4"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      "https://static.wixstatic.com/media/0597a3_1c5f631ba51145659988890917eedaa7~mv2.png/v1/fill/w_412,h_372,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_1c5f631ba51145659988890917eedaa7~mv2.png",
+                      "https://static.wixstatic.com/media/0597a3_96cddbf17d2c42588a73e1177737c107~mv2.png/v1/fill/w_413,h_372,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_96cddbf17d2c42588a73e1177737c107~mv2.png",
+                      "https://static.wixstatic.com/media/0597a3_e13befd35c774a7f962c3be3bfc56edc~mv2.png/v1/fill/w_416,h_378,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_e13befd35c774a7f962c3be3bfc56edc~mv2.png",
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden">
+                        <img src={img} alt={`GT1000 มุมมอง ${i + 2}`} className="w-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
 
-          {/* GT1200 Spec Highlights */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <div className="card-surface p-5 text-center">
-              <Cpu className="mx-auto text-primary mb-2" size={28} />
-              <div className="font-bold text-foreground text-sm">CPU</div>
-              <div className="text-xs text-muted-foreground mt-1">i3-6157U / i5-4278U / i5-7287U / i7-4578U</div>
-            </div>
-            <div className="card-surface p-5 text-center">
-              <Server className="mx-auto text-primary mb-2" size={28} />
-              <div className="font-bold text-foreground text-sm">RAM</div>
-              <div className="text-xs text-muted-foreground mt-1">DDR3L / DDR4 สูงสุด 64GB</div>
-            </div>
-            <div className="card-surface p-5 text-center">
-              <Shield className="mx-auto text-primary mb-2" size={28} />
-              <div className="font-bold text-foreground text-sm">2 LAN Ports</div>
-              <div className="text-xs text-muted-foreground mt-1">Realtek RTL8111 Gigabit</div>
-            </div>
-            <div className="card-surface p-5 text-center">
-              <Zap className="mx-auto text-primary mb-2" size={28} />
-              <div className="font-bold text-foreground text-sm">TDP 28W</div>
-              <div className="text-xs text-muted-foreground mt-1">ประหยัดพลังงาน Fanless</div>
-            </div>
-          </div>
+              {/* Spec Diagrams */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/3e5003_d438441c66734588bf92c3cb77e08aae~mv2.jpg/v1/crop/x_0,y_0,w_1998,h_571/fill/w_1218,h_348,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3.jpg"
+                    alt="GT1000 Connectivity"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/3e5003_6c63145676084587be40a884b1c3c2bd~mv2.jpg/v1/crop/x_0,y_0,w_2000,h_1091/fill/w_1314,h_720,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.jpg"
+                    alt="GT1000 Specification Detail"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
 
-          <div className="text-center">
-            <a
-              href="https://www.entgroup.co.th/_files/ugd/0597a3_b016e32d02cf4accaa6709406df39692.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
-            >
-              <ExternalLink size={16} /> ดาวน์โหลด Datasheet GT1200
-            </a>
-          </div>
+              {/* GT1000 Price Table */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">GT1000 Price List</h3>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-secondary/50">
+                        <th className="text-left p-3 font-semibold text-foreground">Model</th>
+                        <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
+                        <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
+                        <th className="text-left p-3 font-semibold text-foreground">หมายเหตุ</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      {[
+                        { model: "N2920", config: "RAM DDR3L 4GB + SSD 128GB + WIFI", price: "15,990", remark: "" },
+                        { model: "N2920", config: "RAM DDR3L 8GB + SSD 128GB + WIFI", price: "16,990", remark: "" },
+                        { model: "N2920", config: "RAM 4GB / SSD 128GB / 4G Module (Long antenna)", price: "18,990", remark: "" },
+                        { model: "N2920", config: "RAM 4GB / SSD 128GB / 4G / WIN 10", price: "21,990", remark: "ราคารวม Windows 10 Pro OEM" },
+                        { model: "N2920", config: "RAM DDR3L 8GB + SSD 256GB + WIFI", price: "18,990", remark: "ราคารวม Windows 10 Pro OEM" },
+                        { model: "N3520", config: "RAM DDR3L 4GB + SSD 128GB + WIFI", price: "17,990", remark: "" },
+                        { model: "N3520", config: "RAM DDR3L 8GB + SSD 128GB + WIFI", price: "18,990", remark: "" },
+                        { model: "N3520", config: "RAM 4GB / SSD 128GB / 4G Module (Long antenna)", price: "21,990", remark: "" },
+                      ].map((item, i) => (
+                        <tr key={i} className="hover:bg-secondary/30 transition-colors">
+                          <td className="p-3 text-foreground font-medium">{item.model}</td>
+                          <td className="p-3 text-muted-foreground">{item.config}</td>
+                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                          <td className="p-3 text-xs text-muted-foreground">{item.remark}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Port Diagram */}
+              <div className="card-surface p-4 overflow-hidden">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_813ed70f44da4e72b1f8d881cd8b30d9~mv2.png/v1/fill/w_1313,h_466,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_813ed70f44da4e72b1f8d881cd8b30d9~mv2.png"
+                  alt="GT1000 Port Diagram"
+                  className="w-full rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Real-world Photos */}
+              <div className="grid grid-cols-3 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/0597a3_9f94339201574aab951ca7e05b0b5b8b~mv2_d_2048_2048_s_2.jpg/v1/fill/w_340,h_310,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/k10_181024_0017.jpg",
+                  "https://static.wixstatic.com/media/0597a3_0565d74067c7475989c641caa9e558ee~mv2_d_2048_2048_s_2.jpg/v1/fill/w_305,h_310,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/k10_181024_0015.jpg",
+                  "https://static.wixstatic.com/media/0597a3_1a4e692b890345f5a8d2ca2aa85ee5d1~mv2_d_2048_2048_s_2.jpg/v1/fill/w_330,h_310,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/k10_181024_0016.jpg",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden aspect-square">
+                    <img src={img} alt={`GT1000 ติดตั้งจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Datasheet CTA */}
+              <div className="text-center">
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/3e5003_1c53b682c4294201b754a854bda9656d.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> ดาวน์โหลด Datasheet GT1000
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: GT1400 Detail */}
+          {activeTab === "gt1400" && (
+            <div className="space-y-8 animate-fade-in">
+              <div className="text-center">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-4">
+                  NEW 2023
+                </span>
+                <h3 className="text-3xl md:text-4xl font-display font-bold">
+                  GT<span className="text-gradient">1400</span>
+                </h3>
+                <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">
+                  Industrial Grade Computer รุ่นใหม่ล่าสุด รองรับ CPU ตั้งแต่ i5-8305G ไปจนถึง i7-13650HX
+                  พร้อม 4 LAN Ports และ DDR4/DDR5 Support
+                </p>
+              </div>
+
+              <div className="card-surface p-4 overflow-hidden">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_88afd8cf4a5a42a6b36b4880d59e9ebe~mv2.png/v1/fill/w_1293,h_474,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_12_53.png"
+                  alt="GT1400 Industrial PC"
+                  className="w-full rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="card-surface p-5 text-center">
+                  <Cpu className="mx-auto text-primary mb-2" size={28} />
+                  <div className="font-bold text-foreground text-sm">CPU</div>
+                  <div className="text-xs text-muted-foreground mt-1">i5-8305G / i7-12650HX / i7-13650HX</div>
+                </div>
+                <div className="card-surface p-5 text-center">
+                  <Server className="mx-auto text-primary mb-2" size={28} />
+                  <div className="font-bold text-foreground text-sm">RAM</div>
+                  <div className="text-xs text-muted-foreground mt-1">DDR4/DDR5 สูงสุด 64GB</div>
+                </div>
+                <div className="card-surface p-5 text-center">
+                  <Shield className="mx-auto text-primary mb-2" size={28} />
+                  <div className="font-bold text-foreground text-sm">4 LAN Ports</div>
+                  <div className="text-xs text-muted-foreground mt-1">Intel i225V Gigabit</div>
+                </div>
+                <div className="card-surface p-5 text-center">
+                  <Zap className="mx-auto text-primary mb-2" size={28} />
+                  <div className="font-bold text-foreground text-sm">Storage</div>
+                  <div className="text-xs text-muted-foreground mt-1">M.2 NVMe + SATA SSD + HDD</div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4">
+                <div className="card-surface overflow-hidden">
+                  <img src="https://static.wixstatic.com/media/0597a3_f51ed7e9e2004c9c8bc65d0f7b6e105b~mv2.png/v1/fill/w_403,h_362,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_f51ed7e9e2004c9c8bc65d0f7b6e105b~mv2.png" alt="GT1400 Front" className="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div className="card-surface overflow-hidden">
+                  <img src="https://static.wixstatic.com/media/0597a3_4fab26c2e6db4c98b51255f267efe896~mv2.png/v1/fill/w_403,h_362,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_4fab26c2e6db4c98b51255f267efe896~mv2.png" alt="GT1400 Side" className="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div className="card-surface overflow-hidden">
+                  <img src="https://static.wixstatic.com/media/0597a3_143384b5a7b54eda886f119a889f9470~mv2.png/v1/fill/w_403,h_362,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_143384b5a7b54eda886f119a889f9470~mv2.png" alt="GT1400 Back" className="w-full h-full object-cover" loading="lazy" />
+                </div>
+              </div>
+
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">GT1400 Price List</h3>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-secondary/50">
+                        <th className="text-left p-3 font-semibold text-foreground">Processor</th>
+                        <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
+                        <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
+                        <th className="text-left p-3 font-semibold text-foreground">หมายเหตุ</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      {[
+                        { cpu: "i5-8305G", config: "DDR4 RAM 4GB / SSD 128GB / WIFI", price: "28,990", remark: "" },
+                        { cpu: "i5-8305G", config: "DDR4 RAM 8GB / SSD 128GB / WIFI", price: "29,190", remark: "" },
+                        { cpu: "i5-8305G", config: "DDR4 RAM 4GB / SSD 256GB / WIFI", price: "29,590", remark: "4 LAN Ports" },
+                        { cpu: "i5-8305G", config: "DDR4 RAM 8GB / SSD 256GB / WIFI", price: "29,990", remark: "DDR4/DDR5 Support" },
+                        { cpu: "i7-12650HX", config: "DDR5 RAM 8GB / SSD 128GB / WIFI", price: "34,690", remark: "Industrial Grade" },
+                        { cpu: "i7-12650HX", config: "DDR5 RAM 8GB / SSD 256GB / WIFI", price: "35,290", remark: "" },
+                        { cpu: "i7-12650HX", config: "DDR5 RAM 16GB / SSD 128GB / WIFI", price: "36,490", remark: "" },
+                        { cpu: "i7-12650HX", config: "DDR5 RAM 16GB / SSD 256GB / WIFI", price: "36,990", remark: "" },
+                        { cpu: "i7-13650HX", config: "DDR5 RAM 8GB / SSD 128GB / WIFI", price: "37,790", remark: "" },
+                        { cpu: "i7-13650HX", config: "DDR5 RAM 8GB / SSD 256GB / WIFI", price: "38,390", remark: "" },
+                        { cpu: "i7-13650HX", config: "DDR5 RAM 16GB / SSD 128GB / WIFI", price: "39,590", remark: "" },
+                        { cpu: "i7-13650HX", config: "DDR5 RAM 16GB / SSD 256GB / WIFI", price: "39,990", remark: "" },
+                      ].map((item, i) => (
+                        <tr key={i} className="hover:bg-secondary/30 transition-colors">
+                          <td className="p-3 text-foreground font-medium">{item.cpu}</td>
+                          <td className="p-3 text-muted-foreground">{item.config}</td>
+                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                          <td className="p-3 text-xs text-muted-foreground">{item.remark}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-6">
+                  <img src="https://static.wixstatic.com/media/0597a3_c97635d4da504d00ae26c381e3b61efd~mv2.png/v1/fill/w_892,h_477,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_02_11.png" alt="GT1400 Ports" className="w-full rounded-lg" loading="lazy" />
+                </div>
+                <div className="card-surface p-6">
+                  <img src="https://static.wixstatic.com/media/0597a3_0de9b63b73b742a38464eff7ebf651cc~mv2.png/v1/fill/w_1271,h_715,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_25_12.png" alt="GT1400 Specification" className="w-full rounded-lg" loading="lazy" />
+                </div>
+              </div>
+
+              <div className="text-center">
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/0597a3_df771f1787184c4ea82b8ca5ed7abc17.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> ดาวน์โหลด Datasheet GT1400
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: GT1200 Detail */}
+          {activeTab === "gt1200" && (
+            <div className="space-y-8 animate-fade-in">
+              <div className="text-center">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-4">
+                  NEW 2023
+                </span>
+                <h3 className="text-3xl md:text-4xl font-display font-bold">
+                  GT<span className="text-gradient">1200</span>
+                </h3>
+                <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">
+                  รุ่นคอมแพกต์ ดีไซน์กระทัดรัด รองรับ CPU ตั้งแต่ i3-6157U ไปจนถึง i7-10510U
+                  เหมาะกับงาน KIOSK, Digital Signage และ Factory Automation
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/0597a3_3a64dd92132a4f54b2a9f0eb03b87ed4~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
+                  "https://static.wixstatic.com/media/0597a3_5beadd75a18f441fac4637410ada9e1a~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.png",
+                  "https://static.wixstatic.com/media/0597a3_7a9597a364a54709bdb4bcb6a6fbd4a2~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5.png",
+                  "https://static.wixstatic.com/media/0597a3_e67ca0fcac944ce98203bedb443924c8~mv2.png/v1/fill/w_390,h_353,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_e67ca0fcac944ce98203bedb443924c8~mv2.png",
+                  "https://static.wixstatic.com/media/0597a3_49e41d9895654282a8b6af3994fc6a55~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_49e41d9895654282a8b6af3994fc6a55~mv2.png",
+                  "https://static.wixstatic.com/media/0597a3_ada2a84013274204b1f69dfa9eec7b75~mv2.png/v1/fill/w_390,h_353,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_ada2a84013274204b1f69dfa9eec7b75~mv2.png",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden">
+                    <img src={img} alt={`GT1200 มุมมอง ${i + 1}`} className="w-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="card-surface p-5 text-center">
+                  <Cpu className="mx-auto text-primary mb-2" size={28} />
+                  <div className="font-bold text-foreground text-sm">CPU</div>
+                  <div className="text-xs text-muted-foreground mt-1">i3-6157U / i5-4278U / i5-7287U / i7-4578U</div>
+                </div>
+                <div className="card-surface p-5 text-center">
+                  <Server className="mx-auto text-primary mb-2" size={28} />
+                  <div className="font-bold text-foreground text-sm">RAM</div>
+                  <div className="text-xs text-muted-foreground mt-1">DDR3L / DDR4 สูงสุด 64GB</div>
+                </div>
+                <div className="card-surface p-5 text-center">
+                  <Shield className="mx-auto text-primary mb-2" size={28} />
+                  <div className="font-bold text-foreground text-sm">2 LAN Ports</div>
+                  <div className="text-xs text-muted-foreground mt-1">Realtek RTL8111 Gigabit</div>
+                </div>
+                <div className="card-surface p-5 text-center">
+                  <Zap className="mx-auto text-primary mb-2" size={28} />
+                  <div className="font-bold text-foreground text-sm">TDP 28W</div>
+                  <div className="text-xs text-muted-foreground mt-1">ประหยัดพลังงาน Fanless</div>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/0597a3_b016e32d02cf4accaa6709406df39692.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> ดาวน์โหลด Datasheet GT1200
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -623,7 +789,7 @@ const GTSeries = () => {
       </section>
 
       {/* GT Series Banner */}
-      <section className="section-padding">
+      <section className="section-padding bg-surface/50">
         <div className="container max-w-7xl mx-auto">
           <div className="card-surface overflow-hidden">
             <img
@@ -637,7 +803,7 @@ const GTSeries = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-surface/50">
+      <section className="section-padding">
         <div className="container max-w-3xl mx-auto text-center">
           <Cpu className="mx-auto mb-4 text-primary" size={40} />
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
@@ -675,5 +841,49 @@ const GTSeries = () => {
     </div>
   );
 };
+
+/* Model Card Component */
+const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
+  <>
+    <div className="relative bg-secondary/50 p-6 flex items-center justify-center min-h-[200px]">
+      {model.badge ? (
+        <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-primary text-primary-foreground text-[11px] font-bold">
+          {model.highlight}
+        </span>
+      ) : (
+        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground text-[11px] font-medium border border-border">
+          {model.highlight}
+        </span>
+      )}
+      <img
+        src={model.image}
+        alt={model.name}
+        className="max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-300"
+        loading="lazy"
+      />
+    </div>
+    <div className="p-5">
+      <h3 className="text-xl font-display font-bold text-foreground mb-3 group-hover:text-primary transition-colors flex items-center gap-2">
+        {model.name}
+        {model.tab && <span className="text-xs text-primary font-normal">ดูรายละเอียด →</span>}
+        {model.href && !model.tab && <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />}
+      </h3>
+      <div className="space-y-2 text-sm">
+        <div className="flex items-start gap-2">
+          <Cpu size={14} className="text-primary mt-0.5 shrink-0" />
+          <span className="text-muted-foreground">{model.cpu}</span>
+        </div>
+        <div className="flex items-start gap-2">
+          <Server size={14} className="text-primary mt-0.5 shrink-0" />
+          <span className="text-muted-foreground">RAM {model.ram} / {model.storage}</span>
+        </div>
+        <div className="flex items-start gap-2">
+          <Zap size={14} className="text-primary mt-0.5 shrink-0" />
+          <span className="text-muted-foreground">{model.ports}</span>
+        </div>
+      </div>
+    </div>
+  </>
+);
 
 export default GTSeries;
