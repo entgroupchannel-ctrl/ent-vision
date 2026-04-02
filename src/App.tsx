@@ -9,6 +9,7 @@ import GTSeries from "./pages/GTSeries.tsx";
 import EPCBoxSeries from "./pages/EPCBoxSeries.tsx";
 import MiniPC from "./pages/MiniPC.tsx";
 import WaterproofPC from "./pages/WaterproofPC.tsx";
+import Volktek from "./pages/Volktek.tsx";
 import GKSeries from "./pages/GKSeries.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/gk-series" element={<GKSeries />} />
             <Route path="/mini-pc" element={<MiniPC />} />
             <Route path="/waterproof-pc" element={<WaterproofPC />} />
+            <Route path="/volktek" element={<Volktek />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
