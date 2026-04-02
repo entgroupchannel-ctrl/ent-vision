@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowLeft, ExternalLink, Shield, Wind, Monitor, Cpu, Zap, Factory, Building,
-  Phone, MessageCircle, ChevronLeft, ChevronRight, Download, Settings, Wifi,
+  ArrowLeft, ExternalLink, Shield, Wind, Monitor, Cpu, Zap, Factory,
+  Phone, MessageCircle, ChevronLeft, ChevronRight, Settings, Wifi,
   HardDrive, MemoryStick, Layers
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
+import gty121Front from "@/assets/gty121-front.jpg";
+import gty121Rear from "@/assets/gty121-rear.png";
+import gty156Side from "@/assets/gty156-side.jpg";
+import gty156Front from "@/assets/gty156-front.png";
+import gty156Rear from "@/assets/gty156-rear.png";
 
 /* ─── Data ─── */
 
@@ -20,116 +25,154 @@ const features = [
 ];
 
 const stats = [
-  { value: "11", label: "รุ่น", sub: "ขนาดหน้าจอ" },
+  { value: "13", label: "รุ่น", sub: "ขนาดหน้าจอ" },
   { value: "11", label: "แบบ", sub: "ตัวเลือก CPU" },
   { value: "IP65", label: "", sub: "กันน้ำกันฝุ่น" },
   { value: "24/7", label: "", sub: "ทำงานต่อเนื่อง" },
   { value: "1", label: "ปี", sub: "รับประกัน" },
 ];
 
+// All prices from XLSX: [4GB+64/128SSD, 8GB+128SSD, 8GB+256SSD]
+// For Core i series the columns are [4GB+128SSD, 8GB+128SSD, 8GB+256SSD]
+const priceData: Record<string, Record<string, [number, number, number]>> = {
+  j1900: {
+    GTY101T: [24900, 28900, 31900], GTY104T: [24900, 28900, 31900],
+    GTY121T: [26900, 31900, 34900], GTY133T: [0, 0, 0],
+    GTY150T: [25900, 29900, 32900], GTY156T: [25900, 29900, 32900],
+    GTY170T: [25900, 29900, 32900], GTY185T: [26900, 31900, 34900],
+    GTY190T: [26900, 31900, 34900], GTY215T: [26900, 31900, 34900],
+    GTG238T: [28900, 32900, 35900], GTG270T: [33900, 37900, 40900],
+    GTG320T: [35900, 39900, 42900],
+  },
+  j6412: {
+    GTY101T: [34900, 39900, 42900], GTY104T: [35900, 40900, 43900],
+    GTY121T: [34900, 39900, 42900], GTY133T: [0, 0, 0],
+    GTY150T: [35900, 40900, 43900], GTY156T: [35900, 40900, 43900],
+    GTY170T: [36900, 40900, 43900], GTY185T: [36900, 41900, 44900],
+    GTY190T: [35900, 40900, 43900], GTY215T: [36900, 41900, 44900],
+    GTG238T: [37900, 42900, 45900], GTG270T: [45900, 49900, 52900],
+    GTG320T: [45900, 50900, 53900],
+  },
+  "i3-6100u": {
+    GTY101T: [28900, 30900, 33900], GTY104T: [28900, 31900, 34900],
+    GTY121T: [27900, 30900, 33900], GTY133T: [0, 0, 0],
+    GTY150T: [28900, 31900, 34900], GTY156T: [28900, 31900, 34900],
+    GTY170T: [29900, 31900, 35900], GTY185T: [29900, 32900, 35900],
+    GTY190T: [28900, 30900, 33900], GTY215T: [30900, 32900, 35900],
+    GTG238T: [30900, 32900, 36900], GTG270T: [37900, 40900, 43900],
+    GTG320T: [39900, 41900, 44900],
+  },
+  "i5-6300u": {
+    GTY101T: [30900, 32900, 35900], GTY104T: [30900, 33900, 36900],
+    GTY121T: [30900, 32900, 35900], GTY133T: [0, 0, 0],
+    GTY150T: [30900, 33900, 36900], GTY156T: [30900, 33900, 36900],
+    GTY170T: [31900, 33900, 37900], GTY185T: [31900, 34900, 37900],
+    GTY190T: [30900, 32900, 35900], GTY215T: [31900, 34900, 37900],
+    GTG238T: [32900, 34900, 37900], GTG270T: [39900, 42900, 45900],
+    GTG320T: [41900, 43900, 47900],
+  },
+  "i7-6500u": {
+    GTY101T: [33900, 36900, 39900], GTY104T: [34900, 37900, 40900],
+    GTY121T: [33900, 36900, 39900], GTY133T: [0, 0, 0],
+    GTY150T: [35900, 37900, 40900], GTY156T: [35900, 37900, 40900],
+    GTY170T: [35900, 37900, 40900], GTY185T: [35900, 37900, 40900],
+    GTY190T: [34900, 36900, 39900], GTY215T: [36900, 38900, 41900],
+    GTG238T: [36900, 38900, 41900], GTG270T: [44900, 46900, 49900],
+    GTG320T: [45900, 48900, 51900],
+  },
+  "i3-8145u": {
+    GTY101T: [33900, 38900, 41900], GTY104T: [33900, 38900, 41900],
+    GTY121T: [32900, 37900, 40900], GTY133T: [0, 0, 0],
+    GTY150T: [33900, 38900, 41900], GTY156T: [33900, 38900, 41900],
+    GTY170T: [34900, 39900, 42900], GTY185T: [34900, 39900, 42900],
+    GTY190T: [33900, 38900, 41900], GTY215T: [34900, 39900, 42900],
+    GTG238T: [35900, 39900, 42900], GTG270T: [43900, 47900, 51900],
+    GTG320T: [44900, 49900, 52900],
+  },
+  "i5-8350u": {
+    GTY101T: [38900, 43900, 46900], GTY104T: [39900, 44900, 47900],
+    GTY121T: [38900, 43900, 46900], GTY133T: [0, 0, 0],
+    GTY150T: [39900, 44900, 47900], GTY156T: [39900, 44900, 47900],
+    GTY170T: [39900, 44900, 47900], GTY185T: [40900, 45900, 48900],
+    GTY190T: [38900, 43900, 46900], GTY215T: [40900, 45900, 48900],
+    GTG238T: [40900, 45900, 48900], GTG270T: [48900, 53900, 56900],
+    GTG320T: [49900, 54900, 57900],
+  },
+  "i7-8650u": {
+    GTY101T: [41900, 46900, 49900], GTY104T: [41900, 46900, 49900],
+    GTY121T: [41900, 46900, 49900], GTY133T: [0, 0, 0],
+    GTY150T: [41900, 46900, 49900], GTY156T: [41900, 46900, 49900],
+    GTY170T: [42900, 47900, 50900], GTY185T: [43900, 48900, 51900],
+    GTY190T: [41900, 46900, 49900], GTY215T: [43900, 48900, 51900],
+    GTG238T: [43900, 48900, 51900], GTG270T: [51900, 56900, 59900],
+    GTG320T: [52900, 57900, 60900],
+  },
+  "i3-10110u": {
+    GTY101T: [38900, 43900, 46900], GTY104T: [39900, 44900, 47900],
+    GTY121T: [38900, 43900, 46900], GTY133T: [0, 0, 0],
+    GTY150T: [39900, 44900, 47900], GTY156T: [39900, 44900, 47900],
+    GTY170T: [39900, 44900, 47900], GTY185T: [40900, 45900, 48900],
+    GTY190T: [41900, 46900, 49900], GTY215T: [40900, 45900, 48900],
+    GTG238T: [40900, 45900, 48900], GTG270T: [48900, 53900, 56900],
+    GTG320T: [49900, 54900, 57900],
+  },
+  "i5-10310u": {
+    GTY101T: [44900, 49900, 52900], GTY104T: [44900, 49900, 52900],
+    GTY121T: [43900, 48900, 51900], GTY133T: [0, 0, 0],
+    GTY150T: [44900, 49900, 52900], GTY156T: [44900, 49900, 52900],
+    GTY170T: [45900, 50900, 53900], GTY185T: [45900, 50900, 53900],
+    GTY190T: [44900, 49900, 52900], GTY215T: [45900, 50900, 53900],
+    GTG238T: [46900, 51900, 54900], GTG270T: [53900, 58900, 61900],
+    GTG320T: [55900, 60900, 63900],
+  },
+  "i7-1065g7": {
+    GTY101T: [44900, 49900, 52900], GTY104T: [44900, 49900, 52900],
+    GTY121T: [43900, 48900, 51900], GTY133T: [0, 0, 0],
+    GTY150T: [44900, 49900, 52900], GTY156T: [44900, 49900, 52900],
+    GTY170T: [45900, 50900, 53900], GTY185T: [45900, 50900, 53900],
+    GTY190T: [44900, 49900, 52900], GTY215T: [45900, 50900, 53900],
+    GTG238T: [46900, 51900, 54900], GTG270T: [53900, 58900, 61900],
+    GTG320T: [55900, 60900, 63900],
+  },
+};
+
 type PanelModel = {
-  id: string;
-  name: string;
-  screen: string;
-  resolution: string;
-  cooling: "FANLESS" | "FAN";
-  series: "GTY" | "GTG";
-  prices: {
-    "j1900_4_128"?: string;
-    "j1900_8_128"?: string;
-    "j1900_8_256"?: string;
-    "j6412_8_128"?: string;
-    "j6412_8_256"?: string;
-    "j6412_16_256"?: string;
-    "i3_6_8_256"?: string;
-    "i5_6_8_256"?: string;
-    "i7_6_8_256"?: string;
-    "i3_8_8_256"?: string;
-    "i5_8_8_256"?: string;
-    "i7_8_8_256"?: string;
-    "i3_10_8_256"?: string;
-    "i5_10_8_256"?: string;
-    "i7_10_8_256"?: string;
-  };
-  highlight?: string;
-  popular?: boolean;
+  id: string; name: string; screen: string; resolution: string;
+  cooling: "FANLESS" | "FAN"; series: "GTY" | "GTG";
+  highlight?: string; popular?: boolean;
 };
 
 const panelModels: PanelModel[] = [
-  {
-    id: "gty101t", name: "GTY101T", screen: '10.1"', resolution: "FHD", cooling: "FANLESS", series: "GTY",
-    highlight: "ขนาดกะทัดรัด พกพาได้",
-    prices: { "j1900_4_128": "24,900", "j1900_8_128": "28,900", "j1900_8_256": "31,900" },
-  },
-  {
-    id: "gty104t", name: "GTY104T", screen: '10.4"', resolution: "XGA", cooling: "FANLESS", series: "GTY",
-    highlight: "จอสี่เหลี่ยม สำหรับงาน HMI",
-    prices: { "j1900_4_128": "24,900", "j1900_8_128": "28,900", "j1900_8_256": "31,900" },
-  },
-  {
-    id: "gty121t", name: "GTY121T", screen: '12.1"', resolution: "XGA", cooling: "FANLESS", series: "GTY",
-    highlight: "ขนาดมาตรฐาน ใช้งานง่าย",
-    prices: { "j1900_4_128": "26,900", "j1900_8_128": "31,900", "j1900_8_256": "34,900" },
-  },
-  {
-    id: "gty133t", name: "GTY133T", screen: '13.3"', resolution: "FHD", cooling: "FANLESS", series: "GTY",
-    highlight: "Full HD จอกว้าง บางเบา",
-    prices: { "j1900_4_128": "📞 Call", "j1900_8_128": "📞 Call", "j1900_8_256": "📞 Call" },
-  },
-  {
-    id: "gty150t", name: "GTY150T", screen: '15"', resolution: "XGA", cooling: "FANLESS", series: "GTY",
-    highlight: "ยอดนิยม สำหรับงานโรงงาน",
-    prices: { "j1900_4_128": "25,900", "j1900_8_128": "29,900", "j1900_8_256": "32,900" },
-  },
-  {
-    id: "gty156t", name: "GTY156T", screen: '15.6"', resolution: "FHD", cooling: "FANLESS", series: "GTY",
-    highlight: "Full HD ราคาคุ้มค่าที่สุด", popular: true,
-    prices: { "j1900_4_128": "25,900", "j1900_8_128": "29,900", "j1900_8_256": "32,900" },
-  },
-  {
-    id: "gty170t", name: "GTY170T", screen: '17"', resolution: "SXGA", cooling: "FANLESS", series: "GTY",
-    highlight: "จอใหญ่ สัดส่วน 5:4 มองชัด",
-    prices: { "j1900_4_128": "25,900", "j1900_8_128": "29,900", "j1900_8_256": "32,900" },
-  },
-  {
-    id: "gty185t", name: "GTY185T", screen: '18.5"', resolution: "FHD", cooling: "FANLESS", series: "GTY",
-    highlight: "Wide Screen จอกว้าง",
-    prices: { "j1900_4_128": "28,900", "j1900_8_128": "32,900", "j1900_8_256": "35,900" },
-  },
-  {
-    id: "gty190t", name: "GTY190T", screen: '19"', resolution: "SXGA", cooling: "FANLESS", series: "GTY",
-    highlight: "สัดส่วน 5:4 สำหรับงาน SCADA",
-    prices: { "j1900_4_128": "28,900", "j1900_8_128": "32,900", "j1900_8_256": "35,900" },
-  },
-  {
-    id: "gty215t", name: "GTY215T", screen: '21.5"', resolution: "FHD", cooling: "FANLESS", series: "GTY",
-    highlight: "จอใหญ่ Full HD สำหรับ KIOSK",
-    prices: { "j1900_4_128": "29,900", "j1900_8_128": "33,900", "j1900_8_256": "36,900" },
-  },
-  {
-    id: "gtg238t", name: "GTG238T", screen: '23.8"', resolution: "FHD", cooling: "FAN", series: "GTG",
-    highlight: "จอใหญ่ Built-in FAN",
-    prices: { "j1900_4_128": "28,900", "j1900_8_128": "33,900", "j1900_8_256": "36,900" },
-  },
-  {
-    id: "gtg270t", name: "GTG270T", screen: '27"', resolution: "FHD", cooling: "FAN", series: "GTG",
-    highlight: "จอยักษ์ 27 นิ้ว Built-in FAN",
-    prices: { "j1900_4_128": "35,900", "j1900_8_128": "39,900", "j1900_8_256": "42,900" },
-  },
-  {
-    id: "gtg320t", name: "GTG320T", screen: '32"', resolution: "FHD", cooling: "FAN", series: "GTG",
-    highlight: "จอใหญ่สุด 32 นิ้ว Built-in FAN",
-    prices: { "j1900_4_128": "45,900", "j1900_8_128": "49,900", "j1900_8_256": "52,900" },
-  },
+  { id: "GTY101T", name: "GTY101T", screen: '10.1"', resolution: "FHD 1920×1080", cooling: "FANLESS", series: "GTY", highlight: "ขนาดกะทัดรัด พกพาได้" },
+  { id: "GTY104T", name: "GTY104T", screen: '10.4"', resolution: "XGA 1024×768", cooling: "FANLESS", series: "GTY", highlight: "จอสี่เหลี่ยม สำหรับงาน HMI" },
+  { id: "GTY121T", name: "GTY121T", screen: '12.1"', resolution: "XGA 1024×768", cooling: "FANLESS", series: "GTY", highlight: "ขนาดมาตรฐาน ใช้งานง่าย" },
+  { id: "GTY133T", name: "GTY133T", screen: '13.3"', resolution: "FHD 1920×1080", cooling: "FANLESS", series: "GTY", highlight: "Full HD จอกว้าง บางเบา" },
+  { id: "GTY150T", name: "GTY150T", screen: '15"', resolution: "XGA 1024×768", cooling: "FANLESS", series: "GTY", highlight: "ยอดนิยม สำหรับงานโรงงาน" },
+  { id: "GTY156T", name: "GTY156T", screen: '15.6"', resolution: "FHD 1920×1080", cooling: "FANLESS", series: "GTY", highlight: "Full HD ราคาคุ้มค่าที่สุด", popular: true },
+  { id: "GTY170T", name: "GTY170T", screen: '17"', resolution: "SXGA 1280×1024", cooling: "FANLESS", series: "GTY", highlight: "จอใหญ่ สัดส่วน 5:4 มองชัด" },
+  { id: "GTY185T", name: "GTY185T", screen: '18.5"', resolution: "FHD 1920×1080", cooling: "FANLESS", series: "GTY", highlight: "Wide Screen จอกว้าง" },
+  { id: "GTY190T", name: "GTY190T", screen: '19"', resolution: "SXGA 1280×1024", cooling: "FANLESS", series: "GTY", highlight: "สัดส่วน 5:4 สำหรับงาน SCADA" },
+  { id: "GTY215T", name: "GTY215T", screen: '21.5"', resolution: "FHD 1920×1080", cooling: "FANLESS", series: "GTY", highlight: "จอใหญ่ Full HD สำหรับ KIOSK" },
+  { id: "GTG238T", name: "GTG238T", screen: '23.8"', resolution: "FHD 1920×1080", cooling: "FAN", series: "GTG", highlight: "จอใหญ่ Built-in FAN" },
+  { id: "GTG270T", name: "GTG270T", screen: '27"', resolution: "FHD 1920×1080", cooling: "FAN", series: "GTG", highlight: "จอยักษ์ 27 นิ้ว Built-in FAN" },
+  { id: "GTG320T", name: "GTG320T", screen: '32"', resolution: "FHD 1920×1080", cooling: "FAN", series: "GTG", highlight: "จอใหญ่สุด 32 นิ้ว Built-in FAN" },
 ];
 
 const cpuTabs = [
-  { id: "j1900", label: "Celeron J1900", cols: ["4GB + 128SSD", "8GB + 128GB", "8GB + 256GB ⭐"] },
-  { id: "j6412", label: "Celeron J6412", cols: ["8GB + 128SSD", "8GB + 256GB", "16GB + 256GB ⭐"] },
-  { id: "gen6", label: "Core Gen 6", cols: ["i3-6100U 8+256", "i5-6300U 8+256", "i7-6500U 8+256"] },
-  { id: "gen8", label: "Core Gen 8", cols: ["i3-8145U 8+256", "i5-8350U 8+256", "i7-8650U 8+256"] },
-  { id: "gen10", label: "Core Gen 10", cols: ["i3-10110U 8+256", "i5-10310U 8+256", "i7-1065G7 8+256"] },
+  { id: "j1900", label: "Celeron J1900", group: "Celeron", cols: ["4GB+64SSD", "8GB+128GB", "8GB+256GB ⭐"] },
+  { id: "j6412", label: "Celeron J6412", group: "Celeron", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
+  { id: "i3-6100u", label: "i3-6100U", group: "Gen 6", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
+  { id: "i5-6300u", label: "i5-6300U", group: "Gen 6", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
+  { id: "i7-6500u", label: "i7-6500U", group: "Gen 6", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
+  { id: "i3-8145u", label: "i3-8145U", group: "Gen 8", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
+  { id: "i5-8350u", label: "i5-8350U", group: "Gen 8", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
+  { id: "i7-8650u", label: "i7-8650U", group: "Gen 8", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
+  { id: "i3-10110u", label: "i3-10110U", group: "Gen 10", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
+  { id: "i5-10310u", label: "i5-10310U", group: "Gen 10", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
+  { id: "i7-1065g7", label: "i7-1065G7", group: "Gen 10", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
 ];
+
+const cpuGroups = ["Celeron", "Gen 6", "Gen 8", "Gen 10"];
 
 const specs = [
   { label: "CPU", value: "Intel Celeron J1900 / J6412 / Core i3/i5/i7 Gen 6–10" },
@@ -150,12 +193,12 @@ const specs = [
 ];
 
 const addons = [
-  { icon: Wifi, name: "4G/LTE Module", desc: "เพิ่มซิมการ์ด เชื่อมต่ออินเตอร์เน็ตได้ทุกที่" },
-  { icon: HardDrive, name: "SSD/HDD เพิ่มเติม", desc: "อัปเกรด Storage ตามต้องการ" },
-  { icon: MemoryStick, name: "RAM เพิ่มเติม", desc: "อัปเกรด RAM สูงสุด 64GB" },
-  { icon: Layers, name: "RFID / NFC Reader", desc: "อ่านบัตร RFID สำหรับระบบ Access Control" },
-  { icon: Settings, name: "GPIO / Relay Module", desc: "เชื่อมต่อเซ็นเซอร์ อุปกรณ์ภายนอก" },
-  { icon: Monitor, name: "ขาตั้ง / แขนยึด", desc: "VESA Mount, Desktop Stand, Wall Mount" },
+  { icon: Wifi, name: "4G/LTE Module", desc: "เพิ่มซิมการ์ด เชื่อมต่ออินเตอร์เน็ตได้ทุกที่", price: "2,900" },
+  { icon: HardDrive, name: "SSD/HDD เพิ่มเติม", desc: "อัปเกรด Storage ตามต้องการ", price: "สอบถาม" },
+  { icon: MemoryStick, name: "RAM เพิ่มเติม", desc: "อัปเกรด RAM สูงสุด 64GB", price: "สอบถาม" },
+  { icon: Layers, name: "COM RS422/RS485", desc: "เพิ่มพอร์ต Serial สำหรับอุปกรณ์อุตสาหกรรม", price: "900" },
+  { icon: Settings, name: "Wide Voltage 9-36V", desc: "รองรับแรงดันไฟฟ้ากว้าง สำหรับงานยานยนต์", price: "1,900" },
+  { icon: Monitor, name: "Upgrade WiFi 6", desc: "อัปเกรดเป็น WiFi 6 ความเร็วสูง", price: "900" },
 ];
 
 const whyUs = [
@@ -169,6 +212,8 @@ const whyUs = [
 
 const ITEMS_PER_PAGE = 7;
 
+const fmt = (n: number) => n.toLocaleString();
+
 /* ─── Component ─── */
 
 const PanelPC = () => {
@@ -179,35 +224,17 @@ const PanelPC = () => {
 
   const filtered = panelModels.filter((m) => {
     if (coolingFilter !== "all" && m.cooling !== coolingFilter) return false;
-    if (sizeFilter === "small") {
-      const size = parseFloat(m.screen);
-      if (size > 12.1) return false;
-    } else if (sizeFilter === "medium") {
-      const size = parseFloat(m.screen);
-      if (size < 13 || size > 19) return false;
-    } else if (sizeFilter === "large") {
-      const size = parseFloat(m.screen);
-      if (size < 21) return false;
-    }
+    const size = parseFloat(m.screen);
+    if (sizeFilter === "small" && size > 12.1) return false;
+    if (sizeFilter === "medium" && (size < 13 || size > 19)) return false;
+    if (sizeFilter === "large" && size < 21) return false;
     return true;
   });
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const paged = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
-
-  const getPriceKeys = (cpuId: string): string[] => {
-    switch (cpuId) {
-      case "j1900": return ["j1900_4_128", "j1900_8_128", "j1900_8_256"];
-      case "j6412": return ["j6412_8_128", "j6412_8_256", "j6412_16_256"];
-      case "gen6": return ["i3_6_8_256", "i5_6_8_256", "i7_6_8_256"];
-      case "gen8": return ["i3_8_8_256", "i5_8_8_256", "i7_8_8_256"];
-      case "gen10": return ["i3_10_8_256", "i5_10_8_256", "i7_10_8_256"];
-      default: return [];
-    }
-  };
-
   const currentTab = cpuTabs.find((t) => t.id === activeCpu)!;
-  const priceKeys = getPriceKeys(activeCpu);
+  const cpuPrices = priceData[activeCpu] || {};
 
   return (
     <div className="min-h-screen bg-background">
@@ -251,8 +278,8 @@ const PanelPC = () => {
                 <a href="#pricing" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity">
                   📋 ดูราคาสินค้า →
                 </a>
-                <a href="#models" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary transition-colors">
-                  🔍 ดูรุ่นทั้งหมด
+                <a href="#specs" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary transition-colors">
+                  🔍 ดูสเปค
                 </a>
               </div>
               <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
@@ -263,9 +290,9 @@ const PanelPC = () => {
             </div>
             <div className="flex justify-center">
               <img
-                src="https://gty-gtg-panelpc.lovable.app/assets/panel-pc-front-Ch5CdgU2.png"
-                alt="GreenThin Industrial Panel PC"
-                className="max-h-[400px] object-contain drop-shadow-2xl"
+                src={gty156Side}
+                alt="GTY156T Industrial Panel PC"
+                className="max-h-[420px] object-contain drop-shadow-2xl"
               />
             </div>
           </div>
@@ -288,7 +315,7 @@ const PanelPC = () => {
         </div>
       </section>
 
-      {/* Design Showcase */}
+      {/* Product Showcase with real images */}
       <section className="section-padding">
         <div className="container max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -300,22 +327,47 @@ const PanelPC = () => {
               ตัวเครื่องอะลูมิเนียมอัลลอยทั้งตัว ครีบระบายความร้อนแบบ Fanless ทนทาน สวยงาม ใช้งานได้ 24/7
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="card-surface p-2 overflow-hidden">
-              <img
-                src="https://gty-gtg-panelpc.lovable.app/assets/panel-pc-front-win11-DjSvFmQ0.png"
-                alt="Panel PC หน้าจอ Windows 11"
-                className="w-full rounded-lg"
-                loading="lazy"
-              />
+
+          {/* Product Image Grid */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <div className="card-surface p-4 flex flex-col items-center gap-3">
+              <img src={gty121Front} alt="GTY121T ด้านหน้า — จอสัมผัส Windows 11" className="w-full max-h-[280px] object-contain rounded-lg" loading="lazy" />
+              <div className="text-center">
+                <p className="font-bold text-foreground text-sm">GTY121T — ด้านหน้า</p>
+                <p className="text-xs text-muted-foreground">จอสัมผัส 12.1" XGA พร้อม Windows 11</p>
+              </div>
             </div>
-            <div className="card-surface p-2 overflow-hidden">
-              <img
-                src="https://gty-gtg-panelpc.lovable.app/assets/panel-pc-rear-fanless-w23aDp1L.png"
-                alt="Panel PC ด้านหลัง Fanless พร้อมพอร์ต"
-                className="w-full rounded-lg"
-                loading="lazy"
-              />
+            <div className="card-surface p-4 flex flex-col items-center gap-3">
+              <img src={gty156Front} alt="GTY156T — มุมเอียง แสดงครีบระบายความร้อน Fanless" className="w-full max-h-[280px] object-contain rounded-lg" loading="lazy" />
+              <div className="text-center">
+                <p className="font-bold text-foreground text-sm">GTY156T — มุมเอียง</p>
+                <p className="text-xs text-muted-foreground">15.6" FHD พร้อมครีบระบายความร้อน Fanless</p>
+              </div>
+            </div>
+            <div className="card-surface p-4 flex flex-col items-center gap-3">
+              <img src={gty156Side} alt="GTY156T — ด้านข้าง แสดงความบาง" className="w-full max-h-[280px] object-contain rounded-lg" loading="lazy" />
+              <div className="text-center">
+                <p className="font-bold text-foreground text-sm">GTY156T — ด้านข้าง</p>
+                <p className="text-xs text-muted-foreground">ดีไซน์บาง สวยงาม พร้อมติดตั้ง Panel Mount</p>
+              </div>
+            </div>
+          </div>
+
+          {/* I/O Port images */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="card-surface p-4 flex flex-col items-center gap-3">
+              <img src={gty121Rear} alt="GTY121T ด้านหลัง — พอร์ต I/O" className="w-full object-contain rounded-lg" loading="lazy" />
+              <div className="text-center">
+                <p className="font-bold text-foreground text-sm">GTY121T — พอร์ต I/O ด้านหลัง</p>
+                <p className="text-xs text-muted-foreground">HDMI, VGA, USB3.0, LAN ×2, RS232 ×2, Audio</p>
+              </div>
+            </div>
+            <div className="card-surface p-4 flex flex-col items-center gap-3">
+              <img src={gty156Rear} alt="GTY156T ด้านหลัง — พอร์ต I/O" className="w-full object-contain rounded-lg" loading="lazy" />
+              <div className="text-center">
+                <p className="font-bold text-foreground text-sm">GTY156T — พอร์ต I/O ด้านหลัง</p>
+                <p className="text-xs text-muted-foreground">HDMI, VGA, USB3.0 ×2, USB2.0 ×2, LAN ×2, RS232, Audio</p>
+              </div>
             </div>
           </div>
         </div>
@@ -329,7 +381,6 @@ const PanelPC = () => {
             <h2 className="text-3xl md:text-4xl font-display font-bold">
               ทำไมต้องเลือก <span className="text-gradient">Industrial Panel PC</span> by ENTGROUP?
             </h2>
-            <p className="text-muted-foreground mt-4">ออกแบบมาสำหรับสภาพแวดล้อมอุตสาหกรรมที่หนักหน่วง ใช้งานได้ยาวนาน 24/7</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {features.map((f) => (
@@ -340,15 +391,11 @@ const PanelPC = () => {
               </div>
             ))}
           </div>
-          {/* Windows 11 Free Banner */}
+          {/* Windows 11 Free */}
           <div className="card-surface p-6 flex flex-col md:flex-row items-center gap-6 border-primary/20">
-            <img
-              src="https://gty-gtg-panelpc.lovable.app/assets/windows11-free-DTTOmS84.png"
-              alt="Windows 11 OEM ฟรี"
-              className="h-20 object-contain"
-            />
+            <img src="https://gty-gtg-panelpc.lovable.app/assets/windows11-free-DTTOmS84.png" alt="Windows 11 OEM ฟรี" className="h-20 object-contain" />
             <div>
-              <h3 className="text-lg font-bold text-foreground">แถมฟรี! Windows 11 OEM License</h3>
+              <h3 className="text-lg font-bold text-foreground">แถมฟรี! Windows 10/11 OEM License</h3>
               <p className="text-sm text-muted-foreground">มาพร้อมทุกเครื่อง ไม่ต้องซื้อ License เพิ่ม</p>
             </div>
           </div>
@@ -378,12 +425,7 @@ const PanelPC = () => {
                 </ul>
               </div>
               <div className="flex justify-center">
-                <img
-                  src="https://gty-gtg-panelpc.lovable.app/assets/gtg-panel-pc-mZjwn_te.png"
-                  alt="GTG Panel PC — Front, Back, Side view"
-                  className="max-h-[300px] object-contain"
-                  loading="lazy"
-                />
+                <img src="https://gty-gtg-panelpc.lovable.app/assets/gtg-panel-pc-mZjwn_te.png" alt="GTG Panel PC" className="max-h-[300px] object-contain" loading="lazy" />
               </div>
             </div>
           </div>
@@ -398,127 +440,101 @@ const PanelPC = () => {
             <h2 className="text-3xl md:text-5xl font-display font-bold">
               รุ่นสินค้า & <span className="text-gradient">ตารางราคา</span>
             </h2>
-            <p className="text-muted-foreground mt-4">
-              13 รุ่น × 11 CPU — เลือกหน้าจอ เลือก CPU คลิกดูสเปค & Datasheet ได้เลย
-            </p>
+            <p className="text-muted-foreground mt-4">13 รุ่น × 11 CPU — เลือกหน้าจอ เลือก CPU ดูราคาได้เลย</p>
           </div>
 
-          {/* CPU Tabs */}
-          <div className="flex flex-wrap gap-2 mb-4 justify-center">
-            {cpuTabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => { setActiveCpu(tab.id); setPage(1); }}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  activeCpu === tab.id
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                }`}
-              >
-                {tab.label}
-              </button>
+          {/* CPU Group Tabs */}
+          <div className="space-y-3 mb-6">
+            {cpuGroups.map((group) => (
+              <div key={group} className="flex flex-wrap items-center gap-2">
+                <span className="text-xs font-bold text-muted-foreground min-w-[60px]">{group}</span>
+                {cpuTabs.filter((t) => t.group === group).map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => { setActiveCpu(tab.id); setPage(1); }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                      activeCpu === tab.id
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
             ))}
           </div>
 
           {/* Filters */}
           <div className="flex flex-wrap gap-2 mb-6 justify-center">
-            {[
-              { val: "all" as const, label: "ทั้งหมด" },
-              { val: "FANLESS" as const, label: "FANLESS" },
-              { val: "FAN" as const, label: "FAN (GTG)" },
-            ].map((f) => (
-              <button
-                key={f.val}
-                onClick={() => { setCoolingFilter(f.val); setPage(1); }}
-                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                  coolingFilter === f.val
-                    ? "bg-primary/20 text-primary border border-primary/30"
-                    : "bg-secondary/50 text-muted-foreground hover:bg-secondary"
-                }`}
-              >
-                {f.label}
+            {([["all", "ทั้งหมด"], ["FANLESS", "🧊 FANLESS"], ["FAN", "🌀 FAN (GTG)"]] as const).map(([val, label]) => (
+              <button key={val} onClick={() => { setCoolingFilter(val); setPage(1); }}
+                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${coolingFilter === val ? "bg-primary/20 text-primary border border-primary/30" : "bg-secondary/50 text-muted-foreground hover:bg-secondary"}`}>
+                {label}
               </button>
             ))}
             <span className="text-muted-foreground mx-1">|</span>
-            {[
-              { val: "all" as const, label: "ทุกขนาด" },
-              { val: "small" as const, label: "เล็ก (10–12\")" },
-              { val: "medium" as const, label: "กลาง (13–19\")" },
-              { val: "large" as const, label: "ใหญ่ (21–32\")" },
-            ].map((f) => (
-              <button
-                key={f.val}
-                onClick={() => { setSizeFilter(f.val); setPage(1); }}
-                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-                  sizeFilter === f.val
-                    ? "bg-primary/20 text-primary border border-primary/30"
-                    : "bg-secondary/50 text-muted-foreground hover:bg-secondary"
-                }`}
-              >
-                {f.label}
+            {([["all", "ทุกขนาด"], ["small", "เล็ก (10–12\")"], ["medium", "กลาง (13–19\")"], ["large", "ใหญ่ (21–32\")"]] as const).map(([val, label]) => (
+              <button key={val} onClick={() => { setSizeFilter(val); setPage(1); }}
+                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${sizeFilter === val ? "bg-primary/20 text-primary border border-primary/30" : "bg-secondary/50 text-muted-foreground hover:bg-secondary"}`}>
+                {label}
               </button>
             ))}
           </div>
 
           {/* Price heading */}
           <div className="text-center mb-4">
-            <p className="text-sm text-muted-foreground">💰 ราคาขายปลีก (บาท) — Intel® {currentTab.label}</p>
+            <p className="text-sm font-semibold text-foreground">💰 ราคาขายปลีก (บาท) — Intel® {currentTab.label}</p>
           </div>
 
           {/* Table */}
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-border">
+                <tr className="border-b border-border bg-secondary/30">
                   <th className="text-left p-3 text-muted-foreground font-medium">รุ่น</th>
                   <th className="text-center p-3 text-muted-foreground font-medium">หน้าจอ</th>
                   <th className="text-center p-3 text-muted-foreground font-medium">ระบาย</th>
                   {currentTab.cols.map((col) => (
-                    <th key={col} className="text-center p-3 text-muted-foreground font-medium whitespace-nowrap">
-                      {col}
-                    </th>
+                    <th key={col} className="text-center p-3 text-muted-foreground font-medium whitespace-nowrap">{col}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {paged.map((m) => (
-                  <tr key={m.id} className={`border-b border-border/50 hover:bg-secondary/30 transition-colors ${m.popular ? "bg-primary/5" : ""}`}>
-                    <td className="p-3">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-secondary text-secondary-foreground font-mono">{m.series}</span>
-                        <div>
-                          <span className="font-semibold text-foreground">{m.name}</span>
-                          {m.popular && <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground font-bold">⭐</span>}
-                          <p className="text-[11px] text-muted-foreground">{m.highlight}</p>
+                {paged.map((m) => {
+                  const prices = cpuPrices[m.id] || [0, 0, 0];
+                  return (
+                    <tr key={m.id} className={`border-b border-border/50 hover:bg-secondary/30 transition-colors ${m.popular ? "bg-primary/5" : ""}`}>
+                      <td className="p-3">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-secondary text-secondary-foreground font-mono">{m.series}</span>
+                          <div>
+                            <span className="font-semibold text-foreground">{m.name}</span>
+                            {m.popular && <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground font-bold">⭐</span>}
+                            <p className="text-[11px] text-muted-foreground">{m.highlight}</p>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className="text-center p-3 font-medium text-foreground whitespace-nowrap">
-                      {m.screen}<br /><span className="text-[10px] text-muted-foreground">{m.resolution}</span>
-                    </td>
-                    <td className="text-center p-3">
-                      <span className={`text-xs px-2 py-1 rounded-full ${m.cooling === "FANLESS" ? "bg-blue-500/10 text-blue-600 dark:text-blue-400" : "bg-orange-500/10 text-orange-600 dark:text-orange-400"}`}>
-                        {m.cooling === "FANLESS" ? "🧊 FANLESS" : "🌀 FAN"}
-                      </span>
-                    </td>
-                    {priceKeys.map((key) => {
-                      const price = m.prices[key as keyof typeof m.prices];
-                      return (
-                        <td key={key} className="text-center p-3 font-semibold whitespace-nowrap">
-                          {price ? (
-                            price.includes("Call") ? (
-                              <span className="text-muted-foreground">{price}</span>
-                            ) : (
-                              <span className="text-primary">฿{price}</span>
-                            )
+                      </td>
+                      <td className="text-center p-3 font-medium text-foreground whitespace-nowrap">
+                        {m.screen}<br /><span className="text-[10px] text-muted-foreground">{m.resolution}</span>
+                      </td>
+                      <td className="text-center p-3">
+                        <span className={`text-xs px-2 py-1 rounded-full ${m.cooling === "FANLESS" ? "bg-blue-500/10 text-blue-600 dark:text-blue-400" : "bg-orange-500/10 text-orange-600 dark:text-orange-400"}`}>
+                          {m.cooling === "FANLESS" ? "🧊 FANLESS" : "🌀 FAN"}
+                        </span>
+                      </td>
+                      {prices.map((p, i) => (
+                        <td key={i} className="text-center p-3 font-semibold whitespace-nowrap">
+                          {p === 0 ? (
+                            <span className="text-muted-foreground text-xs">📞 สอบถาม</span>
                           ) : (
-                            <span className="text-muted-foreground text-xs">สอบถาม</span>
+                            <span className="text-primary">฿{fmt(p)}</span>
                           )}
                         </td>
-                      );
-                    })}
-                  </tr>
-                ))}
+                      ))}
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -526,21 +542,13 @@ const PanelPC = () => {
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex items-center justify-center gap-4 mt-6">
-              <button
-                onClick={() => setPage(Math.max(1, page - 1))}
-                disabled={page === 1}
-                className="p-2 rounded-lg bg-secondary text-foreground disabled:opacity-30 hover:bg-secondary/80 transition-colors"
-              >
+              <button onClick={() => setPage(Math.max(1, page - 1))} disabled={page === 1}
+                className="p-2 rounded-lg bg-secondary text-foreground disabled:opacity-30 hover:bg-secondary/80 transition-colors">
                 <ChevronLeft size={18} />
               </button>
-              <span className="text-sm text-muted-foreground">
-                หน้า {page}/{totalPages} — แสดง {paged.length} จาก {filtered.length} รุ่น
-              </span>
-              <button
-                onClick={() => setPage(Math.min(totalPages, page + 1))}
-                disabled={page === totalPages}
-                className="p-2 rounded-lg bg-secondary text-foreground disabled:opacity-30 hover:bg-secondary/80 transition-colors"
-              >
+              <span className="text-sm text-muted-foreground">หน้า {page}/{totalPages} — แสดง {paged.length} จาก {filtered.length} รุ่น</span>
+              <button onClick={() => setPage(Math.min(totalPages, page + 1))} disabled={page === totalPages}
+                className="p-2 rounded-lg bg-secondary text-foreground disabled:opacity-30 hover:bg-secondary/80 transition-colors">
                 <ChevronRight size={18} />
               </button>
             </div>
@@ -560,9 +568,7 @@ const PanelPC = () => {
         <div className="container max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Specifications</span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              สเปค<span className="text-gradient">มาตรฐานทุกรุ่น</span>
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold">สเปค<span className="text-gradient">มาตรฐานทุกรุ่น</span></h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl mx-auto">
             {specs.map((s) => (
@@ -575,22 +581,23 @@ const PanelPC = () => {
         </div>
       </section>
 
-      {/* Add-ons */}
+      {/* Add-ons with prices */}
       <section className="section-padding bg-surface/50">
         <div className="container max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Add-ons</span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              อุปกรณ์<span className="text-gradient">เสริม</span>
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold">อุปกรณ์<span className="text-gradient">เสริม</span></h2>
             <p className="text-muted-foreground mt-4">เพิ่มความสามารถให้เครื่องตามความต้องการ</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {addons.map((a) => (
               <div key={a.name} className="card-surface p-5 flex items-start gap-4 hover:border-primary/30 transition-all">
                 <a.icon className="text-primary shrink-0 mt-0.5" size={24} />
-                <div>
-                  <h3 className="font-bold text-foreground text-sm">{a.name}</h3>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-bold text-foreground text-sm">{a.name}</h3>
+                    <span className="text-xs font-semibold text-primary">฿{a.price}</span>
+                  </div>
                   <p className="text-xs text-muted-foreground">{a.desc}</p>
                 </div>
               </div>
@@ -604,9 +611,7 @@ const PanelPC = () => {
         <div className="container max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Why ENT Group</span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              ทำไมต้อง<span className="text-gradient">ซื้อกับเรา?</span>
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold">ทำไมต้อง<span className="text-gradient">ซื้อกับเรา?</span></h2>
             <p className="text-muted-foreground mt-4">เราไม่ได้แค่ขายสินค้า แต่ดูแลคุณตั้งแต่เลือกซื้อจนหลังการขาย</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -628,7 +633,6 @@ const PanelPC = () => {
           </h2>
           <p className="text-muted-foreground mb-2">รองรับโครงการขนาดเล็ก กลาง ใหญ่ — อยากได้ TOR แจ้งได้</p>
           <p className="text-muted-foreground mb-8">รับใบเสนอราคาพิเศษสำหรับออเดอร์จำนวนมาก พร้อม OEM/ODM</p>
-
           <div className="flex flex-wrap justify-center gap-4 mb-10">
             <a href="tel:020456104" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity">
               <Phone size={18} /> 02-045-6104
@@ -636,23 +640,13 @@ const PanelPC = () => {
             <a href="tel:0957391053" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary transition-colors">
               <Phone size={18} /> 095-739-1053
             </a>
-            <a
-              href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[hsl(142,70%,45%)] text-white font-bold hover:opacity-90 transition-opacity"
-            >
+            <a href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[hsl(142,70%,45%)] text-white font-bold hover:opacity-90 transition-opacity">
               <MessageCircle size={18} /> Line @entgroup
             </a>
           </div>
-
-          {/* Lead time */}
           <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
-            {[
-              { label: "📦 Sample", time: "3–5 วัน" },
-              { label: "📦 50 ชิ้น", time: "10–15 วัน" },
-              { label: "📦 100+", time: "15–30 วัน" },
-            ].map((lt) => (
+            {[{ label: "📦 Sample", time: "3–5 วัน" }, { label: "📦 50 ชิ้น", time: "10–15 วัน" }, { label: "📦 100+", time: "15–30 วัน" }].map((lt) => (
               <div key={lt.label} className="card-surface p-4 text-center">
                 <p className="text-sm font-semibold text-foreground">{lt.label}</p>
                 <p className="text-xs text-muted-foreground">{lt.time}</p>
@@ -669,12 +663,8 @@ const PanelPC = () => {
       {/* External link */}
       <section className="section-padding">
         <div className="container max-w-7xl mx-auto text-center">
-          <a
-            href="https://gty-gtg-panelpc.lovable.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity"
-          >
+          <a href="https://gty-gtg-panelpc.lovable.app" target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity">
             <ExternalLink size={20} /> ดูเว็บไซต์ Panel PC เต็มรูปแบบ
           </a>
         </div>
@@ -683,9 +673,7 @@ const PanelPC = () => {
       {/* Footer */}
       <footer className="border-t border-border px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <img src={logo} alt="ENT GROUP" className="h-8 w-auto" />
-        <p className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} ENT GROUP Co., Ltd. All rights reserved.
-        </p>
+        <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} ENT GROUP Co., Ltd. All rights reserved.</p>
       </footer>
     </div>
   );
