@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowLeft, ExternalLink, Sun, Shield, Monitor, Cpu, Phone, MessageCircle,
+  ArrowLeft, Sun, Shield, Monitor, Cpu, Phone, MessageCircle,
   Download, Smartphone, Settings, Wifi, Eye, Layers, Store, BadgePercent, Printer, ScanLine
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -628,15 +628,6 @@ const SmartDisplay = () => {
         </div>
       </section>
 
-      {/* External link */}
-      <section className="section-padding bg-surface/50">
-        <div className="container max-w-7xl mx-auto text-center">
-          <a href="https://www.entgroup.co.th/smartdisplay" target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity">
-            <ExternalLink size={20} /> ดูเว็บไซต์ Smart Display เต็มรูปแบบ
-          </a>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="border-t border-border px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
