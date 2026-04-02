@@ -20,6 +20,7 @@ import industryKiosk from "@/assets/industry-kiosk.jpg";
 import industryWarehouse from "@/assets/industry-warehouse.jpg";
 import industryBuilding from "@/assets/industry-building.jpg";
 import industryFood from "@/assets/industry-food.jpg";
+import gtgSeries from "@/assets/gtg-series.png";
 
 /* ─── Data ─── */
 
