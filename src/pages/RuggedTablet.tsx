@@ -65,6 +65,7 @@ const emRuggedTablets = [
     highlight: "Intel i5-1235U สูงสุด 4.4GHz, 16GB LPDDR4x / 256GB, จอ FHD 1200×1920 ประสิทธิภาพสูงสุด",
     image: "https://entgroup-rugged.com/assets/f9e-C3MseYpo.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/f9e",
   },
   {
     id: "w109u",
@@ -73,6 +74,7 @@ const emRuggedTablets = [
     highlight: "Intel i5-1235U / i7-1255U (10-core), 16-48GB RAM, IP68 กันน้ำกันฝุ่นระดับสูงสุด",
     image: "https://entgroup-rugged.com/assets/w109u-main-C8XbCmqD.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/w109u",
   },
   {
     id: "w10y",
@@ -81,6 +83,7 @@ const emRuggedTablets = [
     highlight: "Intel Core i5-10210Y, จอ IPS ความสว่าง 700cd/㎡, IP68 กันน้ำกันฝุ่น",
     image: "https://entgroup-rugged.com/assets/w10y-main-woE420pE.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/w10y",
   },
   {
     id: "f7g",
@@ -89,6 +92,8 @@ const emRuggedTablets = [
     highlight: "Intel N4120, 8GB/128GB, จอ FHD IPS 1920×1200, IP67 กันน้ำ ทนตก 1.5 เมตร",
     image: "https://entgroup-rugged.com/assets/f7g-DidJ5UAD.png",
     datasheet: "",
+    price: "฿22,990",
+    productUrl: "https://entgroup-rugged.com/product/f7g",
   },
   {
     id: "f9a",
@@ -97,6 +102,8 @@ const emRuggedTablets = [
     highlight: "Intel Alder Lake N100 สูงสุด 3.4GHz, 8-16GB RAM, แบตอึด Multi-Touch 10 จุด",
     image: "https://entgroup-rugged.com/assets/f9a-_j8J-x2I.jpg",
     datasheet: "",
+    price: "฿27,990",
+    productUrl: "https://entgroup-rugged.com/product/f9a",
   },
   {
     id: "f8ct",
@@ -105,6 +112,8 @@ const emRuggedTablets = [
     highlight: "Intel x5-Z8350 Quad-Core, จอ IPS HD 8 นิ้ว, IP67 กันน้ำ กันฝุ่น ขนาดกะทัดรัด",
     image: "https://entgroup-rugged.com/assets/f8ct-CetUjj-d.png",
     datasheet: "",
+    price: "฿21,990",
+    productUrl: "https://entgroup-rugged.com/product/f8ct",
   },
   {
     id: "w10n",
@@ -113,6 +122,7 @@ const emRuggedTablets = [
     highlight: "Intel Celeron N5100, จอ IPS 700cd/㎡, IP68 รองรับมือเปียกและถุงมือ ราคาคุ้มค่า",
     image: "https://entgroup-rugged.com/assets/w10n-main-DJomacwZ.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/w10n",
   },
   {
     id: "f9r",
@@ -121,6 +131,8 @@ const emRuggedTablets = [
     highlight: "RK3588 Octa-Core (4×A76+4×A55), จอ IPS 600 nits, 8GB/128GB Android ประสิทธิภาพสูง",
     image: "https://entgroup-rugged.com/assets/f9r-V3GyP6IL.jpg",
     datasheet: "",
+    price: "฿23,990",
+    productUrl: "https://entgroup-rugged.com/product/f9r",
   },
   {
     id: "a10st",
@@ -129,6 +141,7 @@ const emRuggedTablets = [
     highlight: "MTK8781 Octa-Core 2.2GHz, จอ IPS 700cd/㎡ 1920×1200, IP68 Android 13",
     image: "https://entgroup-rugged.com/assets/a10st-13-CjHhtG0m.jpg",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/a10st-13",
   },
   {
     id: "a109t",
@@ -137,6 +150,7 @@ const emRuggedTablets = [
     highlight: "MT6789V Octa-Core, จอ IPS 700cd/㎡, IP68 บางเฉียบ Android 14 รุ่นใหม่ล่าสุด",
     image: "https://entgroup-rugged.com/assets/a109t-product-main-BDvMNhIR.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/a109t",
   },
 ];
 
