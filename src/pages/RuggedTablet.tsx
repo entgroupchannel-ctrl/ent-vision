@@ -242,36 +242,6 @@ const tpcSeries = [
   },
 ];
 
-const pipoModels = [
-  {
-    id: "pipo-x10s",
-    name: "PIPO X10s Pro",
-    size: '10.1"',
-    os: "Windows",
-    highlight: "Mini PC Tablet จอ IPS 10.1 นิ้ว Full HD 1920×1280 มัลติทัช",
-    image: "https://static.wixstatic.com/media/005637_1052a4dac1824ab7b2db7793b7435663~mv2.jpg/v1/fill/w_831,h_561,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B9%80%E0%B8%A7%E0%B9%87%E0%B8%9Apipo2.jpg",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/005637_ee3154a9a7794bb8a057f61639a279a7.pdf",
-  },
-  {
-    id: "pipo-x11",
-    name: "PIPO X11 Pro",
-    size: '8.9"',
-    os: "Windows",
-    highlight: "Mini PC Tablet จอ IPS 8.9 นิ้ว 1920×1200 คอมแพ็คท์",
-    image: "https://static.wixstatic.com/media/005637_1872094ebf1146b39f9cec6d05603756~mv2.jpg/v1/crop/x_0,y_0,w_996,h_781/fill/w_781,h_612,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/reS__12632141_1.jpg",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/005637_4c0589c2f2854c53bc8db087b8bd00e5.pdf",
-  },
-  {
-    id: "pipo-x4",
-    name: "PIPO X4",
-    size: '10.1"',
-    os: "Windows 10 Pro",
-    highlight: "Rugged IP67 กันน้ำ กันฝุ่น Intel Pentium J4205 RAM 8GB สแกนลายนิ้วมือ",
-    image: "https://static.wixstatic.com/media/0597a3_92168420e69d4c859d0b0f595e8b47c3~mv2.png/v1/fill/w_1224,h_450,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-11-18%20at%2011_27_58.png",
-    datasheet: "",
-  },
-];
-
 const aioProducts = [
   {
     id: "h10pro", name: "H10PRO Box PC", size: '10"',
