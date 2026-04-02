@@ -40,6 +40,7 @@ const HeroSection = () => {
               {l.label}
             </a>
           ))}
+          <ThemeToggle />
           <a
             href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
             target="_blank"
