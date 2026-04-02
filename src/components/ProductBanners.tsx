@@ -32,8 +32,8 @@ const productBanners = [
   },
   {
     title: "Smart Display จอภาพติดตั้งภายนอก-ภายในอาคาร",
-    image: "https://static.wixstatic.com/media/0597a3_4b83ca4062e04f0285200f3eba338ebc~mv2.png/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/vSmart%20Display%20-%201600nits.png",
-    productImage: "https://static.wixstatic.com/media/0597a3_25107590998d467abb1b5b0f603701f3~mv2.png/v1/fill/w_600,h_541,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IPC%20-%20119%20(1040%20x%201040%20px)%20(1332%20x%201200%20px).png",
+    image: smartDisplayBanner,
+    productImage: "",
     links: [
       { label: "ดูสินค้าทั้งหมด", href: "/smart-display" },
       { label: "ดาวน์โหลด Price List", href: "/smart-display#downloads" },
