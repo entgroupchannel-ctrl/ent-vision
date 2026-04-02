@@ -20,12 +20,12 @@ const productBanners = [
     ],
   },
   {
-    title: "Industrial PC สำหรับโรงงาน",
-    image: "https://static.wixstatic.com/media/0597a3_b165c663a83644b3bb1a42f6dc632939~mv2.png/v1/fill/w_600,h_259,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202569-03-31%20at%2022_23_51.png",
-    productImage: "https://static.wixstatic.com/media/0597a3_9da395dc92f646e4a2f6c558d1b0976e~mv2.png/v1/fill/w_600,h_182,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202569-03-31%20at%2022_30_15.png",
+    title: "คอมพิวเตอร์อุตสาหกรรม งานประมูล งานโครงการ",
+    image: "https://rugged-ipc.lovable.app/assets/ibox-007-main-BOyAzQqp.png",
+    productImage: "https://rugged-ipc.lovable.app/assets/ibox-601-gt-pro-main-DGne0Wqp.png",
     links: [
-      { label: "ดูเว็บไซต์", href: "https://rugged-ipc.lovable.app/" },
-      { label: "ดูรุ่นทั้งหมด", href: "https://rugged-ipc.lovable.app/products" },
+      { label: "ดูสินค้าทั้งหมด", href: "https://rugged-ipc.lovable.app/products" },
+      { label: "ขอใบเสนอราคา", href: "https://rugged-ipc.lovable.app/rfq" },
     ],
   },
 ];
