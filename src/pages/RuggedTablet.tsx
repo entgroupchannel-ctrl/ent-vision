@@ -270,7 +270,7 @@ const categories = [
 const ITEMS_PER_PAGE = 10;
 
 /* ───── Product Card ───── */
-const ProductCard = ({ product }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string } }) => (
+const ProductCard = ({ product }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string } }) => (
   <div className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
     {product.image && (
       <div className="bg-secondary/30 p-4 flex items-center justify-center h-48">
@@ -283,6 +283,9 @@ const ProductCard = ({ product }: { product: { name: string; size?: string; high
         {product.size && <Badge variant="secondary" className="text-xs shrink-0">{product.size}</Badge>}
       </div>
       <p className="text-xs text-muted-foreground leading-relaxed">{product.highlight}</p>
+      {product.price && (
+        <p className="text-sm font-bold text-primary">{product.price}</p>
+      )}
       <div className="flex gap-2">
         {product.datasheet && (
           <Button variant="outline" size="sm" asChild className="flex-1">
