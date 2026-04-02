@@ -15,6 +15,7 @@ const categories = [
   { id: "firewall", label: "Firewall Appliance", desc: "Multi-LAN Router" },
   { id: "signage", label: "Digital Signage", desc: "X7 / R9 Android" },
   { id: "legacy", label: "Budget Series", desc: "K6-F13, GT/GQ" },
+  { id: "pricelist", label: "Price List", desc: "ตารางราคา" },
 ];
 
 /* ── Entry-Level Models ── */
