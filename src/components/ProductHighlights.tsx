@@ -11,7 +11,8 @@ const highlights = [
   {
     name: "EPC Box Series",
     image: "https://static.wixstatic.com/media/0597a3_47b98b7d2cc34a1da2b4e89e4499834d~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_23_10.png",
-    href: "https://www.entgroup.co.th/epcboxseries",
+    href: "/epc-box-series",
+    internal: true,
   },
   {
     name: "GK Series",
