@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/hooks/use-theme";
 import Index from "./pages/Index.tsx";
 import GTSeries from "./pages/GTSeries.tsx";
 import EPCBoxSeries from "./pages/EPCBoxSeries.tsx";
+import GKSeries from "./pages/GKSeries.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
