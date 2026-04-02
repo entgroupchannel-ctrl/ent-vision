@@ -21,9 +21,10 @@ const highlights = [
     internal: true,
   },
   {
-    name: "K Series",
+    name: "Mini PC",
     image: "https://static.wixstatic.com/media/0597a3_b9bf3c2c39ee4be6b009dd7b958fa43c~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_28_07.png",
-    href: "https://www.entgroup.co.th/kseries2025",
+    href: "/mini-pc",
+    internal: true,
   },
   {
     name: "Waterproof PC",
