@@ -287,11 +287,73 @@ const SmartDisplay = () => {
                   <span>✅ ทำงาน 24/7</span>
                 </div>
 
-                {/* Product image */}
-                <div className="card-surface overflow-hidden rounded-xl mb-8">
+                {/* Product hero image */}
+                <div className="card-surface overflow-hidden rounded-xl mb-6">
                   <img
                     src="https://static.wixstatic.com/media/0597a3_7ae90fd5a4fd425d9cc9efad0a31c636~mv2.png/v1/fill/w_1317,h_485,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_7ae90fd5a4fd425d9cc9efad0a31c636~mv2.png"
                     alt="FPM Series Industrial Touch Monitor"
+                    className="w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+
+                {/* Wide / Square screen comparison */}
+                <div className="grid md:grid-cols-2 gap-6 mb-6">
+                  <div className="card-surface overflow-hidden rounded-xl">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_171a07409e364dd4b23631e28628341f~mv2.png/v1/fill/w_1112,h_332,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_171a07409e364dd4b23631e28628341f~mv2.png"
+                      alt="Wide Screen & Square Screen options"
+                      className="w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="card-surface overflow-hidden rounded-xl">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_2b37f8b836bf40e983200b7d2c7eec55~mv2.png/v1/fill/w_1306,h_481,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_2b37f8b836bf40e983200b7d2c7eec55~mv2.png"
+                      alt="FPM size options 8-24 inch"
+                      className="w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                {/* Connection & usage info */}
+                <div className="grid md:grid-cols-2 gap-6 mb-6">
+                  <div className="card-surface p-6 rounded-xl">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_bd712d6f658443bbb2190fda091ee8b1~mv2.png/v1/fill/w_1312,h_482,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_bd712d6f658443bbb2190fda091ee8b1~mv2.png"
+                      alt="Industrial Grade Computer + Touch Screen"
+                      className="w-full object-contain rounded-lg mb-4"
+                      loading="lazy"
+                    />
+                    <p className="text-sm text-muted-foreground">ส่งมอบประสบการณ์ที่แข็งแกร่ง กับการเลือกใช้ Industrial Grade Computer ร่วมกับหน้าจอ Touch Screen เกรดอุตสาหกรรม</p>
+                  </div>
+                  <div className="card-surface p-6 rounded-xl">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_099390617863452cb42bc0e2eeca3ab2~mv2.png/v1/fill/w_1297,h_476,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_099390617863452cb42bc0e2eeca3ab2~mv2.png"
+                      alt="Easy connection USB + HDMI"
+                      className="w-full object-contain rounded-lg mb-4"
+                      loading="lazy"
+                    />
+                    <p className="text-sm text-muted-foreground">เพียงเสียบสายไฟ USB และ HDMI — เปลี่ยนระบบการทำงานเป็นแบบสัมผัส พร้อมใช้งานทันที</p>
+                  </div>
+                </div>
+
+                {/* FPM17 Special Edition */}
+                <div className="card-surface overflow-hidden rounded-xl mb-6">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_c6e92eb018a04ed78ef653433323ccc4~mv2.png/v1/crop/x_0,y_19,w_1958,h_1084/fill/w_1327,h_735,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/FPM17%20Special%20Edition.png"
+                    alt="FPM17 Special Edition"
+                    className="w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+
+                {/* Mounting options */}
+                <div className="card-surface overflow-hidden rounded-xl mb-8">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_5bbc918177214812816fca9cac808de6~mv2.png/v1/fill/w_1319,h_484,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_5bbc918177214812816fca9cac808de6~mv2.png"
+                    alt="VESA Mounting options"
                     className="w-full object-contain"
                     loading="lazy"
                   />
@@ -344,16 +406,20 @@ const SmartDisplay = () => {
                   </div>
                 </div>
 
-                {/* Gallery */}
+                {/* Gallery — all images from original page */}
                 <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    "https://static.wixstatic.com/media/0597a3_bcb05795214544aaaa6de89e36e1240d~mv2.jpg/v1/fill/w_242,h_161,q_90,enc_avif,quality_auto/0597a3_bcb05795214544aaaa6de89e36e1240d~mv2.jpg",
-                    "https://static.wixstatic.com/media/0597a3_5296e6c18d9c46eda07b3c9a4747484d~mv2.jpg/v1/fill/w_242,h_161,q_90,enc_avif,quality_auto/0597a3_5296e6c18d9c46eda07b3c9a4747484d~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_c40ca1d586a44b1ca9fc90cf2c49af6a~mv2.jpg/v1/fill/w_276,h_254,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0148.jpg",
-                    "https://static.wixstatic.com/media/005637_6ba3b2af125d4948b5d9d6c626135c1f~mv2.jpg/v1/fill/w_278,h_254,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0140.jpg",
+                    "https://static.wixstatic.com/media/0597a3_bcb05795214544aaaa6de89e36e1240d~mv2.jpg/v1/fill/w_400,h_267,q_90,enc_avif,quality_auto/0597a3_bcb05795214544aaaa6de89e36e1240d~mv2.jpg",
+                    "https://static.wixstatic.com/media/0597a3_5296e6c18d9c46eda07b3c9a4747484d~mv2.jpg/v1/fill/w_400,h_267,q_90,enc_avif,quality_auto/0597a3_5296e6c18d9c46eda07b3c9a4747484d~mv2.jpg",
+                    "https://static.wixstatic.com/media/0597a3_772cb29089e6441683f42be27f12dd10~mv2.jpg/v1/fill/w_489,h_327,q_90,enc_avif,quality_auto/0597a3_772cb29089e6441683f42be27f12dd10~mv2.jpg",
+                    "https://static.wixstatic.com/media/0597a3_c12a57b72528451194c0e554b3a7876e~mv2.jpg/v1/fill/w_366,h_244,q_90,enc_avif,quality_auto/0597a3_c12a57b72528451194c0e554b3a7876e~mv2.jpg",
+                    "https://static.wixstatic.com/media/0597a3_8d732a24969b4605a70e4c8b1f199a4d~mv2.jpg/v1/fill/w_366,h_244,q_90,enc_avif,quality_auto/0597a3_8d732a24969b4605a70e4c8b1f199a4d~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_c40ca1d586a44b1ca9fc90cf2c49af6a~mv2.jpg/v1/fill/w_400,h_368,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0148.jpg",
+                    "https://static.wixstatic.com/media/005637_6ba3b2af125d4948b5d9d6c626135c1f~mv2.jpg/v1/fill/w_400,h_366,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0140.jpg",
+                    "https://static.wixstatic.com/media/005637_54259d2f8cf04757bfbf7bbabb983500~mv2.jpg/v1/fill/w_400,h_366,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0145.jpg",
                   ].map((src, i) => (
                     <div key={i} className="card-surface overflow-hidden rounded-xl">
-                      <img src={src} alt={`FPM installation ${i + 1}`} className="w-full h-40 object-cover" loading="lazy" />
+                      <img src={src} alt={`FPM installation ${i + 1}`} className="w-full h-44 object-cover" loading="lazy" />
                     </div>
                   ))}
                 </div>
