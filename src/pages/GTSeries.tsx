@@ -554,6 +554,37 @@ const GTSeries = () => {
                 ))}
               </div>
 
+              {/* Video Section */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT1000</h3>
+                </div>
+                <a
+                  href="https://www.entgroup.co.th/ipc-gt1000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block relative group"
+                >
+                  <img
+                    src="https://static.wixstatic.com/media/3e5003_1654215f900c48fdbc594d46658d067b~mv2.jpg/v1/fill/w_1270,h_590,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/22.jpg"
+                    alt="GT1000 Video Thumbnail"
+                    className="w-full aspect-video object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                    <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Play className="text-primary-foreground ml-1" size={28} fill="currentColor" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4">
+                    <span className="text-white text-sm font-semibold bg-black/60 px-3 py-1 rounded-full">
+                      GT1000 Detail Specification — 02:00
+                    </span>
+                  </div>
+                </a>
+              </div>
+
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
