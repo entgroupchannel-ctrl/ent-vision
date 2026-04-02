@@ -815,6 +815,158 @@ const MiniPC = () => {
           <CategorySection id="firewall" title="Firewall Appliance" subtitle="Multi-LAN Router, pfSense/OPNsense" icon={Shield} models={firewallModels} />
           <CategorySection id="signage" title="Digital Signage Player" subtitle="Android-based, X7/R9 Series" icon={Monitor} models={signageModels} />
           <CategorySection id="legacy" title="Budget Series — K6-F13" subtitle="ราคาประหยัด สำหรับงานพื้นฐาน" icon={Server} models={legacyModels} />
+
+          {/* Price List */}
+          <section id="pricelist" className="scroll-mt-24">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Server className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">ตารางราคาสินค้า Mini PC — Price List</h2>
+                <p className="text-sm text-muted-foreground">ราคาอัปเดตล่าสุด 2025</p>
+              </div>
+            </div>
+
+            <div className="card-surface overflow-hidden">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-primary/5">
+                      <TableHead className="font-bold text-foreground">รุ่น</TableHead>
+                      <TableHead className="font-bold text-foreground">CPU</TableHead>
+                      <TableHead className="font-bold text-foreground">RAM</TableHead>
+                      <TableHead className="font-bold text-foreground">Storage</TableHead>
+                      <TableHead className="font-bold text-foreground text-right">ราคา (฿)</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {/* Entry-Level */}
+                    <TableRow className="bg-primary/10">
+                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 Entry-Level / Fanless</TableCell>
+                    </TableRow>
+                    {[
+                      { model: "K6-F1", cpu: "Intel N-Series 4C", ram: "4GB", storage: "128GB SSD", price: "4,900" },
+                      { model: "K6-F17H", cpu: "Intel N150 4C", ram: "4GB", storage: "128GB SSD", price: "5,500" },
+                      { model: "K3-F18-6006", cpu: "Core i3-6006U", ram: "8GB", storage: "128GB SSD", price: "8,900" },
+                      { model: "K3-F17H", cpu: "Core i3-5005U", ram: "8GB", storage: "128GB SSD", price: "8,500" },
+                    ].map((r) => (
+                      <TableRow key={r.model}>
+                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
+                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
+                      </TableRow>
+                    ))}
+
+                    {/* High Performance */}
+                    <TableRow className="bg-primary/10">
+                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 High Performance / Industrial</TableCell>
+                    </TableRow>
+                    {[
+                      { model: "K8-F18-4405", cpu: "Pentium 4405U", ram: "8GB", storage: "128GB SSD", price: "9,500" },
+                      { model: "K3-F17HI", cpu: "Core i3 Series", ram: "8GB", storage: "128GB SSD", price: "9,900" },
+                      { model: "K8-F17HI-3710", cpu: "Pentium 3710", ram: "4GB", storage: "64GB SSD", price: "7,900" },
+                      { model: "K5-F17H", cpu: "Core i5-5300U", ram: "8GB", storage: "128GB SSD", price: "11,900" },
+                      { model: "K7-F17H", cpu: "Core i7-5500U", ram: "8GB", storage: "128GB SSD", price: "13,900" },
+                      { model: "K5-F17F", cpu: "Core i5-1155G7", ram: "8GB", storage: "256GB SSD", price: "16,900" },
+                      { model: "K7-F17F", cpu: "Core i7-1195G7", ram: "16GB", storage: "256GB SSD", price: "21,900" },
+                    ].map((r) => (
+                      <TableRow key={r.model}>
+                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
+                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
+                      </TableRow>
+                    ))}
+
+                    {/* Education & Office */}
+                    <TableRow className="bg-primary/10">
+                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 Education & Office</TableCell>
+                    </TableRow>
+                    {[
+                      { model: "G5 Nano", cpu: "Celeron J4125", ram: "4GB", storage: "64GB SSD", price: "3,900" },
+                      { model: "K3-C7", cpu: "Core i3-6157U", ram: "4GB", storage: "128GB SSD", price: "7,900" },
+                      { model: "K5-N12", cpu: "Core i5-8300H", ram: "8GB", storage: "256GB SSD", price: "12,900" },
+                      { model: "K7-N12", cpu: "Core i7-8750H", ram: "8GB", storage: "256GB SSD", price: "15,900" },
+                    ].map((r) => (
+                      <TableRow key={r.model}>
+                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
+                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
+                      </TableRow>
+                    ))}
+
+                    {/* Nano & Firewall */}
+                    <TableRow className="bg-primary/10">
+                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 Nano PC & Firewall Appliance</TableCell>
+                    </TableRow>
+                    {[
+                      { model: "K1-F6-6400T", cpu: "AMD A4-6400T", ram: "2GB", storage: "32GB SSD", price: "3,500" },
+                      { model: "K8-F12 (4LAN)", cpu: "Pentium N3700", ram: "4GB", storage: "64GB SSD", price: "6,900" },
+                      { model: "K8-F12C (6LAN)", cpu: "Pentium N3700", ram: "4GB", storage: "64GB SSD", price: "7,900" },
+                    ].map((r) => (
+                      <TableRow key={r.model}>
+                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
+                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
+                      </TableRow>
+                    ))}
+
+                    {/* Digital Signage */}
+                    <TableRow className="bg-primary/10">
+                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 Digital Signage (Android)</TableCell>
+                    </TableRow>
+                    {[
+                      { model: "R9 Player", cpu: "ARM SoC", ram: "2GB", storage: "16GB", price: "สอบถาม" },
+                      { model: "X7 Player", cpu: "RK3288", ram: "2GB", storage: "16GB", price: "สอบถาม" },
+                    ].map((r) => (
+                      <TableRow key={r.model}>
+                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
+                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
+                      </TableRow>
+                    ))}
+
+                    {/* Budget */}
+                    <TableRow className="bg-primary/10">
+                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 Budget Series</TableCell>
+                    </TableRow>
+                    {[
+                      { model: "K6-F13A", cpu: "N2840 Quad Core", ram: "4GB", storage: "64GB SSD", price: "3,900" },
+                      { model: "K6-F13D", cpu: "N3710 Quad Core", ram: "2GB", storage: "64GB SSD", price: "3,500" },
+                    ].map((r) => (
+                      <TableRow key={r.model}>
+                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
+                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
+                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+
+              {/* Remarks */}
+              <div className="p-5 bg-secondary/30 border-t border-border">
+                <h4 className="text-sm font-semibold text-foreground mb-2">📌 หมายเหตุ</h4>
+                <ul className="space-y-1 text-sm text-muted-foreground">
+                  <li>• ราคาสินค้าอาจเปลี่ยนแปลงได้โดยมิต้องแจ้งให้ทราบล่วงหน้า</li>
+                  <li>• ราคาไม่รวม VAT 7%</li>
+                  <li>• รับประกันมาตรฐาน 1 ปี ซื้อประกันเพิ่มได้สูงสุด 3 ปี</li>
+                </ul>
+              </div>
+            </div>
+          </section>
         </div>
 
         {/* Use Cases Banner */}
