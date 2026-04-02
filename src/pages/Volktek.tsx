@@ -187,10 +187,11 @@ const Volktek = () => {
         </section>
 
         {/* Certifications Headline */}
-        <section className="card-surface p-8 text-center">
+        <section className="card-surface p-8 text-center space-y-6">
           <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground leading-relaxed">
             ผลิตภัณฑ์ Volktek Ethernet ได้รับการรับรองระดับสากลสำหรับการใช้งานในอุตสาหกรรมและเชิงพาณิชย์ และสอดคล้องกับมาตรฐานตลาดเพื่อความปลอดภัยและการทำงานที่แม่นยำ
           </h2>
+          <img src={volktekCertifications} alt="Volktek Certifications - Profinet, Modbus, CE, FCC, RoHS, DNV GL" className="w-full max-w-4xl mx-auto h-auto" />
         </section>
 
         {/* Certifications Banner */}
