@@ -1258,6 +1258,305 @@ const GTSeries = () => {
             </div>
           )}
 
+          {/* Tab: GT4000 Detail */}
+          {activeTab === "gt4000" && (
+            <div className="space-y-8 animate-fade-in">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_26e2e00d748d4b9788a3e56c3998896a~mv2.png/v1/fill/w_882,h_280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_29_11.png"
+                  alt="GT4000 Logo"
+                  className="w-full h-[180px] md:h-[250px] object-contain bg-background p-8"
+                />
+              </div>
+
+              {/* Description + Product Image */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      GPIO · VESA Mount · Core i3/i5/i7
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">4000</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      GT4000 คือ Industrial Mini PC ขนาดกะทัดรัด เพียง 17.7 × 21.7 × 5.2 ซม. น้ำหนักเบา 1.5 กิโลกรัม
+                      แต่มาพร้อมพลัง Intel Core i3, i5, i7 ที่ตอบสนองทุกงานผลิต ไม่ว่าจะเป็น Scada, IOT, Factory Automation
+                      รวมถึง การควบคุมเครื่องจักร, ระบบ Monitor
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-2">🏭 ออกแบบมาเพื่อโรงงานโดยเฉพาะ</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      ทนทานต่อสภาพแวดล้อมที่เต็มไปด้วยน้ำมัน ฝุ่นละออง และความร้อน รองรับการติดตั้งแบบ VESA Mounting
+                      บนรถกอล์ฟ โฟคลิฟท์ หรือตู้คอนเทนเนอร์ได้อย่างมั่นคง GT4000 จึงเป็นตัวเลือกสมบูรณ์แบบสำหรับการขยายไลน์ผลิตของคุณ
+                    </p>
+                  </div>
+
+                  {/* Key Specs Grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU</div>
+                      <div className="text-xs text-muted-foreground mt-1">Intel Core i3 / i5-4200U / i7-4500U</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM & Storage</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR3L 4–8 GB / SSD 128–256 GB</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">8 USB + 6 COM + GPIO</div>
+                      <div className="text-xs text-muted-foreground mt-1">LAN 2, VGA+HDMI, GPIO พร้อมใช้</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Wind className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Fanless + VESA</div>
+                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB ติดตั้งได้ทุกที่</div>
+                    </div>
+                  </div>
+
+                  {/* Use Cases */}
+                  <div className="card-surface p-5">
+                    <h4 className="font-bold text-foreground mb-3">💡 เหมาะกับงาน</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {["Scada", "IOT", "Factory Automation", "KIOSK", "Control Cabinet", "ระบบเครื่องชั่งอัตโนมัติ", "ควบคุมเครื่องจักร"].map((use) => (
+                        <span key={use} className="px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground text-xs font-medium border border-border">
+                          {use}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product Images */}
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_420ceca8be144daaab72c850d80c8589f000.jpg/v1/fill/w_592,h_1044,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_420ceca8be144daaab72c850d80c8589f000.jpg"
+                      alt="GT4000 Front"
+                      className="w-full object-contain p-4"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      "https://static.wixstatic.com/media/005637_64b1e2081a864381be4c4003fb5dc151~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_64b1e2081a864381be4c4003fb5dc151~mv2.jpg",
+                      "https://static.wixstatic.com/media/005637_c5649ede4314444b98281cd97c5086a2~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_c5649ede4314444b98281cd97c5086a2~mv2.jpg",
+                      "https://static.wixstatic.com/media/005637_0360cf0f523f4135a99b73342591afe4~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_0360cf0f523f4135a99b73342591afe4~mv2.jpg",
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden">
+                        <img src={img} alt={`GT4000 มุมมอง ${i + 2}`} className="w-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Port & Connectivity Diagrams */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  🔌 Port Connectivity — ครบครันสำหรับทุกการเชื่อมต่อ
+                </h4>
+                <div className="space-y-6">
+                  <img
+                    src="https://static.wixstatic.com/media/3e5003_a4726520b0df4492b73e8646990df9ce~mv2.jpg/v1/fill/w_1412,h_562,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/gt4000_1.jpg"
+                    alt="GT4000 Port Overview"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <img
+                      src="https://static.wixstatic.com/media/3e5003_91111c3b2ffb41c39bb2978c36ccd01c~mv2.jpg/v1/fill/w_1262,h_683,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.jpg"
+                      alt="GT4000 Port Detail"
+                      className="w-full rounded-lg"
+                      loading="lazy"
+                    />
+                    <img
+                      src="https://static.wixstatic.com/media/3e5003_6b7ab4b0e3764d84bc6bb5dbcb3180b7~mv2.jpg/v1/fill/w_1261,h_700,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3.jpg"
+                      alt="GT4000 Connectivity Diagram"
+                      className="w-full rounded-lg"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                  {[
+                    { label: "8 USB ports", desc: "เชื่อมต่อ barcode scanner, camera, storage พร้อมกัน" },
+                    { label: "6 COM Port (RS232)", desc: "เชื่อมต่อ PLC, sensors, เครื่องจักรเก่า" },
+                    { label: "GPIO", desc: "สั่งงานอุปกรณ์ภายนอก เช่น relay, sensor โดยตรง" },
+                    { label: "Dual Display", desc: "VGA + HDMI — 2 หน้าจอ control & monitoring" },
+                    { label: "2 Gigabit LAN", desc: "แยกเครือข่ายระบบผลิตและ office" },
+                    { label: "VESA Mounting", desc: "ติดผนัง, ติดรถ forklift, ตู้คอนเทนเนอร์" },
+                  ].map((item, i) => (
+                    <div key={i} className="card-surface p-3">
+                      <div className="font-bold text-foreground mb-1">{item.label}</div>
+                      <div className="text-xs text-muted-foreground">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CPU Options */}
+              <div className="card-surface p-4 overflow-hidden">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_231df7381c244ada8adfd31b95a0d7fd~mv2.png/v1/crop/x_0,y_320,w_2560,h_784/fill/w_1190,h_365,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_231df7381c244ada8adfd31b95a0d7fd~mv2.png"
+                  alt="GT4000 CPU Options"
+                  className="w-full rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Dimension */}
+              <div className="card-surface p-6 text-center">
+                <h4 className="text-lg font-display font-bold text-foreground mb-4">📐 ขนาดกะทัดรัด</h4>
+                <p className="text-muted-foreground mb-4">
+                  เพียง 17.7 × 21.7 × 5.2 cm น้ำหนัก 1.516 kg — ขนาดเท่าหนังสือ A4 ติดตั้งง่าย VESA mount ได้
+                </p>
+                <img
+                  src="https://static.wixstatic.com/media/005637_05319cad1597430ba7c64d6336a1277a~mv2.jpg/v1/fill/w_978,h_403,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Size.jpg"
+                  alt="GT4000 Dimensions"
+                  className="max-w-2xl mx-auto rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Real-world Installation Photos */}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/0597a3_4ac1380d49e3423594426528de05c9e6~mv2_d_2048_1596_s_2.jpg/v1/fit/w_565,h_440,q_90,enc_avif,quality_auto/0597a3_4ac1380d49e3423594426528de05c9e6~mv2_d_2048_1596_s_2.jpg",
+                  "https://static.wixstatic.com/media/0597a3_d40df020f64b4972bea62c0df74acb6f~mv2_d_2048_1596_s_2.jpg/v1/fit/w_565,h_440,q_90,enc_avif,quality_auto/0597a3_d40df020f64b4972bea62c0df74acb6f~mv2_d_2048_1596_s_2.jpg",
+                  "https://static.wixstatic.com/media/3e5003_b5289681b81a4e0dbb4e6bd6e3668f69~mv2.jpg/v1/fill/w_1034,h_533,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/111.jpg",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden">
+                    <img src={img} alt={`GT4000 ติดตั้งจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* GT4000 Price Table */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT4000 Price List</h3>
+                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น</p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-secondary/50">
+                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                        <th className="text-left p-3 font-semibold text-foreground">RAM</th>
+                        <th className="text-left p-3 font-semibold text-foreground">SSD</th>
+                        <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      {[
+                        { cpu: "Core i5-4200U", ram: "4GB", ssd: "128GB", price: "24,990" },
+                        { cpu: "Core i5-4200U", ram: "4GB", ssd: "256GB", price: "25,990" },
+                        { cpu: "Core i5-4200U", ram: "8GB", ssd: "128GB", price: "26,990" },
+                        { cpu: "Core i5-4200U", ram: "8GB", ssd: "256GB", price: "27,990" },
+                        { cpu: "Core i5-4200U", ram: "4GB", ssd: "128GB", price: "28,990" },
+                        { cpu: "Core i7-4500U", ram: "4GB", ssd: "256GB", price: "29,990" },
+                        { cpu: "Core i7-4500U", ram: "8GB", ssd: "128GB", price: "30,990" },
+                        { cpu: "Core i7-4500U", ram: "8GB", ssd: "256GB", price: "31,990" },
+                      ].map((item, i) => (
+                        <tr key={i} className="hover:bg-secondary/30 transition-colors">
+                          <td className="p-3 text-foreground font-medium">{item.cpu}</td>
+                          <td className="p-3 text-muted-foreground">{item.ram}</td>
+                          <td className="p-3 text-muted-foreground">{item.ssd}</td>
+                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Video Section */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT4000</h3>
+                </div>
+                <div className="grid md:grid-cols-2 gap-0 md:divide-x divide-border">
+                  <a
+                    href="https://www.youtube.com/watch?v=ifkzyVY9Z-g"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative group"
+                  >
+                    <img
+                      src="https://img.youtube.com/vi/ifkzyVY9Z-g/maxresdefault.jpg"
+                      alt="การเลือกซื้อคอมพิวเตอร์สำหรับงานอุตสาหกรรม GT Series"
+                      className="w-full aspect-video object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">การเลือกซื้อ GT Series — 14:20</span>
+                    </div>
+                  </a>
+                  <div className="flex flex-col gap-4 p-6 bg-secondary/30">
+                    <div className="text-center">
+                      <Play className="mx-auto text-primary mb-2" size={28} />
+                      <p className="text-sm font-semibold text-foreground mb-1">GT4000 Port Connectivities</p>
+                      <p className="text-xs text-muted-foreground mb-1">ความยาว 00:53</p>
+                    </div>
+                    <div className="text-center border-t border-border pt-4">
+                      <Play className="mx-auto text-primary mb-2" size={28} />
+                      <p className="text-sm font-semibold text-foreground mb-1">GT4000 Sale Scenario</p>
+                      <p className="text-xs text-muted-foreground mb-1">ความยาว 02:12</p>
+                    </div>
+                    <a
+                      href="https://www.entgroup.co.th/minipc-gt4000"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1 mt-2 text-xs text-primary hover:underline"
+                    >
+                      ดูวิดีโอทั้งหมดที่เว็บต้นทาง <ExternalLink size={12} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Datasheet CTA */}
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/005637_6f182a79622e4ea79aa9611e215d4605.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> Datasheet GT4000 Core i5
+                </a>
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/005637_4fc705e00b57462d987fd3f161ab917b.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-surface-hover transition-colors"
+                >
+                  <Download size={16} /> Datasheet GT4000 Core i7
+                </a>
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/005637_c43af7378bbc43f6b64b8db780827612.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-surface-hover transition-colors"
+                >
+                  <Download size={16} /> Datasheet GT4000 + WiFi + 4G
+                </a>
+              </div>
+            </div>
+          )}
+
           {/* Tab: GT1400 Detail */}
           {activeTab === "gt1400" && (
             <div className="space-y-8 animate-fade-in">
