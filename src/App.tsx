@@ -11,6 +11,7 @@ import MiniPC from "./pages/MiniPC.tsx";
 import WaterproofPC from "./pages/WaterproofPC.tsx";
 import Volktek from "./pages/Volktek.tsx";
 import EPCSeries from "./pages/EPCSeries.tsx";
+import RuggedTablet from "./pages/RuggedTablet.tsx";
 import GKSeries from "./pages/GKSeries.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/waterproof-pc" element={<WaterproofPC />} />
             <Route path="/volktek" element={<Volktek />} />
             <Route path="/epc-series" element={<EPCSeries />} />
+            <Route path="/rugged-tablet" element={<RuggedTablet />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
