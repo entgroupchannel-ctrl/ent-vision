@@ -164,7 +164,45 @@ const sharedSpecs = {
   ],
 };
 
+const priceListSquare = [
+  // 10 Inch
+  { size: '10"', res: "1024×768", cpu: "J1900", model: "EPC-S1062A", config: "J1900 / 4G RAM / 128G SSD / 12V", price: "฿27,990" },
+  { size: '10"', res: "1024×768", cpu: "J6412", model: "EPC-S1072A", config: "J6412 / 4G RAM / 128G SSD / 12V", price: "฿27,990" },
+  { size: '10"', res: "1024×768", cpu: "i3-10110U", model: "EPC-S1092A", config: "i3-10110U / 4G RAM / 128G SSD / 12V", price: "฿31,990" },
+  { size: '10"', res: "1024×768", cpu: "i5-10210U", model: "EPC-S1092A", config: "i5-10210U / 4G RAM / 128G SSD / 12V", price: "฿34,990" },
+  { size: '10"', res: "1024×768", cpu: "i3-1215U", model: "EPC-S1022A", config: "i3-1215U / 4G RAM / 128G SSD / 12V", price: "฿31,990" },
+  { size: '10"', res: "1024×768", cpu: "i5-1235U", model: "EPC-S1022A", config: "i5-1235U / 4G RAM / 128G SSD / 12V", price: "฿33,990" },
+  // 12 Inch
+  { size: '12"', res: "1024×768", cpu: "J1900", model: "EPC-S1262A", config: "J1900 / 4G RAM / 128G SSD / 12V", price: "฿27,990" },
+  { size: '12"', res: "1024×768", cpu: "J6412", model: "EPC-S1272A", config: "J6412 / 4G RAM / 128G SSD / 12V", price: "฿27,990" },
+  { size: '12"', res: "1024×768", cpu: "i3-10110U", model: "EPC-S1292A", config: "i3-10110U / 4G RAM / 128G SSD / 12V", price: "฿32,990" },
+  { size: '12"', res: "1024×768", cpu: "i5-10210U", model: "EPC-S1292A", config: "i5-10210U / 4G RAM / 128G SSD / 12V", price: "฿34,990" },
+  { size: '12"', res: "1024×768", cpu: "i7-10510U", model: "EPC-S1292A", config: "i7-10510U / 4G RAM / 128G SSD / 12V", price: "฿36,990" },
+  { size: '12"', res: "1024×768", cpu: "i3-1215U", model: "EPC-S1222A", config: "i3-1215U / 4G RAM / 128G SSD / 12V", price: "฿32,990" },
+  { size: '12"', res: "1024×768", cpu: "i5-1235U", model: "EPC-S1222A", config: "i5-1235U / 4G RAM / 128G SSD / 12V", price: "฿33,990" },
+  { size: '12"', res: "1024×768", cpu: "i7-1250U", model: "EPC-S1222A", config: "i7-1250U / 4G RAM / 128G SSD / 12V", price: "฿36,990" },
+  // 15 Inch
+  { size: '15"', res: "1024×768", cpu: "J1900", model: "EPC-S1562A", config: "J1900 / 4G RAM / 128G SSD / 12V", price: "฿27,990" },
+  { size: '15"', res: "1024×768", cpu: "J6412", model: "EPC-S1572A", config: "J6412 / 4G RAM / 128G SSD / 12V", price: "฿27,990" },
+  { size: '15"', res: "1024×768", cpu: "i3-10110U", model: "EPC-S1592A", config: "i3-10110U / 4G RAM / 128G SSD / 12V", price: "฿32,990" },
+  { size: '15"', res: "1024×768", cpu: "i5-10210U", model: "EPC-S1592A", config: "i5-10210U / 4G RAM / 128G SSD / 12V", price: "฿35,990" },
+  { size: '15"', res: "1024×768", cpu: "i7-10510U", model: "EPC-S1592A", config: "i7-10510U / 4G RAM / 128G SSD / 12V", price: "฿36,990" },
+  { size: '15"', res: "1024×768", cpu: "i3-1215U", model: "EPC-S1522A", config: "i3-1215U / 4G RAM / 128G SSD / 12V", price: "฿32,990" },
+  { size: '15"', res: "1024×768", cpu: "i5-1235U", model: "EPC-S1522A", config: "i5-1235U / 4G RAM / 128G SSD / 12V", price: "฿34,990" },
+  { size: '15"', res: "1024×768", cpu: "i7-1250U", model: "EPC-S1522A", config: "i7-1250U / 4G RAM / 128G SSD / 12V", price: "฿36,990" },
+  // 17 Inch
+  { size: '17"', res: "1280×1024", cpu: "J1900", model: "EPC-S1762A", config: "J1900 / 4G RAM / 128G SSD / 12V", price: "฿29,990" },
+  { size: '17"', res: "1280×1024", cpu: "J6412", model: "EPC-S1772A", config: "J6412 / 4G RAM / 128G SSD / 12V", price: "฿29,990" },
+  { size: '17"', res: "1280×1024", cpu: "i3-10110U", model: "EPC-S1792A", config: "i3-10110U / 4G RAM / 128G SSD / 12V", price: "฿33,990" },
+  { size: '17"', res: "1280×1024", cpu: "i5-10210U", model: "EPC-S1792A", config: "i5-10210U / 4G RAM / 128G SSD / 12V", price: "฿36,990" },
+  { size: '17"', res: "1280×1024", cpu: "i7-10510U", model: "EPC-S1792A", config: "i7-10510U / 4G RAM / 128G SSD / 12V", price: "฿37,990" },
+  { size: '17"', res: "1280×1024", cpu: "i3-1215U", model: "EPC-S1722A", config: "i3-1215U / 4G RAM / 128G SSD / 12V", price: "฿33,990" },
+  { size: '17"', res: "1280×1024", cpu: "i5-1235U", model: "EPC-S1722A", config: "i5-1235U / 4G RAM / 128G SSD / 12V", price: "฿36,990" },
+  { size: '17"', res: "1280×1024", cpu: "i7-1250U", model: "EPC-S1722A", config: "i7-1250U / 4G RAM / 128G SSD / 12V", price: "฿37,990" },
+];
+
 const priceListWide = [
+  // 12.5 Inch
   { size: '12.5"', res: "1920×1080", cpu: "J1900", model: "EPC-W1262A", config: "J1900 / 4G RAM / 128G SSD / 12V", price: "฿28,990" },
   { size: '12.5"', res: "1920×1080", cpu: "J6412", model: "EPC-W1272A", config: "J6412 / 4G RAM / 128G SSD / 12V", price: "฿28,990" },
   { size: '12.5"', res: "1920×1080", cpu: "i3-10110U", model: "EPC-W1292A", config: "i3-10110U / 4G RAM / 128G SSD / 12V", price: "฿33,990" },
@@ -173,8 +211,25 @@ const priceListWide = [
   { size: '12.5"', res: "1920×1080", cpu: "i3-1215U", model: "EPC-W1222A", config: "i3-1215U / 4G RAM / 128G SSD / 12V", price: "฿33,990" },
   { size: '12.5"', res: "1920×1080", cpu: "i5-1235U", model: "EPC-W1222A", config: "i5-1235U / 4G RAM / 128G SSD / 12V", price: "฿36,990" },
   { size: '12.5"', res: "1920×1080", cpu: "i7-1250U", model: "EPC-W1222A", config: "i7-1250U / 4G RAM / 128G SSD / 12V", price: "฿37,990" },
+  // 13.3 Inch
   { size: '13.3"', res: "1920×1080", cpu: "J1900", model: "EPC-W1362A", config: "J1900 / 4G RAM / 128G SSD / 12V", price: "฿29,990" },
   { size: '13.3"', res: "1920×1080", cpu: "J6412", model: "EPC-W1372A", config: "J6412 / 4G RAM / 128G SSD / 12V", price: "฿29,990" },
+  { size: '13.3"', res: "1920×1080", cpu: "i3-10110U", model: "EPC-W1392A", config: "i3-10110U / 4G RAM / 128G SSD / 12V", price: "฿33,990" },
+  { size: '13.3"', res: "1920×1080", cpu: "i5-10210U", model: "EPC-W1392A", config: "i5-10210U / 4G RAM / 128G SSD / 12V", price: "฿36,990" },
+  { size: '13.3"', res: "1920×1080", cpu: "i7-10510U", model: "EPC-W1392A", config: "i7-10510U / 4G RAM / 128G SSD / 12V", price: "฿38,990" },
+  { size: '13.3"', res: "1920×1080", cpu: "i3-1215U", model: "EPC-W1322A", config: "i3-1215U / 4G RAM / 128G SSD / 12V", price: "฿33,990" },
+  { size: '13.3"', res: "1920×1080", cpu: "i5-1235U", model: "EPC-W1322A", config: "i5-1235U / 4G RAM / 128G SSD / 12V", price: "฿36,990" },
+  { size: '13.3"', res: "1920×1080", cpu: "i7-1250U", model: "EPC-W1322A", config: "i7-1250U / 4G RAM / 128G SSD / 12V", price: "฿38,990" },
+  // 15.6 Inch
+  { size: '15.6"', res: "1920×1080", cpu: "J1900", model: "EPC-W1562A", config: "J1900 / 4G RAM / 128G SSD / 12V", price: "฿29,990" },
+  { size: '15.6"', res: "1920×1080", cpu: "i7-10510U", model: "EPC-W1592A", config: "i7-10510U / 4G RAM / 128G SSD / 12V", price: "฿37,990" },
+  { size: '15.6"', res: "1920×1080", cpu: "i3-1215U", model: "EPC-W1522A", config: "i3-1215U / 4G RAM / 128G SSD / 12V", price: "฿32,990" },
+  { size: '15.6"', res: "1920×1080", cpu: "i5-1235U", model: "EPC-W1522A", config: "i5-1235U / 4G RAM / 128G SSD / 12V", price: "฿37,990" },
+  { size: '15.6"', res: "1920×1080", cpu: "i7-1250U", model: "EPC-W1522A", config: "i7-1250U / 4G RAM / 128G SSD / 12V", price: "฿37,990" },
+  // 18.5 Inch
+  { size: '18.5"', res: "1920×1080", cpu: "J1900", model: "EPC-W1862A", config: "J1900 / 4G RAM / 128G SSD / 12V", price: "฿32,990" },
+  { size: '18.5"', res: "1920×1080", cpu: "J6412", model: "EPC-W1872A", config: "J6412 / 4G RAM / 128G SSD / 12V", price: "฿32,990" },
+  { size: '18.5"', res: "1920×1080", cpu: "i3-10110U", model: "EPC-W1892A", config: "i3-10110U / 4G RAM / 128G SSD / 12V", price: "฿34,990" },
 ];
 
 const optionsList = [
