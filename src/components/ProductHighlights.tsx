@@ -46,7 +46,8 @@ const highlights = [
   {
     name: "EPC Panel PC",
     image: "https://static.wixstatic.com/media/0597a3_12c253dfc8264f7bb7dce7ca19d03195~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_33_45.png",
-    href: "https://www.entgroup.co.th/epc-series",
+    href: "/epc-series",
+    internal: true,
   },
 ];
 
