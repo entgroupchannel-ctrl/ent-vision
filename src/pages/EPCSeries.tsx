@@ -708,66 +708,10 @@ const EPCSeries = () => {
           </div>
         </section>
 
-        {/* Gallery */}
+        {/* Banner */}
         <section>
-          <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">
-            Product <span className="text-gradient">Gallery</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="card-surface overflow-hidden">
-              <img
-                src="https://static.wixstatic.com/media/0597a3_e554a0bb7e214ade858d408d528dfeb1~mv2.png/v1/fill/w_1087,h_403,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_e554a0bb7e214ade858d408d528dfeb1~mv2.png"
-                alt="EPC Panel PC Overview"
-                className="w-full h-auto"
-                loading="lazy"
-              />
-            </div>
-            <div className="card-surface overflow-hidden">
-              <img
-                src="https://static.wixstatic.com/media/0597a3_44e59681529c4de79a75e43dab908b3c~mv2.png/v1/fill/w_838,h_458,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2010_25_05.png"
-                alt="EPC Panel PC Dimensions"
-                className="w-full h-auto"
-                loading="lazy"
-              />
-            </div>
-            <div className="card-surface overflow-hidden">
-              <img
-                src="https://static.wixstatic.com/media/0597a3_adff763b11184f8fa1d03a1618b93c9f~mv2.png/v1/fill/w_820,h_210,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2010_27_43.png"
-                alt="EPC Panel PC I/O Ports"
-                className="w-full h-auto"
-                loading="lazy"
-              />
-            </div>
-            <div className="card-surface overflow-hidden">
-              <img
-                src="https://static.wixstatic.com/media/0597a3_380d6c3a65e94a64a7d06e335f70a6f4~mv2.png/v1/fill/w_295,h_243,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2009_26_24.png"
-                alt="EPC Panel PC 10 inch"
-                className="w-full h-auto object-contain p-4"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Application images */}
-        <section>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="card-surface overflow-hidden">
-              <img
-                src="https://static.wixstatic.com/media/0597a3_2da44aa009f8447f99db004a6dd67286~mv2.png/v1/fill/w_490,h_490,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_2da44aa009f8447f99db004a6dd67286~mv2.png"
-                alt="EPC Application 1"
-                className="w-full h-auto"
-                loading="lazy"
-              />
-            </div>
-            <div className="card-surface overflow-hidden">
-              <img
-                src="https://static.wixstatic.com/media/0597a3_8fede52fd85a45318f82432b85bae10a~mv2.png/v1/fill/w_544,h_490,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_8fede52fd85a45318f82432b85bae10a~mv2.png"
-                alt="EPC Application 2"
-                className="w-full h-auto"
-                loading="lazy"
-              />
-            </div>
+          <div className="card-surface overflow-hidden rounded-lg">
+            <img src={epcLegoBanner} alt="EPC-S10X2A LEGO MODE Technology" className="w-full h-auto" loading="lazy" />
           </div>
         </section>
 
