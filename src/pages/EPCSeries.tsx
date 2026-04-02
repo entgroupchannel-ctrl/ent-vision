@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download } from "lucide-react";
+import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -311,9 +311,13 @@ const ModelCard = ({ model }: { model: typeof squareModels[0] }) => (
   </div>
 );
 
+const ITEMS_PER_PAGE = 10;
+
 /* ───── Main Component ───── */
 const EPCSeries = () => {
   const [activeCategory, setActiveCategory] = useState("overview");
+  const [squarePage, setSquarePage] = useState(1);
+  const [widePage, setWidePage] = useState(1);
 
   return (
     <div className="min-h-screen bg-background">
@@ -551,45 +555,92 @@ const EPCSeries = () => {
             Price List <span className="text-gradient">ราคาสินค้า</span>
           </h2>
 
-          <Tabs defaultValue="square-price" className="w-full">
+          <Tabs defaultValue="square-price" className="w-full" onValueChange={() => { setSquarePage(1); setWidePage(1); }}>
             <TabsList className="grid w-full grid-cols-3 mb-6">
               <TabsTrigger value="square-price">จอแบบสี่เหลี่ยมจตุรัส</TabsTrigger>
               <TabsTrigger value="wide-price">จอภาพแบบสี่เหลี่ยมผืนผ้า</TabsTrigger>
               <TabsTrigger value="options">Windows / Options</TabsTrigger>
             </TabsList>
 
-            {["square-price", "wide-price"].map((tabValue) => (
-              <TabsContent key={tabValue} value={tabValue}>
-                <div className="card-surface overflow-hidden">
-                  <div className="overflow-x-auto">
-                    <Table>
-                      <TableHeader>
-                        <TableRow className="bg-primary/10">
-                          <TableHead className="text-primary font-bold">Display Size</TableHead>
-                          <TableHead className="text-primary font-bold">Resolution</TableHead>
-                          <TableHead className="text-primary font-bold">Processor</TableHead>
-                          <TableHead className="text-primary font-bold">Model</TableHead>
-                          <TableHead className="text-primary font-bold">Configuration</TableHead>
-                          <TableHead className="text-primary font-bold text-right">Price</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {(tabValue === "square-price" ? priceListSquare : priceListWide).map((row, i) => (
-                          <TableRow key={i}>
-                            <TableCell>{row.size}</TableCell>
-                            <TableCell>{row.res}</TableCell>
-                            <TableCell className="text-sm">{row.cpu}</TableCell>
-                            <TableCell className="font-mono text-sm">{row.model}</TableCell>
-                            <TableCell className="text-sm text-muted-foreground">{row.config}</TableCell>
-                            <TableCell className="text-right font-bold text-primary">{row.price}</TableCell>
+            {["square-price", "wide-price"].map((tabValue) => {
+              const data = tabValue === "square-price" ? priceListSquare : priceListWide;
+              const page = tabValue === "square-price" ? squarePage : widePage;
+              const setPage = tabValue === "square-price" ? setSquarePage : setWidePage;
+              const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+              const paginatedData = data.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
+
+              return (
+                <TabsContent key={tabValue} value={tabValue}>
+                  <div className="card-surface overflow-hidden">
+                    <div className="overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow className="bg-primary/10">
+                            <TableHead className="text-primary font-bold">Display Size</TableHead>
+                            <TableHead className="text-primary font-bold">Resolution</TableHead>
+                            <TableHead className="text-primary font-bold">Processor</TableHead>
+                            <TableHead className="text-primary font-bold">Model</TableHead>
+                            <TableHead className="text-primary font-bold">Configuration</TableHead>
+                            <TableHead className="text-primary font-bold text-right">Price</TableHead>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
+                        </TableHeader>
+                        <TableBody>
+                          {paginatedData.map((row, i) => (
+                            <TableRow key={i}>
+                              <TableCell>{row.size}</TableCell>
+                              <TableCell>{row.res}</TableCell>
+                              <TableCell className="text-sm">{row.cpu}</TableCell>
+                              <TableCell className="font-mono text-sm">{row.model}</TableCell>
+                              <TableCell className="text-sm text-muted-foreground">{row.config}</TableCell>
+                              <TableCell className="text-right font-bold text-primary">{row.price}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                      <div className="flex items-center justify-between px-4 py-3 border-t border-border">
+                        <p className="text-xs text-muted-foreground">
+                          แสดง {(page - 1) * ITEMS_PER_PAGE + 1}-{Math.min(page * ITEMS_PER_PAGE, data.length)} จาก {data.length} รายการ
+                        </p>
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setPage(Math.max(1, page - 1))}
+                            disabled={page === 1}
+                            className="h-8 w-8 p-0"
+                          >
+                            <ChevronLeft className="w-4 h-4" />
+                          </Button>
+                          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                            <Button
+                              key={p}
+                              variant={p === page ? "default" : "outline"}
+                              size="sm"
+                              onClick={() => setPage(p)}
+                              className="h-8 w-8 p-0 text-xs"
+                            >
+                              {p}
+                            </Button>
+                          ))}
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setPage(Math.min(totalPages, page + 1))}
+                            disabled={page === totalPages}
+                            className="h-8 w-8 p-0"
+                          >
+                            <ChevronRight className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
-              </TabsContent>
-            ))}
+                </TabsContent>
+              );
+            })}
 
             <TabsContent value="options">
               <div className="card-surface overflow-hidden">
