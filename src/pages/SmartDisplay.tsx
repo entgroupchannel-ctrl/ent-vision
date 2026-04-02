@@ -265,6 +265,99 @@ const SmartDisplay = () => {
                   <img src="https://static.wixstatic.com/media/0597a3_57760701aff84e30b2efd1cdda15df62~mv2.png/v1/crop/x_0,y_0,w_1836,h_1127/fill/w_1223,h_751,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-09%20at%2013_20_59.png" alt="Display showcase" className="w-full object-cover" loading="lazy" />
                 </div>
               </div>
+
+              {/* Industrial Touch Monitor — FPM Series */}
+              <div className="mt-16">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">Touch Only</span>
+                  <span className="px-3 py-1 rounded-full bg-accent/10 text-accent-foreground text-xs font-bold">เกรดอุตสาหกรรม</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-2">
+                  Industrial Touch Monitor — <span className="text-primary">FPM Series</span>
+                </h3>
+                <p className="text-muted-foreground max-w-3xl mb-3">
+                  จอภาพสัมผัสเกรดอุตสาหกรรม IP65 สำหรับงาน HMI, CNC, Factory Automation, ระบบทหาร และ Big Data — เชื่อมต่อ USB + HDMI กับคอมพิวเตอร์ที่มีอยู่ เปลี่ยนเป็นระบบสัมผัสได้ทันที
+                </p>
+                <div className="flex flex-wrap gap-4 mb-8 text-sm text-muted-foreground">
+                  <span>✅ ขนาด 8"–24"</span>
+                  <span>✅ Capacitive / Resistive Touch</span>
+                  <span>✅ IP65 Front Panel</span>
+                  <span>✅ Wide & Square Screen</span>
+                  <span>✅ สูงสุด 1000 Nits</span>
+                  <span>✅ ทำงาน 24/7</span>
+                </div>
+
+                {/* Product image */}
+                <div className="card-surface overflow-hidden rounded-xl mb-8">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_7ae90fd5a4fd425d9cc9efad0a31c636~mv2.png/v1/fill/w_1317,h_485,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_7ae90fd5a4fd425d9cc9efad0a31c636~mv2.png"
+                    alt="FPM Series Industrial Touch Monitor"
+                    className="w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+
+                {/* Price table */}
+                <div className="card-surface overflow-hidden rounded-xl">
+                  <div className="p-4 border-b border-border bg-secondary/30">
+                    <h4 className="font-bold text-foreground">ราคา FPM Touch Monitor — เริ่มต้น ฿10,990</h4>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-border bg-secondary/20">
+                          <th className="text-left p-3 font-semibold text-muted-foreground">#</th>
+                          <th className="text-left p-3 font-semibold text-muted-foreground">รุ่น</th>
+                          <th className="text-left p-3 font-semibold text-muted-foreground">สเปค</th>
+                          <th className="text-right p-3 font-semibold text-muted-foreground">ราคา (฿)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {fpmTouchMonitors.map((item) => (
+                          <tr key={item.no} className="border-b border-border/50 hover:bg-secondary/20 transition-colors">
+                            <td className="p-3 text-muted-foreground">{item.no}</td>
+                            <td className="p-3 font-semibold text-foreground">{item.model}</td>
+                            <td className="p-3 text-muted-foreground">{item.config}</td>
+                            <td className="p-3 text-right font-bold text-primary">{item.price}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Datasheet downloads */}
+                <div className="mt-6">
+                  <h4 className="font-bold text-foreground mb-3 flex items-center gap-2"><Download size={16} /> ดาวน์โหลด Datasheet</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {fpmDatasheets.map((d) => (
+                      <a
+                        key={d.model}
+                        href={d.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-secondary hover:border-primary/30 transition-all"
+                      >
+                        <Download size={12} /> {d.model}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Gallery */}
+                <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {[
+                    "https://static.wixstatic.com/media/0597a3_bcb05795214544aaaa6de89e36e1240d~mv2.jpg/v1/fill/w_242,h_161,q_90,enc_avif,quality_auto/0597a3_bcb05795214544aaaa6de89e36e1240d~mv2.jpg",
+                    "https://static.wixstatic.com/media/0597a3_5296e6c18d9c46eda07b3c9a4747484d~mv2.jpg/v1/fill/w_242,h_161,q_90,enc_avif,quality_auto/0597a3_5296e6c18d9c46eda07b3c9a4747484d~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_c40ca1d586a44b1ca9fc90cf2c49af6a~mv2.jpg/v1/fill/w_276,h_254,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0148.jpg",
+                    "https://static.wixstatic.com/media/005637_6ba3b2af125d4948b5d9d6c626135c1f~mv2.jpg/v1/fill/w_278,h_254,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0140.jpg",
+                  ].map((src, i) => (
+                    <div key={i} className="card-surface overflow-hidden rounded-xl">
+                      <img src={src} alt={`FPM installation ${i + 1}`} className="w-full h-40 object-cover" loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
 
