@@ -632,19 +632,6 @@ const RuggedTablet = () => {
           </div>
         </section>
 
-        {/* PIPO */}
-        <section id="pipo">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-            PIPO <span className="text-gradient">Tablet PC</span>
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">Mini PC Tablet ผลิตภัณฑ์ดิจิทัลรวมทั้งแท็บเล็ต กล่องทีวี และมินิพีซี จอสัมผัส IPS Full HD</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {pipoModels.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
-        </section>
-
         {/* Buying Guide Banner */}
         <section>
           <div className="card-surface overflow-hidden">
