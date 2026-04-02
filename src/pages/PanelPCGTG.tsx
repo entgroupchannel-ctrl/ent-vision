@@ -229,6 +229,7 @@ const PanelPC = () => {
   const [coolingFilter, setCoolingFilter] = useState<"all" | "FANLESS" | "FAN">("all");
   const [sizeFilter, setSizeFilter] = useState<"all" | "small" | "medium" | "large">("all");
   const [page, setPage] = useState(1);
+  const [displayType, setDisplayType] = useState<"wide" | "square">("wide");
 
   const filtered = panelModels.filter((m) => {
     if (coolingFilter !== "all" && m.cooling !== coolingFilter) return false;
