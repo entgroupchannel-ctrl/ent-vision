@@ -22,9 +22,10 @@ const sections = [
     links: [{ label: "ดูรุ่นทั้งหมด", href: "/smart-display?tab=outdoor" }],
   },
   {
-    title: "Waterproof PC",
-    description: "",
-    image: "https://static.wixstatic.com/media/0597a3_957aaea5b8ae466e81b39ce9792a3f66~mv2.png/v1/fill/w_1242,h_455,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-11-05%20at%2011_17_08.png",
+    title: "Waterproof Panel PC — สแตนเลส สำหรับไลน์ผลิตอาหาร",
+    description: "ตัวเครื่องสแตนเลส IP65/IP69K ทำความสะอาดง่าย ทนน้ำ ทนสารเคมี ออกแบบมาสำหรับโรงงานอาหาร ห้องเย็น และสายการผลิตที่ต้องล้างทำความสะอาดบ่อย",
+    image: waterproofPcBanner,
+    fullBackground: true,
     links: [{ label: "ข้อมูลเพิ่มเติม", href: "https://www.entgroup.co.th/wp-pc" }],
   },
   {
