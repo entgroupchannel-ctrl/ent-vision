@@ -35,7 +35,7 @@ const App = () => (
             <Route path="/volktek" element={<Volktek />} />
             <Route path="/epc-series" element={<EPCSeries />} />
             <Route path="/rugged-tablet" element={<RuggedTablet />} />
-            <Route path="/panel-pc" element={<PanelPC />} />
+            <Route path="/panel-pc-gtg" element={<PanelPCGTG />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
