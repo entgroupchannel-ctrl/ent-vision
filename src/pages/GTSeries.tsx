@@ -709,6 +709,38 @@ const GTSeries = () => {
                 </div>
               </div>
 
+              {/* Video Section */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT1400</h3>
+                </div>
+                <div className="grid md:grid-cols-2 gap-0 md:divide-x divide-border">
+                  <a href="https://www.entgroup.co.th/gt-series-2023" target="_blank" rel="noopener noreferrer" className="block relative group">
+                    <img src="https://static.wixstatic.com/media/0597a3_88afd8cf4a5a42a6b36b4880d59e9ebe~mv2.png/v1/fill/w_1293,h_474,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_12_53.png" alt="GT2023 Intro" className="w-full aspect-video object-cover" loading="lazy" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">GT2023 Intro — 02:44</span>
+                    </div>
+                  </a>
+                  <a href="https://www.entgroup.co.th/gt-series-2023" target="_blank" rel="noopener noreferrer" className="block relative group">
+                    <img src="https://static.wixstatic.com/media/0597a3_b7fd144f004b401aa284fe76f0c11462~mv2.png/v1/fill/w_1119,h_541,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2013_55_43.png" alt="GT1400 Intro" className="w-full aspect-video object-cover" loading="lazy" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">GT1400 Intro — 02:40</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
               <div className="text-center">
                 <a
                   href="https://www.entgroup.co.th/_files/ugd/0597a3_df771f1787184c4ea82b8ca5ed7abc17.pdf"
