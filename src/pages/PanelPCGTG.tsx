@@ -20,6 +20,7 @@ import industryKiosk from "@/assets/industry-kiosk.jpg";
 import industryWarehouse from "@/assets/industry-warehouse.jpg";
 import industryBuilding from "@/assets/industry-building.jpg";
 import industryFood from "@/assets/industry-food.jpg";
+import gtgSeries from "@/assets/gtg-series.png";
 
 /* ─── Data ─── */
 
@@ -516,7 +517,7 @@ const PanelPC = () => {
           </div>
         </div>
       </section>
-
+import gtgSeries from "@/assets/gtg-series.png";
 
       <section className="section-padding bg-surface/50">
         <div className="container max-w-7xl mx-auto">
@@ -569,7 +570,7 @@ const PanelPC = () => {
                 </ul>
               </div>
               <div className="flex justify-center">
-                <img src="https://gty-gtg-panelpc.lovable.app/assets/gtg-panel-pc-mZjwn_te.png" alt="GTG Panel PC" className="max-h-[300px] object-contain" loading="lazy" />
+                <img src={gtgSeries} alt="GTG Panel PC" className="max-h-[300px] object-contain" loading="lazy" />
               </div>
             </div>
           </div>
