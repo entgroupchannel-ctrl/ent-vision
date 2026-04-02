@@ -38,10 +38,11 @@ const sections = [
     links: [{ label: "ดูรุ่นทั้งหมด", href: "/rugged-tablet" }],
   },
   {
-    title: "Volktek Industrial Switch",
-    description: "",
-    image: "https://static.wixstatic.com/media/0597a3_99a9b12f4cef439f9d5ac74bd3e7d647~mv2.png/v1/fill/w_1254,h_459,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-11-05%20at%2011_38_57.png",
-    links: [{ label: "ข้อมูลเพิ่มเติม", href: "https://www.entgroup.co.th/volktek" }],
+    title: "Volktek Industrial Switch — เครือข่ายโรงงานที่เชื่อถือได้",
+    description: "Managed/Unmanaged Switch สำหรับงานอุตสาหกรรม DIN-Rail ทนอุณหภูมิสูง รองรับ PoE สำหรับกล้องวงจรปิดและอุปกรณ์ IoT",
+    image: volktekBanner,
+    fullBackground: true,
+    links: [{ label: "ดูรุ่นทั้งหมด", href: "/volktek" }],
   },
 ];
 
