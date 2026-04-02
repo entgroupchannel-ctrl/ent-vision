@@ -382,7 +382,140 @@ const PanelPC = () => {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Wide vs Square Display Selection */}
+      <section className="section-padding bg-secondary/20">
+        <div className="container max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Display Options</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold">
+              เลือกสัดส่วนหน้าจอ<span className="text-gradient">ที่เหมาะกับงาน</span>
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              มีทั้งจอ Widescreen (16:9) สำหรับแสดงข้อมูลกว้าง และจอ Square (4:3 / 5:4) สำหรับงาน HMI, SCADA แบบดั้งเดิม
+            </p>
+          </div>
+
+          {/* Toggle Buttons */}
+          <div className="flex justify-center gap-4 mb-8">
+            <button
+              onClick={() => setDisplayType("wide")}
+              className={`flex items-center gap-3 px-6 py-4 rounded-2xl border-2 transition-all ${
+                displayType === "wide"
+                  ? "border-primary bg-primary/10 shadow-lg shadow-primary/10"
+                  : "border-border bg-background hover:border-primary/30"
+              }`}
+            >
+              <RectangleHorizontal size={28} className={displayType === "wide" ? "text-primary" : "text-muted-foreground"} />
+              <div className="text-left">
+                <p className={`font-bold ${displayType === "wide" ? "text-primary" : "text-foreground"}`}>Widescreen (16:9)</p>
+                <p className="text-xs text-muted-foreground">13.3" / 15.6" / 18.5" / 21.5" / 23.8" / 27" / 32"</p>
+              </div>
+            </button>
+            <button
+              onClick={() => setDisplayType("square")}
+              className={`flex items-center gap-3 px-6 py-4 rounded-2xl border-2 transition-all ${
+                displayType === "square"
+                  ? "border-primary bg-primary/10 shadow-lg shadow-primary/10"
+                  : "border-border bg-background hover:border-primary/30"
+              }`}
+            >
+              <Square size={28} className={displayType === "square" ? "text-primary" : "text-muted-foreground"} />
+              <div className="text-left">
+                <p className={`font-bold ${displayType === "square" ? "text-primary" : "text-foreground"}`}>Square (4:3 / 5:4)</p>
+                <p className="text-xs text-muted-foreground">10.1" / 10.4" / 12.1" / 15" / 17" / 19"</p>
+              </div>
+            </button>
+          </div>
+
+          {/* Lineup Image */}
+          <div className="card-surface p-6 md:p-10 text-center">
+            <img
+              src={displayType === "wide" ? panelpcWideLineup : panelpcSquareLineup}
+              alt={`Panel PC ${displayType === "wide" ? "Widescreen" : "Square"} Lineup`}
+              className="max-h-[350px] mx-auto object-contain mb-6"
+              loading="lazy"
+            />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+              {displayType === "wide" ? (
+                <>
+                  {[
+                    { size: '13.3"', res: "FHD 1920×1080", use: "บางเบา สำหรับ Embedded" },
+                    { size: '15.6"', res: "FHD 1920×1080", use: "ยอดนิยม ราคาคุ้มที่สุด" },
+                    { size: '18.5"', res: "FHD 1920×1080", use: "จอกว้าง แสดงข้อมูลเยอะ" },
+                    { size: '21.5"–32"', res: "FHD 1920×1080", use: "KIOSK / Digital Signage" },
+                  ].map((d) => (
+                    <div key={d.size} className="p-3 rounded-xl bg-secondary/50">
+                      <p className="text-lg font-bold text-primary">{d.size}</p>
+                      <p className="text-[11px] text-muted-foreground">{d.res}</p>
+                      <p className="text-xs font-medium text-foreground mt-1">{d.use}</p>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {[
+                    { size: '10.1"', res: "FHD 1920×1080", use: "กะทัดรัด พกพาได้" },
+                    { size: '10.4" / 12.1"', res: "XGA 1024×768", use: "มาตรฐาน HMI งานโรงงาน" },
+                    { size: '15"', res: "XGA 1024×768", use: "ขนาดยอดนิยม สำหรับโรงงาน" },
+                    { size: '17" / 19"', res: "SXGA 1280×1024", use: "จอใหญ่ สำหรับ SCADA" },
+                  ].map((d) => (
+                    <div key={d.size} className="p-3 rounded-xl bg-secondary/50">
+                      <p className="text-lg font-bold text-primary">{d.size}</p>
+                      <p className="text-[11px] text-muted-foreground">{d.res}</p>
+                      <p className="text-xs font-medium text-foreground mt-1">{d.use}</p>
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Industry Application Banners */}
+      <section className="section-padding">
+        <div className="container max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Applications</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold">
+              นำไปใช้งาน<span className="text-gradient">ได้หลากหลายอุตสาหกรรม</span>
+            </h2>
+            <p className="text-muted-foreground mt-4">Panel PC สำหรับทุกประเภทธุรกิจและอุตสาหกรรม</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { img: industryFactory, title: "Smart Factory", desc: "MES, ERP, PLM, ESOP — ควบคุมไลน์ผลิตแบบเรียลไทม์", tags: ["MES", "ERP", "HMI"], rec: "แนะนำ: 15\"–21.5\"" },
+              { img: industryHospital, title: "โรงพยาบาล / การแพทย์", desc: "ระบบ HIS, จุดลงทะเบียนผู้ป่วย, ห้องปฏิบัติการ", tags: ["HIS", "EMR", "Lab"], rec: "แนะนำ: 15.6\"–23.8\"" },
+              { img: industryKiosk, title: "Kiosk / Self-Service", desc: "ตู้สั่งอาหาร ตู้จำหน่ายตั๋ว ตู้ลงทะเบียน", tags: ["POS", "Kiosk", "Signage"], rec: "แนะนำ: 21.5\"–32\"" },
+              { img: industryWarehouse, title: "คลังสินค้า / โลจิสติกส์", desc: "WMS, ระบบจัดการสต๊อก, Barcode Scanner", tags: ["WMS", "Barcode", "Logistics"], rec: "แนะนำ: 10.1\"–15.6\"" },
+              { img: industryBuilding, title: "Building Automation", desc: "HVAC, ระบบพลังงาน, Access Control, BMS", tags: ["BMS", "HVAC", "IoT"], rec: "แนะนำ: 15\"–21.5\"" },
+              { img: industryFood, title: "อุตสาหกรรมอาหาร", desc: "QC ไลน์ผลิต, ชั่งน้ำหนัก, ควบคุมอุณหภูมิ", tags: ["QC", "HACCP", "SCADA"], rec: "แนะนำ: 12.1\"–17\"" },
+            ].map((item) => (
+              <div key={item.title} className="card-surface overflow-hidden group hover:border-primary/30 transition-all hover:-translate-y-1">
+                <div className="relative h-48 overflow-hidden">
+                  <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width={800} height={512} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                  <div className="absolute bottom-3 left-4 right-4">
+                    <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <p className="text-sm text-muted-foreground mb-3">{item.desc}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-3">
+                    {item.tags.map((tag) => (
+                      <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">{tag}</span>
+                    ))}
+                  </div>
+                  <p className="text-xs font-semibold text-primary">{item.rec}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
       <section className="section-padding bg-surface/50">
         <div className="container max-w-7xl mx-auto">
           <div className="text-center mb-12">
