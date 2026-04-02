@@ -14,7 +14,7 @@ const sections = [
     links: [
       { label: "EPC Series", href: "/epc-series" },
       { label: "EPC Box Series", href: "/epc-box-series" },
-      { label: "Touch Work", href: "https://www.entgroup.co.th/touchwork" },
+      { label: "KIOSK สำเร็จรูป", href: "/smart-display?tab=kiosk" },
     ],
   },
   {
