@@ -23,6 +23,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/gt-series" element={<GTSeries />} />
             <Route path="/epc-box-series" element={<EPCBoxSeries />} />
+            <Route path="/gk-series" element={<GKSeries />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
