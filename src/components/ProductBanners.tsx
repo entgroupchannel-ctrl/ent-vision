@@ -23,6 +23,7 @@ const productBanners = [
     title: "คอมพิวเตอร์อุตสาหกรรม งานประมูล งานโครงการ",
     image: "https://rugged-ipc.lovable.app/assets/ibox-007-main-BOyAzQqp.png",
     productImage: "https://rugged-ipc.lovable.app/assets/ibox-601-gt-pro-main-DGne0Wqp.png",
+    hot: true,
     links: [
       { label: "ดูสินค้าทั้งหมด", href: "https://rugged-ipc.lovable.app/products" },
       { label: "ขอใบเสนอราคา", href: "https://rugged-ipc.lovable.app/rfq" },
