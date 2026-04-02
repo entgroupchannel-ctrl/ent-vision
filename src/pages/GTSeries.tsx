@@ -128,55 +128,55 @@ const gtModels = [
   },
   {
     name: "GT6000",
-    tagline: "Gen 8 ประสิทธิภาพสูง",
-    cpu: "Intel Core i5 / i7 Gen 8",
-    ram: "8–32 GB DDR4",
-    storage: "SSD 256 GB – 1 TB",
-    ports: "USB 8, COM 6, LAN 2, HDMI+DP, GPIO",
-    size: "ประสิทธิภาพสูง",
-    image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
-    href: "https://www.entgroup.co.th/gt6000",
-    highlight: "Gen 8",
+    tagline: "ดีไซน์ใหม่ Intel Core i3",
+    cpu: "Intel Core i3-5005U",
+    ram: "4–8 GB DDR3L",
+    storage: "SSD 128 GB – 1 TB",
+    ports: "USB 6, COM 6, LAN 2, VGA+HDMI",
+    size: "Fanless สีดำสวยงาม",
+    image: "https://static.wixstatic.com/media/0597a3_e843641a309b4eb89bd60cf3c1696b70f000.jpg/v1/fill/w_268,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_e843641a309b4eb89bd60cf3c1696b70f000.jpg",
+    tab: "gt6000",
+    highlight: "ดีไซน์ใหม่",
     price: "สอบถาม",
   },
   {
     name: "GT7000",
-    tagline: "Gen 10 คำตอบทุกโรงงาน",
-    cpu: "Intel Core i5 / i7 Gen 10",
-    ram: "8–32 GB DDR4",
+    tagline: "คำตอบทุกปัญหาโรงงาน",
+    cpu: "Intel Core i3 / i5 / i7 (DDR4)",
+    ram: "4–32 GB DDR4",
     storage: "SSD 256 GB – 1 TB",
-    ports: "USB 10, COM 6, LAN 2, HDMI+DP, GPIO",
-    size: "ประสิทธิภาพระดับสูง",
-    image: "https://static.wixstatic.com/media/0597a3_8e53a2e85b9f42088834c613e1a9d08f~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_25_08.png",
-    href: "https://www.entgroup.co.th/ipc-gt7000",
-    highlight: "Gen 10",
+    ports: "USB 6, COM 6 (RS232/422/485), LAN 2",
+    size: "23×17.5×5 cm / 2.5 kg",
+    image: "https://static.wixstatic.com/media/0597a3_dc2525bbb341403085db99e88a32210ef000.jpg/v1/fill/w_301,h_535,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_dc2525bbb341403085db99e88a32210ef000.jpg",
+    tab: "gt7000",
+    highlight: "DDR4",
     price: "สอบถาม",
   },
   {
     name: "GT8000",
-    tagline: "Flagship 4 LAN NVMe",
-    cpu: "Intel Core i5 / i7 Gen 11",
-    ram: "8–64 GB DDR4",
-    storage: "NVMe SSD 256 GB – 2 TB",
-    ports: "USB 10, COM 6, LAN 4, HDMI+DP×2, GPIO",
-    size: "Flagship รุ่นใหญ่",
-    image: "https://static.wixstatic.com/media/0597a3_b9bf3c2c39ee4be6b009dd7b958fa43c~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_28_07.png",
-    href: "https://www.entgroup.co.th/gt8000",
-    highlight: "Flagship",
+    tagline: "Ice Lake Gen 10 สเปคแรง",
+    cpu: "Intel Core i5-1035G1 / i7-10710U",
+    ram: "4–32 GB DDR4",
+    storage: "SSD 128 GB – 2 TB",
+    ports: "USB 8, COM 6, LAN 2, HDMI+DP",
+    size: "Intel Gen 10 Ice Lake",
+    image: "https://static.wixstatic.com/media/0597a3_91532076771244788545982fbe4d1736f000.jpg/v1/fill/w_297,h_459,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_91532076771244788545982fbe4d1736f000.jpg",
+    tab: "gt8000",
+    highlight: "Ice Lake",
     price: "สอบถาม",
   },
   {
     name: "GT9000",
-    tagline: "สุดยอด Gen 12 Thunderbolt",
-    cpu: "Intel Core i7 / i9 Gen 12",
-    ram: "16–64 GB DDR5",
-    storage: "NVMe SSD 512 GB – 2 TB",
-    ports: "USB 12, COM 6, LAN 4, HDMI+DP×2, Thunderbolt, GPIO",
-    size: "สุดยอด Performance",
-    image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
-    href: "https://www.entgroup.co.th/gt9000",
-    highlight: "Top",
-    price: "สอบถาม",
+    tagline: "Triple Display 8 COM NVMe",
+    cpu: "Intel i5-10200H / i7-10750H / i5-1235U / i7-1255U",
+    ram: "4–32 GB DDR4/DDR5",
+    storage: "SSD + 2.5\" SATA + M.2 NVMe",
+    ports: "USB 8, COM 8 (RS232/422/485), LAN 2, HDMI×2+DP",
+    size: "Triple Display + Dual Band WiFi",
+    image: "https://static.wixstatic.com/media/0597a3_bee270c19b2f466a8a77aa294d528952f000.jpg/v1/fill/w_290,h_514,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_bee270c19b2f466a8a77aa294d528952f000.jpg",
+    tab: "gt9000",
+    highlight: "Triple Display",
+    price: "25,290",
   },
 ];
 
@@ -195,6 +195,10 @@ const modelTabs = [
   { id: "gt3000", label: "GT3000" },
   { id: "gt4000", label: "GT4000" },
   { id: "gt5000", label: "GT5000" },
+  { id: "gt6000", label: "GT6000" },
+  { id: "gt7000", label: "GT7000" },
+  { id: "gt8000", label: "GT8000" },
+  { id: "gt9000", label: "GT9000" },
   { id: "gt1400", label: "GT1400" },
   { id: "gt1200", label: "GT1200" },
 ];
@@ -1875,6 +1879,857 @@ const GTSeries = () => {
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
                 >
                   <Download size={16} /> ดาวน์โหลด Datasheet GT5000
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: GT6000 Detail */}
+          {activeTab === "gt6000" && (
+            <div className="space-y-8 animate-fade-in">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl">
+                <img
+                  src="https://static.wixstatic.com/media/3e5003_554d898c7cf94282902994dc90486505~mv2.jpg/v1/fill/w_1320,h_341,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1.jpg"
+                  alt="GT6000 Banner"
+                  className="w-full h-[180px] md:h-[280px] object-cover"
+                />
+              </div>
+
+              {/* Description + Product */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      ดีไซน์ใหม่ · สีดำ · Fanless · Intel Core i3
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">6000</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      GT6000 ปรับโฉมใหม่ ตัวเครื่องสีดำดีไซน์สวยงาม พร้อม CPU Intel Core i3-5005U
+                      ระบบ Fanless ไม่มีพัดลม เงียบสนิท ทำงาน 24/7 รองรับ Windows 8/10/11
+                      เหมาะสำหรับโรงงานที่กำลังมีแผนขยายไลน์ผลิต
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-2">🏭 "โรงงานที่กำลังมีแผนขยายไลน์ผลิต นึกถึง Industrial Grade PC จากเรา"</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      GT6000 ออกแบบมาสำหรับงานอุตสาหกรรมที่ต้องการความเสถียรและทนทาน
+                      ระบบระบายความร้อนด้วยครีบอลูมิเนียม ไม่ดูดฝุ่น ไม่มีชิ้นส่วนเคลื่อนไหว
+                    </p>
+                  </div>
+
+                  {/* Key Specs */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU</div>
+                      <div className="text-xs text-muted-foreground mt-1">Intel Core i3-5005U</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM & Storage</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR3L 4–8 GB / SSD 128 GB – 1 TB</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">6 COM + 6 USB</div>
+                      <div className="text-xs text-muted-foreground mt-1">RS232, Dual LAN Gigabit</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Wind className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Fanless 24/7</div>
+                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB ทนอุณหภูมิสูง</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_e843641a309b4eb89bd60cf3c1696b70f000.jpg/v1/fill/w_268,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_e843641a309b4eb89bd60cf3c1696b70f000.jpg"
+                      alt="GT6000 Product"
+                      className="w-full object-contain p-4"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* New Design Banner */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <img
+                  src="https://static.wixstatic.com/media/3e5003_e91656b596354fcb9ad029cf24284022~mv2.jpg/v1/crop/x_5,y_0,w_1983,h_448/fill/w_938,h_213,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3.jpg"
+                  alt="GT6000 New Design"
+                  className="w-full"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Port & Spec Diagrams */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  🔌 Port Connectivity
+                </h4>
+                <img
+                  src="https://static.wixstatic.com/media/3e5003_765929b17afa49eaa2bb5ada3eb35701~mv2.jpg/v1/crop/x_11,y_3,w_1743,h_317/fill/w_1320,h_240,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.jpg"
+                  alt="GT6000 Port Layout"
+                  className="w-full rounded-lg mb-4"
+                  loading="lazy"
+                />
+                <img
+                  src="https://static.wixstatic.com/media/3e5003_78ccf2ae02044a51b5b755a2e01026f5~mv2.jpg/v1/crop/x_0,y_0,w_2187,h_837/fill/w_1320,h_501,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5.jpg"
+                  alt="GT6000 Spec Detail"
+                  className="w-full rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Gallery Photos */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/3e5003_7c11550ab9c24928aa9808980a62344a~mv2.jpg/v1/fill/w_638,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/6666.jpg",
+                  "https://static.wixstatic.com/media/3e5003_635e2d1dc15f438a97f332e171284515~mv2.jpg/v1/fill/w_638,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/66.jpg",
+                  "https://static.wixstatic.com/media/3e5003_31631bf8d09d40bea813521482c7681f~mv2.jpg/v1/fill/w_640,h_401,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/6.jpg",
+                  "https://static.wixstatic.com/media/3e5003_2e4777ecd6f346bebdbe79054c9ba243~mv2.jpg/v1/fill/w_640,h_401,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/666.jpg",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden">
+                    <img src={img} alt={`GT6000 ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Application & Dimensions */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/3e5003_ced01e931f054e7bb5381f60ffbfafb4~mv2.jpg/v1/fill/w_1313,h_670,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7.jpg"
+                    alt="GT6000 Applications"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/3e5003_c767b23db6fb4ba6b14ae85e7dba4193~mv2.jpg/v1/fill/w_1313,h_760,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/9.jpg"
+                    alt="GT6000 Dimensions"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Internal Detail */}
+              <div className="card-surface p-4 overflow-hidden">
+                <img
+                  src="https://static.wixstatic.com/media/3e5003_b7129e385ee8418989d1feb78d9d434a~mv2.jpg/v1/crop/x_0,y_164,w_1998,h_985/fill/w_1320,h_650,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8.jpg"
+                  alt="GT6000 Entertainment"
+                  className="w-full rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Internal & Connectivity Spec */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/3e5003_04e9ebb226cc4be8909ccdd9ede5cb01~mv2.jpg/v1/crop/x_0,y_36,w_2000,h_800/fill/w_1320,h_530,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/10.jpg"
+                    alt="GT6000 Connectivity"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_231df7381c244ada8adfd31b95a0d7fd~mv2.png/v1/fill/w_872,h_388,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_231df7381c244ada8adfd31b95a0d7fd~mv2.png"
+                    alt="GT6000 Spec Table"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Real-world Installation Photos */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/005637_695bb857cf5d4e66a0c242ff1e85b5a9~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_695bb857cf5d4e66a0c242ff1e85b5a9~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_88fb7b2997b8481a99698046c1a2a9b4~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_88fb7b2997b8481a99698046c1a2a9b4~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_b3d70c1ff03f4f828bc4f404a058a380~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_b3d70c1ff03f4f828bc4f404a058a380~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_b8a38c621941402ebba47e73c6e5bfb4~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_b8a38c621941402ebba47e73c6e5bfb4~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_d192aa29846f4ea88334e9b367429320~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_d192aa29846f4ea88334e9b367429320~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_45f8aeb250fd4f478a2d4c064c0bb5bc~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_45f8aeb250fd4f478a2d4c064c0bb5bc~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_542e4ef44bdd433ab04ef78696ef1488~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_542e4ef44bdd433ab04ef78696ef1488~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_53f2bdfe47c84c2a9a35bc0785e5a0ee~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_53f2bdfe47c84c2a9a35bc0785e5a0ee~mv2.jpg",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden">
+                    <img src={img} alt={`GT6000 ใช้งานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Price Table Image */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT6000 Price List</h3>
+                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น</p>
+                </div>
+                <img
+                  src="https://static.wixstatic.com/media/005637_b6848a81c029465dbcc0164ab654c915~mv2.jpg/v1/fill/w_1314,h_645,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%95%E0%B8%B2%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B22022_WEB.jpg"
+                  alt="GT6000 Price List"
+                  className="w-full"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Datasheet CTA */}
+              <div className="text-center">
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/005637_5d4e7e3066dc446a909ccf2c09e2bfc9.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> ดาวน์โหลด Datasheet GT6000
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: GT7000 Detail */}
+          {activeTab === "gt7000" && (
+            <div className="space-y-8 animate-fade-in">
+              {/* Hero Logo */}
+              <div className="card-surface overflow-hidden rounded-2xl">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_570b404607f6492fbc9e3388e5aece33~mv2.png/v1/fill/w_494,h_135,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-12%20at%2013_47_09.png"
+                  alt="GT7000 Logo"
+                  className="w-full h-[120px] md:h-[180px] object-contain bg-background p-8"
+                />
+              </div>
+
+              {/* Description + Product */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      DDR4 · 6 COM RS232/422/485 · 70°C · Aluminium Alloy
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">7000</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      GT7000 คำตอบสำหรับทุกปัญหาในโรงงาน ไม่ว่าจะเป็นคอมพิวเตอร์ร้อนจัด ฝุ่นเข้าเครื่อง
+                      หรือการสูญเสียเวลาผลิต ด้วยนวัตกรรมระบายความร้อนไร้พัดลม ทำงานได้ในอุณหภูมิสูงถึง 70°C
+                      โครงสร้าง Aluminium Alloy แข็งแกร่ง ขนาดกะทัดรัด 23×17.5×5 ซม. น้ำหนักเพียง 2.5 กก.
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-2">💰 ประหยัดต้นทุนระยะยาว</h4>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      <li>• ประหยัดไฟด้วยการกินไฟเพียง 15W</li>
+                      <li>• ระบบ Watch dog ป้องกันการค้าง</li>
+                      <li>• อัพเกรด SSD และ RAM ได้ในอนาคต</li>
+                      <li>• รับประกันการใช้งานยาวนาน</li>
+                    </ul>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-secondary">
+                    <h4 className="font-bold text-foreground mb-2">🔧 พร้อมใช้งานอุตสาหกรรม</h4>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      <li>• พอร์ต COM 6 พอร์ต รองรับ RS232/422/485</li>
+                      <li>• LAN Gigabit 2 พอร์ต เชื่อมต่อระบบเน็ตเวิร์คได้เสถียร</li>
+                      <li>• รองรับ CPU ถึง Intel Core i7 รุ่นล่าสุด</li>
+                      <li>• RAM DDR4 ขยายได้ถึง 32GB</li>
+                    </ul>
+                  </div>
+
+                  {/* Key Specs */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU</div>
+                      <div className="text-xs text-muted-foreground mt-1">Intel Core i3 / i5 / i7 (DDR4)</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM & Storage</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR4 4–32 GB / SSD 256 GB – 1 TB</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">6 COM Port</div>
+                      <div className="text-xs text-muted-foreground mt-1">RS232/RS422/RS485</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Thermometer className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">ทนร้อน 70°C</div>
+                      <div className="text-xs text-muted-foreground mt-1">Aluminium Alloy แข็งแกร่ง</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_dc2525bbb341403085db99e88a32210ef000.jpg/v1/fill/w_301,h_535,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_dc2525bbb341403085db99e88a32210ef000.jpg"
+                      alt="GT7000 Product"
+                      className="w-full object-contain p-4"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Port Connectivity */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  🔌 Port Connectivity — ครบจบในเครื่องเดียว
+                </h4>
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_e983e10281f44de2bf77aead50eea6b0~mv2.png/v1/crop/x_0,y_41,w_1556,h_433/fill/w_1124,h_313,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-12%20at%2014_34_58.png"
+                  alt="GT7000 Port Layout"
+                  className="w-full rounded-lg mb-4"
+                  loading="lazy"
+                />
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_8cb9e95b1cb9467db25fdd471e061e43~mv2.png/v1/fill/w_555,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-12%20at%2013_58_21.png"
+                  alt="GT7000 Spec Detail"
+                  className="w-full rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Application Scenarios */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-6">
+                  <h4 className="font-bold text-foreground mb-3">🏭 ระบบโรงงานอัตโนมัติ</h4>
+                  <ul className="text-sm text-muted-foreground space-y-2">
+                    <li>• ควบคุมแขนกล และระบบการผลิตอัตโนมัติ</li>
+                    <li>• เก็บข้อมูลการผลิตแบบเรียลไทม์</li>
+                    <li>• เชื่อมต่อกับระบบ SCADA ได้อย่างเสถียร</li>
+                  </ul>
+                </div>
+                <div className="card-surface p-6">
+                  <h4 className="font-bold text-foreground mb-3">🍽️ ระบบร้านอาหาร & POS</h4>
+                  <ul className="text-sm text-muted-foreground space-y-2">
+                    <li>• จัดการออเดอร์และสต๊อกสินค้า</li>
+                    <li>• เชื่อมต่อระบบจอทัชสกรีนสั่งอาหาร</li>
+                    <li>• ทำงานต่อเนื่อง 24 ชั่วโมง ไม่สะดุด</li>
+                  </ul>
+                </div>
+                <div className="card-surface p-6">
+                  <h4 className="font-bold text-foreground mb-3">📺 ระบบห้องประชุม</h4>
+                  <ul className="text-sm text-muted-foreground space-y-2">
+                    <li>• รองรับจอสัมผัสความละเอียดสูง</li>
+                    <li>• เชื่อมต่อระบบประชุมทางไกล</li>
+                    <li>• นำเสนองานได้อย่างราบรื่น</li>
+                  </ul>
+                </div>
+                <div className="card-surface p-6">
+                  <h4 className="font-bold text-foreground mb-3">🖥️ ระบบ KIOSK</h4>
+                  <ul className="text-sm text-muted-foreground space-y-2">
+                    <li>• รองรับจอสัมผัสหลายขนาด</li>
+                    <li>• ทำงานได้ในสภาพแวดล้อมที่หลากหลาย</li>
+                    <li>• ติดตั้งง่าย ดูแลรักษาน้อย</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Design & Build */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_b215c732ba714a92ac15a6ce507d454d~mv2.png/v1/fill/w_640,h_361,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT7000-001.png"
+                    alt="GT7000 Design"
+                    className="w-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_e9a79184b4274bb38ec83aafe73b9f2b~mv2.png/v1/crop/x_0,y_186,w_1610,h_1283/fill/w_578,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT7000-008.png"
+                    alt="GT7000 Applications"
+                    className="w-full"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Detail Spec Images */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_a5259d0ec15f4fc39fd63451d1d93f5c~mv2.png/v1/fill/w_648,h_541,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-12%20at%2013_55_38.png"
+                    alt="GT7000 Spec Detail"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_a2cfc41bc5c842b785609fd8e2c79482~mv2.png/v1/crop/x_0,y_178,w_1444,h_1110/fill/w_593,h_454,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT7000-002.png"
+                    alt="GT7000 Compact Design"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Heatsink Design */}
+              <div className="card-surface p-4 overflow-hidden">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_8a949f73234e40408aa2e442b5bf6739~mv2.png/v1/fill/w_662,h_484,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT7000-007.png"
+                  alt="GT7000 Heatsink Design"
+                  className="w-full rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Real-world Photos */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/005637_c6720e80066545c193b82047b9f1f0ae~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_c6720e80066545c193b82047b9f1f0ae~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_e440df937b0b4641b075d45be0851fa6~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_e440df937b0b4641b075d45be0851fa6~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_b50ccc19e8784753a0e90fbe92de4dd5~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_b50ccc19e8784753a0e90fbe92de4dd5~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_e2122e54f34f4c898a4aa2cd017a9804~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_e2122e54f34f4c898a4aa2cd017a9804~mv2.jpg",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden">
+                    <img src={img} alt={`GT7000 ใช้งานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Promo Info */}
+              <div className="card-surface p-6">
+                <h4 className="font-bold text-foreground mb-3">🎁 โปรโมชั่นพิเศษ</h4>
+                <div className="grid sm:grid-cols-2 gap-3 text-sm text-muted-foreground">
+                  <div>• ฟรี! ติดตั้งและตั้งค่าระบบ</div>
+                  <div>• ทดลอง (Demo) ใช้ฟรี 7 วัน</div>
+                  <div>• รับส่วนลดเพิ่ม 10% เมื่อสั่งซื้อ 3 เครื่องขึ้นไป</div>
+                  <div>• ผ่อน 0% นาน 6 เดือน</div>
+                </div>
+              </div>
+
+              {/* Datasheet CTA */}
+              <div className="text-center">
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/005637_bc46788d3e7d4c369da5aa7ed112b7d9.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> ดาวน์โหลด Datasheet GT7000
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: GT8000 Detail */}
+          {activeTab === "gt8000" && (
+            <div className="space-y-8 animate-fade-in">
+              {/* Hero Logo */}
+              <div className="card-surface overflow-hidden rounded-2xl">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_babe61a4533e4b65bcd37184c25619f9~mv2.png/v1/fill/w_448,h_183,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2017_41_51.png"
+                  alt="GT8000 Logo"
+                  className="w-full h-[120px] md:h-[180px] object-contain bg-background p-8"
+                />
+              </div>
+
+              {/* Description + Product */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      Intel Ice Lake Gen 10 · สเปคแรง · ประสิทธิภาพสูง
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">8000</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      คอมพิวเตอร์เกรดอุตสาหกรรมสมรรถนะสูง รองรับการใช้งานในสภาพแวดล้อมที่หนักหน่วง
+                      ด้วยเทคโนโลยี Intel Ice Lake ล่าสุด พร้อมการเชื่อมต่อที่หลากหลายและการออกแบบที่แข็งแกร่ง
+                      เหมาะสำหรับงานอุตสาหกรรม ระบบควบคุม และการประยุกต์ใช้ที่ต้องการความเสถียรสูง
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-2">⚡ ซีพียูจากอินเทล เจนเนอเรชั่น 10</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      สเปคแรง ประสิทธิภาพสูง — Intel Core i5-1035G1 Quad-core 1.0GHz up to 3.6GHz
+                      และ Core i7-10710U 6-core ให้พลังประมวลผลที่โดดเด่น เพื่อประสิทธิภาพดีขึ้นและความบันเทิงที่น่าทึ่ง
+                    </p>
+                  </div>
+
+                  {/* Key Specs */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU</div>
+                      <div className="text-xs text-muted-foreground mt-1">i5-1035G1 / i7-10710U</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM & Storage</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR4 4–32 GB / SSD 128 GB – 2 TB</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">6 COM + 8 USB</div>
+                      <div className="text-xs text-muted-foreground mt-1">RS232, Dual LAN, HDMI+DP</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Wind className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Fanless 24/7</div>
+                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB ทนสภาพแวดล้อมหนักหน่วง</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_91532076771244788545982fbe4d1736f000.jpg/v1/fill/w_297,h_459,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_91532076771244788545982fbe4d1736f000.jpg"
+                      alt="GT8000 Product"
+                      className="w-full object-contain p-4"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Spec Diagrams */}
+              <div className="space-y-4">
+                {[
+                  "https://static.wixstatic.com/media/0597a3_a7a537dba4cc4f378df3b1a5318afd7d~mv2.png/v1/fill/w_1078,h_365,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2019_06_39.png",
+                  "https://static.wixstatic.com/media/0597a3_bd04598a211a4ea5b87840474ff84d43~mv2.png/v1/fill/w_1078,h_383,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2017_48_55.png",
+                  "https://static.wixstatic.com/media/0597a3_37c59af1b9ec42059bbf1c036a0f7ef3~mv2.png/v1/fill/w_1078,h_383,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2019_14_52.png",
+                  "https://static.wixstatic.com/media/0597a3_dc02b627c68e4babba4558811e2909a6~mv2.png/v1/fill/w_1078,h_389,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_01_02.png",
+                  "https://static.wixstatic.com/media/0597a3_de99bee0d7c84561b77a71ef0ac1c3cb~mv2.png/v1/fill/w_1078,h_389,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_03_50.png",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface p-4 overflow-hidden">
+                    <img src={img} alt={`GT8000 Spec ${i + 1}`} className="w-full rounded-lg" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Connectivity & Design */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_d596bf77620a4e758722c9d7da466531~mv2.png/v1/crop/x_0,y_200,w_2290,h_650/fill/w_1078,h_306,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_23_33.png"
+                    alt="GT8000 Connectivity"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_ee9e8e7a3ef84b5580711fef0e9cbc93~mv2.png/v1/fill/w_1078,h_404,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_08_45.png"
+                    alt="GT8000 Design"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* More Spec Images */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_d92c02ade47645d0ba93be6bb82f6a24~mv2.png/v1/fill/w_1078,h_387,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_12_52.png"
+                    alt="GT8000 Internal"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_7d44bee4a375439097f406fbfa096df7~mv2.png/v1/fill/w_1078,h_406,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_22_09.png"
+                    alt="GT8000 Mounting"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Real-world Photos */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/005637_1f872ee47aa5498eb759245d2d2f9aab~mv2.jpg/v1/fill/w_317,h_253,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_1f872ee47aa5498eb759245d2d2f9aab~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_7899b1f70dc94e39b2e0b768dacb5446~mv2.jpg/v1/fill/w_317,h_253,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_7899b1f70dc94e39b2e0b768dacb5446~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_b126ba0cc7514dcd8f8b49baec1c5116~mv2.jpg/v1/fill/w_317,h_253,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_b126ba0cc7514dcd8f8b49baec1c5116~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_2703b7eeb9424b54a5b0329b5f59ac10~mv2.jpg/v1/fill/w_317,h_253,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_2703b7eeb9424b54a5b0329b5f59ac10~mv2.jpg",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden">
+                    <img src={img} alt={`GT8000 ใช้งานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Price Table Image */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT8000 Price List</h3>
+                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น</p>
+                </div>
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_298ea696ba8d4dc28cf13b5dc4842d6d~mv2.png/v1/fill/w_1078,h_396,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_48_58.png"
+                  alt="GT8000 Price List"
+                  className="w-full"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Datasheet CTA */}
+              <div className="text-center">
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/3e5003_1cc0a144983240828fc4dc69c5fe47e8.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> ดาวน์โหลด Datasheet GT8000
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: GT9000 Detail */}
+          {activeTab === "gt9000" && (
+            <div className="space-y-8 animate-fade-in">
+              {/* Hero Logo */}
+              <div className="card-surface overflow-hidden rounded-2xl">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_8075cfe9768d4946a716b5fe6e39ac8e~mv2.png/v1/fill/w_478,h_120,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2011_11_23.png"
+                  alt="GT9000 Logo"
+                  className="w-full h-[120px] md:h-[180px] object-contain bg-background p-8"
+                />
+              </div>
+
+              {/* Description + Product */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      Triple Display · 8 COM · NVMe · DDR5 · Dual-Band WiFi
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">9000</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      GT9000 ออกแบบด้วยการผลิตที่ปราณีต ตัวเครื่องสีดำผลิตจากโลหะผสมอลูมิเนียมขัดเงา
+                      ปราศจากพัดลมระบายอากาศ ทำงานเงียบไร้เสียงรบกวน รองรับการทำงาน 24 ชั่วโมงต่อเนื่อง
+                      พร้อมอุปกรณ์เครือข่ายไร้สาย Dual-Band และเสาอากาศภายนอก ครบครันด้วย 8 COM Port
+                      รองรับ RS232/RS422/RS485 สนับสนุน Triple Display ผ่าน 2 HDMI + 1 DP ทำงาน 3 จอพร้อมกัน
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-2">🏭 โซลูชั่นระบบจัดการโรงงานระดับมืออาชีพ</h4>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      <li>✅ ติดตามกระบวนการผลิตแบบ Real-time</li>
+                      <li>✅ ควบคุมคุณภาพตามมาตรฐานสากล</li>
+                      <li>✅ จัดการสต็อกวัตถุดิบอัจฉริยะ</li>
+                      <li>✅ เชื่อมต่อเครื่องจักรทุกประเภท</li>
+                      <li>✅ ลดเวลา Downtime ได้ถึง 40%</li>
+                    </ul>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-secondary">
+                    <h4 className="font-bold text-foreground mb-2">🎯 ปฏิวัติโรงงานสู่ยุคดิจิทัล</h4>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      <li>🎯 ควบคุมอุณหภูมิและความดันอัตโนมัติ</li>
+                      <li>🎯 ตรวจสอบคุณภาพด้วย AI Vision</li>
+                      <li>🎯 วางแผนการผลิตแบบอัจฉริยะ</li>
+                    </ul>
+                  </div>
+
+                  {/* Key Specs */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU</div>
+                      <div className="text-xs text-muted-foreground mt-1">i5-10200H / i7-10750H / i5-1235U / i7-1255U</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM & Storage</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR4/DDR5 4–32 GB / SSD + SATA + NVMe</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Monitor className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Triple Display</div>
+                      <div className="text-xs text-muted-foreground mt-1">2× HDMI 1.4 + 1× DP — 3 จอพร้อมกัน</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">8 COM Port</div>
+                      <div className="text-xs text-muted-foreground mt-1">RS232/RS422/RS485 + Dual-Band WiFi</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_bee270c19b2f466a8a77aa294d528952f000.jpg/v1/fill/w_290,h_514,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_bee270c19b2f466a8a77aa294d528952f000.jpg"
+                      alt="GT9000 Product"
+                      className="w-full object-contain p-4"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Overview & Spec Diagrams */}
+              <div className="card-surface p-4 overflow-hidden">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_b68e0174e2b54d39b0bdf80ae71118e5~mv2.png/v1/crop/x_0,y_0,w_2752,h_1496/fill/w_712,h_387,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT9000%20PR.png"
+                  alt="GT9000 Product Overview"
+                  className="w-full rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  "https://static.wixstatic.com/media/0597a3_ecdc35b7d41e4cfba1afa5d11300df17~mv2.png/v1/crop/x_15,y_217,w_2352,h_655/fill/w_1095,h_305,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2012_51_54.png",
+                  "https://static.wixstatic.com/media/0597a3_77a9c0395f984fde811028a4f0fbc5e4~mv2.png/v1/fill/w_1084,h_395,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2013_52_21.png",
+                  "https://static.wixstatic.com/media/0597a3_c5d446300d3a4d9caabc33cad2911b4b~mv2.png/v1/fill/w_1084,h_402,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_09_11.png",
+                  "https://static.wixstatic.com/media/0597a3_ffb33e04d1384bdab5c17647bd479b85~mv2.png/v1/fill/w_1084,h_401,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_09_57.png",
+                  "https://static.wixstatic.com/media/0597a3_d3041b42178d4c10bece0b7ffb8f31e3~mv2.png/v1/fill/w_1083,h_401,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_30_29.png",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface p-4 overflow-hidden">
+                    <img src={img} alt={`GT9000 Spec ${i + 1}`} className="w-full rounded-lg" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Connectivity & Design Details */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {[
+                  "https://static.wixstatic.com/media/0597a3_2c101c21f03f4d63b1df69669f310210~mv2.png/v1/fill/w_1083,h_401,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_01_45.png",
+                  "https://static.wixstatic.com/media/0597a3_ee8b5d5430dd45118bfc9310fb269418~mv2.png/v1/fill/w_1083,h_407,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_43_57.png",
+                  "https://static.wixstatic.com/media/0597a3_06cf1a8db43c4bc9b3e45e421c5f38ca~mv2.png/v1/fill/w_1083,h_395,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_28_18.png",
+                  "https://static.wixstatic.com/media/0597a3_e8bf65042cdb49c7badf9b1dc833e3a2~mv2.png/v1/fill/w_1095,h_393,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2013_39_08.png",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface p-4 overflow-hidden">
+                    <img src={img} alt={`GT9000 Detail ${i + 1}`} className="w-full rounded-lg" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Application & Dimension */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_901ca65b5c4149a1b6037ff17888889b~mv2.png/v1/fill/w_1095,h_388,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2014_00_07.png"
+                    alt="GT9000 Application"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_d89ddcc7673d4492ad64911fb4825364~mv2.png/v1/crop/x_0,y_264,w_2433,h_616/fill/w_1095,h_278,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2012_58_44.png"
+                    alt="GT9000 Dimensions"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Real-world Photos */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/005637_11c4dd2fbe1048448d0663de7ae71804~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_11c4dd2fbe1048448d0663de7ae71804~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_a31039453194460c8956f5a8e49a635c~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_a31039453194460c8956f5a8e49a635c~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_a643b2c6b5c14278bff7f4af495805a3~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_a643b2c6b5c14278bff7f4af495805a3~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_bf02ab6305244e028d18bbb27984eb3c~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_bf02ab6305244e028d18bbb27984eb3c~mv2.jpg",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden">
+                    <img src={img} alt={`GT9000 ใช้งานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* GT9000 Price Table */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT9000 Price List</h3>
+                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿25,290</p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-secondary/50">
+                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                        <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
+                        <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      {[
+                        { cpu: "i5-10200H", config: "RAM 4GB + SSD 128GB + WIFI", price: "25,290" },
+                        { cpu: "i5-10200H", config: "RAM 4GB + SSD 256GB + WIFI", price: "26,090" },
+                        { cpu: "i5-10200H", config: "RAM 8GB + SSD 128GB + WIFI", price: "25,890" },
+                        { cpu: "i5-10200H", config: "RAM 8GB + SSD 256GB + WIFI", price: "26,490" },
+                        { cpu: "i5-10200H", config: "RAM 16GB + SSD 256GB + WIFI", price: "27,690" },
+                        { cpu: "i5-10200H", config: "RAM 8GB + SSD 512GB + HDD 500GB + WIFI", price: "26,490" },
+                        { cpu: "i7-10750H", config: "RAM 4GB + SSD 128GB + WIFI", price: "27,690" },
+                        { cpu: "i7-10750H", config: "RAM 8GB + SSD 128GB + WIFI", price: "28,190" },
+                        { cpu: "i7-10750H", config: "RAM 8GB + SSD 256GB + WIFI", price: "28,790" },
+                        { cpu: "i7-10750H", config: "RAM 16GB + SSD 512GB + WIFI", price: "31,390" },
+                        { cpu: "i7-10750H", config: "RAM 32GB + SSD 512GB + WIFI", price: "33,790" },
+                        { cpu: "i5-1235U", config: "RAM DDR5 8GB + SSD 128GB + WIFI", price: "29,790" },
+                        { cpu: "i5-1235U", config: "RAM DDR5 8GB + SSD 256GB + WIFI", price: "30,490" },
+                        { cpu: "i5-1235U", config: "RAM DDR5 16GB + SSD 128GB + WIFI", price: "31,690" },
+                        { cpu: "i5-1235U", config: "RAM DDR5 16GB + SSD 256GB + WIFI", price: "32,290" },
+                        { cpu: "i7-1255U", config: "RAM DDR5 8GB + SSD 128GB + WIFI", price: "33,190" },
+                        { cpu: "i7-1255U", config: "RAM DDR5 8GB + SSD 256GB + WIFI", price: "33,790" },
+                        { cpu: "i7-1255U", config: "RAM DDR5 8GB + SSD 256GB + 2TB HDD + WIFI + Win10", price: "42,290" },
+                        { cpu: "i7-1255U", config: "RAM DDR5 32GB + SSD 256GB + 2TB SSD + WIFI + Win10", price: "48,190" },
+                      ].map((item, i) => (
+                        <tr key={i} className="hover:bg-secondary/30 transition-colors">
+                          <td className="p-3 text-foreground font-medium">{item.cpu}</td>
+                          <td className="p-3 text-muted-foreground">{item.config}</td>
+                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Datasheet CTAs */}
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/0597a3_56faa82174674e0494e3c1427715bead.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> Datasheet GT9000 (Gen 12)
+                </a>
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/005637_7c2186899e804684850ab39151abba04.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary/50 transition-colors"
+                >
+                  <Download size={16} /> Datasheet GT9000 (Gen 10)
+                </a>
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/0597a3_12a4bbf6e46f43f5821708e2157f4a2f.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary/50 transition-colors"
+                >
+                  <Download size={16} /> GT9000 Product Overview
                 </a>
               </div>
             </div>
