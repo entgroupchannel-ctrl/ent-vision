@@ -65,6 +65,7 @@ const emRuggedTablets = [
     highlight: "Intel i5-1235U สูงสุด 4.4GHz, 16GB LPDDR4x / 256GB, จอ FHD 1200×1920 ประสิทธิภาพสูงสุด",
     image: "https://entgroup-rugged.com/assets/f9e-C3MseYpo.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/f9e",
   },
   {
     id: "w109u",
@@ -73,6 +74,7 @@ const emRuggedTablets = [
     highlight: "Intel i5-1235U / i7-1255U (10-core), 16-48GB RAM, IP68 กันน้ำกันฝุ่นระดับสูงสุด",
     image: "https://entgroup-rugged.com/assets/w109u-main-C8XbCmqD.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/w109u",
   },
   {
     id: "w10y",
@@ -81,6 +83,7 @@ const emRuggedTablets = [
     highlight: "Intel Core i5-10210Y, จอ IPS ความสว่าง 700cd/㎡, IP68 กันน้ำกันฝุ่น",
     image: "https://entgroup-rugged.com/assets/w10y-main-woE420pE.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/w10y",
   },
   {
     id: "f7g",
@@ -89,6 +92,8 @@ const emRuggedTablets = [
     highlight: "Intel N4120, 8GB/128GB, จอ FHD IPS 1920×1200, IP67 กันน้ำ ทนตก 1.5 เมตร",
     image: "https://entgroup-rugged.com/assets/f7g-DidJ5UAD.png",
     datasheet: "",
+    price: "฿22,990",
+    productUrl: "https://entgroup-rugged.com/product/f7g",
   },
   {
     id: "f9a",
@@ -97,6 +102,8 @@ const emRuggedTablets = [
     highlight: "Intel Alder Lake N100 สูงสุด 3.4GHz, 8-16GB RAM, แบตอึด Multi-Touch 10 จุด",
     image: "https://entgroup-rugged.com/assets/f9a-_j8J-x2I.jpg",
     datasheet: "",
+    price: "฿27,990",
+    productUrl: "https://entgroup-rugged.com/product/f9a",
   },
   {
     id: "f8ct",
@@ -105,6 +112,8 @@ const emRuggedTablets = [
     highlight: "Intel x5-Z8350 Quad-Core, จอ IPS HD 8 นิ้ว, IP67 กันน้ำ กันฝุ่น ขนาดกะทัดรัด",
     image: "https://entgroup-rugged.com/assets/f8ct-CetUjj-d.png",
     datasheet: "",
+    price: "฿21,990",
+    productUrl: "https://entgroup-rugged.com/product/f8ct",
   },
   {
     id: "w10n",
@@ -113,6 +122,7 @@ const emRuggedTablets = [
     highlight: "Intel Celeron N5100, จอ IPS 700cd/㎡, IP68 รองรับมือเปียกและถุงมือ ราคาคุ้มค่า",
     image: "https://entgroup-rugged.com/assets/w10n-main-DJomacwZ.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/w10n",
   },
   {
     id: "f9r",
@@ -121,6 +131,8 @@ const emRuggedTablets = [
     highlight: "RK3588 Octa-Core (4×A76+4×A55), จอ IPS 600 nits, 8GB/128GB Android ประสิทธิภาพสูง",
     image: "https://entgroup-rugged.com/assets/f9r-V3GyP6IL.jpg",
     datasheet: "",
+    price: "฿23,990",
+    productUrl: "https://entgroup-rugged.com/product/f9r",
   },
   {
     id: "a10st",
@@ -129,6 +141,7 @@ const emRuggedTablets = [
     highlight: "MTK8781 Octa-Core 2.2GHz, จอ IPS 700cd/㎡ 1920×1200, IP68 Android 13",
     image: "https://entgroup-rugged.com/assets/a10st-13-CjHhtG0m.jpg",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/a10st-13",
   },
   {
     id: "a109t",
@@ -137,6 +150,7 @@ const emRuggedTablets = [
     highlight: "MT6789V Octa-Core, จอ IPS 700cd/㎡, IP68 บางเฉียบ Android 14 รุ่นใหม่ล่าสุด",
     image: "https://entgroup-rugged.com/assets/a109t-product-main-BDvMNhIR.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/a109t",
   },
 ];
 
@@ -148,6 +162,8 @@ const ruggedNotebooks = [
     highlight: "Intel AI Processor, DDR5 สูงสุด 32GB, MIL-STD-810H IP65 พร้อม NPU สำหรับ AI Workload",
     image: "https://entgroup-rugged.com/assets/em-x15a-V7O0Cy_Y.png",
     datasheet: "",
+    price: "฿83,900",
+    productUrl: "https://entgroup-rugged.com/product/em-x15m",
   },
   {
     id: "em-x15a",
@@ -156,6 +172,8 @@ const ruggedNotebooks = [
     highlight: "Intel Core i5/i7, จอ FHD IPS Touch, MIL-STD-810G IP65 ทนทานมาตรฐานทหาร",
     image: "https://entgroup-rugged.com/assets/em-x15a-V7O0Cy_Y.png",
     datasheet: "",
+    price: "฿83,900",
+    productUrl: "https://entgroup-rugged.com/product/em-x15a",
   },
   {
     id: "em-x14a",
@@ -164,6 +182,8 @@ const ruggedNotebooks = [
     highlight: "Intel Core i5/i7, จอ 14 นิ้ว FHD IPS, MIL-STD-810G IP65 ขนาดกะทัดรัดพกพาสะดวก",
     image: "https://entgroup-rugged.com/assets/em-x14a-CeYNitLa.png",
     datasheet: "",
+    price: "฿62,900",
+    productUrl: "https://entgroup-rugged.com/product/em-x14a",
   },
   {
     id: "em-x14m",
@@ -172,6 +192,8 @@ const ruggedNotebooks = [
     highlight: "Intel Core Ultra 5, จอ Touch 1000 nits, MIL-STD-810H IP65 พร้อม NPU โหมด Tablet",
     image: "https://entgroup-rugged.com/assets/em-x14m-DwyheEo6.png",
     datasheet: "",
+    price: "฿69,900",
+    productUrl: "https://entgroup-rugged.com/product/em-x14m",
   },
   {
     id: "em-i22j",
@@ -180,6 +202,7 @@ const ruggedNotebooks = [
     highlight: "จอ FHD IPS Touch 12.2 นิ้ว, MIL-STD-810G IP65 คีย์บอร์ดถอดได้ 2-in-1 Design",
     image: "https://entgroup-rugged.com/assets/em-i22j-BG1wttE6.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/em-i22j",
   },
   {
     id: "w14u-a",
@@ -188,6 +211,8 @@ const ruggedNotebooks = [
     highlight: "Intel 11th Gen i5/i7, จอ FHD Touch 700cd/㎡, IP65 ทนอุณหภูมิ -20°C ถึง 60°C",
     image: "https://entgroup-rugged.com/assets/w14u-t-CnIhYdCX.jpg",
     datasheet: "",
+    price: "฿65,900",
+    productUrl: "https://entgroup-rugged.com/product/w14u-a",
   },
   {
     id: "w33u",
@@ -196,6 +221,7 @@ const ruggedNotebooks = [
     highlight: "Intel i5-1135G7, จอ FHD IPS Touch 13.3 นิ้ว, IP67 สแกนลายนิ้วมือ TPM 2.0",
     image: "https://entgroup-rugged.com/assets/w33u-DjSixhuc.jpg",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/w33u",
   },
 ];
 
@@ -248,135 +274,103 @@ const pipoModels = [
 
 const aioProducts = [
   {
-    id: "h10pro",
-    name: "H10PRO Box PC",
-    size: '10"',
+    id: "h10pro", name: "H10PRO Box PC", size: '10"',
     highlight: "Intel J4125 Quad Core, จอ IPS Touch 1920x1200, แบต 10000mAh, VESA/Wall Mount",
-    image: "https://entgroup-rugged.com/assets/h10pro-8mKFXuc7.jpg",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/h10pro-8mKFXuc7.jpg", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/h10pro",
   },
   {
-    id: "h10f",
-    name: "H10F Box PC + Scanner",
-    size: '10.1"',
+    id: "h10f", name: "H10F Box PC + Scanner", size: '10.1"',
     highlight: "Intel J4125 Quad Core, 2D Scanner ในตัว, ถอดแบตได้, Desktop/Wall Mount",
-    image: "https://entgroup-rugged.com/assets/h10f-BONJ3fIQ.jpg",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/h10f-BONJ3fIQ.jpg", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/h10f",
   },
   {
-    id: "f10-aio",
-    name: "F10 All-in-One PC",
-    size: '10.1"',
+    id: "f10-aio", name: "F10 All-in-One PC", size: '10.1"',
     highlight: "Intel Celeron N5095, จอ IPS 1200x1920, Windows 11 Pro, VESA Mount",
-    image: "https://entgroup-rugged.com/assets/f10-C93ZGwZ7.jpg",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/f10-C93ZGwZ7.jpg", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/f10",
   },
   {
-    id: "f15",
-    name: "F15 Industrial AIO",
-    size: '15.6"',
+    id: "f15", name: "F15 Industrial AIO", size: '15.6"',
     highlight: "Intel Celeron N5095, จอ FHD IPS Touch 15.6 นิ้ว พร้อมขาตั้ง, Windows 11 Pro",
-    image: "https://entgroup-rugged.com/assets/f15-fmf9sjOL.jpg",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/f15-fmf9sjOL.jpg", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/f15",
   },
   {
-    id: "f3apl",
-    name: "F3APL Mini Tablet",
-    size: '8"',
+    id: "f3apl", name: "F3APL Mini Tablet", size: '8"',
     highlight: "Intel N4200, จอ HD IPS Touch 8 นิ้ว, Wall Mount, ขนาดกะทัดรัด",
-    image: "https://entgroup-rugged.com/assets/f3apl-BmanKFN1.jpg",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/f3apl-BmanKFN1.jpg", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/f3apl",
   },
   {
-    id: "em-p18r",
-    name: "EM-P18R Panel PC",
-    size: '18.5"',
+    id: "em-p18r", name: "EM-P18R Panel PC", size: '18.5"',
     highlight: "Rockchip RK3568 Quad Core, จอ HD+ Touch 18.5 นิ้ว, Panel/VESA Mount",
-    image: "https://entgroup-rugged.com/assets/em-p18r-BXxSGPUz.jpg",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/em-p18r-BXxSGPUz.jpg", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/em-p18r",
   },
   {
-    id: "em-pt21",
-    name: "EM-PT21 Panel Display",
-    size: '21.5"',
+    id: "em-pt21", name: "EM-PT21 Panel Display", size: '21.5"',
     highlight: "Intel Processor, จอ FHD 1920x1080 Touch 21.5 นิ้ว, Panel/VESA Mount",
-    image: "https://entgroup-rugged.com/assets/em-pt21-Bb8yF9hD.png",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/em-pt21-Bb8yF9hD.png", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/em-pt21",
   },
   {
-    id: "em-p21r",
-    name: "EM-P21R Android Panel PC",
-    size: '21.5"',
+    id: "em-p21r", name: "EM-P21R Android Panel PC", size: '21.5"',
     highlight: "Rockchip RK3568, จอ FHD Touch 21.5 นิ้ว, Android 12, Embedded Panel",
-    image: "https://entgroup-rugged.com/assets/em-p21r-DY_u1Sch.png",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/em-p21r-DY_u1Sch.png", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/em-p21r",
   },
 ];
 
 const handheldProducts = [
   {
-    id: "w65g",
-    name: "W65G Windows Handheld",
-    size: '6.5"',
+    id: "w65g", name: "W65G Windows Handheld", size: '6.5"',
     highlight: "Intel N4020, จอ IPS Gorilla Glass, 2D Scanner, IP67 MIL-STD-810H",
-    image: "https://entgroup-rugged.com/assets/w65g-N3AQKXJb.png",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/w65g-N3AQKXJb.png", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/w65g",
   },
   {
-    id: "a55gt",
-    name: "A55GT 5G Handheld",
-    size: '6.5"',
+    id: "a55gt", name: "A55GT 5G Handheld", size: '6.5"',
     highlight: "Octa-Core, 8GB/128GB, 5G Full Network, 2D Scanner, IP68 กันน้ำ",
-    image: "https://entgroup-rugged.com/assets/a55gt-8EiW4LT7.jpg",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/a55gt-8EiW4LT7.jpg", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/a55gt",
   },
   {
-    id: "p40at",
-    name: "P40AT PDA Scanner",
-    size: '4"',
+    id: "p40at", name: "P40AT PDA Scanner", size: '4"',
     highlight: "Quad/Octa-Core, 2D Barcode Scanner อ่านโค้ดสกปรกได้, IP65",
-    image: "https://entgroup-rugged.com/assets/p40at-AM0dpnMQ.jpg",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/p40at-AM0dpnMQ.jpg", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/p40at",
   },
   {
-    id: "a60t",
-    name: "A60T Data Terminal",
-    size: '6"',
+    id: "a60t", name: "A60T Data Terminal", size: '6"',
     highlight: "Octa-Core, 4GB/64GB, 2D Scanner, จอ HD IPS 6 นิ้ว สแกนเร็ว",
-    image: "https://entgroup-rugged.com/assets/a60t-Mi_-RVw_.jpg",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/a60t-Mi_-RVw_.jpg", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/a60t",
   },
   {
-    id: "p72t",
-    name: "P72T Mobile Terminal",
-    size: '7"',
+    id: "p72t", name: "P72T Mobile Terminal", size: '7"',
     highlight: "MTK6765 Octa-Core, 4GB/64GB, 2D + UHF RFID, จอ HD IPS 7 นิ้ว แบตอึด",
-    image: "https://entgroup-rugged.com/assets/p72t-BIVD8IBh.png",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/p72t-BIVD8IBh.png", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/p72t",
   },
   {
-    id: "em-t2-ultra",
-    name: "EM-T2 Ultra Outdoor Tablet",
-    size: '10.95"',
+    id: "em-t2-ultra", name: "EM-T2 Ultra Outdoor Tablet", size: '10.95"',
     highlight: "MediaTek Dimensity 7300, 12GB/256GB, จอ 2K 1200x1920, Android 15",
-    image: "https://entgroup-rugged.com/assets/em-t2-ultra-Bl924cVb.jpg",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/em-t2-ultra-Bl924cVb.jpg", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/em-t2-ultra",
   },
   {
-    id: "em-p2-pro",
-    name: "EM-P2 Pro 5G Phone",
-    size: '6.78"',
+    id: "em-p2-pro", name: "EM-P2 Pro 5G Phone", size: '6.78"',
     highlight: "Dimensity 6300 5G, 12GB/256GB, จอ 2K 120Hz, Android 14",
-    image: "https://entgroup-rugged.com/assets/main-VATZJz47.png",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/main-VATZJz47.png", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/em-p2-pro",
   },
   {
-    id: "em-p1",
-    name: "EM-P1 Rugged Phone",
-    size: '6.56"',
+    id: "em-p1", name: "EM-P1 Rugged Phone", size: '6.56"',
     highlight: "MediaTek Helio G99, 12GB/256GB, Android 14 กันน้ำกันกระแทก",
-    image: "https://entgroup-rugged.com/assets/em-p1-KJ_Z-unN.png",
-    datasheet: "",
+    image: "https://entgroup-rugged.com/assets/em-p1-KJ_Z-unN.png", datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/em-p1",
   },
 ];
 
@@ -406,7 +400,7 @@ const categories = [
 const ITEMS_PER_PAGE = 10;
 
 /* ───── Product Card ───── */
-const ProductCard = ({ product }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string } }) => (
+const ProductCard = ({ product }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string } }) => (
   <div className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
     {product.image && (
       <div className="bg-secondary/30 p-4 flex items-center justify-center h-48">
@@ -422,7 +416,14 @@ const ProductCard = ({ product }: { product: { name: string; size?: string; high
       {product.price && (
         <p className="text-sm font-bold text-primary">{product.price}</p>
       )}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
+        {product.productUrl && (
+          <Button variant="outline" size="sm" asChild className="flex-1">
+            <a href={product.productUrl} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
+            </a>
+          </Button>
+        )}
         {product.datasheet && (
           <Button variant="outline" size="sm" asChild className="flex-1">
             <a href={product.datasheet} target="_blank" rel="noopener noreferrer">
