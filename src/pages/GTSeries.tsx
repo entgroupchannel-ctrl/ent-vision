@@ -969,6 +969,294 @@ const GTSeries = () => {
             </div>
           )}
 
+          {/* Tab: GT3000 Detail */}
+          {activeTab === "gt3000" && (
+            <div className="space-y-8 animate-fade-in">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_8a20389ce6514883be13fd017042afba~mv2.png/v1/fill/w_850,h_222,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2010_32_15.png"
+                  alt="GT3000 Logo"
+                  className="w-full h-[180px] md:h-[250px] object-contain bg-background p-8"
+                />
+              </div>
+
+              {/* Description + Product Image */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      6 COM · 6 CPU Options · Fanless
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">3000</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Industrial PC คือเครื่องคอมพิวเตอร์เกรดอุตสาหกรรมขนาดเล็ก ที่ถูกออกแบบมาเพื่อรองรับการทำงาน
+                      ในสภาวะแวดล้อมที่มีอุณหภูมิสูง ฝุ่นละอองหนาแน่น โดยออกแบบให้มีการระบายความร้อนได้ดีและทนความร้อนได้สูง
+                      จึงเป็นเหตุผลที่ทำให้ GT3000 ทำงานได้อย่างมีประสิทธิภาพเหมาะสมกับงานอุตสาหกรรมทุกประเภทในปัจจุบัน
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-2">🔧 เลือก CPU ได้ถึง 6 รุ่น</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      เลือกหน่วยประมวลผลให้สอดคล้องกับกิจกรรมจะช่วยให้ระบบมีเสถียรภาพในการทำงาน —
+                      รุ่นเริ่มต้น Celeron สำหรับงานเบา, Core i5 สำหรับงานซับซ้อนปานกลาง,
+                      Core i7 สำหรับงานหนักที่ต้องเชื่อมหลายอุปกรณ์และอัปเดตข้อมูลรวดเร็ว
+                    </p>
+                  </div>
+
+                  {/* CPU Options Visual */}
+                  <div className="card-surface p-4 overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_b1b7aa4df679422f98a13e8b09953c89~mv2.png/v1/fill/w_1240,h_330,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-04-21%20at%2010_23_43.png"
+                      alt="GT3000 CPU Options"
+                      className="w-full rounded-lg"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  {/* Key Specs Grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU 6 ตัวเลือก</div>
+                      <div className="text-xs text-muted-foreground mt-1">Celeron 1007U / i3-4005U / i3-7020U / i5-4200U / i5-8250U / i7-4500U</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM & Storage</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR3L 4 GB / SSD 128 GB</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">6 COM + 6 USB</div>
+                      <div className="text-xs text-muted-foreground mt-1">RS232×6, LAN 2, VGA+HDMI</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Wind className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Fanless</div>
+                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB ทำงาน 24/7</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product Images */}
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_7150a12fcc844677ac9c5c0af540da06f000.jpg/v1/fill/w_592,h_1044,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_7150a12fcc844677ac9c5c0af540da06f000.jpg"
+                      alt="GT3000 Front"
+                      className="w-full object-contain p-4"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      "https://static.wixstatic.com/media/0597a3_d9da151468064e04b151c597b6cffe77~mv2.png/v1/fill/w_411,h_372,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_d9da151468064e04b151c597b6cffe77~mv2.png",
+                      "https://static.wixstatic.com/media/0597a3_4e580f8544054fd1b7c49f674f895717~mv2.png/v1/fill/w_411,h_372,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3.png",
+                      "https://static.wixstatic.com/media/0597a3_f6c89390525b44d7ad717483babace31~mv2.png/v1/fill/w_411,h_372,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_f6c89390525b44d7ad717483babace31~mv2.png",
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden">
+                        <img src={img} alt={`GT3000 มุมมอง ${i + 2}`} className="w-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Heatsink Design */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  🌡️ Heatsink = ตัวเครื่อง — ออกแบบมาเพื่อโรงงาน
+                </h4>
+                <div className="grid md:grid-cols-2 gap-6 items-center">
+                  <div>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      GT3000 รองรับการทำงานในสภาพแวดล้อมที่คอมพิวเตอร์ทั่วไปไม่สามารถทำงานได้
+                      เนื่องจากตัวเครื่องได้รับการออกแบบให้มีความทนทานเป็นพิเศษ มีครีบระบายความร้อนและไม่มีพัดลม
+                    </p>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li className="flex items-start gap-2"><span className="text-primary font-bold">✓</span> ป้องกันฝุ่นละออง สารเคมี แมลง เข้าสู่ตัวเครื่อง</li>
+                      <li className="flex items-start gap-2"><span className="text-primary font-bold">✓</span> Heatsink คือตัวเครื่อง — ระบายความร้อนจากทุกพื้นผิว</li>
+                      <li className="flex items-start gap-2"><span className="text-primary font-bold">✓</span> ไม่มีชิ้นส่วนเคลื่อนไหว = เสถียรสูง ทำงาน 24/7</li>
+                      <li className="flex items-start gap-2"><span className="text-primary font-bold">✓</span> ทนอุณหภูมิ 0-60°C อย่างต่อเนื่อง</li>
+                    </ul>
+                  </div>
+                  <div className="overflow-hidden rounded-lg">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_e32bd6b8875a46949e1ea94eadbb721d~mv2.png/v1/fill/w_521,h_366,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_11_43.png"
+                      alt="GT3000 Heatsink Detail"
+                      className="w-full"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* I/O & Connectivity */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  🔌 I/O Port — 6 COM สำหรับงานหนัก
+                </h4>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="overflow-hidden rounded-lg">
+                    <img
+                      src="https://static.wixstatic.com/media/3e5003_da8e76c7792f47e5a3a39288166d69f9~mv2.png/v1/fill/w_774,h_408,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.png"
+                      alt="GT3000 I/O Diagram"
+                      className="w-full"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="overflow-hidden rounded-lg">
+                    <img
+                      src="https://static.wixstatic.com/media/3e5003_1855c4449e3c468d95d1bdfcc0a0619f~mv2.png/v1/fill/w_491,h_494,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6-01.png"
+                      alt="GT3000 Port Detail"
+                      className="w-full"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                  {[
+                    { label: "6 COM Port (RS232)", desc: "เชื่อมต่อ PLC, เครื่องจักร, sensors พร้อมกัน 6 ตัว" },
+                    { label: "USB 6 ports", desc: "เชื่อมต่อ barcode scanner, camera, external storage" },
+                    { label: "Dual Display", desc: "VGA + HDMI — รองรับ 2 หน้าจอ control & monitoring" },
+                    { label: "2 Gigabit LAN", desc: "แยกเครือข่ายระบบผลิตและ office network" },
+                    { label: "Audio Port", desc: "สำหรับระบบแจ้งเตือนในไลน์ผลิต" },
+                    { label: "ขนาดกะทัดรัด", desc: "15×21.7×5.2 cm น้ำหนัก 1.289 kg — wall mount ได้" },
+                  ].map((item, i) => (
+                    <div key={i} className="card-surface p-3">
+                      <div className="font-bold text-foreground mb-1">{item.label}</div>
+                      <div className="text-xs text-muted-foreground">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Chassis Cooling & Heatsink Diagram */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/3e5003_ca74452ecdc4494884a46da6b4b23594~mv2.png/v1/crop/x_0,y_40,w_2000,h_879/fill/w_591,h_259,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/99.png"
+                    alt="GT3000 Chassis Design"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img
+                    src="https://static.wixstatic.com/media/3e5003_fadd401364de4b7d9e31669c96695798~mv2.jpg/v1/crop/x_6,y_15,w_1988,h_718/fill/w_1277,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7.jpg"
+                    alt="GT3000 Connectivity"
+                    className="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Dimension */}
+              <div className="card-surface p-6 text-center">
+                <h4 className="text-lg font-display font-bold text-foreground mb-4">📐 ขนาดกะทัดรัด</h4>
+                <p className="text-muted-foreground mb-4">
+                  เพียง 15 × 21.7 × 5.2 cm น้ำหนัก 1.289 kg — ขนาดเล็กกว่าหนังสือ A4 wall mount ได้ เคลื่อนย้ายสะดวก
+                </p>
+                <img
+                  src="https://static.wixstatic.com/media/005637_5b7ffcf837664796a61f0c4955583b21~mv2.jpg/v1/fill/w_979,h_403,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Size.jpg"
+                  alt="GT3000 Dimensions"
+                  className="max-w-2xl mx-auto rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Real-world Photos */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/005637_e654106986614352bf4e71dcddee89f6~mv2.jpg/v1/fill/w_420,h_280,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_e654106986614352bf4e71dcddee89f6~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_df6c79b56ee140a58a0eac288558f5b8~mv2.jpg/v1/fill/w_420,h_280,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_df6c79b56ee140a58a0eac288558f5b8~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_1174e23efc0b4aa6953f47d889694eca~mv2.jpg/v1/fill/w_420,h_280,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_1174e23efc0b4aa6953f47d889694eca~mv2.jpg",
+                  "https://static.wixstatic.com/media/005637_60e2fe696a194526af7db7f90b6ac4bd~mv2.jpg/v1/fill/w_420,h_420,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/S__12394925.jpg",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden aspect-square">
+                    <img src={img} alt={`GT3000 ติดตั้งจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Application Photos */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  "https://static.wixstatic.com/media/0597a3_95615da6cde947daa897b34bd31dbbd1~mv2.jpg/v1/fill/w_414,h_416,q_90,enc_avif,quality_auto/0597a3_95615da6cde947daa897b34bd31dbbd1~mv2.jpg",
+                  "https://static.wixstatic.com/media/0597a3_569ca3c78bef4f12a26ac9b23a2cda20~mv2.jpg/v1/fill/w_414,h_414,q_90,enc_avif,quality_auto/0597a3_569ca3c78bef4f12a26ac9b23a2cda20~mv2.jpg",
+                  "https://static.wixstatic.com/media/0597a3_62037fd2481c427baa92d9ce29a5471e~mv2.jpg/v1/fill/w_414,h_416,q_90,enc_avif,quality_auto/0597a3_62037fd2481c427baa92d9ce29a5471e~mv2.jpg",
+                  "https://static.wixstatic.com/media/0597a3_e5b96c236706407191bc8c228973b433~mv2.jpg/v1/fill/w_414,h_414,q_90,enc_avif,quality_auto/0597a3_e5b96c236706407191bc8c228973b433~mv2.jpg",
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden aspect-square">
+                    <img src={img} alt={`GT3000 Application ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Video Section */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT3000</h3>
+                </div>
+                <div className="grid md:grid-cols-2 gap-0 md:divide-x divide-border">
+                  <a
+                    href="https://www.youtube.com/watch?v=ifkzyVY9Z-g"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative group"
+                  >
+                    <img
+                      src="https://img.youtube.com/vi/ifkzyVY9Z-g/maxresdefault.jpg"
+                      alt="การเลือกซื้อคอมพิวเตอร์สำหรับงานอุตสาหกรรม GT Series"
+                      className="w-full aspect-video object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">การเลือกซื้อ GT Series — 14:20</span>
+                    </div>
+                  </a>
+                  <div className="flex items-center justify-center p-8 bg-secondary/30">
+                    <div className="text-center">
+                      <Play className="mx-auto text-primary mb-3" size={32} />
+                      <p className="text-sm font-semibold text-foreground mb-1">GT3000 Summary Talk</p>
+                      <p className="text-xs text-muted-foreground">ความยาว 03:23</p>
+                      <a
+                        href="https://www.entgroup.co.th/mini-pc-3000"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 mt-3 text-xs text-primary hover:underline"
+                      >
+                        ดูที่เว็บต้นทาง <ExternalLink size={12} />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Datasheet CTA */}
+              <div className="text-center">
+                <a
+                  href="https://0597a32c-bc3b-4e42-bded-1a51fba8f70b.usrfiles.com/ugd/005637_2b911a4352f34910b8335bf03b624721.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> ดาวน์โหลด Datasheet GT3000
+                </a>
+              </div>
+            </div>
+          )}
+
           {/* Tab: GT1400 Detail */}
           {activeTab === "gt1400" && (
             <div className="space-y-8 animate-fade-in">
