@@ -76,8 +76,8 @@ const HeroSection = () => {
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 text-center">
         {/* Background */}
         <div className="absolute inset-0 z-0">
-          <img src={heroBg} alt="" className="w-full h-full object-cover opacity-30" width={1920} height={1080} />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
+          <img src={heroBg} alt="" className="w-full h-full object-cover opacity-15" width={1920} height={1080} />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto">
