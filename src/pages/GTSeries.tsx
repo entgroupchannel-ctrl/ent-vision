@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
+import gt1000Hero from "@/assets/gt1000-hero.jpg";
 
 const features = [
   { icon: Thermometer, title: "ทนความร้อนสูง", desc: "ทำงานได้ในอุณหภูมิ 0–60°C อย่างต่อเนื่อง" },
@@ -21,29 +22,48 @@ const useCases = [
 const gtModels = [
   {
     name: "GT1000",
-    cpu: "Intel Celeron / Core i5",
-    ram: "4–8 GB",
+    tagline: "จุดเริ่มต้นที่คุ้มค่า",
+    cpu: "Intel Celeron N2920 / N3520",
+    ram: "4–8 GB DDR3L",
     storage: "SSD 128–256 GB",
     ports: "USB 6, COM 2, LAN 2, VGA+HDMI",
     size: "ขนาดเล็กกระทัดรัด",
     image: "https://static.wixstatic.com/media/0597a3_02acff57b2204d11a615e5e8b37392b6~mv2.png/v1/fill/w_419,h_378,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_02acff57b2204d11a615e5e8b37392b6~mv2.png",
     tab: "gt1000",
     highlight: "เริ่มต้น",
+    price: "15,990",
   },
   {
-    name: "GT1200 / GT1400",
-    cpu: "Intel N95 / N100 / Core i3",
-    ram: "8–16 GB DDR4",
-    storage: "SSD 256–512 GB",
+    name: "GT1200",
+    tagline: "คอมแพกต์ ดีไซน์ใหม่",
+    cpu: "Intel i3-6157U / i5 / i7",
+    ram: "DDR3L–DDR4 สูงสุด 64GB",
+    storage: "M.2 SSD + SATA",
     ports: "USB 6, COM 2, LAN 2, HDMI",
-    size: "ดีไซน์ใหม่ล่าสุด",
-    image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
+    size: "TDP 28W Fanless",
+    image: "https://static.wixstatic.com/media/0597a3_3a64dd92132a4f54b2a9f0eb03b87ed4~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
     tab: "gt1200",
     highlight: "NEW!",
     badge: true,
+    price: "สอบถาม",
+  },
+  {
+    name: "GT1400",
+    tagline: "พลังแรง 4 LAN DDR5",
+    cpu: "i5-8305G / i7-12650HX / i7-13650HX",
+    ram: "DDR4/DDR5 สูงสุด 64GB",
+    storage: "M.2 NVMe + SATA",
+    ports: "USB 6, COM 2, LAN 4, HDMI",
+    size: "4 LAN + DDR5 Support",
+    image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
+    tab: "gt1400",
+    highlight: "NEW!",
+    badge: true,
+    price: "28,990",
   },
   {
     name: "GT2000",
+    tagline: "ยอดนิยม 8 USB",
     cpu: "Intel Celeron 1037U / Core i5",
     ram: "4 GB",
     storage: "SSD 256 GB",
@@ -52,9 +72,11 @@ const gtModels = [
     image: "https://static.wixstatic.com/media/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg/v1/fill/w_268,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg",
     href: "https://www.entgroup.co.th/mini-pc-gt2000",
     highlight: "ยอดนิยม",
+    price: "สอบถาม",
   },
   {
     name: "GT3000",
+    tagline: "6 COM หลากหลาย CPU",
     cpu: "Celeron 1007U / Core i3 / i5 / i7",
     ram: "4 GB",
     storage: "SSD 128 GB",
@@ -62,10 +84,12 @@ const gtModels = [
     size: "15×21.7×5.2 cm / 1.289 kg",
     image: "https://static.wixstatic.com/media/0597a3_7150a12fcc844677ac9c5c0af540da06f000.jpg/v1/fill/w_296,h_522,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_7150a12fcc844677ac9c5c0af540da06f000.jpg",
     href: "https://www.entgroup.co.th/mini-pc-3000",
-    highlight: "หลากหลาย CPU",
+    highlight: "6 COM",
+    price: "สอบถาม",
   },
   {
     name: "GT4000",
+    tagline: "GPIO พร้อมใช้",
     cpu: "Intel Core i3 / i5 / i7",
     ram: "4–16 GB",
     storage: "SSD 128–512 GB",
@@ -74,9 +98,11 @@ const gtModels = [
     image: "https://static.wixstatic.com/media/0597a3_b9bf3c2c39ee4be6b009dd7b958fa43c~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_28_07.png",
     href: "https://www.entgroup.co.th/minipc-gt4000",
     highlight: "GPIO",
+    price: "สอบถาม",
   },
   {
     name: "GT4500",
+    tagline: "Dual HDMI อัปเกรด",
     cpu: "Intel Core i5 / i7",
     ram: "8–16 GB",
     storage: "SSD 256–512 GB",
@@ -85,9 +111,11 @@ const gtModels = [
     image: "https://static.wixstatic.com/media/0597a3_8e53a2e85b9f42088834c613e1a9d08f~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_25_08.png",
     href: "https://www.entgroup.co.th/ipc-gt4500",
     highlight: "Dual HDMI",
+    price: "สอบถาม",
   },
   {
     name: "GT5000",
+    tagline: "GPIO + SIM IoT Ready",
     cpu: "Intel Core i5 / i7",
     ram: "8–16 GB",
     storage: "SSD 256–512 GB",
@@ -95,10 +123,12 @@ const gtModels = [
     size: "พร้อม GPIO + SIM",
     image: "https://static.wixstatic.com/media/0597a3_68700c8f94f94588be18d47414929b55f000.jpg/v1/fill/w_296,h_522,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_68700c8f94f94588be18d47414929b55f000.jpg",
     href: "https://www.entgroup.co.th/gt5000",
-    highlight: "GPIO + SIM",
+    highlight: "IoT Ready",
+    price: "สอบถาม",
   },
   {
     name: "GT6000",
+    tagline: "Gen 8 ประสิทธิภาพสูง",
     cpu: "Intel Core i5 / i7 Gen 8",
     ram: "8–32 GB DDR4",
     storage: "SSD 256 GB – 1 TB",
@@ -107,9 +137,11 @@ const gtModels = [
     image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
     href: "https://www.entgroup.co.th/gt6000",
     highlight: "Gen 8",
+    price: "สอบถาม",
   },
   {
     name: "GT7000",
+    tagline: "Gen 10 คำตอบทุกโรงงาน",
     cpu: "Intel Core i5 / i7 Gen 10",
     ram: "8–32 GB DDR4",
     storage: "SSD 256 GB – 1 TB",
@@ -118,9 +150,11 @@ const gtModels = [
     image: "https://static.wixstatic.com/media/0597a3_8e53a2e85b9f42088834c613e1a9d08f~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_25_08.png",
     href: "https://www.entgroup.co.th/ipc-gt7000",
     highlight: "Gen 10",
+    price: "สอบถาม",
   },
   {
     name: "GT8000",
+    tagline: "Flagship 4 LAN NVMe",
     cpu: "Intel Core i5 / i7 Gen 11",
     ram: "8–64 GB DDR4",
     storage: "NVMe SSD 256 GB – 2 TB",
@@ -129,9 +163,11 @@ const gtModels = [
     image: "https://static.wixstatic.com/media/0597a3_b9bf3c2c39ee4be6b009dd7b958fa43c~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_28_07.png",
     href: "https://www.entgroup.co.th/gt8000",
     highlight: "Flagship",
+    price: "สอบถาม",
   },
   {
     name: "GT9000",
+    tagline: "สุดยอด Gen 12 Thunderbolt",
     cpu: "Intel Core i7 / i9 Gen 12",
     ram: "16–64 GB DDR5",
     storage: "NVMe SSD 512 GB – 2 TB",
@@ -139,7 +175,8 @@ const gtModels = [
     size: "สุดยอด Performance",
     image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
     href: "https://www.entgroup.co.th/gt9000",
-    highlight: "Top Performance",
+    highlight: "Top",
+    price: "สอบถาม",
   },
 ];
 
@@ -357,12 +394,11 @@ const GTSeries = () => {
           {activeTab === "gt1000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden">
+              <div className="card-surface overflow-hidden rounded-2xl">
                 <img
-                  src="https://static.wixstatic.com/media/3e5003_1654215f900c48fdbc594d46658d067b~mv2.jpg/v1/fill/w_1270,h_590,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/22.jpg"
+                  src={gt1000Hero}
                   alt="GT1000 Industrial PC"
-                  className="w-full"
-                  loading="lazy"
+                  className="w-full h-[300px] md:h-[400px] object-cover"
                 />
               </div>
 
@@ -518,6 +554,37 @@ const GTSeries = () => {
                 ))}
               </div>
 
+              {/* Video Section */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT1000</h3>
+                </div>
+                <a
+                  href="https://www.entgroup.co.th/ipc-gt1000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block relative group"
+                >
+                  <img
+                    src="https://static.wixstatic.com/media/3e5003_1654215f900c48fdbc594d46658d067b~mv2.jpg/v1/fill/w_1270,h_590,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/22.jpg"
+                    alt="GT1000 Video Thumbnail"
+                    className="w-full aspect-video object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                    <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Play className="text-primary-foreground ml-1" size={28} fill="currentColor" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4">
+                    <span className="text-white text-sm font-semibold bg-black/60 px-3 py-1 rounded-full">
+                      GT1000 Detail Specification — 02:00
+                    </span>
+                  </div>
+                </a>
+              </div>
+
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
@@ -642,6 +709,38 @@ const GTSeries = () => {
                 </div>
               </div>
 
+              {/* Video Section */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT1400</h3>
+                </div>
+                <div className="grid md:grid-cols-2 gap-0 md:divide-x divide-border">
+                  <a href="https://www.entgroup.co.th/gt-series-2023" target="_blank" rel="noopener noreferrer" className="block relative group">
+                    <img src="https://static.wixstatic.com/media/0597a3_88afd8cf4a5a42a6b36b4880d59e9ebe~mv2.png/v1/fill/w_1293,h_474,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_12_53.png" alt="GT2023 Intro" className="w-full aspect-video object-cover" loading="lazy" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">GT2023 Intro — 02:44</span>
+                    </div>
+                  </a>
+                  <a href="https://www.entgroup.co.th/gt-series-2023" target="_blank" rel="noopener noreferrer" className="block relative group">
+                    <img src="https://static.wixstatic.com/media/0597a3_b7fd144f004b401aa284fe76f0c11462~mv2.png/v1/fill/w_1119,h_541,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2013_55_43.png" alt="GT1400 Intro" className="w-full aspect-video object-cover" loading="lazy" />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">GT1400 Intro — 02:40</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
               <div className="text-center">
                 <a
                   href="https://www.entgroup.co.th/_files/ugd/0597a3_df771f1787184c4ea82b8ca5ed7abc17.pdf"
@@ -707,6 +806,32 @@ const GTSeries = () => {
                   <div className="font-bold text-foreground text-sm">TDP 28W</div>
                   <div className="text-xs text-muted-foreground mt-1">ประหยัดพลังงาน Fanless</div>
                 </div>
+              </div>
+
+              {/* Video Section */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT1200</h3>
+                </div>
+                <a href="https://www.entgroup.co.th/gt-series-2023" target="_blank" rel="noopener noreferrer" className="block relative group">
+                  <img
+                    src="https://static.wixstatic.com/media/005637_8fbc98531f7d46429391aeb758636e01~mv2.jpg/v1/crop/x_0,y_142,w_4404,h_1523/fill/w_1271,h_440,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ad2GTSeries2023.jpg"
+                    alt="GT1200 Video"
+                    className="w-full aspect-video object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                    <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Play className="text-primary-foreground ml-1" size={28} fill="currentColor" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4">
+                    <span className="text-white text-sm font-semibold bg-black/60 px-3 py-1 rounded-full">
+                      GT1200 Intro — 02:21
+                    </span>
+                  </div>
+                </a>
               </div>
 
               <div className="text-center">
@@ -863,11 +988,12 @@ const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
       />
     </div>
     <div className="p-5">
-      <h3 className="text-xl font-display font-bold text-foreground mb-3 group-hover:text-primary transition-colors flex items-center gap-2">
+      <h3 className="text-xl font-display font-bold text-foreground mb-1 group-hover:text-primary transition-colors flex items-center gap-2">
         {model.name}
         {model.tab && <span className="text-xs text-primary font-normal">ดูรายละเอียด →</span>}
         {model.href && !model.tab && <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />}
       </h3>
+      <p className="text-xs font-semibold text-primary mb-3">"{model.tagline}"</p>
       <div className="space-y-2 text-sm">
         <div className="flex items-start gap-2">
           <Cpu size={14} className="text-primary mt-0.5 shrink-0" />
@@ -882,6 +1008,12 @@ const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
           <span className="text-muted-foreground">{model.ports}</span>
         </div>
       </div>
+      {model.price && (
+        <div className="mt-3 pt-3 border-t border-border">
+          <span className="text-sm text-muted-foreground">เริ่มต้น </span>
+          <span className="font-bold text-foreground">{model.price.startsWith("สอบถาม") ? model.price : `฿${model.price}`}</span>
+        </div>
+      )}
     </div>
   </>
 );
