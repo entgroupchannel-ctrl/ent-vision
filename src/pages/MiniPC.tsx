@@ -674,17 +674,13 @@ const ProductCard = ({ model }: { model: any }) => (
           {model.gallery && <TabsTrigger value="gallery" className="text-xs md:text-sm">►Gallery</TabsTrigger>}
         </TabsList>
         <TabsContent value="specs">
-          <div className="overflow-x-auto mt-4">
-            <Table>
-              <TableBody>
-                {Object.entries(model.specs || {}).map(([key, val]) => (
-                  <TableRow key={key}>
-                    <TableCell className="font-medium text-foreground/70 whitespace-nowrap w-[140px]">{key}</TableCell>
-                    <TableCell className="text-foreground">{val as string}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-4">
+            {Object.entries(model.specs || {}).map(([key, val]) => (
+              <div key={key} className="bg-secondary/30 rounded-lg p-3 border border-border/50">
+                <div className="text-[11px] font-semibold uppercase tracking-wider text-primary/70 mb-1">{key}</div>
+                <div className="text-sm font-medium text-foreground leading-snug">{val as string}</div>
+              </div>
+            ))}
           </div>
         </TabsContent>
         {model.gallery && (
