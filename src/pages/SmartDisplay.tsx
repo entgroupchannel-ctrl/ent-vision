@@ -305,6 +305,149 @@ const SmartDisplay = () => {
             </div>
           )}
 
+          {/* KIOSK สำเร็จรูป */}
+          {activeTab === "kiosk" && (
+            <div>
+              {/* Hero Banner */}
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary/10 via-primary/5 to-destructive/10 border-2 border-primary/20 p-8 md:p-12 mb-10">
+                <div className="absolute top-4 right-4 z-10">
+                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-destructive text-destructive-foreground text-sm font-bold animate-pulse shadow-lg">
+                    <BadgePercent size={18} /> ประหยัดกว่าทั่วไป 15–30%
+                  </span>
+                </div>
+                <div className="grid lg:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold mb-4">
+                      🏪 KIOSK สำเร็จรูป — พร้อมใช้งานทันที
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-black text-foreground mb-4 leading-tight">
+                      ตู้ KIOSK อัจฉริยะ
+                      <br />
+                      <span className="text-primary">ทุกคนเป็นเจ้าของได้</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed mb-6">
+                      ตู้คีออสก์สำเร็จรูปจากโรงงาน นำเข้าโดยตรง ราคาประหยัดกว่าทั่วไป 15–30%
+                      เหมาะสำหรับร้านอาหาร โรงพยาบาล ธนาคาร ค้าปลีก งานอีเวนต์ และทุกธุรกิจบริการ
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {["ร้านอาหาร", "โรงพยาบาล", "ธนาคาร", "ค้าปลีก", "อีเวนต์", "ราชการ"].map((t) => (
+                        <span key={t} className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary font-medium">{t}</span>
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => setShowLineQR(true)}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity"
+                    >
+                      <MessageCircle size={18} /> สอบถามราคา KIOSK
+                    </button>
+                  </div>
+                  <div className="flex justify-center">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_f8734b5a7dd9417bb93b82c09df3eccd~mv2.png/v1/fill/w_600,h_541,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk.png"
+                      alt="KIOSK สำเร็จรูป"
+                      className="max-h-[400px] object-contain drop-shadow-2xl"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Kiosk models grid */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                {[
+                  { image: "https://static.wixstatic.com/media/0597a3_4295297952794823a3e94770fb57311e~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk%20(3).png", title: "KIOSK แบบตั้งพื้น", desc: "สั่งอาหาร / ระบบคิว / เช็คอิน" },
+                  { image: "https://static.wixstatic.com/media/0597a3_368c91b7891d4e4980b92344c420a299~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk.png", title: "KIOSK ขนาดกะทัดรัด", desc: "Counter Top / ตู้ข้อมูล" },
+                  { image: "https://static.wixstatic.com/media/0597a3_9fe176a2fb7f4d809a385fe9d650a8a3~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk%20(4).png", title: "KIOSK Premium", desc: "จอใหญ่ / ดีไซน์หรู / สองหน้า" },
+                  { image: "https://static.wixstatic.com/media/0597a3_923cc29817714f80b57ba97aba096dac~mv2.png/v1/fill/w_388,h_350,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk%20(2).png", title: "KIOSK แบบติดผนัง", desc: "ประหยัดพื้นที่ / Self-service" },
+                ].map((k) => (
+                  <div key={k.title} className="card-surface p-5 hover:border-primary/30 transition-all hover:-translate-y-1 group">
+                    <div className="bg-secondary/30 rounded-xl p-4 mb-4 flex items-center justify-center h-52 overflow-hidden">
+                      <img src={k.image} alt={k.title} className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    </div>
+                    <h3 className="font-bold text-foreground mb-1">{k.title}</h3>
+                    <p className="text-sm text-muted-foreground">{k.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Why Kiosk */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+                {[
+                  { icon: BadgePercent, title: "ราคาประหยัด", desc: "นำเข้าจากโรงงานโดยตรง ราคาถูกกว่าทั่วไป 15–30%" },
+                  { icon: Settings, title: "ปรับแต่งได้", desc: "เลือกขนาด สี โลโก้ และอุปกรณ์เสริมตามต้องการ" },
+                  { icon: Printer, title: "เสริมอุปกรณ์", desc: "เครื่องพิมพ์ สแกนเนอร์ NFC กล้อง ติดตั้งในตู้ได้" },
+                  { icon: ScanLine, title: "ใช้งาน 24/7", desc: "รองรับการใช้งานต่อเนื่อง ทนทาน พร้อมรับประกัน" },
+                ].map((f) => (
+                  <div key={f.title} className="card-surface p-5 hover:border-primary/30 transition-all">
+                    <f.icon className="text-primary mb-3" size={28} />
+                    <h3 className="font-bold text-foreground mb-1 text-sm">{f.title}</h3>
+                    <p className="text-xs text-muted-foreground">{f.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Touch Screen Sizes */}
+              <div className="card-surface p-6 md:p-10 mb-10">
+                <div className="grid lg:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <h3 className="text-2xl font-display font-bold text-foreground mb-4">
+                      Touch Screen Monitor <span className="text-primary">5"–65"</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      เลือกขนาดจอภาพหน้าจอสัมผัสตั้งแต่ 5" ถึง 65" ติดตั้งได้ทั้งผนัง โต๊ะ และแบบฝัง
+                      รองรับ Capacitive Touch 10 จุด กันน้ำ ใช้ได้แม้สวมถุงมือ
+                    </p>
+                    <p className="text-muted-foreground text-sm mb-6">
+                      รองรับ Android, Linux และ Windows — ปรับแต่ง OS ตามโครงการและงบประมาณได้
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {["7\"", "8\"", "10\"", "15.6\"", "21.5\"", "23.8\"", "32\"", "43\"", "55\"", "65\""].map((s) => (
+                        <span key={s} className="text-xs px-3 py-1.5 rounded-lg bg-primary/10 text-primary font-bold">{s}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex justify-center">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_841bc593914c47cfa538b4dd7b57a27e~mv2.png/v1/fill/w_506,h_506,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk%20(2).png"
+                      alt="Kiosk enclosures"
+                      className="max-h-[350px] object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Case Study */}
+              <div className="card-surface overflow-hidden border-primary/20">
+                <div className="bg-gradient-to-r from-primary/10 to-transparent p-6 md:p-10">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold mb-4">
+                    📱 Case Study — ระบบคิวอัจฉริยะ
+                  </span>
+                  <h3 className="text-xl md:text-2xl font-display font-bold text-foreground mb-4">
+                    โรงพยาบาลติดตั้ง KIOSK ระบบคิว ผลลัพธ์เกินคาด
+                  </h3>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                    {[
+                      { value: "45%", label: "เวลารอคิวลดลง" },
+                      { value: "60%", label: "ความพึงพอใจเพิ่มขึ้น" },
+                      { value: "0", label: "การแซงคิว" },
+                      { value: "24/7", label: "ทำงานต่อเนื่อง" },
+                    ].map((s) => (
+                      <div key={s.label} className="bg-background/80 rounded-xl p-4 text-center">
+                        <p className="text-2xl font-display font-black text-primary">{s.value}</p>
+                        <p className="text-xs text-muted-foreground">{s.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    เชื่อมต่อกับระบบ HIS ของโรงพยาบาล วางไว้ที่ล็อบบี้ ห้องตรวจ และแผนกต่างๆ
+                    ปัจจุบันกลายเป็นต้นแบบการจัดการระบบคิวที่มีประสิทธิภาพ
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Window Display */}
           {activeTab === "window" && (
             <div>
