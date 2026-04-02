@@ -13,6 +13,7 @@ import Volktek from "./pages/Volktek.tsx";
 import EPCSeries from "./pages/EPCSeries.tsx";
 import RuggedTablet from "./pages/RuggedTablet.tsx";
 import GKSeries from "./pages/GKSeries.tsx";
+import PanelPC from "./pages/PanelPC.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/volktek" element={<Volktek />} />
             <Route path="/epc-series" element={<EPCSeries />} />
             <Route path="/rugged-tablet" element={<RuggedTablet />} />
+            <Route path="/panel-pc" element={<PanelPC />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
