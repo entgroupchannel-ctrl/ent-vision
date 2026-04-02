@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowLeft, ExternalLink, Sun, Shield, Monitor, Cpu, Phone, MessageCircle,
+  ArrowLeft, Sun, Shield, Monitor, Cpu, Phone, MessageCircle,
   Download, Smartphone, Settings, Wifi, Eye, Layers, Store, BadgePercent, Printer, ScanLine
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
