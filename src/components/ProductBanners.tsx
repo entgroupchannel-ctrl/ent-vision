@@ -31,13 +31,14 @@ const productBanners = [
     ],
   },
   {
-    title: "Smart Display จอภาพติดตั้งภายนอก-ภายในอาคาร",
-    image: smartDisplayBanner,
+    title: "ตู้ KIOSK สำเร็จรูป พร้อม Windows 11",
+    subtitle: "ทุกคนเป็นเจ้าของได้ — ประหยัดกว่าตลาด 15-30%",
+    image: kioskBanner,
     productImage: "",
     fullBackground: true,
     links: [
-      { label: "ดูสินค้าทั้งหมด", href: "/smart-display" },
-      { label: "ดาวน์โหลด Price List", href: "/smart-display#downloads" },
+      { label: "ดู KIOSK ทั้งหมด", href: "/smart-display?tab=kiosk" },
+      { label: "ดูจอ Smart Display", href: "/smart-display" },
     ],
   },
 ];
