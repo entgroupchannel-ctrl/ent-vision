@@ -14,9 +14,11 @@ const sections = [
   },
   {
     title: "จอภาพติดตั้งภายนอกอาคาร",
-    description: "จอภาพสำหรับการติดตั้งภายนอกอาคาร ชนิดความสว่างสูง ทนต่อสภาพการใช้งานที่รุนแรง เช่น ฝุ่นละออง อากาศเย็นและอากาศร้อน ผู้ผลิตจะออกแบบกล่องสำหรับบรรจุตัวเครื่องเพื่อเสนอก่อนผลิต ทดสอบการป้องกันน้ำ ความเย็น ความร้อน จากโรงงานผู้ผลิต รับประกันสินค้า 1 ปี",
-    image: "https://static.wixstatic.com/media/0597a3_b235aa9ba0be42bdb1ab4b8064dc9183~mv2.png/v1/fill/w_1247,h_455,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-11-05%20at%2011_06_39.png",
-    links: [{ label: "ข้อมูลเพิ่มเติม", href: "https://www.entgroup.co.th/smartdisplay" }],
+    description: "วางกลางแดดกลางฝนได้สบาย — ออกแบบมาเพื่อสภาพอากาศเมืองไทยโดยเฉพาะ IP55 กันน้ำกันฝุ่น ความสว่างสูง 1,500-2,500 nits มองเห็นชัดแม้แดดจัด เริ่มต้น ฿69,000 รับประกัน 1 ปี",
+    image: outdoorDisplayBanner,
+    fullBackground: true,
+    price: "เริ่มต้น ฿69,000",
+    links: [{ label: "ดูรุ่นทั้งหมด", href: "/smart-display?tab=outdoor" }],
   },
   {
     title: "Waterproof PC",
