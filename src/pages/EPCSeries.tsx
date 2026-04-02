@@ -311,9 +311,13 @@ const ModelCard = ({ model }: { model: typeof squareModels[0] }) => (
   </div>
 );
 
+const ITEMS_PER_PAGE = 10;
+
 /* ───── Main Component ───── */
 const EPCSeries = () => {
   const [activeCategory, setActiveCategory] = useState("overview");
+  const [squarePage, setSquarePage] = useState(1);
+  const [widePage, setWidePage] = useState(1);
 
   return (
     <div className="min-h-screen bg-background">
