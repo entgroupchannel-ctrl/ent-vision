@@ -423,6 +423,18 @@ const RuggedTablet = () => {
           </div>
         </section>
 
+        {/* Buying Guide Banner */}
+        <section>
+          <div className="card-surface overflow-hidden">
+            <img
+              src="https://static.wixstatic.com/media/0597a3_8b5479cc6a1342db890862413f797f37~mv2.png/v1/fill/w_849,h_474,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%81%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD%20Gole%20Rugged%20Banner.png"
+              alt="คู่มือเลือกซื้อ PC และแท็บเล็ตหน้าจอสัมผัส"
+              className="w-full h-auto"
+              loading="lazy"
+            />
+          </div>
+        </section>
+
         {/* Price List */}
         <section id="pricelist">
           <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">
