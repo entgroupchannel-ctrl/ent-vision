@@ -29,7 +29,8 @@ const highlights = [
   {
     name: "Waterproof PC",
     image: "https://static.wixstatic.com/media/0597a3_f28d1e4ae8534b4cbfe3a67e522ee979~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_40_50.png",
-    href: "https://www.entgroup.co.th/wp-pc",
+    href: "/waterproof-pc",
+    internal: true,
   },
   {
     name: "Volktek",
