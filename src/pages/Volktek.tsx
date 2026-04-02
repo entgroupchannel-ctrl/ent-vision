@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Shield, Zap, Network, Server, ThermometerSun, Globe } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import volktekCertifications from "@/assets/volktek-certifications.png";
 
 const productCategories = [
   {
