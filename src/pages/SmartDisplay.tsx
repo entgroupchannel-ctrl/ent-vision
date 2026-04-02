@@ -24,6 +24,12 @@ const categories = [
     icon: Sun,
   },
   {
+    id: "kiosk",
+    label: "ตู้ KIOSK สำเร็จรูป",
+    desc: "ตู้คีออสก์พร้อมใช้งาน ราคาประหยัด",
+    icon: Store,
+  },
+  {
     id: "window",
     label: "Window Display",
     desc: "จอติดหน้าต่างร้าน ความสว่างสูง",
