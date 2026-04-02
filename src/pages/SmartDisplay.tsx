@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Sun, Shield, Monitor, Cpu, Phone, MessageCircle,
   Download, Smartphone, Settings, Wifi, Eye, Layers, Store, BadgePercent, Printer, ScanLine
@@ -117,7 +117,11 @@ const priceLists = [
 /* ─── Component ─── */
 
 const SmartDisplay = () => {
-  const [activeTab, setActiveTab] = useState("indoor");
+  const [searchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState(() => {
+    const tab = searchParams.get("tab");
+    return tab === "kiosk" || tab === "outdoor" ? tab : "indoor";
+  });
   const [showLineQR, setShowLineQR] = useState(false);
 
   return (
