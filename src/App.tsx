@@ -31,6 +31,7 @@ const App = () => (
             <Route path="/mini-pc" element={<MiniPC />} />
             <Route path="/waterproof-pc" element={<WaterproofPC />} />
             <Route path="/volktek" element={<Volktek />} />
+            <Route path="/epc-series" element={<EPCSeries />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
