@@ -614,7 +614,32 @@ const RuggedTablet = () => {
           </div>
         </section>
 
-        {/* TPC Series */}
+        {/* All-in-One PC */}
+        <section id="aio">
+          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
+            All-in-One <span className="text-gradient">Industrial PC</span>
+          </h2>
+          <p className="text-sm text-muted-foreground mb-6">คอมพิวเตอร์ All-in-One จอสัมผัส สำหรับอุตสาหกรรม ประหยัดพื้นที่ VESA/Panel Mount</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {aioProducts.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </section>
+
+        {/* Handheld & PDA */}
+        <section id="handheld">
+          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
+            Rugged <span className="text-gradient">Handheld & PDA</span>
+          </h2>
+          <p className="text-sm text-muted-foreground mb-6">เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม พร้อม Barcode Scanner, NFC, RFID สำหรับงานภาคสนาม</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {handheldProducts.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </section>
+
         <section id="tpc">
           <h2 className="text-2xl font-display font-bold text-foreground mb-2">
             TPC <span className="text-gradient">Series</span>
