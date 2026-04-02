@@ -14,6 +14,7 @@ import EPCSeries from "./pages/EPCSeries.tsx";
 import RuggedTablet from "./pages/RuggedTablet.tsx";
 import GKSeries from "./pages/GKSeries.tsx";
 import PanelPCGTG from "./pages/PanelPCGTG.tsx";
+import SmartDisplay from "./pages/SmartDisplay.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
