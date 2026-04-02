@@ -346,8 +346,10 @@ const PanelPC = () => {
                 <p className="text-xs text-muted-foreground">จอสัมผัส 12.1" XGA พร้อม Windows 11</p>
               </div>
             </div>
-            <div className="card-surface p-4 flex flex-col items-center gap-3">
-              <img src={gty156Front} alt="GTY156T — มุมเอียง แสดงครีบระบายความร้อน Fanless" className="w-full max-h-[280px] object-contain rounded-lg" loading="lazy" />
+            <div className="card-surface p-4 flex flex-col items-center gap-3 justify-end">
+              <div className="flex-1 flex items-end">
+                <img src={gty156Front} alt="GTY156T — มุมเอียง แสดงครีบระบายความร้อน Fanless" className="w-full max-h-[280px] object-contain rounded-lg" loading="lazy" />
+              </div>
               <div className="text-center">
                 <p className="font-bold text-foreground text-sm">GTY156T — มุมเอียง</p>
                 <p className="text-xs text-muted-foreground">15.6" FHD พร้อมครีบระบายความร้อน Fanless</p>
