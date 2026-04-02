@@ -162,6 +162,8 @@ const ruggedNotebooks = [
     highlight: "Intel AI Processor, DDR5 สูงสุด 32GB, MIL-STD-810H IP65 พร้อม NPU สำหรับ AI Workload",
     image: "https://entgroup-rugged.com/assets/em-x15a-V7O0Cy_Y.png",
     datasheet: "",
+    price: "฿83,900",
+    productUrl: "https://entgroup-rugged.com/product/em-x15m",
   },
   {
     id: "em-x15a",
@@ -170,6 +172,8 @@ const ruggedNotebooks = [
     highlight: "Intel Core i5/i7, จอ FHD IPS Touch, MIL-STD-810G IP65 ทนทานมาตรฐานทหาร",
     image: "https://entgroup-rugged.com/assets/em-x15a-V7O0Cy_Y.png",
     datasheet: "",
+    price: "฿83,900",
+    productUrl: "https://entgroup-rugged.com/product/em-x15a",
   },
   {
     id: "em-x14a",
@@ -178,6 +182,8 @@ const ruggedNotebooks = [
     highlight: "Intel Core i5/i7, จอ 14 นิ้ว FHD IPS, MIL-STD-810G IP65 ขนาดกะทัดรัดพกพาสะดวก",
     image: "https://entgroup-rugged.com/assets/em-x14a-CeYNitLa.png",
     datasheet: "",
+    price: "฿62,900",
+    productUrl: "https://entgroup-rugged.com/product/em-x14a",
   },
   {
     id: "em-x14m",
@@ -186,6 +192,8 @@ const ruggedNotebooks = [
     highlight: "Intel Core Ultra 5, จอ Touch 1000 nits, MIL-STD-810H IP65 พร้อม NPU โหมด Tablet",
     image: "https://entgroup-rugged.com/assets/em-x14m-DwyheEo6.png",
     datasheet: "",
+    price: "฿69,900",
+    productUrl: "https://entgroup-rugged.com/product/em-x14m",
   },
   {
     id: "em-i22j",
@@ -194,6 +202,7 @@ const ruggedNotebooks = [
     highlight: "จอ FHD IPS Touch 12.2 นิ้ว, MIL-STD-810G IP65 คีย์บอร์ดถอดได้ 2-in-1 Design",
     image: "https://entgroup-rugged.com/assets/em-i22j-BG1wttE6.png",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/em-i22j",
   },
   {
     id: "w14u-a",
@@ -202,6 +211,8 @@ const ruggedNotebooks = [
     highlight: "Intel 11th Gen i5/i7, จอ FHD Touch 700cd/㎡, IP65 ทนอุณหภูมิ -20°C ถึง 60°C",
     image: "https://entgroup-rugged.com/assets/w14u-t-CnIhYdCX.jpg",
     datasheet: "",
+    price: "฿65,900",
+    productUrl: "https://entgroup-rugged.com/product/w14u-a",
   },
   {
     id: "w33u",
@@ -210,6 +221,7 @@ const ruggedNotebooks = [
     highlight: "Intel i5-1135G7, จอ FHD IPS Touch 13.3 นิ้ว, IP67 สแกนลายนิ้วมือ TPM 2.0",
     image: "https://entgroup-rugged.com/assets/w33u-DjSixhuc.jpg",
     datasheet: "",
+    productUrl: "https://entgroup-rugged.com/product/w33u",
   },
 ];
 
