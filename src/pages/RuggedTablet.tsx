@@ -745,7 +745,7 @@ const RuggedTablet = () => {
               { name: "EM-i10J Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_6d72e4515e004620af862a7897168a95.pdf" },
               { name: "TPC-1062A Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_70c1f8faf9cd4eadb93ffb5479aa6854.pdf" },
               { name: "TPC-1082A Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_288240e733304dba8334ca07cdc411cf.pdf" },
-              { name: "PIPO X10s Pro Datasheet", url: "https://www.entgroup.co.th/_files/ugd/005637_ee3154a9a7794bb8a057f61639a279a7.pdf" },
+              
               { name: "วารสาร Rugged", url: "https://www.entgroup.co.th/_files/ugd/0597a3_064a791320d74e85957143c869a8c0fd.pdf" },
               { name: "Gole F9A Overview", url: "https://www.entgroup.co.th/_files/ugd/0597a3_3a33965f742b4034b974ef56aab56170.pdf" },
               { name: "EM-i17J Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_d2a64ac1b5444600b9255fcae1311289.pdf" },
