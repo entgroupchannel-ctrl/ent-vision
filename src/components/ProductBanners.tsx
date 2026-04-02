@@ -12,8 +12,8 @@ const productBanners = [
   },
   {
     title: "Rugged Devices ทนทานทุกสภาพ",
-    image: "https://static.wixstatic.com/media/0597a3_d6aedbe177554e629e0d037af6da40c9~mv2.png/v1/fill/w_578,h_239,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202569-03-31%20at%2022_15_36.png",
-    productImage: "https://static.wixstatic.com/media/0597a3_c53fac4b1eee40798a7be9f5aff3b322~mv2.png/v1/fill/w_676,h_215,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202569-03-31%20at%2022_20_35.png",
+    image: "https://entgroup-rugged.com/assets/f7g-DiEQ_Pjf.png",
+    productImage: "https://entgroup-rugged.com/assets/f9a-_j8J-x2I.jpg",
     links: [
       { label: "ดูเว็บไซต์", href: "https://entgroup-rugged.com/" },
       { label: "ดูรุ่นทั้งหมด", href: "https://entgroup-rugged.com/products" },
