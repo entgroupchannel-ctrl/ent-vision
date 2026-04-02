@@ -1,5 +1,5 @@
 import { MessageCircle } from "lucide-react";
-
+import logo from "@/assets/logo-entgroup.avif";
 const Footer = () => {
   return (
     <footer className="border-t border-border" id="contact">
