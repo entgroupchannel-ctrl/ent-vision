@@ -13,7 +13,14 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['IBM Plex Sans Thai', 'Inter', 'sans-serif'],
+        display: ['Inter', 'IBM Plex Sans Thai', 'sans-serif'],
+      },
       colors: {
+        glow: "hsl(var(--glow))",
+        surface: "hsl(var(--surface))",
+        "surface-hover": "hsl(var(--surface-hover))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
