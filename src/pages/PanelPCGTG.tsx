@@ -570,7 +570,7 @@ import gtgSeries from "@/assets/gtg-series.png";
                 </ul>
               </div>
               <div className="flex justify-center">
-                <img src="https://gty-gtg-panelpc.lovable.app/assets/gtg-panel-pc-mZjwn_te.png" alt="GTG Panel PC" className="max-h-[300px] object-contain" loading="lazy" />
+                <img src={gtgSeries} alt="GTG Panel PC" className="max-h-[300px] object-contain" loading="lazy" />
               </div>
             </div>
           </div>
