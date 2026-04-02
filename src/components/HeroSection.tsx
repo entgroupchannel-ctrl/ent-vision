@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Search, Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import heroBg from "@/assets/hero-bg.jpg";
+import logo from "@/assets/logo-entgroup.avif";
 
 const searchTags = [
   { label: "Mini PC สำนักงาน", href: "#products" },
