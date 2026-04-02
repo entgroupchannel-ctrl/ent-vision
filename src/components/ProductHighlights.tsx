@@ -17,7 +17,8 @@ const highlights = [
   {
     name: "GK Series",
     image: "https://static.wixstatic.com/media/0597a3_8e53a2e85b9f42088834c613e1a9d08f~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_25_08.png",
-    href: "https://www.entgroup.co.th/gk1506",
+    href: "/gk-series",
+    internal: true,
   },
   {
     name: "K Series",

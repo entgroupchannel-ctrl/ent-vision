@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/hooks/use-theme";
 import Index from "./pages/Index.tsx";
 import GTSeries from "./pages/GTSeries.tsx";
 import EPCBoxSeries from "./pages/EPCBoxSeries.tsx";
+import GKSeries from "./pages/GKSeries.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/gt-series" element={<GTSeries />} />
             <Route path="/epc-box-series" element={<EPCBoxSeries />} />
+            <Route path="/gk-series" element={<GKSeries />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
