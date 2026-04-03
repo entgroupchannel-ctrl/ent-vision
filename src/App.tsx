@@ -29,6 +29,7 @@ import AdminDashboard from "./pages/AdminDashboard.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import FloatingContact from "./components/FloatingContact.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
+import AIChatWidget from "./components/AIChatWidget.tsx";
 
 const queryClient = new QueryClient();
 
