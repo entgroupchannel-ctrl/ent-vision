@@ -26,6 +26,7 @@ import ContactUs from "./pages/ContactUs.tsx";
 import QuoteRequest from "./pages/QuoteRequest.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
+import MemberRegister from "./pages/MemberRegister.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import FloatingContact from "./components/FloatingContact.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
