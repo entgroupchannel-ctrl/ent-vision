@@ -194,7 +194,7 @@ const gtModels = [
     storage: "SSD + 2.5\" SATA + M.2 NVMe",
     ports: "USB 8, COM 8 (RS232/422/485), LAN 2, HDMI×2+DP",
     size: "Triple Display + Dual Band WiFi",
-    image: "https://static.wixstatic.com/media/0597a3_bee270c19b2f466a8a77aa294d528952f000.jpg/v1/fill/w_290,h_514,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_bee270c19b2f466a8a77aa294d528952f000.jpg",
+    image: gt9000Product,
     tab: "gt9000",
     highlight: "Triple Display",
     price: "25,290",
