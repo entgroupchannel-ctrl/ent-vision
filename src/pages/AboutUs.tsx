@@ -308,7 +308,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      <Footer />
+      <FooterCompact />
     </div>
   );
 };
