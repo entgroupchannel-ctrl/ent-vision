@@ -264,7 +264,7 @@ const CollapsibleSection = ({ title, children, defaultOpen = false }: { title: s
   );
 };
 
-const ModelCard = ({ model }: { model: FirewallModel }) => {
+const ModelCard = ({ model, onQuote }: { model: FirewallModel; onQuote?: (name: string) => void }) => {
   const tier = tierMeta[model.tier];
   const [expanded, setExpanded] = useState(false);
 
@@ -332,11 +332,18 @@ const ModelCard = ({ model }: { model: FirewallModel }) => {
           ))}
         </div>
 
-        {/* Expand toggle */}
-        <button onClick={() => setExpanded(!expanded)} className="text-xs text-primary font-medium flex items-center gap-1 hover:underline">
-          {expanded ? "ซ่อนรายละเอียด" : "ดูสเปกเต็ม"}
-          <ChevronDown size={12} className={`transition-transform ${expanded ? "rotate-180" : ""}`} />
-        </button>
+        {/* Actions */}
+        <div className="flex items-center gap-2">
+          <button onClick={() => setExpanded(!expanded)} className="text-xs text-primary font-medium flex items-center gap-1 hover:underline">
+            {expanded ? "ซ่อนรายละเอียด" : "ดูสเปกเต็ม"}
+            <ChevronDown size={12} className={`transition-transform ${expanded ? "rotate-180" : ""}`} />
+          </button>
+          {onQuote && (
+            <button onClick={() => onQuote(model.name)} className="ml-auto text-xs font-semibold flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
+              <FileText size={12} /> ขอราคา
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Expanded specs */}
@@ -914,7 +921,7 @@ const MiniPCFirewall = () => {
           {/* Cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map((m) => (
-              <ModelCard key={m.id} model={m} />
+              <ModelCard key={m.id} model={m} onQuote={setQuoteProduct} />
             ))}
           </div>
         </div>
