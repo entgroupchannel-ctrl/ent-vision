@@ -61,15 +61,6 @@ const NewsletterForm = () => {
 
 const footerSections = [
   {
-    title: "งานบริการไอที",
-    links: [
-      { label: "Software Develop", href: "https://www.entgroup.co.th", external: true },
-      { label: "MA Service", href: "https://www.entgroup.co.th", external: true },
-      { label: "IT Outsourcing", href: "https://www.entgroup.co.th", external: true },
-      { label: "Networking", href: "https://www.entgroup.co.th", external: true },
-    ],
-  },
-  {
     title: "สินค้า",
     links: [
       { label: "GT Series — Mini PC", href: "/gt-series" },
@@ -77,19 +68,17 @@ const footerSections = [
       { label: "EPC Series", href: "/epc-series" },
       { label: "Rugged Tablet", href: "/rugged-tablet" },
       { label: "Mini PC", href: "/mini-pc" },
-      { label: "Panel PC", href: "/panel-pc-gtg" },
-      { label: "Waterproof PC", href: "/waterproof-pc" },
-      { label: "NVIDIA Jetson", href: "https://nvidia-jetson.com/", external: true },
       { label: "Smart Display", href: "/smart-display" },
     ],
   },
   {
-    title: "เว็บไซต์ในเครือ",
+    title: "บริการ & ข้อมูล",
     links: [
-      { label: "Rugged Device", href: "https://entgroup-rugged.com", external: true },
-      { label: "NVIDIA Jetson", href: "https://nvidia-jetson.com", external: true },
-      { label: "Online Shopping", href: "https://www.entgroup.co.th", external: true },
-      { label: "ENT Group Biz", href: "https://www.entgroup.co.th", external: true },
+      { label: "สมัครตัวแทนจำหน่าย", href: "/welcome-member" },
+      { label: "เงื่อนไขการรับประกัน", href: "/warrantys" },
+      { label: "วิธีการชำระเงิน", href: "/payment" },
+      { label: "ขั้นตอนการจัดส่ง", href: "/delivery" },
+      { label: "ติดตามพัสดุ Kerry", href: "/kerry" },
     ],
   },
   {
@@ -99,8 +88,14 @@ const footerSections = [
       { label: "ติดต่อเรา / แผนที่", href: "/contact" },
       { label: "ขอใบเสนอราคา", href: "/quote" },
       { label: "โปรโมชั่น", href: "/promotions" },
-      { label: "Smart Display", href: "/smart-display" },
-      { label: "Touch Monitor", href: "/panel-pc-gtg" },
+    ],
+  },
+  {
+    title: "เว็บไซต์ในเครือ",
+    links: [
+      { label: "Rugged Device", href: "https://entgroup-rugged.com", external: true },
+      { label: "NVIDIA Jetson", href: "https://nvidia-jetson.com", external: true },
+      { label: "ENT Group Biz", href: "https://www.entgroup.co.th", external: true },
     ],
   },
 ];
