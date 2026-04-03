@@ -109,6 +109,7 @@ export type Database = {
       }
       contact_submissions: {
         Row: {
+          business_card_data: Json | null
           callback_time: string | null
           category: string | null
           company: string | null
@@ -125,6 +126,7 @@ export type Database = {
           whatsapp: string | null
         }
         Insert: {
+          business_card_data?: Json | null
           callback_time?: string | null
           category?: string | null
           company?: string | null
@@ -141,6 +143,7 @@ export type Database = {
           whatsapp?: string | null
         }
         Update: {
+          business_card_data?: Json | null
           callback_time?: string | null
           category?: string | null
           company?: string | null
