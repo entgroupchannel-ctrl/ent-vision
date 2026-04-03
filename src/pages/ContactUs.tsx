@@ -239,8 +239,9 @@ const ContactUs = () => {
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-foreground mb-1">สำนักงานใหญ่ & สำนักงานขาย</h3>
+                    <p className="text-xs font-semibold text-foreground mb-1">บริษัท อีเอ็นที กรุ๊ป จำกัด</p>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      เมทโทร บิซทาวน์ แจ้งวัฒนะ 2, 70/5 หมู่ 4<br />
+                      70/5 หมู่ 4 เมทโทร บิซทาวน์ แจ้งวัฒนะ 2<br />
                       ตำบลคลองพระอุดม อำเภอปากเกร็ด<br />
                       นนทบุรี 11120
                     </p>
