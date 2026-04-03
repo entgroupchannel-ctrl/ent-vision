@@ -3667,9 +3667,9 @@ const GTSeries = () => {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { src: "/images/gt1300/front.jpg", alt: "GT1300 ด้านหน้า" },
-                      { src: "/images/gt1300/top.jpg", alt: "GT1300 ด้านบน" },
-                      { src: "/images/gt1300/side.jpg", alt: "GT1300 ด้านข้าง" },
+                      { src: "/images/gt1300/angle2.jpg", alt: "GT1300 ด้านหน้า" },
+                      { src: "/images/gt1300/angle3.jpg", alt: "GT1300 ด้านบน" },
+                      { src: "/images/gt1300/angle4.jpg", alt: "GT1300 ด้านล่าง" },
                       { src: "/images/gt1300/internal.jpg", alt: "GT1300 ภายใน" },
                     ].map((img, i) => (
                       <div key={i} className="card-surface overflow-hidden">
@@ -3680,13 +3680,33 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Feature Highlights — 2 คอลัมน์ */}
+              {/* Feature Highlights + Ports — 2 คอลัมน์ */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="card-surface overflow-hidden rounded-xl">
                   <img src="/images/gt1300/feature-hdmi.png" alt="GT1300 Support 3x HDMI Triple Display" className="w-full h-auto rounded-xl" loading="lazy" />
                 </div>
                 <div className="card-surface overflow-hidden rounded-xl">
                   <img src="/images/gt1300/feature-dustproof.png" alt="GT1300 Industrial-Grade Dust-Proof and Corrosion-Resistant" className="w-full h-auto rounded-xl" loading="lazy" />
+                </div>
+              </div>
+
+              {/* Ports Detail — 2 คอลัมน์ */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="card-surface p-4 overflow-hidden rounded-xl">
+                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหน้า</h4>
+                  <img src="/images/gt1300/ports-detail1.jpg" alt="GT1300 Ports ด้านหน้า" className="w-full rounded-lg" loading="lazy" />
+                </div>
+                <div className="card-surface p-4 overflow-hidden rounded-xl">
+                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหลัง</h4>
+                  <img src="/images/gt1300/ports-detail2.jpg" alt="GT1300 Ports ด้านหลัง" className="w-full rounded-lg" loading="lazy" />
+                </div>
+              </div>
+
+              {/* Dimension Drawing */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="card-surface p-4 overflow-hidden rounded-xl">
+                  <h4 className="font-bold text-foreground mb-3 text-sm">📐 Dimension Drawing</h4>
+                  <img src="/images/gt1300/dimension.jpg" alt="GT1300 Dimension" className="w-full rounded-lg" loading="lazy" />
                 </div>
               </div>
 
