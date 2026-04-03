@@ -103,7 +103,7 @@ const gtModels = [
     storage: "SSD 128 GB",
     ports: "USB 6, COM 6, LAN 2, VGA+HDMI",
     size: "15×21.7×5.2 cm / 1.289 kg",
-    image: "https://static.wixstatic.com/media/0597a3_7150a12fcc844677ac9c5c0af540da06f000.jpg/v1/fill/w_296,h_522,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_7150a12fcc844677ac9c5c0af540da06f000.jpg",
+    image: gt3000Product,
     tab: "gt3000",
     highlight: "6 COM",
     price: "สอบถาม",
