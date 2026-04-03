@@ -9,17 +9,45 @@ import { supabase } from "@/integrations/supabase/client";
 import heroIndustrial from "@/assets/hero-industrial.jpg";
 import logo from "@/assets/logo-entgroup.avif";
 
+const searchIndex = [
+  { keywords: ["mini pc", "มินิพีซี", "สำนักงาน", "office", "thin client"], label: "Mini PC สำนักงาน", href: "/mini-pc" },
+  { keywords: ["gt", "gt series", "industrial pc", "โรงงาน", "fanless", "ทนร้อน", "ทนฝุ่น", "อุตสาหกรรม"], label: "GT Series — Industrial Mini PC", href: "/gt-series" },
+  { keywords: ["gb", "gb series", "compact", "คอมแพค"], label: "GB Series — Compact PC", href: "/gb-series" },
+  { keywords: ["epc", "epc box", "embedded"], label: "EPC Box Series", href: "/epc-box-series" },
+  { keywords: ["epc series"], label: "EPC Series", href: "/epc-series" },
+  { keywords: ["panel pc", "gk", "จอสัมผัส", "touch", "หน้าจอ", "touchscreen"], label: "GK Series — Panel PC", href: "/gk-series" },
+  { keywords: ["gtg", "gty", "panel pc gtg", "stainless", "ip65"], label: "Panel PC GTG/GTY", href: "/panel-pc-gtg" },
+  { keywords: ["utc", "utc series"], label: "UTC Series", href: "/utc-series" },
+  { keywords: ["firewall", "ไฟร์วอลล์", "network security", "pfsense", "opnsense", "sme"], label: "Mini PC Firewall", href: "/minipc-firewall" },
+  { keywords: ["smart display", "kiosk", "คีออส", "digital signage", "จอโฆษณา", "monitor"], label: "Smart Display & KIOSK", href: "/smart-display" },
+  { keywords: ["rugged", "tablet", "แท็บเล็ต", "notebook", "ทหาร", "กันน้ำ", "กันกระแทก", "ภาคสนาม", "vehicle"], label: "Rugged Tablet / Notebook", href: "/rugged-tablet" },
+  { keywords: ["volktek", "switch", "เครือข่าย", "network", "สวิตช์"], label: "Volktek Industrial Switch", href: "/volktek" },
+  { keywords: ["vcloudpoint", "zero client", "thin client", "ประหยัดพลังงาน"], label: "vCloudPoint Zero Client", href: "/vcloudpoint" },
+  { keywords: ["waterproof", "ip69k", "กันน้ำ", "ล้างน้ำ", "อาหาร", "food"], label: "Waterproof PC IP69K", href: "/waterproof-pc" },
+  { keywords: ["โปรโมชั่น", "promotion", "ลดราคา", "sale"], label: "โปรโมชั่น", href: "/promotions" },
+  { keywords: ["ติดต่อ", "contact", "สอบถาม", "โทร"], label: "ติดต่อเรา", href: "/contact" },
+  { keywords: ["ใบเสนอราคา", "quote", "ขอราคา"], label: "ขอใบเสนอราคา", href: "/quote" },
+  { keywords: ["gt1000"], label: "GT1000 — Entry Level", href: "/gt-series?tab=GT1000" },
+  { keywords: ["gt1400", "gpio"], label: "GT1400 — GPIO + 2.5G LAN", href: "/gt-series?tab=GT1400" },
+  { keywords: ["gt4500"], label: "GT4500 — DDR4 + SIM 4G/5G", href: "/gt-series?tab=GT4500" },
+  { keywords: ["gt7000"], label: "GT7000 — คำตอบทุกปัญหาโรงงาน", href: "/gt-series?tab=GT7000" },
+  { keywords: ["gt9000"], label: "GT9000 — 3 HDMI 6 COM NVMe", href: "/gt-series?tab=GT9000" },
+  { keywords: ["gb1000"], label: "GB1000 — Ultra-Compact", href: "/gb-series" },
+  { keywords: ["gb5000"], label: "GB5000 — Premium Performance", href: "/gb-series" },
+  { keywords: ["pos", "ร้านค้า", "ขายของ"], label: "Panel PC สำหรับ POS ร้านค้า", href: "/panel-pc-gtg" },
+];
+
 const searchTags = [
-  { label: "Mini PC สำนักงาน", href: "#products" },
-  { label: "Industrial PC ทนร้อนทนฝุ่น", href: "#products" },
-  { label: "Panel PC จอสัมผัสโรงงาน", href: "#products" },
-  { label: "Firewall สำหรับ SME", href: "#products" },
-  { label: "Zero Client ประหยัดพลังงาน", href: "#products" },
-  { label: "Rugged Tablet กันน้ำกันกระแทก", href: "#products" },
-  { label: "Industrial Switch เครือข่ายโรงงาน", href: "#products" },
-  { label: "Touch Screen POS ร้านค้า", href: "#products" },
-  { label: "Rugged Notebook สำหรับภาคสนาม", href: "#products" },
-  { label: "Vehicle Tablet ติดรถขนส่ง", href: "#products" },
+  { label: "Mini PC สำนักงาน", href: "/mini-pc" },
+  { label: "Industrial PC ทนร้อนทนฝุ่น", href: "/gt-series" },
+  { label: "Panel PC จอสัมผัสโรงงาน", href: "/panel-pc-gtg" },
+  { label: "Firewall สำหรับ SME", href: "/minipc-firewall" },
+  { label: "Zero Client ประหยัดพลังงาน", href: "/vcloudpoint" },
+  { label: "Rugged Tablet กันน้ำกันกระแทก", href: "/rugged-tablet" },
+  { label: "Industrial Switch เครือข่ายโรงงาน", href: "/volktek" },
+  { label: "Touch Screen POS ร้านค้า", href: "/panel-pc-gtg" },
+  { label: "Rugged Notebook สำหรับภาคสนาม", href: "/rugged-tablet" },
+  { label: "Vehicle Tablet ติดรถขนส่ง", href: "/rugged-tablet" },
 ];
 
 const navLinks = [
@@ -42,15 +70,47 @@ const HeroSection = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
+  const [searchOpen, setSearchOpen] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Close menus on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
         setUserMenuOpen(false);
       }
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Search logic
+  const searchResults = searchQuery.trim().length >= 1
+    ? searchIndex.filter((item) => {
+        const q = searchQuery.toLowerCase();
+        return item.label.toLowerCase().includes(q) || item.keywords.some((k) => k.includes(q));
+      }).slice(0, 8)
+    : [];
+
+  const handleSearch = () => {
+    if (searchResults.length > 0) {
+      navigate(searchResults[0].href);
+      setSearchQuery("");
+      setSearchOpen(false);
+    } else if (searchQuery.trim()) {
+      navigate(`/contact?q=${encodeURIComponent(searchQuery)}`);
+      setSearchQuery("");
+      setSearchOpen(false);
+    }
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") handleSearch();
+    if (e.key === "Escape") setSearchOpen(false);
+  };
 
   return (
     <section className="relative min-h-screen flex flex-col">
@@ -198,32 +258,53 @@ const HeroSection = () => {
           </p>
 
           {/* Search */}
-          <div className="relative max-w-xl mb-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
+          <div ref={searchRef} className="relative max-w-xl mb-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
             <div className="flex items-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden focus-within:ring-2 focus-within:ring-primary/50 transition-shadow">
               <Search className="ml-4 text-white/50" size={20} />
               <input
                 type="text"
                 placeholder="บอกความต้องการ เช่น Mini PC โรงงาน, Firewall SME..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => { setSearchQuery(e.target.value); setSearchOpen(true); }}
+                onFocus={() => setSearchOpen(true)}
+                onKeyDown={handleSearchKeyDown}
                 className="flex-1 bg-transparent px-4 py-4 text-white placeholder:text-white/40 outline-none text-sm md:text-base"
               />
-              <button className="px-6 py-4 bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity">
+              <button
+                onClick={handleSearch}
+                className="px-6 py-4 bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
+              >
                 ค้นเลย
               </button>
             </div>
+
+            {/* Autocomplete dropdown */}
+            {searchOpen && searchResults.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-background/95 backdrop-blur-xl border border-border rounded-xl shadow-2xl overflow-hidden z-50 animate-fade-in">
+                {searchResults.map((item, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { navigate(item.href); setSearchQuery(""); setSearchOpen(false); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-primary/10 transition-colors border-b border-border/50 last:border-0"
+                  >
+                    <Search size={14} className="text-muted-foreground shrink-0" />
+                    <span className="text-sm text-foreground">{item.label}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 max-w-xl animate-fade-up" style={{ animationDelay: "0.4s" }}>
             {searchTags.slice(0, 6).map((tag) => (
-              <a
+              <button
                 key={tag.label}
-                href={tag.href}
+                onClick={() => navigate(tag.href)}
                 className="px-3 py-1.5 rounded-full bg-white/10 text-white/80 text-xs border border-white/10 hover:bg-white/20 hover:border-white/30 transition-all backdrop-blur-sm"
               >
                 {tag.label}
-              </a>
+              </button>
             ))}
           </div>
 
