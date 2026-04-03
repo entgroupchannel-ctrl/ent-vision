@@ -196,7 +196,18 @@ const IBoxSeries = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {iboxModels.map((model) => (
               <div key={model.id} className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
-                <div className="bg-secondary/30 p-6 flex items-center justify-center h-52">
+                <div className="relative bg-secondary/30 p-6 flex items-center justify-center h-52">
+                  <WishlistHeart
+                    item={{
+                      id: model.id,
+                      name: model.name,
+                      category: "iBox Series",
+                      image: model.image,
+                      href: "/ibox-series",
+                      specs: model.cpu,
+                    }}
+                    className="absolute top-3 right-3"
+                  />
                   <img
                     src={model.image}
                     alt={model.name}
