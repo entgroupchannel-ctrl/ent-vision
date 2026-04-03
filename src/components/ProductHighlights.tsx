@@ -1,5 +1,16 @@
 import { Link } from "react-router-dom";
-import { Monitor, Cpu, TabletSmartphone, Wifi, Shield, LayoutGrid, Server } from "lucide-react";
+import { Monitor, Cpu, TabletSmartphone, Wifi, Shield, LayoutGrid, Server, Tv } from "lucide-react";
+
+import imgGT from "@/assets/product-gt-series.jpg";
+import imgGB from "@/assets/product-gb-series.jpg";
+import imgPanel from "@/assets/product-panel-pc.jpg";
+import imgUTC from "@/assets/product-utc-series.jpg";
+import imgSmart from "@/assets/product-smart-display.jpg";
+import imgRugged from "@/assets/product-rugged.jpg";
+import imgVolktek from "@/assets/product-volktek.jpg";
+import imgEPC from "@/assets/product-epc.jpg";
+import imgFirewall from "@/assets/product-firewall.jpg";
+import imgVCloud from "@/assets/product-vcloudpoint.jpg";
 
 const categories = [
   {
@@ -10,7 +21,7 @@ const categories = [
     href: "/gt-series",
     models: ["GT1000", "GT1200", "GT1300", "GT1400", "GT2000", "GT3000", "GT4000", "GT4500", "GT5000", "GT6000", "GT7000", "GT8000", "GT9000"],
     badge: "Hot",
-    image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
+    image: imgGT,
   },
   {
     title: "GB Series",
@@ -20,7 +31,7 @@ const categories = [
     href: "/gb-series",
     models: ["GB1000", "GB2000", "GB4000", "GB5000"],
     badge: "New",
-    image: "https://static.wixstatic.com/media/0597a3_84464f31e83d47a982b5ee3b559db400~mv2.png/v1/fill/w_496,h_496,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GB5000%20(1).png",
+    image: imgGB,
   },
   {
     title: "Panel PC",
@@ -29,7 +40,7 @@ const categories = [
     icon: Monitor,
     href: "/panel-pc-gtg",
     models: ["GTG Series", "Stainless Steel"],
-    image: "https://static.wixstatic.com/media/0597a3_12c253dfc8264f7bb7dce7ca19d03195~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_33_45.png",
+    image: imgPanel,
   },
   {
     title: "UTC Series",
@@ -39,17 +50,17 @@ const categories = [
     href: "/utc-series",
     models: ["Square 4:3", "Wide 16:9", "J6412"],
     badge: "New",
-    image: "https://static.wixstatic.com/media/0597a3_152c5c8f71304d409ffb3d54774749d7~mv2.png/v1/fill/w_354,h_354,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/UTC%20Series%20(1).png",
+    image: imgUTC,
   },
   {
     title: "Smart Display",
     subtitle: "Digital Signage & Kiosk",
     description: "จอแสดงผลอุตสาหกรรม Indoor/Outdoor และตู้ Kiosk",
-    icon: LayoutGrid,
+    icon: Tv,
     href: "/smart-display",
-    models: ["Indoor", "Outdoor", "Kiosk"],
+    models: ["Indoor", "Outdoor", "Stainless", "Food Grade"],
     badge: "New",
-    image: "https://static.wixstatic.com/media/0597a3_756a4a09e31d4b6d85eb8da1da91f781~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_39_10.png",
+    image: imgSmart,
   },
   {
     title: "Rugged Devices",
@@ -58,7 +69,7 @@ const categories = [
     icon: TabletSmartphone,
     href: "/rugged-tablet",
     models: ["Tablet", "Notebook", "Handheld"],
-    image: "https://static.wixstatic.com/media/0597a3_1f3ca942da0a4a3d834c5e7e2cf03b7a~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_36_56.png",
+    image: imgRugged,
   },
   {
     title: "Volktek",
@@ -67,7 +78,7 @@ const categories = [
     icon: Wifi,
     href: "/volktek",
     models: ["Managed", "Unmanaged", "PoE"],
-    image: "https://static.wixstatic.com/media/0597a3_756a4a09e31d4b6d85eb8da1da91f781~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_39_10.png",
+    image: imgVolktek,
   },
   {
     title: "EPC & Mini PC",
@@ -76,7 +87,7 @@ const categories = [
     icon: Shield,
     href: "/epc-box-series",
     models: ["EPC Box", "GK Series", "Mini PC"],
-    image: "https://static.wixstatic.com/media/0597a3_47b98b7d2cc34a1da2b4e89e4499834d~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_23_10.png",
+    image: imgEPC,
   },
   {
     title: "Mini PC Firewall",
@@ -86,7 +97,7 @@ const categories = [
     href: "/minipc-firewall",
     models: ["GT194L", "GT196L", "IPC068", "IPC090"],
     badge: "Hot",
-    image: "https://static.wixstatic.com/media/0597a3_6ebc77045f9a4292bb485a4fa91ac3a2~mv2.png/v1/fill/w_211,h_155,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-15%20at%2012_02_13.png",
+    image: imgFirewall,
   },
   {
     title: "vCloudPoint",
@@ -96,7 +107,7 @@ const categories = [
     href: "/vcloudpoint",
     models: ["S100", "V100", "vMatrix"],
     badge: "Hot",
-    image: "https://static.wixstatic.com/media/0597a3_756a4a09e31d4b6d85eb8da1da91f781~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_39_10.png",
+    image: imgVCloud,
   },
 ];
 
@@ -133,51 +144,53 @@ const ProductHighlights = () => {
                 </span>
               )}
 
-              <div className="flex items-start gap-4 p-5">
-                {/* Icon */}
-                <div className="shrink-0 w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <cat.icon className="text-primary" size={22} />
-                </div>
-
-                {/* Text */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
-                    {cat.title}
-                  </h3>
-                  <p className="text-xs text-primary/70 font-medium">{cat.subtitle}</p>
-                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{cat.description}</p>
-                </div>
+              {/* Product image */}
+              <div className="relative h-40 overflow-hidden bg-secondary/30">
+                <img
+                  src={cat.image}
+                  alt={cat.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  width={640}
+                  height={512}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
               </div>
 
-              {/* Product image + models strip */}
-              <div className="px-5 pb-4">
-                <div className="flex items-center gap-4 p-3 rounded-lg bg-secondary/50">
-                  <img
-                    src={cat.image}
-                    alt={cat.title}
-                    className="w-16 h-16 object-contain shrink-0 group-hover:scale-110 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                  <div className="flex flex-wrap gap-1.5">
-                    {cat.models.slice(0, 6).map((model) => (
-                      <span
-                        key={model}
-                        className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-background border border-border text-muted-foreground"
-                      >
-                        {model}
-                      </span>
-                    ))}
-                    {cat.models.length > 6 && (
-                      <span className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-primary/10 border border-primary/20 text-primary">
-                        +{cat.models.length - 6} รุ่น
-                      </span>
-                    )}
+              <div className="p-5">
+                {/* Icon + Text */}
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <cat.icon className="text-primary" size={20} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
+                      {cat.title}
+                    </h3>
+                    <p className="text-xs text-primary/70 font-medium">{cat.subtitle}</p>
                   </div>
                 </div>
-              </div>
 
-              {/* Bottom action hint */}
-              <div className="px-5 pb-4">
+                <p className="text-xs text-muted-foreground leading-relaxed mb-3">{cat.description}</p>
+
+                {/* Models strip */}
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {cat.models.slice(0, 6).map((model) => (
+                    <span
+                      key={model}
+                      className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-secondary border border-border text-muted-foreground"
+                    >
+                      {model}
+                    </span>
+                  ))}
+                  {cat.models.length > 6 && (
+                    <span className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-primary/10 border border-primary/20 text-primary">
+                      +{cat.models.length - 6} รุ่น
+                    </span>
+                  )}
+                </div>
+
+                {/* Bottom action hint */}
                 <div className="flex items-center justify-between text-xs text-muted-foreground group-hover:text-primary transition-colors">
                   <span className="font-medium">ดูรายละเอียด →</span>
                   <span>{cat.models.length} หมวดหมู่</span>
