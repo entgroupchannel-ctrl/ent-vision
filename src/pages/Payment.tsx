@@ -149,7 +149,7 @@ const Payment = () => {
                 <Phone size={16} className="text-primary" />
                 <div>
                   <p className="text-xs text-muted-foreground">จัดซื้อ</p>
-                  <p className="text-sm font-semibold text-foreground">Khun Phatrawan — 082-249-7922</p>
+                  <p className="text-sm font-semibold text-foreground">082-249-7922</p>
                 </div>
               </div>
             </div>
