@@ -1,49 +1,78 @@
 import { ExternalLink } from "lucide-react";
 
-const ThaiPatternBg = () => (
+const ThaiLinePattern = () => (
   <svg
-    className="absolute inset-0 w-full h-full opacity-[0.04] dark:opacity-[0.06] pointer-events-none"
+    className="absolute inset-0 w-full h-full text-primary pointer-events-none"
     xmlns="http://www.w3.org/2000/svg"
-    preserveAspectRatio="none"
-    viewBox="0 0 800 600"
+    style={{ opacity: 0.045 }}
   >
     <defs>
-      <pattern id="thai-lai" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
-        {/* Kranok (กระหนก) — Thai flame motif */}
+      <pattern id="thai-line" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+        {/* ลายประจำยาม — interlocking curves */}
         <path
-          d="M40 8 C44 14, 50 16, 52 24 C54 32, 48 36, 40 40 C32 36, 26 32, 28 24 C30 16, 36 14, 40 8Z"
-          fill="currentColor"
+          d="M60 0 Q75 15, 60 30 Q45 15, 60 0Z"
+          fill="none" stroke="currentColor" strokeWidth="0.8"
         />
         <path
-          d="M40 40 C44 46, 50 48, 52 56 C54 64, 48 68, 40 72 C32 68, 26 64, 28 56 C30 48, 36 46, 40 40Z"
-          fill="currentColor"
+          d="M60 30 Q75 45, 60 60 Q45 45, 60 30Z"
+          fill="none" stroke="currentColor" strokeWidth="0.8"
         />
-        {/* Small diamond accents */}
-        <path d="M12 40 L20 36 L28 40 L20 44Z" fill="currentColor" opacity="0.5" />
-        <path d="M52 40 L60 36 L68 40 L60 44Z" fill="currentColor" opacity="0.5" />
-        {/* Corner petals */}
-        <circle cx="0" cy="0" r="6" fill="currentColor" opacity="0.3" />
-        <circle cx="80" cy="0" r="6" fill="currentColor" opacity="0.3" />
-        <circle cx="0" cy="80" r="6" fill="currentColor" opacity="0.3" />
-        <circle cx="80" cy="80" r="6" fill="currentColor" opacity="0.3" />
-        {/* Connecting lines */}
-        <line x1="20" y1="0" x2="20" y2="80" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
-        <line x1="60" y1="0" x2="60" y2="80" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
-        <line x1="0" y1="20" x2="80" y2="20" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
-        <line x1="0" y1="60" x2="80" y2="60" stroke="currentColor" strokeWidth="0.5" opacity="0.2" />
+        <path
+          d="M60 60 Q75 75, 60 90 Q45 75, 60 60Z"
+          fill="none" stroke="currentColor" strokeWidth="0.8"
+        />
+        <path
+          d="M60 90 Q75 105, 60 120 Q45 105, 60 90Z"
+          fill="none" stroke="currentColor" strokeWidth="0.8"
+        />
+        {/* Horizontal leaf curves */}
+        <path
+          d="M0 60 Q15 45, 30 60 Q15 75, 0 60Z"
+          fill="none" stroke="currentColor" strokeWidth="0.8"
+        />
+        <path
+          d="M30 60 Q45 45, 60 60 Q45 75, 30 60Z"
+          fill="none" stroke="currentColor" strokeWidth="0.8"
+        />
+        <path
+          d="M60 60 Q75 45, 90 60 Q75 75, 60 60Z"
+          fill="none" stroke="currentColor" strokeWidth="0.8"
+        />
+        <path
+          d="M90 60 Q105 45, 120 60 Q105 75, 90 60Z"
+          fill="none" stroke="currentColor" strokeWidth="0.8"
+        />
+        {/* Diagonal graceful S-curves — กนกเปลว */}
+        <path
+          d="M0 0 C10 10, 20 5, 30 15 S50 25, 60 15"
+          fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.6"
+        />
+        <path
+          d="M60 60 C70 70, 80 65, 90 75 S110 85, 120 75"
+          fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.6"
+        />
+        <path
+          d="M120 0 C110 10, 100 5, 90 15 S70 25, 60 15"
+          fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.6"
+        />
+        <path
+          d="M60 60 C50 70, 40 65, 30 75 S10 85, 0 75"
+          fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.6"
+        />
+        {/* Small petal at center */}
+        <circle cx="60" cy="60" r="2.5" fill="none" stroke="currentColor" strokeWidth="0.6" />
+        <circle cx="60" cy="60" r="1" fill="currentColor" opacity="0.3" />
       </pattern>
     </defs>
-    <rect width="800" height="600" fill="url(#thai-lai)" />
+    <rect width="100%" height="100%" fill="url(#thai-line)" />
   </svg>
 );
 
 const EdgeAISection = () => {
   return (
     <section className="section-padding relative overflow-hidden" id="edge-ai">
-      {/* Thai pattern background */}
-      <ThaiPatternBg />
-      {/* Subtle gold-teal gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] via-transparent to-[hsl(40,60%,50%)]/[0.04] pointer-events-none" />
+      <ThaiLinePattern />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-[hsl(40,55%,55%)]/[0.03] pointer-events-none" />
 
       <div className="container max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
