@@ -91,7 +91,6 @@ const MemberRegister = () => {
       setScanning(false);
       if (fileInputRef.current) fileInputRef.current.value = "";
     }
-    }
   }, [toast]);
 
   const handleSubmit = async (e: React.FormEvent) => {
