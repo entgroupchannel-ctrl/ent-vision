@@ -143,6 +143,11 @@ const AdminLogin = () => {
             >
               <LogIn size={14} /> {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
             </button>
+            <div className="text-right">
+              <a href="/forgot-password" className="text-xs text-primary hover:underline font-medium">
+                ลืมรหัสผ่าน?
+              </a>
+            </div>
           </form>
 
           <div className="flex items-center gap-3">

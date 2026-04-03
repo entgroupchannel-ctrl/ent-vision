@@ -36,6 +36,8 @@ import Delivery from "./pages/Delivery.tsx";
 import Cabinets from "./pages/Cabinets.tsx";
 import IBoxSeries from "./pages/IBoxSeries.tsx";
 import WishlistPage from "./pages/WishlistPage.tsx";
+import ForgotPassword from "./pages/ForgotPassword.tsx";
+import ResetPassword from "./pages/ResetPassword.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import FloatingContact from "./components/FloatingContact.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
