@@ -791,7 +791,9 @@ const GTSeries = () => {
               </div>
 
               {/* Comparison Table */}
-              <ComparisonTable handleTabChange={handleTabChange} />
+              <div id="comparison">
+                <ComparisonTable handleTabChange={handleTabChange} />
+              </div>
             </div>
           )}
 
