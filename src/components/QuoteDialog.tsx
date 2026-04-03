@@ -38,7 +38,7 @@ const inputClass =
   "w-full px-3 py-2 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
 
 const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: QuoteDialogProps) => {
-  const { user, loading: authLoading } = useAuth();
+  const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
 
