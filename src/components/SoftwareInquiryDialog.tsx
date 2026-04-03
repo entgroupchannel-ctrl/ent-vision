@@ -45,6 +45,19 @@ const SoftwareInquiryDialog = ({ children }: SoftwareInquiryDialogProps) => {
     subscribe: true,
   });
 
+  // Auto-fill from user profile when dialog opens
+  useEffect(() => {
+    if (open && user) {
+      setForm((prev) => ({
+        ...prev,
+        name: prev.name || user.user_metadata?.full_name || "",
+        email: prev.email || user.email || "",
+        phone: prev.phone || user.user_metadata?.phone || "",
+        company: prev.company || user.user_metadata?.company || "",
+      }));
+    }
+  }, [open, user]);
+
   const updateField = (field: string, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
