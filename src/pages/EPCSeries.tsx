@@ -479,7 +479,7 @@ const EPCSeries = () => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {squareModels.map((model) => (
-              <ModelCard key={model.id} model={model} />
+              <ModelCard key={model.id} model={model} onQuote={(name) => setQuoteProduct(name)} />
             ))}
           </div>
         </section>
@@ -494,7 +494,7 @@ const EPCSeries = () => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {wideModels.map((model) => (
-              <ModelCard key={model.id} model={model} />
+              <ModelCard key={model.id} model={model} onQuote={(name) => setQuoteProduct(name)} />
             ))}
           </div>
         </section>

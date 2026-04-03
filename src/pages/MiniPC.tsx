@@ -731,7 +731,7 @@ const CategorySection = ({ id, title, subtitle, icon: Icon, models }: {
       </div>
     </div>
     <div className="space-y-6">
-      {models.map((m) => <ProductCard key={m.id} model={m} />)}
+      {models.map((m) => <ProductCard key={m.id} model={m} onQuote={(name) => setQuoteProduct(name)} />)}
     </div>
   </section>
 );
