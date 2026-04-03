@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
+import MegaMenu, { MobileMegaMenu } from "@/components/MegaMenu";
 import heroIndustrial from "@/assets/hero-industrial.jpg";
 import logo from "@/assets/logo-entgroup.avif";
 
@@ -19,8 +20,6 @@ const searchTags = [
 ];
 
 const navLinks = [
-  { label: "สินค้า", href: "#products" },
-  { label: "บริการ", href: "#services" },
   { label: "โปรโมชั่น", href: "/promotions" },
   { label: "ติดต่อเรา", href: "#contact" },
 ];
@@ -57,18 +56,20 @@ const HeroSection = () => {
         <a href="#" className="flex items-center gap-3">
           <img src={logo} alt="ENT GROUP" className="h-10 w-auto" />
         </a>
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-2">
+          <MegaMenu />
           {navLinks.map((l) =>
             l.href.startsWith("/") ? (
-              <Link key={l.label} to={l.href} className="text-sm font-medium text-white/70 hover:text-white transition-colors">
+              <Link key={l.label} to={l.href} className="px-3 py-2 rounded-lg text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 transition-colors">
                 {l.label}
               </Link>
             ) : (
-              <a key={l.label} href={l.href} className="text-sm font-medium text-white/70 hover:text-white transition-colors">
+              <a key={l.label} href={l.href} className="px-3 py-2 rounded-lg text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 transition-colors">
                 {l.label}
               </a>
             )
           )}
+          <div className="w-px h-6 bg-white/10 mx-1" />
           <ThemeToggle />
           <button
             onClick={() => setShowLineQR(true)}
@@ -84,19 +85,9 @@ const HeroSection = () => {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 z-30 bg-card border-b border-border p-6 animate-fade-in">
-          {navLinks.map((l) =>
-            l.href.startsWith("/") ? (
-              <Link key={l.label} to={l.href} onClick={() => setMobileMenuOpen(false)} className="block py-3 text-foreground font-medium">
-                {l.label}
-              </Link>
-            ) : (
-              <a key={l.label} href={l.href} onClick={() => setMobileMenuOpen(false)} className="block py-3 text-foreground font-medium">
-                {l.label}
-              </a>
-            )
-          )}
-          <div className="flex items-center justify-between mt-4 gap-3">
+        <div className="md:hidden absolute top-16 left-0 right-0 z-30 bg-card border-b border-border p-6 animate-fade-in max-h-[80vh] overflow-y-auto">
+          <MobileMegaMenu onNavigate={() => setMobileMenuOpen(false)} />
+          <div className="flex items-center justify-between mt-4 gap-3 pt-4 border-t border-border">
             <ThemeToggle />
             <button
               onClick={() => { setShowLineQR(true); setMobileMenuOpen(false); }}
