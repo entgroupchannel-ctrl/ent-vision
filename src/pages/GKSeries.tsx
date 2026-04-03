@@ -814,7 +814,10 @@ const GKSeries = () => {
             ให้ทีมผู้เชี่ยวชาญช่วยเลือกรุ่นและ Configuration ที่เหมาะกับงานของคุณ
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <QuoteButton productName="" productCategory="GK Series — Panel PC" />
+            <button onClick={() => setQuoteOpen(true)} className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:bg-primary/90 transition-colors">
+              ขอใบเสนอราคา
+            </button>
+            <QuoteDialog open={quoteOpen} onClose={() => setQuoteOpen(false)} productCategory="GK Series — Panel PC" />
             <a
               href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
               target="_blank"
