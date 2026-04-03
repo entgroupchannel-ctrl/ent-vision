@@ -159,7 +159,7 @@ const ProductHighlights = () => {
                     loading="lazy"
                   />
                   <div className="flex flex-wrap gap-1.5">
-                    {cat.models.map((model) => (
+                    {cat.models.slice(0, 6).map((model) => (
                       <span
                         key={model}
                         className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-background border border-border text-muted-foreground"
@@ -167,6 +167,11 @@ const ProductHighlights = () => {
                         {model}
                       </span>
                     ))}
+                    {cat.models.length > 6 && (
+                      <span className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-primary/10 border border-primary/20 text-primary">
+                        +{cat.models.length - 6} รุ่น
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
