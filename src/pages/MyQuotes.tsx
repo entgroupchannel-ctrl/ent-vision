@@ -19,6 +19,15 @@ const statusConfig: Record<string, { label: string; color: string; icon: typeof 
   closed: { label: "ปิดแล้ว", color: "bg-muted text-muted-foreground border-border", icon: CheckCircle },
 };
 
+const parseDetails = (details: string | null) => {
+  if (!details) return { timeline: "", qty: "", budget: "", extra: "" };
+  const timeline = details.match(/\[timeline:\s*([^\]]*)\]/)?.[1]?.trim() || "";
+  const qty = details.match(/\[qty:\s*([^\]]*)\]/)?.[1]?.trim() || "";
+  const budget = details.match(/\[budget:\s*([^\]]*)\]/)?.[1]?.trim() || "";
+  const extra = details.replace(/\[timeline:[^\]]*\]/g, "").replace(/\[qty:[^\]]*\]/g, "").replace(/\[budget:[^\]]*\]/g, "").trim();
+  return { timeline, qty, budget, extra };
+};
+
 interface QuoteRequest {
   id: string;
   created_at: string;
