@@ -440,7 +440,7 @@ const ComparisonTable = ({ handleTabChange }: { handleTabChange: (tab: string) =
             <tbody>
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={11} className="p-12 text-center">
+                  <td colSpan={12} className="p-12 text-center">
                     <div className="text-muted-foreground">
                       <Filter size={32} className="mx-auto mb-3 opacity-30" />
                       <p className="font-semibold">ไม่พบรุ่นที่ตรงกับตัวกรอง</p>
