@@ -487,46 +487,108 @@ const VCloudPoint = () => {
         </div>
       </section>
 
-      {/* ── Testimonials ── */}
+      {/* ── Success Stories — Case Studies ── */}
       <section className="py-16 md:py-24">
         <div className="container max-w-7xl mx-auto px-6">
-          <div className="text-center mb-10">
+          {/* Header */}
+          <div className="text-center mb-6">
             <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">Success Stories</span>
             <h2 className="text-3xl md:text-4xl font-black text-foreground">
               เรื่องราว<span className="text-primary">ความสำเร็จ</span>
             </h2>
-            <p className="text-muted-foreground mt-2">กรณีศึกษาจริงจากองค์กรที่ประสบความสำเร็จด้วย vCloudPoint</p>
+            <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
+              กรณีศึกษาจริงจากองค์กรที่ประสบความสำเร็จด้วย vCloudPoint — ใช้งานจริงมากกว่า 10 ปี ทั้งมหาวิทยาลัย โรงงาน และธุรกิจทั่วประเทศ
+            </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-5">
-            {testimonials.map((t) => (
-              <div key={t.org} className="card-surface rounded-xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map((i) => <Star key={i} size={14} className="text-amber-400 fill-amber-400" />)}
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4 italic">"{t.quote}"</p>
-                <div className="flex items-center justify-between pt-3 border-t border-border">
-                  <div>
-                    <p className="text-sm font-bold text-foreground">{t.org}</p>
-                    <p className="text-[11px] text-muted-foreground">{t.sector}</p>
+
+          {/* Track Record Bar */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto">
+            {trackRecord.map((t) => (
+              <div key={t.label} className="text-center p-4 rounded-xl card-surface">
+                <t.icon size={18} className="text-primary mx-auto mb-1.5" />
+                <p className="text-2xl font-black text-primary">{t.val}</p>
+                <p className="text-xs font-bold text-foreground">{t.label}</p>
+                <p className="text-[10px] text-muted-foreground mt-0.5">{t.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Case Study Cards */}
+          <div className="space-y-6">
+            {caseStudies.map((cs) => (
+              <div key={cs.title} className={`card-surface rounded-2xl overflow-hidden border ${cs.borderColor} hover:shadow-lg transition-all duration-300`}>
+                <div className={`bg-gradient-to-r ${cs.color} p-6 md:p-8`}>
+                  <div className="flex flex-col md:flex-row md:items-start gap-6">
+                    {/* Left: Icon + Meta */}
+                    <div className="flex items-start gap-4 flex-1">
+                      <div className={`w-14 h-14 rounded-xl bg-background/80 border border-border flex items-center justify-center shrink-0`}>
+                        <cs.icon className={cs.accentColor} size={26} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex flex-wrap items-center gap-2 mb-1">
+                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${cs.borderColor} ${cs.accentColor}`}>
+                            {cs.tag}
+                          </span>
+                          <span className="text-[10px] text-muted-foreground">{cs.sector}</span>
+                        </div>
+                        <h3 className="text-lg md:text-xl font-black text-foreground">{cs.title}</h3>
+                        <p className="text-xs text-muted-foreground">{cs.subtitle}</p>
+                      </div>
+                    </div>
+                    {/* Right: Stats */}
+                    <div className="flex gap-4 md:gap-6">
+                      {cs.stats.map((s) => (
+                        <div key={s.label} className="text-center">
+                          <p className={`text-xl md:text-2xl font-black ${cs.accentColor}`}>{s.val}</p>
+                          <p className="text-[10px] text-muted-foreground font-medium">{s.label}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <span className={`text-xs font-bold ${t.color}`}>{t.count}</span>
+                </div>
+
+                <div className="p-6 md:px-8">
+                  {/* Quote */}
+                  <div className="flex gap-3 mb-5">
+                    <Quote size={20} className="text-primary/30 shrink-0 mt-0.5" />
+                    <p className="text-sm text-muted-foreground leading-relaxed italic">
+                      {cs.quote}
+                    </p>
+                  </div>
+
+                  {/* Highlights */}
+                  <div className="flex flex-wrap gap-2">
+                    {cs.highlights.map((h) => (
+                      <span key={h} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/60 text-xs text-foreground font-medium border border-border/50">
+                        <CheckCircle2 size={11} className={cs.accentColor} />
+                        {h}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 max-w-2xl mx-auto">
-            {[
-              { val: "500+", label: "องค์กรใช้งาน" },
-              { val: "1,000+", label: "เครื่องที่ติดตั้ง" },
-              { val: "95%", label: "ขยายระบบ" },
-              { val: "4.9/5", label: "คะแนนรีวิว" },
-            ].map((s) => (
-              <div key={s.label} className="text-center p-4 rounded-xl card-surface">
-                <p className="text-2xl font-black text-primary">{s.val}</p>
-                <p className="text-[11px] text-muted-foreground">{s.label}</p>
-              </div>
-            ))}
+          {/* Global proof — vCloudPoint worldwide */}
+          <div className="mt-12 card-surface rounded-2xl p-6 md:p-8 text-center border border-primary/20">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Award size={20} className="text-primary" />
+              <span className="text-xs font-bold uppercase tracking-wider text-primary">Global Trust</span>
+            </div>
+            <h3 className="text-xl md:text-2xl font-black text-foreground mb-2">
+              vCloudPoint ได้รับความไว้วางใจจากองค์กร<span className="text-primary">ทั่วโลก</span>
+            </h3>
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto mb-4">
+              ถูกใช้งานใน 100+ ประเทศ ตั้งแต่โรงเรียนในโปแลนด์ โรงแรมในจอร์แดน สถาบันในอิหร่าน ไปจนถึงโรงงานและมหาวิทยาลัยในไทย — ผ่านการพิสูจน์มานานกว่า 10 ปี
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {["FCC", "CE", "RoHS", "ISO 9001:2015", "ISO 14001:2015"].map((c) => (
+                <span key={c} className="px-3 py-1 rounded-lg text-[10px] font-medium bg-secondary text-secondary-foreground border border-border">
+                  {c}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
