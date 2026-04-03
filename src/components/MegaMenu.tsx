@@ -260,8 +260,8 @@ const MegaMenu = ({
               {/* Category header */}
               <div className="flex items-center gap-2 mb-4">
                 <active.icon size={16} className="text-primary" />
-                <h3 className="text-white font-bold text-sm">{active.label}</h3>
-                <span className="text-white/30 text-xs">— {active.tagline}</span>
+                <h3 className="text-foreground font-bold text-sm">{active.label}</h3>
+                <span className="text-muted-foreground text-xs">— {active.tagline}</span>
               </div>
 
               <div className="grid grid-cols-12 gap-5">
