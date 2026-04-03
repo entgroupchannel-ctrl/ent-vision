@@ -191,7 +191,7 @@ const WishlistPage = () => {
 
       <QuoteDialog
         open={quoteOpen}
-        onOpenChange={setQuoteOpen}
+        onClose={() => setQuoteOpen(false)}
         productName={quoteProductName}
         productCategory="Wishlist"
       />
