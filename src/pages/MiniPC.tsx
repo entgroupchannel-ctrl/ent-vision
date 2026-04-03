@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Zap, Shield, Monitor, Wifi, ThermometerSun, HardDrive, Server, ChevronRight } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Zap, Shield, Monitor, Wifi, ThermometerSun, HardDrive, Server, ChevronRight, FileText } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteDialog from "@/components/QuoteDialog";
 
 /* ── Category Navigation ── */
 const categories = [
