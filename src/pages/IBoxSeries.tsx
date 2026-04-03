@@ -317,11 +317,27 @@ const IBoxSeries = () => {
           <p className="text-center text-sm text-muted-foreground mb-8">
             ใช้โปรแกรมได้หลากหลาย ในสำนักงาน โรงงานอุตสาหกรรม โรงเรียน ทั้งการพรีเซนต์งาน การเรียนการสอน และความบันเทิง
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {useCases.map((uc) => (
-              <div key={uc} className="card-surface p-4 text-center">
-                <Box className="w-6 h-6 text-primary mx-auto mb-2" />
-                <p className="text-xs font-medium text-foreground">{uc}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {useCasesData.map((uc) => (
+              <div key={uc.title} className="group card-surface overflow-hidden hover:border-primary/30 transition-all">
+                <div className="relative h-44 overflow-hidden">
+                  <img
+                    src={uc.image}
+                    alt={uc.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-3 left-4 flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-primary/90 flex items-center justify-center">
+                      <uc.icon className="w-4 h-4 text-primary-foreground" />
+                    </div>
+                    <h3 className="text-sm font-bold text-white">{uc.title}</h3>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
+                </div>
               </div>
             ))}
           </div>
