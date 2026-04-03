@@ -410,12 +410,24 @@ const GTSeries = () => {
           {activeTab === "gt1000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src={gt1000Hero}
+                  src={gt1000Banner}
                   alt="GT1000 Industrial PC"
-                  className="w-full h-[300px] md:h-[400px] object-cover"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    Best Seller · Fanless · Compact
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">1000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    รุ่นเริ่มต้น คุ้มค่า — เล็กแต่แกร่ง ทำงาน 24/7
+                  </p>
+                </div>
               </div>
 
               {/* Description */}
