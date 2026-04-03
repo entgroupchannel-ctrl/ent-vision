@@ -7,6 +7,12 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import epcLegoBanner from "@/assets/epc-lego-banner.png";
+import epcUsecaseFactory from "@/assets/epc-usecase-factory.jpg";
+import epcUsecaseColdStorage from "@/assets/epc-usecase-coldstorage.jpg";
+import epcUsecaseConstruction from "@/assets/epc-usecase-construction.jpg";
+import epcUsecaseFood from "@/assets/epc-usecase-food.jpg";
+import epcUsecaseAutomotive from "@/assets/epc-usecase-automotive.jpg";
+import epcUsecaseWarehouse from "@/assets/epc-usecase-warehouse.jpg";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -719,6 +725,34 @@ const EPCSeries = () => {
                   <p className="text-xs text-muted-foreground">PDF Datasheet</p>
                 </div>
               </a>
+            ))}
+          </div>
+        </section>
+
+        {/* Use Cases Section */}
+        <section>
+          <h2 className="text-2xl font-display font-bold text-foreground mb-2 text-center">การนำไปใช้งานกิจกรรมต่างๆ</h2>
+          <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">สถานการณ์จริงที่พีซีทั่วไปไม่รอด — ต้อง EPC Panel PC เกรดอุตสาหกรรมเท่านั้น</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { image: epcUsecaseFactory, title: "โรงงานเชื่อมโลหะ", desc: "สะเก็ดไฟ ฝุ่นโลหะ ความร้อนสูง — IP65 กันได้หมด ใส่ถุงมือสัมผัสหน้าจอได้เลย", badge: "IP65 กันฝุ่น-น้ำ" },
+              { image: epcUsecaseColdStorage, title: "ห้องเย็น & Cold Storage", desc: "อุณหภูมิติดลบ ความชื้นสูง — ทำงานได้ตั้งแต่ -20°C ไม่มีพัดลมไม่มีหยดน้ำ", badge: "-20°C ทนความเย็น" },
+              { image: epcUsecaseConstruction, title: "ไซต์ก่อสร้าง", desc: "ฝุ่น แดดจัด ฝนตก สั่นสะเทือน — หน้าจอมองเห็นชัดกลางแดด ทนทุกสภาพอากาศ", badge: "MIL-STD ทนสั่นสะเทือน" },
+              { image: epcUsecaseFood, title: "โรงงานอาหาร & เครื่องดื่ม", desc: "ล้างน้ำแรงดันสูงได้ สัมผัสจอด้วยถุงมือยาง ไม่มีซอกมุมสะสมเชื้อโรค", badge: "ล้างน้ำได้ IP65" },
+              { image: epcUsecaseAutomotive, title: "สายการผลิตยานยนต์", desc: "ควบคุมหุ่นยนต์ ติดตาม OEE แบบ Real-time เชื่อมต่อ PLC/SCADA ผ่าน COM Port", badge: "24/7 ไม่หยุดพัก" },
+              { image: epcUsecaseWarehouse, title: "คลังสินค้า & โลจิสติกส์", desc: "สแกนบาร์โค้ด จัดการ WMS ทนฝุ่น ทนกระแทก ติดตั้งบนสายพานลำเลียงได้", badge: "Fanless ไร้เสียง" },
+            ].map((item) => (
+              <div key={item.title} className="card-surface overflow-hidden rounded-xl group">
+                <div className="relative h-48 overflow-hidden">
+                  <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width={768} height={512} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <Badge className="absolute bottom-3 left-3 bg-primary/90 text-primary-foreground text-xs">{item.badge}</Badge>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-base font-bold text-foreground mb-1.5">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
             ))}
           </div>
         </section>
