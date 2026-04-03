@@ -191,6 +191,12 @@ const menuCategories = [
           { label: "Mini PC — Office & SME", href: "/mini-pc" },
         ],
       },
+      {
+        heading: "เครื่องมือช่วยตัดสินใจ",
+        links: [
+          { label: "🎯 ช่วยเลือกสินค้าที่ใช่", href: "/product-advisor", hot: true },
+        ],
+      },
     ],
   },
 ];
