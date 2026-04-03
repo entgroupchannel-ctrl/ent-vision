@@ -288,7 +288,7 @@ const SpecTable = ({ model }: { model: typeof squareModels[0] }) => (
 );
 
 /* ───── Model Card ───── */
-const ModelCard = ({ model }: { model: typeof squareModels[0] }) => (
+const ModelCard = ({ model, onQuote }: { model: typeof squareModels[0]; onQuote?: (name: string) => void }) => (
   <div className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
     <div className="bg-secondary/30 p-6 flex items-center justify-center">
       <img src={model.image} alt={model.name} className="max-h-44 object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
