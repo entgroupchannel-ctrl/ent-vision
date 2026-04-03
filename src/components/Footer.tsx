@@ -242,11 +242,11 @@ const Footer = () => {
         <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
           <div className="container max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-muted-foreground">
-              <a href="#" className="hover:text-primary transition-colors">เงื่อนไขการรับประกัน</a>
+              <Link to="/warrantys" className="hover:text-primary transition-colors">เงื่อนไขการรับประกัน</Link>
               <span>|</span>
-              <a href="#" className="hover:text-primary transition-colors">การชำระเงิน</a>
+              <Link to="/payment" className="hover:text-primary transition-colors">การชำระเงิน</Link>
               <span>|</span>
-              <a href="#" className="hover:text-primary transition-colors">ติดต่อเรา</a>
+              <Link to="/contact" className="hover:text-primary transition-colors">ติดต่อเรา</Link>
               <span>|</span>
               <span className="text-primary">เป็นไปตาม PDPA ✓</span>
               <span>|</span>
