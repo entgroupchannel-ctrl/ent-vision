@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import Footer from "@/components/Footer";
 import heroGrowth from "@/assets/about-hero-growth.jpg";
+import entLogoFull from "@/assets/entgroup-logo-full.jpg";
 
 /* ═══════ Timeline Data ═══════ */
 const timeline = [
@@ -120,7 +121,17 @@ const AboutUs = () => {
               <span className="text-gradient">ENT</span> ในความหมายของเรา
             </h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-4 gap-5 items-center">
+            {/* Logo */}
+            <div className="flex justify-center">
+              <img
+                src={entLogoFull}
+                alt="ENT Group Logo"
+                className="w-32 md:w-40 h-auto"
+                loading="lazy"
+              />
+            </div>
+            {/* Meaning cards */}
             {entMeaning.map((item) => (
               <div key={item.letter} className="card-surface rounded-xl p-6 text-center group hover:border-primary/20 transition-all">
                 <span className="text-4xl font-display font-black text-primary">{item.letter}</span>
