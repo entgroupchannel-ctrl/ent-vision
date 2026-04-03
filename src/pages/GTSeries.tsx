@@ -62,7 +62,7 @@ const gtModels = [
     storage: "M.2 SSD + SATA",
     ports: "USB 6, COM 2, LAN 2, HDMI",
     size: "TDP 28W Fanless",
-    image: "https://static.wixstatic.com/media/0597a3_3a64dd92132a4f54b2a9f0eb03b87ed4~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
+    image: gt1200Product,
     tab: "gt1200",
     highlight: "NEW!",
     badge: true,
