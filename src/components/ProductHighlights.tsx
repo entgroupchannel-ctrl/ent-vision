@@ -83,10 +83,10 @@ const categories = [
   {
     title: "EPC & Mini PC",
     subtitle: "Compact Embedded System",
-    description: "คอมพิวเตอร์ขนาดเล็ก EPC Box, GK Series, Mini PC",
+    description: "คอมพิวเตอร์ขนาดเล็ก EPC Box, Mini PC สำหรับงาน Embedded",
     icon: Shield,
     href: "/epc-box-series",
-    models: ["EPC Box", "GK Series", "Mini PC"],
+    models: ["EPC Box", "Mini PC"],
     image: imgEPC,
   },
   {
