@@ -111,6 +111,13 @@ const HeroSection = () => {
     if (e.key === "Enter") handleSearch();
     if (e.key === "Escape") setSearchOpen(false);
   };
+
+  return (
+    <section className="relative min-h-screen flex flex-col">
+      {/* Full-bleed background image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={heroIndustrial}
           alt="Industrial Computing Production Line"
           className="w-full h-full object-cover"
           width={1920}
