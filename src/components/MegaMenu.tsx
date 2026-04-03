@@ -362,38 +362,42 @@ const MegaMenu = ({
                 </div>
               </div>
 
-              {/* Promo Banner */}
-              <Link
-                to="/promotions"
-                onClick={() => { setActiveMenu(null); onNavigate?.(); }}
-                className="group mt-4 flex items-center gap-4 rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20 p-4 hover:border-primary/40 transition-all duration-300"
-              >
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                  <Sparkles size={20} className="text-primary" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-bold text-foreground">🔥 โปรโมชั่นประจำเดือน — ลดสูงสุด 20%</p>
-                  <p className="text-[11px] text-muted-foreground mt-0.5">Mini PC, Panel PC, Firewall สินค้าคัดสรรราคาพิเศษ พร้อมส่งทันที</p>
-                </div>
-                <span className="flex-shrink-0 text-xs text-primary font-semibold group-hover:underline flex items-center gap-1">
-                  ดูโปรโมชั่น <ArrowRight size={11} />
-                </span>
-              </Link>
+              {/* Category-specific Image Banner */}
+              {promoBanners[active.id] && (() => {
+                const promo = promoBanners[active.id];
+                return (
+                  <Link
+                    to={promo.href}
+                    onClick={() => { setActiveMenu(null); onNavigate?.(); }}
+                    className="group mt-4 block rounded-xl overflow-hidden border border-border hover:border-primary/40 transition-all duration-300 relative h-24"
+                  >
+                    <img
+                      src={promo.image}
+                      alt={promo.title}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                    <div className="relative z-10 flex items-center justify-between h-full px-5">
+                      <div>
+                        <p className="text-sm font-bold text-white">{promo.title}</p>
+                        <p className="text-[11px] text-white/70 mt-0.5">{promo.desc}</p>
+                      </div>
+                      <span className="flex-shrink-0 text-xs text-white font-semibold group-hover:underline flex items-center gap-1 bg-primary/80 px-3 py-1.5 rounded-lg">
+                        ดูสินค้า <ArrowRight size={11} />
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })()}
 
               {/* Bottom quick links */}
-              <div className="mt-4 pt-3 border-t border-gray-200 dark:border-white/5 flex items-center justify-between">
+              <div className="mt-3 pt-3 border-t border-gray-200 dark:border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-4 text-[10px] text-gray-400 dark:text-white/25">
                   <span className="flex items-center gap-1"><Factory size={10} /> นำเข้าจากโรงงานโดยตรง</span>
                   <span className="flex items-center gap-1"><Zap size={10} /> รับประกัน 1–3 ปี</span>
                   <span className="flex items-center gap-1"><Server size={10} /> สต๊อกพร้อมส่งในไทย</span>
                 </div>
-                <Link
-                  to="/promotions"
-                  onClick={() => { setActiveMenu(null); onNavigate?.(); }}
-                  className="text-[10px] text-primary font-semibold hover:underline flex items-center gap-1"
-                >
-                  โปรโมชั่น <ArrowRight size={10} />
-                </Link>
               </div>
             </div>
           </div>
