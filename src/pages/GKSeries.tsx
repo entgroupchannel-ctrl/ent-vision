@@ -11,6 +11,13 @@ import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import { LineQRDialog } from "@/components/LineQRDialog";
+import gk1506img1 from "@/assets/gk-series/gk1506-1.jpg";
+import gk1506img2 from "@/assets/gk-series/gk1506-2.jpg";
+import gk1506img3 from "@/assets/gk-series/gk1506-3.jpg";
+import gk1506img4 from "@/assets/gk-series/gk1506-4.jpg";
+import gk1506img5 from "@/assets/gk-series/gk1506-5.jpg";
+import gk1506img6 from "@/assets/gk-series/gk1506-6.jpg";
+import gk1506banner from "@/assets/gk-series/gk1506-banner.jpg";
 
 /* ─── Concept: "One Body, Multiple Brains" ─── */
 const concepts = [
@@ -178,8 +185,8 @@ const gkModels: GKModel[] = [
     resolution: "1920×1080 Full HD",
     tagline: "Full HD — Best Seller!",
     desc: "Panel PC อุตสาหกรรม 15.6 นิ้ว Full HD จอสัมผัส 10 จุด โครงสร้าง IP65 ทั้งด้านหน้าและด้านหลัง ทนฝุ่น ทนน้ำ รองรับ CPU ตั้งแต่ Pentium ถึง Core i7 — เลือกสเปกให้ตรงกับงบประมาณและการใช้งาน",
-    image: "https://www.sharevdi.com/upload/portal/20250709/202507092029118445.jpg",
-    bannerImage: "https://www.sharevdi.com/upload/portal/20241226/202412261546429083.jpg",
+    image: gk1506img1,
+    bannerImage: gk1506banner,
     datasheetUrls: [
       { label: "A15 Datasheet (PDF)", url: "https://www.sharevdi.com/upload/portal/20250704/202507042002221664.pdf" },
       { label: "GK1506 Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_d2a55f290be74f049d8099a7666f5153.pdf" },
@@ -253,12 +260,12 @@ const gkModels: GKModel[] = [
     ],
     applications: ["HMI Dashboard", "Quality Control", "Factory Monitoring", "Self-Service Terminal", "Kiosk & POS", "Digital Signage"],
     gallery: [
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029118445.jpg",
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029155415.jpg",
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029188041.jpg",
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029228350.jpg",
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029258587.jpg",
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029288272.jpg",
+      gk1506img1,
+      gk1506img2,
+      gk1506img3,
+      gk1506img4,
+      gk1506img5,
+      gk1506img6,
     ],
   },
   {
