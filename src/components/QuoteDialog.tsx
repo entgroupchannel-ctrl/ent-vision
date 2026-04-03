@@ -105,7 +105,9 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: 
         whatsapp: form.whatsapp || null,
         callback_time: form.callbackTime || null,
         products: products.filter((p) => p.category || p.model),
-        details: form.details || null,
+        details: user
+          ? `[timeline: ${memberForm.timeline}] [qty: ${memberForm.quantity}] [budget: ${memberForm.budget}] ${memberForm.requirements}`
+          : form.details || null,
       });
       if (error) throw error;
       setSubmitted(true);
