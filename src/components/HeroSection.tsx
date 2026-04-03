@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, Menu, X, ChevronDown, UserPlus, LogOut, User } from "lucide-react";
+import { toast } from "sonner";
 import ThemeToggle from "@/components/ThemeToggle";
 import MegaMenu, { MobileMegaMenu } from "@/components/MegaMenu";
 import { useAuth } from "@/hooks/useAuth";
@@ -42,6 +43,7 @@ const HeroSection = () => {
   const handleAuthClick = async () => {
     if (user) {
       await supabase.auth.signOut();
+      toast.success("ออกจากระบบเรียบร้อยแล้ว");
     } else {
       navigate("/admin-login");
     }
