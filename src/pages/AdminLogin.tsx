@@ -58,8 +58,17 @@ const AdminLogin = () => {
   }, [navigate]);
 
   const checkAdmin = async (userId: string) => {
-    const { data } = await supabase.rpc("is_admin", { _user_id: userId });
-    return data === true;
+    try {
+      const { data } = await Promise.race([
+        supabase.rpc("is_admin", { _user_id: userId }),
+        new Promise<{ data: null }>((resolve) =>
+          setTimeout(() => resolve({ data: null }), 3000)
+        ),
+      ]);
+      return data === true;
+    } catch {
+      return false;
+    }
   };
 
   const handleEmailLogin = async (e: React.FormEvent) => {
