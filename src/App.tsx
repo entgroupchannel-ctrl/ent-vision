@@ -20,6 +20,7 @@ import Promotions from "./pages/Promotions.tsx";
 import UTCSeries from "./pages/UTCSeries.tsx";
 import MiniPCFirewall from "./pages/MiniPCFirewall.tsx";
 import VCloudPoint from "./pages/VCloudPoint.tsx";
+import AboutUs from "./pages/AboutUs.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
