@@ -47,6 +47,7 @@ serve(async (req) => {
         line_id: line_id || null,
         interest: interest || null,
         conversation_summary: conversation_summary || null,
+        messages: messages || [],
         lead_score: leadScore,
       })
       .select()
