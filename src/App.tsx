@@ -79,6 +79,7 @@ const App = () => (
               <Route path="/payment" element={<Payment />} />
               <Route path="/delivery" element={<Delivery />} />
               <Route path="/cabinets" element={<Cabinets />} />
+              <Route path="/ibox-series" element={<IBoxSeries />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
