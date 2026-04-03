@@ -4427,6 +4427,7 @@ const GTSeries = () => {
         productCategory="GT Series — Mini PC"
       />
       <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
+      <MultiSelectQuoteBar selectedProducts={selectedProducts} onClear={clearSelection} productCategory="GT Series — Mini PC" />
     </div>
   );
 };
