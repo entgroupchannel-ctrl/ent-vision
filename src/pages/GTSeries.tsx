@@ -472,7 +472,7 @@ const GTSeries = () => {
                           { name: "GT6000", tagline: "Triple Display DDR4", cpu: "Core i3/i5/i7 Gen 8–10", ram: "DDR4 สูงสุด 64GB", com: 2, usb: 6, lan: 2, gpio: false, sim: false, display: "HDMI×2+DP", price: "สอบถาม", cat: "standard", gen: "Gen 8–10" },
                           { name: "GT7000", tagline: "DDR4 ทนทุกโรงงาน", cpu: "i3 / i5 / i7 (DDR4)", ram: "DDR4 4–32GB", com: 6, usb: 6, lan: 2, gpio: false, sim: false, display: "VGA+HDMI", price: "สอบถาม", cat: "high", gen: "Gen 6–8" },
                           { name: "GT8000", tagline: "Dual HDMI + SIM 4G", cpu: "i5-1035G1 / i7-10710U", ram: "DDR4 สูงสุด 64GB", com: 2, usb: 6, lan: 2, gpio: false, sim: true, display: "HDMI×2", price: "สอบถาม", cat: "high", gen: "Gen 10" },
-                          { name: "GT9000", tagline: "Triple Display 8 COM", cpu: "i5-10200H / i7-10750H / i5-1235U / i7-1255U", ram: "DDR4/DDR5 32GB", com: 8, usb: 8, lan: 2, gpio: false, sim: false, display: "HDMI×2+DP", price: "25,290", cat: "high", gen: "Gen 10–12" },
+                          { name: "GT9000", tagline: "3 HDMI 6 COM SIM 4G", cpu: "i5-10200H / i7-10750H / i5-1235U / i7-1255U", ram: "DDR4/DDR5 32GB", com: 6, usb: 8, lan: 2, gpio: false, sim: true, display: "HDMI×3", price: "25,290", cat: "high", gen: "Gen 10–12" },
                         ].map((row) => {
                           const catStyle = row.cat === "entry"
                             ? "bg-emerald-500/5 hover:bg-emerald-500/10"
