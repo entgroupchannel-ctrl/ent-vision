@@ -447,10 +447,8 @@ const RuggedTablet = () => {
                   <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Product Overview
                 </a>
               </Button>
-              <Button size="sm" asChild>
-                <a href="/quote">
-                  ขอใบเสนอราคา
-                </a>
+              <Button size="sm" onClick={() => setQuoteProduct("Rugged Tablet")}>
+                <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
               </Button>
             </div>
           </div>
