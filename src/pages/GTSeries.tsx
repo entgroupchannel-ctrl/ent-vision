@@ -142,7 +142,7 @@ const gtModels = [
     storage: "SSD 128 GB – 1 TB",
     ports: "USB 8, COM 6 (RS232/RS485/RS422), LAN 2, GPIO, SIM slot",
     size: "GPIO + SIM + RS485",
-    image: "https://static.wixstatic.com/media/0597a3_68700c8f94f94588be18d47414929b55f000.jpg/v1/fill/w_296,h_522,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_68700c8f94f94588be18d47414929b55f000.jpg",
+    image: gt5000Product,
     tab: "gt5000",
     highlight: "IoT Ready",
     price: "19,490",
