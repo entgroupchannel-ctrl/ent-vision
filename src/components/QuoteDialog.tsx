@@ -51,6 +51,12 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: 
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [memberForm, setMemberForm] = useState({
+    timeline: "",
+    budget: "",
+    quantity: "",
+    requirements: "",
+  });
 
   // Login form state
   const [authMode, setAuthMode] = useState<"login" | "register">("register");
