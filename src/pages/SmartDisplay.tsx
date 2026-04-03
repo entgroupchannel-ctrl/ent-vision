@@ -1094,11 +1094,6 @@ const SmartDisplay = () => {
       </section>
 
 
-      {/* Footer */}
-      <footer className="border-t border-border px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <img src={logo} alt="ENT GROUP" className="h-8 w-auto" />
-        <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} ENT GROUP Co., Ltd. All rights reserved.</p>
-      </footer>
 
       {/* LINE QR Dialog */}
       <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
