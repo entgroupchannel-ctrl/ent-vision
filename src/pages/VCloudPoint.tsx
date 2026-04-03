@@ -83,6 +83,7 @@ const caseStudies = [
       { val: "65%", label: "ลดต้นทุน IT" },
     ],
     highlights: ["QC & Production Line", "ระบบ ERP / SAP", "สภาพแวดล้อมฝุ่น ความร้อน ความชื้น", "ขยายระบบต่อเนื่องทุกปี"],
+    videos: [],
     color: "from-amber-500/10 to-amber-500/5",
     borderColor: "border-amber-500/20",
     accentColor: "text-amber-500",
@@ -100,6 +101,11 @@ const caseStudies = [
       { val: "80%", label: "ประหยัดไฟ" },
     ],
     highlights: ["Computer Lab 20–40 เครื่องต่อห้อง", "ซอฟต์แวร์สอน Adobe, Office, Coding", "Broadcasting หน้าจอ — อาจารย์สอนได้ง่าย", "นักศึกษา 500+ คนใช้พร้อมกัน"],
+    videos: [
+      { id: "uGMqA_xlHLs", label: "มหาวิทยาลัย — ห้อง Lab" },
+      { id: "4hxvwm9ZKhg", label: "สำหรับห้องเรียน โรงเรียน" },
+      { id: "XVl62Xe9ZaI", label: "Case Study — โรงเรียน" },
+    ],
     color: "from-sky-500/10 to-sky-500/5",
     borderColor: "border-sky-500/20",
     accentColor: "text-sky-500",
@@ -117,6 +123,9 @@ const caseStudies = [
       { val: "0", label: "เครื่องพัง/ปี" },
     ],
     highlights: ["Data Entry ในไลน์ผลิต", "ระบบตรวจสอบคุณภาพ QC", "ทนฝุ่น ทนร้อน ไม่มี Moving Part", "ROI คืนทุนภายใน 6 เดือน"],
+    videos: [
+      { id: "sSfAl0l8wHs", label: "Case Study — โรงงานอุตสาหกรรม" },
+    ],
     color: "from-emerald-500/10 to-emerald-500/5",
     borderColor: "border-emerald-500/20",
     accentColor: "text-emerald-500",
@@ -134,6 +143,7 @@ const caseStudies = [
       { val: "3×", label: "ถูกกว่า PC" },
     ],
     highlights: ["ขยาย Seat ได้ทันที", "CRM + VoIP ทำงานลื่นไหล", "ไม่มีเสียงรบกวนจาก Fan", "Centralized Management"],
+    videos: [],
     color: "from-violet-500/10 to-violet-500/5",
     borderColor: "border-violet-500/20",
     accentColor: "text-violet-500",
@@ -332,7 +342,44 @@ const VCloudPoint = () => {
         </div>
       </section>
 
-      {/* ── Benefits ── */}
+      {/* ── 10 เรื่องที่คุณยังไม่รู้ ── */}
+      <section className="py-16">
+        <div className="container max-w-5xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider mb-4">
+                <Play size={10} /> Must Watch
+              </div>
+              <h2 className="text-2xl md:text-3xl font-black text-foreground mb-3">
+                10 เรื่องที่คุณ<span className="text-primary">ยังไม่รู้</span>
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                เกี่ยวกับ vCloudPoint Zero Client — ทำไมองค์กรกว่า 500 แห่งถึงเลือกใช้ และสิ่งที่คุณอาจไม่เคยรู้มาก่อนเกี่ยวกับเทคโนโลยี Shared Computing
+              </p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {["ทำไมถึงใช้ไฟแค่ 5W?", "ไม่มี Local Storage = ปลอดภัยจริงหรือ?", "รองรับ Full HD Video ได้ไหม?", "ใช้กับ Windows 11 ได้หรือเปล่า?", "คืนทุนภายในกี่เดือน?"].map((q) => (
+                  <li key={q} className="flex items-center gap-2">
+                    <CheckCircle2 size={13} className="text-primary shrink-0" />
+                    {q}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl border border-border">
+              <iframe
+                src="https://www.youtube.com/embed/kogDEEuUns4?rel=0"
+                title="10 เรื่องที่คุณยังไม่รู้เกี่ยวกับ vCloudPoint Zero Client"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       <section className="py-16 md:py-24">
         <div className="container max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
@@ -558,7 +605,7 @@ const VCloudPoint = () => {
                   </div>
 
                   {/* Highlights */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {cs.highlights.map((h) => (
                       <span key={h} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/60 text-xs text-foreground font-medium border border-border/50">
                         <CheckCircle2 size={11} className={cs.accentColor} />
@@ -566,6 +613,32 @@ const VCloudPoint = () => {
                       </span>
                     ))}
                   </div>
+
+                  {/* Video Embeds */}
+                  {cs.videos.length > 0 && (
+                    <div className="pt-4 border-t border-border/50">
+                      <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <Play size={12} className="text-primary" /> วิดีโอจากงานจริง
+                      </p>
+                      <div className={`grid gap-3 ${cs.videos.length === 1 ? "grid-cols-1 max-w-lg" : cs.videos.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
+                        {cs.videos.map((v: { id: string; label: string }) => (
+                          <div key={v.id} className="space-y-1.5">
+                            <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary/50">
+                              <iframe
+                                src={`https://www.youtube.com/embed/${v.id}?rel=0`}
+                                title={v.label}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                className="absolute inset-0 w-full h-full"
+                                loading="lazy"
+                              />
+                            </div>
+                            <p className="text-[11px] text-muted-foreground font-medium">{v.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
+import FooterCompact from "@/components/FooterCompact";
 import gty121Front from "@/assets/gty121-front.jpg";
 import gty121Rear from "@/assets/gty121-rear.png";
 import gty156Side from "@/assets/gty156-side.jpg";
