@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, Menu, X, ChevronDown, UserPlus, LogOut, User } from "lucide-react";
+import { Search, Menu, X, ChevronDown, UserPlus, LogOut, User, LogIn } from "lucide-react";
 import { toast } from "sonner";
 import ThemeToggle from "@/components/ThemeToggle";
 import MegaMenu, { MobileMegaMenu } from "@/components/MegaMenu";
@@ -37,17 +37,20 @@ const heroStats = [
 const HeroSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user } = useAuth();
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
-  const handleAuthClick = async () => {
-    if (user) {
-      await supabase.auth.signOut();
-      toast.success("ออกจากระบบเรียบร้อยแล้ว");
-    } else {
-      navigate("/member-register");
-    }
-  };
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex flex-col">
@@ -84,14 +87,49 @@ const HeroSection = () => {
           )}
           <div className="w-px h-6 bg-white/10 mx-1" />
           <ThemeToggle />
-          <button
-            onClick={handleAuthClick}
-            className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
-          >
-            <span className="flex items-center gap-2">
-              {user ? <><LogOut size={16} /> ออกจากระบบ</> : <><UserPlus size={16} /> สมัครสมาชิก</>}
-            </span>
-          </button>
+          <div className="relative" ref={userMenuRef}>
+            <button
+              onClick={() => setUserMenuOpen(!userMenuOpen)}
+              className="p-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+              aria-label="บัญชีผู้ใช้"
+            >
+              <User size={20} />
+            </button>
+            {userMenuOpen && (
+              <div className="absolute right-0 top-full mt-2 w-48 rounded-xl bg-card border border-border shadow-xl py-1 z-50 animate-fade-in">
+                {user ? (
+                  <>
+                    <div className="px-4 py-2 text-xs text-muted-foreground border-b border-border truncate">
+                      {user.email}
+                    </div>
+                    <button
+                      onClick={() => { signOut(); setUserMenuOpen(false); }}
+                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                    >
+                      <LogOut size={14} /> ออกจากระบบ
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/admin-login"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                    >
+                      <LogIn size={14} /> เข้าสู่ระบบ
+                    </Link>
+                    <Link
+                      to="/member-register"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                    >
+                      <UserPlus size={14} /> สมัครสมาชิก
+                    </Link>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
         </div>
         <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-white">
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -104,12 +142,31 @@ const HeroSection = () => {
           <MobileMegaMenu onNavigate={() => setMobileMenuOpen(false)} />
           <div className="flex items-center justify-between mt-4 gap-3 pt-4 border-t border-border">
             <ThemeToggle />
-            <button
-              onClick={() => { handleAuthClick(); setMobileMenuOpen(false); }}
-              className="flex-1 text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
-            >
-              {user ? "ออกจากระบบ" : "สมัครสมาชิก"}
-            </button>
+            {user ? (
+              <button
+                onClick={() => { signOut(); setMobileMenuOpen(false); }}
+                className="flex-1 text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
+              >
+                ออกจากระบบ
+              </button>
+            ) : (
+              <div className="flex-1 flex gap-2">
+                <Link
+                  to="/admin-login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex-1 text-center px-3 py-2.5 rounded-lg border border-border text-foreground text-sm font-semibold hover:bg-muted transition-colors"
+                >
+                  เข้าสู่ระบบ
+                </Link>
+                <Link
+                  to="/member-register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex-1 text-center px-3 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
+                >
+                  สมัครสมาชิก
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       )}
