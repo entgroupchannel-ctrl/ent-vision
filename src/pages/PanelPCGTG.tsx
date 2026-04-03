@@ -519,6 +519,7 @@ const PanelPC = () => {
         </div>
       </section>
 import gtgSeries from "@/assets/gtg-series.png";
+import FooterCompact from "@/components/FooterCompact";
 
       <section className="section-padding bg-surface/50">
         <div className="container max-w-7xl mx-auto">
@@ -853,7 +854,6 @@ import gtgSeries from "@/assets/gtg-series.png";
           </a>
         </div>
       </section>
-
       <FooterCompact />
     </div>
   );

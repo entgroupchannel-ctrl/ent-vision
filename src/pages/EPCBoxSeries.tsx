@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, L
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
+import FooterCompact from "@/components/FooterCompact";
 
 const features = [
   { icon: Wind, title: "Fanless Design", desc: "เงียบสนิท ไม่มีชิ้นส่วนเคลื่อนไหว อายุการใช้งานยาวนาน" },
@@ -821,7 +822,6 @@ const EPCBoxSeries = () => {
           </div>
         </div>
       </section>
-
       <FooterCompact />
     </div>
   );
