@@ -542,6 +542,13 @@ const MiniPCFirewall = () => {
         </div>
       </section>
 
+      {/* ── Comparison Table with Smart Filter ── */}
+      <section className="py-16" id="comparison">
+        <div className="container max-w-7xl mx-auto px-6">
+          <FirewallComparisonTable />
+        </div>
+      </section>
+
       {/* ── IPC090 Xeon Comparison ── */}
       <section className="py-16">
         <div className="container max-w-7xl mx-auto px-6">
