@@ -2907,10 +2907,11 @@ const GTSeries = () => {
                       <div className="font-bold text-foreground text-sm">Dual HDMI + SIM</div>
                       <div className="text-xs text-muted-foreground mt-1">2× HDMI + Micro SIM 4G</div>
                     </div>
-                    <div className="card-surface p-4 text-center">
-                      <Wind className="mx-auto text-primary mb-2" size={24} />
-                      <div className="font-bold text-foreground text-sm">Fanless 24/7</div>
-                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB · 2 COM · 2 LAN</div>
+                    <div className="card-surface p-4 text-center border-2 border-amber-500/30">
+                      <Wind className="mx-auto text-amber-500 mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Active Cooling 🌀</div>
+                      <div className="text-xs text-amber-600 dark:text-amber-400 mt-1 font-semibold">มีพัดลม (TDP 15–25W)</div>
+                      <div className="text-xs text-muted-foreground">รุ่นเดียวที่ไม่ใช่ Fanless</div>
                     </div>
                   </div>
                 </div>
