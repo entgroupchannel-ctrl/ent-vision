@@ -9,17 +9,45 @@ import { supabase } from "@/integrations/supabase/client";
 import heroIndustrial from "@/assets/hero-industrial.jpg";
 import logo from "@/assets/logo-entgroup.avif";
 
+const searchIndex = [
+  { keywords: ["mini pc", "มินิพีซี", "สำนักงาน", "office", "thin client"], label: "Mini PC สำนักงาน", href: "/mini-pc" },
+  { keywords: ["gt", "gt series", "industrial pc", "โรงงาน", "fanless", "ทนร้อน", "ทนฝุ่น", "อุตสาหกรรม"], label: "GT Series — Industrial Mini PC", href: "/gt-series" },
+  { keywords: ["gb", "gb series", "compact", "คอมแพค"], label: "GB Series — Compact PC", href: "/gb-series" },
+  { keywords: ["epc", "epc box", "embedded"], label: "EPC Box Series", href: "/epc-box-series" },
+  { keywords: ["epc series"], label: "EPC Series", href: "/epc-series" },
+  { keywords: ["panel pc", "gk", "จอสัมผัส", "touch", "หน้าจอ", "touchscreen"], label: "GK Series — Panel PC", href: "/gk-series" },
+  { keywords: ["gtg", "gty", "panel pc gtg", "stainless", "ip65"], label: "Panel PC GTG/GTY", href: "/panel-pc-gtg" },
+  { keywords: ["utc", "utc series"], label: "UTC Series", href: "/utc-series" },
+  { keywords: ["firewall", "ไฟร์วอลล์", "network security", "pfsense", "opnsense", "sme"], label: "Mini PC Firewall", href: "/minipc-firewall" },
+  { keywords: ["smart display", "kiosk", "คีออส", "digital signage", "จอโฆษณา", "monitor"], label: "Smart Display & KIOSK", href: "/smart-display" },
+  { keywords: ["rugged", "tablet", "แท็บเล็ต", "notebook", "ทหาร", "กันน้ำ", "กันกระแทก", "ภาคสนาม", "vehicle"], label: "Rugged Tablet / Notebook", href: "/rugged-tablet" },
+  { keywords: ["volktek", "switch", "เครือข่าย", "network", "สวิตช์"], label: "Volktek Industrial Switch", href: "/volktek" },
+  { keywords: ["vcloudpoint", "zero client", "thin client", "ประหยัดพลังงาน"], label: "vCloudPoint Zero Client", href: "/vcloudpoint" },
+  { keywords: ["waterproof", "ip69k", "กันน้ำ", "ล้างน้ำ", "อาหาร", "food"], label: "Waterproof PC IP69K", href: "/waterproof-pc" },
+  { keywords: ["โปรโมชั่น", "promotion", "ลดราคา", "sale"], label: "โปรโมชั่น", href: "/promotions" },
+  { keywords: ["ติดต่อ", "contact", "สอบถาม", "โทร"], label: "ติดต่อเรา", href: "/contact" },
+  { keywords: ["ใบเสนอราคา", "quote", "ขอราคา"], label: "ขอใบเสนอราคา", href: "/quote" },
+  { keywords: ["gt1000"], label: "GT1000 — Entry Level", href: "/gt-series?tab=GT1000" },
+  { keywords: ["gt1400", "gpio"], label: "GT1400 — GPIO + 2.5G LAN", href: "/gt-series?tab=GT1400" },
+  { keywords: ["gt4500"], label: "GT4500 — DDR4 + SIM 4G/5G", href: "/gt-series?tab=GT4500" },
+  { keywords: ["gt7000"], label: "GT7000 — คำตอบทุกปัญหาโรงงาน", href: "/gt-series?tab=GT7000" },
+  { keywords: ["gt9000"], label: "GT9000 — 3 HDMI 6 COM NVMe", href: "/gt-series?tab=GT9000" },
+  { keywords: ["gb1000"], label: "GB1000 — Ultra-Compact", href: "/gb-series" },
+  { keywords: ["gb5000"], label: "GB5000 — Premium Performance", href: "/gb-series" },
+  { keywords: ["pos", "ร้านค้า", "ขายของ"], label: "Panel PC สำหรับ POS ร้านค้า", href: "/panel-pc-gtg" },
+];
+
 const searchTags = [
-  { label: "Mini PC สำนักงาน", href: "#products" },
-  { label: "Industrial PC ทนร้อนทนฝุ่น", href: "#products" },
-  { label: "Panel PC จอสัมผัสโรงงาน", href: "#products" },
-  { label: "Firewall สำหรับ SME", href: "#products" },
-  { label: "Zero Client ประหยัดพลังงาน", href: "#products" },
-  { label: "Rugged Tablet กันน้ำกันกระแทก", href: "#products" },
-  { label: "Industrial Switch เครือข่ายโรงงาน", href: "#products" },
-  { label: "Touch Screen POS ร้านค้า", href: "#products" },
-  { label: "Rugged Notebook สำหรับภาคสนาม", href: "#products" },
-  { label: "Vehicle Tablet ติดรถขนส่ง", href: "#products" },
+  { label: "Mini PC สำนักงาน", href: "/mini-pc" },
+  { label: "Industrial PC ทนร้อนทนฝุ่น", href: "/gt-series" },
+  { label: "Panel PC จอสัมผัสโรงงาน", href: "/panel-pc-gtg" },
+  { label: "Firewall สำหรับ SME", href: "/minipc-firewall" },
+  { label: "Zero Client ประหยัดพลังงาน", href: "/vcloudpoint" },
+  { label: "Rugged Tablet กันน้ำกันกระแทก", href: "/rugged-tablet" },
+  { label: "Industrial Switch เครือข่ายโรงงาน", href: "/volktek" },
+  { label: "Touch Screen POS ร้านค้า", href: "/panel-pc-gtg" },
+  { label: "Rugged Notebook สำหรับภาคสนาม", href: "/rugged-tablet" },
+  { label: "Vehicle Tablet ติดรถขนส่ง", href: "/rugged-tablet" },
 ];
 
 const navLinks = [
