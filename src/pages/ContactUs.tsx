@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import { useAuth } from "@/hooks/useAuth";
 
 const categories = [
   "เลือกหมวดหมู่",
