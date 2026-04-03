@@ -88,6 +88,7 @@ const footerSections = [
       { label: "ติดต่อเรา / แผนที่", href: "/contact" },
       { label: "ขอใบเสนอราคา", href: "/quote" },
       { label: "โปรโมชั่น", href: "/promotions" },
+      { label: "สมัครงาน", href: "https://entgroup-job.lovable.app/", external: true },
     ],
   },
   {
