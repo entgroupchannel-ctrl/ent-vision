@@ -188,8 +188,30 @@ const AdminDashboard = () => {
           ))}
         </div>
 
-        {/* Filter */}
-        {tab !== "subscribers" && (
+        {/* Filter & Export */}
+        {tab === "subscribers" ? (
+          <div className="flex items-center justify-end mb-4">
+            <button
+              onClick={() => {
+                const headers = ["Email", "Name", "Source", "Active", "Created At"];
+                const rows = subscribers.map((s: any) => [
+                  s.email, s.name || "", s.source || "", s.is_active ? "Yes" : "No", s.created_at
+                ]);
+                const csv = [headers, ...rows].map(r => r.map((c: string) => `"${c}"`).join(",")).join("\n");
+                const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `subscribers_${new Date().toISOString().slice(0,10)}.csv`;
+                a.click();
+                URL.revokeObjectURL(url);
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+            >
+              <Download size={14} /> Export CSV
+            </button>
+          </div>
+        ) : (
           <div className="flex items-center gap-2 mb-4">
             <Filter size={14} className="text-muted-foreground" />
             <select
