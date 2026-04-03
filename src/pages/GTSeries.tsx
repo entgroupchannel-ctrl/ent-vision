@@ -3812,12 +3812,12 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
-                  href="https://www.entgroup.co.th/gt-series-2023"
+                  href="http://www.greenthinpc.com/productinfo/954397.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
                 >
-                  <ExternalLink size={16} /> ดูข้อมูลเพิ่มเติม GT1300
+                  <ExternalLink size={16} /> ดูข้อมูลเพิ่มเติม GT1300 (Manufacturer)
                 </a>
               </div>
             </div>
