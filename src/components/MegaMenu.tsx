@@ -39,7 +39,6 @@ const menuCategories = [
           { label: "GT Series — 12 รุ่น", href: "/gt-series", hot: true },
           { label: "GB Series — Compact", href: "/gb-series" },
           { label: "iBox Series", href: "/ibox-series" },
-          { label: "EPC Series", href: "/epc-series" },
           { label: "EPC Box Series", href: "/epc-box-series" },
         ],
       },
@@ -48,13 +47,14 @@ const menuCategories = [
         links: [
           { label: "GK Series — Panel PC", href: "/gk-series", hot: true },
           { label: "Panel PC GTG/GTY", href: "/panel-pc-gtg" },
+          { label: "EPC Series", href: "/epc-series" },
+          { label: "Waterproof PC IP69K", href: "/waterproof-pc" },
+          { label: "UTC Series", href: "/utc-series" },
         ],
       },
       {
         heading: "เพิ่มเติม",
         links: [
-          { label: "Waterproof PC IP69K", href: "/waterproof-pc" },
-          { label: "UTC Series", href: "/utc-series" },
           { label: "Panel PC — Cabinet", href: "/cabinets" },
         ],
       },
