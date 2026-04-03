@@ -2828,14 +2828,14 @@ const GTSeries = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
                 <div className="relative z-10 p-8 md:p-12">
-                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
-                    Intel Ice Lake Gen 10 · สเปคแรง
+                   <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-amber-500/30">
+                    Intel Ice Lake Gen 10 · Active Cooling · 🌀 มีพัดลม
                   </span>
                   <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
                     GT<span className="text-primary">8000</span>
                   </h2>
                   <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
-                    Ice Lake Gen 10 — พลังประมวลผลระดับ Data Center
+                    Ice Lake Gen 10 — พลังประมวลผลสูงสุดใน GT Series
                   </p>
                 </div>
               </div>
@@ -2844,24 +2844,47 @@ const GTSeries = () => {
               <div className="grid lg:grid-cols-5 gap-8">
                 <div className="lg:col-span-3 space-y-6">
                   <div>
-                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
-                      DDR4 64GB · Dual HDMI · SIM 4G · Fanless
+                     <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      DDR4 64GB · Dual HDMI · SIM 4G · Active Cooling
                     </span>
                     <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
                       GT<span className="text-gradient">8000</span>
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Industrial Mini PC โครง Brushed Aluminum Alloy ระบบ Fanless เงียบสนิท
+                      Industrial Mini PC โครง Brushed Aluminum Alloy พร้อมระบบพัดลมระบายความร้อน
                       รองรับ DDR4 สูงสุด 64GB, Dual HDMI Display, Micro SIM 4G Module
                       พร้อม mSATA SSD + 2.5" SATA HDD — ครบทุกการเชื่อมต่อ
                     </p>
                   </div>
 
+                  {/* Fan Notice */}
+                  <div className="rounded-xl p-5 border-2 border-amber-500/30 bg-amber-500/5">
+                    <div className="flex items-start gap-3">
+                      <span className="text-2xl">🌀</span>
+                      <div>
+                        <h4 className="font-bold text-foreground mb-1 flex items-center gap-2">
+                          รุ่นเดียวใน GT Series ที่ใช้ระบบพัดลม
+                          <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-400 text-[10px] font-bold">Active Cooling</span>
+                        </h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          GT8000 ใช้ CPU Intel Gen 10 (Ice Lake / Comet Lake) ที่มี TDP สูงถึง 15–25W 
+                          ซึ่งต้องการระบบระบายความร้อนแบบ Active Cooling (พัดลม) เพื่อรักษาประสิทธิภาพสูงสุดอย่างต่อเนื่อง 
+                          — ต่างจากรุ่นอื่นใน GT Series ที่เป็น Fanless ทั้งหมด
+                        </p>
+                        <div className="flex flex-wrap gap-2 mt-3">
+                          <span className="px-2.5 py-1 rounded-full bg-muted text-xs font-medium text-muted-foreground">TDP 15–25W</span>
+                          <span className="px-2.5 py-1 rounded-full bg-muted text-xs font-medium text-muted-foreground">ต้องการพัดลมช่วยระบายความร้อน</span>
+                          <span className="px-2.5 py-1 rounded-full bg-muted text-xs font-medium text-muted-foreground">เหมาะกับงานประมวลผลหนัก</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-2">🏭 ออกแบบมาเพื่อโรงงานโดยเฉพาะ</h4>
+                    <h4 className="font-bold text-foreground mb-2">⚡ ทำไมต้องมีพัดลม?</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      ทนทานต่อสภาพแวดล้อมที่เต็มไปด้วยฝุ่นละออง และความร้อน
-                      Compact structure, Fanless, ไม่มีชิ้นส่วนเคลื่อนไหว ทำงานต่อเนื่อง 24/7
+                      CPU Intel Gen 10 ให้ประสิทธิภาพสูงกว่ารุ่น Celeron/Gen 4 หลายเท่า แต่แลกมาด้วยความร้อนที่มากขึ้น 
+                      GT8000 จึงใช้พัดลมขนาดเล็กที่ทำงานเงียบ เพื่อรองรับงาน SCADA, AI Edge, Multi-tasking หนักๆ ได้อย่างเสถียร
                     </p>
                   </div>
 
@@ -2884,10 +2907,11 @@ const GTSeries = () => {
                       <div className="font-bold text-foreground text-sm">Dual HDMI + SIM</div>
                       <div className="text-xs text-muted-foreground mt-1">2× HDMI + Micro SIM 4G</div>
                     </div>
-                    <div className="card-surface p-4 text-center">
-                      <Wind className="mx-auto text-primary mb-2" size={24} />
-                      <div className="font-bold text-foreground text-sm">Fanless 24/7</div>
-                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB · 2 COM · 2 LAN</div>
+                    <div className="card-surface p-4 text-center border-2 border-amber-500/30">
+                      <Wind className="mx-auto text-amber-500 mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Active Cooling 🌀</div>
+                      <div className="text-xs text-amber-600 dark:text-amber-400 mt-1 font-semibold">มีพัดลม (TDP 15–25W)</div>
+                      <div className="text-xs text-muted-foreground">รุ่นเดียวที่ไม่ใช่ Fanless</div>
                     </div>
                   </div>
                 </div>
@@ -2975,7 +2999,7 @@ const GTSeries = () => {
                           ["LAN", "2 × Gigabit Ethernet RJ45"],
                           ["SIM", "Micro SIM 4G (PUSH function)"],
                           ["WiFi", "Built-in WiFi / Bluetooth"],
-                          ["Cooling", "Fanless — เงียบ 0 dB"],
+                          ["Cooling", "Active Cooling (พัดลม) — TDP 15–25W"],
                           ["Mounting", "VESA / Wall Mount"],
                         ].map(([k, v], i) => (
                           <tr key={i}><td className="p-3 font-medium text-foreground w-1/3">{k}</td><td className="p-3 text-muted-foreground">{v}</td></tr>
