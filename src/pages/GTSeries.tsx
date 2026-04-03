@@ -11,6 +11,7 @@ import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuo
 import { LineQRDialog } from "@/components/LineQRDialog";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
+import gtSeriesHero from "@/assets/gt-series-hero-lineup.jpg";
 import gt1000Banner from "@/assets/gt1000-banner.jpg";
 import gt2000Banner from "@/assets/gt2000-banner.jpg";
 import gt3000Banner from "@/assets/gt3000-banner.jpg";
