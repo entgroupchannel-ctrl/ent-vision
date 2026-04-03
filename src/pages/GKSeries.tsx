@@ -564,6 +564,7 @@ const ComparisonTable = () => (
 /* ─── Page ─── */
 const GKSeries = () => {
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [showLineQR, setShowLineQR] = useState(false);
   return (
     <div className="min-h-screen bg-background">
       {/* Nav */}
