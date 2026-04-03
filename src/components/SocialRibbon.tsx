@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube } from "lucide-react";
 
 const TiktokIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -8,30 +8,10 @@ const TiktokIcon = ({ size = 20 }: { size?: number }) => (
 );
 
 const socials = [
-  {
-    icon: <Facebook size={20} />,
-    label: "Facebook",
-    href: "https://www.facebook.com/entgroup.co.th",
-    bg: "bg-[#1877F2]",
-  },
-  {
-    icon: <Instagram size={20} />,
-    label: "Instagram",
-    href: "https://www.instagram.com/entgroup.co.th",
-    bg: "bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888]",
-  },
-  {
-    icon: <TiktokIcon />,
-    label: "TikTok",
-    href: "https://www.tiktok.com/@entgroup",
-    bg: "bg-[#010101]",
-  },
-  {
-    icon: <Youtube size={20} />,
-    label: "YouTube",
-    href: "https://www.youtube.com/@entgroup",
-    bg: "bg-[#FF0000]",
-  },
+  { icon: <Facebook size={18} />, label: "Facebook", href: "https://www.facebook.com/entgroup.co.th", bg: "bg-[#1877F2]" },
+  { icon: <Instagram size={18} />, label: "Instagram", href: "https://www.instagram.com/entgroup.co.th", bg: "bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888]" },
+  { icon: <TiktokIcon size={18} />, label: "TikTok", href: "https://www.tiktok.com/@entgroup", bg: "bg-[#010101]" },
+  { icon: <Youtube size={18} />, label: "YouTube", href: "https://www.youtube.com/@entgroup", bg: "bg-[#FF0000]" },
 ];
 
 const SocialRibbon = () => {
@@ -40,48 +20,52 @@ const SocialRibbon = () => {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const showTimer = setTimeout(() => setVisible(true), 1000);
-    return () => clearTimeout(showTimer);
+    const t = setTimeout(() => setVisible(true), 1000);
+    return () => clearTimeout(t);
   }, []);
 
-  // Auto-collapse after 10s whenever expanded becomes true
   useEffect(() => {
     if (!visible || !expanded) return;
     timerRef.current = setTimeout(() => setExpanded(false), 10000);
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, [visible, expanded]);
 
   if (!visible) return null;
 
   return (
-    <div className="fixed left-0 top-1/2 -translate-y-1/2 z-40 flex items-center">
-      <div
-        className={`flex flex-col gap-1 transition-all duration-500 ease-in-out ${
-          expanded ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0 pointer-events-none"
-        }`}
-      >
+    <div
+      className="fixed left-0 top-1/2 -translate-y-1/2 z-40 transition-transform duration-500 ease-in-out"
+      style={{ transform: `translateY(-50%) translateX(${expanded ? "0" : "-100%"})` }}
+    >
+      {/* Ribbon */}
+      <div className="flex flex-col gap-0.5">
         {socials.map((s, i) => (
           <a
             key={i}
             href={s.href}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex items-center gap-3 px-4 py-3 ${s.bg} text-white rounded-r-xl shadow-lg hover:pl-6 transition-all duration-200`}
+            className={`flex items-center gap-2.5 px-3 py-2.5 ${s.bg} text-white rounded-r-lg shadow-md hover:pr-5 transition-all duration-200 text-xs font-medium`}
           >
             <span className="shrink-0">{s.icon}</span>
-            <span className="text-sm font-medium whitespace-nowrap">{s.label}</span>
+            <span className="whitespace-nowrap">{s.label}</span>
           </a>
         ))}
       </div>
 
+      {/* Pull tab — always visible, attached to right edge of ribbon */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="flex items-center justify-center w-7 h-14 rounded-r-lg bg-primary text-primary-foreground shadow-md hover:w-8 transition-all duration-200"
-        aria-label={expanded ? "ซ่อนเมนู" : "แสดงเมนู"}
+        className="absolute top-1/2 -translate-y-1/2 -right-6 w-6 h-12 rounded-r-md bg-foreground/80 text-background flex items-center justify-center shadow-md hover:bg-foreground transition-colors"
+        style={{ right: "-24px" }}
+        aria-label={expanded ? "ซ่อน" : "แสดง Social"}
       >
-        {expanded ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+        <svg
+          width="10" height="16" viewBox="0 0 10 16" fill="none"
+          className={`transition-transform duration-300 ${expanded ? "" : "rotate-180"}`}
+        >
+          <path d="M8 2L2 8L8 14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </button>
     </div>
   );
