@@ -3,12 +3,12 @@ import { Monitor, Cpu, TabletSmartphone, Wifi, Shield, LayoutGrid, Server } from
 
 const categories = [
   {
-    title: "GT Series",
-    subtitle: "Fanless Embedded Computer",
-    description: "คอมพิวเตอร์อุตสาหกรรมไร้พัดลม ทนทาน แข็งแกร่ง",
+    title: "GT Series — Mini PC",
+    subtitle: "Fanless Industrial Computer",
+    description: "คอมพิวเตอร์อุตสาหกรรมไร้พัดลม 13 รุ่น ครบทุกสเปก ตั้งแต่ Celeron ถึง i7 Gen 12",
     icon: Cpu,
     href: "/gt-series",
-    models: ["GT1000", "GT1200", "GT1300", "GT4500", "GT7000", "GT9000"],
+    models: ["GT1000", "GT1200", "GT1300", "GT1400", "GT2000", "GT3000", "GT4000", "GT4500", "GT5000", "GT6000", "GT7000", "GT8000", "GT9000"],
     badge: "Hot",
     image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
   },
