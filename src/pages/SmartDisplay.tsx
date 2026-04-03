@@ -565,17 +565,21 @@ const SmartDisplay = () => {
                 <p className="text-muted-foreground text-center text-sm mb-6">KIOSK ของเราถูกนำไปใช้จริงในหลากหลายอุตสาหกรรม</p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    { emoji: "👤", title: "Visitor Management", desc: "ระบบลงทะเบียนผู้มาติดต่อ ถ่ายภาพ พิมพ์บัตร — สำนักงาน อาคารสูง โรงงาน", color: "bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900/30" },
-                    { emoji: "🎫", title: "Queue Management", desc: "ระบบจัดคิวอัจฉริยะ ลดเวลารอคอย — โรงพยาบาล ธนาคาร สำนักงานราชการ", color: "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-900/30" },
-                    { emoji: "🗺️", title: "Wayfinding & Directory", desc: "แผนที่นำทาง ค้นหาข้อมูลสถานที่ — ห้างสรรพสินค้า สนามบิน มหาวิทยาลัย", color: "bg-purple-50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-900/30" },
-                    { emoji: "🍔", title: "Self-Order & Payment", desc: "สั่งอาหาร เลือกเมนู ชำระเงิน — ร้านอาหาร QSR ฟู้ดคอร์ท คาเฟ่", color: "bg-orange-50 dark:bg-orange-950/20 border-orange-200 dark:border-orange-900/30" },
-                    { emoji: "📢", title: "Brand & Promotion", desc: "จอโฆษณาแบบอินเทอร์แอคทีฟ — ค้าปลีก งานอีเวนต์ โชว์รูม", color: "bg-pink-50 dark:bg-pink-950/20 border-pink-200 dark:border-pink-900/30" },
-                    { emoji: "📋", title: "Document & Check-in", desc: "เช็คอิน ลงทะเบียน กรอกเอกสาร — โรงแรม คลินิก สัมมนา", color: "bg-teal-50 dark:bg-teal-950/20 border-teal-200 dark:border-teal-900/30" },
+                    { image: kioskVisitor, title: "Visitor Management", desc: "ระบบลงทะเบียนผู้มาติดต่อ ถ่ายภาพ พิมพ์บัตร — สำนักงาน อาคารสูง โรงงาน", color: "bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900/30" },
+                    { image: kioskQueue, title: "Queue Management", desc: "ระบบจัดคิวอัจฉริยะ ลดเวลารอคอย — โรงพยาบาล ธนาคาร สำนักงานราชการ", color: "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-900/30" },
+                    { image: kioskWayfinding, title: "Wayfinding & Directory", desc: "แผนที่นำทาง ค้นหาข้อมูลสถานที่ — ห้างสรรพสินค้า สนามบิน มหาวิทยาลัย", color: "bg-purple-50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-900/30" },
+                    { image: kioskSelforder, title: "Self-Order & Payment", desc: "สั่งอาหาร เลือกเมนู ชำระเงิน — ร้านอาหาร QSR ฟู้ดคอร์ท คาเฟ่", color: "bg-orange-50 dark:bg-orange-950/20 border-orange-200 dark:border-orange-900/30" },
+                    { image: kioskBrand, title: "Brand & Promotion", desc: "จอโฆษณาแบบอินเทอร์แอคทีฟ — ค้าปลีก งานอีเวนต์ โชว์รูม", color: "bg-pink-50 dark:bg-pink-950/20 border-pink-200 dark:border-pink-900/30" },
+                    { image: kioskCheckin, title: "Document & Check-in", desc: "เช็คอิน ลงทะเบียน กรอกเอกสาร — โรงแรม คลินิก สัมมนา", color: "bg-teal-50 dark:bg-teal-950/20 border-teal-200 dark:border-teal-900/30" },
                   ].map((uc) => (
-                    <div key={uc.title} className={`rounded-xl p-5 border ${uc.color} hover:shadow-md transition-shadow`}>
-                      <span className="text-2xl mb-2 block">{uc.emoji}</span>
-                      <h4 className="font-bold text-foreground text-sm mb-1">{uc.title}</h4>
-                      <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
+                    <div key={uc.title} className={`rounded-xl overflow-hidden border ${uc.color} hover:shadow-md transition-shadow`}>
+                      <div className="aspect-[3/2] overflow-hidden">
+                        <img src={uc.image} alt={uc.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+                      </div>
+                      <div className="p-5">
+                        <h4 className="font-bold text-foreground text-sm mb-1">{uc.title}</h4>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
