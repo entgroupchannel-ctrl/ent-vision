@@ -72,6 +72,13 @@ const HeroSection = () => {
   const navigate = useNavigate();
   const { count: wishlistCount } = useWishlist();
   const [searchOpen, setSearchOpen] = useState(false);
+  const [tagsExpanded, setTagsExpanded] = useState(true);
+
+  // Auto-collapse tags after 10 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setTagsExpanded(false), 10000);
+    return () => clearTimeout(timer);
+  }, []);
   const searchRef = useRef<HTMLDivElement>(null);
 
   // Close menus on outside click
