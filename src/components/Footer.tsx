@@ -232,6 +232,27 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Affiliate Sites - Horizontal */}
+        <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
+          <div className="container max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span className="text-xs font-bold text-foreground mr-2">เว็บไซต์ในเครือ:</span>
+            {[
+              { label: "Rugged Device", href: "https://entgroup-rugged.com" },
+              { label: "NVIDIA Jetson", href: "https://nvidia-jetson.com" },
+              { label: "ENT Group Biz", href: "https://www.entgroup.co.th" },
+              { label: "VIMOSA", href: "https://www.vimosa.co.th/" },
+              { label: "VICHAKAN", href: "https://www.vichakarn.co/" },
+            ].map((site, i, arr) => (
+              <span key={site.label} className="inline-flex items-center gap-1">
+                <a href={site.href} target="_blank" rel="noopener noreferrer" className="text-xs text-muted-foreground hover:text-primary transition-colors">
+                  {site.label}
+                </a>
+                {i < arr.length - 1 && <span className="text-muted-foreground/40 mx-1">|</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+
         {/* PDPA - Collapsible */}
         <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
           <div className="container max-w-7xl mx-auto px-6 py-4">
