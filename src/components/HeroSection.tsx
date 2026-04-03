@@ -70,7 +70,7 @@ const HeroSection = () => {
   const userMenuRef = useRef<HTMLDivElement>(null);
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
-
+  const { count: wishlistCount } = useWishlist();
   const [searchOpen, setSearchOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
