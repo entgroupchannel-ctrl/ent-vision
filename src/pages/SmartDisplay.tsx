@@ -186,7 +186,7 @@ const SmartDisplay = () => {
           <div className="flex items-center gap-3">
             <ThemeToggle />
             <Link to="/" className="hidden md:inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              <ArrowLeft size={16} /> กลับหน้าหลัก
+              <ArrowLeft size={16} /> กลับหน้าแรก
             </Link>
           </div>
         </div>
