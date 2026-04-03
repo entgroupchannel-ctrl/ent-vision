@@ -1,5 +1,5 @@
 import SEOHead from "@/components/SEOHead";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import bannerContact from "@/assets/banner-contact.jpg";
 import teamSky from "@/assets/team-sky.png";
 import teamSom from "@/assets/team-som.png";
@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import { useAuth } from "@/hooks/useAuth";
 
 const categories = [
   "เลือกหมวดหมู่",
@@ -41,6 +42,7 @@ const callbackTimes = [
 ];
 
 const ContactUs = () => {
+  const { user } = useAuth();
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -55,6 +57,19 @@ const ContactUs = () => {
     subscribe: true,
   });
   const [submitted, setSubmitted] = useState(false);
+
+  // Auto-fill from user profile
+  useEffect(() => {
+    if (user) {
+      setForm((prev) => ({
+        ...prev,
+        name: prev.name || user.user_metadata?.full_name || "",
+        email: prev.email || user.email || "",
+        phone: prev.phone || user.user_metadata?.phone || "",
+        company: prev.company || user.user_metadata?.company || "",
+      }));
+    }
+  }, [user]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
