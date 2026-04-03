@@ -803,6 +803,7 @@ const EPCSeries = () => {
         productName={quoteProduct || ""}
         productCategory="EPC Series"
       />
+      <MultiSelectQuoteBar selectedProducts={selectedProducts} onClear={clearSelection} productCategory="EPC Series" />
       <FooterCompact />
     </div>
   );
