@@ -20,6 +20,17 @@ const productCategories = [
   "Waterproof PC IP69K", "อื่นๆ",
 ];
 
+const categoryModels: Record<string, string[]> = {
+  "GT Series — Mini PC": ["GT1000", "GT1200", "GT1300", "GT1400", "GT2000", "GT3000", "GT4000", "GT4500", "GT5000", "GT6000", "GT7000", "GT8000", "GT9000"],
+  "GB Series — Compact": ["GB1000", "GB2000", "GB4000 v1", "GB4000 v2", "GB5000"],
+  "EPC Series": ["EPC-102A", "EPC-106A", "EPC-107A", "EPC-109A", "EPC-202A", "EPC-206A", "EPC-207A", "EPC-209A", "EPC-302A", "EPC-306A", "EPC-307A", "EPC-309A"],
+  "EPC Box Series": ["EPC-10XA", "EPC-20XA", "EPC-30XA"],
+  "GK Series — Panel PC": ["GK1004", "GK1501", "GK1506", "GK1901", "GK2101"],
+  "Panel PC GTG/GTY": ["GTY101T", "GTY104T", "GTY121T", "GTY133T", "GTY150T", "GTY156T", "GTY170T", "GTY185T", "GTY190T", "GTY215T", "GTG238T", "GTG270T", "GTG320T"],
+  "Mini PC Firewall": ["K8-F12", "K8-F18"],
+  "vCloudPoint": ["vCloudPoint S100", "vCloudPoint S200"],
+};
+
 const callbackTimes = [
   "เลือก", "เช้า (9:00-12:00)", "บ่าย (13:00-16:00)",
   "เย็น (16:00-18:00)", "เวลาใดก็ได้",
