@@ -150,13 +150,35 @@ interface GBPriceListProps {
 const GBPriceList = ({ onRequestQuote }: GBPriceListProps) => {
   const [activeTab, setActiveTab] = useState<TabId>("gb1000");
   const [pages, setPages] = useState<Record<TabId, number>>({ gb1000: 1, gb2000: 1, gb4000: 1, gb5000: 1, windows: 1 });
+  const [search, setSearch] = useState("");
 
   const currentTab = tabs.find((t) => t.id === activeTab)!;
+
+  const filteredData = useMemo(() => {
+    if (!search.trim()) return currentTab.data;
+    const q = search.toLowerCase();
+    return currentTab.data.filter(
+      (item) =>
+        item.processor.toLowerCase().includes(q) ||
+        item.config.toLowerCase().includes(q) ||
+        (item.remark && item.remark.toLowerCase().includes(q))
+    );
+  }, [currentTab.data, search]);
+
   const currentPage = pages[activeTab];
-  const totalPages = Math.ceil(currentTab.data.length / ITEMS_PER_PAGE);
-  const pagedData = currentTab.data.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  const safePage = Math.min(currentPage, totalPages || 1);
+  const pagedData = filteredData.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
 
   const setPage = (page: number) => setPages((prev) => ({ ...prev, [activeTab]: page }));
+
+  // Get unique processors for quick filter chips
+  const cpuChips = useMemo(() => {
+    const seen = new Set<string>();
+    return currentTab.data
+      .filter((item) => item.processor && !seen.has(item.processor) && seen.add(item.processor))
+      .map((item) => item.processor);
+  }, [currentTab.data]);
 
   return (
     <section className="border-t border-border bg-card" id="price-list">
