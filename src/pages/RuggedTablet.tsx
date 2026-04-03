@@ -828,6 +828,44 @@ const RuggedTablet = () => {
           </div>
         </div>
       </div>
+
+      {/* Floating Selection Bar */}
+      {selectedProducts.size > 0 && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-primary text-primary-foreground rounded-full shadow-2xl px-6 py-3 flex items-center gap-4 animate-in slide-in-from-bottom-4">
+          <div className="flex items-center gap-2">
+            <ShoppingCart className="w-5 h-5" />
+            <span className="font-bold text-sm">{selectedProducts.size} รุ่น</span>
+          </div>
+          <Button
+            size="sm"
+            variant="secondary"
+            className="rounded-full font-bold"
+            onClick={openMultiQuote}
+          >
+            <FileText className="w-4 h-4 mr-1.5" /> ขอใบเสนอราคารวม
+          </Button>
+          <button onClick={clearSelection} className="p-1 hover:bg-primary-foreground/20 rounded-full transition-colors">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="Rugged Tablet"
+      />
+      <QuoteDialog
+        open={showMultiQuote}
+        onClose={() => { setShowMultiQuote(false); clearSelection(); }}
+        productCategory="Rugged Tablet"
+        initialProducts={Array.from(selectedProducts).map(name => ({
+          category: "Rugged Tablet / Notebook",
+          model: name,
+          qty: 1,
+        }))}
+      />
       <FooterCompact />
     </div>
   );
