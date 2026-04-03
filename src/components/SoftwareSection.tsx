@@ -1,5 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import LineQRButton from "@/components/LineQRButton";
+import SoftwareInquiryDialog from "@/components/SoftwareInquiryDialog";
 
 const softwareExamples = [
   { label: "HRM", href: "https://entgroup-job.lovable.app/" },
@@ -59,11 +60,16 @@ const SoftwareSection = () => {
             </div>
 
             <div className="flex flex-wrap gap-4">
+              <SoftwareInquiryDialog>
+                <button className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity">
+                  สอบถามบริการซอฟต์แวร์
+                </button>
+              </SoftwareInquiryDialog>
               <a
                 href="https://codesteel.lovable.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-semibold hover:bg-surface-hover transition-colors"
               >
                 ดูตัวอย่างงาน <ExternalLink size={16} />
               </a>
