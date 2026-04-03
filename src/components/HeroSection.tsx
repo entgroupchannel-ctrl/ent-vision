@@ -72,6 +72,13 @@ const HeroSection = () => {
   const navigate = useNavigate();
   const { count: wishlistCount } = useWishlist();
   const [searchOpen, setSearchOpen] = useState(false);
+  const [tagsExpanded, setTagsExpanded] = useState(true);
+
+  // Auto-collapse tags after 10 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setTagsExpanded(false), 10000);
+    return () => clearTimeout(timer);
+  }, []);
   const searchRef = useRef<HTMLDivElement>(null);
 
   // Close menus on outside click
@@ -337,18 +344,26 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right: Search Tags */}
-          <div className="hidden lg:flex flex-col gap-2.5 max-w-[220px] animate-fade-up" style={{ animationDelay: "0.4s" }}>
-            <p className="text-[10px] font-semibold tracking-widest uppercase text-white/40 mb-1">สินค้ายอดนิยม</p>
-            {searchTags.slice(0, 6).map((tag) => (
-              <button
-                key={tag.label}
-                onClick={() => navigate(tag.href)}
-                className="w-full text-left px-4 py-2.5 rounded-xl bg-white/5 backdrop-blur-md text-white/80 text-xs border border-white/10 hover:bg-white/15 hover:border-white/25 hover:text-white transition-all"
-              >
-                {tag.label}
-              </button>
-            ))}
+          {/* Right: Search Tags — collapsible */}
+          <div className="hidden lg:flex flex-col items-end gap-2.5 animate-fade-up" style={{ animationDelay: "0.4s" }}>
+            <button
+              onClick={() => setTagsExpanded(!tagsExpanded)}
+              className="flex items-center gap-1.5 text-[10px] font-semibold tracking-widest uppercase text-white/40 hover:text-white/70 transition-colors mb-1"
+            >
+              <span>สินค้ายอดนิยม</span>
+              <ChevronDown size={12} className={`transition-transform duration-300 ${tagsExpanded ? "rotate-0" : "-rotate-90"}`} />
+            </button>
+            <div className={`flex flex-col gap-2.5 max-w-[220px] overflow-hidden transition-all duration-500 ease-in-out ${tagsExpanded ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"}`}>
+              {searchTags.slice(0, 6).map((tag) => (
+                <button
+                  key={tag.label}
+                  onClick={() => navigate(tag.href)}
+                  className="w-full text-left px-4 py-2.5 rounded-xl bg-white/5 backdrop-blur-md text-white/80 text-xs border border-white/10 hover:bg-white/15 hover:border-white/25 hover:text-white transition-all"
+                >
+                  {tag.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Mobile: Tags inline */}
