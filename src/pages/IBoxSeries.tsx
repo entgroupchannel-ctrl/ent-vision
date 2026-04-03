@@ -7,6 +7,7 @@ import WishlistHeart from "@/components/WishlistHeart";
 import {
   ArrowLeft, Cpu, Thermometer, Shield, Usb, Wifi, Download,
   FileText, ChevronRight, Layers, HardDrive, Monitor, Zap, Box,
+  Factory, Stethoscope, Truck, ScanLine, Tv, Warehouse,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
