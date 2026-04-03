@@ -59,6 +59,7 @@ const ContactUs = () => {
   const [submitted, setSubmitted] = useState(false);
   const [scanning, setScanning] = useState(false);
   const [cardPreview, setCardPreview] = useState<string | null>(null);
+  const [extractedCardData, setExtractedCardData] = useState<Record<string, string> | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Auto-fill from user profile
