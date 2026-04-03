@@ -1637,7 +1637,7 @@ const GTSeries = () => {
                 <div className="lg:col-span-2 space-y-4">
                   <div className="card-surface overflow-hidden rounded-xl bg-muted/30">
                     <img
-                      src="https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5873810.jpg"
+                      src="/images/gt4000/front.jpg"
                       alt="GT4000 ด้านหน้า — 6 COM, USB, LAN, VGA, HDMI"
                       className="w-full object-contain p-2"
                       loading="lazy"
@@ -1645,10 +1645,10 @@ const GTSeries = () => {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5873922.jpg", alt: "GT4000 ด้านหลัง — USB, COM ports" },
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5873921.jpg", alt: "GT4000 ด้านข้าง — ครีบระบายความร้อน" },
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5873919.jpg", alt: "GT4000 มุมเอียง — ภาพรวม" },
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5873923.jpg", alt: "GT4000 ภายใน — Mainboard" },
+                      { src: "/images/gt4000/rear.jpg", alt: "GT4000 ด้านหลัง — USB, COM ports" },
+                      { src: "/images/gt4000/side.jpg", alt: "GT4000 ด้านข้าง — ครีบระบายความร้อน" },
+                      { src: "/images/gt4000/angle.jpg", alt: "GT4000 มุมเอียง — ภาพรวม" },
+                      { src: "/images/gt4000/mainboard.jpg", alt: "GT4000 ภายใน — Mainboard" },
                     ].map((img, i) => (
                       <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
                         <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
