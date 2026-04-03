@@ -102,6 +102,13 @@ const HeroSection = () => {
                     <div className="px-4 py-2 text-xs text-muted-foreground border-b border-border truncate">
                       {user.email}
                     </div>
+                    <Link
+                      to="/my-quotes"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                    >
+                      <FileText size={14} /> ใบเสนอราคาของฉัน
+                    </Link>
                     <button
                       onClick={() => { signOut(); setUserMenuOpen(false); }}
                       className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
