@@ -7,6 +7,7 @@ import WishlistHeart from "@/components/WishlistHeart";
 import {
   ArrowLeft, Cpu, Thermometer, Shield, Usb, Wifi, Download,
   FileText, ChevronRight, Layers, HardDrive, Monitor, Zap, Box,
+  Factory, Stethoscope, Truck, ScanLine, Tv, Warehouse,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +16,12 @@ import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import bannerIBox from "@/assets/banner-ibox-series.jpg";
+import usecaseAutomation from "@/assets/ibox-usecase-automation.jpg";
+import usecaseMedical from "@/assets/ibox-usecase-medical.jpg";
+import usecaseLogistics from "@/assets/ibox-usecase-logistics.jpg";
+import usecaseWarehouse from "@/assets/ibox-usecase-warehouse.jpg";
+import usecaseVision from "@/assets/ibox-usecase-vision.jpg";
+import usecaseSignage from "@/assets/ibox-usecase-signage.jpg";
 
 /* ═══════ Product Data ═══════ */
 const iboxModels = [
@@ -115,15 +122,44 @@ const features = [
   "รับประกันสินค้า 1 ปี (Carry-in)",
 ];
 
-const useCases = [
-  "Industrial Automation",
-  "Medical",
-  "Logistic & Transportation",
-  "Warehouse",
-  "Machine Vision",
-  "Digital Signage",
+const useCasesData = [
+  {
+    title: "Industrial Automation",
+    desc: "ควบคุมระบบ PLC, SCADA และ HMI บนสายการผลิต ทนฝุ่นและความร้อนในโรงงาน",
+    icon: Factory,
+    image: usecaseAutomation,
+  },
+  {
+    title: "Medical & Healthcare",
+    desc: "ระบบ EMR, มอนิเตอร์สัญญาณชีพ และเวชระเบียนอิเล็กทรอนิกส์ในโรงพยาบาล",
+    icon: Stethoscope,
+    image: usecaseMedical,
+  },
+  {
+    title: "Logistics & Transportation",
+    desc: "ศูนย์ควบคุมการขนส่ง ติดตามยานพาหนะ บริหารเส้นทางแบบ Real-time",
+    icon: Truck,
+    image: usecaseLogistics,
+  },
+  {
+    title: "Warehouse Management",
+    desc: "ระบบจัดการคลังสินค้า สแกนบาร์โค้ด ตรวจนับสต็อกอัตโนมัติ",
+    icon: Warehouse,
+    image: usecaseWarehouse,
+  },
+  {
+    title: "Machine Vision",
+    desc: "ตรวจสอบคุณภาพชิ้นงานบนสายพาน ด้วยกล้องอุตสาหกรรมและ AI",
+    icon: ScanLine,
+    image: usecaseVision,
+  },
+  {
+    title: "Digital Signage",
+    desc: "ป้ายโฆษณาดิจิทัลในห้าง ร้านค้า สนามบิน แสดงผลต่อเนื่อง 24/7",
+    icon: Tv,
+    image: usecaseSignage,
+  },
 ];
-
 const galleryImages = [
   "https://static.wixstatic.com/media/3e5003_8d0fe57f33ec4c78bac1e2211f2f5680~mv2.jpg/v1/fill/w_430,h_420,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/51.jpg",
   "https://static.wixstatic.com/media/3e5003_10530c54a885451a9145236b7c128357~mv2.jpg/v1/fill/w_424,h_420,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/52.jpg",
@@ -281,11 +317,27 @@ const IBoxSeries = () => {
           <p className="text-center text-sm text-muted-foreground mb-8">
             ใช้โปรแกรมได้หลากหลาย ในสำนักงาน โรงงานอุตสาหกรรม โรงเรียน ทั้งการพรีเซนต์งาน การเรียนการสอน และความบันเทิง
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {useCases.map((uc) => (
-              <div key={uc} className="card-surface p-4 text-center">
-                <Box className="w-6 h-6 text-primary mx-auto mb-2" />
-                <p className="text-xs font-medium text-foreground">{uc}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {useCasesData.map((uc) => (
+              <div key={uc.title} className="group card-surface overflow-hidden hover:border-primary/30 transition-all">
+                <div className="relative h-44 overflow-hidden">
+                  <img
+                    src={uc.image}
+                    alt={uc.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-3 left-4 flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-primary/90 flex items-center justify-center">
+                      <uc.icon className="w-4 h-4 text-primary-foreground" />
+                    </div>
+                    <h3 className="text-sm font-bold text-white">{uc.title}</h3>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
+                </div>
               </div>
             ))}
           </div>
