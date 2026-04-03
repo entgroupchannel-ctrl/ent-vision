@@ -581,6 +581,7 @@ const ComparisonTable = ({ handleTabChange }: { handleTabChange: (tab: string) =
 const GTSeries = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "overview");
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
