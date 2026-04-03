@@ -9,6 +9,9 @@ import { Badge } from "@/components/ui/badge";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import bannerCabinets from "@/assets/banner-cabinets.jpg";
+import cabinetGallery4 from "@/assets/cabinet-gallery-4.jpg";
+import cabinetGallery5 from "@/assets/cabinet-gallery-5.jpg";
+import cabinetGallery6 from "@/assets/cabinet-gallery-6.jpg";
 
 /* ═══════ Product Data ═══════ */
 const cabinetModels = [
@@ -73,9 +76,9 @@ const galleryImages = [
   "https://static.wixstatic.com/media/005637_32016e0d75a34007b8955509d9cb5b59~mv2.jpg/v1/fill/w_300,h_270,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reLINE_ALBUM_%E0%B8%81%E0%B8%A5%E0%B9%88%E0%B8%AD%E0%B8%87_%E0%B9%92%E0%B9%93%E0%B9%90%E0%B9%98%E0%B9%90%E0%B9%97_14.jpg",
   "https://static.wixstatic.com/media/005637_34cd1b29091c44eca78ef0700748e875~mv2.jpg/v1/fill/w_300,h_270,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reLINE_ALBUM_%E0%B8%81%E0%B8%A5%E0%B9%88%E0%B8%AD%E0%B8%87_%E0%B9%92%E0%B9%93%E0%B9%90%E0%B9%98%E0%B9%90%E0%B9%97_87.jpg",
   "https://static.wixstatic.com/media/005637_905985eb99544b148865284b561dba6b~mv2.jpg/v1/fill/w_335,h_301,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reLINE_ALBUM_%E0%B8%81%E0%B8%A5%E0%B9%88%E0%B8%AD%E0%B8%87_%E0%B9%92%E0%B9%93%E0%B9%90%E0%B9%98%E0%B9%90%E0%B9%97_95.jpg",
-  "https://static.wixstatic.com/media/0597a3_9f94339201574aab951ca7e05b0b5b8b~mv2_d_2048_2048_s_2.jpg/v1/fill/w_430,h_396,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/k10_181024_0017.jpg",
-  "https://static.wixstatic.com/media/0597a3_b0322ae3964f4bb6a5df8c4ffe9980cf~mv2.jpg/v1/fill/w_415,h_415,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/kb4.jpg",
-  "https://static.wixstatic.com/media/0597a3_1a4e692b890345f5a8d2ca2aa85ee5d1~mv2_d_2048_2048_s_2.jpg/v1/fill/w_410,h_397,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/k10_181024_0016.jpg",
+  cabinetGallery4,
+  cabinetGallery5,
+  cabinetGallery6,
 ];
 
 /* ═══════ Component ═══════ */
