@@ -597,6 +597,12 @@ const GTSeries = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead title="GT Series — Industrial Fanless Mini PC 12 รุ่น" description="GT Series คอมพิวเตอร์อุตสาหกรรม Fanless ทนร้อน ทนฝุ่น 12 รุ่น รองรับ Intel N100 ถึง Core i7 สำหรับโรงงาน IoT Edge Computing ประเทศไทย" path="/gt-series" />
+      <ProductJsonLd
+        collectionName="GT Series Industrial Fanless Mini PC"
+        collectionDescription="คอมพิวเตอร์อุตสาหกรรม Fanless 12 รุ่น รองรับ Intel Celeron ถึง Core i7 สำหรับโรงงาน IoT Edge Computing"
+        collectionUrl="/gt-series"
+        products={gtModels.map(m => ({ name: m.name, price: m.price, image: typeof m.image === 'string' ? m.image : undefined, description: m.tagline, category: "Industrial Fanless Mini PC" }))}
+      />
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">

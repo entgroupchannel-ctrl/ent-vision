@@ -1,4 +1,5 @@
 import SEOHead from "@/components/SEOHead";
+import ProductJsonLd from "@/components/ProductJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { useState, useEffect } from "react";
 import { LineQRDialog } from "@/components/LineQRDialog";
