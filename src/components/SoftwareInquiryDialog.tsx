@@ -41,6 +41,7 @@ const SoftwareInquiryDialog = ({ children }: SoftwareInquiryDialogProps) => {
     timeline: "",
     current_problems: "",
     requirements: "",
+    subscribe: true,
   });
 
   const updateField = (field: string, value: string) =>
