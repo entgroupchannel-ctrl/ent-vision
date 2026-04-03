@@ -13,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    const { session_id, name, email, phone, company, line_id, interest, conversation_summary } = await req.json();
+    const { session_id, name, email, phone, company, line_id, interest, conversation_summary, messages } = await req.json();
 
     if (!session_id) {
       return new Response(
