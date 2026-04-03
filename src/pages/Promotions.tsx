@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FooterCompact from "@/components/FooterCompact";
+import LineQRButton from "@/components/LineQRButton";
 
 /* ───── Types ───── */
 type PromoStatus = "active" | "ended" | "recurring";
