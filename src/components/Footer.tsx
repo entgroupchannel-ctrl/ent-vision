@@ -114,7 +114,7 @@ const footerSections = [
 const socials = [
   { icon: Facebook, href: "https://www.facebook.com/entgroup.th/", label: "Facebook" },
   { icon: Youtube, href: "https://www.youtube.com/@ENTGROUP-TH", label: "YouTube" },
-  { icon: Instagram, href: "https://www.instagram.com/entgroup", label: "Instagram" },
+  { icon: Instagram, href: "https://www.instagram.com/entgroupcompany/", label: "Instagram" },
 ];
 
 const CollapsibleSection = ({ title, links }: { title: string; links: typeof footerSections[0]["links"] }) => {
