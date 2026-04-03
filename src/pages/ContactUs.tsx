@@ -1,4 +1,7 @@
 import { useState } from "react";
+import teamSky from "@/assets/team-sky.png";
+import teamSom from "@/assets/team-som.png";
+import teamPreaw from "@/assets/team-preaw.png";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -393,9 +396,9 @@ const ContactUs = () => {
                 </p>
                 <div className="grid grid-cols-3 gap-4">
                   {[
-                    { name: "Sky - Adisak", role: "ผู้เชี่ยวชาญงานขาย", img: "https://nvidia-jetson.com/images/company/sky.png" },
-                    { name: "Som - Rungaroon", role: "เจ้าหน้าที่ฝ่ายขาย", img: "https://nvidia-jetson.com/images/company/som.png" },
-                    { name: "Preaw - Unthikan", role: "เจ้าหน้าที่ฝ่ายขาย", img: "https://nvidia-jetson.com/images/company/preaw.png" },
+                    { name: "Sky - Adisak", role: "ผู้เชี่ยวชาญงานขาย", img: teamSky },
+                    { name: "Som - Rungaroon", role: "เจ้าหน้าที่ฝ่ายขาย", img: teamSom },
+                    { name: "Preaw - Unthikan", role: "เจ้าหน้าที่ฝ่ายขาย", img: teamPreaw },
                   ].map((person) => (
                     <div key={person.name} className="text-center">
                       <img
