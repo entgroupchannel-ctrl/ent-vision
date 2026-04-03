@@ -48,9 +48,7 @@ const AdminLogin = () => {
         if (isAdmin) {
           navigate("/admin", { replace: true });
         } else {
-          toast({ title: "ไม่มีสิทธิ์เข้าถึง", description: "บัญชีนี้ไม่มีสิทธิ์ Admin", variant: "destructive" });
-          await supabase.auth.signOut();
-          setChecking(false);
+          navigate("/", { replace: true });
         }
       }
     });
