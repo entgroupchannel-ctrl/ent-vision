@@ -1,7 +1,62 @@
 import { useState } from "react";
-import { MessageCircle, ChevronDown, Phone, Mail, MapPin, Facebook, Instagram, Youtube } from "lucide-react";
+import { MessageCircle, ChevronDown, Phone, Mail, MapPin, Facebook, Instagram, Youtube, CheckCircle, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/logo-entgroup.avif";
+
+const NewsletterForm = () => {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setLoading(true);
+    try {
+      const { error } = await (supabase.from as any)("subscribers").insert({ email, source: "website_footer" });
+      if (error) {
+        if (error.code === "23505") {
+          toast({ title: "อีเมลนี้สมัครรับข่าวสารแล้ว", variant: "destructive" });
+        } else {
+          throw error;
+        }
+      } else {
+        setSuccess(true);
+        setEmail("");
+        toast({ title: "สมัครรับข่าวสารสำเร็จ!" });
+        setTimeout(() => setSuccess(false), 3000);
+      }
+    } catch {
+      toast({ title: "เกิดข้อผิดพลาด กรุณาลองใหม่", variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+      <input
+        type="email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="กรอกอีเมลของคุณ"
+        className="flex-1 px-4 py-2.5 rounded-lg bg-[hsl(220,15%,15%)] border border-[hsl(220,15%,22%)] text-sm text-white placeholder:text-[hsl(215,15%,40%)] focus:outline-none focus:border-primary"
+        disabled={loading}
+      />
+      <button
+        type="submit"
+        disabled={loading}
+        className="px-6 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-50"
+      >
+        {loading ? <Loader2 size={16} className="animate-spin" /> : success ? <><CheckCircle size={16} /> สำเร็จ!</> : "สมัคร"}
+      </button>
+    </form>
+  );
+};
 
 const footerSections = [
   {
@@ -166,22 +221,7 @@ const Footer = () => {
             <p className="text-xs text-[hsl(215,15%,55%)] mb-4">
               รับข่าวสารล่าสุดเกี่ยวกับสินค้า โปรโมชั่น และเทคโนโลยีใหม่ๆ จาก ENT Group
             </p>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto"
-            >
-              <input
-                type="email"
-                placeholder="กรอกอีเมลของคุณ"
-                className="flex-1 px-4 py-2.5 rounded-lg bg-[hsl(220,15%,15%)] border border-[hsl(220,15%,22%)] text-sm text-white placeholder:text-[hsl(215,15%,40%)] focus:outline-none focus:border-primary"
-              />
-              <button
-                type="submit"
-                className="px-6 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
-              >
-                สมัคร
-              </button>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
 
