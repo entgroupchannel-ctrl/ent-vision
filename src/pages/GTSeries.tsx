@@ -725,7 +725,7 @@ const GTSeries = () => {
               <div className="absolute -bottom-6 -left-6 w-32 h-32 rounded-full bg-primary/5 blur-3xl" />
 
               {/* Floating badge */}
-              <div className="absolute -bottom-4 left-6 z-20 px-5 py-3 rounded-xl bg-card border border-border shadow-lg">
+              <div className="absolute -bottom-4 left-6 z-20 px-4 md:px-5 py-2.5 md:py-3 rounded-xl bg-card border border-border shadow-lg hidden sm:flex">
                 <div className="flex items-center gap-3">
                   <Thermometer className="text-primary" size={20} />
                   <div>
@@ -735,7 +735,7 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              <div className="absolute -top-3 right-8 z-20 px-4 py-2.5 rounded-xl bg-card border border-border shadow-lg">
+              <div className="absolute -top-3 right-8 z-20 px-3 md:px-4 py-2 md:py-2.5 rounded-xl bg-card border border-border shadow-lg hidden sm:flex">
                 <div className="flex items-center gap-2">
                   <Wind className="text-primary" size={18} />
                   <div>
