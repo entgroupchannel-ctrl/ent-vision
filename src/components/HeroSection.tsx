@@ -251,65 +251,108 @@ const HeroSection = () => {
         </div>
       )}
 
-      {/* Hero Content — left-aligned for impact */}
+      {/* Hero Content — two-column layout */}
       <div className="relative z-10 flex-1 flex items-center px-6 md:px-12 lg:px-20">
-        <div className="max-w-3xl py-16 md:py-0">
-          <p className="text-sm md:text-base text-primary font-semibold tracking-widest uppercase mb-4 animate-fade-up">
-            Mini PC Factory Outlet — นำเข้าจากโรงงานโดยตรง
-          </p>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black leading-[1.1] mb-6 animate-fade-up text-white" style={{ animationDelay: "0.1s" }}>
-            โซลูชัน{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[hsl(var(--accent))]">
-              Industrial Computing
-            </span>
-            <br />
-            สำหรับประเทศไทย
-          </h1>
-          <p className="text-lg md:text-xl text-white/70 max-w-xl mb-10 animate-fade-up leading-relaxed" style={{ animationDelay: "0.2s" }}>
-            พันธมิตรธุรกิจที่คุณไว้วางใจ — Mini PC, Panel PC, Rugged Device
-            และซอฟต์แวร์ครบวงจร สำหรับงานโรงงาน งานประมูล และงานโครงการ
-          </p>
+        <div className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 py-16 md:py-0">
+          {/* Left: Headline + Search + CTA */}
+          <div className="max-w-2xl">
+            <p className="text-sm md:text-base text-primary font-semibold tracking-widest uppercase mb-4 animate-fade-up">
+              Mini PC Factory Outlet — นำเข้าจากโรงงานโดยตรง
+            </p>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black leading-[1.1] mb-6 animate-fade-up text-white" style={{ animationDelay: "0.1s" }}>
+              โซลูชัน{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[hsl(var(--accent))]">
+                Industrial Computing
+              </span>
+              <br />
+              สำหรับประเทศไทย
+            </h1>
+            <p className="text-lg md:text-xl text-white/70 max-w-xl mb-10 animate-fade-up leading-relaxed" style={{ animationDelay: "0.2s" }}>
+              พันธมิตรธุรกิจที่คุณไว้วางใจ — Mini PC, Panel PC, Rugged Device
+              และซอฟต์แวร์ครบวงจร สำหรับงานโรงงาน งานประมูล และงานโครงการ
+            </p>
 
-          {/* Search */}
-          <div ref={searchRef} className="relative max-w-xl mb-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-            <div className="flex items-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden focus-within:ring-2 focus-within:ring-primary/50 transition-shadow">
-              <Search className="ml-4 text-white/50" size={20} />
-              <input
-                type="text"
-                placeholder="บอกความต้องการ เช่น Mini PC โรงงาน, Firewall SME..."
-                value={searchQuery}
-                onChange={(e) => { setSearchQuery(e.target.value); setSearchOpen(true); }}
-                onFocus={() => setSearchOpen(true)}
-                onKeyDown={handleSearchKeyDown}
-                className="flex-1 bg-transparent px-4 py-4 text-white placeholder:text-white/40 outline-none text-sm md:text-base"
-              />
-              <button
-                onClick={handleSearch}
-                className="px-6 py-4 bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
-              >
-                ค้นเลย
-              </button>
+            {/* Search */}
+            <div ref={searchRef} className="relative max-w-xl mb-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
+              <div className="flex items-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden focus-within:ring-2 focus-within:ring-primary/50 transition-shadow">
+                <Search className="ml-4 text-white/50" size={20} />
+                <input
+                  type="text"
+                  placeholder="บอกความต้องการ เช่น Mini PC โรงงาน, Firewall SME..."
+                  value={searchQuery}
+                  onChange={(e) => { setSearchQuery(e.target.value); setSearchOpen(true); }}
+                  onFocus={() => setSearchOpen(true)}
+                  onKeyDown={handleSearchKeyDown}
+                  className="flex-1 bg-transparent px-4 py-4 text-white placeholder:text-white/40 outline-none text-sm md:text-base"
+                />
+                <button
+                  onClick={handleSearch}
+                  className="px-6 py-4 bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
+                >
+                  ค้นเลย
+                </button>
+              </div>
+
+              {/* Autocomplete dropdown */}
+              {searchOpen && searchResults.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-background/95 backdrop-blur-xl border border-border rounded-xl shadow-2xl overflow-hidden z-50 animate-fade-in">
+                  {searchResults.map((item, i) => (
+                    <button
+                      key={i}
+                      onClick={() => { navigate(item.href); setSearchQuery(""); setSearchOpen(false); }}
+                      className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-primary/10 transition-colors border-b border-border/50 last:border-0"
+                    >
+                      <Search size={14} className="text-muted-foreground shrink-0" />
+                      <span className="text-sm text-foreground">{item.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Autocomplete dropdown */}
-            {searchOpen && searchResults.length > 0 && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-background/95 backdrop-blur-xl border border-border rounded-xl shadow-2xl overflow-hidden z-50 animate-fade-in">
-                {searchResults.map((item, i) => (
-                  <button
-                    key={i}
-                    onClick={() => { navigate(item.href); setSearchQuery(""); setSearchOpen(false); }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-primary/10 transition-colors border-b border-border/50 last:border-0"
-                  >
-                    <Search size={14} className="text-muted-foreground shrink-0" />
-                    <span className="text-sm text-foreground">{item.label}</span>
-                  </button>
-                ))}
-              </div>
-            )}
+            {/* CTA */}
+            <div className="flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "0.35s" }}>
+              <Link
+                to="/product-advisor"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+              >
+                <Search size={16} /> ช่วยเลือกสินค้าที่ใช่
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/20 text-white/80 text-sm hover:bg-white/10 transition-colors backdrop-blur-sm"
+              >
+                ปรึกษาผู้เชี่ยวชาญ
+              </Link>
+            </div>
+
+            {/* Stats bar */}
+            <div className="flex flex-wrap gap-8 mt-12 animate-fade-up" style={{ animationDelay: "0.5s" }}>
+              {heroStats.map((s) => (
+                <div key={s.label}>
+                  <p className="text-2xl md:text-3xl font-display font-black text-primary">{s.value}</p>
+                  <p className="text-xs text-white/50">{s.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 max-w-xl mb-6 animate-fade-up" style={{ animationDelay: "0.35s" }}>
+          {/* Right: Search Tags */}
+          <div className="hidden lg:flex flex-col gap-2.5 max-w-[220px] animate-fade-up" style={{ animationDelay: "0.4s" }}>
+            <p className="text-[10px] font-semibold tracking-widest uppercase text-white/40 mb-1">สินค้ายอดนิยม</p>
+            {searchTags.slice(0, 6).map((tag) => (
+              <button
+                key={tag.label}
+                onClick={() => navigate(tag.href)}
+                className="w-full text-left px-4 py-2.5 rounded-xl bg-white/5 backdrop-blur-md text-white/80 text-xs border border-white/10 hover:bg-white/15 hover:border-white/25 hover:text-white transition-all"
+              >
+                {tag.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile: Tags inline */}
+          <div className="flex flex-wrap gap-2 lg:hidden animate-fade-up" style={{ animationDelay: "0.4s" }}>
             {searchTags.slice(0, 6).map((tag) => (
               <button
                 key={tag.label}
@@ -318,32 +361,6 @@ const HeroSection = () => {
               >
                 {tag.label}
               </button>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "0.4s" }}>
-            <Link
-              to="/product-advisor"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
-            >
-              <Search size={16} /> ช่วยเลือกสินค้าที่ใช่
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/20 text-white/80 text-sm hover:bg-white/10 transition-colors backdrop-blur-sm"
-            >
-              ปรึกษาผู้เชี่ยวชาญ
-            </Link>
-          </div>
-
-          {/* Stats bar */}
-          <div className="flex flex-wrap gap-8 mt-12 animate-fade-up" style={{ animationDelay: "0.5s" }}>
-            {heroStats.map((s) => (
-              <div key={s.label}>
-                <p className="text-2xl md:text-3xl font-display font-black text-primary">{s.value}</p>
-                <p className="text-xs text-white/50">{s.label}</p>
-              </div>
             ))}
           </div>
         </div>
