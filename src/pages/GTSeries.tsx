@@ -4412,6 +4412,7 @@ const GTSeries = () => {
         productName={quoteProduct || ""}
         productCategory="GT Series — Mini PC"
       />
+      <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
     </div>
   );
 };
