@@ -471,7 +471,7 @@ const GTSeries = () => {
                           { name: "GT5000", tagline: "GPIO + SIM IoT Ready", cpu: "i5-4200U / i7-4500U", ram: "DDR3L 4–8GB", com: 6, usb: 8, lan: 2, gpio: true, sim: true, display: "VGA+HDMI", price: "19,490", cat: "standard", gen: "Gen 4" },
                           { name: "GT6000", tagline: "Triple Display DDR4", cpu: "Core i3/i5/i7 Gen 8–10", ram: "DDR4 สูงสุด 64GB", com: 2, usb: 6, lan: 2, gpio: false, sim: false, display: "HDMI×2+DP", price: "สอบถาม", cat: "standard", gen: "Gen 8–10" },
                           { name: "GT7000", tagline: "DDR4 ทนทุกโรงงาน", cpu: "i3 / i5 / i7 (DDR4)", ram: "DDR4 4–32GB", com: 6, usb: 6, lan: 2, gpio: false, sim: false, display: "VGA+HDMI", price: "สอบถาม", cat: "high", gen: "Gen 6–8" },
-                          { name: "GT8000", tagline: "Ice Lake Gen 10", cpu: "i5-1035G1 / i7-10710U", ram: "DDR4 4–32GB", com: 6, usb: 8, lan: 2, gpio: false, sim: false, display: "HDMI+DP", price: "สอบถาม", cat: "high", gen: "Gen 10" },
+                          { name: "GT8000", tagline: "Dual HDMI + SIM 4G", cpu: "i5-1035G1 / i7-10710U", ram: "DDR4 สูงสุด 64GB", com: 2, usb: 6, lan: 2, gpio: false, sim: true, display: "HDMI×2", price: "สอบถาม", cat: "high", gen: "Gen 10" },
                           { name: "GT9000", tagline: "Triple Display 8 COM", cpu: "i5-10200H / i7-10750H / i5-1235U / i7-1255U", ram: "DDR4/DDR5 32GB", com: 8, usb: 8, lan: 2, gpio: false, sim: false, display: "HDMI×2+DP", price: "25,290", cat: "high", gen: "Gen 10–12" },
                         ].map((row) => {
                           const catStyle = row.cat === "entry"
@@ -2571,23 +2571,23 @@ const GTSeries = () => {
                 <div className="lg:col-span-3 space-y-6">
                   <div>
                     <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
-                      Intel Ice Lake Gen 10 · สเปคแรง · ประสิทธิภาพสูง
+                      DDR4 64GB · Dual HDMI · SIM 4G · Fanless
                     </span>
                     <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
                       GT<span className="text-gradient">8000</span>
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      คอมพิวเตอร์เกรดอุตสาหกรรมสมรรถนะสูง รองรับการใช้งานในสภาพแวดล้อมที่หนักหน่วง
-                      ด้วยเทคโนโลยี Intel Ice Lake ล่าสุด พร้อมการเชื่อมต่อที่หลากหลายและการออกแบบที่แข็งแกร่ง
-                      เหมาะสำหรับงานอุตสาหกรรม ระบบควบคุม และการประยุกต์ใช้ที่ต้องการความเสถียรสูง
+                      Industrial Mini PC โครง Brushed Aluminum Alloy ระบบ Fanless เงียบสนิท
+                      รองรับ DDR4 สูงสุด 64GB, Dual HDMI Display, Micro SIM 4G Module
+                      พร้อม mSATA SSD + 2.5" SATA HDD — ครบทุกการเชื่อมต่อ
                     </p>
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-2">⚡ ซีพียูจากอินเทล เจนเนอเรชั่น 10</h4>
+                    <h4 className="font-bold text-foreground mb-2">🏭 ออกแบบมาเพื่อโรงงานโดยเฉพาะ</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      สเปคแรง ประสิทธิภาพสูง — Intel Core i5-1035G1 Quad-core 1.0GHz up to 3.6GHz
-                      และ Core i7-10710U 6-core ให้พลังประมวลผลที่โดดเด่น เพื่อประสิทธิภาพดีขึ้นและความบันเทิงที่น่าทึ่ง
+                      ทนทานต่อสภาพแวดล้อมที่เต็มไปด้วยฝุ่นละออง และความร้อน
+                      Compact structure, Fanless, ไม่มีชิ้นส่วนเคลื่อนไหว ทำงานต่อเนื่อง 24/7
                     </p>
                   </div>
 
@@ -2596,119 +2596,120 @@ const GTSeries = () => {
                     <div className="card-surface p-4 text-center">
                       <Cpu className="mx-auto text-primary mb-2" size={24} />
                       <div className="font-bold text-foreground text-sm">CPU</div>
-                      <div className="text-xs text-muted-foreground mt-1">i5-1035G1 / i7-10710U</div>
+                      <div className="text-xs text-muted-foreground mt-1">Intel Core i5/i7 Gen 10</div>
+                      <div className="text-xs text-muted-foreground">Ice Lake / Comet Lake</div>
                     </div>
                     <div className="card-surface p-4 text-center">
                       <Server className="mx-auto text-primary mb-2" size={24} />
                       <div className="font-bold text-foreground text-sm">RAM & Storage</div>
-                      <div className="text-xs text-muted-foreground mt-1">DDR4 4–32 GB / SSD 128 GB – 2 TB</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR4 สูงสุด 64 GB</div>
+                      <div className="text-xs text-muted-foreground">mSATA + 2.5" SATA</div>
                     </div>
                     <div className="card-surface p-4 text-center">
-                      <Shield className="mx-auto text-primary mb-2" size={24} />
-                      <div className="font-bold text-foreground text-sm">6 COM + 8 USB</div>
-                      <div className="text-xs text-muted-foreground mt-1">RS232, Dual LAN, HDMI+DP</div>
+                      <Monitor className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Dual HDMI + SIM</div>
+                      <div className="text-xs text-muted-foreground mt-1">2× HDMI + Micro SIM 4G</div>
                     </div>
                     <div className="card-surface p-4 text-center">
                       <Wind className="mx-auto text-primary mb-2" size={24} />
                       <div className="font-bold text-foreground text-sm">Fanless 24/7</div>
-                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB ทนสภาพแวดล้อมหนักหน่วง</div>
+                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB · 2 COM · 2 LAN</div>
                     </div>
                   </div>
                 </div>
 
+                {/* Product Images — Factory */}
                 <div className="lg:col-span-2 space-y-4">
-                  <div className="card-surface overflow-hidden">
+                  <div className="card-surface overflow-hidden rounded-xl bg-muted/30">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_91532076771244788545982fbe4d1736f000.jpg/v1/fill/w_297,h_459,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_91532076771244788545982fbe4d1736f000.jpg"
-                      alt="GT8000 Product"
-                      className="w-full object-contain p-4"
+                      src="/images/gt8000/main.jpg"
+                      alt="GT8000 ภาพหลัก"
+                      className="w-full object-contain p-2"
                       loading="lazy"
                     />
                   </div>
-                </div>
-              </div>
-
-              {/* Spec Diagrams */}
-              <div className="space-y-4">
-                {[
-                  "https://static.wixstatic.com/media/0597a3_a7a537dba4cc4f378df3b1a5318afd7d~mv2.png/v1/fill/w_1078,h_365,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2019_06_39.png",
-                  "https://static.wixstatic.com/media/0597a3_bd04598a211a4ea5b87840474ff84d43~mv2.png/v1/fill/w_1078,h_383,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2017_48_55.png",
-                  "https://static.wixstatic.com/media/0597a3_37c59af1b9ec42059bbf1c036a0f7ef3~mv2.png/v1/fill/w_1078,h_383,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2019_14_52.png",
-                  "https://static.wixstatic.com/media/0597a3_dc02b627c68e4babba4558811e2909a6~mv2.png/v1/fill/w_1078,h_389,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_01_02.png",
-                  "https://static.wixstatic.com/media/0597a3_de99bee0d7c84561b77a71ef0ac1c3cb~mv2.png/v1/fill/w_1078,h_389,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_03_50.png",
-                ].map((img, i) => (
-                  <div key={i} className="card-surface p-4 overflow-hidden">
-                    <img src={img} alt={`GT8000 Spec ${i + 1}`} className="w-full rounded-lg" loading="lazy" />
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { src: "/images/gt8000/front.jpg", alt: "GT8000 ด้านหน้า" },
+                      { src: "/images/gt8000/side.jpg", alt: "GT8000 ด้านข้าง" },
+                      { src: "/images/gt8000/angle.jpg", alt: "GT8000 มุมเอียง" },
+                      { src: "/images/gt8000/internal.jpg", alt: "GT8000 ภายใน — Mainboard" },
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
+                        <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-
-              {/* Connectivity & Design */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_d596bf77620a4e758722c9d7da466531~mv2.png/v1/crop/x_0,y_200,w_2290,h_650/fill/w_1078,h_306,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_23_33.png"
-                    alt="GT8000 Connectivity"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_ee9e8e7a3ef84b5580711fef0e9cbc93~mv2.png/v1/fill/w_1078,h_404,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_08_45.png"
-                    alt="GT8000 Design"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
                 </div>
               </div>
 
-              {/* More Spec Images */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_d92c02ade47645d0ba93be6bb82f6a24~mv2.png/v1/fill/w_1078,h_387,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_12_52.png"
-                    alt="GT8000 Internal"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_7d44bee4a375439097f406fbfa096df7~mv2.png/v1/fill/w_1078,h_406,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_22_09.png"
-                    alt="GT8000 Mounting"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
+              {/* Factory Gallery — Bottom */}
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="card-surface overflow-hidden rounded-lg bg-muted/30">
+                  <img src="/images/gt8000/bottom.jpg" alt="GT8000 ด้านล่าง — VESA Mount" className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
                 </div>
               </div>
 
-              {/* Real-world Photos */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  "https://static.wixstatic.com/media/005637_1f872ee47aa5498eb759245d2d2f9aab~mv2.jpg/v1/fill/w_317,h_253,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_1f872ee47aa5498eb759245d2d2f9aab~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_7899b1f70dc94e39b2e0b768dacb5446~mv2.jpg/v1/fill/w_317,h_253,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_7899b1f70dc94e39b2e0b768dacb5446~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_b126ba0cc7514dcd8f8b49baec1c5116~mv2.jpg/v1/fill/w_317,h_253,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_b126ba0cc7514dcd8f8b49baec1c5116~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_2703b7eeb9424b54a5b0329b5f59ac10~mv2.jpg/v1/fill/w_317,h_253,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_2703b7eeb9424b54a5b0329b5f59ac10~mv2.jpg",
-                ].map((img, i) => (
-                  <div key={i} className="card-surface overflow-hidden">
-                    <img src={img} alt={`GT8000 ใช้งานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
-                  </div>
-                ))}
+              {/* Port Connectivity */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  🔌 Port Connectivity — ครบจบในเครื่องเดียว
+                </h4>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                  {[
+                    { label: "2 COM Port", desc: "RS232 × 2 สำหรับเชื่อมต่ออุปกรณ์อุตสาหกรรม" },
+                    { label: "Dual HDMI", desc: "2× HDMI Display — 2 หน้าจอพร้อมกัน" },
+                    { label: "Micro SIM 4G", desc: "PUSH function รองรับ 4G Module" },
+                    { label: "DDR4 สูงสุด 64GB", desc: "2 × DDR4 RAM Slot รองรับงานหนัก" },
+                    { label: "mSATA + SATA", desc: "mSATA SSD + 2.5\" SATA 3.0 HDD/SSD" },
+                    { label: "2 Gigabit LAN", desc: "Dual Gigabit Ethernet แยกเครือข่าย" },
+                  ].map((item, i) => (
+                    <div key={i} className="card-surface p-3">
+                      <div className="font-bold text-foreground mb-1">{item.label}</div>
+                      <div className="text-xs text-muted-foreground">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              {/* Price Table Image */}
-              <div className="card-surface overflow-hidden">
+              {/* Spec Table — 2 คอลัมน์ */}
+              <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT8000 Price List</h3>
-                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น</p>
+                  <h3 className="text-lg font-display font-bold text-foreground">GT8000 Specifications</h3>
+                  <p className="text-xs text-muted-foreground mt-1">ข้อมูลจาก Manufacturer</p>
                 </div>
-                <img
-                  src="https://static.wixstatic.com/media/0597a3_298ea696ba8d4dc28cf13b5dc4842d6d~mv2.png/v1/fill/w_1078,h_396,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2018_48_58.png"
-                  alt="GT8000 Price List"
-                  className="w-full"
-                  loading="lazy"
-                />
+                <div className="grid md:grid-cols-2 md:divide-x divide-border">
+                  <div>
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {[
+                          ["CPU", "Intel Core i5-1035G1 / i7-10710U (Gen 10)"],
+                          ["RAM", "2 × DDR4 Slot, สูงสุด 64 GB"],
+                          ["Storage", "mSATA SSD + 2.5\" SATA 3.0 HDD/SSD"],
+                          ["Display", "2× HDMI (Dual Display)"],
+                          ["COM", "2 × RS232"],
+                        ].map(([k, v], i) => (
+                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3">{k}</td><td className="p-3 text-muted-foreground">{v}</td></tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div>
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {[
+                          ["LAN", "2 × Gigabit Ethernet RJ45"],
+                          ["SIM", "Micro SIM 4G (PUSH function)"],
+                          ["WiFi", "Built-in WiFi / Bluetooth"],
+                          ["Cooling", "Fanless — เงียบ 0 dB"],
+                          ["Mounting", "VESA / Wall Mount"],
+                        ].map(([k, v], i) => (
+                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3">{k}</td><td className="p-3 text-muted-foreground">{v}</td></tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
 
               {/* Datasheet CTA */}
