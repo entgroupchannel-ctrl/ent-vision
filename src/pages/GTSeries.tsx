@@ -583,6 +583,7 @@ const GTSeries = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "overview");
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const [showLineQR, setShowLineQR] = useState(false);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
