@@ -382,6 +382,34 @@ const ContactUs = () => {
                 )}
               </div>
 
+              {/* Sales Team */}
+              <div className="mt-6 card-surface rounded-xl p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <Users size={18} className="text-primary" />
+                  <h3 className="text-base font-display font-bold text-foreground">ติดต่อทีมขายของเรา</h3>
+                </div>
+                <p className="text-xs text-muted-foreground mb-5">
+                  ติดต่อได้ที่ <a href="mailto:Sale@entgroup.co.th" className="text-primary hover:underline">Sale@entgroup.co.th</a>
+                </p>
+                <div className="grid grid-cols-3 gap-4">
+                  {[
+                    { name: "Sky - Adisak", role: "ผู้เชี่ยวชาญงานขาย", img: "https://nvidia-jetson.com/images/company/sky.png" },
+                    { name: "Som - Rungaroon", role: "เจ้าหน้าที่ฝ่ายขาย", img: "https://nvidia-jetson.com/images/company/som.png" },
+                    { name: "Preaw - Unthikan", role: "เจ้าหน้าที่ฝ่ายขาย", img: "https://nvidia-jetson.com/images/company/preaw.png" },
+                  ].map((person) => (
+                    <div key={person.name} className="text-center">
+                      <img
+                        src={person.img}
+                        alt={person.name}
+                        className="w-20 h-20 rounded-full mx-auto mb-2 object-cover border-2 border-primary/20"
+                      />
+                      <p className="text-xs font-bold text-foreground">{person.name}</p>
+                      <p className="text-[10px] text-muted-foreground">{person.role}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* CTA to Quote page */}
               <div className="mt-6 card-surface rounded-xl p-5 border-l-4 border-primary">
                 <p className="text-sm text-foreground font-medium mb-1">ต้องการใบเสนอราคา?</p>
