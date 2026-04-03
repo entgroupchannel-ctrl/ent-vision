@@ -577,6 +577,43 @@ const AdminDashboard = () => {
                     </>
                   )}
 
+                  {selectedItem._type === "software" && (
+                    <>
+                      <div>
+                        <span className="text-muted-foreground">ประเภทบริการ:</span>
+                        <span className={`ml-2 inline-flex items-center gap-1 font-medium ${
+                          selectedItem.service_type === "saas" ? "text-blue-400" : "text-purple-400"
+                        }`}>
+                          {selectedItem.service_type === "saas" ? <><Cloud size={12} /> SaaS</> : <><Code2 size={12} /> พัฒนาเฉพาะ</>}
+                        </span>
+                      </div>
+                      {selectedItem.budget_range && (
+                        <div>
+                          <span className="text-muted-foreground">งบประมาณ:</span>
+                          <span className="ml-2 text-foreground">{selectedItem.budget_range}</span>
+                        </div>
+                      )}
+                      {selectedItem.timeline && (
+                        <div>
+                          <span className="text-muted-foreground">ระยะเวลา:</span>
+                          <span className="ml-2 text-foreground">{selectedItem.timeline}</span>
+                        </div>
+                      )}
+                      {selectedItem.current_problems && (
+                        <div>
+                          <span className="text-muted-foreground block mb-1">ปัญหาปัจจุบัน:</span>
+                          <p className="text-foreground bg-muted/30 rounded-lg p-3 text-xs leading-relaxed">{selectedItem.current_problems}</p>
+                        </div>
+                      )}
+                      {selectedItem.requirements && (
+                        <div>
+                          <span className="text-muted-foreground block mb-1">ความต้องการ:</span>
+                          <p className="text-foreground bg-muted/30 rounded-lg p-3 text-xs leading-relaxed">{selectedItem.requirements}</p>
+                        </div>
+                      )}
+                    </>
+                  )}
+
                   {selectedItem._type === "chatlead" && (
                     <>
                       {selectedItem.interest && (
@@ -619,7 +656,8 @@ const AdminDashboard = () => {
                       value={selectedItem.status}
                       onChange={(e) => {
                         const table = selectedItem._type === "contact" ? "contact_submissions" 
-                          : selectedItem._type === "chatlead" ? "chat_leads" 
+                          : selectedItem._type === "chatlead" ? "chat_leads"
+                          : selectedItem._type === "software" ? "software_inquiries"
                           : "quote_requests";
                         updateStatus(table, selectedItem.id, e.target.value);
                       }}
