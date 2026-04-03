@@ -69,6 +69,20 @@ const gtModels = [
     price: "สอบถาม",
   },
   {
+    name: "GT1300",
+    tagline: "3 HDMI · 6 COM · GPIO · 2.5G",
+    cpu: "i5-8400H / i7-8750H / i5-9400H / i7-9750H / i5-10200H / i7-10750H",
+    ram: "DDR4 สูงสุด 64GB",
+    storage: "M-SATA + M.2 NVMe + SATA",
+    ports: "USB 6, COM 6, LAN 2 (2.5G), HDMI×3, GPIO",
+    size: "3 HDMI + GPIO + 9–36V",
+    image: "/images/gt1300/main.jpg",
+    tab: "gt1300",
+    highlight: "NEW!",
+    badge: true,
+    price: "สอบถาม",
+  },
+  {
     name: "GT1400",
     tagline: "2.5G LAN · 6 COM · GPIO · 5G",
     cpu: "Celeron J4125/J6412 / i5/i7 Gen 8–11",
@@ -222,6 +236,7 @@ const modelTabs = [
   { id: "gt9000", label: "GT9000" },
   { id: "gt4500", label: "GT4500" },
   { id: "gt1400", label: "GT1400" },
+  { id: "gt1300", label: "GT1300" },
   { id: "gt1200", label: "GT1200" },
 ];
 
@@ -3561,6 +3576,177 @@ const GTSeries = () => {
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
                 >
                   <Download size={16} /> ดาวน์โหลด Datasheet GT1400
+                </a>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: GT1300 Detail */}
+          {activeTab === "gt1300" && (
+            <div className="space-y-8 animate-fade-in">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
+                <img src="/images/gt1300/main.jpg" alt="GT1300 Industrial PC" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    3× HDMI · 6 COM · GPIO · 2.5G LAN · 9–36V
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">1300</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    3× HDMI Triple Display · 6 COM · GPIO — H-Series สำหรับงานหนัก
+                  </p>
+                </div>
+              </div>
+
+              {/* Description + Factory Gallery */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      Gen 8/9/10 H-Series · 3 HDMI · 6 COM · GPIO · 2.5G LAN
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">1300</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      GT1300 คอมพิวเตอร์อุตสาหกรรมระดับสูง รองรับ CPU H-Series Gen 8/9/10 (TDP 45W)
+                      พร้อม 3× HDMI 1.4 Triple Display, 6 COM Port (2 ตัวเปลี่ยนเป็น RS422/RS485 ผ่าน BIOS),
+                      GPIO 14 ช่อง (7 IN / 7 OUT), 2× Intel i225V 2.5G LAN,
+                      ไฟเข้า 9–36V กว้าง เหมาะสำหรับ Industrial Robotics, Factory Automation, Surveillance
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-3">🏭 Products Features</h4>
+                    <ul className="text-sm text-muted-foreground space-y-2">
+                      <li>✅ Intel Gen 8/9/10 H-Series i5/i7 CPU (TDP 45W)</li>
+                      <li>✅ 2× Intel i225V 2.5G LAN</li>
+                      <li>✅ 6× DB9 COM (2× เปลี่ยนเป็น RS422/RS485 ผ่าน BIOS)</li>
+                      <li>✅ 3× HDMI 1.4 Triple Display พร้อมกัน</li>
+                      <li>✅ GPIO 14 ช่อง (7 IN + 7 OUT)</li>
+                      <li>✅ 2× DDR4 SO-DIMM สูงสุด 64GB</li>
+                      <li>✅ M-SATA + M.2 NVMe + SATA HDD พร้อมกัน</li>
+                      <li>✅ Fanless Aluminum Alloy — เงียบ 24 ชม.</li>
+                      <li>✅ ไฟ 9–36V (3-pin Phoenix Terminal) + ATX/AT</li>
+                      <li>✅ AWAL, Wake On LAN, Watchdog, RTC</li>
+                    </ul>
+                  </div>
+
+                  {/* Key Specs */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU H-Series</div>
+                      <div className="text-xs text-muted-foreground mt-1">i5-8400H / i7-8750H / i5-9400H / i7-9750H / i5-10200H / i7-10750H</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM & Storage</div>
+                      <div className="text-xs text-muted-foreground mt-1">2× DDR4 สูงสุด 64GB / M-SATA + NVMe + SATA</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Monitor className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">3× HDMI 1.4</div>
+                      <div className="text-xs text-muted-foreground mt-1">Triple Display — แสดงผล 3 จอพร้อมกัน</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">6 COM + GPIO</div>
+                      <div className="text-xs text-muted-foreground mt-1">RS232/422/485 + GPIO 14ch + 2.5G LAN</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Factory Gallery */}
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img src="/images/gt1300/main.jpg" alt="GT1300 ภาพหลัก" className="w-full object-contain p-4" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { src: "/images/gt1300/front.jpg", alt: "GT1300 ด้านหน้า" },
+                      { src: "/images/gt1300/top.jpg", alt: "GT1300 ด้านบน" },
+                      { src: "/images/gt1300/side.jpg", alt: "GT1300 ด้านข้าง" },
+                      { src: "/images/gt1300/internal.jpg", alt: "GT1300 ภายใน" },
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden">
+                        <img src={img.src} alt={img.alt} className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Ports & Dimension — 2 คอลัมน์ */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="card-surface p-4 overflow-hidden">
+                  <h4 className="font-bold text-foreground mb-3 px-2 text-sm">🔌 Ports & Connectivity</h4>
+                  <img src="/images/gt1300/ports1.jpg" alt="GT1300 Ports Front" className="w-full rounded-lg mb-3" loading="lazy" />
+                  <img src="/images/gt1300/ports2.jpg" alt="GT1300 Ports Rear" className="w-full rounded-lg" loading="lazy" />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <h4 className="font-bold text-foreground mb-3 px-2 text-sm">📐 Dimension Drawing</h4>
+                  <img src="/images/gt1300/dimension.jpg" alt="GT1300 Dimension" className="w-full rounded-lg" loading="lazy" />
+                </div>
+              </div>
+
+              {/* Spec 2 คอลัมน์ */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">📋 GT1300 Specifications</h3>
+                </div>
+                <div className="grid md:grid-cols-2 md:divide-x divide-border">
+                  <div className="divide-y divide-border">
+                    {[
+                      ["CPU", "1. i5-8400H 4C/8T 2.5–4.2GHz 8MB TDP 45W\n2. i7-8750H 6C/12T 2.2–4.1GHz 9MB TDP 45W\n3. i5-9400H 4C/8T 2.5–4.3GHz 8MB TDP 45W\n4. i7-9750H 6C/12T 2.6–4.5GHz 12MB TDP 45W\n5. i5-10200H 4C/8T 2.4–4.1GHz 8MB TDP 45W\n6. i7-10750H 6C/12T 4.8–5.0GHz 12MB TDP 45W"],
+                      ["Chipset", "SOC"],
+                      ["Memory", "2× SO-DIMM DDR4 สูงสุด 64GB"],
+                      ["M-SATA", "1× M-SATA 3.0 (6Gb/s)"],
+                      ["M.2 SSD", "1× M.2 NVMe 2280"],
+                      ["SATA", "1× SATA 3.0 (6Gb/s) สำหรับ HDD/SSD"],
+                      ["Display", "3× HDMI 1.4 (Triple Display)"],
+                      ["LAN", "2× Intel i225V 2.5G RJ45"],
+                    ].map(([label, value], i) => (
+                      <div key={i} className="flex">
+                        <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
+                        <div className="w-2/3 p-3 text-xs text-muted-foreground whitespace-pre-line">{value}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="divide-y divide-border">
+                    {[
+                      ["COM", "6× DB9 COM\n(2× รองรับ RS232/RS422/RS485 ผ่าน BIOS)"],
+                      ["USB", "4× USB 2.0 + 2× USB 3.0"],
+                      ["GPIO", "1× GPIO (7 IN + 7 OUT)"],
+                      ["WiFi / 4G", "Mini PCIe WiFi/BT + Mini PCIe 3G/4G\n2× เสาอากาศภายนอก + SIM Slot"],
+                      ["Power", "9V–36V DC (3-pin Phoenix Terminal)\n+ 2-pin Phoenix + ATX/AT Switch"],
+                      ["Audio", "1× MIC + 1× SPK"],
+                      ["Temp Range", "-20°C ~ +60°C (Operating)"],
+                      ["Size / Weight", "240 × 150 × 65mm / 2kg"],
+                      ["Functions", "AWAL, Wake On LAN, Watchdog, RTC"],
+                      ["OS", "Windows 10/11, WES 10, Linux"],
+                    ].map(([label, value], i) => (
+                      <div key={i} className="flex">
+                        <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
+                        <div className="w-2/3 p-3 text-xs text-muted-foreground whitespace-pre-line">{value}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Datasheet CTA */}
+              <div className="text-center">
+                <a
+                  href="https://www.entgroup.co.th/gt-series-2023"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <ExternalLink size={16} /> ดูข้อมูลเพิ่มเติม GT1300
                 </a>
               </div>
             </div>
