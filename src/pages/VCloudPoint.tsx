@@ -265,6 +265,12 @@ const VCloudPoint = () => {
                   </div>
                 ))}
               </div>
+              <div className="flex items-center gap-3 mb-6">
+                <WishlistHeart
+                  item={{ id: "vcloudpoint-zero-client", name: "vCloudPoint Zero Client", category: "vCloudPoint", image: "https://vcloudpoint.info/assets/zero-client-1-D2hOci6Y.jpg", href: "/vcloudpoint", specs: "Shared Computing — 1 PC 30 Users" }}
+                />
+                <span className="text-xs text-muted-foreground">เพิ่มในรายการถูกใจ</span>
+              </div>
 
               <div className="flex flex-wrap gap-3">
                 <LineQRButton

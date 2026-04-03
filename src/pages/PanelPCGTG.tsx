@@ -357,7 +357,11 @@ const PanelPC = () => {
                 <p className="text-xs text-muted-foreground">จอสัมผัส 12.1" XGA พร้อม Windows 11</p>
               </div>
             </div>
-            <div className="card-surface p-4 flex flex-col items-center gap-3 justify-end">
+            <div className="card-surface p-4 flex flex-col items-center gap-3 justify-end relative">
+              <WishlistHeart
+                item={{ id: "gty156t", name: "GTY156T", category: "Panel PC GTY/GTG", image: gty156Front, href: "/panel-pc-gtg", specs: "15.6\" FHD Touch Panel PC" }}
+                className="absolute top-3 right-3"
+              />
               <div className="flex-1 flex items-end">
                 <img src={gty156Front} alt="GTY156T — มุมเอียง แสดงครีบระบายความร้อน Fanless" className="w-full max-h-[280px] object-contain rounded-lg" loading="lazy" />
               </div>

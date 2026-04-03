@@ -363,14 +363,19 @@ const UTCSeries = () => {
             {/* Wide */}
             <div className="card-surface rounded-xl overflow-hidden">
               <div className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                    <RectangleHorizontal className="text-primary" size={22} />
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                      <RectangleHorizontal className="text-primary" size={22} />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-foreground">Wide Screen (16:9)</h3>
+                      <p className="text-xs text-primary/70 font-medium">หน้าจอสี่เหลี่ยมผืนผ้า</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-foreground">Wide Screen (16:9)</h3>
-                    <p className="text-xs text-primary/70 font-medium">หน้าจอสี่เหลี่ยมผืนผ้า</p>
-                  </div>
+                  <WishlistHeart
+                    item={{ id: "utc-wide", name: "UTC Wide Screen", category: "UTC Series", image: "https://static.wixstatic.com/media/0597a3_52951cbca38c439f8abc10f9e94fa03f~mv2.png", href: "/utc-series", specs: "16:9 Touch Monitor" }}
+                  />
                 </div>
                 <img
                   src="https://static.wixstatic.com/media/0597a3_52951cbca38c439f8abc10f9e94fa03f~mv2.png/v1/crop/x_0,y_112,w_2032,h_1008/fill/w_1292,h_641,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Wide%20Screen%20Banner01.png"
