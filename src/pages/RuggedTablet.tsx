@@ -402,10 +402,8 @@ const ProductCard = ({ product }: { product: { name: string; size?: string; high
             </a>
           </Button>
         )}
-        <Button size="sm" asChild className="flex-1">
-          <a href="/quote">
-            ขอราคา
-          </a>
+        <Button size="sm" className="flex-1" onClick={() => onQuote?.(product.name)}>
+          <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอราคา
         </Button>
       </div>
     </div>
