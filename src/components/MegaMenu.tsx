@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Cpu, Monitor, Shield, Tablet, Wifi, Server, Box, Layers,
   Factory, Zap, ChevronRight, ArrowRight, Sparkles, Tv, Sun,
-  Droplets, UtensilsCrossed
+  Droplets, UtensilsCrossed, Headset, ShieldCheck, Users, Handshake
 } from "lucide-react";
 
 import imgGT from "@/assets/product-gt-series.jpg";
@@ -187,6 +187,14 @@ const menuCategories = [
   },
 ];
 
+const b2bBanners: Record<string, { icon: typeof Headset; title: string; desc: string }> = {
+  industrial: { icon: Headset, title: "ผู้เชี่ยวชาญช่วยเลือกสเปก", desc: "ทีมวิศวกรพร้อมให้คำปรึกษา เลือกรุ่นที่ตรงกับ TOR" },
+  network: { icon: ShieldCheck, title: "รับประกันหลังการขาย", desc: "ซ่อม เปลี่ยน ดูแลอย่างมืออาชีพ 1–3 ปี" },
+  display: { icon: Users, title: "ลูกค้าองค์กรชั้นนำไว้วางใจ", desc: "หน่วยงานรัฐ โรงงาน โรงพยาบาล ใช้สินค้าของเรา" },
+  rugged: { icon: Handshake, title: "B2B ราคาพิเศษสำหรับโครงการ", desc: "สั่งซื้อจำนวนมาก ราคาดีกว่า พร้อมเทรนนิ่ง" },
+  solution: { icon: Headset, title: "ทดลองฟรี 30 วัน", desc: "ลองก่อนตัดสินใจ ไม่มีค่าใช้จ่าย มีทีมติดตั้งให้" },
+};
+
 /* ═══════ Component ═══════ */
 const MegaMenu = ({
   onNavigate,
@@ -290,7 +298,7 @@ const MegaMenu = ({
                 </div>
 
                 {/* Product columns — right */}
-                <div className="col-span-9 grid grid-cols-3 gap-4">
+                <div className={`col-span-9 grid grid-cols-3 gap-4`}>
                   {active.columns.map((col) => (
                     <div key={col.heading}>
                       <h5 className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-2">
@@ -317,6 +325,26 @@ const MegaMenu = ({
                       </ul>
                     </div>
                   ))}
+
+                  {/* B2B Banner — fills empty column space */}
+                  {active.columns.length < 3 && b2bBanners[active.id] && (() => {
+                    const banner = b2bBanners[active.id];
+                    const BannerIcon = banner.icon;
+                    return (
+                      <Link
+                        to="/about-us"
+                        onClick={() => { setActiveMenu(null); onNavigate?.(); }}
+                        className="group col-span-1 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/15 p-3 flex flex-col justify-center hover:border-primary/30 transition-all"
+                      >
+                        <BannerIcon size={18} className="text-primary mb-2" />
+                        <p className="text-xs font-bold text-white mb-1">{banner.title}</p>
+                        <p className="text-[10px] text-white/40 leading-relaxed mb-2">{banner.desc}</p>
+                        <span className="text-[10px] text-primary font-semibold group-hover:underline flex items-center gap-1">
+                          เกี่ยวกับเรา <ArrowRight size={9} />
+                        </span>
+                      </Link>
+                    );
+                  })()}
                 </div>
               </div>
 
