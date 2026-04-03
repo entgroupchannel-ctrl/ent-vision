@@ -55,6 +55,10 @@ const MemberRegister = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Show preview
+    const previewUrl = URL.createObjectURL(file);
+    setCardPreview(previewUrl);
+
     setScanning(true);
     try {
       const reader = new FileReader();
@@ -86,6 +90,7 @@ const MemberRegister = () => {
     } finally {
       setScanning(false);
       if (fileInputRef.current) fileInputRef.current.value = "";
+    }
     }
   }, [toast]);
 
