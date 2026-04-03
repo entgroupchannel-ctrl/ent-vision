@@ -11,6 +11,7 @@ import {
   Phone, Mail, MapPin, ArrowLeft, Send, MessageCircle, Users,
 } from "lucide-react";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteDialog from "@/components/QuoteDialog";
 
 const categories = [
   "เลือกหมวดหมู่",
