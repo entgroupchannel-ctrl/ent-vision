@@ -321,6 +321,7 @@ const IBoxSeries = () => {
         productName={quoteProduct || ""}
         productCategory="iBox Series"
       />
+      <MultiSelectQuoteBar selectedProducts={selectedProducts} onClear={clearSelection} productCategory="iBox Series" />
       <FooterCompact />
     </div>
   );

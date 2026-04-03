@@ -1047,6 +1047,7 @@ const MiniPCFirewall = () => {
         productName={quoteProduct || ""}
         productCategory="Mini PC Firewall"
       />
+      <MultiSelectQuoteBar selectedProducts={selectedProducts} onClear={clearSelection} productCategory="Mini PC Firewall" />
       <FooterCompact />
     </div>
   );
