@@ -83,6 +83,7 @@ const App = () => (
               <Route path="/delivery" element={<Delivery />} />
               <Route path="/cabinets" element={<Cabinets />} />
               <Route path="/ibox-series" element={<IBoxSeries />} />
+              <Route path="/wishlist" element={<WishlistPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
