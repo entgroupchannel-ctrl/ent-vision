@@ -342,7 +342,44 @@ const VCloudPoint = () => {
         </div>
       </section>
 
-      {/* ── Benefits ── */}
+      {/* ── 10 เรื่องที่คุณยังไม่รู้ ── */}
+      <section className="py-16">
+        <div className="container max-w-5xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider mb-4">
+                <Play size={10} /> Must Watch
+              </div>
+              <h2 className="text-2xl md:text-3xl font-black text-foreground mb-3">
+                10 เรื่องที่คุณ<span className="text-primary">ยังไม่รู้</span>
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                เกี่ยวกับ vCloudPoint Zero Client — ทำไมองค์กรกว่า 500 แห่งถึงเลือกใช้ และสิ่งที่คุณอาจไม่เคยรู้มาก่อนเกี่ยวกับเทคโนโลยี Shared Computing
+              </p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {["ทำไมถึงใช้ไฟแค่ 5W?", "ไม่มี Local Storage = ปลอดภัยจริงหรือ?", "รองรับ Full HD Video ได้ไหม?", "ใช้กับ Windows 11 ได้หรือเปล่า?", "คืนทุนภายในกี่เดือน?"].map((q) => (
+                  <li key={q} className="flex items-center gap-2">
+                    <CheckCircle2 size={13} className="text-primary shrink-0" />
+                    {q}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl border border-border">
+              <iframe
+                src="https://www.youtube.com/embed/kogDEEuUns4?rel=0"
+                title="10 เรื่องที่คุณยังไม่รู้เกี่ยวกับ vCloudPoint Zero Client"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       <section className="py-16 md:py-24">
         <div className="container max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
