@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, Users, FileText, Mail, TrendingUp,
   Filter, RefreshCw, Eye, Clock, CheckCircle, XCircle,
-  Star, Phone, Building2, MessageSquare, LogOut, Shield,
+  Star, Phone, Building2, MessageSquare, LogOut, Shield, Download,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
