@@ -111,7 +111,7 @@ const MyQuotes = () => {
       </section>
 
       {/* Content */}
-      <section className="pb-16 px-4">
+      <section className="flex-1 pb-16 px-4">
         <div className="container max-w-2xl mx-auto">
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm text-muted-foreground">{quotes.length} รายการ</span>
