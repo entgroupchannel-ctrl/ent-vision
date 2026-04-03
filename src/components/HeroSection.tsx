@@ -148,7 +148,18 @@ const HeroSection = () => {
           )}
           <div className="w-px h-6 bg-white/10 mx-1" />
           <ThemeToggle />
-          <div className="relative" ref={userMenuRef}>
+          <Link
+            to="/wishlist"
+            className="relative p-2.5 rounded-lg text-white/70 hover:text-red-400 hover:bg-white/10 transition-colors"
+            title="สินค้าที่ถูกใจ"
+          >
+            <Heart size={20} className={wishlistCount > 0 ? "fill-red-400 text-red-400" : ""} />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
+                {wishlistCount > 9 ? "9+" : wishlistCount}
+              </span>
+            )}
+          </Link>
             <button
               onClick={() => setUserMenuOpen(!userMenuOpen)}
               className="p-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
