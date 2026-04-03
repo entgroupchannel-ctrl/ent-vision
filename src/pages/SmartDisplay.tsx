@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { LineQRDialog } from "@/components/LineQRDialog";
+import QuoteButton from "@/components/QuoteButton";
 import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Sun, Shield, Monitor, Cpu, Phone, MessageCircle,
@@ -805,11 +806,9 @@ const SmartDisplay = () => {
           </h2>
           <p className="text-muted-foreground mb-8">แอดมินพร้อมช่วยเหลือในการออกแบบตู้สำหรับติดตั้ง ระบบ AirFlow และเลือกจอภาพที่เหมาะสม</p>
           <div className="flex flex-wrap justify-center gap-4 mb-10">
-            <a href="tel:020456104" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity">
+            <QuoteButton productName="" productCategory="Smart Display & KIOSK" />
+            <a href="tel:020456104" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary transition-colors">
               <Phone size={18} /> 02-045-6104
-            </a>
-            <a href="tel:0957391053" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary transition-colors">
-              <Phone size={18} /> 095-739-1053
             </a>
             <button onClick={() => setShowLineQR(true)}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[hsl(142,70%,45%)] text-white font-bold hover:opacity-90 transition-opacity cursor-pointer">

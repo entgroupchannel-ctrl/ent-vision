@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteButton from "@/components/QuoteButton";
 
 /* ─── Concept: "One Body, Multiple Brains" ─── */
 const concepts = [
@@ -812,11 +813,12 @@ const GKSeries = () => {
             ให้ทีมผู้เชี่ยวชาญช่วยเลือกรุ่นและ Configuration ที่เหมาะกับงานของคุณ
           </p>
           <div className="flex flex-wrap justify-center gap-4">
+            <QuoteButton productName="" productCategory="GK Series — Panel PC" />
             <a
               href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-border text-foreground font-bold text-lg hover:bg-muted transition-colors"
             >
               LINE @entgroup
             </a>
