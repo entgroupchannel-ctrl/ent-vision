@@ -580,7 +580,7 @@ const RuggedTablet = () => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             {goleRuggedTablets.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
 
@@ -607,7 +607,7 @@ const RuggedTablet = () => {
           <p className="text-sm text-muted-foreground mb-6">แท็บเล็ตทนทานระดับอุตสาหกรรม Windows & Android พร้อมมาตรฐาน IP65-IP68</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {emRuggedTablets.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
         </section>
@@ -630,7 +630,7 @@ const RuggedTablet = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {ruggedNotebooks.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
         </section>
@@ -643,7 +643,7 @@ const RuggedTablet = () => {
           <p className="text-sm text-muted-foreground mb-6">คอมพิวเตอร์ All-in-One จอสัมผัส สำหรับอุตสาหกรรม ประหยัดพื้นที่ VESA/Panel Mount</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {aioProducts.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
         </section>
@@ -656,7 +656,7 @@ const RuggedTablet = () => {
           <p className="text-sm text-muted-foreground mb-6">เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม พร้อม Barcode Scanner, NFC, RFID สำหรับงานภาคสนาม</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {handheldProducts.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
         </section>
