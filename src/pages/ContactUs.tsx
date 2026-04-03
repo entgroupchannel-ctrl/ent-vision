@@ -391,6 +391,17 @@ const ContactUs = () => {
                       />
                     </div>
 
+                    {/* Subscribe */}
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={form.subscribe}
+                        onChange={(e) => setForm({ ...form, subscribe: e.target.checked })}
+                        className="rounded border-border text-primary focus:ring-primary/30 w-4 h-4"
+                      />
+                      <span className="text-xs text-muted-foreground">สมัครรับข่าวสาร โปรโมชั่น และอัปเดตจาก ENT Group</span>
+                    </label>
+
                     {/* Submit */}
                     <button
                       type="submit"
