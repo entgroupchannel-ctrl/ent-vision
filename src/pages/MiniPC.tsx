@@ -708,7 +708,7 @@ const ProductCard = ({ model }: { model: any }) => (
           </Button>
         )}
         <Button size="sm" asChild>
-          <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+          <a href="/quote">
             ขอใบเสนอราคา
           </a>
         </Button>
@@ -761,7 +761,7 @@ const MiniPC = () => {
             </div>
             <div className="flex gap-2">
               <Button variant="outline" size="sm" asChild>
-                <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+                <a href="/quote">
                   ขอใบเสนอราคา
                 </a>
               </Button>
@@ -989,7 +989,7 @@ const MiniPC = () => {
             ))}
           </div>
           <Button asChild>
-            <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+            <a href="/quote">
               ปรึกษาผู้เชี่ยวชาญ — ขอใบเสนอราคา
             </a>
           </Button>

@@ -688,7 +688,7 @@ const VCloudPoint = () => {
             <p className="text-sm text-muted-foreground mb-4">
               สำหรับทุกโรงเรียนที่ประสบภัย: ฟรีติดตั้ง + ฟรี Training + ฟรีซอฟต์แวร์ + รับประกัน 3 ปี + 10 โรงเรียนแรกรับอุปกรณ์เสริมมูลค่า 10,000 บาท
             </p>
-            <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline">
+            <a href="/quote" className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline">
               สอบถามโครงการ <ArrowRight size={14} />
             </a>
           </div>

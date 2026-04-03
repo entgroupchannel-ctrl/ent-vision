@@ -402,7 +402,7 @@ const ProductCard = ({ product }: { product: { name: string; size?: string; high
           </Button>
         )}
         <Button size="sm" asChild className="flex-1">
-          <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+          <a href="/quote">
             ขอราคา
           </a>
         </Button>
@@ -448,7 +448,7 @@ const RuggedTablet = () => {
                 </a>
               </Button>
               <Button size="sm" asChild>
-                <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+                <a href="/quote">
                   ขอใบเสนอราคา
                 </a>
               </Button>
@@ -773,7 +773,7 @@ const RuggedTablet = () => {
               </a>
             </Button>
             <Button asChild>
-              <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+              <a href="/quote">
                 ขอใบเสนอราคา
               </a>
             </Button>

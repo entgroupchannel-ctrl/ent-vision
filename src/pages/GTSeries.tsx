@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search } from "lucide-react";
+import QuoteButton from "@/components/QuoteButton";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import gt1000Banner from "@/assets/gt1000-banner.jpg";
@@ -4450,12 +4451,15 @@ const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
           <span className="text-muted-foreground">{model.ports}</span>
         </div>
       </div>
-      {model.price && (
-        <div className="mt-3 pt-3 border-t border-border">
-          <span className="text-sm text-muted-foreground">เริ่มต้น </span>
-          <span className="font-bold text-foreground">{model.price.startsWith("สอบถาม") ? model.price : `฿${model.price}`}</span>
-        </div>
-      )}
+      <div className="mt-3 pt-3 border-t border-border flex items-center justify-between">
+        {model.price ? (
+          <div>
+            <span className="text-sm text-muted-foreground">เริ่มต้น </span>
+            <span className="font-bold text-foreground">{model.price.startsWith("สอบถาม") ? model.price : `฿${model.price}`}</span>
+          </div>
+        ) : <div />}
+        <QuoteButton productName={model.name} productCategory="GT Series — Mini PC" variant="compact" />
+      </div>
     </div>
   </>
 );

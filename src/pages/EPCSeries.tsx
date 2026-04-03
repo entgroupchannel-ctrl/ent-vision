@@ -304,7 +304,7 @@ const ModelCard = ({ model }: { model: typeof squareModels[0] }) => (
           </a>
         </Button>
         <Button size="sm" asChild className="flex-1">
-          <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+          <a href="/quote">
             ขอใบเสนอราคา
           </a>
         </Button>
@@ -357,7 +357,7 @@ const EPCSeries = () => {
                   </a>
                 </Button>
                 <Button size="sm" asChild>
-                  <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+                  <a href="/quote">
                     ขอใบเสนอราคา
                   </a>
                 </Button>
@@ -727,7 +727,7 @@ const EPCSeries = () => {
               </a>
             </Button>
             <Button asChild>
-              <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+              <a href="/quote">
                 ขอใบเสนอราคา
               </a>
             </Button>
