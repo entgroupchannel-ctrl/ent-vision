@@ -6,6 +6,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import { LineQRDialog } from "@/components/LineQRDialog";
 
 const features = [
   { icon: Wind, title: "Fanless Design", desc: "เงียบสนิท ไม่มีชิ้นส่วนเคลื่อนไหว อายุการใช้งานยาวนาน" },
@@ -529,6 +530,7 @@ const SeriesSection = ({ series, index }: { series: SeriesData; index: number })
 
 const EPCBoxSeries = () => {
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [showLineQR, setShowLineQR] = useState(false);
   return (
     <div className="min-h-screen bg-background">
       {/* Nav */}
@@ -811,14 +813,12 @@ const EPCBoxSeries = () => {
               ขอใบเสนอราคา
             </button>
             <QuoteDialog open={quoteOpen} onClose={() => setQuoteOpen(false)} productCategory="EPC Box Series" />
-            <a
-              href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-border text-foreground font-bold text-lg hover:bg-muted transition-colors"
+            <button
+              onClick={() => setShowLineQR(true)}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[hsl(142,70%,45%)] text-white font-bold text-lg hover:opacity-90 transition-opacity"
             >
               LINE @entgroup
-            </a>
+            </button>
             <Link
               to="/"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-border text-foreground font-bold text-lg hover:bg-muted transition-colors"
@@ -829,6 +829,7 @@ const EPCBoxSeries = () => {
         </div>
       </section>
       <FooterCompact />
+      <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
     </div>
   );
 };

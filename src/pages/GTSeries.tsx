@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText } from "lucide-react";
 import QuoteDialog from "@/components/QuoteDialog";
+import { LineQRDialog } from "@/components/LineQRDialog";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import gt1000Banner from "@/assets/gt1000-banner.jpg";
@@ -582,6 +583,7 @@ const GTSeries = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "overview");
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const [showLineQR, setShowLineQR] = useState(false);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -4380,14 +4382,12 @@ const GTSeries = () => {
             ให้ทีมผู้เชี่ยวชาญช่วยเลือกรุ่นที่เหมาะกับงานของคุณ
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity animate-pulse-glow"
+            <button
+              onClick={() => setShowLineQR(true)}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[hsl(142,70%,45%)] text-white font-bold text-lg hover:opacity-90 transition-opacity"
             >
               LINE @entgroup
-            </a>
+            </button>
             <Link
               to="/"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-border text-foreground font-bold text-lg hover:bg-surface-hover transition-colors"
@@ -4412,6 +4412,7 @@ const GTSeries = () => {
         productName={quoteProduct || ""}
         productCategory="GT Series — Mini PC"
       />
+      <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
     </div>
   );
 };
