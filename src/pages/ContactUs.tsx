@@ -52,6 +52,7 @@ const ContactUs = () => {
     callbackTime: "",
     category: "",
     message: "",
+    subscribe: true,
   });
   const [submitted, setSubmitted] = useState(false);
 
