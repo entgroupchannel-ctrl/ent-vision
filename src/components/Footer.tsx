@@ -45,7 +45,7 @@ const NewsletterForm = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="กรอกอีเมลของคุณ"
-        className="flex-1 px-4 py-2.5 rounded-lg bg-[hsl(220,15%,15%)] border border-[hsl(220,15%,22%)] text-sm text-white placeholder:text-[hsl(215,15%,40%)] focus:outline-none focus:border-primary"
+        className="flex-1 px-4 py-2.5 rounded-lg bg-white/80 border border-gray-300 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary dark:bg-[hsl(220,15%,15%)] dark:border-[hsl(220,15%,22%)] dark:text-white dark:placeholder:text-[hsl(215,15%,40%)]"
         disabled={loading}
       />
       <button
@@ -167,7 +167,7 @@ const Footer = () => {
 
 
       {/* Main Footer */}
-      <div className="bg-[hsl(220,20%,10%)] text-[hsl(210,20%,85%)]">
+      <div className="bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 text-gray-700 dark:from-[hsl(220,20%,12%)] dark:via-[hsl(220,18%,9%)] dark:to-[hsl(220,20%,7%)] dark:text-[hsl(210,20%,85%)]">
         <div className="container max-w-7xl mx-auto px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             {/* Company Info */}
@@ -199,7 +199,7 @@ const Footer = () => {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-[hsl(220,15%,18%)] flex items-center justify-center text-[hsl(215,15%,55%)] hover:text-primary hover:bg-[hsl(220,15%,22%)] transition-colors"
+                    className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 hover:text-primary hover:bg-gray-300 transition-colors dark:bg-[hsl(220,15%,18%)] dark:text-[hsl(215,15%,55%)] dark:hover:bg-[hsl(220,15%,22%)]"
                     aria-label={s.label}
                   >
                     <s.icon size={14} />
@@ -227,13 +227,13 @@ const Footer = () => {
         </div>
 
         {/* PDPA */}
-        <div className="border-t border-[hsl(220,15%,18%)]">
+        <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
           <div className="container max-w-7xl mx-auto px-6 py-6">
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-[hsl(220,15%,12%)]">
+            <div className="flex items-start gap-3 p-4 rounded-lg bg-white/60 dark:bg-[hsl(220,15%,12%)]">
               <span className="text-lg">🔒</span>
               <div>
-                <p className="text-xs font-bold text-white mb-1">การคุ้มครองข้อมูลส่วนบุคคล (PDPA)</p>
-                <p className="text-[11px] text-[hsl(215,15%,50%)] leading-relaxed">
+                <p className="text-xs font-bold text-foreground mb-1">การคุ้มครองข้อมูลส่วนบุคคล (PDPA)</p>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">
                   บริษัท อีเอ็นที กรุ๊ป จำกัด ให้ความสำคัญกับการคุ้มครองข้อมูลส่วนบุคคลของท่าน ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)
                   ข้อมูลของท่าน ได้แก่ ชื่อ อีเมล เบอร์โทรศัพท์ และข้อมูลบริษัท จะถูกจัดเก็บเพื่อวัตถุประสงค์ในการจัดทำใบเสนอราคา ให้คำปรึกษาด้านเทคนิค
                   และบริการหลังการขายเท่านั้น เราจะไม่จำหน่าย แบ่งปัน หรือเปิดเผยข้อมูลส่วนบุคคลของท่านแก่บุคคลที่สาม
@@ -244,9 +244,9 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-[hsl(220,15%,18%)]">
+        <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
           <div className="container max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-[hsl(215,15%,45%)]">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-muted-foreground">
               <a href="#" className="hover:text-primary transition-colors">เงื่อนไขการรับประกัน</a>
               <span>|</span>
               <a href="#" className="hover:text-primary transition-colors">การชำระเงิน</a>
@@ -257,7 +257,7 @@ const Footer = () => {
               <span>|</span>
               <Link to="/admin-login" className="hover:text-primary transition-colors">Admin</Link>
             </div>
-            <p className="text-[11px] text-[hsl(215,15%,40%)]">
+            <p className="text-[11px] text-muted-foreground">
               © {new Date().getFullYear()} ENT Group Co., Ltd. All rights reserved. — NVIDIA Jetson Solutions by ENT Group
             </p>
           </div>
