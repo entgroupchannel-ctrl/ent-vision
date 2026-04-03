@@ -310,9 +310,9 @@ const MegaMenu = ({
                             <Link
                               to={link.href}
                               onClick={() => { setActiveMenu(null); onNavigate?.(); }}
-                              className="group flex items-center gap-1.5 py-1.5 px-2 -mx-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                              className="group flex items-center gap-1.5 py-1.5 px-2 -mx-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
                             >
-                              <ChevronRight size={10} className="text-white/20 group-hover:text-primary transition-colors" />
+                              <ChevronRight size={10} className="text-muted-foreground/40 group-hover:text-primary transition-colors" />
                               <span className="text-xs font-medium">{link.label}</span>
                               {link.hot && (
                                 <span className="px-1 py-0.5 rounded text-[7px] font-bold uppercase bg-red-500/20 text-red-400 border border-red-500/30">
