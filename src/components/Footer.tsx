@@ -41,6 +41,7 @@ const footerSections = [
     links: [
       { label: "เกี่ยวกับเรา", href: "/about-us" },
       { label: "ติดต่อเรา / แผนที่", href: "/contact" },
+      { label: "ขอใบเสนอราคา", href: "/quote" },
       { label: "โปรโมชั่น", href: "/promotions" },
       { label: "Smart Display", href: "/smart-display" },
       { label: "Touch Monitor", href: "/panel-pc-gtg" },

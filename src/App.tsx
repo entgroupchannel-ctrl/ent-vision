@@ -22,6 +22,7 @@ import MiniPCFirewall from "./pages/MiniPCFirewall.tsx";
 import VCloudPoint from "./pages/VCloudPoint.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import ContactUs from "./pages/ContactUs.tsx";
+import QuoteRequest from "./pages/QuoteRequest.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -53,6 +54,7 @@ const App = () => (
             <Route path="/vcloudpoint" element={<VCloudPoint />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/quote" element={<QuoteRequest />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
