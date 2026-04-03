@@ -380,80 +380,26 @@ const GTSeries = () => {
         </div>
       </section>
 
-      {/* Use Cases */}
-      <section className="section-padding bg-surface/50">
-        <div className="container max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              รองรับ<span className="text-gradient">ทุกสถานที่</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12">
-            {useCases.map((uc) => (
-              <div key={uc.label} className="card-surface p-6 text-center flex flex-col items-center gap-3">
-                <uc.icon className="text-primary" size={36} />
-                <span className="font-semibold text-foreground">{uc.label}</span>
-              </div>
-            ))}
-          </div>
-
-          <img
-            src="https://static.wixstatic.com/media/3e5003_1fb2c4f1460e476b8ef1f40a3c65587f~mv2.jpg/v1/fill/w_1312,h_280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5.jpg"
-            alt="GT Series Applications"
-            className="w-full rounded-xl"
-            loading="lazy"
-          />
-        </div>
-      </section>
-
-      {/* Key Features */}
-      <section className="section-padding">
-        <div className="container max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Features</span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              จุดเด่น<span className="text-gradient">ที่แตกต่าง</span>
-            </h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Compact Feature Strip */}
+      <section className="py-8 bg-surface/50 border-y border-border">
+        <div className="container max-w-7xl mx-auto px-6">
+          {/* Features + Use Cases in one row */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
             {features.map((f) => (
-              <div key={f.title} className="card-surface p-6 hover:border-primary/30 transition-all hover:-translate-y-1">
-                <f.icon className="text-primary mb-4" size={32} />
-                <h3 className="font-bold text-foreground mb-2">{f.title}</h3>
-                <p className="text-sm text-muted-foreground">{f.desc}</p>
+              <div key={f.title} className="flex items-center gap-2 p-3 rounded-lg bg-card border border-border">
+                <f.icon className="text-primary shrink-0" size={18} />
+                <div>
+                  <div className="text-xs font-bold text-foreground leading-tight">{f.title}</div>
+                  <div className="text-[10px] text-muted-foreground leading-tight hidden sm:block">{f.desc}</div>
+                </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* About Industrial PC */}
-      <section className="section-padding bg-surface/50">
-        <div className="container max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Industrial PC</span>
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6 leading-tight">
-                เทคโนโลยี <span className="text-gradient">Chassis Cooling</span>
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                ตัวเครื่องทั้งหมดทำหน้าที่เป็น heatsink ยักษ์ ด้วยครีบระบายความร้อนอลูมิเนียมที่ออกแบบมาพิเศษ
-                ทำให้ความร้อนกระจายออกจากพื้นผิวทั้งหมดอย่างมีประสิทธิภาพ ระบบ Fanless Design ให้ประโยชน์มากมาย
-                — ไม่มีพัดลมทำให้เงียบสนิท 0 เดซิเบล, โครงสร้างอลูมิเนียมแข็งแรงทนทาน, และประหยัดไฟ
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                ผลที่ได้คือความเสถียรสูงเพราะไม่มีชิ้นส่วนเคลื่อนไหว เหมาะกับสิ่งแวดล้อมโรงงานที่มีฝุ่นเพราะไม่ดูดอากาศ
-                สามารถทำงาน 24/7 ต่อเนื่อง ไม่รบกวนการทำงานด้วยเสียงเงียบสนิท
-              </p>
-            </div>
-            <div className="card-surface p-2 overflow-hidden">
-              <img
-                src="https://static.wixstatic.com/media/0597a3_d8a5010af6b34403b5f79b763973d50a~mv2.png/v1/fill/w_1030,h_367,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2011_01_34.png"
-                alt="GT Series Lineup"
-                className="w-full rounded-lg"
-                loading="lazy"
-              />
-            </div>
+            {useCases.map((uc) => (
+              <div key={uc.label} className="flex items-center gap-2 p-3 rounded-lg bg-card border border-border">
+                <uc.icon className="text-primary shrink-0" size={18} />
+                <span className="text-xs font-bold text-foreground">{uc.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
