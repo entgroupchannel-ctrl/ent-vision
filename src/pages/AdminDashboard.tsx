@@ -71,16 +71,18 @@ const AdminDashboard = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    const [c, q, s, cl] = await Promise.all([
+    const [c, q, s, cl, sw] = await Promise.all([
       (supabase.from as any)("contact_submissions").select("*").order("created_at", { ascending: false }),
       (supabase.from as any)("quote_requests").select("*").order("created_at", { ascending: false }),
       (supabase.from as any)("subscribers").select("*").order("created_at", { ascending: false }),
       (supabase.from as any)("chat_leads").select("*").order("created_at", { ascending: false }),
+      (supabase.from as any)("software_inquiries").select("*").order("created_at", { ascending: false }),
     ]);
     if (c.data) setContacts(c.data);
     if (q.data) setQuotes(q.data);
     if (s.data) setSubscribers(s.data);
     if (cl.data) setChatLeads(cl.data);
+    if (sw.data) setSoftwareInquiries(sw.data);
     setLoading(false);
   };
 
