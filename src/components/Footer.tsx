@@ -61,14 +61,32 @@ const NewsletterForm = () => {
 
 const footerSections = [
   {
-    title: "สินค้า",
+    title: "Industrial PC",
     links: [
-      { label: "GT Series — Mini PC", href: "/gt-series" },
-      { label: "GK Series — Panel PC", href: "/gk-series" },
+      { label: "GT Series — Fanless Mini PC", href: "/gt-series" },
+      { label: "GB Series — Compact PC", href: "/gb-series" },
+      { label: "EPC Box Series", href: "/epc-box-series" },
       { label: "EPC Series", href: "/epc-series" },
+      { label: "Waterproof PC", href: "/waterproof-pc" },
+    ],
+  },
+  {
+    title: "Panel PC & Display",
+    links: [
+      { label: "GK Series — Panel PC", href: "/gk-series" },
+      { label: "Panel PC GTG — Stainless", href: "/panel-pc-gtg" },
+      { label: "Smart Display / KIOSK", href: "/smart-display" },
+      { label: "UTG Series", href: "/utc-series" },
+    ],
+  },
+  {
+    title: "อุปกรณ์ & โซลูชัน",
+    links: [
       { label: "Rugged Tablet", href: "/rugged-tablet" },
       { label: "Mini PC", href: "/mini-pc" },
-      { label: "Smart Display", href: "/smart-display" },
+      { label: "Mini PC Firewall", href: "/minipc-firewall" },
+      { label: "Volktek — Network Switch", href: "/volktek" },
+      { label: "vCloudPoint — Thin Client", href: "/vcloudpoint" },
     ],
   },
   {
@@ -165,9 +183,9 @@ const Footer = () => {
       {/* Main Footer */}
       <div className="bg-gradient-to-b from-white via-gray-100 to-gray-300 text-gray-700 dark:from-[hsl(220,15%,16%)] dark:via-[hsl(220,18%,10%)] dark:to-[hsl(220,20%,6%)] dark:text-[hsl(210,20%,85%)]">
         <div className="container max-w-7xl mx-auto px-6 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-8">
             {/* Company Info */}
-            <div className="md:col-span-1">
+            <div className="md:col-span-1 lg:col-span-2">
               <img src={logo} alt="ENT GROUP" className="h-10 w-auto mb-4" />
               <p className="text-sm font-bold text-gray-900 dark:text-white mb-1">บริษัท อีเอ็นที กรุ๊ป จำกัด</p>
               <p className="text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] leading-relaxed mb-4">
