@@ -1942,119 +1942,42 @@ const GTSeries = () => {
                   </div>
                 </div>
 
-                {/* Product Images */}
+                {/* Product Images — Factory */}
                 <div className="lg:col-span-2 space-y-4">
-                  <div className="card-surface overflow-hidden">
+                  <div className="card-surface overflow-hidden rounded-xl bg-muted/30">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_68700c8f94f94588be18d47414929b55f000.jpg/v1/fill/w_592,h_1044,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_68700c8f94f94588be18d47414929b55f000.jpg"
-                      alt="GT5000 Front"
-                      className="w-full object-contain p-4"
+                      src="/images/gt5000/main.jpg"
+                      alt="GT5000 ภาพหลัก — ด้านหน้า"
+                      className="w-full object-contain p-2"
                       loading="lazy"
                     />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { src: "/images/gt5000/front.jpg", alt: "GT5000 ด้านหน้า — พอร์ต COM, USB" },
+                      { src: "/images/gt5000/rear.jpg", alt: "GT5000 ด้านหลัง — LAN, HDMI, VGA" },
+                      { src: "/images/gt5000/side.jpg", alt: "GT5000 ด้านข้าง — ครีบระบายความร้อน" },
+                      { src: "/images/gt5000/angle.jpg", alt: "GT5000 มุมเอียง — ภาพรวม" },
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
+                        <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              {/* Port & Connectivity */}
-              <div className="card-surface p-6 md:p-8">
-                <h4 className="text-xl font-display font-bold text-foreground mb-4">
-                  🔌 Port Connectivity — ครบจบในเครื่องเดียว
-                </h4>
-                <img
-                  src="https://static.wixstatic.com/media/3e5003_617b36aa9ca7485aa099fb80f46364de~mv2.jpg/v1/fill/w_1300,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.jpg"
-                  alt="GT5000 Port Overview"
-                  className="w-full rounded-lg mb-6"
-                  loading="lazy"
-                />
-                <div className="grid md:grid-cols-2 gap-6">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_bb9ec7f103ed423a84c3e1af33441b01~mv2.png/v1/fill/w_600,h_267,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_01_59.png"
-                    alt="GT5000 Front Ports"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_f5f0f43a56cf42129538582fe0075a6f~mv2.png/v1/fill/w_600,h_434,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_52_38.png"
-                    alt="GT5000 Rear Ports"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
-                  {[
-                    { label: "6 COM Port", desc: "RS232 × 6 — COM1+COM2 ตั้งค่าเป็น RS485/RS422 ได้" },
-                    { label: "GPIO Port", desc: "ควบคุมอุปกรณ์ภายนอก relay, sensor, LCD โดยตรง" },
-                    { label: "Micro SIM Slot", desc: "รองรับ 4G/5G SIM พร้อม PUSH function" },
-                    { label: "USB 8 ports", desc: "เชื่อมต่อ barcode, camera, storage พร้อมกัน" },
-                    { label: "Dual Display", desc: "VGA + HDMI — 2 หน้าจอ control & monitoring" },
-                    { label: "2 Gigabit LAN", desc: "แยกเครือข่ายระบบผลิตและ office" },
-                  ].map((item, i) => (
-                    <div key={i} className="card-surface p-3">
-                      <div className="font-bold text-foreground mb-1">{item.label}</div>
-                      <div className="text-xs text-muted-foreground">{item.desc}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* GPIO Detail */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_cda761cbfb2749c89f401db85687eca3~mv2.png/v1/fill/w_854,h_256,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GPIO002.png"
-                    alt="GT5000 GPIO Port"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_7fa9f95958144fafb0ad73bbecf655b8~mv2.png/v1/crop/x_84,y_40,w_704,h_606/fill/w_403,h_346,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_46_44.png"
-                    alt="GT5000 SIM Slot"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              {/* Detailed Spec Diagrams */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_ddb56bce25de4abea0a2d39bffb2d713~mv2.png/v1/fill/w_600,h_253,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_23_24.png"
-                    alt="GT5000 Spec Detail 1"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_16a85cbfb5e044ccb23d787b4a8bf214~mv2.png/v1/fill/w_438,h_375,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_19_01.png"
-                    alt="GT5000 Spec Detail 2"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              {/* Additional Spec Images */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_f9c12154e3784f19820dc6c92ab1233a~mv2.png/v1/fill/w_501,h_253,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_55_02.png"
-                    alt="GT5000 Internal"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_0fb82b9a50ee42979d68ae304d18184f~mv2.png/v1/fill/w_501,h_289,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_39_48.png"
-                    alt="GT5000 Application"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
+              {/* Factory Gallery — Internal & Bottom */}
+              <div className="grid md:grid-cols-3 gap-4">
+                {[
+                  { src: "/images/gt5000/internal.jpg", alt: "GT5000 ภายใน — Mainboard" },
+                  { src: "/images/gt5000/bottom.jpg", alt: "GT5000 ด้านล่าง — VESA Mount" },
+                  { src: "/images/gt5000/spec.jpg", alt: "GT5000 Spec Overview" },
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
+                    <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
+                  </div>
+                ))}
               </div>
 
               {/* Real-world Photos */}
