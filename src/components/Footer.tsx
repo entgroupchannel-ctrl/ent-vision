@@ -16,7 +16,7 @@ const NewsletterForm = () => {
     if (!email) return;
     setLoading(true);
     try {
-      const { error } = await (supabase.from as any)("subscribers").insert({ email, source: "website_footer" });
+      const { error } = await supabase.from("subscribers").insert({ email, source: "website_footer" });
       if (error) {
         if (error.code === "23505") {
           toast({ title: "อีเมลนี้สมัครรับข่าวสารแล้ว", variant: "destructive" });
