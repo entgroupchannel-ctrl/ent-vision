@@ -90,6 +90,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: 
     setLoading(true);
     try {
       const { error } = await (supabase.from as any)("quote_requests").insert({
+        user_id: user?.id || null,
         name: form.name || user?.user_metadata?.full_name || "",
         email: emailValue,
         phone: form.phone || null,
