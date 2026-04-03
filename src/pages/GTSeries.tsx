@@ -3328,110 +3328,194 @@ const GTSeries = () => {
           {/* Tab: GT1400 Detail */}
           {activeTab === "gt1400" && (
             <div className="space-y-8 animate-fade-in">
-              <div className="text-center">
-                <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-4">
-                  NEW 2023
-                </span>
-                <h3 className="text-3xl md:text-4xl font-display font-bold">
-                  GT<span className="text-gradient">1400</span>
-                </h3>
-                <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">
-                  Industrial Grade Computer รุ่นใหม่ล่าสุด รองรับ CPU ตั้งแต่ i5-8305G ไปจนถึง i7-13650HX
-                  พร้อม 4 LAN Ports และ DDR4/DDR5 Support
-                </p>
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
+                <img src="/images/gt1400/main.jpg" alt="GT1400 Industrial PC" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    2.5G LAN · 6 COM · GPIO · SIM 4G/5G · 9–36V
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">1400</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    2× Intel 2.5G LAN · 6 COM · GPIO · SIM 5G — Industrial IoT Powerhouse
+                  </p>
+                </div>
               </div>
 
+              {/* Description + Factory Gallery */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      Celeron / Gen 8 / Gen 10 / Gen 11 · 2.5G LAN · 6 COM · GPIO · 5G
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">1400</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      GT1400 คอมพิวเตอร์อุตสาหกรรมรุ่นใหม่ รองรับ CPU 9 รุ่นตั้งแต่ Celeron J4125 ถึง i7-1165G7
+                      พร้อม 2× Intel i225V 2.5G LAN, 6 COM Port (2× RS232/422/485 + 4× Expanded RS232),
+                      GPIO 10 ช่อง, รองรับ 4G/5G Module, ไฟ 9–36V กว้าง เหมาะกับงาน Automation, Robotics,
+                      Maritime, Surveillance และ Smart City
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-3">🏭 Products Features</h4>
+                    <ul className="text-sm text-muted-foreground space-y-2">
+                      <li>✅ Intel Celeron J4125/J6412 หรือ Gen 8/10/11 Core i3/i5/i7</li>
+                      <li>✅ 2× Intel i225V 2.5G LAN (รองรับขยายเป็น 4 LAN)</li>
+                      <li>✅ 2× RS232/RS422/RS485 COM + 4× Expanded RS232 COM</li>
+                      <li>✅ 10-way GPIO + Remote Switch</li>
+                      <li>✅ M.2 3042/3052 สำหรับ 3G/4G/5G Module + SIM Slot</li>
+                      <li>✅ Fanless Aluminum Alloy — เงียบสนิท 24 ชม.</li>
+                      <li>✅ ไฟเข้า 9–36V กว้าง (4-pin Phoenix Terminal)</li>
+                      <li>✅ AWAL, Wake On LAN, Watchdog, RTC</li>
+                      <li>✅ ขนาด 300×155×50mm / 1.8kg</li>
+                    </ul>
+                  </div>
+
+                  {/* Key Specs */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU 9 รุ่น</div>
+                      <div className="text-xs text-muted-foreground mt-1">J4125 / J6412 / i5-8260U / i5-8365U / i7-8565U / i5-10210U / i7-10510U / i5-1135G7 / i7-1165G7</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM & Storage</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR4 สูงสุด 64GB / M.2 SATA + M.2 NVMe + SATA HDD</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Monitor className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">2× 2.5G LAN</div>
+                      <div className="text-xs text-muted-foreground mt-1">Intel i225V + ขยายได้ถึง 4 LAN</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">6 COM + GPIO</div>
+                      <div className="text-xs text-muted-foreground mt-1">RS232/422/485 + 10-way GPIO + 5G</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Factory Gallery */}
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img src="/images/gt1400/main.jpg" alt="GT1400 ภาพหลัก" className="w-full object-contain p-4" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { src: "/images/gt1400/front.jpg", alt: "GT1400 ด้านหน้า" },
+                      { src: "/images/gt1400/rear.jpg", alt: "GT1400 ด้านหลัง" },
+                      { src: "/images/gt1400/side.jpg", alt: "GT1400 ด้านข้าง" },
+                      { src: "/images/gt1400/internal.jpg", alt: "GT1400 ภายใน" },
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden">
+                        <img src={img.src} alt={img.alt} className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Port Diagram */}
               <div className="card-surface p-4 overflow-hidden">
-                <img
-                  src="https://static.wixstatic.com/media/0597a3_88afd8cf4a5a42a6b36b4880d59e9ebe~mv2.png/v1/fill/w_1293,h_474,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_12_53.png"
-                  alt="GT1400 Industrial PC"
-                  className="w-full rounded-lg"
-                  loading="lazy"
-                />
+                <h4 className="font-bold text-foreground mb-3 px-2">🔌 Ports & Connectivity</h4>
+                <img src="/images/gt1400/ports.png" alt="GT1400 Ports Layout" className="w-full rounded-lg" loading="lazy" />
               </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="card-surface p-5 text-center">
-                  <Cpu className="mx-auto text-primary mb-2" size={28} />
-                  <div className="font-bold text-foreground text-sm">CPU</div>
-                  <div className="text-xs text-muted-foreground mt-1">i5-8305G / i7-12650HX / i7-13650HX</div>
-                </div>
-                <div className="card-surface p-5 text-center">
-                  <Server className="mx-auto text-primary mb-2" size={28} />
-                  <div className="font-bold text-foreground text-sm">RAM</div>
-                  <div className="text-xs text-muted-foreground mt-1">DDR4/DDR5 สูงสุด 64GB</div>
-                </div>
-                <div className="card-surface p-5 text-center">
-                  <Shield className="mx-auto text-primary mb-2" size={28} />
-                  <div className="font-bold text-foreground text-sm">4 LAN Ports</div>
-                  <div className="text-xs text-muted-foreground mt-1">Intel i225V Gigabit</div>
-                </div>
-                <div className="card-surface p-5 text-center">
-                  <Zap className="mx-auto text-primary mb-2" size={28} />
-                  <div className="font-bold text-foreground text-sm">Storage</div>
-                  <div className="text-xs text-muted-foreground mt-1">M.2 NVMe + SATA SSD + HDD</div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-4">
-                <div className="card-surface overflow-hidden">
-                  <img src="https://static.wixstatic.com/media/0597a3_f51ed7e9e2004c9c8bc65d0f7b6e105b~mv2.png/v1/fill/w_403,h_362,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_f51ed7e9e2004c9c8bc65d0f7b6e105b~mv2.png" alt="GT1400 Front" className="w-full h-full object-cover" loading="lazy" />
-                </div>
-                <div className="card-surface overflow-hidden">
-                  <img src="https://static.wixstatic.com/media/0597a3_4fab26c2e6db4c98b51255f267efe896~mv2.png/v1/fill/w_403,h_362,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_4fab26c2e6db4c98b51255f267efe896~mv2.png" alt="GT1400 Side" className="w-full h-full object-cover" loading="lazy" />
-                </div>
-                <div className="card-surface overflow-hidden">
-                  <img src="https://static.wixstatic.com/media/0597a3_143384b5a7b54eda886f119a889f9470~mv2.png/v1/fill/w_403,h_362,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_143384b5a7b54eda886f119a889f9470~mv2.png" alt="GT1400 Back" className="w-full h-full object-cover" loading="lazy" />
-                </div>
-              </div>
-
+              {/* Spec 2 คอลัมน์ */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">GT1400 Price List</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground">📋 GT1400 Specifications</h3>
+                </div>
+                <div className="grid md:grid-cols-2 md:divide-x divide-border">
+                  <div className="divide-y divide-border">
+                    {[
+                      ["CPU", "1. Celeron J4125 4C/4T 2.0–2.7GHz TDP 10W\n2. Celeron J6412 4C/4T 2.0–2.6GHz TDP 10W\n3. i5-8260U 4C/8T 1.6–3.9GHz TDP 15W\n4. i5-8365U 4C/8T 1.6–4.1GHz TDP 15W\n5. i7-8565U 4C/8T 1.8–4.6GHz TDP 15W\n6. i5-10210U 2C/6T 1.6–4.2GHz TDP 15W\n7. i7-10510U 4C/8T 1.8–4.9GHz TDP 15W\n8. i5-1135G7 4C/8T 2.4–4.2GHz TDP 12W\n9. i7-1165G7 4C/8T 2.8–4.7GHz TDP 12W"],
+                      ["Chipset", "SOC"],
+                      ["Memory", "J4125/J6412: 1× SO-DIMM DDR4 (สูงสุด 32GB)\nGen 8/10/11: 2× SO-DIMM DDR4 (สูงสุด 64GB)"],
+                      ["M.2 SSD", "1× M.2 SATA 2242/2260/2280\n1× M.2 SATA/NVMe 2280"],
+                      ["SATA", "1× SATA 3.0 (6Gb/s) สำหรับ HDD/SSD"],
+                      ["Display", "1× HDMI 1.4"],
+                      ["LAN", "2× Intel i225V 2.5G RJ45\n(ขยายได้ถึง 4 LAN)"],
+                    ].map(([label, value], i) => (
+                      <div key={i} className="flex">
+                        <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
+                        <div className="w-2/3 p-3 text-xs text-muted-foreground whitespace-pre-line">{value}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="divide-y divide-border">
+                    {[
+                      ["COM", "2× RS232/RS422/RS485\n4× Expanded RS232"],
+                      ["USB", "J4125/J6412: 4× USB 3.0 + 2× USB 2.0\nGen 8/10/11: 2× USB 3.0 + 4× USB 2.0"],
+                      ["EXT IO", "4-way 3-wire COM + 10-way GPIO + Remote Switch"],
+                      ["WiFi / 5G", "M.2 2230 WiFi/BT + M.2 3042/3052 3G/4G/5G\n5× เสาอากาศภายนอก + SIM Slot"],
+                      ["Power", "9V–36V DC (4-pin Phoenix Terminal)"],
+                      ["Temp Range", "-20°C ~ +60°C (Operating)"],
+                      ["Size / Weight", "300 × 155 × 50mm / 1.8kg"],
+                      ["Functions", "AWAL, Wake On LAN, Watchdog, RTC, ATX"],
+                      ["OS", "Windows 10/11, WES 10, Linux"],
+                    ].map(([label, value], i) => (
+                      <div key={i} className="flex">
+                        <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
+                        <div className="w-2/3 p-3 text-xs text-muted-foreground whitespace-pre-line">{value}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Dimension Drawing */}
+              <div className="card-surface p-4 overflow-hidden">
+                <h4 className="font-bold text-foreground mb-3 px-2">📐 Dimension Drawing</h4>
+                <img src="/images/gt1400/dimension.png" alt="GT1400 Dimension" className="w-full rounded-lg" loading="lazy" />
+              </div>
+
+              {/* Price Table */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT1400 Price List</h3>
+                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿28,990</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-secondary/50">
-                        <th className="text-left p-3 font-semibold text-foreground">Processor</th>
+                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
                         <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
                         <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
-                        <th className="text-left p-3 font-semibold text-foreground">หมายเหตุ</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border">
                       {[
-                        { cpu: "i5-8305G", config: "DDR4 RAM 4GB / SSD 128GB / WIFI", price: "28,990", remark: "" },
-                        { cpu: "i5-8305G", config: "DDR4 RAM 8GB / SSD 128GB / WIFI", price: "29,190", remark: "" },
-                        { cpu: "i5-8305G", config: "DDR4 RAM 4GB / SSD 256GB / WIFI", price: "29,590", remark: "4 LAN Ports" },
-                        { cpu: "i5-8305G", config: "DDR4 RAM 8GB / SSD 256GB / WIFI", price: "29,990", remark: "DDR4/DDR5 Support" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 8GB / SSD 128GB / WIFI", price: "34,690", remark: "Industrial Grade" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 8GB / SSD 256GB / WIFI", price: "35,290", remark: "" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 16GB / SSD 128GB / WIFI", price: "36,490", remark: "" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 16GB / SSD 256GB / WIFI", price: "36,990", remark: "" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 8GB / SSD 128GB / WIFI", price: "37,790", remark: "" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 8GB / SSD 256GB / WIFI", price: "38,390", remark: "" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 16GB / SSD 128GB / WIFI", price: "39,590", remark: "" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 16GB / SSD 256GB / WIFI", price: "39,990", remark: "" },
+                        { cpu: "i5-8305G", config: "DDR4 RAM 4GB + SSD 128GB + WIFI", price: "28,990" },
+                        { cpu: "i5-8305G", config: "DDR4 RAM 8GB + SSD 128GB + WIFI", price: "29,190" },
+                        { cpu: "i5-8305G", config: "DDR4 RAM 4GB + SSD 256GB + WIFI", price: "29,590" },
+                        { cpu: "i5-8305G", config: "DDR4 RAM 8GB + SSD 256GB + WIFI", price: "29,990" },
+                        { cpu: "i7-12650HX", config: "DDR5 RAM 8GB + SSD 128GB + WIFI", price: "34,690" },
+                        { cpu: "i7-12650HX", config: "DDR5 RAM 8GB + SSD 256GB + WIFI", price: "35,290" },
+                        { cpu: "i7-12650HX", config: "DDR5 RAM 16GB + SSD 128GB + WIFI", price: "36,490" },
+                        { cpu: "i7-12650HX", config: "DDR5 RAM 16GB + SSD 256GB + WIFI", price: "36,990" },
+                        { cpu: "i7-13650HX", config: "DDR5 RAM 8GB + SSD 128GB + WIFI", price: "37,790" },
+                        { cpu: "i7-13650HX", config: "DDR5 RAM 8GB + SSD 256GB + WIFI", price: "38,390" },
+                        { cpu: "i7-13650HX", config: "DDR5 RAM 16GB + SSD 128GB + WIFI", price: "39,590" },
+                        { cpu: "i7-13650HX", config: "DDR5 RAM 16GB + SSD 256GB + WIFI", price: "39,990" },
                       ].map((item, i) => (
                         <tr key={i} className="hover:bg-secondary/30 transition-colors">
                           <td className="p-3 text-foreground font-medium">{item.cpu}</td>
                           <td className="p-3 text-muted-foreground">{item.config}</td>
                           <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
-                          <td className="p-3 text-xs text-muted-foreground">{item.remark}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-6">
-                  <img src="https://static.wixstatic.com/media/0597a3_c97635d4da504d00ae26c381e3b61efd~mv2.png/v1/fill/w_892,h_477,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_02_11.png" alt="GT1400 Ports" className="w-full rounded-lg" loading="lazy" />
-                </div>
-                <div className="card-surface p-6">
-                  <img src="https://static.wixstatic.com/media/0597a3_0de9b63b73b742a38464eff7ebf651cc~mv2.png/v1/fill/w_1271,h_715,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_25_12.png" alt="GT1400 Specification" className="w-full rounded-lg" loading="lazy" />
                 </div>
               </div>
 
@@ -3467,6 +3551,7 @@ const GTSeries = () => {
                 </div>
               </div>
 
+              {/* Datasheet CTA */}
               <div className="text-center">
                 <a
                   href="https://www.entgroup.co.th/_files/ugd/0597a3_df771f1787184c4ea82b8ca5ed7abc17.pdf"
