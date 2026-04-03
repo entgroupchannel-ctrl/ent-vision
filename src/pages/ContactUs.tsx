@@ -172,14 +172,11 @@ const ContactUs = () => {
                         alt="LINE QR Code @entgroup"
                         className="w-24 h-24 rounded-lg border border-border bg-white p-1"
                       />
-                      <a
-                        href="https://line.me/R/ti/p/@entgroup?from=page&oat_content=url&searchId=entgroup"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <LineQRButton
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[hsl(120,60%,40%)] text-white text-xs font-bold hover:bg-[hsl(120,60%,35%)] transition-colors"
                       >
                         แอดไลน์ @entgroup
-                      </a>
+                      </LineQRButton>
                     </div>
                   </div>
                 </div>

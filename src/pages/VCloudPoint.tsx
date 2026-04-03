@@ -263,14 +263,11 @@ const VCloudPoint = () => {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <a
-                  href="https://line.me/R/ti/p/%40njm2688e"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <LineQRButton
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg shadow-primary/20"
                 >
                   <Play size={16} /> ขอเดโม่ฟรี 30 วัน
-                </a>
+                </LineQRButton>
                 <a
                   href="https://vcloudpoint.info/"
                   target="_blank"

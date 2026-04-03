@@ -66,14 +66,11 @@ const FooterCompact = () => {
                 <s.icon size={12} />
               </a>
             ))}
-            <a
-              href="https://line.me/R/ti/p/@entgroup"
-              target="_blank"
-              rel="noopener noreferrer"
+            <LineQRButton
               className="ml-1 px-3 py-1.5 rounded-lg bg-primary/10 text-primary text-[10px] font-bold hover:bg-primary/20 transition-colors flex items-center gap-1"
             >
-              LINE @entgroup <ExternalLink size={9} />
-            </a>
+              LINE @entgroup
+            </LineQRButton>
           </div>
         </div>
       </div>
