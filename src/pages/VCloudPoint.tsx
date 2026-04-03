@@ -83,6 +83,7 @@ const caseStudies = [
       { val: "65%", label: "ลดต้นทุน IT" },
     ],
     highlights: ["QC & Production Line", "ระบบ ERP / SAP", "สภาพแวดล้อมฝุ่น ความร้อน ความชื้น", "ขยายระบบต่อเนื่องทุกปี"],
+    videos: [],
     color: "from-amber-500/10 to-amber-500/5",
     borderColor: "border-amber-500/20",
     accentColor: "text-amber-500",
