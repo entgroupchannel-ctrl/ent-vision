@@ -26,6 +26,7 @@ import ContactUs from "./pages/ContactUs.tsx";
 import QuoteRequest from "./pages/QuoteRequest.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
+import MemberRegister from "./pages/MemberRegister.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import FloatingContact from "./components/FloatingContact.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
@@ -64,6 +65,7 @@ const App = () => (
               <Route path="/quote" element={<QuoteRequest />} />
               <Route path="/admin-login" element={<AdminLogin />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/member-register" element={<MemberRegister />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
