@@ -852,10 +852,10 @@ const SmartDisplay = () => {
           </div>
         </div>
       )}
+      <FooterCompact />
     </div>
   );
 };
 
-expo
 
-      <FooterCompact />rt default SmartDisplay;
+export default SmartDisplay;

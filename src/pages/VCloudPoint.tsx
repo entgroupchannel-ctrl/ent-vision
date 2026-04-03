@@ -636,10 +636,10 @@ const VCloudPoint = () => {
           <DemoCTA variant="secondary" />
         </div>
       </section>
+      <FooterCompact />
     </div>
   );
 };
 
-expo
 
-      <FooterCompact />rt default VCloudPoint;
+export default VCloudPoint;

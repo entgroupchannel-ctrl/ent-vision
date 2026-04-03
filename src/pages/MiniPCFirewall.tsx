@@ -1008,10 +1008,10 @@ const MiniPCFirewall = () => {
           </div>
         </div>
       </section>
+      <FooterCompact />
     </div>
   );
 };
 
-expo
 
-      <FooterCompact />rt default MiniPCFirewall;
+export default MiniPCFirewall;

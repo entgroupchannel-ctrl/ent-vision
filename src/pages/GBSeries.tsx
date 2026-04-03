@@ -445,10 +445,10 @@ const GBSeries = () => {
           </div>
         </div>
       </section>
+      <FooterCompact />
     </div>
   );
 };
 
-expo
 
-      <FooterCompact />rt default GBSeries;
+export default GBSeries;
