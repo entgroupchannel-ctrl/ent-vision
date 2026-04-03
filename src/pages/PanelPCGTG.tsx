@@ -9,7 +9,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
 import { LineQRDialog } from "@/components/LineQRDialog";
-import QuoteButton from "@/components/QuoteButton";
+import QuoteDialog from "@/components/QuoteDialog";
 import gty121Front from "@/assets/gty121-front.jpg";
 import gty121Rear from "@/assets/gty121-rear.png";
 import gty156Side from "@/assets/gty156-side.jpg";
@@ -230,6 +230,7 @@ const fmt = (n: number) => n.toLocaleString();
 
 const PanelPC = () => {
   const [showLineQR, setShowLineQR] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
   const [activeCpu, setActiveCpu] = useState("j1900");
   const [coolingFilter, setCoolingFilter] = useState<"all" | "FANLESS" | "FAN">("all");
   const [sizeFilter, setSizeFilter] = useState<"all" | "small" | "medium" | "large">("all");
@@ -784,7 +785,10 @@ import FooterCompact from "@/components/FooterCompact";
           <p className="text-muted-foreground mb-2">รองรับโครงการขนาดเล็ก กลาง ใหญ่ — อยากได้ TOR แจ้งได้</p>
           <p className="text-muted-foreground mb-8">รับใบเสนอราคาพิเศษสำหรับออเดอร์จำนวนมาก พร้อม OEM/ODM</p>
           <div className="flex flex-wrap justify-center gap-4 mb-10">
-            <QuoteButton productName="" productCategory="Panel PC GTG/GTY" />
+            <button onClick={() => setQuoteOpen(true)} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-colors">
+              ขอใบเสนอราคา
+            </button>
+            <QuoteDialog open={quoteOpen} onClose={() => setQuoteOpen(false)} productCategory="Panel PC GTG/GTY" />
             <a href="tel:020456104" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary transition-colors">
               <Phone size={18} /> 02-045-6104
             </a>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { LineQRDialog } from "@/components/LineQRDialog";
-import QuoteButton from "@/components/QuoteButton";
+import QuoteDialog from "@/components/QuoteDialog";
 import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Sun, Shield, Monitor, Cpu, Phone, MessageCircle,
@@ -152,6 +152,7 @@ const SmartDisplay = () => {
     return tab === "kiosk" || tab === "outdoor" ? tab : "indoor";
   });
   const [showLineQR, setShowLineQR] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
@@ -806,7 +807,10 @@ const SmartDisplay = () => {
           </h2>
           <p className="text-muted-foreground mb-8">แอดมินพร้อมช่วยเหลือในการออกแบบตู้สำหรับติดตั้ง ระบบ AirFlow และเลือกจอภาพที่เหมาะสม</p>
           <div className="flex flex-wrap justify-center gap-4 mb-10">
-            <QuoteButton productName="" productCategory="Smart Display & KIOSK" />
+            <button onClick={() => setQuoteOpen(true)} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-colors">
+              ขอใบเสนอราคา
+            </button>
+            <QuoteDialog open={quoteOpen} onClose={() => setQuoteOpen(false)} productCategory="Smart Display & KIOSK" />
             <a href="tel:020456104" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary transition-colors">
               <Phone size={18} /> 02-045-6104
             </a>

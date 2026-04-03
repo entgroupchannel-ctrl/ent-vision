@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
-import QuoteButton from "@/components/QuoteButton";
+import QuoteDialog from "@/components/QuoteDialog";
 
 const features = [
   { icon: Wind, title: "Fanless Design", desc: "เงียบสนิท ไม่มีชิ้นส่วนเคลื่อนไหว อายุการใช้งานยาวนาน" },
@@ -528,6 +528,7 @@ const SeriesSection = ({ series, index }: { series: SeriesData; index: number })
 };
 
 const EPCBoxSeries = () => {
+  const [quoteOpen, setQuoteOpen] = useState(false);
   return (
     <div className="min-h-screen bg-background">
       {/* Nav */}
@@ -806,7 +807,10 @@ const EPCBoxSeries = () => {
             ให้ทีมผู้เชี่ยวชาญช่วยเลือกรุ่นและ Configuration ที่เหมาะกับงานของคุณ
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <QuoteButton productName="" productCategory="EPC Box Series" />
+            <button onClick={() => setQuoteOpen(true)} className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:bg-primary/90 transition-colors">
+              ขอใบเสนอราคา
+            </button>
+            <QuoteDialog open={quoteOpen} onClose={() => setQuoteOpen(false)} productCategory="EPC Box Series" />
             <a
               href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
               target="_blank"

@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FooterCompact from "@/components/FooterCompact";
-import QuoteButton from "@/components/QuoteButton";
+
 
 /* ───── Product Data ───── */
 
