@@ -724,10 +724,8 @@ const EPCSeries = () => {
                 <ExternalLink className="w-4 h-4 mr-1.5" /> ดาวน์โหลด E-Catalog
               </a>
             </Button>
-            <Button asChild>
-              <a href="/quote">
-                ขอใบเสนอราคา
-              </a>
+            <Button onClick={() => setQuoteProduct("EPC Series")}>
+              <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
             </Button>
           </div>
         </div>

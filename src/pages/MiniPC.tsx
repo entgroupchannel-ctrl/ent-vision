@@ -985,10 +985,8 @@ const MiniPC = () => {
               <span key={u} className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">{u}</span>
             ))}
           </div>
-          <Button asChild>
-            <a href="/quote">
-              ปรึกษาผู้เชี่ยวชาญ — ขอใบเสนอราคา
-            </a>
+          <Button onClick={() => setQuoteProduct("Mini PC")}>
+            <FileText className="w-3.5 h-3.5 mr-1.5" /> ปรึกษาผู้เชี่ยวชาญ — ขอใบเสนอราคา
           </Button>
         </div>
       </div>

@@ -359,10 +359,8 @@ const WaterproofPC = () => {
         <div className="card-surface p-8 text-center">
           <h2 className="text-2xl font-display font-bold text-foreground mb-3">สนใจ Waterproof Panel PC?</h2>
           <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือกรุ่นที่เหมาะกับอุตสาหกรรมของคุณ</p>
-          <Button size="lg" asChild>
-            <a href="/quote">
-              ขอใบเสนอราคา
-            </a>
+          <Button size="lg" onClick={() => setQuoteProduct("Waterproof PC IP69K")}>
+            <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
           </Button>
         </div>
       </div>

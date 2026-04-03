@@ -424,12 +424,12 @@ const ContactUs = () => {
                 <p className="text-xs text-muted-foreground mb-3">
                   เลือกสินค้าและจำนวนที่ต้องการ — ฝ่ายขายจะจัดทำใบเสนอราคาให้ภายใน 24 ชม.
                 </p>
-                <Link
-                  to="/quote"
+                <button
+                  onClick={() => setQuoteOpen(true)}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition-colors"
                 >
                   ขอใบเสนอราคา →
-                </Link>
+                </button>
               </div>
             </div>
           </div>
