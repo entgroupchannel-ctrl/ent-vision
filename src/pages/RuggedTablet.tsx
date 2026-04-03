@@ -420,7 +420,7 @@ const RuggedTablet = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero */}
+      <SEOHead title="Rugged Tablet & Notebook กันน้ำ กันกระแทก" description="Rugged Tablet และ Notebook ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์ และอุตสาหกรรม" path="/rugged-tablet" />
       <div className="relative overflow-hidden">
         {/* Hero Background */}
         <div className="absolute inset-0">

@@ -315,7 +315,7 @@ const GBSeries = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
+      <SEOHead title="GB Series — Compact Mini PC สำนักงาน" description="GB Series Mini PC ขนาดกะทัดรัด รองรับ Intel N100 ถึง Core i7 สำหรับสำนักงาน Digital Signage และ Thin Client ราคาจากโรงงาน" path="/gb-series" />
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">

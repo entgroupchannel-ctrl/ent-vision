@@ -92,7 +92,7 @@ const ContactUs = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Banner */}
+      <SEOHead title="ติดต่อเรา — ENT Group" description="ติดต่อ ENT Group สอบถามสินค้า Mini PC, Panel PC, Industrial Computer ขอใบเสนอราคา โทร สำนักงานปากเกร็ด นนทบุรี" path="/contact" />
       <div className="relative h-48 md:h-64 overflow-hidden">
         <img src={bannerContact} alt="ติดต่อเรา" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
