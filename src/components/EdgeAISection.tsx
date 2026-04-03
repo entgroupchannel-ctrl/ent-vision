@@ -6,7 +6,7 @@ const EdgeAISection = () => {
     <section className="section-padding relative overflow-hidden" id="edge-ai">
       {/* Thai Suphannahong pattern background */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.08] dark:opacity-[0.06]"
+        className="absolute inset-0 pointer-events-none opacity-[0.12] dark:opacity-[0.08]"
         style={{
           backgroundImage: `url(${thaiPattern})`,
           backgroundSize: "420px",
