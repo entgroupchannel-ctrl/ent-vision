@@ -47,6 +47,8 @@ const LeadScoreBadge = ({ score }: { score: number }) => {
 
 const AdminDashboard = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const { user, isAdmin, isSuperAdmin, loading: authLoading, signOut } = useAuth();
   const [tab, setTab] = useState<Tab>("contacts");
   const [contacts, setContacts] = useState<any[]>([]);
   const [quotes, setQuotes] = useState<any[]>([]);
