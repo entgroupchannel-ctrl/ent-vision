@@ -24,13 +24,12 @@ const AdminLogin = () => {
         if (session) {
           const isAdmin = await checkAdmin(session.user.id);
           if (!mounted) return;
-          if (isAdmin) {
-            navigate("/admin", { replace: true });
-            return;
-          } else {
-            toast({ title: "ไม่มีสิทธิ์เข้าถึง", description: "บัญชีนี้ไม่มีสิทธิ์ Admin", variant: "destructive" });
-            await supabase.auth.signOut();
-          }
+        if (isAdmin) {
+          navigate("/admin", { replace: true });
+        } else {
+          navigate("/", { replace: true });
+        }
+        return;
         }
       } catch (err) {
         console.error("Session check error:", err);
