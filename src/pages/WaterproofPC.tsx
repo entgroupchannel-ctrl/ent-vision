@@ -173,7 +173,7 @@ const WaterproofPC = () => {
               </p>
               <div className="flex gap-3">
                 <Button asChild>
-                  <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+                  <a href="/quote">
                     ขอใบเสนอราคา
                   </a>
                 </Button>
@@ -322,7 +322,7 @@ const WaterproofPC = () => {
                       </a>
                     </Button>
                     <Button size="sm" asChild>
-                      <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+                      <a href="/quote">
                         ขอใบเสนอราคา
                       </a>
                     </Button>
@@ -362,7 +362,7 @@ const WaterproofPC = () => {
           <h2 className="text-2xl font-display font-bold text-foreground mb-3">สนใจ Waterproof Panel PC?</h2>
           <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือกรุ่นที่เหมาะกับอุตสาหกรรมของคุณ</p>
           <Button size="lg" asChild>
-            <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+            <a href="/quote">
               ขอใบเสนอราคา
             </a>
           </Button>

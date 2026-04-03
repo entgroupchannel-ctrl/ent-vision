@@ -146,7 +146,7 @@ const Volktek = () => {
                 </a>
               </Button>
               <Button size="sm" asChild>
-                <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+                <a href="/quote">
                   ขอใบเสนอราคา
                 </a>
               </Button>
@@ -307,7 +307,7 @@ const Volktek = () => {
               </a>
             </Button>
             <Button asChild>
-              <a href="https://line.me/R/ti/p/%40njm2688e" target="_blank" rel="noopener noreferrer">
+              <a href="/quote">
                 ขอใบเสนอราคา
               </a>
             </Button>
