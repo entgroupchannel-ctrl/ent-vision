@@ -16,12 +16,12 @@ const gtModels = [
 ];
 
 const panelPCModels = [
-  { name: "FPM - Touch Monitor", href: "https://www.entgroup.co.th/industrial-touch-monitor" },
-  { name: "UTC Series", href: "https://www.entgroup.co.th/utc-series" },
-  { name: "GTP Series", href: "https://www.entgroup.co.th/gtp-series" },
-  { name: "GK Series", href: "https://www.entgroup.co.th/gk-series" },
-  { name: "GTC Series", href: "https://www.entgroup.co.th/gtc-series" },
-  { name: "SPC Series", href: "https://www.entgroup.co.th/spc-series" },
+  { name: "FPM - Touch Monitor", href: "/panel-pc-gtg" },
+  { name: "UTC Series", href: "/utc-series" },
+  { name: "GTP Series", href: "/panel-pc-gtg" },
+  { name: "GK Series", href: "/gk-series" },
+  { name: "GTC Series", href: "/panel-pc-gtg" },
+  { name: "SPC Series", href: "/panel-pc-gtg" },
 ];
 
 const ProductLineup = () => {
