@@ -152,6 +152,7 @@ const SmartDisplay = () => {
     return tab === "kiosk" || tab === "outdoor" ? tab : "indoor";
   });
   const [showLineQR, setShowLineQR] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
