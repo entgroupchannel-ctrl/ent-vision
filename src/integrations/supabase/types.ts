@@ -14,7 +14,135 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_submissions: {
+        Row: {
+          callback_time: string | null
+          category: string | null
+          company: string | null
+          created_at: string
+          email: string
+          id: string
+          lead_score: number
+          line_id: string | null
+          message: string
+          name: string
+          notes: string | null
+          phone: string | null
+          status: string
+          whatsapp: string | null
+        }
+        Insert: {
+          callback_time?: string | null
+          category?: string | null
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          lead_score?: number
+          line_id?: string | null
+          message: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          status?: string
+          whatsapp?: string | null
+        }
+        Update: {
+          callback_time?: string | null
+          category?: string | null
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          lead_score?: number
+          line_id?: string | null
+          message?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          status?: string
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
+      quote_requests: {
+        Row: {
+          callback_time: string | null
+          company: string | null
+          created_at: string
+          details: string | null
+          email: string
+          id: string
+          lead_score: number
+          line_id: string | null
+          name: string
+          notes: string | null
+          phone: string | null
+          products: Json
+          status: string
+          whatsapp: string | null
+        }
+        Insert: {
+          callback_time?: string | null
+          company?: string | null
+          created_at?: string
+          details?: string | null
+          email: string
+          id?: string
+          lead_score?: number
+          line_id?: string | null
+          name: string
+          notes?: string | null
+          phone?: string | null
+          products?: Json
+          status?: string
+          whatsapp?: string | null
+        }
+        Update: {
+          callback_time?: string | null
+          company?: string | null
+          created_at?: string
+          details?: string | null
+          email?: string
+          id?: string
+          lead_score?: number
+          line_id?: string | null
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          products?: Json
+          status?: string
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
+      subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          is_active: boolean
+          name: string | null
+          source: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          is_active?: boolean
+          name?: string | null
+          source?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          is_active?: boolean
+          name?: string | null
+          source?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
