@@ -112,6 +112,7 @@ const AdminDashboard = () => {
   }
 
   return (
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-10">
         <div className="container max-w-7xl mx-auto px-6 py-4">
