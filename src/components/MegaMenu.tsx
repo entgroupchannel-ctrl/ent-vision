@@ -73,21 +73,80 @@ const menuCategories = [
     ],
   },
   {
+    id: "display",
+    label: "Smart Display",
+    tagline: "จอแสดงผลอุตสาหกรรม & KIOSK",
+    icon: Tv,
+    featured: {
+      title: "Smart Display & KIOSK",
+      desc: "จอ Digital Signage Indoor/Outdoor ความสว่างสูง พร้อมซอฟต์แวร์จัดการเนื้อหาฟรี",
+      href: "/smart-display",
+      badge: "Signage",
+      image: "https://static.wixstatic.com/media/0597a3_89ddd2e3de8b4610bd0e08f02dbf25d6~mv2.png/v1/fill/w_378,h_315,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-07-12%20at%2017_18_04.png",
+    },
+    columns: [
+      {
+        heading: "Indoor Display",
+        links: [
+          { label: "Digital Signage 35\"–75\"", href: "/smart-display", hot: true },
+          { label: "Stretched Bar Display", href: "/smart-display" },
+          { label: "Standing Kiosk", href: "/smart-display?tab=kiosk" },
+        ],
+      },
+      {
+        heading: "Outdoor Monitor",
+        links: [
+          { label: "Outdoor 12\"–32\" (1500 Nits)", href: "/smart-display?tab=outdoor", hot: true },
+          { label: "Window Display", href: "/smart-display" },
+        ],
+      },
+      {
+        heading: "Industrial Grade",
+        links: [
+          { label: "Stainless Steel IP69K", href: "/smart-display" },
+          { label: "Food Grade Display", href: "/smart-display" },
+          { label: "Touch Monitor FPM Series", href: "/smart-display" },
+        ],
+      },
+    ],
+  },
+  {
     id: "rugged",
     label: "Rugged Device",
     tagline: "อุปกรณ์ทนทานเกรดทหาร",
     icon: Tablet,
     featured: {
-      title: "Rugged Tablet",
-      desc: "กันน้ำ กันกระแทก MIL-STD-810G — สำหรับภาคสนามและโลจิสติกส์",
+      title: "Rugged Tablet & Notebook",
+      desc: "กันน้ำ กันกระแทก MIL-STD-810G/H — Windows & Android สำหรับภาคสนามและโลจิสติกส์",
       href: "/rugged-tablet",
       badge: "MIL-STD",
+      image: "https://entgroup-rugged.com/assets/f9e-C3MseYpo.png",
     },
     columns: [
       {
-        heading: "Rugged Series",
+        heading: "Rugged Tablet",
         links: [
-          { label: "Rugged Tablet", href: "/rugged-tablet", hot: true },
+          { label: "F9E Elite — i5 Gen 12", href: "/rugged-tablet", hot: true },
+          { label: "W109U — i5/i7 IP68", href: "/rugged-tablet" },
+          { label: "F9A — Alder Lake N100", href: "/rugged-tablet" },
+          { label: "F9R — Android RK3588", href: "/rugged-tablet" },
+          { label: "A109T — Android 14", href: "/rugged-tablet" },
+        ],
+      },
+      {
+        heading: "Rugged Notebook",
+        links: [
+          { label: "EM-X15M — AI PC i7", href: "/rugged-tablet", hot: true },
+          { label: "EM-X14A — 14\" Compact", href: "/rugged-tablet" },
+          { label: "EM-X14M — 2-in-1 Tablet PC", href: "/rugged-tablet" },
+          { label: "W14U-A — 14\" Laptop", href: "/rugged-tablet" },
+        ],
+      },
+      {
+        heading: "อุปกรณ์เสริม",
+        links: [
+          { label: "แท่นชาร์จ & Dock", href: "/rugged-tablet" },
+          { label: "Vehicle Mount", href: "/rugged-tablet" },
         ],
       },
     ],
