@@ -113,7 +113,7 @@ const footerSections = [
 
 const socials = [
   { icon: Facebook, href: "https://www.facebook.com/entgroup.th/", label: "Facebook" },
-  { icon: Youtube, href: "https://www.youtube.com/@entgroup", label: "YouTube" },
+  { icon: Youtube, href: "https://www.youtube.com/@ENTGROUP-TH", label: "YouTube" },
   { icon: Instagram, href: "https://www.instagram.com/entgroup", label: "Instagram" },
 ];
 
