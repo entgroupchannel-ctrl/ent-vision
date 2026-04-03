@@ -319,6 +319,7 @@ const EPCSeries = () => {
   const [activeCategory, setActiveCategory] = useState("overview");
   const [squarePage, setSquarePage] = useState(1);
   const [widePage, setWidePage] = useState(1);
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background">
