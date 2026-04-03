@@ -167,7 +167,7 @@ const Footer = () => {
 
 
       {/* Main Footer */}
-      <div className="bg-[hsl(220,20%,10%)] text-[hsl(210,20%,85%)]">
+      <div className="bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 text-gray-700 dark:from-[hsl(220,20%,12%)] dark:via-[hsl(220,18%,9%)] dark:to-[hsl(220,20%,7%)] dark:text-[hsl(210,20%,85%)]">
         <div className="container max-w-7xl mx-auto px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             {/* Company Info */}
