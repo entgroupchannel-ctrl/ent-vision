@@ -674,25 +674,25 @@ const GTSeries = () => {
                   </div>
                 </div>
 
-                {/* Product Images Gallery */}
+                {/* Product Images Gallery — ภาพจริงจากโรงงาน */}
                 <div className="lg:col-span-2 space-y-4">
-                  <div className="card-surface overflow-hidden rounded-xl">
+                  <div className="card-surface overflow-hidden rounded-xl bg-muted/30">
                     <img
-                      src={gt1000Front}
+                      src="http://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874413.jpg"
                       alt="GT1000 ด้านหน้า — 2 LAN, HDMI, VGA, MIC, SPK"
-                      className="w-full object-contain"
+                      className="w-full object-contain p-2"
                       loading="lazy"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { src: gt1000Rear, alt: "GT1000 ด้านหลัง — USB, COM ports" },
-                      { src: gt1000Side, alt: "GT1000 ด้านข้าง — ครีบระบายความร้อน" },
-                      { src: gt1000Top, alt: "GT1000 VESA Mount + ด้านล่าง" },
-                      { src: gt1000Wifi, alt: "GT1000 ภายใน — WiFi Module + Mainboard" },
+                      { src: "http://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874414.jpg", alt: "GT1000 ด้านหลัง — USB, COM ports" },
+                      { src: "http://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874418.jpg", alt: "GT1000 ด้านข้าง — ครีบระบายความร้อน" },
+                      { src: "http://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874416.jpg", alt: "GT1000 ด้านล่าง — VESA Mount" },
+                      { src: "http://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874419.jpg", alt: "GT1000 ภายใน — Mainboard + WiFi" },
                     ].map((img, i) => (
-                      <div key={i} className="card-surface overflow-hidden rounded-lg">
-                        <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
+                        <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
                       </div>
                     ))}
                   </div>
