@@ -110,7 +110,7 @@ const HeroSection = () => {
                       <FileText size={14} /> ใบเสนอราคาของฉัน
                     </Link>
                     <button
-                      onClick={() => { signOut(); setUserMenuOpen(false); }}
+                      onClick={async () => { setUserMenuOpen(false); await signOut(); }}
                       className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
                     >
                       <LogOut size={14} /> ออกจากระบบ
@@ -151,7 +151,7 @@ const HeroSection = () => {
             <ThemeToggle />
             {user ? (
               <button
-                onClick={() => { signOut(); setMobileMenuOpen(false); }}
+                onClick={async () => { setMobileMenuOpen(false); await signOut(); }}
                 className="flex-1 text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
               >
                 ออกจากระบบ
