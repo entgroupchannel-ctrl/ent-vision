@@ -151,7 +151,7 @@ const HeroSection = () => {
             <ThemeToggle />
             {user ? (
               <button
-                onClick={() => { signOut(); setMobileMenuOpen(false); }}
+                onClick={async () => { setMobileMenuOpen(false); await signOut(); }}
                 className="flex-1 text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
               >
                 ออกจากระบบ
