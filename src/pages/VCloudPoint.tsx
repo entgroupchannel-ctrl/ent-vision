@@ -712,6 +712,12 @@ const VCloudPoint = () => {
           <DemoCTA variant="secondary" />
         </div>
       </section>
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="vCloudPoint"
+      />
       <FooterCompact />
     </div>
   );

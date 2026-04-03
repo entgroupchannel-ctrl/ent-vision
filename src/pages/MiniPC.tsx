@@ -991,6 +991,12 @@ const MiniPC = () => {
           </Button>
         </div>
       </div>
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="GT Series — Mini PC"
+      />
       <FooterCompact />
     </div>
   );

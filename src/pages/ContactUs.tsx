@@ -437,6 +437,10 @@ const ContactUs = () => {
         </div>
       </section>
 
+      <QuoteDialog
+        open={quoteOpen}
+        onClose={() => setQuoteOpen(false)}
+      />
       <FooterCompact />
     </div>
   );

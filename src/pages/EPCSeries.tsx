@@ -732,6 +732,13 @@ const EPCSeries = () => {
       </div>
       <FooterCompact />
     </div>
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="EPC Series"
+      />
+    </div>
   );
 };
 

@@ -313,6 +313,12 @@ const Volktek = () => {
         </div>
       </div>
       <FooterCompact />
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="Volktek Switch"
+      />
     </div>
   );
 };

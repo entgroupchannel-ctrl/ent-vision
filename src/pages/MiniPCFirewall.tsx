@@ -1010,6 +1010,12 @@ const MiniPCFirewall = () => {
           </div>
         </div>
       </section>
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="Mini PC Firewall"
+      />
       <FooterCompact />
     </div>
   );
