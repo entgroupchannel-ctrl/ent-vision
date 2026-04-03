@@ -347,6 +347,7 @@ const EPCSeries = () => {
   const [squarePage, setSquarePage] = useState(1);
   const [widePage, setWidePage] = useState(1);
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
 
   return (
     <div className="min-h-screen bg-background">
