@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Monitor, Cpu, TabletSmartphone, Wifi, Shield, LayoutGrid } from "lucide-react";
+import { Monitor, Cpu, TabletSmartphone, Wifi, Shield, LayoutGrid, Server } from "lucide-react";
 
 const categories = [
   {
-    title: "Industrial PC",
+    title: "GT Series",
     subtitle: "Fanless Embedded Computer",
     description: "คอมพิวเตอร์อุตสาหกรรมไร้พัดลม ทนทาน แข็งแกร่ง",
     icon: Cpu,
@@ -11,6 +11,16 @@ const categories = [
     models: ["GT1000", "GT1200", "GT1300", "GT4500", "GT7000", "GT9000"],
     badge: "Hot",
     image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
+  },
+  {
+    title: "GB Series",
+    subtitle: "Industrial Grade Computer",
+    description: "4 รุ่น 4 สไตล์ ตอบโจทย์ทุกความต้องการอุตสาหกรรม",
+    icon: Server,
+    href: "/gb-series",
+    models: ["GB1000", "GB2000", "GB4000", "GB5000"],
+    badge: "New",
+    image: "https://static.wixstatic.com/media/0597a3_84464f31e83d47a982b5ee3b559db400~mv2.png/v1/fill/w_496,h_496,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GB5000%20(1).png",
   },
   {
     title: "Panel PC",
