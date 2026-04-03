@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import Footer from "@/components/Footer";
 import heroGrowth from "@/assets/about-hero-growth.jpg";
+import entLogoFull from "@/assets/entgroup-logo-full.jpg";
 
 /* ═══════ Timeline Data ═══════ */
 const timeline = [
