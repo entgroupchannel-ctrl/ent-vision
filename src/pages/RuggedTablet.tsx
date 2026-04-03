@@ -427,6 +427,12 @@ const RuggedTablet = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead title="Rugged Tablet & Notebook กันน้ำ กันกระแทก" description="Rugged Tablet และ Notebook ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์ และอุตสาหกรรม" path="/rugged-tablet" />
+      <ProductJsonLd
+        collectionName="Rugged Tablet & Notebook กันน้ำ กันกระแทก"
+        collectionDescription="Rugged Tablet และ Notebook ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์"
+        collectionUrl="/rugged-tablet"
+        products={[...ruggedWindows, ...ruggedAndroid].map(m => ({ name: m.name, price: m.price, category: "Rugged Tablet" }))}
+      />
       <div className="relative overflow-hidden">
         {/* Hero Background */}
         <div className="absolute inset-0">

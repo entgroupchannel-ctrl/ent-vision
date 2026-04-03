@@ -166,6 +166,12 @@ const SmartDisplay = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead title="Smart Display, KIOSK & Digital Signage" description="จอ Smart Display, ตู้ KIOSK สำเร็จรูป และ Digital Signage สำหรับร้านค้า โรงแรม โรงพยาบาล สำนักงาน พร้อมซอฟต์แวร์ครบวงจร" path="/smart-display" />
+      <ProductJsonLd
+        collectionName="Smart Display, KIOSK & Digital Signage"
+        collectionDescription="จอ Smart Display, ตู้ KIOSK สำเร็จรูป และ Digital Signage สำหรับร้านค้า โรงแรม โรงพยาบาล สำนักงาน"
+        collectionUrl="/smart-display"
+        products={displayModels.map(m => ({ name: m.name, image: m.image, description: m.desc, category: "Smart Display & KIOSK" }))}
+      />
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">
