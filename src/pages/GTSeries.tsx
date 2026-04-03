@@ -129,7 +129,7 @@ const gtModels = [
     storage: "SSD 256 GB",
     ports: "USB 8 (4×3.0+4×2.0), COM 6, LAN 2, VGA+HDMI, SIM",
     size: "21.2×15.5×4.5 cm / 2.5 kg",
-    image: "https://static.wixstatic.com/media/0597a3_8e53a2e85b9f42088834c613e1a9d08f~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_25_08.png",
+    image: gt4500Product,
     tab: "gt4500",
     highlight: "DDR4 + 4G",
     price: "21,900",
