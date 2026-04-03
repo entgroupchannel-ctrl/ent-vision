@@ -123,6 +123,9 @@ const caseStudies = [
       { val: "0", label: "เครื่องพัง/ปี" },
     ],
     highlights: ["Data Entry ในไลน์ผลิต", "ระบบตรวจสอบคุณภาพ QC", "ทนฝุ่น ทนร้อน ไม่มี Moving Part", "ROI คืนทุนภายใน 6 เดือน"],
+    videos: [
+      { id: "sSfAl0l8wHs", label: "Case Study — โรงงานอุตสาหกรรม" },
+    ],
     color: "from-emerald-500/10 to-emerald-500/5",
     borderColor: "border-emerald-500/20",
     accentColor: "text-emerald-500",
