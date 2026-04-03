@@ -167,9 +167,9 @@ const WaterproofPC = () => {
         collectionName="Waterproof Panel PC IP67 IP69K"
         collectionDescription="Waterproof Panel PC มาตรฐาน IP67 IP69K กันน้ำ กันฝุ่น Stainless Steel สำหรับอุตสาหกรรมอาหารและยา"
         collectionUrl="/waterproof-pc"
-        products={models.map(m => ({ name: m.name, image: m.image, description: `${m.model} Waterproof Panel PC`, category: "Waterproof Panel PC" }))}
+        products={models.map(m => ({ name: m.name, image: m.image, description: `${m.model} Waterproof Panel PC`, category: "Waterproof Panel PC" }))}      />
+
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "Waterproof PC", path: "/waterproof-pc" }]} />
-      />
       {/* Hero */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/5" />

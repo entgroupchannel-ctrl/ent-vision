@@ -762,9 +762,9 @@ const MiniPC = () => {
           { name: "K3-F18-6006 Mini PC", price: "8,900", category: "Mini PC" },
           { name: "K3-F17H Mini PC", price: "8,500", category: "Mini PC" },
           { name: "K8-F18-4405 Mini PC", price: "9,500", category: "Mini PC" },
-        ]}
+        ]}      />
+
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "Mini PC", path: "/mini-pc" }]} />
-      />
       {/* Header */}
       <div className="bg-gradient-to-b from-primary/5 to-background border-b border-border">
         <div className="container max-w-7xl mx-auto px-4 py-6">
