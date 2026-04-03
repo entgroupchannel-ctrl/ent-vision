@@ -346,7 +346,11 @@ const PanelPC = () => {
 
           {/* Product Image Grid */}
           <div className="grid md:grid-cols-3 gap-6 mb-8">
-            <div className="card-surface p-4 flex flex-col items-center gap-3">
+            <div className="card-surface p-4 flex flex-col items-center gap-3 relative">
+              <WishlistHeart
+                item={{ id: "gty121t", name: "GTY121T", category: "Panel PC GTY/GTG", image: gty121Front, href: "/panel-pc-gtg", specs: "12.1\" XGA Touch Panel PC" }}
+                className="absolute top-3 right-3"
+              />
               <img src={gty121Front} alt="GTY121T ด้านหน้า — จอสัมผัส Windows 11" className="w-full max-h-[280px] object-contain rounded-lg" loading="lazy" />
               <div className="text-center">
                 <p className="font-bold text-foreground text-sm">GTY121T — ด้านหน้า</p>
