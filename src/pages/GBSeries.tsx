@@ -500,7 +500,7 @@ const GBSeries = () => {
       {/* GB4000 v1 vs v2 Comparison */}
       <section className="border-t border-border bg-secondary/10">
         <div className="container max-w-7xl mx-auto px-6 py-12">
-          <CollapsibleSpec title="⚔️ เปรียบเทียบ GB4000 v1 vs v2 — เหมือนหรือต่างกันอย่างไร?" defaultOpen={false}>
+          <<CollapsibleSpec title="⚔️ เปรียบเทียบ GB4000 v1 vs v2 — เหมือนหรือต่างกันอย่างไร?" defaultOpen={true}>
             <div className="p-6 space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="p-5 rounded-xl border border-border bg-card">
