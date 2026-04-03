@@ -1311,12 +1311,24 @@ const GTSeries = () => {
           {activeTab === "gt4000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_26e2e00d748d4b9788a3e56c3998896a~mv2.png/v1/fill/w_882,h_280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_29_11.png"
-                  alt="GT4000 Logo"
-                  className="w-full h-[180px] md:h-[250px] object-contain bg-background p-8"
+                  src={gt4000Banner}
+                  alt="GT4000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    GPIO · VESA Mount · Core i3/i5/i7
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">4000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    GPIO พร้อมใช้ VESA Mount — ควบคุมระบบอัตโนมัติ
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product Image */}
