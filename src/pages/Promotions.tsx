@@ -477,14 +477,11 @@ const Promotions = () => {
           <h2 className="text-2xl font-bold text-foreground mb-3">ต้องการใบเสนอราคา?</h2>
           <p className="text-muted-foreground mb-6">ติดต่อเราเพื่อขอราคาพิเศษสำหรับโปรเจกต์ของคุณ</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href="https://line.me/R/ti/p/@entgroup"
-              target="_blank"
-              rel="noopener noreferrer"
+            <LineQRButton
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
             >
               LINE @entgroup
-            </a>
+            </LineQRButton>
             <a
               href="tel:0957391053"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-border bg-card text-foreground font-semibold hover:bg-secondary/50 transition-colors"
