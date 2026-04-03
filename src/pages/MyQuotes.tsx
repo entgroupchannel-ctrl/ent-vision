@@ -89,7 +89,7 @@ const MyQuotes = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <section className="py-10 md:py-14 px-4 bg-gradient-to-b from-primary/10 via-background to-background">
         <div className="container max-w-2xl mx-auto">
