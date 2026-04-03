@@ -49,7 +49,7 @@ const gtModels = [
     storage: "SSD 128–256 GB",
     ports: "USB 6, COM 2, LAN 2, VGA+HDMI",
     size: "ขนาดเล็กกระทัดรัด",
-    image: "https://static.wixstatic.com/media/0597a3_02acff57b2204d11a615e5e8b37392b6~mv2.png/v1/fill/w_419,h_378,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_02acff57b2204d11a615e5e8b37392b6~mv2.png",
+    image: gt1000Product,
     tab: "gt1000",
     highlight: "เริ่มต้น",
     price: "15,990",
