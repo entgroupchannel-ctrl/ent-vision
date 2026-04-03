@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Search, Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import heroIndustrial from "@/assets/hero-industrial.jpg";
-import logo from "@/assets/logo-entgroup.avif";
+import logo from "@/assets/logo-entgroup-transparent.png";
 
 const searchTags = [
   { label: "Mini PC สำนักงาน", href: "#products" },
@@ -55,7 +55,7 @@ const HeroSection = () => {
       {/* Nav */}
       <nav className="relative z-20 flex items-center justify-between px-6 md:px-12 py-5">
         <a href="#" className="flex items-center gap-3">
-          <img src={logo} alt="ENT GROUP" className="h-10 w-auto opacity-70" />
+          <img src={logo} alt="ENT GROUP" className="h-10 w-auto" />
         </a>
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((l) =>
