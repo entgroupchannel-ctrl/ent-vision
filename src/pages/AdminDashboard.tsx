@@ -335,6 +335,41 @@ const AdminDashboard = () => {
                   </div>
                 </button>
               ))
+            ) : tab === "chatleads" ? (
+              chatLeads.length === 0 ? (
+                <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มี Chat Lead</div>
+              ) : chatLeads.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setSelectedItem({ ...item, _type: "chatlead" })}
+                  className={`w-full text-left card-surface rounded-xl p-4 hover:border-primary/30 transition-colors ${
+                    selectedItem?.id === item.id ? "border-primary/50 ring-1 ring-primary/20" : ""
+                  }`}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <span className="text-sm font-bold text-foreground">{item.name || "ไม่ระบุชื่อ"}</span>
+                      {item.company && (
+                        <span className="ml-2 text-xs text-muted-foreground inline-flex items-center gap-1">
+                          <Building2 size={10} /> {item.company}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <LeadScoreBadge score={item.lead_score} />
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${statusColors[item.status] || statusColors.new}`}>
+                        {statusLabels[item.status] || item.status}
+                      </span>
+                    </div>
+                  </div>
+                  {item.interest && <p className="text-xs text-muted-foreground line-clamp-1 mb-1">สนใจ: {item.interest}</p>}
+                  <div className="flex items-center gap-3 text-[10px] text-muted-foreground/70">
+                    {item.email && <span>{item.email}</span>}
+                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={8} /> {item.phone}</span>}
+                    <span className="flex items-center gap-0.5"><Clock size={8} /> {formatDate(item.created_at)}</span>
+                  </div>
+                </button>
+              ))
             ) : (
               subscribers.length === 0 ? (
                 <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มีสมาชิก</div>
