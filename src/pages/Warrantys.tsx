@@ -36,7 +36,7 @@ const shippingWarranty = [
 const Warrantys = () => {
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection />
+      <PageBanner image={bannerImg} title="เงื่อนไขการรับประกัน" subtitle="Warranty Policy — ENT Group" />
 
       {/* Header */}
       <section className="py-12 md:py-16 bg-gradient-to-b from-primary/5 to-background">

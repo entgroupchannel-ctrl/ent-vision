@@ -42,7 +42,7 @@ const deliveryNotes = [
 const Delivery = () => {
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection />
+      <PageBanner image={bannerImg} title="ขั้นตอนการจัดส่งสินค้า" subtitle="Delivery Procedure — ENT Group" />
 
       {/* Header */}
       <section className="py-12 md:py-16 bg-gradient-to-b from-primary/5 to-background">

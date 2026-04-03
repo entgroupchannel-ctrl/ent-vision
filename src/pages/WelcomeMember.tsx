@@ -60,7 +60,7 @@ const documents = [
 const WelcomeMember = () => {
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection />
+      <PageBanner image={bannerImg} title="สมัครตัวแทนจำหน่าย" subtitle="ร่วมเป็นพาร์ทเนอร์กับ ENT Group" />
 
       {/* Hero Banner */}
       <section className="bg-gradient-to-br from-primary/10 via-background to-primary/5 py-16 md:py-24">

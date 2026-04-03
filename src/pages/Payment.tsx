@@ -35,7 +35,7 @@ const taxNotes = [
 const Payment = () => {
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection />
+      <PageBanner image={bannerImg} title="วิธีการชำระเงิน" subtitle="Payment Methods — ENT Group" />
 
       {/* Header */}
       <section className="py-12 md:py-16 bg-gradient-to-b from-primary/5 to-background">
