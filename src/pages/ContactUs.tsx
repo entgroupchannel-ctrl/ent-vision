@@ -51,11 +51,32 @@ const ContactUs = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Submit to Supabase contact_submissions table
-    console.log("Contact submission:", form);
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: form.name,
+        email: form.email,
+        phone: form.phone || null,
+        company: form.company || null,
+        line_id: form.lineId || null,
+        whatsapp: form.whatsapp || null,
+        callback_time: form.callbackTime || null,
+        category: form.category || null,
+        message: form.message,
+      });
+      if (error) throw error;
+      setSubmitted(true);
+      toast({ title: "ส่งข้อความเรียบร้อย!", description: "ทีมงานจะตอบกลับภายใน 24 ชม." });
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClass =
