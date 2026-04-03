@@ -116,7 +116,7 @@ const gtModels = [
     storage: "SSD 128–256 GB",
     ports: "USB 8, COM 6, LAN 2, VGA+HDMI, GPIO",
     size: "17.7×21.7×5.2 cm / 1.516 kg",
-    image: "https://static.wixstatic.com/media/0597a3_420ceca8be144daaab72c850d80c8589f000.jpg/v1/fill/w_296,h_522,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_420ceca8be144daaab72c850d80c8589f000.jpg",
+    image: gt4000Product,
     tab: "gt4000",
     highlight: "GPIO",
     price: "24,990",
