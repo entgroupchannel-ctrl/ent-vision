@@ -775,9 +775,15 @@ const MiniPCFirewall = () => {
                 ))}
               </div>
 
-              <a href="#products" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors">
-                เลือกรุ่นที่เหมาะกับคุณ <ChevronDown size={16} />
-              </a>
+              <div className="flex flex-wrap gap-3">
+                <a href="#products" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors">
+                  เลือกรุ่นที่เหมาะกับคุณ <ChevronDown size={16} />
+                </a>
+                <a href="#comparison" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-primary/40 text-primary font-semibold text-sm hover:bg-primary/10 transition-all">
+                  <Filter size={16} /> เปรียบเทียบสเปก
+                  <span className="px-2 py-0.5 rounded-full bg-primary/15 text-[10px] font-bold tracking-wide uppercase">Smart Filter</span>
+                </a>
+              </div>
             </div>
 
             <div className="relative flex items-center justify-center">
