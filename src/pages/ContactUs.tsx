@@ -11,6 +11,7 @@ import {
   Phone, Mail, MapPin, ArrowLeft, Send, MessageCircle, Users,
 } from "lucide-react";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteDialog from "@/components/QuoteDialog";
 
 const categories = [
   "เลือกหมวดหมู่",
@@ -39,6 +40,7 @@ const callbackTimes = [
 ];
 
 const ContactUs = () => {
+  const [quoteOpen, setQuoteOpen] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -424,18 +426,22 @@ const ContactUs = () => {
                 <p className="text-xs text-muted-foreground mb-3">
                   เลือกสินค้าและจำนวนที่ต้องการ — ฝ่ายขายจะจัดทำใบเสนอราคาให้ภายใน 24 ชม.
                 </p>
-                <Link
-                  to="/quote"
+                <button
+                  onClick={() => setQuoteOpen(true)}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition-colors"
                 >
                   ขอใบเสนอราคา →
-                </Link>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      <QuoteDialog
+        open={quoteOpen}
+        onClose={() => setQuoteOpen(false)}
+      />
       <FooterCompact />
     </div>
   );

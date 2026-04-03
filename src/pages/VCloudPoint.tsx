@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import LineQRButton from "@/components/LineQRButton";
+import QuoteDialog from "@/components/QuoteDialog";
 import {
   ArrowLeft, Monitor, Cpu, Shield, Zap, Users, Server, ChevronDown,
   ExternalLink, Factory, Building2, GraduationCap, HeadphonesIcon,
@@ -198,6 +199,7 @@ const DemoCTA = ({ variant = "primary" }: { variant?: "primary" | "secondary" })
 /* ═══════ MAIN PAGE ═══════ */
 const VCloudPoint = () => {
   const [showVmatrix, setShowVmatrix] = useState(false);
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background">
@@ -683,9 +685,9 @@ const VCloudPoint = () => {
             <p className="text-sm text-muted-foreground mb-4">
               สำหรับทุกโรงเรียนที่ประสบภัย: ฟรีติดตั้ง + ฟรี Training + ฟรีซอฟต์แวร์ + รับประกัน 3 ปี + 10 โรงเรียนแรกรับอุปกรณ์เสริมมูลค่า 10,000 บาท
             </p>
-            <a href="/quote" className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline">
+            <button onClick={() => setQuoteProduct("vCloudPoint")} className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline">
               สอบถามโครงการ <ArrowRight size={14} />
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -710,6 +712,12 @@ const VCloudPoint = () => {
           <DemoCTA variant="secondary" />
         </div>
       </section>
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="vCloudPoint"
+      />
       <FooterCompact />
     </div>
   );

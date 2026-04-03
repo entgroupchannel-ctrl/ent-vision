@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import epcLegoBanner from "@/assets/epc-lego-banner.png";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteDialog from "@/components/QuoteDialog";
 
 /* ───── Product Data ───── */
 
@@ -287,7 +288,7 @@ const SpecTable = ({ model }: { model: typeof squareModels[0] }) => (
 );
 
 /* ───── Model Card ───── */
-const ModelCard = ({ model }: { model: typeof squareModels[0] }) => (
+const ModelCard = ({ model, onQuote }: { model: typeof squareModels[0]; onQuote?: (name: string) => void }) => (
   <div className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
     <div className="bg-secondary/30 p-6 flex items-center justify-center">
       <img src={model.image} alt={model.name} className="max-h-44 object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
@@ -303,10 +304,8 @@ const ModelCard = ({ model }: { model: typeof squareModels[0] }) => (
             <Download className="w-3.5 h-3.5 mr-1.5" /> Datasheet
           </a>
         </Button>
-        <Button size="sm" asChild className="flex-1">
-          <a href="/quote">
-            ขอใบเสนอราคา
-          </a>
+        <Button size="sm" className="flex-1" onClick={() => onQuote?.(model.name)}>
+          <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
         </Button>
       </div>
     </div>
@@ -320,6 +319,7 @@ const EPCSeries = () => {
   const [activeCategory, setActiveCategory] = useState("overview");
   const [squarePage, setSquarePage] = useState(1);
   const [widePage, setWidePage] = useState(1);
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background">
@@ -356,10 +356,8 @@ const EPCSeries = () => {
                     <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Product Overview
                   </a>
                 </Button>
-                <Button size="sm" asChild>
-                  <a href="/quote">
-                    ขอใบเสนอราคา
-                  </a>
+                <Button size="sm" onClick={() => setQuoteProduct("EPC Series")}>
+                  <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
                 </Button>
               </div>
             </div>
@@ -481,7 +479,7 @@ const EPCSeries = () => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {squareModels.map((model) => (
-              <ModelCard key={model.id} model={model} />
+              <ModelCard key={model.id} model={model} onQuote={(name) => setQuoteProduct(name)} />
             ))}
           </div>
         </section>
@@ -496,7 +494,7 @@ const EPCSeries = () => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {wideModels.map((model) => (
-              <ModelCard key={model.id} model={model} />
+              <ModelCard key={model.id} model={model} onQuote={(name) => setQuoteProduct(name)} />
             ))}
           </div>
         </section>
@@ -726,14 +724,18 @@ const EPCSeries = () => {
                 <ExternalLink className="w-4 h-4 mr-1.5" /> ดาวน์โหลด E-Catalog
               </a>
             </Button>
-            <Button asChild>
-              <a href="/quote">
-                ขอใบเสนอราคา
-              </a>
+            <Button onClick={() => setQuoteProduct("EPC Series")}>
+              <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
             </Button>
           </div>
         </div>
       </div>
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="EPC Series"
+      />
       <FooterCompact />
     </div>
   );

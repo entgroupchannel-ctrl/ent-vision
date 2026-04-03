@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Shield, Droplets, Battery, Smartphone, Monitor, Download, ChevronLeft, ChevronRight, Wifi } from "lucide-react";
+import { ArrowLeft, ExternalLink, Shield, Droplets, Battery, Smartphone, Monitor, Download, ChevronLeft, ChevronRight, Wifi, FileText } from "lucide-react";
 import ruggedHero from "@/assets/rugged-tablet-hero.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteDialog from "@/components/QuoteDialog";
 
 /* ───── Product Categories ───── */
 
@@ -370,7 +371,7 @@ const categories = [
 const ITEMS_PER_PAGE = 10;
 
 /* ───── Product Card ───── */
-const ProductCard = ({ product }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string } }) => (
+const ProductCard = ({ product, onQuote }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string }; onQuote?: (name: string) => void }) => (
   <div className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
     {product.image && (
       <div className="bg-secondary/30 p-4 flex items-center justify-center h-48">
@@ -401,10 +402,8 @@ const ProductCard = ({ product }: { product: { name: string; size?: string; high
             </a>
           </Button>
         )}
-        <Button size="sm" asChild className="flex-1">
-          <a href="/quote">
-            ขอราคา
-          </a>
+        <Button size="sm" className="flex-1" onClick={() => onQuote?.(product.name)}>
+          <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอราคา
         </Button>
       </div>
     </div>
@@ -416,6 +415,7 @@ const RuggedTablet = () => {
   const [activeCategory, setActiveCategory] = useState("overview");
   const [winPage, setWinPage] = useState(1);
   const [androidPage, setAndroidPage] = useState(1);
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background">
@@ -447,10 +447,8 @@ const RuggedTablet = () => {
                   <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Product Overview
                 </a>
               </Button>
-              <Button size="sm" asChild>
-                <a href="/quote">
-                  ขอใบเสนอราคา
-                </a>
+              <Button size="sm" onClick={() => setQuoteProduct("Rugged Tablet")}>
+                <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
               </Button>
             </div>
           </div>
@@ -530,7 +528,7 @@ const RuggedTablet = () => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             {goleRuggedTablets.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
             ))}
           </div>
 
@@ -557,7 +555,7 @@ const RuggedTablet = () => {
           <p className="text-sm text-muted-foreground mb-6">แท็บเล็ตทนทานระดับอุตสาหกรรม Windows & Android พร้อมมาตรฐาน IP65-IP68</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {emRuggedTablets.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
             ))}
           </div>
         </section>
@@ -580,7 +578,7 @@ const RuggedTablet = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {ruggedNotebooks.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
             ))}
           </div>
         </section>
@@ -593,7 +591,7 @@ const RuggedTablet = () => {
           <p className="text-sm text-muted-foreground mb-6">คอมพิวเตอร์ All-in-One จอสัมผัส สำหรับอุตสาหกรรม ประหยัดพื้นที่ VESA/Panel Mount</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {aioProducts.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
             ))}
           </div>
         </section>
@@ -606,7 +604,7 @@ const RuggedTablet = () => {
           <p className="text-sm text-muted-foreground mb-6">เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม พร้อม Barcode Scanner, NFC, RFID สำหรับงานภาคสนาม</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {handheldProducts.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
             ))}
           </div>
         </section>
@@ -628,7 +626,7 @@ const RuggedTablet = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {tpcSeries.map((p) => (
-              <ProductCard key={p.id} product={{ ...p, image: undefined }} />
+              <ProductCard key={p.id} product={{ ...p, image: undefined }} onQuote={(name) => setQuoteProduct(name)} />
             ))}
           </div>
         </section>
@@ -772,10 +770,8 @@ const RuggedTablet = () => {
                 <ExternalLink className="w-4 h-4 mr-1.5" /> ดาวน์โหลด Catalog
               </a>
             </Button>
-            <Button asChild>
-              <a href="/quote">
-                ขอใบเสนอราคา
-              </a>
+            <Button onClick={() => setQuoteProduct("Rugged Tablet")}>
+              <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
             </Button>
           </div>
         </div>

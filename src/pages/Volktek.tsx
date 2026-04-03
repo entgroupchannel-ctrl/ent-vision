@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Shield, Zap, Network, Server, ThermometerSun, Globe } from "lucide-react";
+import { ArrowLeft, ExternalLink, Shield, Zap, Network, Server, ThermometerSun, Globe, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import volktekCertifications from "@/assets/volktek-certifications.png";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteDialog from "@/components/QuoteDialog";
 
 const productCategories = [
   {
@@ -113,6 +115,7 @@ const applicationGallery = [
 ];
 
 const Volktek = () => {
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   return (
     <div className="min-h-screen bg-background">
       {/* Hero */}
@@ -145,10 +148,8 @@ const Volktek = () => {
                   <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Datasheet
                 </a>
               </Button>
-              <Button size="sm" asChild>
-                <a href="/quote">
-                  ขอใบเสนอราคา
-                </a>
+              <Button size="sm" onClick={() => setQuoteProduct("Volktek Switch")}>
+                <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
               </Button>
             </div>
           </div>
@@ -306,15 +307,19 @@ const Volktek = () => {
                 <ExternalLink className="w-4 h-4 mr-1.5" /> ดาวน์โหลด Catalog
               </a>
             </Button>
-            <Button asChild>
-              <a href="/quote">
-                ขอใบเสนอราคา
-              </a>
+            <Button onClick={() => setQuoteProduct("Volktek Switch")}>
+              <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
             </Button>
           </div>
         </div>
       </div>
       <FooterCompact />
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="Volktek Switch"
+      />
     </div>
   );
 };

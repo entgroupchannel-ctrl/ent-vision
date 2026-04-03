@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Zap, Shield, Monitor, Wifi, ThermometerSun, HardDrive, Server, ChevronRight } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Zap, Shield, Monitor, Wifi, ThermometerSun, HardDrive, Server, ChevronRight, FileText } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteDialog from "@/components/QuoteDialog";
 
 /* ── Category Navigation ── */
 const categories = [
@@ -640,7 +641,7 @@ const legacyModels = [
 ];
 
 /* ── Product Card Component ── */
-const ProductCard = ({ model }: { model: any }) => (
+const ProductCard = ({ model, onQuote }: { model: any; onQuote?: (name: string) => void }) => (
   <div id={model.id} className="card-surface overflow-hidden scroll-mt-24">
     <div className="p-6 md:p-8">
       {/* Header */}
@@ -707,10 +708,8 @@ const ProductCard = ({ model }: { model: any }) => (
             </a>
           </Button>
         )}
-        <Button size="sm" asChild>
-          <a href="/quote">
-            ขอใบเสนอราคา
-          </a>
+        <Button size="sm" onClick={() => onQuote?.(model.name)}>
+          <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
         </Button>
       </div>
     </div>
@@ -732,7 +731,7 @@ const CategorySection = ({ id, title, subtitle, icon: Icon, models }: {
       </div>
     </div>
     <div className="space-y-6">
-      {models.map((m) => <ProductCard key={m.id} model={m} />)}
+      {models.map((m) => <ProductCard key={m.id} model={m} onQuote={(name) => setQuoteProduct(name)} />)}
     </div>
   </section>
 );
@@ -740,6 +739,7 @@ const CategorySection = ({ id, title, subtitle, icon: Icon, models }: {
 /* ── Main Page ── */
 const MiniPC = () => {
   const [activeCategory, setActiveCategory] = useState("entry");
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background">
@@ -760,10 +760,8 @@ const MiniPC = () => {
               </p>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" asChild>
-                <a href="/quote">
-                  ขอใบเสนอราคา
-                </a>
+              <Button variant="outline" size="sm" onClick={() => setQuoteProduct("Mini PC")}>
+                <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
               </Button>
             </div>
           </div>
@@ -988,13 +986,17 @@ const MiniPC = () => {
               <span key={u} className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">{u}</span>
             ))}
           </div>
-          <Button asChild>
-            <a href="/quote">
-              ปรึกษาผู้เชี่ยวชาญ — ขอใบเสนอราคา
-            </a>
+          <Button onClick={() => setQuoteProduct("Mini PC")}>
+            <FileText className="w-3.5 h-3.5 mr-1.5" /> ปรึกษาผู้เชี่ยวชาญ — ขอใบเสนอราคา
           </Button>
         </div>
       </div>
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="GT Series — Mini PC"
+      />
       <FooterCompact />
     </div>
   );

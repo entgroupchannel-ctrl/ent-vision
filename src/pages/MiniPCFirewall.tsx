@@ -4,11 +4,12 @@ import {
   ArrowLeft, Shield, Wifi, Network, Cpu, Wind, Zap, Server,
   ChevronDown, Download, ExternalLink, Factory, Building2,
   Stethoscope, Building, Globe, Landmark, MonitorSmartphone,
-  Filter, X, Search
+  Filter, X, Search, FileText
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteDialog from "@/components/QuoteDialog";
 
 /* ═══════════════════════════════════════════
    TIER SYSTEM — like GT Series
@@ -725,6 +726,7 @@ const FirewallComparisonTable = () => {
 
 const MiniPCFirewall = () => {
   const [activeTier, setActiveTier] = useState<Tier | "all">("all");
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   const filtered = activeTier === "all" ? models : models.filter((m) => m.tier === activeTier);
 
   return (
@@ -999,15 +1001,21 @@ const MiniPCFirewall = () => {
           <h2 className="text-2xl md:text-3xl font-black text-foreground mb-4">พร้อมเริ่มต้นแล้วหรือยัง?</h2>
           <p className="text-muted-foreground mb-8">ปรึกษาผู้เชี่ยวชาญของเราเพื่อหาโซลูชันที่เหมาะสมกับธุรกิจของคุณ</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="/quote" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors">
-              <ExternalLink size={16} /> ขอใบเสนอราคา
-            </a>
+            <button onClick={() => setQuoteProduct("Mini PC Firewall")} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors">
+              <FileText size={16} /> ขอใบเสนอราคา
+            </button>
             <Link to="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-semibold text-sm hover:bg-secondary transition-colors">
               <ArrowLeft size={16} /> กลับหน้าหลัก
             </Link>
           </div>
         </div>
       </section>
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="Mini PC Firewall"
+      />
       <FooterCompact />
     </div>
   );
