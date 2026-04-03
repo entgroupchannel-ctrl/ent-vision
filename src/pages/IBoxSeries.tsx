@@ -16,6 +16,12 @@ import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import bannerIBox from "@/assets/banner-ibox-series.jpg";
+import usecaseAutomation from "@/assets/ibox-usecase-automation.jpg";
+import usecaseMedical from "@/assets/ibox-usecase-medical.jpg";
+import usecaseLogistics from "@/assets/ibox-usecase-logistics.jpg";
+import usecaseWarehouse from "@/assets/ibox-usecase-warehouse.jpg";
+import usecaseVision from "@/assets/ibox-usecase-vision.jpg";
+import usecaseSignage from "@/assets/ibox-usecase-signage.jpg";
 
 /* ═══════ Product Data ═══════ */
 const iboxModels = [
