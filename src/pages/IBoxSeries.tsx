@@ -10,8 +10,10 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import bannerIBox from "@/assets/banner-ibox-series.jpg";
 
 /* ═══════ Product Data ═══════ */
