@@ -14,31 +14,52 @@ const AdminLogin = () => {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
+    let mounted = true;
+
+    const checkSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!mounted) return;
+
+        if (session) {
+          const isAdmin = await checkAdmin(session.user.id);
+          if (!mounted) return;
+          if (isAdmin) {
+            navigate("/admin", { replace: true });
+            return;
+          } else {
+            toast({ title: "ไม่มีสิทธิ์เข้าถึง", description: "บัญชีนี้ไม่มีสิทธิ์ Admin", variant: "destructive" });
+            await supabase.auth.signOut();
+          }
+        }
+      } catch (err) {
+        console.error("Session check error:", err);
+      } finally {
+        if (mounted) setChecking(false);
+      }
+    };
+
+    checkSession();
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (session) {
+      if (!mounted) return;
+      if (event === "SIGNED_IN" && session) {
         const isAdmin = await checkAdmin(session.user.id);
+        if (!mounted) return;
         if (isAdmin) {
           navigate("/admin", { replace: true });
         } else {
           toast({ title: "ไม่มีสิทธิ์เข้าถึง", description: "บัญชีนี้ไม่มีสิทธิ์ Admin", variant: "destructive" });
           await supabase.auth.signOut();
+          setChecking(false);
         }
       }
-      setChecking(false);
     });
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (session) {
-        const isAdmin = await checkAdmin(session.user.id);
-        if (isAdmin) {
-          navigate("/admin", { replace: true });
-          return;
-        }
-      }
-      setChecking(false);
-    });
-
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, [navigate]);
 
   const checkAdmin = async (userId: string) => {
