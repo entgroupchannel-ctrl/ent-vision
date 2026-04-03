@@ -1,4 +1,5 @@
 import { useState } from "react";
+import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft, Shield, Wifi, Network, Cpu, Wind, Zap, Server,
@@ -288,6 +289,10 @@ const ModelCard = ({ model }: { model: FirewallModel }) => {
 
         {/* Image */}
         <div className="relative h-36 mb-4 flex items-center justify-center bg-secondary/30 rounded-lg overflow-hidden">
+          <WishlistHeart
+            item={{ id: model.id, name: model.name, category: "Mini PC Firewall", image: model.image, href: "/mini-pc-firewall", specs: model.tagline }}
+            className="absolute top-2 right-2 z-10"
+          />
           <img src={model.image} alt={model.name} className="max-h-full max-w-full object-contain" loading="lazy" />
         </div>
 

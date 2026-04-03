@@ -1,4 +1,5 @@
 import { useState } from "react";
+import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Layers, Settings, Box, Maximize, ChevronDown, Monitor, HardDrive, Wifi, Power, PlugZap, Expand } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -416,6 +417,10 @@ const SeriesSection = ({ series, index }: { series: SeriesData; index: number })
               {series.highlight}
             </span>
           )}
+          <WishlistHeart
+            item={{ id: series.id, name: series.name, category: "EPC Box Series", image: series.image, href: "/epc-box-series", specs: series.tagline }}
+            className="absolute top-4 right-4 z-10"
+          />
           <img
             src={series.image}
             alt={series.name}

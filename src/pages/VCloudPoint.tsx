@@ -1,4 +1,5 @@
 import { useState } from "react";
+import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import LineQRButton from "@/components/LineQRButton";
 import QuoteDialog from "@/components/QuoteDialog";
@@ -263,6 +264,12 @@ const VCloudPoint = () => {
                     <p className="text-[10px] text-muted-foreground font-medium">{s.label}</p>
                   </div>
                 ))}
+              </div>
+              <div className="flex items-center gap-3 mb-6">
+                <WishlistHeart
+                  item={{ id: "vcloudpoint-zero-client", name: "vCloudPoint Zero Client", category: "vCloudPoint", image: "https://vcloudpoint.info/assets/zero-client-1-D2hOci6Y.jpg", href: "/vcloudpoint", specs: "Shared Computing — 1 PC 30 Users" }}
+                />
+                <span className="text-xs text-muted-foreground">เพิ่มในรายการถูกใจ</span>
               </div>
 
               <div className="flex flex-wrap gap-3">

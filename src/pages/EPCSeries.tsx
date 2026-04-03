@@ -1,4 +1,5 @@
 import { useState } from "react";
+import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -290,7 +291,11 @@ const SpecTable = ({ model }: { model: typeof squareModels[0] }) => (
 /* ───── Model Card ───── */
 const ModelCard = ({ model, onQuote }: { model: typeof squareModels[0]; onQuote?: (name: string) => void }) => (
   <div className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
-    <div className="bg-secondary/30 p-6 flex items-center justify-center">
+    <div className="relative bg-secondary/30 p-6 flex items-center justify-center">
+      <WishlistHeart
+        item={{ id: model.id, name: model.name, category: "EPC Series", image: model.image, href: "/epc-series", specs: `${model.size} (${model.ratio})` }}
+        className="absolute top-3 right-3"
+      />
       <img src={model.image} alt={model.name} className="max-h-44 object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
     </div>
     <div className="p-5 space-y-3">

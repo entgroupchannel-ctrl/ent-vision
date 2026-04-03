@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import WishlistHeart from "@/components/WishlistHeart";
 import { ArrowLeft, ExternalLink, Cpu, Zap, Shield, Monitor, Wifi, ThermometerSun, HardDrive, Server, ChevronRight, FileText } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -647,7 +648,11 @@ const ProductCard = ({ model, onQuote }: { model: any; onQuote?: (name: string) 
       {/* Header */}
       <div className="flex flex-col md:flex-row gap-6 mb-6">
         <div className="md:w-1/3 flex items-center justify-center">
-          <div className="bg-secondary/50 rounded-xl p-4 w-full flex items-center justify-center min-h-[200px]">
+          <div className="relative bg-secondary/50 rounded-xl p-4 w-full flex items-center justify-center min-h-[200px]">
+            <WishlistHeart
+              item={{ id: model.id, name: model.name, category: "Mini PC", image: model.image, href: "/mini-pc", specs: model.tagline }}
+              className="absolute top-3 right-3"
+            />
             <img src={model.image} alt={model.name} className="max-w-full max-h-[200px] object-contain" loading="lazy" />
           </div>
         </div>
