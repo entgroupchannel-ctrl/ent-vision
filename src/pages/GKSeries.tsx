@@ -820,14 +820,12 @@ const GKSeries = () => {
               ขอใบเสนอราคา
             </button>
             <QuoteDialog open={quoteOpen} onClose={() => setQuoteOpen(false)} productCategory="GK Series — Panel PC" />
-            <a
-              href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-border text-foreground font-bold text-lg hover:bg-muted transition-colors"
+            <button
+              onClick={() => setShowLineQR(true)}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[hsl(142,70%,45%)] text-white font-bold text-lg hover:opacity-90 transition-opacity"
             >
               LINE @entgroup
-            </a>
+            </button>
             <Link
               to="/"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-border text-foreground font-bold text-lg hover:bg-muted transition-colors"
