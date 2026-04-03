@@ -236,6 +236,7 @@ const modelTabs = [
   { id: "gt9000", label: "GT9000" },
   { id: "gt4500", label: "GT4500" },
   { id: "gt1400", label: "GT1400" },
+  { id: "gt1300", label: "GT1300" },
   { id: "gt1200", label: "GT1200" },
 ];
 
