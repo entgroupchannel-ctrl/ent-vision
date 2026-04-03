@@ -274,12 +274,12 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: 
                       </select>
                       {(() => {
                         const models = product.category ? categoryModels[product.category] : null;
-                        const isCustom = product.model && models && !models.includes(product.model);
-                        if (models && !isCustom) {
+                        if (models) {
+                          const inList = models.includes(product.model);
                           return (
                             <select
-                              value={product.model}
-                              onChange={(e) => handleProductChange(index, "model", e.target.value === "__other" ? "" : e.target.value)}
+                              value={inList ? product.model : ""}
+                              onChange={(e) => handleProductChange(index, "model", e.target.value)}
                               className={inputClass}
                             >
                               <option value="">เลือกรุ่น</option>
