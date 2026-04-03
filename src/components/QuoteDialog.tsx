@@ -20,6 +20,17 @@ const productCategories = [
   "Waterproof PC IP69K", "อื่นๆ",
 ];
 
+const categoryModels: Record<string, string[]> = {
+  "GT Series — Mini PC": ["GT1000", "GT1200", "GT1300", "GT1400", "GT2000", "GT3000", "GT4000", "GT4500", "GT5000", "GT6000", "GT7000", "GT8000", "GT9000"],
+  "GB Series — Compact": ["GB1000", "GB2000", "GB4000 v1", "GB4000 v2", "GB5000"],
+  "EPC Series": ["EPC-102A", "EPC-106A", "EPC-107A", "EPC-109A", "EPC-202A", "EPC-206A", "EPC-207A", "EPC-209A", "EPC-302A", "EPC-306A", "EPC-307A", "EPC-309A"],
+  "EPC Box Series": ["EPC-10XA", "EPC-20XA", "EPC-30XA"],
+  "GK Series — Panel PC": ["GK1004", "GK1501", "GK1506", "GK1901", "GK2101"],
+  "Panel PC GTG/GTY": ["GTY101T", "GTY104T", "GTY121T", "GTY133T", "GTY150T", "GTY156T", "GTY170T", "GTY185T", "GTY190T", "GTY215T", "GTG238T", "GTG270T", "GTG320T"],
+  "Mini PC Firewall": ["K8-F12", "K8-F18"],
+  "vCloudPoint": ["vCloudPoint S100", "vCloudPoint S200"],
+};
+
 const callbackTimes = [
   "เลือก", "เช้า (9:00-12:00)", "บ่าย (13:00-16:00)",
   "เย็น (16:00-18:00)", "เวลาใดก็ได้",
@@ -251,19 +262,42 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: 
                     <div className="flex-1 grid grid-cols-[1fr_1fr_80px] gap-2">
                       <select
                         value={product.category}
-                        onChange={(e) => handleProductChange(index, "category", e.target.value)}
+                        onChange={(e) => {
+                          handleProductChange(index, "category", e.target.value);
+                          handleProductChange(index, "model", "");
+                        }}
                         className={inputClass}
                       >
                         {productCategories.map((c) => (
                           <option key={c} value={c === "เลือกหมวดหมู่" ? "" : c}>{c}</option>
                         ))}
                       </select>
-                      <input
-                        type="text" placeholder="รุ่น / Model"
-                        value={product.model}
-                        onChange={(e) => handleProductChange(index, "model", e.target.value)}
-                        className={inputClass}
-                      />
+                      {(() => {
+                        const models = product.category ? categoryModels[product.category] : null;
+                        const isCustom = product.model && models && !models.includes(product.model);
+                        if (models && !isCustom) {
+                          return (
+                            <select
+                              value={product.model}
+                              onChange={(e) => handleProductChange(index, "model", e.target.value === "__other" ? "" : e.target.value)}
+                              className={inputClass}
+                            >
+                              <option value="">เลือกรุ่น</option>
+                              {models.map((m) => (
+                                <option key={m} value={m}>{m}</option>
+                              ))}
+                            </select>
+                          );
+                        }
+                        return (
+                          <input
+                            type="text" placeholder="รุ่น / Model"
+                            value={product.model}
+                            onChange={(e) => handleProductChange(index, "model", e.target.value)}
+                            className={inputClass}
+                          />
+                        );
+                      })()}
                       <div className="flex items-center gap-0.5">
                         <button type="button" onClick={() => handleProductChange(index, "qty", Math.max(1, product.qty - 1))}
                           className="w-7 h-8 flex items-center justify-center rounded border border-border text-muted-foreground hover:bg-muted transition-colors">
