@@ -171,7 +171,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             {/* Company Info */}
             <div className="md:col-span-1">
-              <img src={logo} alt="ENT GROUP" className="h-10 w-auto mb-4 brightness-0 invert" />
+              <img src={logo} alt="ENT GROUP" className="h-10 w-auto mb-4" />
               <p className="text-sm font-bold text-white mb-1">บริษัท เอ็นที กรุ๊ป จำกัด</p>
               <p className="text-xs text-[hsl(215,15%,55%)] leading-relaxed mb-4">
                 เมทโทร บิซทาวน์ แจ้งวัฒนะ2<br />
