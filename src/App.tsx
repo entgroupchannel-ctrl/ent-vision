@@ -27,6 +27,7 @@ import QuoteRequest from "./pages/QuoteRequest.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import FloatingContact from "./components/FloatingContact.tsx";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +65,7 @@ const App = () => (
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <FloatingContact />
           </BrowserRouter>
         </TooltipProvider>
       </AuthProvider>
