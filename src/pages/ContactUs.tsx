@@ -248,7 +248,7 @@ const ContactUs = () => {
                     <button
                       onClick={() => {
                         setSubmitted(false);
-                        setForm({ name: "", email: "", phone: "", company: "", lineId: "", whatsapp: "", callbackTime: "", category: "", message: "" });
+                        setForm({ name: "", email: "", phone: "", company: "", lineId: "", whatsapp: "", callbackTime: "", category: "", message: "", subscribe: true });
                       }}
                       className="text-sm text-primary hover:underline"
                     >
