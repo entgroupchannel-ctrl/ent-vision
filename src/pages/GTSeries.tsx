@@ -12,6 +12,7 @@ import gt6000Banner from "@/assets/gt6000-banner.jpg";
 import gt7000Banner from "@/assets/gt7000-banner.jpg";
 import gt8000Banner from "@/assets/gt8000-banner.jpg";
 import gt9000Banner from "@/assets/gt9000-banner.jpg";
+import gt4500Banner from "@/assets/gt4500-banner.jpg";
 
 const features = [
   { icon: Thermometer, title: "ทนความร้อนสูง", desc: "ทำงานได้ในอุณหภูมิ 0–60°C อย่างต่อเนื่อง" },
@@ -110,16 +111,16 @@ const gtModels = [
   },
   {
     name: "GT4500",
-    tagline: "Dual HDMI อัปเกรด",
-    cpu: "Intel Core i5 / i7",
-    ram: "8–16 GB",
-    storage: "SSD 256–512 GB",
-    ports: "USB 8, COM 6, LAN 2, HDMI×2, GPIO",
-    size: "รุ่นอัปเกรด GT4000",
+    tagline: "DDR4 + SIM 4G/5G มาตรฐานใหม่",
+    cpu: "Intel Core i3-6006U / i5-7260U / i5-8250U / i7-8550U",
+    ram: "4–8 GB DDR4",
+    storage: "SSD 256 GB",
+    ports: "USB 8 (4×3.0+4×2.0), COM 6, LAN 2, VGA+HDMI, SIM",
+    size: "21.2×15.5×4.5 cm / 2.5 kg",
     image: "https://static.wixstatic.com/media/0597a3_8e53a2e85b9f42088834c613e1a9d08f~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_25_08.png",
-    href: "https://www.entgroup.co.th/ipc-gt4500",
-    highlight: "Dual HDMI",
-    price: "สอบถาม",
+    tab: "gt4500",
+    highlight: "DDR4 + 4G",
+    price: "21,900",
   },
   {
     name: "GT5000",
@@ -207,6 +208,7 @@ const modelTabs = [
   { id: "gt7000", label: "GT7000" },
   { id: "gt8000", label: "GT8000" },
   { id: "gt9000", label: "GT9000" },
+  { id: "gt4500", label: "GT4500" },
   { id: "gt1400", label: "GT1400" },
   { id: "gt1200", label: "GT1200" },
 ];
@@ -392,15 +394,9 @@ const GTSeries = () => {
                 <button
                   key={model.name}
                   onClick={() => model.tab ? handleTabChange(model.tab) : undefined}
-                  className={`group card-surface overflow-hidden hover:border-primary/30 transition-all hover:-translate-y-1 text-left ${model.tab ? "cursor-pointer" : ""}`}
+                  className={`group card-surface overflow-hidden hover:border-primary/30 transition-all hover:-translate-y-1 text-left cursor-pointer`}
                 >
-                  {model.href && !model.tab ? (
-                    <a href={model.href} target="_blank" rel="noopener noreferrer" className="block">
-                      <ModelCard model={model} />
-                    </a>
-                  ) : (
-                    <ModelCard model={model} />
-                  )}
+                  <ModelCard model={model} />
                 </button>
               ))}
             </div>
@@ -2851,6 +2847,363 @@ const GTSeries = () => {
             </div>
           )}
 
+          {/* Tab: GT4500 Detail */}
+          {activeTab === "gt4500" && (
+            <div className="space-y-8 animate-fade-in">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
+                <img
+                  src={gt4500Banner}
+                  alt="GT4500 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    DDR4 · SIM 4G/5G · 75°C · Fanless
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">4500</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    มาตรฐานใหม่แห่งความทนทาน — เพื่ออุตสาหกรรมไทย
+                  </p>
+                </div>
+              </div>
+
+              {/* Description + Product Image */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      DDR4 · SIM 4G/5G · RS485 · 75°C · Auto Power On
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">4500</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      GT4500 คือคำตอบสำหรับผู้ประกอบการที่มองหาคอมพิวเตอร์อุตสาหกรรมที่เชื่อถือได้ ด้วยการออกแบบที่เน้นความทนทานพิเศษ
+                      พร้อมประสิทธิภาพที่ตอบโจทย์การใช้งานในสภาพแวดล้อมที่ท้าทาย ไม่ว่าจะเป็นสายการผลิต คลังสินค้า หรือพื้นที่ควบคุมเครื่องจักร
+                    </p>
+                  </div>
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-2">🌡️ ทนทานเหนือระดับ -20° ถึง +75°C</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      ทำงานได้ในอุณหภูมิ -20° ถึง +75°C และความชื้นสูงถึง 90% ด้วยครีบระบายความร้อนอลูมิเนียมขนาดใหญ่
+                      ระบบ Passive Cooling ไม่ใช้พัดลม เงียบ 0 dB ทำงานต่อเนื่อง 24 ชั่วโมงไม่มีปัญหาความร้อนสะสม
+                    </p>
+                  </div>
+
+                  {/* Key Specs Grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU 4 ตัวเลือก</div>
+                      <div className="text-xs text-muted-foreground mt-1">i3-6006U / i5-7260U / i5-8250U / i7-8550U</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM DDR4 + SSD</div>
+                      <div className="text-xs text-muted-foreground mt-1">4 GB DDR4 / SSD 256 GB</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">6 COM + 8 USB</div>
+                      <div className="text-xs text-muted-foreground mt-1">RS232×6 (COM1-2 เป็น RS485/422 ได้), LAN 2</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Zap className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">SIM 4G/5G Ready</div>
+                      <div className="text-xs text-muted-foreground mt-1">Micro SIM Push slot, WiFi Optional</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product Images */}
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_aea4cee9a1cb431b90886aa5b64e1f96~mv2.png/v1/fill/w_600,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT4500-004.png"
+                      alt="GT4500 Front"
+                      className="w-full object-contain p-4"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="card-surface overflow-hidden">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_2901e68aa51b482697a1d4c4fa9fc320~mv2.png/v1/crop/x_0,y_213,w_1660,h_845/fill/w_600,h_305,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT4500-003.png"
+                      alt="GT4500 Rear Ports"
+                      className="w-full object-contain p-4"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Why GT4500 */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="card-surface p-6">
+                  <h4 className="text-lg font-display font-bold text-foreground mb-4">⚡ ประหยัดต้นทุนค่าไฟ</h4>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li>• กินไฟเพียง <strong className="text-foreground">15W</strong> แม้ทำงาน 24 ชั่วโมง</li>
+                    <li>• คิดเป็นค่าไฟเพียง <strong className="text-foreground">2.5 บาทต่อวัน</strong> (75 บาท/เดือน)</li>
+                    <li>• ประหยัดค่าไฟได้มากกว่า <strong className="text-foreground">5,000 บาท/ปี</strong> เทียบกับ PC ทั่วไป</li>
+                    <li>• ประหยัดกว่า 60% เมื่อเทียบกับคอมพิวเตอร์ทั่วไป</li>
+                  </ul>
+                </div>
+                <div className="card-surface p-6">
+                  <h4 className="text-lg font-display font-bold text-foreground mb-4">🔧 ดูแลง่าย ลดภาระ IT</h4>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li>• <strong className="text-foreground">Auto Power On</strong> — กลับมาทำงานอัตโนมัติหลังไฟดับ</li>
+                    <li>• <strong className="text-foreground">Watchdog Timer</strong> — ตรวจจับและแก้ไขระบบค้างอัตโนมัติ</li>
+                    <li>• <strong className="text-foreground">Wake-on-LAN</strong> — IT ดูแลระยะไกลได้ ลดการเดินทาง</li>
+                    <li>• อัพเกรดง่ายทั้ง RAM และ Storage</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* CPU Options Visual */}
+              <div className="card-surface p-4 overflow-hidden">
+                <h4 className="text-lg font-display font-bold text-foreground mb-4 px-2">🔧 เลือก CPU ได้ถึง 4 รุ่น — จ่ายตามความต้องการ</h4>
+                <img
+                  src="https://static.wixstatic.com/media/3e5003_db3073f9df72429ca103a592e5e1d47d~mv2.jpg/v1/crop/x_2,y_0,w_1997,h_603/fill/w_1181,h_357,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3.jpg"
+                  alt="GT4500 CPU Options"
+                  className="w-full rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Software Compatibility */}
+              <div className="card-surface p-6 md:p-8">
+                <h4 className="text-xl font-display font-bold text-foreground mb-4">
+                  💻 รองรับซอฟต์แวร์หลากหลาย
+                </h4>
+                <div className="grid md:grid-cols-2 gap-6 items-center">
+                  <div>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      รองรับ Windows 7/8/10 และ Linux ทำให้ใช้งานได้ทั้งซอฟต์แวร์อุตสาหกรรมและโปรแกรมทั่วไป:
+                    </p>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li>• Microsoft Office, PDF Reader</li>
+                      <li>• PLC Programming, SCADA</li>
+                      <li>• CAD/CAM ออกแบบเขียนแบบ</li>
+                      <li>• ระบบจัดการฐานข้อมูลและ ERP</li>
+                      <li>• มัลติมีเดียสำหรับงานนำเสนอและฝึกอบรม</li>
+                    </ul>
+                  </div>
+                  <div className="overflow-hidden rounded-lg">
+                    <img
+                      src="https://static.wixstatic.com/media/0597a3_840c03acd28147a89285de218f3a0a25~mv2.png/v1/fill/w_600,h_448,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT4500-001.png"
+                      alt="GT4500 Software"
+                      className="w-full"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Cooling System */}
+              <div className="card-surface p-4 overflow-hidden">
+                <h4 className="text-lg font-display font-bold text-foreground mb-4 px-2">🔇 ระบบระบายความร้อน Passive Cooling</h4>
+                <p className="text-sm text-muted-foreground mb-4 px-2 leading-relaxed">
+                  ครีบระบายความร้อนอลูมิเนียมขนาดใหญ่ออกแบบอย่างพิถีพิถัน กระจายความร้อนได้ทั่วถึงและรวดเร็ว
+                  ไม่ใช้พัดลม ไม่มีเสียงรบกวน ป้องกันฝุ่นเข้าตัวเครื่อง
+                </p>
+                <img
+                  src="https://static.wixstatic.com/media/3e5003_5146d29438c1469084384085311877b6~mv2.jpg/v1/fill/w_1309,h_202,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/6.jpg"
+                  alt="GT4500 Heatsink"
+                  className="w-full rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Port Diagram */}
+              <div className="card-surface p-4 overflow-hidden">
+                <h4 className="text-lg font-display font-bold text-foreground mb-4 px-2">🔌 พอร์ตเชื่อมต่อครบครัน</h4>
+                <img
+                  src="https://static.wixstatic.com/media/3e5003_fa1b7c0241e1439796bca055fb8c927d~mv2.jpg/v1/fill/w_1310,h_418,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7.jpg"
+                  alt="GT4500 Port Layout"
+                  className="w-full rounded-lg mb-4"
+                  loading="lazy"
+                />
+                <div className="grid md:grid-cols-3 gap-4 px-2">
+                  <div className="text-sm">
+                    <h5 className="font-bold text-foreground mb-1">พอร์ตสื่อสาร</h5>
+                    <p className="text-muted-foreground">RS232 × 6 พอร์ต<br/>COM1/COM2 ตั้งค่าเป็น RS485/RS422 ผ่าน BIOS</p>
+                  </div>
+                  <div className="text-sm">
+                    <h5 className="font-bold text-foreground mb-1">USB & แสดงผล</h5>
+                    <p className="text-muted-foreground">USB 3.0 × 4 + USB 2.0 × 4<br/>HDMI + VGA Dual Display</p>
+                  </div>
+                  <div className="text-sm">
+                    <h5 className="font-bold text-foreground mb-1">เครือข่าย & เสียง</h5>
+                    <p className="text-muted-foreground">LAN × 2 (Gigabit)<br/>MIC + SPK, WiFi Optional</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dimension */}
+              <div className="card-surface p-6 text-center">
+                <h4 className="text-lg font-display font-bold text-foreground mb-4">📐 ขนาดกะทัดรัด เล็กกว่า IPC ทั่วไป 40%</h4>
+                <p className="text-muted-foreground mb-4">
+                  เพียง 21.2 × 15.5 × 4.5 cm น้ำหนัก 2.5 kg — ติดตั้งในตู้ควบคุม บนแขนยึด หรือใน AGV/โฟล์คลิฟท์ได้สะดวก
+                </p>
+                <div className="grid md:grid-cols-2 gap-4 items-center">
+                  <img
+                    src="https://static.wixstatic.com/media/3e5003_b7535d8168ab4f7d8d657a3eef999b12~mv2.jpg/v1/fill/w_1210,h_390,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/10.jpg"
+                    alt="GT4500 Dimensions"
+                    className="rounded-lg w-full"
+                    loading="lazy"
+                  />
+                  <img
+                    src="https://static.wixstatic.com/media/0597a3_c6c89af9190c48b992640615c77efcee~mv2.png/v1/fill/w_655,h_584,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT4500-002.png"
+                    alt="GT4500 VESA Mount"
+                    className="rounded-lg w-full"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* GT4500 Price Table */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT4500 Price List — รับประกัน 1 ปี</h3>
+                  <p className="text-sm text-muted-foreground mt-1">ถูกกว่าตลาด 20-30% สเปคและความทนทานเทียบเท่าหรือดีกว่า</p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-muted/50">
+                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                        <th className="text-left p-3 font-semibold text-foreground">RAM</th>
+                        <th className="text-left p-3 font-semibold text-foreground">SSD</th>
+                        <th className="text-right p-3 font-semibold text-foreground">ราคา (฿)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      <tr className="hover:bg-muted/30 transition-colors">
+                        <td className="p-3 text-muted-foreground">Intel Core i3-6006U</td>
+                        <td className="p-3 text-muted-foreground">4 GB DDR4</td>
+                        <td className="p-3 text-muted-foreground">256 GB</td>
+                        <td className="p-3 text-right font-bold text-foreground">21,900</td>
+                      </tr>
+                      <tr className="hover:bg-muted/30 transition-colors bg-primary/5">
+                        <td className="p-3 text-muted-foreground">Intel Core i5-7260U <span className="text-xs text-primary font-bold">ยอดนิยม</span></td>
+                        <td className="p-3 text-muted-foreground">4 GB DDR4</td>
+                        <td className="p-3 text-muted-foreground">256 GB</td>
+                        <td className="p-3 text-right font-bold text-foreground">22,900</td>
+                      </tr>
+                      <tr className="hover:bg-muted/30 transition-colors">
+                        <td className="p-3 text-muted-foreground">Intel Core i5-8250U</td>
+                        <td className="p-3 text-muted-foreground">4 GB DDR4</td>
+                        <td className="p-3 text-muted-foreground">256 GB</td>
+                        <td className="p-3 text-right font-bold text-foreground">23,900</td>
+                      </tr>
+                      <tr className="hover:bg-muted/30 transition-colors">
+                        <td className="p-3 text-muted-foreground">Intel Core i7-8550U</td>
+                        <td className="p-3 text-muted-foreground">4 GB DDR4</td>
+                        <td className="p-3 text-muted-foreground">256 GB</td>
+                        <td className="p-3 text-right font-bold text-foreground">25,900</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Options Table */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">🛒 Options เสริม</h3>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <tbody className="divide-y divide-border">
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 10 Pro OEM</td><td className="p-3 text-right font-bold text-foreground">฿3,950</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 11 Pro OEM</td><td className="p-3 text-right font-bold text-foreground">฿4,590</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 10 IOT</td><td className="p-3 text-right font-bold text-foreground">฿3,950</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 11 IOT</td><td className="p-3 text-right font-bold text-foreground">฿4,590</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Upgrade WiFi ABGN/AC → WiFi 6</td><td className="p-3 text-right font-bold text-foreground">สอบถาม</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">4G SIM Card Module</td><td className="p-3 text-right font-bold text-foreground">สอบถาม</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">5G SIM Card Module</td><td className="p-3 text-right font-bold text-foreground">สอบถาม</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">ซื้อประกันเพิ่ม ปีที่ 2</td><td className="p-3 text-right font-bold text-foreground">15%</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">ซื้อประกันเพิ่ม ปีที่ 3</td><td className="p-3 text-right font-bold text-foreground">20%</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Gallery */}
+              <div className="card-surface p-6">
+                <h4 className="text-lg font-display font-bold text-foreground mb-4">📸 ภาพตัวอย่างการใช้งานจริง</h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {[
+                    "https://static.wixstatic.com/media/005637_af317d79eacd469f9157d4820cb459cc~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_af317d79eacd469f9157d4820cb459cc~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_e650889eede347d0a8d30c6a7e32287e~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_e650889eede347d0a8d30c6a7e32287e~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_37d8da415dab4f7494a6b4801687e3e1~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_37d8da415dab4f7494a6b4801687e3e1~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_5734e20385dd4e4db9c42a9ab159a87c~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_5734e20385dd4e4db9c42a9ab159a87c~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_e1b5f354431c46b58dc7d1e0e0c6ee53~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_e1b5f354431c46b58dc7d1e0e0c6ee53~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_d766ad09992e48559be58df3a9bc4ab7~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_d766ad09992e48559be58df3a9bc4ab7~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_37a9f940aea64c389e66a1e46f2cd2e3~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_37a9f940aea64c389e66a1e46f2cd2e3~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_6c42aac9d6d747d08022f03a3979e64c~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_6c42aac9d6d747d08022f03a3979e64c~mv2.jpg",
+                  ].map((src, idx) => (
+                    <img
+                      key={idx}
+                      src={src}
+                      alt={`GT4500 การใช้งานจริง ${idx + 1}`}
+                      className="w-full h-auto rounded-lg hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Video */}
+              <div className="card-surface p-6">
+                <h4 className="text-lg font-display font-bold text-foreground mb-4">🎬 วิดีโอ GT4500</h4>
+                <a
+                  href="https://www.youtube.com/watch?v=ou3yHel3ijU"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative block rounded-xl overflow-hidden max-w-lg mx-auto"
+                >
+                  <img
+                    src="https://img.youtube.com/vi/ou3yHel3ijU/maxresdefault.jpg"
+                    alt="GT4500 Video"
+                    className="w-full group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+                    <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
+                      <Play size={28} className="text-primary-foreground ml-1" fill="currentColor" />
+                    </div>
+                  </div>
+                  <span className="absolute bottom-3 left-3 text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">Industrial Computer รุ่น GT4500</span>
+                </a>
+              </div>
+
+              {/* Datasheet CTA */}
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/0597a3_f33a4cfd614848709449d3a2d3173976.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <Download size={16} /> ดาวน์โหลด Datasheet GT4500
+                </a>
+                <a
+                  href="https://www.entgroup.co.th/_files/ugd/0597a3_30cd5ccac16b42b79ed91d64cf12d0c9.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-surface-hover transition-colors"
+                >
+                  <Download size={16} /> วารสาร / Journal GT4500
+                </a>
+              </div>
+            </div>
+          )}
+
           {/* Tab: GT1400 Detail */}
           {activeTab === "gt1400" && (
             <div className="space-y-8 animate-fade-in">
@@ -3243,7 +3596,7 @@ const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
       <h3 className="text-xl font-display font-bold text-foreground mb-1 group-hover:text-primary transition-colors flex items-center gap-2">
         {model.name}
         {model.tab && <span className="text-xs text-primary font-normal">ดูรายละเอียด →</span>}
-        {model.href && !model.tab && <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />}
+        {!model.tab && <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />}
       </h3>
       <p className="text-xs font-semibold text-primary mb-3">"{model.tagline}"</p>
       <div className="space-y-2 text-sm">
