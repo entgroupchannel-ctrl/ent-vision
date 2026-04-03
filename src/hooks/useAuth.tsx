@@ -26,12 +26,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   const checkRoles = async (userId: string) => {
-    const [adminRes, superRes] = await Promise.all([
-      supabase.rpc("is_admin", { _user_id: userId }),
-      supabase.rpc("has_role", { _user_id: userId, _role: "super_admin" }),
-    ]);
-    setIsAdmin(adminRes.data === true);
-    setIsSuperAdmin(superRes.data === true);
+    try {
+      const [adminRes, superRes] = await Promise.all([
+        Promise.race([
+          supabase.rpc("is_admin", { _user_id: userId }),
+          new Promise<{ data: null }>((resolve) =>
+            setTimeout(() => resolve({ data: null }), 3000)
+          ),
+        ]),
+        Promise.race([
+          supabase.rpc("has_role", { _user_id: userId, _role: "super_admin" }),
+          new Promise<{ data: null }>((resolve) =>
+            setTimeout(() => resolve({ data: null }), 3000)
+          ),
+        ]),
+      ]);
+      setIsAdmin(adminRes.data === true);
+      setIsSuperAdmin(superRes.data === true);
+    } catch {
+      setIsAdmin(false);
+      setIsSuperAdmin(false);
+    }
   };
 
   useEffect(() => {
