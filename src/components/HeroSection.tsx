@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Search, Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import MegaMenu, { MobileMegaMenu } from "@/components/MegaMenu";
+import { LineQRDialog } from "@/components/LineQRDialog";
 import heroIndustrial from "@/assets/hero-industrial.jpg";
 import logo from "@/assets/logo-entgroup.avif";
 
