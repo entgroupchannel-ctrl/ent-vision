@@ -167,7 +167,8 @@ const AdminLogin = () => {
         </div>
 
         <p className="text-center text-xs text-muted-foreground mt-4">
-          เฉพาะผู้ดูแลระบบเท่านั้น
+          สำหรับสมาชิก ENT Group เท่านั้น ·{" "}
+          <a href="/member-register" className="text-primary hover:underline font-medium">สมัครสมาชิก</a>
         </p>
       </div>
     </div>
