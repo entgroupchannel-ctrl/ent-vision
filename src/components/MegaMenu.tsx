@@ -265,7 +265,7 @@ const MegaMenu = ({
                   <Link
                     to={active.featured.href}
                     onClick={() => { setActiveMenu(null); onNavigate?.(); }}
-                    className="group block rounded-2xl bg-gradient-to-br from-primary/15 via-primary/5 to-transparent border border-primary/20 p-6 hover:border-primary/40 transition-all duration-300"
+                    className="group block rounded-2xl bg-gradient-to-br from-primary/15 via-primary/5 to-transparent border border-primary/20 p-6 hover:border-primary/40 transition-all duration-300 h-full"
                   >
                     <div className="flex items-center gap-2 mb-3">
                       <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-primary text-primary-foreground">
@@ -273,6 +273,16 @@ const MegaMenu = ({
                       </span>
                       <Sparkles size={12} className="text-primary" />
                     </div>
+                    {active.featured.image && (
+                      <div className="flex justify-center mb-4">
+                        <img
+                          src={active.featured.image}
+                          alt={active.featured.title}
+                          className="h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-lg"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
                     <h4 className="text-xl font-black text-white mb-2 group-hover:text-primary transition-colors">
                       {active.featured.title}
                     </h4>
