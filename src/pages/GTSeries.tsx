@@ -715,7 +715,7 @@ const GTSeries = () => {
             <div className="relative">
               <div className="relative z-10 rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/10">
                 <img
-                  src="https://static.wixstatic.com/media/3e5003_b63c249dfe4a44a0b97711a28cf0892a~mv2.jpg/v1/fill/w_1312,h_580,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1.jpg"
+                  src={gtSeriesHero}
                   alt="GT Series Industrial PC Lineup"
                   className="w-full h-auto"
                 />
