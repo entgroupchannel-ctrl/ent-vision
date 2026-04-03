@@ -240,7 +240,331 @@ const modelTabs = [
   { id: "gt1200", label: "GT1200" },
 ];
 
-const GTSeries = () => {
+const comparisonRows = [
+  { name: "GT1000", tagline: "เริ่มต้นคุ้มค่า", cpu: "Celeron N2920/N3520", ram: "DDR3L 4–8GB", com: 2, usb: 6, lan: 2, gpio: false, sim: false, display: "VGA+HDMI", price: "15,990", cat: "entry", gen: "Gen 4" },
+  { name: "GT1200", tagline: "คอมแพกต์ ดีไซน์ใหม่", cpu: "i3-6157U / i5 / i7", ram: "DDR3L–DDR4 64GB", com: 2, usb: 6, lan: 2, gpio: false, sim: false, display: "HDMI", price: "สอบถาม", cat: "premium", gen: "Gen 6–8" },
+  { name: "GT1400", tagline: "4 LAN DDR5 สุดแกร่ง", cpu: "i5-8305G / i7-12650HX / i7-13650HX", ram: "DDR4/DDR5 64GB", com: 2, usb: 6, lan: 4, gpio: false, sim: false, display: "HDMI", price: "28,990", cat: "premium", gen: "Gen 8–13" },
+  { name: "GT2000", tagline: "ยอดนิยม 8 USB", cpu: "Celeron 1037U / i5-3317U", ram: "DDR3L 4GB", com: 4, usb: 8, lan: 2, gpio: false, sim: false, display: "VGA+HDMI", price: "15,990", cat: "entry", gen: "Gen 3" },
+  { name: "GT3000", tagline: "6 COM หลากหลาย CPU", cpu: "Celeron / i3 / i5 / i7", ram: "DDR3L 4GB", com: 6, usb: 6, lan: 2, gpio: false, sim: false, display: "VGA+HDMI", price: "สอบถาม", cat: "standard", gen: "Gen 3–4" },
+  { name: "GT4000", tagline: "GPIO + VESA Mount", cpu: "i3 / i5-4200U / i7-4500U", ram: "DDR3L 4–8GB", com: 6, usb: 8, lan: 2, gpio: true, sim: false, display: "VGA+HDMI", price: "24,990", cat: "standard", gen: "Gen 4" },
+  { name: "GT4500", tagline: "DDR4 + SIM 4G/5G", cpu: "i3-6006U / i5-7260U / i5-8250U / i7-8550U", ram: "DDR4 4–8GB", com: 6, usb: 8, lan: 2, gpio: false, sim: true, display: "VGA+HDMI", price: "21,900", cat: "standard", gen: "Gen 6–8" },
+  { name: "GT5000", tagline: "GPIO + SIM IoT Ready", cpu: "i5-4200U / i7-4500U", ram: "DDR3L 4–8GB", com: 6, usb: 8, lan: 2, gpio: true, sim: true, display: "VGA+HDMI", price: "19,490", cat: "standard", gen: "Gen 4" },
+  { name: "GT6000", tagline: "Triple Display DDR4", cpu: "Core i3/i5/i7 Gen 8–10", ram: "DDR4 สูงสุด 64GB", com: 2, usb: 6, lan: 2, gpio: false, sim: false, display: "HDMI×2+DP", price: "สอบถาม", cat: "standard", gen: "Gen 8–10" },
+  { name: "GT7000", tagline: "DDR4 ทนทุกโรงงาน", cpu: "i3 / i5 / i7 (DDR4)", ram: "DDR4 4–32GB", com: 6, usb: 6, lan: 2, gpio: false, sim: false, display: "VGA+HDMI", price: "สอบถาม", cat: "high", gen: "Gen 6–8" },
+  { name: "GT8000", tagline: "Dual HDMI + SIM 4G", cpu: "i5-1035G1 / i7-10710U", ram: "DDR4 สูงสุด 64GB", com: 2, usb: 6, lan: 2, gpio: false, sim: true, display: "HDMI×2", price: "สอบถาม", cat: "high", gen: "Gen 10" },
+  { name: "GT9000", tagline: "3 HDMI 6 COM SIM 4G", cpu: "i5-10200H / i7-10750H / i5-1235U / i7-1255U", ram: "DDR4/DDR5 32GB", com: 6, usb: 8, lan: 2, gpio: false, sim: true, display: "HDMI×3", price: "25,290", cat: "high", gen: "Gen 10–12" },
+  { name: "GT1300", tagline: "3 HDMI · 6 COM · GPIO", cpu: "i5-8400H / i7-8750H / i5-10200H / i7-10750H", ram: "DDR4 64GB", com: 6, usb: 6, lan: 2, gpio: true, sim: false, display: "HDMI×3", price: "สอบถาม", cat: "high", gen: "Gen 8–10" },
+];
+
+const comOptions = [2, 4, 6];
+const genOptions = ["Gen 3", "Gen 4", "Gen 6–8", "Gen 8–10", "Gen 10", "Gen 10–12", "Gen 8–13"];
+
+const ComparisonTable = ({ handleTabChange }: { handleTabChange: (tab: string) => void }) => {
+  const [filterCom, setFilterCom] = useState<number | null>(null);
+  const [filterGpio, setFilterGpio] = useState<boolean | null>(null);
+  const [filterSim, setFilterSim] = useState<boolean | null>(null);
+  const [filterGen, setFilterGen] = useState<string | null>(null);
+  const [searchText, setSearchText] = useState("");
+
+  const hasActiveFilter = filterCom !== null || filterGpio !== null || filterSim !== null || filterGen !== null || searchText.length > 0;
+
+  const clearFilters = () => {
+    setFilterCom(null);
+    setFilterGpio(null);
+    setFilterSim(null);
+    setFilterGen(null);
+    setSearchText("");
+  };
+
+  const filtered = comparisonRows.filter((row) => {
+    if (filterCom !== null && row.com < filterCom) return false;
+    if (filterGpio === true && !row.gpio) return false;
+    if (filterSim === true && !row.sim) return false;
+    if (filterGen !== null && !row.gen.includes(filterGen.replace("Gen ", ""))) return false;
+    if (searchText.length > 0) {
+      const q = searchText.toLowerCase();
+      if (!row.name.toLowerCase().includes(q) && !row.cpu.toLowerCase().includes(q) && !row.tagline.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+
+  return (
+    <div>
+      <div className="text-center mb-8">
+        <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">Quick Compare</span>
+        <h3 className="text-2xl md:text-3xl font-display font-bold">
+          เปรียบเทียบ<span className="text-gradient">ทุกรุ่น</span>
+        </h3>
+        <p className="text-muted-foreground mt-2 text-sm max-w-xl mx-auto">
+          กรองตามคุณสมบัติที่ต้องการ — เลือกรุ่นที่ตรงกับงานของคุณ
+        </p>
+      </div>
+
+      {/* Filter Bar */}
+      <div className="card-surface rounded-2xl p-4 md:p-5 mb-6">
+        <div className="flex items-center gap-2 mb-3">
+          <Filter size={16} className="text-primary" />
+          <span className="text-sm font-bold text-foreground">กรองสเปก</span>
+          {hasActiveFilter && (
+            <button onClick={clearFilters} className="ml-auto flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
+              <X size={14} /> ล้างตัวกรอง
+            </button>
+          )}
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          {/* Search */}
+          <div className="col-span-2 md:col-span-1">
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">ค้นหา</label>
+            <div className="relative">
+              <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="รุ่น, CPU..."
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                className="w-full pl-8 pr-3 py-2 rounded-lg bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:ring-2 focus:ring-primary/30"
+              />
+            </div>
+          </div>
+
+          {/* COM Filter */}
+          <div>
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">COM ขั้นต่ำ</label>
+            <div className="flex gap-1">
+              {comOptions.map((n) => (
+                <button
+                  key={n}
+                  onClick={() => setFilterCom(filterCom === n ? null : n)}
+                  className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
+                    filterCom === n
+                      ? "bg-primary text-primary-foreground shadow-md"
+                      : "bg-background border border-border text-muted-foreground hover:border-primary/40"
+                  }`}
+                >
+                  ≥{n}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* GPIO Filter */}
+          <div>
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">GPIO</label>
+            <button
+              onClick={() => setFilterGpio(filterGpio === true ? null : true)}
+              className={`w-full py-2 rounded-lg text-xs font-bold transition-all ${
+                filterGpio === true
+                  ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/40"
+                  : "bg-background border border-border text-muted-foreground hover:border-primary/40"
+              }`}
+            >
+              {filterGpio === true ? "✓ มี GPIO" : "มี GPIO"}
+            </button>
+          </div>
+
+          {/* SIM Filter */}
+          <div>
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">SIM / 4G-5G</label>
+            <button
+              onClick={() => setFilterSim(filterSim === true ? null : true)}
+              className={`w-full py-2 rounded-lg text-xs font-bold transition-all ${
+                filterSim === true
+                  ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/40"
+                  : "bg-background border border-border text-muted-foreground hover:border-primary/40"
+              }`}
+            >
+              {filterSim === true ? "✓ รองรับ SIM" : "รองรับ SIM"}
+            </button>
+          </div>
+
+          {/* CPU Gen Filter */}
+          <div className="col-span-2 md:col-span-1">
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">CPU Generation</label>
+            <select
+              value={filterGen || ""}
+              onChange={(e) => setFilterGen(e.target.value || null)}
+              className="w-full py-2 px-3 rounded-lg bg-background border border-border text-sm text-foreground outline-none focus:ring-2 focus:ring-primary/30"
+            >
+              <option value="">ทั้งหมด</option>
+              {genOptions.map((g) => (
+                <option key={g} value={g}>{g}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Active filter summary */}
+        {hasActiveFilter && (
+          <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border">
+            <span className="text-xs text-muted-foreground">แสดง</span>
+            <span className="text-xs font-bold text-primary">{filtered.length}</span>
+            <span className="text-xs text-muted-foreground">จาก {comparisonRows.length} รุ่น</span>
+          </div>
+        )}
+      </div>
+
+      {/* Category Legend */}
+      <div className="flex flex-wrap justify-center gap-3 mb-6">
+        {[
+          { color: "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30", label: "เริ่มต้น / คุ้มค่า" },
+          { color: "bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/30", label: "มาตรฐาน / ยอดนิยม" },
+          { color: "bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30", label: "สเปกสูง / งานหนัก" },
+          { color: "bg-purple-500/20 text-purple-600 dark:text-purple-400 border-purple-500/30", label: "Premium / ล่าสุด" },
+        ].map((cat) => (
+          <span key={cat.label} className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${cat.color}`}>
+            {cat.label}
+          </span>
+        ))}
+      </div>
+
+      <div className="card-surface overflow-hidden rounded-2xl">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border bg-muted/50">
+                <th className="text-left p-4 font-bold text-foreground sticky left-0 bg-muted/50 min-w-[100px]">รุ่น</th>
+                <th className="text-left p-4 font-bold text-foreground min-w-[120px]">จุดเด่น</th>
+                <th className="text-left p-4 font-bold text-foreground min-w-[180px]">CPU</th>
+                <th className="text-left p-4 font-bold text-foreground min-w-[100px]">RAM</th>
+                <th className="text-center p-4 font-bold text-foreground">COM</th>
+                <th className="text-center p-4 font-bold text-foreground">USB</th>
+                <th className="text-center p-4 font-bold text-foreground">LAN</th>
+                <th className="text-center p-4 font-bold text-foreground">GPIO</th>
+                <th className="text-center p-4 font-bold text-foreground">SIM</th>
+                <th className="text-center p-4 font-bold text-foreground">Display</th>
+                <th className="text-right p-4 font-bold text-foreground min-w-[110px]">เริ่มต้น (฿)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.length === 0 ? (
+                <tr>
+                  <td colSpan={11} className="p-12 text-center">
+                    <div className="text-muted-foreground">
+                      <Filter size={32} className="mx-auto mb-3 opacity-30" />
+                      <p className="font-semibold">ไม่พบรุ่นที่ตรงกับตัวกรอง</p>
+                      <p className="text-xs mt-1">ลองปรับเงื่อนไขหรือ<button onClick={clearFilters} className="text-primary underline ml-1">ล้างตัวกรอง</button></p>
+                    </div>
+                  </td>
+                </tr>
+              ) : filtered.map((row) => {
+                const catStyle = row.cat === "entry"
+                  ? "bg-emerald-500/5 hover:bg-emerald-500/10"
+                  : row.cat === "standard"
+                  ? "bg-blue-500/5 hover:bg-blue-500/10"
+                  : row.cat === "high"
+                  ? "bg-amber-500/5 hover:bg-amber-500/10"
+                  : "bg-purple-500/5 hover:bg-purple-500/10";
+                const catBadge = row.cat === "entry"
+                  ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"
+                  : row.cat === "standard"
+                  ? "bg-blue-500/20 text-blue-600 dark:text-blue-400"
+                  : row.cat === "high"
+                  ? "bg-amber-500/20 text-amber-600 dark:text-amber-400"
+                  : "bg-purple-500/20 text-purple-600 dark:text-purple-400";
+                return (
+                  <tr
+                    key={row.name}
+                    className={`border-b border-border/50 transition-colors cursor-pointer ${catStyle}`}
+                    onClick={() => handleTabChange(row.name.toLowerCase())}
+                  >
+                    <td className="p-4 sticky left-0 font-bold text-foreground" style={{ background: 'inherit' }}>
+                      <div className="flex flex-col gap-1">
+                        <span className="text-base">{row.name}</span>
+                        <span className={`inline-block w-fit px-2 py-0.5 rounded-full text-[10px] font-bold ${catBadge}`}>
+                          {row.gen}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="p-4">
+                      <span className="text-xs text-muted-foreground leading-tight block">{row.tagline}</span>
+                    </td>
+                    <td className="p-4">
+                      <span className="text-xs text-foreground font-mono leading-tight block">{row.cpu}</span>
+                    </td>
+                    <td className="p-4">
+                      <span className="text-xs text-muted-foreground">{row.ram}</span>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold ${
+                        row.com >= 8 ? "bg-amber-500/20 text-amber-600 dark:text-amber-400" :
+                        row.com >= 6 ? "bg-blue-500/20 text-blue-600 dark:text-blue-400" :
+                        "bg-muted text-muted-foreground"
+                      }`}>{row.com}</span>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold ${
+                        row.usb >= 8 ? "bg-amber-500/20 text-amber-600 dark:text-amber-400" :
+                        "bg-muted text-muted-foreground"
+                      }`}>{row.usb}</span>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold ${
+                        row.lan >= 4 ? "bg-purple-500/20 text-purple-600 dark:text-purple-400" :
+                        "bg-muted text-muted-foreground"
+                      }`}>{row.lan}</span>
+                    </td>
+                    <td className="p-4 text-center">
+                      {row.gpio ? (
+                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold">✓</span>
+                      ) : (
+                        <span className="text-muted-foreground/40">—</span>
+                      )}
+                    </td>
+                    <td className="p-4 text-center">
+                      {row.sim ? (
+                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold">✓</span>
+                      ) : (
+                        <span className="text-muted-foreground/40">—</span>
+                      )}
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="text-xs text-muted-foreground">{row.display}</span>
+                    </td>
+                    <td className="p-4 text-right">
+                      <span className={`font-bold text-sm ${row.price === "สอบถาม" ? "text-muted-foreground" : "text-primary"}`}>
+                        {row.price === "สอบถาม" ? "สอบถาม" : `฿${row.price}`}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Decision Helper */}
+        <div className="p-6 bg-muted/30 border-t border-border">
+          <h4 className="font-bold text-foreground mb-4 text-sm">🎯 เลือกรุ่นไหนดี?</h4>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="space-y-2">
+              <div className="text-xs font-bold text-emerald-600 dark:text-emerald-400">งบจำกัด / งานเบา</div>
+              <div className="text-xs text-muted-foreground">GT1000 หรือ GT2000 — Celeron ประหยัด เพียงพอสำหรับ POS, Signage, ระบบคิว</div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-xs font-bold text-blue-600 dark:text-blue-400">ต้องการ COM เยอะ / IoT</div>
+              <div className="text-xs text-muted-foreground">GT3000–GT5000 — 6 COM + GPIO/SIM เหมาะเชื่อมเซ็นเซอร์ PLC หลายตัว</div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-xs font-bold text-amber-600 dark:text-amber-400">สเปกแรง / งานหนัก</div>
+              <div className="text-xs text-muted-foreground">GT7000–GT9000 — DDR4/DDR5 + i5/i7 Gen 10–12 สำหรับ SCADA, AI Edge, Vision</div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-xs font-bold text-purple-600 dark:text-purple-400">เน็ตเวิร์ก / ดีไซน์ใหม่</div>
+              <div className="text-xs text-muted-foreground">GT1400 — 4 LAN + DDR5 สำหรับ Firewall, Router หรืองาน Network Appliance</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p className="text-center text-xs text-muted-foreground mt-4">
+        * ราคาขึ้นอยู่กับ CPU, RAM, Storage ที่เลือก — คลิกที่แถวเพื่อดูรายละเอียดแต่ละรุ่น
+      </p>
+    </div>
+  );
+};
+
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "overview");
 
