@@ -678,7 +678,7 @@ const RuggedTablet = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {tpcSeries.map((p) => (
-              <ProductCard key={p.id} product={{ ...p, image: undefined }} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={{ ...p, image: undefined }} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
         </section>
