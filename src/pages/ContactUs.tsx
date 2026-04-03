@@ -79,6 +79,14 @@ const ContactUs = () => {
         message: form.message,
       });
       if (error) throw error;
+
+      if (form.subscribe && form.email) {
+        await (supabase.from as any)("subscribers").insert({
+          email: form.email,
+          name: form.name || null,
+          source: "contact_form",
+        }).then(() => {});
+      }
       setSubmitted(true);
       toast({ title: "ส่งข้อความเรียบร้อย!", description: "ทีมงานจะตอบกลับภายใน 24 ชม." });
     } catch (err: any) {
