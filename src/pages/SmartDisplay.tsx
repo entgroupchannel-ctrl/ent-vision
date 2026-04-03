@@ -575,6 +575,50 @@ const SmartDisplay = () => {
                 </div>
               </div>
 
+              {/* Real Kiosk Photo Gallery */}
+              <div className="mb-10">
+                <h3 className="text-2xl font-display font-bold text-foreground mb-2 text-center">ผลงานจริงจากโรงงาน</h3>
+                <p className="text-muted-foreground text-center text-sm mb-6">ตู้ KIOSK ที่ออกแบบและผลิตให้ลูกค้าในหลากหลายอุตสาหกรรม</p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {[
+                    "https://static.wixstatic.com/media/005637_92bc43868f714520858954cac48e4dab~mv2.jpg/v1/fill/w_576,h_300,al_t,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_92bc43868f714520858954cac48e4dab~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_b26918d72c2b4ef0a47a5b77d05407e1~mv2.jpg/v1/crop/x_548,y_405,w_384,h_300,q_80,enc_avif,quality_auto/005637_b26918d72c2b4ef0a47a5b77d05407e1~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_3273fb00d2994fb8b60e033e95139fd4~mv2.jpg/v1/fill/w_384,h_300,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_3273fb00d2994fb8b60e033e95139fd4~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_795624203e2d469282900aab60a78bc3~mv2.jpg/v1/fill/w_576,h_300,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_795624203e2d469282900aab60a78bc3~mv2.jpg",
+                  ].map((img, i) => (
+                    <div key={i} className="rounded-xl overflow-hidden bg-secondary/30 border border-border aspect-[4/3]">
+                      <img src={img} alt={`KIOSK ผลงานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Use Case Photos from Source */}
+              <div className="mb-10">
+                <h3 className="text-2xl font-display font-bold text-foreground mb-2 text-center">ตัวอย่างการใช้งานจริง</h3>
+                <p className="text-muted-foreground text-center text-sm mb-6">KIOSK ถูกนำไปใช้งานจริงในหลากหลายสถานที่</p>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {[
+                    { image: "https://static.wixstatic.com/media/005637_e66f056de7634648bb47150eec24ea4c~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/new-normal-after-covid-epidemic-asian-female-searching-information-with-digital-touch-scre.jpg", title: "Visitor Management", desc: "ระบบลงทะเบียนผู้มาติดต่อ ถ่ายภาพ พิมพ์บัตร" },
+                    { image: "https://static.wixstatic.com/media/005637_c1f3742fc7e04f11aa6d39170e38dee1~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/well-dressed-executives-movement.jpg", title: "Queue Management", desc: "ระบบจัดคิวอัจฉริยะ โรงพยาบาล ธนาคาร สำนักงาน" },
+                    { image: "https://static.wixstatic.com/media/005637_ea5bf2db35064644ac58160f3b84a6d0~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/young-woman-consulting-station-map-city.jpg", title: "Wayfinding & Directory", desc: "แผนที่นำทาง ค้นหาข้อมูลสถานที่" },
+                    { image: "https://static.wixstatic.com/media/005637_c9a89ea001f5437aa6c52df854db3ba7~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/buying-food-supermarket-during-corona-virus-global-pandemic.jpg", title: "Self-Order & Payment", desc: "สั่งอาหาร เลือกเมนู ชำระเงิน" },
+                    { image: "https://static.wixstatic.com/media/005637_7a76d52860b5470ea47dfc44ff6606a6~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/M_S-New-03_516_516_0_0_800_800.jpg", title: "Brand & Promotion", desc: "จอโฆษณาแบบอินเทอร์แอคทีฟ งานอีเวนต์" },
+                    { image: "https://static.wixstatic.com/media/005637_fcb8f39e5ea542a0969d58555633398a~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/eBOL-driver-kiosk.jpg", title: "Document Check-in", desc: "เช็คอิน ลงทะเบียน กรอกเอกสาร" },
+                  ].map((uc) => (
+                    <div key={uc.title} className="card-surface overflow-hidden hover:border-primary/30 transition-all group">
+                      <div className="aspect-[3/2] overflow-hidden">
+                        <img src={uc.image} alt={uc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                      </div>
+                      <div className="p-4">
+                        <h4 className="font-bold text-foreground text-sm mb-1">{uc.title}</h4>
+                        <p className="text-xs text-muted-foreground">{uc.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Kiosk models grid */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
                 {[
@@ -609,6 +653,26 @@ const SmartDisplay = () => {
                       <f.icon className="text-primary mb-3" size={28} />
                       <h4 className="font-bold text-foreground mb-1 text-sm">{f.title}</h4>
                       <p className="text-xs text-muted-foreground leading-relaxed">{f.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Key Features Strip */}
+              <div className="rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20 p-6 mb-10">
+                <h3 className="text-sm font-bold text-foreground mb-4">ข้อดีของการใช้ Kiosk จาก ENT Group</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {[
+                    "รองรับการติดตั้งภายในและภายนอกอาคาร",
+                    "กันฝุ่น / กันน้ำ / ปลอดภัย ติดตั้งง่าย",
+                    "โครงสร้างเหล็กพร้อมการเคลือบสีฝุ่นทนทาน",
+                    "รูนำภายในเพื่อสลักลงเมื่อจำเป็น",
+                    "คุณสมบัติป้องกันการงัดแงะ ไม่ต้องใช้สกรู",
+                    "บำรุงรักษาง่ายด้วยส่วนประกอบที่สลับง่าย",
+                  ].map((feat) => (
+                    <div key={feat} className="flex items-start gap-2">
+                      <span className="text-primary mt-0.5">✓</span>
+                      <span className="text-sm text-foreground">{feat}</span>
                     </div>
                   ))}
                 </div>
@@ -660,14 +724,49 @@ const SmartDisplay = () => {
                       </a>
                     </div>
                   </div>
-                  <div className="flex justify-center">
+                  <div className="flex gap-4 justify-center">
                     <img
-                      src="https://static.wixstatic.com/media/005637_bf1ac53c95244bfc9806b0757ab39272~mv2.png/v1/crop/x_425,y_110,w_626,h_999/fill/w_400,h_640,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2.png"
-                      alt="KIOSK-GK2101"
-                      className="max-h-[450px] object-contain drop-shadow-xl"
+                      src="https://static.wixstatic.com/media/005637_bf1ac53c95244bfc9806b0757ab39272~mv2.png/v1/crop/x_425,y_110,w_626,h_999/fill/w_280,h_450,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2.png"
+                      alt="KIOSK-GK2101 ด้านหน้า"
+                      className="max-h-[400px] object-contain drop-shadow-xl"
+                      loading="lazy"
+                    />
+                    <img
+                      src="https://static.wixstatic.com/media/005637_b48ec7c382e549ad853ae993207d740e~mv2.png/v1/crop/x_407,y_68,w_666,h_1041/fill/w_280,h_450,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%87.png"
+                      alt="KIOSK-GK2101 ด้านหลัง"
+                      className="max-h-[400px] object-contain drop-shadow-xl"
                       loading="lazy"
                     />
                   </div>
+                </div>
+              </div>
+
+              {/* KIOSK Model Product Gallery */}
+              <div className="mb-10">
+                <h3 className="text-2xl font-display font-bold text-foreground mb-2 text-center">KIOSK รุ่นพร้อมจำหน่าย</h3>
+                <p className="text-muted-foreground text-center text-sm mb-6">เลือกขนาดและสไตล์ที่เหมาะกับธุรกิจของคุณ</p>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {[
+                    { image: "https://static.wixstatic.com/media/005637_5e95b495af4c440f9b14b562ea433c3f~mv2.jpg/v1/crop/x_52,y_49,w_689,h_1376/fill/w_200,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/kio215vrt-visitor-management-kiosk.jpg", title: "KIO-215VRT", desc: "Visitor Management Kiosk — จอ 21.5\" ตั้งพื้น" },
+                    { image: "https://static.wixstatic.com/media/005637_8df769ac52f944c3a1670d2abe60f468~mv2.jpg/v1/fill/w_150,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/KIO190-modelpic.jpg", title: "KIO-190", desc: "Queue & Self-Service Kiosk — จอ 19\" สไตล์บาง" },
+                    { image: "https://static.wixstatic.com/media/005637_3a8d730e167e49768b023123fd3984bd~mv2.jpg/v1/fill/w_400,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ad1KIOSK.jpg", title: "KIOSK Custom", desc: "สั่งผลิตตามความต้องการ — ทุกขนาด ทุกสไตล์" },
+                  ].map((k) => (
+                    <div key={k.title} className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
+                      <div className="bg-secondary/30 flex items-center justify-center h-72 overflow-hidden">
+                        <img src={k.image} alt={k.title} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500 p-4" loading="lazy" />
+                      </div>
+                      <div className="p-5">
+                        <h4 className="font-bold text-foreground mb-1">{k.title}</h4>
+                        <p className="text-sm text-muted-foreground mb-3">{k.desc}</p>
+                        <button
+                          onClick={() => setQuoteOpen(true)}
+                          className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline"
+                        >
+                          <FileText size={14} /> ขอใบเสนอราคา
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -719,6 +818,21 @@ const SmartDisplay = () => {
                     <p className="text-xs text-muted-foreground">{t.desc}</p>
                   </div>
                 ))}
+              </div>
+
+              {/* Installation Gallery */}
+              <div className="mb-10">
+                <h3 className="text-xl font-display font-bold text-foreground mb-4 text-center">ภาพตัวอย่างการติดตั้ง</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    "https://static.wixstatic.com/media/005637_d6d438173a884b35819d4af4c11b8eab~mv2.jpg/v1/fill/w_732,h_274,q_90,enc_avif,quality_auto/005637_d6d438173a884b35819d4af4c11b8eab~mv2.jpg",
+                    "https://static.wixstatic.com/media/005637_b94be3cae5d74c24bf620dfd192c2738~mv2.jpg/v1/fill/w_732,h_274,q_90,enc_avif,quality_auto/005637_b94be3cae5d74c24bf620dfd192c2738~mv2.jpg",
+                  ].map((img, i) => (
+                    <div key={i} className="rounded-xl overflow-hidden border border-border">
+                      <img src={img} alt={`ตัวอย่างการติดตั้ง ${i + 1}`} className="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Case Study */}
