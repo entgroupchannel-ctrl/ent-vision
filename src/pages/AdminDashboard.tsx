@@ -175,6 +175,7 @@ const AdminDashboard = () => {
           {([
             { id: "contacts" as Tab, label: "ติดต่อเข้ามา", count: contacts.length },
             { id: "quotes" as Tab, label: "ใบเสนอราคา", count: quotes.length },
+            { id: "chatleads" as Tab, label: "AI Chat Leads", count: chatLeads.length },
             { id: "subscribers" as Tab, label: "สมาชิก", count: subscribers.length },
           ] as const).map((t) => (
             <button
