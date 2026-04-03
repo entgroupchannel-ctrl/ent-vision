@@ -391,22 +391,6 @@ const EPCSeries = () => {
             </div>
           </div>
 
-          {/* Key highlights strip */}
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mb-4">
-            {[
-              { label: "เมนบอร์ดอุตสาหกรรมแท้", icon: "✨" },
-              { label: "ผลิตโดยตรงจากโรงงาน", icon: "✨" },
-              { label: "ขัดข้อง 0.5%/ปี", icon: "✨" },
-              { label: "ปรับแต่งเฉพาะลูกค้า", icon: "✨" },
-              { label: "รับประกัน 1-3 ปี", icon: "✨" },
-              { label: "มาตรฐานสากลครบ", icon: "✨" },
-            ].map((item, i) => (
-              <div key={i} className="card-surface p-3 text-center text-xs font-medium text-foreground">
-                <span className="block text-lg mb-1">{item.icon}</span>
-                {item.label}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 
