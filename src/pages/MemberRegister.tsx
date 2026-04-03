@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import {
   UserPlus, Mail, Lock, Eye, EyeOff, Building2, Phone, MapPin,
-  ArrowLeft, Briefcase, Factory,
+  ArrowLeft, Briefcase, Factory, Camera, Sparkles, Loader2,
 } from "lucide-react";
 import FooterCompact from "@/components/FooterCompact";
 
@@ -28,6 +28,8 @@ const MemberRegister = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [scanning, setScanning] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -46,6 +48,45 @@ const MemberRegister = () => {
 
   const inputClass =
     "w-full px-4 py-2.5 rounded-xl border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all";
+
+  // Business card scan
+  const handleCardScan = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setScanning(true);
+    try {
+      const reader = new FileReader();
+      const base64 = await new Promise<string>((resolve) => {
+        reader.onload = () => resolve(reader.result as string);
+        reader.readAsDataURL(file);
+      });
+
+      const { data, error } = await supabase.functions.invoke("scan-business-card", {
+        body: { image: base64 },
+      });
+
+      if (error) throw error;
+
+      const info = data?.data || {};
+      setForm((prev) => ({
+        ...prev,
+        name: info.name || prev.name,
+        email: info.email || prev.email,
+        phone: info.phone || prev.phone,
+        company: info.company || prev.company,
+        position: info.position || prev.position,
+        address: info.address || prev.address,
+      }));
+
+      toast({ title: "สแกนนามบัตรสำเร็จ!", description: "ข้อมูลถูกเติมให้อัตโนมัติแล้ว" });
+    } catch (err: any) {
+      toast({ title: "สแกนไม่สำเร็จ", description: err.message || "กรุณาลองใหม่", variant: "destructive" });
+    } finally {
+      setScanning(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  }, [toast]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -150,6 +191,37 @@ const MemberRegister = () => {
               <div className="flex-1 h-px bg-border" />
               <span className="text-xs text-muted-foreground">หรือกรอกแบบฟอร์ม</span>
               <div className="flex-1 h-px bg-border" />
+            </div>
+
+            {/* Business Card Scan */}
+            <div className="relative">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={handleCardScan}
+                className="hidden"
+              />
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={scanning}
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-primary/30 bg-primary/5 text-primary text-sm font-semibold hover:bg-primary/10 hover:border-primary/50 transition-all disabled:opacity-50"
+              >
+                {scanning ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    กำลังอ่านนามบัตร...
+                  </>
+                ) : (
+                  <>
+                    <Camera size={16} />
+                    <Sparkles size={14} />
+                    ถ่ายรูป / อัปโหลดนามบัตร — เติมข้อมูลอัตโนมัติ
+                  </>
+                )}
+              </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
