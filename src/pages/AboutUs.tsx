@@ -4,7 +4,7 @@ import {
   Building2, Rocket, Globe, ShoppingCart, Monitor, Cpu, TabletSmartphone,
   Network, Package, TrendingUp,
 } from "lucide-react";
-import Footer from "@/components/Footer";
+import FooterCompact from "@/components/FooterCompact";
 import heroGrowth from "@/assets/about-hero-growth.jpg";
 import entLogoFull from "@/assets/entgroup-logo-full.jpg";
 
@@ -308,7 +308,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      <Footer />
+      <FooterCompact />
     </div>
   );
 };
