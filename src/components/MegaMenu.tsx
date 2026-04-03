@@ -255,13 +255,13 @@ const MegaMenu = ({
           onMouseLeave={handleLeave}
         >
           {/* Panel */}
-          <div className="rounded-xl bg-[hsl(220,20%,10%)] border border-white/10 shadow-2xl animate-fade-in overflow-hidden">
+          <div className="rounded-xl bg-gradient-to-b from-white via-gray-50 to-gray-100 dark:from-[hsl(220,20%,13%)] dark:via-[hsl(220,18%,10%)] dark:to-[hsl(220,20%,8%)] border border-gray-200 dark:border-white/10 shadow-2xl animate-fade-in overflow-hidden">
             <div className="p-5">
               {/* Category header */}
               <div className="flex items-center gap-2 mb-4">
                 <active.icon size={16} className="text-primary" />
-                <h3 className="text-white font-bold text-sm">{active.label}</h3>
-                <span className="text-white/30 text-xs">— {active.tagline}</span>
+                <h3 className="text-foreground font-bold text-sm">{active.label}</h3>
+                <span className="text-muted-foreground text-xs">— {active.tagline}</span>
               </div>
 
               <div className="grid grid-cols-12 gap-5">
@@ -285,10 +285,10 @@ const MegaMenu = ({
                         />
                       </div>
                     )}
-                    <h4 className="text-sm font-bold text-white mb-1 group-hover:text-primary transition-colors">
+                    <h4 className="text-sm font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
                       {active.featured.title}
                     </h4>
-                    <p className="text-[11px] text-white/40 leading-relaxed mb-2 line-clamp-2">
+                    <p className="text-[11px] text-muted-foreground leading-relaxed mb-2 line-clamp-2">
                       {active.featured.desc}
                     </p>
                     <span className="inline-flex items-center gap-1 text-primary text-xs font-semibold group-hover:gap-1.5 transition-all">
@@ -301,7 +301,7 @@ const MegaMenu = ({
                 <div className={`col-span-9 grid grid-cols-3 gap-4`}>
                   {active.columns.map((col) => (
                     <div key={col.heading}>
-                      <h5 className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-2">
+                      <h5 className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60 mb-2">
                         {col.heading}
                       </h5>
                       <ul className="space-y-0.5">
@@ -310,9 +310,9 @@ const MegaMenu = ({
                             <Link
                               to={link.href}
                               onClick={() => { setActiveMenu(null); onNavigate?.(); }}
-                              className="group flex items-center gap-1.5 py-1.5 px-2 -mx-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                              className="group flex items-center gap-1.5 py-1.5 px-2 -mx-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
                             >
-                              <ChevronRight size={10} className="text-white/20 group-hover:text-primary transition-colors" />
+                              <ChevronRight size={10} className="text-muted-foreground/40 group-hover:text-primary transition-colors" />
                               <span className="text-xs font-medium">{link.label}</span>
                               {link.hot && (
                                 <span className="px-1 py-0.5 rounded text-[7px] font-bold uppercase bg-red-500/20 text-red-400 border border-red-500/30">
@@ -337,8 +337,8 @@ const MegaMenu = ({
                         className="group col-span-1 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/15 p-3 flex flex-col justify-center hover:border-primary/30 transition-all"
                       >
                         <BannerIcon size={18} className="text-primary mb-2" />
-                        <p className="text-xs font-bold text-white mb-1">{banner.title}</p>
-                        <p className="text-[10px] text-white/40 leading-relaxed mb-2">{banner.desc}</p>
+                        <p className="text-xs font-bold text-foreground mb-1">{banner.title}</p>
+                        <p className="text-[10px] text-muted-foreground leading-relaxed mb-2">{banner.desc}</p>
                         <span className="text-[10px] text-primary font-semibold group-hover:underline flex items-center gap-1">
                           เกี่ยวกับเรา <ArrowRight size={9} />
                         </span>
