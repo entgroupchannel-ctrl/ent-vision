@@ -6,6 +6,12 @@ import {
   Droplets, UtensilsCrossed
 } from "lucide-react";
 
+import imgGT from "@/assets/product-gt-series.jpg";
+import imgFirewall from "@/assets/product-firewall.jpg";
+import imgSmart from "@/assets/product-smart-display.jpg";
+import imgRugged from "@/assets/product-rugged.jpg";
+import imgVCloud from "@/assets/product-vcloudpoint.jpg";
+
 /* ═══════ Menu Data ═══════ */
 const menuCategories = [
   {
