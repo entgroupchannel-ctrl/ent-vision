@@ -12,6 +12,12 @@ import imgSmart from "@/assets/product-smart-display.jpg";
 import imgRugged from "@/assets/product-rugged.jpg";
 import imgVCloud from "@/assets/product-vcloudpoint.jpg";
 
+import bannerIndustrial from "@/assets/banner-industrial.jpg";
+import bannerNetwork from "@/assets/banner-network.jpg";
+import bannerDisplay from "@/assets/banner-display.jpg";
+import bannerRugged from "@/assets/banner-rugged.jpg";
+import bannerSolution from "@/assets/banner-solution.jpg";
+
 /* ═══════ Menu Data ═══════ */
 const menuCategories = [
   {
