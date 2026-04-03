@@ -69,6 +69,7 @@ const App = () => (
             </Routes>
             <FloatingContact />
             <SocialRibbon />
+            <AIChatWidget />
           </BrowserRouter>
         </TooltipProvider>
       </AuthProvider>
