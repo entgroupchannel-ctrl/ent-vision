@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import {
   ArrowLeft, Shield, Wifi, Network, Cpu, Wind, Zap, Server,
   ChevronDown, Download, ExternalLink, Factory, Building2,
-  Stethoscope, Building, Globe, Landmark, MonitorSmartphone
+  Stethoscope, Building, Globe, Landmark, MonitorSmartphone,
+  Filter, X, Search
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
@@ -365,6 +366,359 @@ const ModelCard = ({ model }: { model: FirewallModel }) => {
 };
 
 /* ═══════════════════════════════════════════
+   COMPARISON TABLE DATA
+   ═══════════════════════════════════════════ */
+
+interface CompRow {
+  name: string;
+  tier: Tier;
+  cpu: string;
+  ram: string;
+  lanCount: number;
+  lanSpeed: string;
+  cooling: "fanless" | "fan";
+  sim: boolean;
+  display: string;
+  aesni: boolean;
+  formFactor: string;
+  pdf?: string;
+}
+
+const compRows: CompRow[] = [
+  { name: "GT196L", tier: "entry", cpu: "Celeron J1900", ram: "DDR3L 8GB", lanCount: 6, lanSpeed: "1G", cooling: "fanless", sim: false, display: "VGA+HDMI", aesni: false, formFactor: "Desktop", pdf: "https://www.entgroup.co.th/_files/ugd/3e5003_71ee8f3705a84e9e94bbcb8366adf413.pdf" },
+  { name: "JC6L", tier: "entry", cpu: "Celeron / i3 / i5", ram: "DDR3L/DDR4 16GB", lanCount: 2, lanSpeed: "1G", cooling: "fanless", sim: false, display: "VGA+HDMI", aesni: false, formFactor: "Desktop" },
+  { name: "GT194L-J4125", tier: "standard", cpu: "Celeron J4125", ram: "DDR4 16GB", lanCount: 4, lanSpeed: "2.5G", cooling: "fanless", sim: true, display: "VGA+HDMI", aesni: true, formFactor: "Desktop", pdf: "https://www.entgroup.co.th/_files/ugd/005637_822d9fce1dac4cd8a83514391d12d899.pdf" },
+  { name: "GT194L-N5105", tier: "standard", cpu: "N5105 / i3 / i5 / i7", ram: "DDR4 32GB", lanCount: 4, lanSpeed: "2.5G", cooling: "fanless", sim: false, display: "HDMI+DP 4K", aesni: true, formFactor: "Desktop", pdf: "https://www.entgroup.co.th/_files/ugd/005637_62c6ba289fad40c5802517a12048c9f9.pdf" },
+  { name: "Eight Net", tier: "standard", cpu: "Celeron / Atom", ram: "DDR3L 8GB", lanCount: 8, lanSpeed: "1G", cooling: "fanless", sim: false, display: "VGA+HDMI", aesni: false, formFactor: "Desktop", pdf: "https://www.entgroup.co.th/_files/ugd/005637_6173027ead324ba6a039eecba9ad5e8d.pdf" },
+  { name: "IPC056", tier: "advanced", cpu: "Intel Celeron", ram: "DDR4 16GB", lanCount: 8, lanSpeed: "1G", cooling: "fanless", sim: false, display: "—", aesni: true, formFactor: "Desktop" },
+  { name: "IPC068", tier: "advanced", cpu: "Alder Lake N100", ram: "DDR5 16GB", lanCount: 6, lanSpeed: "2.5G", cooling: "fan", sim: false, display: "—", aesni: true, formFactor: "Desktop", pdf: "https://www.entgroup.co.th/_files/ugd/0597a3_481b334d2fab416cb19251801d4a2ef1.pdf" },
+  { name: "IPC050", tier: "advanced", cpu: "Celeron / Pentium", ram: "DDR4 16GB", lanCount: 6, lanSpeed: "1G", cooling: "fanless", sim: false, display: "—", aesni: true, formFactor: "Desktop", pdf: "https://www.entgroup.co.th/_files/ugd/0597a3_cfd539daa7844ac5a31132ea4b648f7b.pdf" },
+  { name: "IPC090", tier: "enterprise", cpu: "Xeon E5 (12–18C)", ram: "DDR4 ECC 64GB", lanCount: 8, lanSpeed: "10G SFP+", cooling: "fan", sim: false, display: "VGA+HDMI", aesni: true, formFactor: "1U Rack" },
+  { name: "IPC092", tier: "enterprise", cpu: "i7/i9/Xeon", ram: "DDR4 128GB", lanCount: 8, lanSpeed: "10G SFP+", cooling: "fan", sim: false, display: "VGA+HDMI", aesni: true, formFactor: "1U/2U Rack" },
+];
+
+const lanSpeedOptions = ["1G", "2.5G", "10G SFP+"];
+const lanCountOptions = [2, 4, 6, 8];
+
+const FirewallComparisonTable = () => {
+  const [filterTier, setFilterTier] = useState<Tier | null>(null);
+  const [filterLanSpeed, setFilterLanSpeed] = useState<string | null>(null);
+  const [filterMinLan, setFilterMinLan] = useState<number | null>(null);
+  const [filterFanless, setFilterFanless] = useState<boolean | null>(null);
+  const [filterAesni, setFilterAesni] = useState<boolean | null>(null);
+  const [searchText, setSearchText] = useState("");
+
+  const hasFilter = filterTier !== null || filterLanSpeed !== null || filterMinLan !== null || filterFanless !== null || filterAesni !== null || searchText.length > 0;
+
+  const clearFilters = () => {
+    setFilterTier(null);
+    setFilterLanSpeed(null);
+    setFilterMinLan(null);
+    setFilterFanless(null);
+    setFilterAesni(null);
+    setSearchText("");
+  };
+
+  const filtered = compRows.filter((row) => {
+    if (filterTier && row.tier !== filterTier) return false;
+    if (filterLanSpeed && row.lanSpeed !== filterLanSpeed) return false;
+    if (filterMinLan && row.lanCount < filterMinLan) return false;
+    if (filterFanless === true && row.cooling !== "fanless") return false;
+    if (filterAesni === true && !row.aesni) return false;
+    if (searchText) {
+      const q = searchText.toLowerCase();
+      if (!row.name.toLowerCase().includes(q) && !row.cpu.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+
+  const tierStyle = (t: Tier) => {
+    const m = tierMeta[t];
+    return { row: t === "entry" ? "bg-emerald-500/5 hover:bg-emerald-500/10" : t === "standard" ? "bg-sky-500/5 hover:bg-sky-500/10" : t === "advanced" ? "bg-amber-500/5 hover:bg-amber-500/10" : "bg-purple-500/5 hover:bg-purple-500/10", badge: `${m.bg} ${m.color}` };
+  };
+
+  return (
+    <div>
+      <div className="text-center mb-8">
+        <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">Smart Compare</span>
+        <h2 className="text-3xl md:text-4xl font-black text-foreground">
+          เปรียบเทียบ<span className="text-primary">ทุกรุ่น</span>
+        </h2>
+        <p className="text-muted-foreground mt-2 text-sm max-w-xl mx-auto">
+          กรองตามคุณสมบัติที่ต้องการ — เลือก Firewall ที่ตรงกับเครือข่ายของคุณ
+        </p>
+      </div>
+
+      {/* Filter Bar */}
+      <div className="card-surface rounded-2xl p-4 md:p-5 mb-6">
+        <div className="flex items-center gap-2 mb-3">
+          <Filter size={16} className="text-primary" />
+          <span className="text-sm font-bold text-foreground">กรองสเปก</span>
+          {hasFilter && (
+            <button onClick={clearFilters} className="ml-auto flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
+              <X size={14} /> ล้างตัวกรอง
+            </button>
+          )}
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
+          {/* Search */}
+          <div className="col-span-2 md:col-span-1">
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">ค้นหา</label>
+            <div className="relative">
+              <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                placeholder="รุ่น, CPU..."
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                className="w-full pl-8 pr-3 py-2 rounded-lg bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:ring-2 focus:ring-primary/30"
+              />
+            </div>
+          </div>
+
+          {/* Tier */}
+          <div>
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">ระดับ</label>
+            <select
+              value={filterTier || ""}
+              onChange={(e) => setFilterTier((e.target.value as Tier) || null)}
+              className="w-full py-2 px-3 rounded-lg bg-background border border-border text-sm text-foreground outline-none focus:ring-2 focus:ring-primary/30"
+            >
+              <option value="">ทั้งหมด</option>
+              {(Object.keys(tierMeta) as Tier[]).map((t) => (
+                <option key={t} value={t}>{tierMeta[t].label} — {tierMeta[t].desc}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* LAN Speed */}
+          <div>
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">ความเร็ว LAN</label>
+            <div className="flex gap-1">
+              {lanSpeedOptions.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => setFilterLanSpeed(filterLanSpeed === s ? null : s)}
+                  className={`flex-1 py-2 rounded-lg text-[10px] font-bold transition-all ${
+                    filterLanSpeed === s
+                      ? "bg-primary text-primary-foreground shadow-md"
+                      : "bg-background border border-border text-muted-foreground hover:border-primary/40"
+                  }`}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Min LAN Ports */}
+          <div>
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">LAN ขั้นต่ำ</label>
+            <div className="flex gap-1">
+              {lanCountOptions.map((n) => (
+                <button
+                  key={n}
+                  onClick={() => setFilterMinLan(filterMinLan === n ? null : n)}
+                  className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
+                    filterMinLan === n
+                      ? "bg-primary text-primary-foreground shadow-md"
+                      : "bg-background border border-border text-muted-foreground hover:border-primary/40"
+                  }`}
+                >
+                  ≥{n}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Fanless */}
+          <div>
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">Cooling</label>
+            <button
+              onClick={() => setFilterFanless(filterFanless === true ? null : true)}
+              className={`w-full py-2 rounded-lg text-xs font-bold transition-all ${
+                filterFanless === true
+                  ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/40"
+                  : "bg-background border border-border text-muted-foreground hover:border-primary/40"
+              }`}
+            >
+              {filterFanless ? "✓ Fanless เท่านั้น" : "Fanless เท่านั้น"}
+            </button>
+          </div>
+
+          {/* AES-NI */}
+          <div>
+            <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1 block">AES-NI</label>
+            <button
+              onClick={() => setFilterAesni(filterAesni === true ? null : true)}
+              className={`w-full py-2 rounded-lg text-xs font-bold transition-all ${
+                filterAesni === true
+                  ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/40"
+                  : "bg-background border border-border text-muted-foreground hover:border-primary/40"
+              }`}
+            >
+              {filterAesni ? "✓ รองรับ AES-NI" : "รองรับ AES-NI"}
+            </button>
+          </div>
+        </div>
+
+        {hasFilter && (
+          <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border">
+            <span className="text-xs text-muted-foreground">แสดง</span>
+            <span className="text-xs font-bold text-primary">{filtered.length}</span>
+            <span className="text-xs text-muted-foreground">จาก {compRows.length} รุ่น</span>
+          </div>
+        )}
+      </div>
+
+      {/* Category Legend */}
+      <div className="flex flex-wrap justify-center gap-3 mb-6">
+        {(Object.keys(tierMeta) as Tier[]).map((t) => {
+          const m = tierMeta[t];
+          return (
+            <span key={t} className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${m.border} ${m.bg} ${m.color}`}>
+              {m.label} — {m.desc}
+            </span>
+          );
+        })}
+      </div>
+
+      {/* Table */}
+      <div className="card-surface overflow-hidden rounded-2xl">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border bg-muted/50">
+                <th className="text-left p-4 font-bold text-foreground sticky left-0 bg-muted/50 min-w-[120px]">รุ่น</th>
+                <th className="text-left p-4 font-bold text-foreground min-w-[160px]">CPU</th>
+                <th className="text-left p-4 font-bold text-foreground min-w-[100px]">RAM</th>
+                <th className="text-center p-4 font-bold text-foreground">LAN</th>
+                <th className="text-center p-4 font-bold text-foreground">ความเร็ว</th>
+                <th className="text-center p-4 font-bold text-foreground">Cooling</th>
+                <th className="text-center p-4 font-bold text-foreground">AES-NI</th>
+                <th className="text-center p-4 font-bold text-foreground">SIM</th>
+                <th className="text-center p-4 font-bold text-foreground">Display</th>
+                <th className="text-center p-4 font-bold text-foreground">Form</th>
+                <th className="text-center p-4 font-bold text-foreground min-w-[50px]">PDF</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.length === 0 ? (
+                <tr>
+                  <td colSpan={11} className="p-12 text-center">
+                    <div className="text-muted-foreground">
+                      <Filter size={32} className="mx-auto mb-3 opacity-30" />
+                      <p className="font-semibold">ไม่พบรุ่นที่ตรงกับตัวกรอง</p>
+                      <p className="text-xs mt-1">ลองปรับเงื่อนไขหรือ<button onClick={clearFilters} className="text-primary underline ml-1">ล้างตัวกรอง</button></p>
+                    </div>
+                  </td>
+                </tr>
+              ) : filtered.map((row) => {
+                const ts = tierStyle(row.tier);
+                const tm = tierMeta[row.tier];
+                return (
+                  <tr key={row.name} className={`border-b border-border/50 transition-colors ${ts.row}`}>
+                    <td className="p-4 sticky left-0 font-bold text-foreground" style={{ background: 'inherit' }}>
+                      <div className="flex flex-col gap-1">
+                        <span className="text-base">{row.name}</span>
+                        <span className={`inline-block w-fit px-2 py-0.5 rounded-full text-[10px] font-bold ${ts.badge}`}>
+                          {tm.label}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="p-4">
+                      <span className="text-xs text-foreground font-mono leading-tight block">{row.cpu}</span>
+                    </td>
+                    <td className="p-4">
+                      <span className="text-xs text-muted-foreground">{row.ram}</span>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold ${
+                        row.lanCount >= 8 ? "bg-amber-500/20 text-amber-600 dark:text-amber-400" :
+                        row.lanCount >= 6 ? "bg-sky-500/20 text-sky-600 dark:text-sky-400" :
+                        "bg-muted text-muted-foreground"
+                      }`}>{row.lanCount}</span>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-[10px] font-bold ${
+                        row.lanSpeed === "10G SFP+" ? "bg-purple-500/20 text-purple-600 dark:text-purple-400" :
+                        row.lanSpeed === "2.5G" ? "bg-sky-500/20 text-sky-600 dark:text-sky-400" :
+                        "bg-muted text-muted-foreground"
+                      }`}>{row.lanSpeed}</span>
+                    </td>
+                    <td className="p-4 text-center">
+                      {row.cooling === "fanless" ? (
+                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold">
+                          <Wind size={12} /> Fanless
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 text-[10px] font-bold">
+                          🌀 Fan
+                        </span>
+                      )}
+                    </td>
+                    <td className="p-4 text-center">
+                      {row.aesni ? (
+                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold">✓</span>
+                      ) : (
+                        <span className="text-muted-foreground/40">—</span>
+                      )}
+                    </td>
+                    <td className="p-4 text-center">
+                      {row.sim ? (
+                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold">✓</span>
+                      ) : (
+                        <span className="text-muted-foreground/40">—</span>
+                      )}
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="text-xs text-muted-foreground">{row.display}</span>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="text-xs text-muted-foreground">{row.formFactor}</span>
+                    </td>
+                    <td className="p-4 text-center">
+                      {row.pdf ? (
+                        <a href={row.pdf} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80">
+                          <Download size={14} />
+                        </a>
+                      ) : (
+                        <span className="text-muted-foreground/40">—</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Decision Helper */}
+        <div className="p-6 bg-muted/30 border-t border-border">
+          <h4 className="font-bold text-foreground mb-4 text-sm">🎯 เลือกรุ่นไหนดี?</h4>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {decisionHelper.slice(0, 4).map((d) => {
+              const t = tierMeta[d.tier];
+              return (
+                <div key={d.need} className="space-y-2">
+                  <div className={`text-xs font-bold ${t.color}`}>{d.need}</div>
+                  <div className="text-xs text-muted-foreground">→ {d.rec}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <p className="text-center text-xs text-muted-foreground mt-4">
+        * สเปกอาจแตกต่างตามรุ่นย่อยและ CPU ที่เลือก — ติดต่อเราเพื่อรับคำแนะนำที่เหมาะกับองค์กรของคุณ
+      </p>
+    </div>
+  );
+};
+
+/* ═══════════════════════════════════════════
    MAIN PAGE
    ═══════════════════════════════════════════ */
 
@@ -421,9 +775,15 @@ const MiniPCFirewall = () => {
                 ))}
               </div>
 
-              <a href="#products" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors">
-                เลือกรุ่นที่เหมาะกับคุณ <ChevronDown size={16} />
-              </a>
+              <div className="flex flex-wrap gap-3">
+                <a href="#products" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors">
+                  เลือกรุ่นที่เหมาะกับคุณ <ChevronDown size={16} />
+                </a>
+                <a href="#comparison" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-primary/40 text-primary font-semibold text-sm hover:bg-primary/10 transition-all">
+                  <Filter size={16} /> เปรียบเทียบสเปก
+                  <span className="px-2 py-0.5 rounded-full bg-primary/15 text-[10px] font-bold tracking-wide uppercase">Smart Filter</span>
+                </a>
+              </div>
             </div>
 
             <div className="relative flex items-center justify-center">
@@ -538,6 +898,13 @@ const MiniPCFirewall = () => {
               <ModelCard key={m.id} model={m} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Comparison Table with Smart Filter ── */}
+      <section className="py-16" id="comparison">
+        <div className="container max-w-7xl mx-auto px-6">
+          <FirewallComparisonTable />
         </div>
       </section>
 
