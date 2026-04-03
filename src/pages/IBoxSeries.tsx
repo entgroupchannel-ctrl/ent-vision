@@ -122,16 +122,44 @@ const features = [
   "รับประกันสินค้า 1 ปี (Carry-in)",
 ];
 
-const useCases = [
-  "Industrial Automation",
-  "Medical",
-  "Logistic & Transportation",
-  "Warehouse",
-  "Machine Vision",
-  "Digital Signage",
+const useCasesData = [
+  {
+    title: "Industrial Automation",
+    desc: "ควบคุมระบบ PLC, SCADA และ HMI บนสายการผลิต ทนฝุ่นและความร้อนในโรงงาน",
+    icon: Factory,
+    image: usecaseAutomation,
+  },
+  {
+    title: "Medical & Healthcare",
+    desc: "ระบบ EMR, มอนิเตอร์สัญญาณชีพ และเวชระเบียนอิเล็กทรอนิกส์ในโรงพยาบาล",
+    icon: Stethoscope,
+    image: usecaseMedical,
+  },
+  {
+    title: "Logistics & Transportation",
+    desc: "ศูนย์ควบคุมการขนส่ง ติดตามยานพาหนะ บริหารเส้นทางแบบ Real-time",
+    icon: Truck,
+    image: usecaseLogistics,
+  },
+  {
+    title: "Warehouse Management",
+    desc: "ระบบจัดการคลังสินค้า สแกนบาร์โค้ด ตรวจนับสต็อกอัตโนมัติ",
+    icon: Warehouse,
+    image: usecaseWarehouse,
+  },
+  {
+    title: "Machine Vision",
+    desc: "ตรวจสอบคุณภาพชิ้นงานบนสายพาน ด้วยกล้องอุตสาหกรรมและ AI",
+    icon: ScanLine,
+    image: usecaseVision,
+  },
+  {
+    title: "Digital Signage",
+    desc: "ป้ายโฆษณาดิจิทัลในห้าง ร้านค้า สนามบิน แสดงผลต่อเนื่อง 24/7",
+    icon: Tv,
+    image: usecaseSignage,
+  },
 ];
-
-const galleryImages = [
   "https://static.wixstatic.com/media/3e5003_8d0fe57f33ec4c78bac1e2211f2f5680~mv2.jpg/v1/fill/w_430,h_420,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/51.jpg",
   "https://static.wixstatic.com/media/3e5003_10530c54a885451a9145236b7c128357~mv2.jpg/v1/fill/w_424,h_420,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/52.jpg",
   "https://static.wixstatic.com/media/3e5003_ac1383fef1fc47b8be3c350501f0a04f~mv2.jpg/v1/crop/x_18,y_0,w_1973,h_1909/fill/w_434,h_420,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/53.jpg",
