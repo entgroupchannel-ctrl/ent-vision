@@ -447,14 +447,11 @@ const Promotions = () => {
                   แอดไลน์ @entgroup เพื่อรับข่าวสารโปรโมชั่นพิเศษ ดีลเฉพาะลูกค้าไลน์ และข้อเสนอ Flash Sale ก่อนใคร
                 </p>
 
-                <a
-                  href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <LineQRButton
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity mb-6"
                 >
                   เพิ่มเพื่อน LINE @entgroup
-                </a>
+                </LineQRButton>
 
                 <div className="grid grid-cols-3 gap-4 mt-8">
                   {[
