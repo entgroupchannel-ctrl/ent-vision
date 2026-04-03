@@ -1,3 +1,4 @@
+import SEOHead from "@/components/SEOHead";
 import { useState, useEffect } from "react";
 import { LineQRDialog } from "@/components/LineQRDialog";
 import QuoteDialog from "@/components/QuoteDialog";

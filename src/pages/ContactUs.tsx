@@ -1,3 +1,4 @@
+import SEOHead from "@/components/SEOHead";
 import { useState } from "react";
 import bannerContact from "@/assets/banner-contact.jpg";
 import teamSky from "@/assets/team-sky.png";
