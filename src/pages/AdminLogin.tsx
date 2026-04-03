@@ -20,16 +20,14 @@ const AdminLogin = () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         if (!mounted) return;
-
         if (session) {
           const isAdmin = await checkAdmin(session.user.id);
           if (!mounted) return;
-        if (isAdmin) {
-          navigate("/admin", { replace: true });
-        } else {
-          navigate("/", { replace: true });
-        }
-        return;
+          if (isAdmin) {
+            navigate("/admin", { replace: true });
+          } else {
+            navigate("/", { replace: true });
+          }
         }
       } catch (err) {
         console.error("Session check error:", err);
