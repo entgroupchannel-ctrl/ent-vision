@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Cpu, Monitor, Shield, Tablet, Wifi, Server, Box, Layers,
-  Factory, Zap, ChevronRight, ArrowRight, Sparkles
+  Factory, Zap, ChevronRight, ArrowRight, Sparkles, Tv, Sun,
+  Droplets, UtensilsCrossed
 } from "lucide-react";
 
 /* ═══════ Menu Data ═══════ */
