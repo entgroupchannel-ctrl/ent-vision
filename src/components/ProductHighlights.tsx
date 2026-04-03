@@ -32,6 +32,16 @@ const categories = [
     image: "https://static.wixstatic.com/media/0597a3_12c253dfc8264f7bb7dce7ca19d03195~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_33_45.png",
   },
   {
+    title: "UTC Series",
+    subtitle: "Panel PC with Touch Screen",
+    description: "จอสัมผัสอุตสาหกรรม Modular Design 8\"–24\" พร้อม iDoor Technology",
+    icon: Monitor,
+    href: "/utc-series",
+    models: ["Square 4:3", "Wide 16:9", "J6412"],
+    badge: "New",
+    image: "https://static.wixstatic.com/media/0597a3_152c5c8f71304d409ffb3d54774749d7~mv2.png/v1/fill/w_354,h_354,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/UTC%20Series%20(1).png",
+  },
+  {
     title: "Smart Display",
     subtitle: "Digital Signage & Kiosk",
     description: "จอแสดงผลอุตสาหกรรม Indoor/Outdoor และตู้ Kiosk",
