@@ -62,7 +62,7 @@ const menuCategories = [
       desc: "pfSense / OPNsense Ready — Fanless 2.5G/10G พร้อม Smart Filter",
       href: "/minipc-firewall",
       badge: "Smart Filter",
-      image: "https://static.wixstatic.com/media/0597a3_6ebc77045f9a4292bb485a4fa91ac3a2~mv2.png/v1/fill/w_211,h_155,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-15%20at%2012_02_13.png",
+      image: imgFirewall,
     },
     columns: [
       {
