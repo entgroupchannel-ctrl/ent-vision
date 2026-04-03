@@ -54,6 +54,7 @@ const menuCategories = [
         links: [
           { label: "Waterproof PC IP69K", href: "/waterproof-pc" },
           { label: "UTC Series", href: "/utc-series" },
+          { label: "Panel PC — Cabinet", href: "/cabinets" },
         ],
       },
     ],

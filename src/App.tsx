@@ -32,6 +32,7 @@ import WelcomeMember from "./pages/WelcomeMember.tsx";
 import Warrantys from "./pages/Warrantys.tsx";
 import Payment from "./pages/Payment.tsx";
 import Delivery from "./pages/Delivery.tsx";
+import Cabinets from "./pages/Cabinets.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import FloatingContact from "./components/FloatingContact.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
@@ -76,6 +77,7 @@ const App = () => (
               <Route path="/warrantys" element={<Warrantys />} />
               <Route path="/payment" element={<Payment />} />
               <Route path="/delivery" element={<Delivery />} />
+              <Route path="/cabinets" element={<Cabinets />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
