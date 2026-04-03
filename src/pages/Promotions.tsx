@@ -487,10 +487,10 @@ const Promotions = () => {
           </div>
         </div>
       </section>
+      <FooterCompact />
     </div>
   );
 };
 
-expo
 
-      <FooterCompact />rt default Promotions;
+export default Promotions;

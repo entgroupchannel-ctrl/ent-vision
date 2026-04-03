@@ -780,10 +780,10 @@ const RuggedTablet = () => {
           </div>
         </div>
       </div>
+      <FooterCompact />
     </div>
   );
 };
 
-expo
 
-      <FooterCompact />rt default RuggedTablet;
+export default RuggedTablet;

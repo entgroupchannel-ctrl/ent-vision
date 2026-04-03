@@ -663,10 +663,10 @@ const UTCSeries = () => {
           </div>
         </div>
       </section>
+      <FooterCompact />
     </div>
   );
 };
 
-expo
 
-      <FooterCompact />rt default UTCSeries;
+export default UTCSeries;

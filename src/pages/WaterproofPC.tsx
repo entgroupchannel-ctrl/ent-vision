@@ -368,10 +368,10 @@ const WaterproofPC = () => {
           </Button>
         </div>
       </div>
+      <FooterCompact />
     </div>
   );
 };
 
-expo
 
-      <FooterCompact />rt default WaterproofPC;
+export default WaterproofPC;

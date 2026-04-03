@@ -314,10 +314,10 @@ const Volktek = () => {
           </div>
         </div>
       </div>
+      <FooterCompact />
     </div>
   );
 };
 
-expo
 
-      <FooterCompact />rt default Volktek;
+export default Volktek;

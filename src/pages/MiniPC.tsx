@@ -995,10 +995,10 @@ const MiniPC = () => {
           </Button>
         </div>
       </div>
+      <FooterCompact />
     </div>
   );
 };
 
-expo
 
-      <FooterCompact />rt default MiniPC;
+export default MiniPC;

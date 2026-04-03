@@ -734,10 +734,10 @@ const EPCSeries = () => {
           </div>
         </div>
       </div>
+      <FooterCompact />
     </div>
   );
 };
 
-expo
 
-      <FooterCompact />rt default EPCSeries;
+export default EPCSeries;
