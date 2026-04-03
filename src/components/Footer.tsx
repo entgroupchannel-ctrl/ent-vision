@@ -185,7 +185,7 @@ const Footer = () => {
         <div className="container max-w-7xl mx-auto px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-8">
             {/* Company Info */}
-            <div className="md:col-span-1">
+            <div className="md:col-span-1 lg:col-span-2">
               <img src={logo} alt="ENT GROUP" className="h-10 w-auto mb-4" />
               <p className="text-sm font-bold text-gray-900 dark:text-white mb-1">บริษัท อีเอ็นที กรุ๊ป จำกัด</p>
               <p className="text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] leading-relaxed mb-4">
