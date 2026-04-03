@@ -74,7 +74,51 @@ const ContactUs = () => {
     }
   }, [user]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleCardUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Show preview
+    const reader = new FileReader();
+    reader.onload = async (ev) => {
+      const base64 = ev.target?.result as string;
+      setCardPreview(base64);
+      setScanning(true);
+
+      try {
+        const { data, error } = await supabase.functions.invoke("scan-business-card", {
+          body: { image: base64 },
+        });
+
+        if (error) throw error;
+
+        const extracted = data?.data || {};
+        setForm((prev) => ({
+          ...prev,
+          name: extracted.name || prev.name,
+          email: extracted.email || prev.email,
+          phone: extracted.phone || prev.phone,
+          company: extracted.company || prev.company,
+          lineId: extracted.lineId || prev.lineId,
+          whatsapp: extracted.whatsapp || prev.whatsapp,
+        }));
+
+        toast({
+          title: "สแกนนามบัตรสำเร็จ!",
+          description: "กรอกข้อมูลจากนามบัตรให้อัตโนมัติแล้ว",
+        });
+      } catch (err: any) {
+        toast({
+          title: "สแกนนามบัตรไม่สำเร็จ",
+          description: "กรุณาลองอีกครั้ง หรือกรอกข้อมูลเอง",
+          variant: "destructive",
+        });
+      } finally {
+        setScanning(false);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
