@@ -301,7 +301,7 @@ const MegaMenu = ({
                 <div className={`col-span-9 grid grid-cols-3 gap-4`}>
                   {active.columns.map((col) => (
                     <div key={col.heading}>
-                      <h5 className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-2">
+                      <h5 className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60 mb-2">
                         {col.heading}
                       </h5>
                       <ul className="space-y-0.5">
