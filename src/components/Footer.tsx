@@ -222,19 +222,23 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* PDPA */}
+        {/* PDPA - Collapsible */}
         <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
-          <div className="container max-w-7xl mx-auto px-6 py-6">
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-white/60 dark:bg-[hsl(220,15%,12%)]">
-              <span className="text-lg">🔒</span>
-              <div>
-                <p className="text-xs font-bold text-foreground mb-1">การคุ้มครองข้อมูลส่วนบุคคล (PDPA)</p>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">
-                  บริษัท อีเอ็นที กรุ๊ป จำกัด ให้ความสำคัญกับการคุ้มครองข้อมูลส่วนบุคคลของท่าน ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)
-                  ข้อมูลของท่าน ได้แก่ ชื่อ อีเมล เบอร์โทรศัพท์ และข้อมูลบริษัท จะถูกจัดเก็บเพื่อวัตถุประสงค์ในการจัดทำใบเสนอราคา ให้คำปรึกษาด้านเทคนิค
-                  และบริการหลังการขายเท่านั้น เราจะไม่จำหน่าย แบ่งปัน หรือเปิดเผยข้อมูลส่วนบุคคลของท่านแก่บุคคลที่สาม
-                </p>
-              </div>
+          <div className="container max-w-7xl mx-auto px-6 py-4">
+            <button
+              onClick={() => document.getElementById('pdpa-content')?.classList.toggle('hidden')}
+              className="flex items-center gap-2 text-xs font-bold text-foreground hover:text-primary transition-colors"
+            >
+              <span>🔒</span>
+              การคุ้มครองข้อมูลส่วนบุคคล (PDPA)
+              <ChevronDown size={14} className="text-muted-foreground" />
+            </button>
+            <div id="pdpa-content" className="hidden mt-3 p-4 rounded-lg bg-white/60 dark:bg-[hsl(220,15%,12%)]">
+              <p className="text-[11px] text-muted-foreground leading-relaxed">
+                บริษัท อีเอ็นที กรุ๊ป จำกัด ให้ความสำคัญกับการคุ้มครองข้อมูลส่วนบุคคลของท่าน ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)
+                ข้อมูลของท่าน ได้แก่ ชื่อ อีเมล เบอร์โทรศัพท์ และข้อมูลบริษัท จะถูกจัดเก็บเพื่อวัตถุประสงค์ในการจัดทำใบเสนอราคา ให้คำปรึกษาด้านเทคนิค
+                และบริการหลังการขายเท่านั้น เราจะไม่จำหน่าย แบ่งปัน หรือเปิดเผยข้อมูลส่วนบุคคลของท่านแก่บุคคลที่สาม
+              </p>
             </div>
           </div>
         </div>
