@@ -168,7 +168,7 @@ const gtModels = [
     storage: "SSD 256 GB – 1 TB",
     ports: "USB 6, COM 6 (RS232/422/485), LAN 2",
     size: "23×17.5×5 cm / 2.5 kg",
-    image: "https://static.wixstatic.com/media/0597a3_dc2525bbb341403085db99e88a32210ef000.jpg/v1/fill/w_301,h_535,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_dc2525bbb341403085db99e88a32210ef000.jpg",
+    image: gt7000Product,
     tab: "gt7000",
     highlight: "DDR4",
     price: "สอบถาม",
