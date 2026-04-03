@@ -207,8 +207,11 @@ const IBoxSeries = () => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {iboxModels.map((model) => (
-              <div key={model.id} className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
+              <div key={model.id} className={`card-surface overflow-hidden group transition-all ${selectedProducts.has(model.name) ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
                 <div className="relative bg-secondary/30 p-6 flex items-center justify-center h-52">
+                  <button onClick={() => toggleSelect(model.name)} className="absolute top-3 left-3 z-10">
+                    <Checkbox checked={selectedProducts.has(model.name)} className="h-5 w-5" />
+                  </button>
                   <WishlistHeart
                     item={{
                       id: model.id,
