@@ -208,7 +208,7 @@ const UTCSeries = () => {
         collectionName="UTC Series Open Frame Touch Monitor"
         collectionDescription="จอสัมผัสอุตสาหกรรมแบบ Open Frame 8-19 นิ้ว สำหรับฝังใน KIOSK ตู้จำหน่ายสินค้า"
         collectionUrl="/utc-series"
-        products={productCategories.flatMap(c => c.items).map(m => ({ name: m.model, price: m.price, description: m.config, category: "Open Frame Touch Monitor" }))}
+        products={[...squareModels, ...wideModels].map(m => ({ name: m.model, price: m.price, description: `${m.size} ${m.config}`, category: "Open Frame Touch Monitor" }))}
       />
       {/* Sticky Nav */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">

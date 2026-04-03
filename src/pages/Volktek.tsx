@@ -126,7 +126,7 @@ const Volktek = () => {
         collectionName="Volktek Industrial Ethernet Switch"
         collectionDescription="Volktek Industrial Ethernet Switch Managed/Unmanaged PoE สำหรับโรงงานและระบบกล้องวงจรปิด"
         collectionUrl="/volktek"
-        products={models.map(m => ({ name: m.name, description: m.desc, category: "Industrial Ethernet Switch" }))}
+        products={productCategories.map(c => ({ name: c.title, description: c.desc, category: "Industrial Ethernet Switch" }))}
       />
       {/* Hero */}
       <div className="relative overflow-hidden">
