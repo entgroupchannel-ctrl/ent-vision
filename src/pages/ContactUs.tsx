@@ -298,9 +298,63 @@ const ContactUs = () => {
             <div className="lg:col-span-3">
               <div className="card-surface rounded-xl p-6 md:p-8">
                 <h2 className="text-lg font-display font-bold text-foreground mb-1">ส่งข้อความถึงเรา</h2>
-                <p className="text-xs text-muted-foreground mb-6">
+                <p className="text-xs text-muted-foreground mb-4">
                   กรอกข้อมูลด้านล่าง ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง
                 </p>
+
+                {/* Business Card Scanner */}
+                <div className="mb-6 p-4 rounded-xl border-2 border-dashed border-primary/30 bg-primary/5 hover:border-primary/50 transition-colors">
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    className="hidden"
+                    onChange={handleCardUpload}
+                  />
+                  
+                  {cardPreview ? (
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                        <CreditCard size={16} className="text-primary" />
+                        นามบัตรที่อัปโหลด
+                      </div>
+                      <div className="relative rounded-lg overflow-hidden border border-border">
+                        <img src={cardPreview} alt="นามบัตร" className="w-full h-auto max-h-48 object-contain bg-white" />
+                        {scanning && (
+                          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                            <div className="flex items-center gap-2 text-white text-sm font-medium bg-black/60 px-4 py-2 rounded-lg">
+                              <Loader2 size={16} className="animate-spin" /> กำลังสแกนนามบัตร...
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => { setCardPreview(null); fileInputRef.current && (fileInputRef.current.value = ""); }}
+                        className="text-xs text-muted-foreground hover:text-destructive transition-colors"
+                      >
+                        ลบภาพ & อัปโหลดใหม่
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="w-full flex flex-col items-center gap-2 py-4"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+                        <Camera size={22} className="text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">📇 สแกนนามบัตร — กรอกข้อมูลอัตโนมัติ</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          ถ่ายรูปหรืออัปโหลดนามบัตร ระบบ AI จะดึงข้อมูลให้อัตโนมัติ
+                        </p>
+                      </div>
+                    </button>
+                  )}
+                </div>
 
                 {submitted ? (
                   <div className="text-center py-12">
