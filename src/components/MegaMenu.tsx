@@ -12,6 +12,12 @@ import imgSmart from "@/assets/product-smart-display.jpg";
 import imgRugged from "@/assets/product-rugged.jpg";
 import imgVCloud from "@/assets/product-vcloudpoint.jpg";
 
+import bannerIndustrial from "@/assets/banner-industrial.jpg";
+import bannerNetwork from "@/assets/banner-network.jpg";
+import bannerDisplay from "@/assets/banner-display.jpg";
+import bannerRugged from "@/assets/banner-rugged.jpg";
+import bannerSolution from "@/assets/banner-solution.jpg";
+
 /* ═══════ Menu Data ═══════ */
 const menuCategories = [
   {
@@ -195,6 +201,14 @@ const b2bBanners: Record<string, { icon: typeof Headset; title: string; desc: st
   solution: { icon: Headset, title: "ทดลองฟรี 30 วัน", desc: "ลองก่อนตัดสินใจ ไม่มีค่าใช้จ่าย มีทีมติดตั้งให้" },
 };
 
+const promoBanners: Record<string, { image: string; title: string; desc: string; href: string }> = {
+  industrial: { image: bannerIndustrial, title: "Mini PC Fanless เกรดอุตสาหกรรม", desc: "ถึก ทน แกร่ง — 12 รุ่นครอบคลุมทุกงาน", href: "/gt-series" },
+  network: { image: bannerNetwork, title: "Firewall & Network Security", desc: "pfSense / OPNsense Ready — ปกป้องเครือข่ายของคุณ", href: "/minipc-firewall" },
+  display: { image: bannerDisplay, title: "Smart Display & Digital Signage", desc: "จอ Indoor/Outdoor ความสว่างสูง พร้อมซอฟต์แวร์ฟรี", href: "/smart-display" },
+  rugged: { image: bannerRugged, title: "Rugged Tablet & Notebook", desc: "กันน้ำ กันกระแทก MIL-STD — สำหรับภาคสนาม", href: "/rugged-tablet" },
+  solution: { image: bannerSolution, title: "vCloudPoint Zero Client", desc: "1 เครื่อง PC รองรับ 30 คน — ลดต้นทุน 60%", href: "/vcloudpoint" },
+};
+
 /* ═══════ Component ═══════ */
 const MegaMenu = ({
   onNavigate,
@@ -348,38 +362,42 @@ const MegaMenu = ({
                 </div>
               </div>
 
-              {/* Promo Banner */}
-              <Link
-                to="/promotions"
-                onClick={() => { setActiveMenu(null); onNavigate?.(); }}
-                className="group mt-4 flex items-center gap-4 rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20 p-4 hover:border-primary/40 transition-all duration-300"
-              >
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                  <Sparkles size={20} className="text-primary" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-bold text-foreground">🔥 โปรโมชั่นประจำเดือน — ลดสูงสุด 20%</p>
-                  <p className="text-[11px] text-muted-foreground mt-0.5">Mini PC, Panel PC, Firewall สินค้าคัดสรรราคาพิเศษ พร้อมส่งทันที</p>
-                </div>
-                <span className="flex-shrink-0 text-xs text-primary font-semibold group-hover:underline flex items-center gap-1">
-                  ดูโปรโมชั่น <ArrowRight size={11} />
-                </span>
-              </Link>
+              {/* Category-specific Image Banner */}
+              {promoBanners[active.id] && (() => {
+                const promo = promoBanners[active.id];
+                return (
+                  <Link
+                    to={promo.href}
+                    onClick={() => { setActiveMenu(null); onNavigate?.(); }}
+                    className="group mt-4 block rounded-xl overflow-hidden border border-border hover:border-primary/40 transition-all duration-300 relative h-24"
+                  >
+                    <img
+                      src={promo.image}
+                      alt={promo.title}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                    <div className="relative z-10 flex items-center justify-between h-full px-5">
+                      <div>
+                        <p className="text-sm font-bold text-white">{promo.title}</p>
+                        <p className="text-[11px] text-white/70 mt-0.5">{promo.desc}</p>
+                      </div>
+                      <span className="flex-shrink-0 text-xs text-white font-semibold group-hover:underline flex items-center gap-1 bg-primary/80 px-3 py-1.5 rounded-lg">
+                        ดูสินค้า <ArrowRight size={11} />
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })()}
 
               {/* Bottom quick links */}
-              <div className="mt-4 pt-3 border-t border-gray-200 dark:border-white/5 flex items-center justify-between">
+              <div className="mt-3 pt-3 border-t border-gray-200 dark:border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-4 text-[10px] text-gray-400 dark:text-white/25">
                   <span className="flex items-center gap-1"><Factory size={10} /> นำเข้าจากโรงงานโดยตรง</span>
                   <span className="flex items-center gap-1"><Zap size={10} /> รับประกัน 1–3 ปี</span>
                   <span className="flex items-center gap-1"><Server size={10} /> สต๊อกพร้อมส่งในไทย</span>
                 </div>
-                <Link
-                  to="/promotions"
-                  onClick={() => { setActiveMenu(null); onNavigate?.(); }}
-                  className="text-[10px] text-primary font-semibold hover:underline flex items-center gap-1"
-                >
-                  โปรโมชั่น <ArrowRight size={10} />
-                </Link>
               </div>
             </div>
           </div>
