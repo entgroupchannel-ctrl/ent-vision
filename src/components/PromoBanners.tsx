@@ -1,87 +1,171 @@
-import { ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Zap, Bell, ArrowRight, Calendar, Sparkles } from "lucide-react";
 
-const bannerLinks = [
+/* ───── Shared promo data (active + recurring only) ───── */
+const activePromos = [
   {
-    image: "https://static.wixstatic.com/media/0597a3_bba6f36ac07b4a7bac516546032aba6c~mv2.png/v1/fill/w_555,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-15%20at%2017_14_13.png",
-    href: "https://www.entgroup.co.th/wp-pc",
-    alt: "Waterproof PC",
+    id: "starter-plus",
+    title: "STARTER PLUS+ อัพสเปคฟรี!",
+    subtitle: "RAM & SSD อัพฟรีทุกซีรีส์",
+    badge: "คุ้มสุด",
+    period: "จนถึง 31 ธ.ค. 2568",
+    image: "https://static.wixstatic.com/media/0597a3_edb77d9f4150436f837edf75bf00a6e6~mv2.png/v1/fill/w_587,h_587,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IPC110%20(1).png",
+    highlights: ["RAM 4→8GB ฟรี", "SSD 128→256GB ฟรี", "ประหยัด 2,700 บาท/เครื่อง"],
+    status: "active" as const,
   },
   {
-    image: "https://static.wixstatic.com/media/0597a3_f3214cd9900b491e907ede50aa85dfea~mv2.png/v1/fill/w_506,h_194,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-15%20at%2017_24_07.png",
-    href: "https://www.entgroup.co.th/newgenfirewall",
-    alt: "New Gen Firewall",
+    id: "endyear-windows",
+    title: "END YEAR SALE แถม Windows ฟรี!",
+    subtitle: "GT Series + Windows OEM มูลค่า 4,900 บาท",
+    badge: "🔥 HOT",
+    period: "จนถึง 31 ธ.ค. 2568",
+    image: "https://static.wixstatic.com/media/0597a3_db1433a3bf0c4657a1f5d99352280129~mv2.png/v1/fill/w_487,h_487,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
+    highlights: ["แถมฟรี Windows Pro OEM", "มูลค่าสูงสุด 4,900 บาท", "Fanless + พอร์ตครบ"],
+    status: "active" as const,
   },
   {
-    image: "https://static.wixstatic.com/media/0597a3_7f24aee4b923403b9b441f4b4a993317~mv2.png/v1/fill/w_555,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-01%20at%2021_21_01.png",
-    href: "https://www.entgroup.co.th/kseries2025",
-    alt: "K Series",
+    id: "wifi6-free",
+    title: "ซื้อ 1 แถม 1! WiFi 6 ฟรี",
+    subtitle: "Industrial PC + WiFi 6 มูลค่า 3,900 บาท",
+    period: "จนถึง 31 ธ.ค. 2568",
+    image: "https://static.wixstatic.com/media/0597a3_dc716eff20664aae8238509cca867668~mv2.png/v1/fill/w_487,h_487,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT1200.png",
+    highlights: ["ฟรี WiFi 6 Module", "เชื่อมต่อเร็วกว่า", "ใช้ได้ GT & GB Series"],
+    status: "active" as const,
   },
   {
-    image: "https://static.wixstatic.com/media/0597a3_6e34ac062104498984b585a310a8690d~mv2.png/v1/fill/w_382,h_170,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2023_24_21.png",
-    href: "https://www.entgroup.co.th/gb-serie",
-    alt: "GB Series",
+    id: "monday-deal",
+    title: "โปรวันจันทร์!",
+    subtitle: "ดีลพิเศษทุกวันจันทร์",
+    badge: "Weekly",
+    period: "ทุกวันจันทร์",
+    image: "https://static.wixstatic.com/media/0597a3_e37368a316ff4090b336d904f95bf018~mv2.png/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/UTC%20Series.png",
+    highlights: ["ดีลเปลี่ยนทุกสัปดาห์", "ราคาพิเศษเฉพาะวันจันทร์", "หลากหลายซีรีส์"],
+    status: "recurring" as const,
   },
 ];
 
 const PromoBanners = () => {
+  const featured = activePromos[0];
+  const rest = activePromos.slice(1);
+
   return (
     <section className="section-padding" id="promotions">
       <div className="container max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Promotions</span>
-          <h2 className="text-3xl md:text-5xl font-display font-bold">
+        {/* Header */}
+        <div className="text-center mb-10">
+          <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">
+            Promotions
+          </span>
+          <h2 className="text-3xl md:text-5xl font-display font-bold mb-3">
             โปรโมชั่น<span className="text-gradient">พิเศษ</span>
           </h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            ข้อเสนอสุดพิเศษสำหรับลูกค้าองค์กร — อัพเดทล่าสุด
+          </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-4 md:gap-6 mb-8">
-          {bannerLinks.map((banner) => (
-            <a
-              key={banner.alt}
-              href={banner.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card-surface overflow-hidden group hover:border-primary/30 transition-all"
+        {/* Featured promo */}
+        <Link
+          to="/promotions"
+          className="card-surface overflow-hidden group hover:border-primary/30 transition-all mb-6 flex flex-col md:flex-row"
+        >
+          <div className="relative bg-secondary/20 flex items-center justify-center p-8 md:w-2/5">
+            {featured.badge && (
+              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-destructive text-destructive-foreground">
+                {featured.badge}
+              </span>
+            )}
+            <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-500 text-white">
+              <Zap size={10} /> กำลังจัด
+            </span>
+            <img
+              src={featured.image}
+              alt={featured.title}
+              className="max-h-56 object-contain group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          </div>
+          <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
+            <div className="flex items-center gap-2 mb-2">
+              <Calendar size={14} className="text-primary" />
+              <span className="text-xs text-muted-foreground font-medium">{featured.period}</span>
+            </div>
+            <h3 className="text-xl md:text-2xl font-bold text-foreground mb-1">{featured.title}</h3>
+            <p className="text-sm text-primary font-medium mb-3">{featured.subtitle}</p>
+            <ul className="space-y-1 mb-4">
+              {featured.highlights.map((h) => (
+                <li key={h} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <span className="text-primary">✓</span> {h}
+                </li>
+              ))}
+            </ul>
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3 transition-all">
+              ดูรายละเอียด <ArrowRight size={16} />
+            </span>
+          </div>
+        </Link>
+
+        {/* Rest of promos */}
+        <div className="grid sm:grid-cols-3 gap-4 mb-8">
+          {rest.map((promo) => (
+            <Link
+              key={promo.id}
+              to="/promotions"
+              className="card-surface overflow-hidden group hover:border-primary/30 transition-all flex flex-col"
             >
-              <img
-                src={banner.image}
-                alt={banner.alt}
-                className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-300"
-                loading="lazy"
-              />
-            </a>
+              <div className="relative bg-secondary/20 flex items-center justify-center p-6 h-44">
+                {promo.badge && (
+                  <span className={`absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                    promo.status === "active"
+                      ? "bg-destructive text-destructive-foreground"
+                      : "bg-amber-500 text-white"
+                  }`}>
+                    {promo.badge}
+                  </span>
+                )}
+                <span className={`absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                  promo.status === "active" ? "bg-green-500 text-white" : "bg-amber-500 text-white"
+                }`}>
+                  {promo.status === "active" ? <Zap size={10} /> : <Bell size={10} />}
+                  {promo.status === "active" ? "กำลังจัด" : "จัดประจำ"}
+                </span>
+                <img
+                  src={promo.image}
+                  alt={promo.title}
+                  className="max-h-32 object-contain group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-4 flex-1 flex flex-col">
+                <div className="flex items-center gap-1.5 mb-1.5">
+                  <Calendar size={12} className="text-primary" />
+                  <span className="text-[11px] text-muted-foreground">{promo.period}</span>
+                </div>
+                <h3 className="text-sm font-bold text-foreground mb-0.5 leading-tight">{promo.title}</h3>
+                <p className="text-xs text-primary font-medium mb-2">{promo.subtitle}</p>
+                <ul className="space-y-0.5 mb-3">
+                  {promo.highlights.slice(0, 2).map((h) => (
+                    <li key={h} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                      <span className="text-primary text-[10px]">✓</span> {h}
+                    </li>
+                  ))}
+                </ul>
+                <span className="mt-auto inline-flex items-center gap-1.5 text-xs font-semibold text-primary group-hover:gap-2.5 transition-all">
+                  ดูเพิ่มเติม <ArrowRight size={14} />
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
 
-        {/* Promo images */}
-        <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-8">
-          <div className="card-surface overflow-hidden">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_7f7a40a025494408b070e78388f4d3a5~mv2.png/v1/fill/w_460,h_418,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_7f7a40a025494408b070e78388f4d3a5~mv2.png"
-              alt="โปรโมชั่น 1"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
-          <div className="card-surface overflow-hidden">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_ed86c9eaeabe4e7e87b7496871572893~mv2.png/v1/fill/w_460,h_418,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_ed86c9eaeabe4e7e87b7496871572893~mv2.png"
-              alt="โปรโมชั่น 2"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
-        </div>
-
+        {/* CTA */}
         <div className="text-center">
-          <a
-            href="https://www.entgroup.co.th/promotions"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/promotions"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
           >
-            ดูโปรโมชั่นเพิ่มเติม <ExternalLink size={16} />
-          </a>
+            <Sparkles size={16} /> ดูโปรโมชั่นทั้งหมด
+          </Link>
         </div>
       </div>
     </section>
