@@ -921,7 +921,7 @@ const MiniPCFirewall = () => {
           {/* Cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map((m) => (
-              <ModelCard key={m.id} model={m} />
+              <ModelCard key={m.id} model={m} onQuote={setQuoteProduct} />
             ))}
           </div>
         </div>
