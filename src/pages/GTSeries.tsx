@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search } from "lucide-react";
-import QuoteButton from "@/components/QuoteButton";
+import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText } from "lucide-react";
+import QuoteDialog from "@/components/QuoteDialog";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import gt1000Banner from "@/assets/gt1000-banner.jpg";
@@ -581,6 +581,7 @@ const ComparisonTable = ({ handleTabChange }: { handleTabChange: (tab: string) =
 const GTSeries = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "overview");
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -799,7 +800,7 @@ const GTSeries = () => {
                     onClick={() => model.tab ? handleTabChange(model.tab) : undefined}
                     className={`group card-surface overflow-hidden hover:border-primary/30 transition-all hover:-translate-y-1 text-left cursor-pointer`}
                   >
-                    <ModelCard model={model} />
+                    <ModelCard model={model} onQuote={setQuoteProduct} />
                   </button>
                 ))}
               </div>
@@ -4404,6 +4405,13 @@ const GTSeries = () => {
           © {new Date().getFullYear()} ENT GROUP Co., Ltd. All rights reserved.
         </p>
       </footer>
+
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="GT Series — Mini PC"
+      />
     </div>
   );
 };
@@ -4411,11 +4419,11 @@ const GTSeries = () => {
 /* M
 
       <FooterCompact />odel Card Component */
-const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
+const ModelCard = ({ model, onQuote }: { model: typeof gtModels[0]; onQuote?: (name: string) => void }) => (
   <>
     <div className="relative bg-secondary/50 p-6 flex items-center justify-center min-h-[200px]">
       {model.badge ? (
-        <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-primary text-primary-foreground text-[11px] font-bold">
+        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary text-primary-foreground text-[11px] font-bold border border-primary/20 animate-pulse">
           {model.highlight}
         </span>
       ) : (
@@ -4458,7 +4466,14 @@ const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
             <span className="font-bold text-foreground">{model.price.startsWith("สอบถาม") ? model.price : `฿${model.price}`}</span>
           </div>
         ) : <div />}
-        <QuoteButton productName={model.name} productCategory="GT Series — Mini PC" variant="compact" />
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); onQuote?.(model.name); }}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition-colors"
+        >
+          <FileText size={12} />
+          ขอใบเสนอราคา
+        </button>
       </div>
     </div>
   </>
