@@ -455,56 +455,62 @@ const VCloudPoint = () => {
       {/* ── vMatrix Software ── */}
       <section className="py-16">
         <div className="container max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-10 items-start">
-            <div>
-              <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">vMatrix Server Software</span>
-              <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
-                ควบคุม<span className="text-primary">จากจุดเดียว</span>
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                vMatrix Server ทำงานบน Windows 7/8/10/11 ให้บริการผู้ใช้ที่เชื่อมต่อจาก Zero Client ได้สูงสุด 30 คน พร้อมระบบจัดการ User, สิทธิ์การเข้าถึง, Broadcasting หน้าจอ และ Chatting Room
-              </p>
+          <div className="text-center mb-10">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">vMatrix Server Software</span>
+            <h2 className="text-3xl md:text-4xl font-black text-foreground mb-2">
+              ควบคุม<span className="text-primary">จากจุดเดียว</span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              vMatrix Server ทำงานบน Windows 7/8/10/11 รองรับผู้ใช้สูงสุด 30 คน พร้อมระบบจัดการ User, สิทธิ์, Broadcasting หน้าจอ และ Chatting Room
+            </p>
+          </div>
 
-              <button onClick={() => setShowVmatrix(!showVmatrix)} className="text-sm text-primary font-semibold flex items-center gap-1 mb-4 hover:underline">
-                {showVmatrix ? "ซ่อนความสามารถ" : "ดูความสามารถทั้งหมด"}
-                <ChevronDown size={14} className={`transition-transform ${showVmatrix ? "rotate-180" : ""}`} />
-              </button>
-
-              <div className={`overflow-hidden transition-[max-height] duration-300 ${showVmatrix ? "max-h-[500px]" : "max-h-0"}`}>
-                <ul className="space-y-2 mb-4">
-                  {vmatrixFeatures.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <CheckCircle2 size={14} className="text-primary shrink-0 mt-0.5" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <a
-                href="https://vcloudpoint.info/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline"
-              >
-                ดาวน์โหลด vMatrix <Download size={14} />
-              </a>
-            </div>
-
-            <div className="space-y-4">
+          {/* Screenshots — side by side, capped height */}
+          <div className="grid sm:grid-cols-2 gap-4 mb-8 max-w-4xl mx-auto">
+            <div className="rounded-xl overflow-hidden border border-border bg-secondary/30">
               <img
                 src="https://static.wixstatic.com/media/0597a3_4370580a88c646c88a88dcdf9e7b6dd7~mv2.jpg/v1/fill/w_600,h_598,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_4370580a88c646c88a88dcdf9e7b6dd7~mv2.jpg"
                 alt="vMatrix Server Software"
-                className="w-full rounded-xl"
-                loading="lazy"
-              />
-              <img
-                src="https://static.wixstatic.com/media/0597a3_f4c88e348b9e4916a08c834a965cc703~mv2.jpg/v1/fill/w_598,h_598,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/contral.jpg"
-                alt="vMatrix Control Panel"
-                className="w-full rounded-xl"
+                className="w-full h-56 md:h-64 object-cover object-top"
                 loading="lazy"
               />
             </div>
+            <div className="rounded-xl overflow-hidden border border-border bg-secondary/30">
+              <img
+                src="https://static.wixstatic.com/media/0597a3_f4c88e348b9e4916a08c834a965cc703~mv2.jpg/v1/fill/w_598,h_598,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/contral.jpg"
+                alt="vMatrix Control Panel"
+                className="w-full h-56 md:h-64 object-cover object-top"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          {/* Features list — collapsible */}
+          <div className="max-w-2xl mx-auto text-center">
+            <button onClick={() => setShowVmatrix(!showVmatrix)} className="text-sm text-primary font-semibold flex items-center gap-1 mx-auto mb-4 hover:underline">
+              {showVmatrix ? "ซ่อนความสามารถ" : "ดูความสามารถทั้งหมด"}
+              <ChevronDown size={14} className={`transition-transform ${showVmatrix ? "rotate-180" : ""}`} />
+            </button>
+
+            <div className={`overflow-hidden transition-[max-height] duration-300 ${showVmatrix ? "max-h-[500px]" : "max-h-0"}`}>
+              <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-left mb-6">
+                {vmatrixFeatures.map((f) => (
+                  <div key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 size={14} className="text-primary shrink-0 mt-0.5" />
+                    {f}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <a
+              href="https://vcloudpoint.info/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline"
+            >
+              ดาวน์โหลด vMatrix <Download size={14} />
+            </a>
           </div>
         </div>
       </section>
