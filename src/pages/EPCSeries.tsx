@@ -304,9 +304,14 @@ const SpecTable = ({ model }: { model: typeof squareModels[0] }) => (
 );
 
 /* ───── Model Card ───── */
-const ModelCard = ({ model, onQuote }: { model: typeof squareModels[0]; onQuote?: (name: string) => void }) => (
-  <div className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
+const ModelCard = ({ model, onQuote, selected, onToggleSelect }: { model: typeof squareModels[0]; onQuote?: (name: string) => void; selected?: boolean; onToggleSelect?: (name: string) => void }) => (
+  <div className={`card-surface overflow-hidden group transition-all ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
     <div className="relative bg-secondary/30 p-6 flex items-center justify-center">
+      {onToggleSelect && (
+        <button onClick={() => onToggleSelect(model.name)} className="absolute top-3 left-3 z-10">
+          <Checkbox checked={selected} className="h-5 w-5" />
+        </button>
+      )}
       <WishlistHeart
         item={{ id: model.id, name: model.name, category: "EPC Series", image: model.image, href: "/epc-series", specs: `${model.size} (${model.ratio})` }}
         className="absolute top-3 right-3"
