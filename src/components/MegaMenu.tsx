@@ -298,7 +298,7 @@ const MegaMenu = ({
                 </div>
 
                 {/* Product columns — right */}
-                <div className="col-span-9 grid grid-cols-3 gap-4">
+                <div className={`col-span-9 grid grid-cols-3 gap-4`}>
                   {active.columns.map((col) => (
                     <div key={col.heading}>
                       <h5 className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-2">
@@ -325,6 +325,26 @@ const MegaMenu = ({
                       </ul>
                     </div>
                   ))}
+
+                  {/* B2B Banner — fills empty column space */}
+                  {active.columns.length < 3 && b2bBanners[active.id] && (() => {
+                    const banner = b2bBanners[active.id];
+                    const BannerIcon = banner.icon;
+                    return (
+                      <Link
+                        to="/about-us"
+                        onClick={() => { setActiveMenu(null); onNavigate?.(); }}
+                        className="group col-span-1 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/15 p-3 flex flex-col justify-center hover:border-primary/30 transition-all"
+                      >
+                        <BannerIcon size={18} className="text-primary mb-2" />
+                        <p className="text-xs font-bold text-white mb-1">{banner.title}</p>
+                        <p className="text-[10px] text-white/40 leading-relaxed mb-2">{banner.desc}</p>
+                        <span className="text-[10px] text-primary font-semibold group-hover:underline flex items-center gap-1">
+                          เกี่ยวกับเรา <ArrowRight size={9} />
+                        </span>
+                      </Link>
+                    );
+                  })()}
                 </div>
               </div>
 
