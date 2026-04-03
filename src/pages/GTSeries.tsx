@@ -887,6 +887,11 @@ const GTSeries = () => {
                 </a>
               </div>
 
+              {/* Factory Application Image */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <img src="/images/gt1000/factory-app.avif" alt="GT1000 Factory Application" className="w-full h-auto rounded-xl" loading="lazy" />
+              </div>
+
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
