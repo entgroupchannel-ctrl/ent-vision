@@ -262,19 +262,43 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: 
                     <div className="flex-1 grid grid-cols-[1fr_1fr_80px] gap-2">
                       <select
                         value={product.category}
-                        onChange={(e) => handleProductChange(index, "category", e.target.value)}
+                        onChange={(e) => {
+                          handleProductChange(index, "category", e.target.value);
+                          handleProductChange(index, "model", "");
+                        }}
                         className={inputClass}
                       >
                         {productCategories.map((c) => (
                           <option key={c} value={c === "เลือกหมวดหมู่" ? "" : c}>{c}</option>
                         ))}
                       </select>
-                      <input
-                        type="text" placeholder="รุ่น / Model"
-                        value={product.model}
-                        onChange={(e) => handleProductChange(index, "model", e.target.value)}
-                        className={inputClass}
-                      />
+                      {product.category && categoryModels[product.category] ? (
+                        <select
+                          value={product.model}
+                          onChange={(e) => handleProductChange(index, "model", e.target.value)}
+                          className={inputClass}
+                        >
+                          <option value="">เลือกรุ่น</option>
+                          {categoryModels[product.category].map((m) => (
+                            <option key={m} value={m}>{m}</option>
+                          ))}
+                          <option value="__other">อื่นๆ (พิมพ์เอง)</option>
+                        </select>
+                      ) : product.model === "__other" || (product.category && !categoryModels[product.category]) ? (
+                        <input
+                          type="text" placeholder="รุ่น / Model"
+                          value={product.model === "__other" ? "" : product.model}
+                          onChange={(e) => handleProductChange(index, "model", e.target.value)}
+                          className={inputClass}
+                        />
+                      ) : (
+                        <input
+                          type="text" placeholder="รุ่น / Model"
+                          value={product.model}
+                          onChange={(e) => handleProductChange(index, "model", e.target.value)}
+                          className={inputClass}
+                        />
+                      )}
                       <div className="flex items-center gap-0.5">
                         <button type="button" onClick={() => handleProductChange(index, "qty", Math.max(1, product.qty - 1))}
                           className="w-7 h-8 flex items-center justify-center rounded border border-border text-muted-foreground hover:bg-muted transition-colors">
