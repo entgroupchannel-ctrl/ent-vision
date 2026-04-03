@@ -285,10 +285,10 @@ const MegaMenu = ({
                         />
                       </div>
                     )}
-                    <h4 className="text-sm font-bold text-white mb-1 group-hover:text-primary transition-colors">
+                    <h4 className="text-sm font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
                       {active.featured.title}
                     </h4>
-                    <p className="text-[11px] text-white/40 leading-relaxed mb-2 line-clamp-2">
+                    <p className="text-[11px] text-muted-foreground leading-relaxed mb-2 line-clamp-2">
                       {active.featured.desc}
                     </p>
                     <span className="inline-flex items-center gap-1 text-primary text-xs font-semibold group-hover:gap-1.5 transition-all">
