@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 
-type Tab = "contacts" | "quotes" | "subscribers";
+type Tab = "contacts" | "quotes" | "subscribers" | "chatleads";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -53,20 +53,23 @@ const AdminDashboard = () => {
   const [contacts, setContacts] = useState<any[]>([]);
   const [quotes, setQuotes] = useState<any[]>([]);
   const [subscribers, setSubscribers] = useState<any[]>([]);
+  const [chatLeads, setChatLeads] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<any>(null);
 
   const fetchData = async () => {
     setLoading(true);
-    const [c, q, s] = await Promise.all([
+    const [c, q, s, cl] = await Promise.all([
       (supabase.from as any)("contact_submissions").select("*").order("created_at", { ascending: false }),
       (supabase.from as any)("quote_requests").select("*").order("created_at", { ascending: false }),
       (supabase.from as any)("subscribers").select("*").order("created_at", { ascending: false }),
+      (supabase.from as any)("chat_leads").select("*").order("created_at", { ascending: false }),
     ]);
     if (c.data) setContacts(c.data);
     if (q.data) setQuotes(q.data);
     if (s.data) setSubscribers(s.data);
+    if (cl.data) setChatLeads(cl.data);
     setLoading(false);
   };
 
@@ -172,6 +175,7 @@ const AdminDashboard = () => {
           {([
             { id: "contacts" as Tab, label: "ติดต่อเข้ามา", count: contacts.length },
             { id: "quotes" as Tab, label: "ใบเสนอราคา", count: quotes.length },
+            { id: "chatleads" as Tab, label: "AI Chat Leads", count: chatLeads.length },
             { id: "subscribers" as Tab, label: "สมาชิก", count: subscribers.length },
           ] as const).map((t) => (
             <button
@@ -189,7 +193,30 @@ const AdminDashboard = () => {
         </div>
 
         {/* Filter & Export */}
-        {tab === "subscribers" ? (
+        {tab === "chatleads" ? (
+          <div className="flex items-center justify-end mb-4">
+            <button
+              onClick={() => {
+                const headers = ["Name", "Email", "Phone", "Company", "LINE ID", "Interest", "Score", "Status", "Created At"];
+                const rows = chatLeads.map((l: any) => [
+                  l.name || "", l.email || "", l.phone || "", l.company || "", l.line_id || "",
+                  l.interest || "", l.lead_score, l.status, l.created_at
+                ]);
+                const csv = [headers, ...rows].map(r => r.map((c: any) => `"${c}"`).join(",")).join("\n");
+                const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `chat_leads_${new Date().toISOString().slice(0,10)}.csv`;
+                a.click();
+                URL.revokeObjectURL(url);
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+            >
+              <Download size={14} /> Export CSV
+            </button>
+          </div>
+        ) : tab === "subscribers" ? (
           <div className="flex items-center justify-end mb-4">
             <button
               onClick={() => {
@@ -303,6 +330,41 @@ const AdminDashboard = () => {
                   </p>
                   <div className="flex items-center gap-3 text-[10px] text-muted-foreground/70">
                     <span>{item.email}</span>
+                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={8} /> {item.phone}</span>}
+                    <span className="flex items-center gap-0.5"><Clock size={8} /> {formatDate(item.created_at)}</span>
+                  </div>
+                </button>
+              ))
+            ) : tab === "chatleads" ? (
+              chatLeads.length === 0 ? (
+                <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มี Chat Lead</div>
+              ) : chatLeads.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setSelectedItem({ ...item, _type: "chatlead" })}
+                  className={`w-full text-left card-surface rounded-xl p-4 hover:border-primary/30 transition-colors ${
+                    selectedItem?.id === item.id ? "border-primary/50 ring-1 ring-primary/20" : ""
+                  }`}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <span className="text-sm font-bold text-foreground">{item.name || "ไม่ระบุชื่อ"}</span>
+                      {item.company && (
+                        <span className="ml-2 text-xs text-muted-foreground inline-flex items-center gap-1">
+                          <Building2 size={10} /> {item.company}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <LeadScoreBadge score={item.lead_score} />
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${statusColors[item.status] || statusColors.new}`}>
+                        {statusLabels[item.status] || item.status}
+                      </span>
+                    </div>
+                  </div>
+                  {item.interest && <p className="text-xs text-muted-foreground line-clamp-1 mb-1">สนใจ: {item.interest}</p>}
+                  <div className="flex items-center gap-3 text-[10px] text-muted-foreground/70">
+                    {item.email && <span>{item.email}</span>}
                     {item.phone && <span className="flex items-center gap-0.5"><Phone size={8} /> {item.phone}</span>}
                     <span className="flex items-center gap-0.5"><Clock size={8} /> {formatDate(item.created_at)}</span>
                   </div>
