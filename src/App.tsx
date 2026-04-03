@@ -18,6 +18,7 @@ import PanelPCGTG from "./pages/PanelPCGTG.tsx";
 import SmartDisplay from "./pages/SmartDisplay.tsx";
 import Promotions from "./pages/Promotions.tsx";
 import UTCSeries from "./pages/UTCSeries.tsx";
+import MiniPCFirewall from "./pages/MiniPCFirewall.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
