@@ -98,8 +98,8 @@ const AdminLogin = () => {
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-display font-bold text-foreground mb-1">Admin Login</h1>
-          <p className="text-sm text-muted-foreground">เข้าสู่ระบบจัดการหลังบ้าน</p>
+          <h1 className="text-2xl font-display font-bold text-foreground mb-1">เข้าสู่ระบบ</h1>
+          <p className="text-sm text-muted-foreground">เข้าสู่ระบบสำหรับสมาชิกและผู้ดูแลระบบ</p>
         </div>
 
         <div className="card-surface rounded-2xl p-6 space-y-4">
