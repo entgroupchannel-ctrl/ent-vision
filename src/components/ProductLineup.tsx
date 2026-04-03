@@ -79,11 +79,9 @@ const ProductLineup = () => {
               {/* Model chips */}
               <div className="flex flex-wrap gap-1.5">
                 {gtModels.map((model) => (
-                  <a
+                  <Link
                     key={model.name}
-                    href={model.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    to={model.href}
                     className="relative inline-flex items-center gap-1 px-2.5 py-1 rounded-md border border-border text-[11px] font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5 transition-all"
                   >
                     {model.name}
@@ -92,7 +90,7 @@ const ProductLineup = () => {
                         {model.badge}
                       </span>
                     )}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
