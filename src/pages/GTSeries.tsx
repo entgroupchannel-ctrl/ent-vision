@@ -393,15 +393,9 @@ const GTSeries = () => {
                 <button
                   key={model.name}
                   onClick={() => model.tab ? handleTabChange(model.tab) : undefined}
-                  className={`group card-surface overflow-hidden hover:border-primary/30 transition-all hover:-translate-y-1 text-left ${model.tab ? "cursor-pointer" : ""}`}
+                  className={`group card-surface overflow-hidden hover:border-primary/30 transition-all hover:-translate-y-1 text-left cursor-pointer`}
                 >
-                  {model.href && !model.tab ? (
-                    <a href={model.href} target="_blank" rel="noopener noreferrer" className="block">
-                      <ModelCard model={model} />
-                    </a>
-                  ) : (
-                    <ModelCard model={model} />
-                  )}
+                  <ModelCard model={model} />
                 </button>
               ))}
             </div>
