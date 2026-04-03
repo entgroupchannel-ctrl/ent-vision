@@ -274,18 +274,30 @@ const PromoCard = ({ promo, featured = false }: { promo: Promo; featured?: boole
 
           {/* CTA */}
           <div className="flex flex-wrap gap-2">
-            <a
-              href={promo.ctaHref}
-              target={promo.ctaHref.startsWith("http") ? "_blank" : undefined}
-              rel={promo.ctaHref.startsWith("http") ? "noopener noreferrer" : undefined}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90 ${
-                promo.status === "active"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-foreground"
-              }`}
-            >
-              {promo.ctaLabel}
-            </a>
+            {promo.ctaHref.includes("line.me") ? (
+              <LineQRButton
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90 ${
+                  promo.status === "active"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-foreground"
+                }`}
+              >
+                {promo.ctaLabel}
+              </LineQRButton>
+            ) : (
+              <a
+                href={promo.ctaHref}
+                target={promo.ctaHref.startsWith("http") ? "_blank" : undefined}
+                rel={promo.ctaHref.startsWith("http") ? "noopener noreferrer" : undefined}
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90 ${
+                  promo.status === "active"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-foreground"
+                }`}
+              >
+                {promo.ctaLabel}
+              </a>
+            )}
             {promo.downloadHref && (
               <a
                 href={promo.downloadHref}
