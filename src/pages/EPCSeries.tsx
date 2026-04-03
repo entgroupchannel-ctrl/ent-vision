@@ -304,10 +304,8 @@ const ModelCard = ({ model }: { model: typeof squareModels[0] }) => (
             <Download className="w-3.5 h-3.5 mr-1.5" /> Datasheet
           </a>
         </Button>
-        <Button size="sm" asChild className="flex-1">
-          <a href="/quote">
-            ขอใบเสนอราคา
-          </a>
+        <Button size="sm" className="flex-1" onClick={() => onQuote?.(model.name)}>
+          <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
         </Button>
       </div>
     </div>
