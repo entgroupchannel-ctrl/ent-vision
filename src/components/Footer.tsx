@@ -61,14 +61,32 @@ const NewsletterForm = () => {
 
 const footerSections = [
   {
-    title: "สินค้า",
+    title: "Industrial PC",
     links: [
-      { label: "GT Series — Mini PC", href: "/gt-series" },
-      { label: "GK Series — Panel PC", href: "/gk-series" },
+      { label: "GT Series — Fanless Mini PC", href: "/gt-series" },
+      { label: "GB Series — Compact PC", href: "/gb-series" },
+      { label: "EPC Box Series", href: "/epc-box-series" },
       { label: "EPC Series", href: "/epc-series" },
+      { label: "Waterproof PC", href: "/waterproof-pc" },
+    ],
+  },
+  {
+    title: "Panel PC & Display",
+    links: [
+      { label: "GK Series — Panel PC", href: "/gk-series" },
+      { label: "Panel PC GTG — Stainless", href: "/panel-pc-gtg" },
+      { label: "Smart Display / KIOSK", href: "/smart-display" },
+      { label: "UTG Series", href: "/utc-series" },
+    ],
+  },
+  {
+    title: "อุปกรณ์ & โซลูชัน",
+    links: [
       { label: "Rugged Tablet", href: "/rugged-tablet" },
       { label: "Mini PC", href: "/mini-pc" },
-      { label: "Smart Display", href: "/smart-display" },
+      { label: "Mini PC Firewall", href: "/minipc-firewall" },
+      { label: "Volktek — Network Switch", href: "/volktek" },
+      { label: "vCloudPoint — Thin Client", href: "/vcloudpoint" },
     ],
   },
   {
