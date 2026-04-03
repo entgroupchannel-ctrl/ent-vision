@@ -185,7 +185,7 @@ const ContactUs = () => {
               {/* Google Map */}
               <div className="card-surface rounded-xl overflow-hidden">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3873.4!2d100.5!3d13.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e283e8c1f3e63b%3A0x7f9d25f04c82de9e!2sMetro%20Biztown%20Chaengwattana%202!5e0!3m2!1sth!2sth!4v1"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3872.5!2d100.4793839!3d13.9320709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2839e781a7a99%3A0xfae548f49721eb09!2sENT%20GROUP%20Co.%2CLtd.!5e0!3m2!1sth!2sth!4v1"
                   width="100%"
                   height="220"
                   style={{ border: 0 }}
@@ -197,7 +197,7 @@ const ContactUs = () => {
                 />
                 <div className="p-3">
                   <a
-                    href="https://maps.app.goo.gl/entgroup"
+                    href="https://maps.app.goo.gl/vuvJHVwy2n2G3o7e6"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs text-primary hover:underline flex items-center gap-1"
