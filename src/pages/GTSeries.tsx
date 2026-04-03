@@ -3483,54 +3483,157 @@ const GTSeries = () => {
           {/* Tab: GT1200 Detail */}
           {activeTab === "gt1200" && (
             <div className="space-y-8 animate-fade-in">
-              <div className="text-center">
-                <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-4">
-                  NEW 2023
-                </span>
-                <h3 className="text-3xl md:text-4xl font-display font-bold">
-                  GT<span className="text-gradient">1200</span>
-                </h3>
-                <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">
-                  รุ่นคอมแพกต์ ดีไซน์กระทัดรัด รองรับ CPU ตั้งแต่ i3-6157U ไปจนถึง i7-10510U
-                  เหมาะกับงาน KIOSK, Digital Signage และ Factory Automation
-                </p>
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
+                <img src="/images/gt1200/main.jpg" alt="GT1200 Industrial PC" className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    Dual LAN · 2 COM · VGA+HDMI · SIM 4G · TDP 28W
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">1200</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    Dual LAN Compact Fanless IPC — คอมแพกต์ ประหยัดพลังงาน
+                  </p>
+                </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {[
-                  "https://static.wixstatic.com/media/0597a3_3a64dd92132a4f54b2a9f0eb03b87ed4~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
-                  "https://static.wixstatic.com/media/0597a3_5beadd75a18f441fac4637410ada9e1a~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.png",
-                  "https://static.wixstatic.com/media/0597a3_7a9597a364a54709bdb4bcb6a6fbd4a2~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5.png",
-                  "https://static.wixstatic.com/media/0597a3_e67ca0fcac944ce98203bedb443924c8~mv2.png/v1/fill/w_390,h_353,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_e67ca0fcac944ce98203bedb443924c8~mv2.png",
-                  "https://static.wixstatic.com/media/0597a3_49e41d9895654282a8b6af3994fc6a55~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_49e41d9895654282a8b6af3994fc6a55~mv2.png",
-                  "https://static.wixstatic.com/media/0597a3_ada2a84013274204b1f69dfa9eec7b75~mv2.png/v1/fill/w_390,h_353,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_ada2a84013274204b1f69dfa9eec7b75~mv2.png",
-                ].map((img, i) => (
-                  <div key={i} className="card-surface overflow-hidden">
-                    <img src={img} alt={`GT1200 มุมมอง ${i + 1}`} className="w-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+              {/* Description + Factory Gallery */}
+              <div className="grid lg:grid-cols-5 gap-8">
+                <div className="lg:col-span-3 space-y-6">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
+                      Gen 4/6/7/8/10 · Dual LAN · VGA+HDMI · SIM 4G
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+                      GT<span className="text-gradient">1200</span>
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      GT1200 คอมพิวเตอร์อุตสาหกรรมขนาดกะทัดรัด รองรับ CPU ตั้งแต่ Gen 4 ถึง Gen 10
+                      ตัวเครื่องอลูมิเนียมอัลลอยด์ระบายความร้อนแบบ Fanless ทำงาน 24 ชม.
+                      พร้อม Dual LAN, 2 COM RS232, VGA+HDMI Dual Display, SIM 4G/WiFi
+                      เหมาะกับงาน KIOSK, Digital Signage, Factory Automation, IoT
+                    </p>
                   </div>
-                ))}
+
+                  <div className="card-surface p-5 border-l-4 border-primary">
+                    <h4 className="font-bold text-foreground mb-3">🏭 Products Features</h4>
+                    <ul className="text-sm text-muted-foreground space-y-2">
+                      <li>✅ Intel Gen 4/6/7/8/10 Core i3/i5/i7 CPU (Onboard)</li>
+                      <li>✅ 2× RJ45 Intel Gigabit LAN + 2× DB9 RS232 COM</li>
+                      <li>✅ VGA + HDMI 1.4 Dual Display พร้อมกัน</li>
+                      <li>✅ SIM Card Slot สำหรับ 3G/4G WiFi</li>
+                      <li>✅ Fanless Aluminum Alloy — เงียบสนิท 24 ชม.</li>
+                      <li>✅ TDP เพียง 28W ประหยัดพลังงาน</li>
+                      <li>✅ AWAL, Wake On LAN, Watchdog, RTC</li>
+                      <li>✅ Wall Mount ได้ — ขนาดเล็กเพียง 193.9×127×57.2mm</li>
+                    </ul>
+                  </div>
+
+                  {/* Key Specs */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="card-surface p-4 text-center">
+                      <Cpu className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">CPU</div>
+                      <div className="text-xs text-muted-foreground mt-1">i3-6157U / i5-4278U / i5-7287U / i7-4578U</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Server className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">RAM</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR3L / DDR4 สูงสุด 64GB</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Monitor className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Dual Display</div>
+                      <div className="text-xs text-muted-foreground mt-1">VGA + HDMI 1.4 — 2 จอพร้อมกัน</div>
+                    </div>
+                    <div className="card-surface p-4 text-center">
+                      <Shield className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">2 LAN + 2 COM</div>
+                      <div className="text-xs text-muted-foreground mt-1">Realtek Gigabit + RS232 + SIM 4G</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Factory Gallery */}
+                <div className="lg:col-span-2 space-y-4">
+                  <div className="card-surface overflow-hidden">
+                    <img src="/images/gt1200/main.jpg" alt="GT1200 ภาพหลัก" className="w-full object-contain p-4" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { src: "/images/gt1200/front.jpg", alt: "GT1200 ด้านหน้า" },
+                      { src: "/images/gt1200/side.jpg", alt: "GT1200 ด้านข้าง" },
+                      { src: "/images/gt1200/top.jpg", alt: "GT1200 ด้านบน" },
+                      { src: "/images/gt1200/internal.jpg", alt: "GT1200 ภายใน" },
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden">
+                        <img src={img.src} alt={img.alt} className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="card-surface p-5 text-center">
-                  <Cpu className="mx-auto text-primary mb-2" size={28} />
-                  <div className="font-bold text-foreground text-sm">CPU</div>
-                  <div className="text-xs text-muted-foreground mt-1">i3-6157U / i5-4278U / i5-7287U / i7-4578U</div>
+              {/* Port Diagram */}
+              <div className="card-surface p-4 overflow-hidden">
+                <h4 className="font-bold text-foreground mb-3 px-2">🔌 Ports & Connectivity</h4>
+                <img src="/images/gt1200/ports.jpg" alt="GT1200 Ports Layout" className="w-full rounded-lg" loading="lazy" />
+              </div>
+
+              {/* Spec 2 คอลัมน์ */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">📋 GT1200 Specifications</h3>
                 </div>
-                <div className="card-surface p-5 text-center">
-                  <Server className="mx-auto text-primary mb-2" size={28} />
-                  <div className="font-bold text-foreground text-sm">RAM</div>
-                  <div className="text-xs text-muted-foreground mt-1">DDR3L / DDR4 สูงสุด 64GB</div>
+                <div className="grid md:grid-cols-2 md:divide-x divide-border">
+                  <div className="divide-y divide-border">
+                    {[
+                      ["CPU", "1. Intel Core i3-6157U 2.4GHz 2C/4T 3MB TDP 28W\n2. Intel Core i5-4278U 2.6–3.1GHz 2C/4T 3MB TDP 28W\n3. Intel Core i5-7287U 3.3–3.7GHz 2C/4T 4MB TDP 28W\n4. Intel Core i7-4578U 3.0–3.5GHz 2C/4T 4MB TDP 28W"],
+                      ["TDP", "28W"],
+                      ["Chipset", "Intel Sunrise Point-LP / Skylake-U"],
+                      ["Memory", "Gen 4: 1× SO-DIMM DDR3L (4–8GB)\nGen 6/7/8: 1× SO-DIMM DDR4 (4–32GB)\nGen 8/10: 2× SO-DIMM DDR4 (สูงสุด 64GB)"],
+                      ["SSD", "Gen 4: M-SATA 3.0 (6Gb/s)\nGen 6/7/8/10: M.2 NVMe/NGFF 2280"],
+                      ["SATA", "1× SATA 3.0 สำหรับ HDD/SSD (6Gb/s)"],
+                      ["Display", "1× VGA + 1× HDMI 1.4 (Dual Display)"],
+                    ].map(([label, value], i) => (
+                      <div key={i} className="flex">
+                        <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
+                        <div className="w-2/3 p-3 text-xs text-muted-foreground whitespace-pre-line">{value}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="divide-y divide-border">
+                    {[
+                      ["LAN", "2× Realtek RTL8111 Gigabit (10/100/1000Mbps)"],
+                      ["COM", "2× DB9 RS232"],
+                      ["USB", "4× USB 2.0 + 4× USB 3.0"],
+                      ["WiFi / 4G", "Mini PCIe WiFi/BT + Mini PCIe 3G/4G\n2× เสาอากาศภายนอก + SIM Slot"],
+                      ["Audio", "1× MIC + 1× SPK"],
+                      ["Power", "DC 12V–19V (แนะนำ 12V/5A)"],
+                      ["Temp Range", "-20°C ~ +60°C (Operating)"],
+                      ["Size / Weight", "193.9 × 127 × 57.2mm / 1kg"],
+                      ["Functions", "AWAL, Wake On LAN, Watchdog, RTC"],
+                      ["OS", "Windows 7/8/10/11, Linux"],
+                    ].map(([label, value], i) => (
+                      <div key={i} className="flex">
+                        <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
+                        <div className="w-2/3 p-3 text-xs text-muted-foreground whitespace-pre-line">{value}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="card-surface p-5 text-center">
-                  <Shield className="mx-auto text-primary mb-2" size={28} />
-                  <div className="font-bold text-foreground text-sm">2 LAN Ports</div>
-                  <div className="text-xs text-muted-foreground mt-1">Realtek RTL8111 Gigabit</div>
+              </div>
+
+              {/* Dimension Drawings */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="card-surface p-4 overflow-hidden">
+                  <img src="/images/gt1200/dimension1.jpg" alt="GT1200 Dimension Front" className="w-full rounded-lg" loading="lazy" />
                 </div>
-                <div className="card-surface p-5 text-center">
-                  <Zap className="mx-auto text-primary mb-2" size={28} />
-                  <div className="font-bold text-foreground text-sm">TDP 28W</div>
-                  <div className="text-xs text-muted-foreground mt-1">ประหยัดพลังงาน Fanless</div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <img src="/images/gt1200/dimension2.jpg" alt="GT1200 Dimension Side" className="w-full rounded-lg" loading="lazy" />
                 </div>
               </div>
 
@@ -3560,6 +3663,7 @@ const GTSeries = () => {
                 </a>
               </div>
 
+              {/* Datasheet CTA */}
               <div className="text-center">
                 <a
                   href="https://www.entgroup.co.th/_files/ugd/0597a3_b016e32d02cf4accaa6709406df39692.pdf"
