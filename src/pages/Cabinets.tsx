@@ -88,9 +88,27 @@ const galleryImages = [
   cabinetGallery6,
 ];
 
+const inputClass =
+  "w-full px-3 py-2 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
+
+const materialOptions = ["เหล็กขาว", "สแตนเลสสตีล (SUS304)", "สแตนเลสสตีล (SUS316)", "อื่นๆ"];
+const installOptions = ["วางกับพื้น (Floor Standing)", "แขวนกับผนัง (Wall Mounting)", "ทั้งสองแบบ"];
+const lockOptions = ["กุญแจแบบเด้ง", "กุญแจแบบเขาควาย", "ล็อกอิเล็กทรอนิกส์", "อื่นๆ"];
+
 /* ═══════ Component ═══════ */
 const Cabinets = () => {
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const [customOpen, setCustomOpen] = useState(false);
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const [customLoading, setCustomLoading] = useState(false);
+  const [customSubmitted, setCustomSubmitted] = useState(false);
+  const [customForm, setCustomForm] = useState({
+    name: "", email: "", phone: "", company: "",
+    panelModel: "", cabinetWidth: "", cabinetHeight: "", cabinetDepth: "",
+    material: "", installation: "", lock: "", protection: "IP65",
+    plateCount: "1", details: "",
+  });
 
   return (
     <div className="min-h-screen bg-background">
