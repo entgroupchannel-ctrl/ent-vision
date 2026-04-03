@@ -40,6 +40,8 @@ Return ONLY a JSON object with these fields (use empty string if not found):
   "email": "email address", 
   "phone": "phone number",
   "company": "company name",
+  "position": "job title / position",
+  "address": "office address",
   "lineId": "LINE ID if visible",
   "whatsapp": "WhatsApp number if visible"
 }
@@ -69,10 +71,8 @@ Do not include any markdown formatting or code blocks. Return only the raw JSON 
     const data = await response.json()
     const content = data.choices?.[0]?.message?.content || '{}'
     
-    // Try to parse the JSON from AI response
     let parsed
     try {
-      // Remove potential markdown code blocks
       const cleaned = content.replace(/```json?\n?/g, '').replace(/```/g, '').trim()
       parsed = JSON.parse(cleaned)
     } catch {
