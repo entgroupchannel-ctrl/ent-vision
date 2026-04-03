@@ -76,7 +76,7 @@ const gtModels = [
     storage: "M.2 NVMe + SATA",
     ports: "USB 6, COM 2, LAN 4, HDMI",
     size: "4 LAN + DDR5 Support",
-    image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
+    image: gt1400Product,
     tab: "gt1400",
     highlight: "NEW!",
     badge: true,
