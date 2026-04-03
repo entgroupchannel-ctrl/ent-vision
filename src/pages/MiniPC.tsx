@@ -739,6 +739,7 @@ const CategorySection = ({ id, title, subtitle, icon: Icon, models }: {
 /* ── Main Page ── */
 const MiniPC = () => {
   const [activeCategory, setActiveCategory] = useState("entry");
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background">
