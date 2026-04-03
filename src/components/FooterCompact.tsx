@@ -23,6 +23,7 @@ const quickLinks = [
   { label: "Rugged Tablet", href: "/rugged-tablet" },
   { label: "vCloudPoint", href: "/vcloudpoint" },
   { label: "Smart Display", href: "/smart-display" },
+  { label: "🎯 ช่วยเลือกสินค้า", href: "/product-advisor" },
 ];
 
 const FooterCompact = () => {

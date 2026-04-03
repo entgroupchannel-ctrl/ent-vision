@@ -308,6 +308,22 @@ const HeroSection = () => {
             )}
           </div>
 
+          {/* CTA + Tags */}
+          <div className="flex flex-wrap items-center gap-3 mb-6 animate-fade-up" style={{ animationDelay: "0.35s" }}>
+            <Link
+              to="/product-advisor"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+            >
+              <Search size={16} /> ช่วยเลือกสินค้าที่ใช่
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/20 text-white/80 text-sm hover:bg-white/10 transition-colors backdrop-blur-sm"
+            >
+              ปรึกษาผู้เชี่ยวชาญ
+            </Link>
+          </div>
+
           {/* Tags */}
           <div className="flex flex-wrap gap-2 max-w-xl animate-fade-up" style={{ animationDelay: "0.4s" }}>
             {searchTags.slice(0, 6).map((tag) => (
