@@ -669,31 +669,31 @@ const GTSeries = () => {
                 ))}
               </div>
 
-              <p className="text-muted-foreground leading-relaxed max-w-lg text-base">
+              <p className="text-muted-foreground leading-relaxed max-w-lg text-sm md:text-base">
                 คอมพิวเตอร์อุตสาหกรรม Fanless ขนาดกะทัดรัด โครงอลูมิเนียมหนาทั้งตัว
                 ครีบระบายความร้อนถี่ๆ — ทนฝุ่น ทนสั่นสะเทือน ทำงาน 24/7 ไม่มีสะดุด
               </p>
 
               {/* Quick stats */}
-              <div className="grid grid-cols-3 gap-4">
-                <div className="text-center p-3 rounded-lg bg-card border border-border">
-                  <div className="text-2xl font-black text-primary">13+</div>
-                  <div className="text-xs text-muted-foreground mt-1">รุ่นให้เลือก</div>
+              <div className="grid grid-cols-3 gap-3 md:gap-4">
+                <div className="text-center p-2.5 md:p-3 rounded-lg bg-card border border-border">
+                  <div className="text-xl md:text-2xl font-black text-primary">13+</div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1">รุ่นให้เลือก</div>
                 </div>
-                <div className="text-center p-3 rounded-lg bg-card border border-border">
-                  <div className="text-2xl font-black text-primary">0°</div>
-                  <div className="text-xs text-muted-foreground mt-1">เสียงรบกวน</div>
+                <div className="text-center p-2.5 md:p-3 rounded-lg bg-card border border-border">
+                  <div className="text-xl md:text-2xl font-black text-primary">0°</div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1">เสียงรบกวน</div>
                 </div>
-                <div className="text-center p-3 rounded-lg bg-card border border-border">
-                  <div className="text-2xl font-black text-primary">24/7</div>
-                  <div className="text-xs text-muted-foreground mt-1">ทำงานต่อเนื่อง</div>
+                <div className="text-center p-2.5 md:p-3 rounded-lg bg-card border border-border">
+                  <div className="text-xl md:text-2xl font-black text-primary">24/7</div>
+                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1">ทำงานต่อเนื่อง</div>
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => handleTabChange("overview")}
-                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-primary/25"
+                  className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-primary/25"
                 >
                   ดูรุ่นทั้งหมด <ArrowLeft size={16} className="rotate-180" />
                 </button>
@@ -702,11 +702,11 @@ const GTSeries = () => {
                     const el = document.getElementById("comparison");
                     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
                   }}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border-2 border-primary/40 text-primary font-bold text-sm hover:bg-primary/10 transition-all group"
+                  className="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-3 md:py-3.5 rounded-full border-2 border-primary/40 text-primary font-bold text-sm hover:bg-primary/10 transition-all group"
                 >
                   <Filter size={16} />
                   <span>เปรียบเทียบสเปก</span>
-                  <span className="px-2 py-0.5 rounded-full bg-primary/15 text-[10px] font-bold tracking-wide uppercase group-hover:bg-primary/25 transition-colors">Smart Filter</span>
+                  <span className="hidden sm:inline px-2 py-0.5 rounded-full bg-primary/15 text-[10px] font-bold tracking-wide uppercase group-hover:bg-primary/25 transition-colors">Smart Filter</span>
                 </button>
               </div>
             </div>
@@ -725,7 +725,7 @@ const GTSeries = () => {
               <div className="absolute -bottom-6 -left-6 w-32 h-32 rounded-full bg-primary/5 blur-3xl" />
 
               {/* Floating badge */}
-              <div className="absolute -bottom-4 left-6 z-20 px-5 py-3 rounded-xl bg-card border border-border shadow-lg">
+              <div className="absolute -bottom-4 left-6 z-20 px-4 md:px-5 py-2.5 md:py-3 rounded-xl bg-card border border-border shadow-lg hidden sm:flex">
                 <div className="flex items-center gap-3">
                   <Thermometer className="text-primary" size={20} />
                   <div>
@@ -735,7 +735,7 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              <div className="absolute -top-3 right-8 z-20 px-4 py-2.5 rounded-xl bg-card border border-border shadow-lg">
+              <div className="absolute -top-3 right-8 z-20 px-3 md:px-4 py-2 md:py-2.5 rounded-xl bg-card border border-border shadow-lg hidden sm:flex">
                 <div className="flex items-center gap-2">
                   <Wind className="text-primary" size={18} />
                   <div>

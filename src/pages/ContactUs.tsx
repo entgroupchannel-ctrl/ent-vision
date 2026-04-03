@@ -119,8 +119,6 @@ const ContactUs = () => {
     };
     reader.readAsDataURL(file);
   };
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
