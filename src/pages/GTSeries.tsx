@@ -3920,10 +3920,16 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Port Diagram */}
-              <div className="card-surface p-4 overflow-hidden">
-                <h4 className="font-bold text-foreground mb-3 px-2">🔌 Ports & Connectivity</h4>
-                <img src="/images/gt1200/ports.jpg" alt="GT1200 Ports Layout" className="w-full rounded-lg" loading="lazy" />
+              {/* Ports & Dimension — 2 คอลัมน์ */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="card-surface p-4 overflow-hidden rounded-xl">
+                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหน้า</h4>
+                  <img src="/images/gt1200/ports-front.jpg" alt="GT1200 Ports ด้านหน้า" className="w-full rounded-lg" loading="lazy" />
+                </div>
+                <div className="card-surface p-4 overflow-hidden rounded-xl">
+                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหลัง</h4>
+                  <img src="/images/gt1200/ports-rear.jpg" alt="GT1200 Ports ด้านหลัง" className="w-full rounded-lg" loading="lazy" />
+                </div>
               </div>
 
               {/* Spec 2 คอลัมน์ */}
