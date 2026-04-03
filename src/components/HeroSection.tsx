@@ -59,7 +59,7 @@ const navLinks = [
 const heroStats = [
   { value: "8,000+", label: "ลูกค้าองค์กร" },
   { value: "13+", label: "ปีประสบการณ์" },
-  { value: "50+", label: "รุ่นสินค้าพร้อมส่ง" },
+  { value: "> 600 SKU", label: "รายการสินค้า" },
   { value: "OEM", label: "ราคาจากผู้ผลิตโดยตรง" },
 ];
 
