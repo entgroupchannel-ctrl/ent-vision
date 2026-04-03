@@ -174,10 +174,8 @@ const WaterproofPC = () => {
                 คอมพิวเตอร์อุตสาหกรรมกันน้ำ กันฝุ่น IP67/IP69K สแตนเลส SUS304 เกรดอาหาร ออกแบบไร้พัดลม เหมาะสำหรับอุตสาหกรรมอาหาร เครื่องดื่ม ยา และพื้นที่ที่ต้องล้างทำความสะอาดได้
               </p>
               <div className="flex gap-3">
-                <Button asChild>
-                  <a href="/quote">
-                    ขอใบเสนอราคา
-                  </a>
+                <Button onClick={() => setQuoteProduct("Waterproof PC IP69K")}>
+                  <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
                 </Button>
                 <Button variant="outline" asChild>
                   <a href="https://www.entgroup.co.th/_files/ugd/0597a3_9c183e569b0c43bd9fe64184fff90503.pdf" target="_blank" rel="noopener noreferrer">
