@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import MegaMenu from "@/components/MegaMenu";
+
 import FooterCompact from "@/components/FooterCompact";
 
 /* ═══════ Product Database ═══════ */
