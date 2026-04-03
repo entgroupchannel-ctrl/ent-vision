@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   Cpu, Monitor, Shield, Tablet, Wifi, Server, Box, Layers,
-  Factory, Zap, ChevronRight, ArrowRight, Sparkles
+  Factory, Zap, ChevronRight, ArrowRight, Sparkles, Tv, Sun,
+  Droplets, UtensilsCrossed
 } from "lucide-react";
 
 /* ═══════ Menu Data ═══════ */
@@ -17,6 +18,7 @@ const menuCategories = [
       desc: "Mini PC Fanless ถึก ทน แกร่ง — 12 รุ่น ครอบคลุมทุกงาน",
       href: "/gt-series",
       badge: "Best Seller",
+      image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
     },
     columns: [
       {
@@ -33,7 +35,6 @@ const menuCategories = [
         links: [
           { label: "GK Series — Panel PC", href: "/gk-series", hot: true },
           { label: "Panel PC GTG/GTY", href: "/panel-pc-gtg" },
-          { label: "Smart Display & KIOSK", href: "/smart-display" },
         ],
       },
       {
@@ -55,6 +56,7 @@ const menuCategories = [
       desc: "pfSense / OPNsense Ready — Fanless 2.5G/10G พร้อม Smart Filter",
       href: "/minipc-firewall",
       badge: "Smart Filter",
+      image: "https://static.wixstatic.com/media/0597a3_6ebc77045f9a4292bb485a4fa91ac3a2~mv2.png/v1/fill/w_211,h_155,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-15%20at%2012_02_13.png",
     },
     columns: [
       {
@@ -72,21 +74,80 @@ const menuCategories = [
     ],
   },
   {
+    id: "display",
+    label: "Smart Display",
+    tagline: "จอแสดงผลอุตสาหกรรม & KIOSK",
+    icon: Tv,
+    featured: {
+      title: "Smart Display & KIOSK",
+      desc: "จอ Digital Signage Indoor/Outdoor ความสว่างสูง พร้อมซอฟต์แวร์จัดการเนื้อหาฟรี",
+      href: "/smart-display",
+      badge: "Signage",
+      image: "https://static.wixstatic.com/media/0597a3_89ddd2e3de8b4610bd0e08f02dbf25d6~mv2.png/v1/fill/w_378,h_315,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-07-12%20at%2017_18_04.png",
+    },
+    columns: [
+      {
+        heading: "Indoor Display",
+        links: [
+          { label: "Digital Signage 35\"–75\"", href: "/smart-display", hot: true },
+          { label: "Stretched Bar Display", href: "/smart-display" },
+          { label: "Standing Kiosk", href: "/smart-display?tab=kiosk" },
+        ],
+      },
+      {
+        heading: "Outdoor Monitor",
+        links: [
+          { label: "Outdoor 12\"–32\" (1500 Nits)", href: "/smart-display?tab=outdoor", hot: true },
+          { label: "Window Display", href: "/smart-display" },
+        ],
+      },
+      {
+        heading: "Industrial Grade",
+        links: [
+          { label: "Stainless Steel IP69K", href: "/smart-display" },
+          { label: "Food Grade Display", href: "/smart-display" },
+          { label: "Touch Monitor FPM Series", href: "/smart-display" },
+        ],
+      },
+    ],
+  },
+  {
     id: "rugged",
     label: "Rugged Device",
     tagline: "อุปกรณ์ทนทานเกรดทหาร",
     icon: Tablet,
     featured: {
-      title: "Rugged Tablet",
-      desc: "กันน้ำ กันกระแทก MIL-STD-810G — สำหรับภาคสนามและโลจิสติกส์",
+      title: "Rugged Tablet & Notebook",
+      desc: "กันน้ำ กันกระแทก MIL-STD-810G/H — Windows & Android สำหรับภาคสนามและโลจิสติกส์",
       href: "/rugged-tablet",
       badge: "MIL-STD",
+      image: "https://entgroup-rugged.com/assets/f9e-C3MseYpo.png",
     },
     columns: [
       {
-        heading: "Rugged Series",
+        heading: "Rugged Tablet",
         links: [
-          { label: "Rugged Tablet", href: "/rugged-tablet", hot: true },
+          { label: "F9E Elite — i5 Gen 12", href: "/rugged-tablet", hot: true },
+          { label: "W109U — i5/i7 IP68", href: "/rugged-tablet" },
+          { label: "F9A — Alder Lake N100", href: "/rugged-tablet" },
+          { label: "F9R — Android RK3588", href: "/rugged-tablet" },
+          { label: "A109T — Android 14", href: "/rugged-tablet" },
+        ],
+      },
+      {
+        heading: "Rugged Notebook",
+        links: [
+          { label: "EM-X15M — AI PC i7", href: "/rugged-tablet", hot: true },
+          { label: "EM-X14A — 14\" Compact", href: "/rugged-tablet" },
+          { label: "EM-X14M — 2-in-1 Tablet PC", href: "/rugged-tablet" },
+          { label: "W14U-A — 14\" Laptop", href: "/rugged-tablet" },
+        ],
+      },
+      {
+        heading: "อุปกรณ์เสริม",
+        links: [
+          { label: "แท่นชาร์จ & Dock", href: "/rugged-tablet" },
+          { label: "Vehicle Mount", href: "/rugged-tablet" },
         ],
       },
     ],
@@ -101,6 +162,7 @@ const menuCategories = [
       desc: "1 เครื่อง PC รองรับ 30 คน — ลดต้นทุน 60% ประหยัดไฟ 80%",
       href: "/vcloudpoint",
       badge: "Zero Client",
+      image: "https://static.wixstatic.com/media/0597a3_756a4a09e31d4b6d85eb8da1da91f781~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_39_10.png",
     },
     columns: [
       {
@@ -202,7 +264,7 @@ const MegaMenu = ({
                   <Link
                     to={active.featured.href}
                     onClick={() => { setActiveMenu(null); onNavigate?.(); }}
-                    className="group block rounded-2xl bg-gradient-to-br from-primary/15 via-primary/5 to-transparent border border-primary/20 p-6 hover:border-primary/40 transition-all duration-300"
+                    className="group block rounded-2xl bg-gradient-to-br from-primary/15 via-primary/5 to-transparent border border-primary/20 p-6 hover:border-primary/40 transition-all duration-300 h-full"
                   >
                     <div className="flex items-center gap-2 mb-3">
                       <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-primary text-primary-foreground">
@@ -210,6 +272,16 @@ const MegaMenu = ({
                       </span>
                       <Sparkles size={12} className="text-primary" />
                     </div>
+                    {active.featured.image && (
+                      <div className="flex justify-center mb-4">
+                        <img
+                          src={active.featured.image}
+                          alt={active.featured.title}
+                          className="h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-lg"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
                     <h4 className="text-xl font-black text-white mb-2 group-hover:text-primary transition-colors">
                       {active.featured.title}
                     </h4>
