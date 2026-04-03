@@ -331,14 +331,19 @@ const UTCSeries = () => {
             {/* Square */}
             <div className="card-surface rounded-xl overflow-hidden">
               <div className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                    <Square className="text-primary" size={22} />
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                      <Square className="text-primary" size={22} />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-foreground">Square Screen (4:3 / 5:4)</h3>
+                      <p className="text-xs text-primary/70 font-medium">หน้าจอสี่เหลี่ยมจตุรัส</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-foreground">Square Screen (4:3 / 5:4)</h3>
-                    <p className="text-xs text-primary/70 font-medium">หน้าจอสี่เหลี่ยมจตุรัส</p>
-                  </div>
+                  <WishlistHeart
+                    item={{ id: "utc-square", name: "UTC Square Screen", category: "UTC Series", image: "https://static.wixstatic.com/media/0597a3_48b4b6dd4b0844f1996977be9733e597~mv2.png", href: "/utc-series", specs: "4:3 / 5:4 Touch Monitor" }}
+                  />
                 </div>
                 <img
                   src="https://static.wixstatic.com/media/0597a3_48b4b6dd4b0844f1996977be9733e597~mv2.png/v1/crop/x_1,y_7,w_1775,h_891/fill/w_1330,h_668,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_48b4b6dd4b0844f1996977be9733e597~mv2.png"
