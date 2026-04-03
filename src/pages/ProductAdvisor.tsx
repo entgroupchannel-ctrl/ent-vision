@@ -628,7 +628,10 @@ const ProductAdvisor = () => {
         <section className="relative py-16 md:py-24 px-4 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/10" />
           <div className="container max-w-4xl mx-auto text-center relative z-10">
-            <Badge variant="secondary" className="mb-4 gap-1.5">
+            <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4">
+              <ArrowLeft size={16} /> กลับหน้าแรก
+            </Link>
+            <Badge variant="secondary" className="mb-4 gap-1.5 block w-fit mx-auto">
               <Sparkles size={12} /> Smart Product Advisor
             </Badge>
             <h1 className="text-3xl md:text-5xl font-display font-bold mb-4">
