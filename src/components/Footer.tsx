@@ -121,7 +121,7 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between py-3 md:py-0 md:pointer-events-none md:cursor-default text-left"
       >
-        <h3 className="text-sm font-bold text-gray-800 dark:text-white">{title}</h3>
+        <h3 className="text-sm font-bold text-gray-900 dark:text-white">{title}</h3>
         <ChevronDown
           size={16}
           className={`text-gray-400 dark:text-[hsl(215,15%,55%)] transition-transform duration-200 md:hidden ${open ? "rotate-180" : ""}`}
