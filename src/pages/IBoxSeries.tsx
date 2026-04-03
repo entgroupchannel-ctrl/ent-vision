@@ -1,3 +1,4 @@
+import SEOHead from "@/components/SEOHead";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -133,6 +134,7 @@ const IBoxSeries = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="iBox Series — Embedded Fanless Industrial PC" description="iBox Series คอมพิวเตอร์อุตสาหกรรมแบบ Fanless ขนาดกะทัดรัด รองรับ Intel N-Series ถึง Core i7 สำหรับ Edge Computing, IoT Gateway, Digital Signage" path="/ibox-series" />
       {/* Banner */}
       <div className="relative h-48 md:h-64 overflow-hidden">
         <img src={bannerIBox} alt="iBox Series — Industrial Mini PC" className="w-full h-full object-cover" />

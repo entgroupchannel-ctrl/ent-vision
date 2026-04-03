@@ -1,3 +1,4 @@
+import SEOHead from "@/components/SEOHead";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Settings, Maximize, Wifi, ChevronDown, Smartphone, Factory, BarChart3, Gauge } from "lucide-react";
@@ -567,7 +568,7 @@ const GKSeries = () => {
   const [showLineQR, setShowLineQR] = useState(false);
   return (
     <div className="min-h-screen bg-background">
-      {/* Nav */}
+      <SEOHead title="GK Series — Industrial Panel PC จอสัมผัสอุตสาหกรรม" description="GK Series Panel PC อุตสาหกรรม จอสัมผัส 10.4-21 นิ้ว เลือก CPU ได้ตามใจ ทนร้อน ทนฝุ่น สำหรับโรงงาน POS และงานควบคุม" path="/gk-series" />
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">
