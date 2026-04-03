@@ -143,7 +143,7 @@ const MemberRegister = () => {
 
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data: signUpData, error } = await supabase.auth.signUp({
         email: form.email,
         password: form.password,
         options: {
@@ -159,6 +159,11 @@ const MemberRegister = () => {
       });
 
       if (error) throw error;
+
+      // Save business card to DB if scanned
+      if (scannedFileRef.current && signUpData?.user?.id) {
+        await saveBusinessCard(signUpData.user.id, scannedFileRef.current, scannedInfoRef.current);
+      }
 
       toast({
         title: "สมัครสมาชิกสำเร็จ!",
