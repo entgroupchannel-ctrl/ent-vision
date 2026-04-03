@@ -101,6 +101,11 @@ const caseStudies = [
       { val: "80%", label: "ประหยัดไฟ" },
     ],
     highlights: ["Computer Lab 20–40 เครื่องต่อห้อง", "ซอฟต์แวร์สอน Adobe, Office, Coding", "Broadcasting หน้าจอ — อาจารย์สอนได้ง่าย", "นักศึกษา 500+ คนใช้พร้อมกัน"],
+    videos: [
+      { id: "uGMqA_xlHLs", label: "มหาวิทยาลัย — ห้อง Lab" },
+      { id: "4hxvwm9ZKhg", label: "สำหรับห้องเรียน โรงเรียน" },
+      { id: "XVl62Xe9ZaI", label: "Case Study — โรงเรียน" },
+    ],
     color: "from-sky-500/10 to-sky-500/5",
     borderColor: "border-sky-500/20",
     accentColor: "text-sky-500",
