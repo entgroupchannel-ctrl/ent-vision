@@ -180,8 +180,6 @@ const HeroSection = () => {
         </a>
       </div>
 
-      {/* LINE QR Dialog */}
-      <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
     </section>
   );
 };
