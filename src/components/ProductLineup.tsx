@@ -1,18 +1,18 @@
-import { ExternalLink, ArrowRight, BarChart3, Search } from "lucide-react";
+import { BarChart3, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const gtModels = [
-  { name: "GT1000", href: "https://www.entgroup.co.th/ipc-gt1000" },
-  { name: "GT1200 / GT1400", href: "https://www.entgroup.co.th/gt-series-2023", badge: "ราคาใหม่!" },
-  { name: "GT2000", href: "https://www.entgroup.co.th/mini-pc-gt2000" },
-  { name: "GT3000", href: "https://www.entgroup.co.th/mini-pc-3000" },
-  { name: "GT4000", href: "https://www.entgroup.co.th/minipc-gt4000" },
-  { name: "GT4500", href: "https://www.entgroup.co.th/ipc-gt4500" },
-  { name: "GT5000", href: "https://www.entgroup.co.th/gt5000" },
-  { name: "GT6000", href: "https://www.entgroup.co.th/gt6000" },
-  { name: "GT7000", href: "https://www.entgroup.co.th/ipc-gt7000" },
-  { name: "GT8000", href: "https://www.entgroup.co.th/gt8000" },
-  { name: "GT9000", href: "https://www.entgroup.co.th/gt9000" },
+  { name: "GT1000", href: "/gt-series" },
+  { name: "GT1200 / GT1400", href: "/gt-series", badge: "ราคาใหม่!" },
+  { name: "GT2000", href: "/gt-series" },
+  { name: "GT3000", href: "/gt-series" },
+  { name: "GT4000", href: "/gt-series" },
+  { name: "GT4500", href: "/gt-series" },
+  { name: "GT5000", href: "/gt-series" },
+  { name: "GT6000", href: "/gt-series" },
+  { name: "GT7000", href: "/gt-series" },
+  { name: "GT8000", href: "/gt-series" },
+  { name: "GT9000", href: "/gt-series" },
 ];
 
 const panelPCModels = [
