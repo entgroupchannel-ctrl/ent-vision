@@ -30,6 +30,7 @@ import MemberRegister from "./pages/MemberRegister.tsx";
 import MyQuotes from "./pages/MyQuotes.tsx";
 import WelcomeMember from "./pages/WelcomeMember.tsx";
 import Warrantys from "./pages/Warrantys.tsx";
+import Payment from "./pages/Payment.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import FloatingContact from "./components/FloatingContact.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
