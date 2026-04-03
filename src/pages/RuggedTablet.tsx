@@ -415,6 +415,7 @@ const RuggedTablet = () => {
   const [activeCategory, setActiveCategory] = useState("overview");
   const [winPage, setWinPage] = useState(1);
   const [androidPage, setAndroidPage] = useState(1);
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background">
