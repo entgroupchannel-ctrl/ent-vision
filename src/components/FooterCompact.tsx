@@ -27,7 +27,7 @@ const FooterCompact = () => {
             <img src={logo} alt="ENT GROUP" className="h-8 w-auto" />
             <div className="w-px h-8 bg-[hsl(220,15%,20%)]" />
             <div className="flex flex-col gap-0.5">
-              <span className="text-xs font-bold text-white">บจก. เอ็นที กรุ๊ป</span>
+              <span className="text-xs font-bold text-white">บจก. อีเอ็นที กรุ๊ป</span>
               <div className="flex items-center gap-3 text-[11px] text-[hsl(215,15%,55%)]">
                 <a href="tel:020456104" className="flex items-center gap-1 hover:text-primary transition-colors">
                   <Phone size={10} /> 02-045-6104
