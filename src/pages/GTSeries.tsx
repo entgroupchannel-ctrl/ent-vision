@@ -738,69 +738,86 @@ const GTSeries = () => {
                   <h3 className="text-lg font-display font-bold text-foreground">GT1000 Specifications</h3>
                   <p className="text-xs text-muted-foreground mt-1">ข้อมูลจาก Manufacturer · Intel Bay Trail Platform</p>
                 </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <tbody className="divide-y divide-border">
-                      {[
-                        { cat: "General", items: [
-                          { label: "CPU", value: "Intel Pentium N3520 (2.16GHz, Quad-Core, Turbo Boost) / Celeron N2920 (1.86GHz, Quad-Core, Turbo 2.0GHz)" },
-                          { label: "Core (FSB)", value: "100MHz" },
-                          { label: "CPU Technique", value: "22nm" },
-                          { label: "L3 Cache", value: "2 MB, CPU Integrated" },
-                          { label: "Motherboard", value: "Intel CRESCENTBAY (Lynx Point-LP), Support GPIO" },
-                          { label: "BIOS", value: "AMI BIOS, ACPI Supported, Auto Power On" },
-                          { label: "Chipset", value: "Intel BTY SOC" },
-                        ]},
-                        { cat: "Memory & Storage", items: [
-                          { label: "Memory", value: "1× SO-DIMM DDR3L Slot, 4GB/8GB DDR3L 1333MHz (Optional)" },
-                          { label: "Storage", value: "1× mSATA SSD: 16G–1TB + 1× SATA HDD: 320G–1TB (Optional)" },
-                        ]},
-                        { cat: "I/O Ports", items: [
-                          { label: "Front Panel", value: "1× Switch On/Off, 1× LED, 2× USB 3.0, 4× USB 2.0, 2× RS232/422/485 COM" },
-                          { label: "Backside", value: "1× MIC, 1× SPK, 2× RJ45 LAN, 1× HDMI, 1× VGA, 1× DC-IN, 2× WiFi Antenna" },
-                          { label: "COM", value: "2× RS232/RS422/RS485 (เปลี่ยนจาก BIOS ได้)" },
-                          { label: "Internal", value: "1× M-SATA 3.0 (6Gb/s), 1× SATA 3.0 (6Gb/s), 1× mini PCIe-half (WiFi), 1× mini PCIe-full (4G)" },
-                          { label: "SIM Slot", value: "Micro SIM พร้อม Push Function (ด้านข้าง)" },
-                        ]},
-                        { cat: "Display & Audio", items: [
-                          { label: "Video", value: "Intel Haswell ULT Integrated Graphics, Intel HD Graphics" },
-                          { label: "Display Output", value: "VGA + HDMI (Dual Display Synchronous)" },
-                          { label: "Audio", value: "ALC662 HD Audio, 6 Channel Sound" },
-                        ]},
-                        { cat: "Network", items: [
-                          { label: "LAN", value: "Onboard Intel i211 Gigabit × 2, 10/100/1000Mbps BaseT" },
-                          { label: "WiFi / BT", value: "Built-in WiFi + Bluetooth (Dual Antenna, Optional)" },
-                        ]},
-                        { cat: "Power & Environment", items: [
-                          { label: "Input", value: "DC 100–240V AC / 50–60Hz" },
-                          { label: "Output", value: "DC 12V / 5A" },
-                          { label: "Consumption", value: "10W" },
-                          { label: "Operating Temp", value: "-10°C ~ 60°C (22°F ~ 130°F)" },
-                          { label: "Storage Temp", value: "-20°C ~ 80°C (-68°F ~ 176°F)" },
-                          { label: "Humidity", value: "10%–90% (Non-condensing)" },
-                        ]},
-                        { cat: "Dimension", items: [
-                          { label: "Size", value: "175 × 125 × 37 mm" },
-                          { label: "Net Weight", value: "0.85 kg" },
-                          { label: "Gross Weight", value: "1.5 kg (รวม Package)" },
-                          { label: "Mounting", value: "VESA 100×100mm / Wall Mount" },
-                          { label: "OS Support", value: "Windows 7 / 8 / 10 / Linux" },
-                        ]},
-                      ].map((section) => (
-                        <>
-                          <tr key={section.cat} className="bg-secondary/40">
-                            <td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">{section.cat}</td>
-                          </tr>
-                          {section.items.map((spec) => (
-                            <tr key={spec.label} className="hover:bg-secondary/30 transition-colors">
-                              <td className="p-3 font-semibold text-foreground w-[160px] whitespace-nowrap text-xs">{spec.label}</td>
-                              <td className="p-3 text-muted-foreground text-xs">{spec.value}</td>
+                <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border">
+                  {/* Left Column */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {[
+                          { cat: "General", items: [
+                            { label: "CPU", value: "Intel Pentium N3520 / Celeron N2920 Quad-Core" },
+                            { label: "FSB / Process", value: "100MHz / 22nm" },
+                            { label: "L3 Cache", value: "2 MB Integrated" },
+                            { label: "Chipset", value: "Intel BTY SOC" },
+                            { label: "BIOS", value: "AMI BIOS, ACPI, Auto Power On" },
+                          ]},
+                          { cat: "Memory & Storage", items: [
+                            { label: "Memory", value: "1× SO-DIMM DDR3L, 4/8GB 1333MHz" },
+                            { label: "Storage", value: "mSATA SSD + SATA HDD (Optional)" },
+                          ]},
+                          { cat: "Display & Audio", items: [
+                            { label: "GPU", value: "Intel HD Graphics (Integrated)" },
+                            { label: "Output", value: "VGA + HDMI (Dual Sync)" },
+                            { label: "Audio", value: "ALC662 HD Audio, 6CH" },
+                          ]},
+                        ].map((section) => (
+                          <>
+                            <tr key={section.cat} className="bg-secondary/40">
+                              <td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">{section.cat}</td>
                             </tr>
-                          ))}
-                        </>
-                      ))}
-                    </tbody>
-                  </table>
+                            {section.items.map((spec) => (
+                              <tr key={spec.label} className="hover:bg-secondary/30 transition-colors">
+                                <td className="p-3 font-semibold text-foreground w-[120px] whitespace-nowrap text-xs">{spec.label}</td>
+                                <td className="p-3 text-muted-foreground text-xs">{spec.value}</td>
+                              </tr>
+                            ))}
+                          </>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  {/* Right Column */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {[
+                          { cat: "I/O Ports", items: [
+                            { label: "USB", value: "2× USB 3.0 + 4× USB 2.0" },
+                            { label: "COM", value: "2× RS232/422/485 (BIOS Switch)" },
+                            { label: "LAN", value: "2× Intel i211 GbE" },
+                            { label: "SIM", value: "Micro SIM (Push, ด้านข้าง)" },
+                            { label: "Internal", value: "mSATA + SATA + mini PCIe ×2" },
+                          ]},
+                          { cat: "Network", items: [
+                            { label: "WiFi/BT", value: "Built-in Dual Antenna (Optional)" },
+                          ]},
+                          { cat: "Power & Environment", items: [
+                            { label: "Power", value: "DC 12V/5A (10W), AC 100–240V" },
+                            { label: "Temp", value: "-10°C ~ 60°C" },
+                            { label: "Humidity", value: "10–90% Non-condensing" },
+                          ]},
+                          { cat: "Physical", items: [
+                            { label: "Size", value: "175 × 125 × 37 mm" },
+                            { label: "Weight", value: "0.85 kg (Net) / 1.5 kg (Gross)" },
+                            { label: "Mount", value: "VESA 100×100 / Wall" },
+                            { label: "OS", value: "Win 7/8/10 / Linux" },
+                          ]},
+                        ].map((section) => (
+                          <>
+                            <tr key={section.cat} className="bg-secondary/40">
+                              <td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">{section.cat}</td>
+                            </tr>
+                            {section.items.map((spec) => (
+                              <tr key={spec.label} className="hover:bg-secondary/30 transition-colors">
+                                <td className="p-3 font-semibold text-foreground w-[120px] whitespace-nowrap text-xs">{spec.label}</td>
+                                <td className="p-3 text-muted-foreground text-xs">{spec.value}</td>
+                              </tr>
+                            ))}
+                          </>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
