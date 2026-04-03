@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Phone, Mail, MapPin, ArrowLeft, Send, MessageCircle,
 } from "lucide-react";
-import Footer from "@/components/Footer";
+import FooterCompact from "@/components/FooterCompact";
 
 const categories = [
   "เลือกหมวดหมู่",
@@ -289,7 +289,7 @@ const ContactUs = () => {
         </div>
       </section>
 
-      <Footer />
+      <FooterCompact />
     </div>
   );
 };
