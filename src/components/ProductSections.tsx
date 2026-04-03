@@ -30,7 +30,7 @@ const sections = [
     description: "ตัวเครื่องสแตนเลส IP65/IP69K ทำความสะอาดง่าย ทนน้ำ ทนสารเคมี ออกแบบมาสำหรับโรงงานอาหาร ห้องเย็น และสายการผลิตที่ต้องล้างทำความสะอาดบ่อย",
     image: waterproofPcBanner,
     fullBackground: true,
-    links: [{ label: "ข้อมูลเพิ่มเติม", href: "https://www.entgroup.co.th/wp-pc" }],
+    links: [{ label: "ข้อมูลเพิ่มเติม", href: "/waterproof-pc" }],
   },
   {
     title: "Rugged Devices — ทนร้อน ทนกระแทก เกรดทหาร",
