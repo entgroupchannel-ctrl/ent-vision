@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import {
-  Phone, Mail, MapPin, ArrowLeft, Send, MessageCircle,
+  Phone, Mail, MapPin, ArrowLeft, Send, MessageCircle, Users,
 } from "lucide-react";
 import FooterCompact from "@/components/FooterCompact";
 
