@@ -840,20 +840,30 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Real-world Photos */}
-              <div>
-                <h3 className="text-lg font-display font-bold text-foreground mb-4">ภาพการติดตั้งจริง</h3>
-                <div className="grid grid-cols-3 gap-4">
-                  {[
-                    "https://static.wixstatic.com/media/0597a3_9f94339201574aab951ca7e05b0b5b8b~mv2_d_2048_2048_s_2.jpg/v1/fill/w_340,h_310,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/k10_181024_0017.jpg",
-                    "https://static.wixstatic.com/media/0597a3_0565d74067c7475989c641caa9e558ee~mv2_d_2048_2048_s_2.jpg/v1/fill/w_305,h_310,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/k10_181024_0015.jpg",
-                    "https://static.wixstatic.com/media/0597a3_1a4e692b890345f5a8d2ca2aa85ee5d1~mv2_d_2048_2048_s_2.jpg/v1/fill/w_330,h_310,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/k10_181024_0016.jpg",
-                  ].map((img, i) => (
-                    <div key={i} className="card-surface overflow-hidden aspect-square rounded-xl">
-                      <img src={img} alt={`GT1000 ติดตั้งจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
-                    </div>
-                  ))}
+              {/* Product Gallery — จากโรงงาน */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="card-surface p-4 overflow-hidden rounded-xl">
+                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหน้า</h4>
+                  <img src="/images/gt1000/ports-front.jpg" alt="GT1000 Ports ด้านหน้า" className="w-full rounded-lg" loading="lazy" />
                 </div>
+                <div className="card-surface p-4 overflow-hidden rounded-xl">
+                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหลัง</h4>
+                  <img src="/images/gt1000/ports-rear.jpg" alt="GT1000 Ports ด้านหลัง" className="w-full rounded-lg" loading="lazy" />
+                </div>
+              </div>
+
+              {/* Product Angles */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {[
+                  { src: "/images/gt1000/product-angle1.jpg", alt: "GT1000 มุมด้านหน้า" },
+                  { src: "/images/gt1000/product-angle2.jpg", alt: "GT1000 มุมเอียง" },
+                  { src: "/images/gt1000/side-view.jpg", alt: "GT1000 ด้านข้าง — ครีบระบายความร้อน" },
+                  { src: "/images/gt1000/bottom-view.jpg", alt: "GT1000 ด้านล่าง — VESA Mount" },
+                ].map((img, i) => (
+                  <div key={i} className="card-surface overflow-hidden rounded-xl">
+                    <img src={img.src} alt={img.alt} className="w-full aspect-square object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
               </div>
 
               {/* Video Section */}
