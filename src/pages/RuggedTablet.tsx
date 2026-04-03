@@ -431,7 +431,7 @@ const RuggedTablet = () => {
         collectionName="Rugged Tablet & Notebook กันน้ำ กันกระแทก"
         collectionDescription="Rugged Tablet และ Notebook ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์"
         collectionUrl="/rugged-tablet"
-        products={[...ruggedWindows, ...ruggedAndroid].map(m => ({ name: m.name, price: m.price, category: "Rugged Tablet" }))}
+        products={[...goleRuggedTablets, ...goleWindowsModels, ...goleAndroidModels].map(m => ({ name: m.name, price: m.price, category: "Rugged Tablet" }))}
       />
       <div className="relative overflow-hidden">
         {/* Hero Background */}

@@ -327,7 +327,7 @@ const GBSeries = () => {
         collectionName="GB Series Compact Mini PC"
         collectionDescription="GB Series Mini PC ขนาดกะทัดรัด รองรับ Intel N100 ถึง Core i7 สำหรับสำนักงาน Digital Signage และ Thin Client"
         collectionUrl="/gb-series"
-        products={gbModels.map(m => ({ name: m.name, description: m.tagline, category: "Compact Mini PC" }))}
+        products={models.map(m => ({ name: m.name, description: m.tagline, category: "Compact Mini PC" }))}
       />
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
