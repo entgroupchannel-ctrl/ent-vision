@@ -400,6 +400,7 @@ const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
             }}
             className="absolute top-4 right-4"
           />
+          <img
             src={model.image}
             alt={model.name}
             className="max-h-[240px] object-contain mb-4"
