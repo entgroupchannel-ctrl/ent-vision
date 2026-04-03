@@ -554,7 +554,7 @@ const GBSeries = () => {
       {/* Full Comparison Table */}
       <section className="border-t border-border bg-secondary/20">
         <div className="container max-w-7xl mx-auto px-6 py-12">
-          <CollapsibleSpec title="📊 เปรียบเทียบทุกรุ่น GB Series (5 รุ่น)">
+          <CollapsibleSpec title="📊 เปรียบเทียบทุกรุ่น GB Series (5 รุ่น)" defaultOpen={true}>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
