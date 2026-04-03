@@ -37,17 +37,20 @@ const heroStats = [
 const HeroSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user } = useAuth();
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
-  const handleAuthClick = async () => {
-    if (user) {
-      await supabase.auth.signOut();
-      toast.success("ออกจากระบบเรียบร้อยแล้ว");
-    } else {
-      navigate("/member-register");
-    }
-  };
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex flex-col">
