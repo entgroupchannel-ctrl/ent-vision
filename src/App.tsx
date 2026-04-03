@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/hooks/use-theme";
 import Index from "./pages/Index.tsx";
 import GTSeries from "./pages/GTSeries.tsx";
+import GBSeries from "./pages/GBSeries.tsx";
 import EPCBoxSeries from "./pages/EPCBoxSeries.tsx";
 import MiniPC from "./pages/MiniPC.tsx";
 import WaterproofPC from "./pages/WaterproofPC.tsx";
@@ -29,6 +30,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/gt-series" element={<GTSeries />} />
+            <Route path="/gb-series" element={<GBSeries />} />
             <Route path="/epc-box-series" element={<EPCBoxSeries />} />
             <Route path="/gk-series" element={<GKSeries />} />
             <Route path="/mini-pc" element={<MiniPC />} />
