@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import {
   ArrowLeft, Shield, Wifi, Network, Cpu, Wind, Zap, Server,
   ChevronDown, Download, ExternalLink, Factory, Building2,
-  Stethoscope, Building, Globe, Landmark, MonitorSmartphone
+  Stethoscope, Building, Globe, Landmark, MonitorSmartphone,
+  Filter, X, Search
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
