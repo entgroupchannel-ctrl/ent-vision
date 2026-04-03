@@ -4450,12 +4450,15 @@ const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
           <span className="text-muted-foreground">{model.ports}</span>
         </div>
       </div>
-      {model.price && (
-        <div className="mt-3 pt-3 border-t border-border">
-          <span className="text-sm text-muted-foreground">เริ่มต้น </span>
-          <span className="font-bold text-foreground">{model.price.startsWith("สอบถาม") ? model.price : `฿${model.price}`}</span>
-        </div>
-      )}
+      <div className="mt-3 pt-3 border-t border-border flex items-center justify-between">
+        {model.price ? (
+          <div>
+            <span className="text-sm text-muted-foreground">เริ่มต้น </span>
+            <span className="font-bold text-foreground">{model.price.startsWith("สอบถาม") ? model.price : `฿${model.price}`}</span>
+          </div>
+        ) : <div />}
+        <QuoteButton productName={model.name} productCategory="GT Series — Mini PC" variant="compact" />
+      </div>
     </div>
   </>
 );
