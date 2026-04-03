@@ -127,7 +127,7 @@ const menuCategories = [
       desc: "กันน้ำ กันกระแทก MIL-STD-810G/H — Windows & Android สำหรับภาคสนามและโลจิสติกส์",
       href: "/rugged-tablet",
       badge: "MIL-STD",
-      image: "https://entgroup-rugged.com/assets/f9e-C3MseYpo.png",
+      image: imgRugged,
     },
     columns: [
       {
