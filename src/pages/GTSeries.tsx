@@ -25,6 +25,7 @@ import gt6000Product from "@/assets/gt6000-product.jpg";
 import gt7000Product from "@/assets/gt7000-product.jpg";
 import gt8000Product from "@/assets/gt8000-product.jpg";
 import gt9000Product from "@/assets/gt9000-product.jpg";
+import FooterCompact from "@/components/FooterCompact";
 
 const features = [
   { icon: Thermometer, title: "ทนความร้อนสูง", desc: "ทำงานได้ในอุณหภูมิ 0–60°C อย่างต่อเนื่อง" },
@@ -4406,7 +4407,9 @@ const GTSeries = () => {
   );
 };
 
-/* Model Card Component */
+/* M
+
+      <FooterCompact />odel Card Component */
 const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
   <>
     <div className="relative bg-secondary/50 p-6 flex items-center justify-center min-h-[200px]">

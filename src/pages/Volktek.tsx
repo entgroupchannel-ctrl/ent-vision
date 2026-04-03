@@ -3,6 +3,7 @@ import { ArrowLeft, ExternalLink, Shield, Zap, Network, Server, ThermometerSun, 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import volktekCertifications from "@/assets/volktek-certifications.png";
+import FooterCompact from "@/components/FooterCompact";
 
 const productCategories = [
   {
@@ -317,4 +318,6 @@ const Volktek = () => {
   );
 };
 
-export default Volktek;
+expo
+
+      <FooterCompact />rt default Volktek;

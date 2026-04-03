@@ -5,6 +5,7 @@ import {
   Zap, Percent, Calendar, PartyPopper, Sparkles, Timer, FileDown
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import FooterCompact from "@/components/FooterCompact";
 
 /* ───── Types ───── */
 type PromoStatus = "active" | "ended" | "recurring";
@@ -490,4 +491,6 @@ const Promotions = () => {
   );
 };
 
-export default Promotions;
+expo
+
+      <FooterCompact />rt default Promotions;

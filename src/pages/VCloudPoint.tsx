@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
+import FooterCompact from "@/components/FooterCompact";
 
 /* ═══════ Key Benefits ═══════ */
 const benefits = [
@@ -639,4 +640,6 @@ const VCloudPoint = () => {
   );
 };
 
-export default VCloudPoint;
+expo
+
+      <FooterCompact />rt default VCloudPoint;

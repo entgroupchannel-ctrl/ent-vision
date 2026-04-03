@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import FooterCompact from "@/components/FooterCompact";
 
 /* ───── Product Categories ───── */
 
@@ -783,4 +784,6 @@ const RuggedTablet = () => {
   );
 };
 
-export default RuggedTablet;
+expo
+
+      <FooterCompact />rt default RuggedTablet;

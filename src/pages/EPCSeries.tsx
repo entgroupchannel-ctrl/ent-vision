@@ -6,6 +6,7 @@ import epcLegoBanner from "@/assets/epc-lego-banner.png";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import FooterCompact from "@/components/FooterCompact";
 
 /* ───── Product Data ───── */
 
@@ -737,4 +738,6 @@ const EPCSeries = () => {
   );
 };
 
-export default EPCSeries;
+expo
+
+      <FooterCompact />rt default EPCSeries;
