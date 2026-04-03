@@ -308,6 +308,7 @@ const GBSeries = () => {
   const [activeModel, setActiveModel] = useState(0);
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [showLineQR, setShowLineQR] = useState(false);
+  const [compareFilter, setCompareFilter] = useState<number[]>(models.map((_, i) => i));
   const current = models[activeModel];
 
   return (
@@ -551,31 +552,68 @@ const GBSeries = () => {
         </div>
       </section>
 
-      {/* Full Comparison Table */}
+      {/* Full Comparison Table with Filter */}
       <section className="border-t border-border bg-secondary/20">
         <div className="container max-w-7xl mx-auto px-6 py-12">
           <CollapsibleSpec title="📊 เปรียบเทียบทุกรุ่น GB Series (5 รุ่น)" defaultOpen={true}>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-secondary/50">
-                    <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Feature</th>
-                    {models.map((m) => (
-                      <th key={m.id} className="px-4 py-3 text-center font-bold text-foreground whitespace-nowrap">{m.name}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  {comparisonRows.map((row) => (
-                    <tr key={row.label} className="hover:bg-secondary/20">
-                      <td className="px-4 py-2.5 font-medium text-muted-foreground">{row.label}</td>
-                      {row.values.map((v, i) => (
-                        <td key={i} className="px-4 py-2.5 text-center text-foreground text-xs">{v}</td>
+            <div className="p-4 space-y-4">
+              {/* Model Filter Chips */}
+              <div className="flex flex-wrap gap-2 items-center">
+                <span className="text-xs font-semibold text-muted-foreground mr-1">เลือกรุ่นที่ต้องการเปรียบเทียบ:</span>
+                {models.map((m, i) => {
+                  const isActive = compareFilter.includes(i);
+                  return (
+                    <button
+                      key={m.id}
+                      onClick={() => {
+                        setCompareFilter(prev => {
+                          if (prev.includes(i)) {
+                            if (prev.length <= 2) return prev; // ต้องเลือกอย่างน้อย 2 รุ่น
+                            return prev.filter(x => x !== i);
+                          }
+                          return [...prev, i];
+                        });
+                      }}
+                      className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border ${
+                        isActive
+                          ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                          : "bg-card text-muted-foreground border-border hover:border-primary/50"
+                      }`}
+                    >
+                      {m.name}
+                    </button>
+                  );
+                })}
+                <button
+                  onClick={() => setCompareFilter(models.map((_, i) => i))}
+                  className="px-3 py-1.5 rounded-full text-xs font-medium text-primary hover:bg-primary/10 border border-primary/30 transition-colors"
+                >
+                  เลือกทั้งหมด
+                </button>
+              </div>
+              {/* Table */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-secondary/50">
+                      <th className="px-4 py-3 text-left font-semibold text-muted-foreground">Feature</th>
+                      {compareFilter.sort((a, b) => a - b).map((idx) => (
+                        <th key={models[idx].id} className="px-4 py-3 text-center font-bold text-foreground whitespace-nowrap">{models[idx].name}</th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-border">
+                    {comparisonRows.map((row) => (
+                      <tr key={row.label} className="hover:bg-secondary/20">
+                        <td className="px-4 py-2.5 font-medium text-muted-foreground">{row.label}</td>
+                        {compareFilter.sort((a, b) => a - b).map((idx) => (
+                          <td key={idx} className="px-4 py-2.5 text-center text-foreground text-xs">{row.values[idx]}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </CollapsibleSpec>
         </div>
