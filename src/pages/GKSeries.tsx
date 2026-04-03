@@ -6,6 +6,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import { LineQRDialog } from "@/components/LineQRDialog";
 
 /* ─── Concept: "One Body, Multiple Brains" ─── */
 const concepts = [
