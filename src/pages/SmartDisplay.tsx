@@ -7,6 +7,7 @@ import {
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import smartDisplayHero from "@/assets/smart-display-hero.jpg";
+import FooterCompact from "@/components/FooterCompact";
 
 /* ─── Data ─── */
 
@@ -855,4 +856,6 @@ const SmartDisplay = () => {
   );
 };
 
-export default SmartDisplay;
+expo
+
+      <FooterCompact />rt default SmartDisplay;

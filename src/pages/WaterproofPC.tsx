@@ -3,6 +3,7 @@ import { ArrowLeft, ExternalLink, Droplets, Shield, ThermometerSun, Cpu, Monitor
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import FooterCompact from "@/components/FooterCompact";
 
 const models = [
   {
@@ -371,4 +372,6 @@ const WaterproofPC = () => {
   );
 };
 
-export default WaterproofPC;
+expo
+
+      <FooterCompact />rt default WaterproofPC;

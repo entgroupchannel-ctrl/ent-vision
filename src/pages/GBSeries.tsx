@@ -6,6 +6,7 @@ import {
   Factory, Building2, Truck, Stethoscope, Server, MonitorSmartphone
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import FooterCompact from "@/components/FooterCompact";
 
 /* ───── Product Data ───── */
 
@@ -448,4 +449,6 @@ const GBSeries = () => {
   );
 };
 
-export default GBSeries;
+expo
+
+      <FooterCompact />rt default GBSeries;

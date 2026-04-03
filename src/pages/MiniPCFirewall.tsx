@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
+import FooterCompact from "@/components/FooterCompact";
 
 /* ═══════════════════════════════════════════
    TIER SYSTEM — like GT Series
@@ -1011,4 +1012,6 @@ const MiniPCFirewall = () => {
   );
 };
 
-export default MiniPCFirewall;
+expo
+
+      <FooterCompact />rt default MiniPCFirewall;

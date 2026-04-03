@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import FooterCompact from "@/components/FooterCompact";
 
 /* ── Category Navigation ── */
 const categories = [
@@ -998,4 +999,6 @@ const MiniPC = () => {
   );
 };
 
-export default MiniPC;
+expo
+
+      <FooterCompact />rt default MiniPC;

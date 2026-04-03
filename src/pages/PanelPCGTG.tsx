@@ -519,6 +519,7 @@ const PanelPC = () => {
         </div>
       </section>
 import gtgSeries from "@/assets/gtg-series.png";
+import FooterCompact from "@/components/FooterCompact";
 
       <section className="section-padding bg-surface/50">
         <div className="container max-w-7xl mx-auto">
@@ -853,12 +854,7 @@ import gtgSeries from "@/assets/gtg-series.png";
           </a>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <img src={logo} alt="ENT GROUP" className="h-8 w-auto" />
-        <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} ENT GROUP Co., Ltd. All rights reserved.</p>
-      </footer>
+      <FooterCompact />
     </div>
   );
 };

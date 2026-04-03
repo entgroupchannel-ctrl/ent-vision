@@ -8,6 +8,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
+import FooterCompact from "@/components/FooterCompact";
 
 /* ───── Features ───── */
 const features = [
@@ -666,4 +667,6 @@ const UTCSeries = () => {
   );
 };
 
-export default UTCSeries;
+expo
+
+      <FooterCompact />rt default UTCSeries;
