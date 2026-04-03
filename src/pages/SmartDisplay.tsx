@@ -4,7 +4,7 @@ import QuoteDialog from "@/components/QuoteDialog";
 import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Sun, Shield, Monitor, Cpu, Phone, MessageCircle,
-  Download, Smartphone, Settings, Wifi, Eye, Layers, Store, BadgePercent, Printer, ScanLine
+  Download, Smartphone, Settings, Wifi, Eye, Layers, Store, BadgePercent, Printer, ScanLine, FileText
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
