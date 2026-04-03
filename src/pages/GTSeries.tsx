@@ -843,8 +843,8 @@ const GTSeries = () => {
               {/* Product Gallery — จากโรงงาน */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
-                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหน้า</h4>
-                  <img src="/images/gt1000/ports-front.jpg" alt="GT1000 Ports ด้านหน้า" className="w-full rounded-lg" loading="lazy" />
+                  <h4 className="font-bold text-foreground mb-3 text-sm">🖥️ Mainboard และการติดตั้ง</h4>
+                  <img src="/images/gt1000/ports-front.jpg" alt="GT1000 Mainboard และการติดตั้ง" className="w-full rounded-lg" loading="lazy" />
                 </div>
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
                   <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหลัง</h4>
