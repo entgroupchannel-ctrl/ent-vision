@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Search, Menu, X, ChevronDown, MessageCircle } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Search, Menu, X, ChevronDown, UserPlus, LogOut, User } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import MegaMenu, { MobileMegaMenu } from "@/components/MegaMenu";
-import { LineQRDialog } from "@/components/LineQRDialog";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import heroIndustrial from "@/assets/hero-industrial.jpg";
 import logo from "@/assets/logo-entgroup.avif";
 
@@ -35,7 +36,16 @@ const heroStats = [
 const HeroSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showLineQR, setShowLineQR] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleAuthClick = async () => {
+    if (user) {
+      await supabase.auth.signOut();
+    } else {
+      navigate("/admin/login");
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex flex-col">
@@ -73,10 +83,12 @@ const HeroSection = () => {
           <div className="w-px h-6 bg-white/10 mx-1" />
           <ThemeToggle />
           <button
-            onClick={() => setShowLineQR(true)}
-            className="px-5 py-2.5 rounded-lg bg-[hsl(142,70%,45%)] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+            onClick={handleAuthClick}
+            className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
           >
-            <span className="flex items-center gap-2"><MessageCircle size={16} /> LINE @entgroup</span>
+            <span className="flex items-center gap-2">
+              {user ? <><LogOut size={16} /> ออกจากระบบ</> : <><UserPlus size={16} /> สมัครสมาชิก</>}
+            </span>
           </button>
         </div>
         <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-white">
@@ -91,10 +103,10 @@ const HeroSection = () => {
           <div className="flex items-center justify-between mt-4 gap-3 pt-4 border-t border-border">
             <ThemeToggle />
             <button
-              onClick={() => { setShowLineQR(true); setMobileMenuOpen(false); }}
-              className="flex-1 text-center px-5 py-2.5 rounded-lg bg-[hsl(142,70%,45%)] text-white text-sm font-semibold"
+              onClick={() => { handleAuthClick(); setMobileMenuOpen(false); }}
+              className="flex-1 text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
             >
-              LINE @entgroup
+              {user ? "ออกจากระบบ" : "สมัครสมาชิก"}
             </button>
           </div>
         </div>
@@ -168,8 +180,6 @@ const HeroSection = () => {
         </a>
       </div>
 
-      {/* LINE QR Dialog */}
-      <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
     </section>
   );
 };
