@@ -197,7 +197,7 @@ const gtModels = [
     size: "Intel Gen 10 Ice Lake",
     image: gt8000Product,
     tab: "gt8000",
-    highlight: "Ice Lake",
+    highlight: "มีพัดลม",
     price: "สอบถาม",
   },
   {
