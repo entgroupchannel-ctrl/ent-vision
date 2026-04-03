@@ -3478,11 +3478,6 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Dimension Drawing */}
-              <div className="card-surface p-4 overflow-hidden">
-                <h4 className="font-bold text-foreground mb-3 px-2">📐 Dimension Drawing</h4>
-                <img src="/images/gt1400/dimension.png" alt="GT1400 Dimension" className="w-full rounded-lg" loading="lazy" />
-              </div>
 
               {/* Price Table */}
               <div className="card-surface overflow-hidden">
