@@ -148,7 +148,7 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
             ) : (
               <Link
                 to={link.href}
-                className="text-sm text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
+                className="text-sm text-gray-600 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
               >
                 {link.label}
               </Link>
