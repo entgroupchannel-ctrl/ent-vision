@@ -136,6 +136,7 @@ const galleryImages = [
 /* ═══════ Component ═══════ */
 const IBoxSeries = () => {
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
 
   return (
     <div className="min-h-screen bg-background">

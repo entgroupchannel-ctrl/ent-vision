@@ -744,6 +744,7 @@ const FirewallComparisonTable = () => {
 const MiniPCFirewall = () => {
   const [activeTier, setActiveTier] = useState<Tier | "all">("all");
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
   const filtered = activeTier === "all" ? models : models.filter((m) => m.tier === activeTier);
 
   return (
