@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import {
   ArrowLeft, Send, ShoppingCart, Plus, Trash2, FileText,
 } from "lucide-react";
@@ -73,11 +75,32 @@ const QuoteRequest = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Submit to Supabase quote_requests table
-    console.log("Quote request:", { products, ...form });
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      const { error } = await (supabase.from as any)("quote_requests").insert({
+        name: form.name,
+        email: form.email,
+        phone: form.phone || null,
+        company: form.company || null,
+        line_id: form.lineId || null,
+        whatsapp: form.whatsapp || null,
+        callback_time: form.callbackTime || null,
+        products: products.filter(p => p.category),
+        details: form.details || null,
+      });
+      if (error) throw error;
+      setSubmitted(true);
+      toast({ title: "ส่งคำขอเรียบร้อย!", description: "ทีมฝ่ายขายจะติดต่อกลับภายใน 24 ชม." });
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClass =
