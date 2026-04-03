@@ -106,7 +106,7 @@ const AdminDashboard = () => {
     day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit",
   });
 
-  if (authLoading || !isAdmin) {
+  if (authLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-muted-foreground text-sm">กำลังตรวจสอบสิทธิ์...</div>
