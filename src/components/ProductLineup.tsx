@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const gtModels = [
   { name: "GT1000", href: "/gt-series" },
   { name: "GT1200 / GT1400", href: "/gt-series", badge: "ราคาใหม่!" },
+  { name: "GT1300", href: "/gt-series" },
   { name: "GT2000", href: "/gt-series" },
   { name: "GT3000", href: "/gt-series" },
   { name: "GT4000", href: "/gt-series" },
