@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, FileText, Clock, CheckCircle, Package,
   Phone, Building2, RefreshCw, ChevronDown, ChevronUp,
+  CalendarClock, Hash, Wallet,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
