@@ -3,12 +3,12 @@ import { Monitor, Cpu, TabletSmartphone, Wifi, Shield, LayoutGrid, Server } from
 
 const categories = [
   {
-    title: "GT Series",
-    subtitle: "Fanless Embedded Computer",
-    description: "คอมพิวเตอร์อุตสาหกรรมไร้พัดลม ทนทาน แข็งแกร่ง",
+    title: "GT Series — Mini PC",
+    subtitle: "Fanless Industrial Computer",
+    description: "คอมพิวเตอร์อุตสาหกรรมไร้พัดลม 13 รุ่น ครบทุกสเปก ตั้งแต่ Celeron ถึง i7 Gen 12",
     icon: Cpu,
     href: "/gt-series",
-    models: ["GT1000", "GT1200", "GT1300", "GT4500", "GT7000", "GT9000"],
+    models: ["GT1000", "GT1200", "GT1300", "GT1400", "GT2000", "GT3000", "GT4000", "GT4500", "GT5000", "GT6000", "GT7000", "GT8000", "GT9000"],
     badge: "Hot",
     image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
   },
@@ -88,6 +88,16 @@ const categories = [
     badge: "Hot",
     image: "https://static.wixstatic.com/media/0597a3_6ebc77045f9a4292bb485a4fa91ac3a2~mv2.png/v1/fill/w_211,h_155,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-15%20at%2012_02_13.png",
   },
+  {
+    title: "vCloudPoint",
+    subtitle: "Zero Client Solution",
+    description: "PC 1 เครื่อง ใช้ได้ 30 คน ประหยัดต้นทุน ประหยัดไฟ ทดลองฟรี 30 วัน",
+    icon: Monitor,
+    href: "/vcloudpoint",
+    models: ["S100", "V100", "vMatrix"],
+    badge: "Hot",
+    image: "https://static.wixstatic.com/media/0597a3_756a4a09e31d4b6d85eb8da1da91f781~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_39_10.png",
+  },
 ];
 
 const ProductHighlights = () => {
@@ -149,7 +159,7 @@ const ProductHighlights = () => {
                     loading="lazy"
                   />
                   <div className="flex flex-wrap gap-1.5">
-                    {cat.models.map((model) => (
+                    {cat.models.slice(0, 6).map((model) => (
                       <span
                         key={model}
                         className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-background border border-border text-muted-foreground"
@@ -157,6 +167,11 @@ const ProductHighlights = () => {
                         {model}
                       </span>
                     ))}
+                    {cat.models.length > 6 && (
+                      <span className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-primary/10 border border-primary/20 text-primary">
+                        +{cat.models.length - 6} รุ่น
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
