@@ -3,8 +3,15 @@ import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
-import gt1000Hero from "@/assets/gt1000-hero.jpg";
+import gt1000Banner from "@/assets/gt1000-banner.jpg";
+import gt2000Banner from "@/assets/gt2000-banner.jpg";
 import gt3000Banner from "@/assets/gt3000-banner.jpg";
+import gt4000Banner from "@/assets/gt4000-banner.jpg";
+import gt5000Banner from "@/assets/gt5000-banner.jpg";
+import gt6000Banner from "@/assets/gt6000-banner.jpg";
+import gt7000Banner from "@/assets/gt7000-banner.jpg";
+import gt8000Banner from "@/assets/gt8000-banner.jpg";
+import gt9000Banner from "@/assets/gt9000-banner.jpg";
 
 const features = [
   { icon: Thermometer, title: "ทนความร้อนสูง", desc: "ทำงานได้ในอุณหภูมิ 0–60°C อย่างต่อเนื่อง" },
