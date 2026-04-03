@@ -174,9 +174,23 @@ const DemoRequestDialog = ({ children }: DemoRequestDialogProps) => {
             ส่งคำขอทดลองใช้ฟรี
           </Button>
 
-          <p className="text-xs text-muted-foreground text-center">
-            {user ? "✅ ล็อกอินแล้ว — คุณสามารถตรวจสอบสถานะคำขอได้ที่เมนู \"คำขอของฉัน\"" : "💡 สมัครสมาชิกเพื่อติดตามสถานะคำขอย้อนหลัง"}
-          </p>
+          {user ? (
+            <p className="text-xs text-muted-foreground text-center">
+              ✅ ล็อกอินแล้ว — คุณสามารถตรวจสอบสถานะคำขอได้ที่เมนู "คำขอของฉัน"
+            </p>
+          ) : (
+            <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+              <span>💡 ยังไม่ได้เป็นสมาชิก?</span>
+              <Link
+                to="/member-register"
+                className="text-primary font-semibold hover:underline"
+                onClick={() => setOpen(false)}
+              >
+                สมัครสมาชิก
+              </Link>
+              <span>เพื่อติดตามสถานะคำขอย้อนหลัง</span>
+            </div>
+          )}
         </form>
       </DialogContent>
     </Dialog>
