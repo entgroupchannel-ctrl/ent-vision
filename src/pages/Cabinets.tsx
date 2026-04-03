@@ -110,6 +110,45 @@ const Cabinets = () => {
     plateCount: "1", details: "",
   });
 
+  const handleCustomChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setCustomForm({ ...customForm, [e.target.name]: e.target.value });
+  };
+
+  const handleCustomSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setCustomLoading(true);
+    try {
+      const details = [
+        `[Custom Cabinet]`,
+        `Panel Model: ${customForm.panelModel}`,
+        `ขนาดตู้: ${customForm.cabinetWidth}×${customForm.cabinetHeight}×${customForm.cabinetDepth} mm`,
+        `วัสดุ: ${customForm.material}`,
+        `การติดตั้ง: ${customForm.installation}`,
+        `กุญแจ: ${customForm.lock}`,
+        `ระดับป้องกัน: ${customForm.protection}`,
+        `เพลทยึด: ${customForm.plateCount} ชั้น`,
+        customForm.details ? `หมายเหตุ: ${customForm.details}` : "",
+      ].filter(Boolean).join("\n");
+
+      const { error } = await (supabase.from as any)("quote_requests").insert({
+        user_id: user?.id || null,
+        name: customForm.name,
+        email: customForm.email || user?.email || "",
+        phone: customForm.phone || null,
+        company: customForm.company || null,
+        products: [{ category: "Custom Cabinet", model: customForm.panelModel, qty: 1 }],
+        details,
+      });
+      if (error) throw error;
+      setCustomSubmitted(true);
+      toast({ title: "ส่งคำขอเรียบร้อย!", description: "ทีมจะติดต่อกลับเพื่อเสนอราคาตู้ Custom" });
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    } finally {
+      setCustomLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Banner */}
