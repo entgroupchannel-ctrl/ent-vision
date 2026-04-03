@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import {
@@ -209,6 +210,7 @@ const UTCSeries = () => {
         collectionDescription="จอสัมผัสอุตสาหกรรมแบบ Open Frame 8-19 นิ้ว สำหรับฝังใน KIOSK ตู้จำหน่ายสินค้า"
         collectionUrl="/utc-series"
         products={[...squareModels, ...wideModels].map(m => ({ name: m.model, price: m.price, description: `${m.size} ${m.config}`, category: "Open Frame Touch Monitor" }))}
+      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "UTC Series", path: "/utc-series" }]} />
       />
       {/* Sticky Nav */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">

@@ -1,5 +1,6 @@
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -160,6 +161,7 @@ const Cabinets = () => {
         collectionDescription="ตู้ Rack, ตู้ Cabinet อุตสาหกรรม สั่งผลิตขนาดพิเศษ วัสดุ Steel/SUS304/SUS316 มาตรฐาน IP65"
         collectionUrl="/cabinets"
         products={[{ name: "Custom Industrial Cabinet", category: "ตู้ Rack & Cabinet" }]}
+      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "ตู้ Rack & Cabinet", path: "/cabinets" }]} />
       />
       <div className="relative h-48 md:h-64 overflow-hidden">
         <img src={bannerCabinets} alt="ตู้พาเนลพีซีเกรดอุตสาหกรรม" className="w-full h-full object-cover" />

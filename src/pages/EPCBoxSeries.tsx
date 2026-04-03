@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Layers, Settings, Box, Maximize, ChevronDown, Monitor, HardDrive, Wifi, Power, PlugZap, Expand } from "lucide-react";
@@ -546,6 +547,7 @@ const EPCBoxSeries = () => {
         collectionDescription="EPC Box Series คอมพิวเตอร์อุตสาหกรรม Fanless แบบ Modular สำหรับโรงงานและ IoT"
         collectionUrl="/epc-box-series"
         products={priceList.map(m => ({ name: m.model, price: m.price, description: m.spec, category: "Fanless Modular Industrial PC" }))}
+      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "EPC Box Series", path: "/epc-box-series" }]} />
       />
       {/* Nav */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">

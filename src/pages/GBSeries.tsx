@@ -1,5 +1,6 @@
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -328,6 +329,7 @@ const GBSeries = () => {
         collectionDescription="GB Series Mini PC ขนาดกะทัดรัด รองรับ Intel N100 ถึง Core i7 สำหรับสำนักงาน Digital Signage และ Thin Client"
         collectionUrl="/gb-series"
         products={models.map(m => ({ name: m.name, description: m.tagline, category: "Compact Mini PC" }))}
+      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "GB Series", path: "/gb-series" }]} />
       />
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">

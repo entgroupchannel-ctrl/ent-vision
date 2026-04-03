@@ -1,5 +1,6 @@
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { useState, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
@@ -602,6 +603,7 @@ const GTSeries = () => {
         collectionDescription="คอมพิวเตอร์อุตสาหกรรม Fanless 12 รุ่น รองรับ Intel Celeron ถึง Core i7 สำหรับโรงงาน IoT Edge Computing"
         collectionUrl="/gt-series"
         products={gtModels.map(m => ({ name: m.name, price: m.price, image: typeof m.image === 'string' ? m.image : undefined, description: m.tagline, category: "Industrial Fanless Mini PC" }))}
+      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "GT Series", path: "/gt-series" }]} />
       />
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 py-4">

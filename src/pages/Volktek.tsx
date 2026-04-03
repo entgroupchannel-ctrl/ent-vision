@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Shield, Zap, Network, Server, ThermometerSun, Globe, FileText } from "lucide-react";
@@ -127,6 +128,7 @@ const Volktek = () => {
         collectionDescription="Volktek Industrial Ethernet Switch Managed/Unmanaged PoE สำหรับโรงงานและระบบกล้องวงจรปิด"
         collectionUrl="/volktek"
         products={productCategories.map(c => ({ name: c.title, description: c.desc, category: "Industrial Ethernet Switch" }))}
+      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "Volktek", path: "/volktek" }]} />
       />
       {/* Hero */}
       <div className="relative overflow-hidden">

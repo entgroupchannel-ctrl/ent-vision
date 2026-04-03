@@ -1,5 +1,6 @@
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Settings, Maximize, Wifi, ChevronDown, Smartphone, Factory, BarChart3, Gauge } from "lucide-react";
@@ -381,6 +382,7 @@ const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
         {/* Image side */}
         <div className={`lg:col-span-2 relative bg-secondary/30 p-8 flex flex-col items-center justify-center ${isReversed ? "lg:order-2" : ""}`}>
           <div className="absolute top-4 left-4 flex items-center gap-2">
+      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "GK Series", path: "/gk-series" }]} />
             <span className="px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
               {model.screenSize}
             </span>
