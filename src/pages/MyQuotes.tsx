@@ -188,12 +188,51 @@ const MyQuotes = () => {
                           )}
                         </div>
 
-                        {q.details && (
-                          <div>
-                            <p className="text-xs font-semibold text-foreground mb-1">รายละเอียด</p>
-                            <p className="text-xs text-muted-foreground">{q.details}</p>
-                          </div>
-                        )}
+                        {q.details && (() => {
+                          const parsed = parseDetails(q.details);
+                          const hasStructured = parsed.timeline || parsed.qty || parsed.budget;
+                          return (
+                            <div className="space-y-2">
+                              {hasStructured && (
+                                <div className="grid grid-cols-3 gap-2">
+                                  {parsed.timeline && (
+                                    <div className="rounded-lg bg-muted/40 p-2 text-center">
+                                      <CalendarClock size={14} className="mx-auto mb-1 text-primary" />
+                                      <p className="text-[10px] text-muted-foreground">ระยะเวลา</p>
+                                      <p className="text-xs font-medium text-foreground">{parsed.timeline}</p>
+                                    </div>
+                                  )}
+                                  {parsed.qty && (
+                                    <div className="rounded-lg bg-muted/40 p-2 text-center">
+                                      <Hash size={14} className="mx-auto mb-1 text-primary" />
+                                      <p className="text-[10px] text-muted-foreground">จำนวน</p>
+                                      <p className="text-xs font-medium text-foreground">{parsed.qty}</p>
+                                    </div>
+                                  )}
+                                  {parsed.budget && (
+                                    <div className="rounded-lg bg-muted/40 p-2 text-center">
+                                      <Wallet size={14} className="mx-auto mb-1 text-primary" />
+                                      <p className="text-[10px] text-muted-foreground">งบประมาณ</p>
+                                      <p className="text-xs font-medium text-foreground">{parsed.budget}</p>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                              {parsed.extra && (
+                                <div>
+                                  <p className="text-xs font-semibold text-foreground mb-1">รายละเอียดเพิ่มเติม</p>
+                                  <p className="text-xs text-muted-foreground">{parsed.extra}</p>
+                                </div>
+                              )}
+                              {!hasStructured && (
+                                <div>
+                                  <p className="text-xs font-semibold text-foreground mb-1">รายละเอียด</p>
+                                  <p className="text-xs text-muted-foreground">{q.details}</p>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })()}
 
                         {q.notes && (
                           <div className="rounded-lg bg-primary/5 border border-primary/10 p-3">
