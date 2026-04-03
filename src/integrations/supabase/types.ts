@@ -116,6 +116,60 @@ export type Database = {
         }
         Relationships: []
       }
+      demo_requests: {
+        Row: {
+          apps_to_test: string | null
+          budget_info: string | null
+          created_at: string
+          email: string | null
+          id: string
+          line_id: string | null
+          name: string
+          notes: string | null
+          organization: string | null
+          phone: string | null
+          status: string
+          trial_end: string | null
+          trial_start: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          apps_to_test?: string | null
+          budget_info?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          line_id?: string | null
+          name: string
+          notes?: string | null
+          organization?: string | null
+          phone?: string | null
+          status?: string
+          trial_end?: string | null
+          trial_start?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          apps_to_test?: string | null
+          budget_info?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          line_id?: string | null
+          name?: string
+          notes?: string | null
+          organization?: string | null
+          phone?: string | null
+          status?: string
+          trial_end?: string | null
+          trial_start?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       quote_requests: {
         Row: {
           callback_time: string | null
