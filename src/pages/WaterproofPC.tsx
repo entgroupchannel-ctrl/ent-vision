@@ -155,6 +155,7 @@ const useCases = [
 ];
 
 const WaterproofPC = () => {
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   return (
     <div className="min-h-screen bg-background">
       {/* Hero */}
