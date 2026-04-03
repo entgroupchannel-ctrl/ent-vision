@@ -109,16 +109,6 @@ const footerSections = [
       { label: "สมัครงาน", href: "https://entgroup-job.lovable.app/", external: true },
     ],
   },
-  {
-    title: "เว็บไซต์ในเครือ",
-    links: [
-      { label: "Rugged Device", href: "https://entgroup-rugged.com", external: true },
-      { label: "NVIDIA Jetson", href: "https://nvidia-jetson.com", external: true },
-      { label: "ENT Group Biz", href: "https://www.entgroup.co.th", external: true },
-      { label: "VIMOSA", href: "https://www.vimosa.co.th/", external: true },
-      { label: "VICHAKAN", href: "https://www.vichakarn.co/", external: true },
-    ],
-  },
 ];
 
 const socials = [
