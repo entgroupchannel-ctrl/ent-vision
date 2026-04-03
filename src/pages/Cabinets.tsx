@@ -304,6 +304,40 @@ const Cabinets = () => {
           </div>
         </section>
 
+        {/* Custom Cabinet Section */}
+        <section className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 via-background to-primary/5 p-8 md:p-10">
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <Settings className="w-7 h-7 text-primary" />
+            </div>
+            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground mb-3">
+              สั่งผลิตตู้ Custom Cabinet
+            </h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              ต้องการตู้ขนาดพิเศษ? เราสามารถออกแบบและผลิตตู้ Panel PC ตามความต้องการเฉพาะของคุณ
+              ไม่ว่าจะเป็นขนาด วัสดุ ระดับการป้องกัน หรือระบบล็อก
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            {[
+              { icon: Ruler, title: "กำหนดขนาดได้", desc: "ระบุขนาดตู้ที่ต้องการให้เหมาะกับตัวเครื่องและพื้นที่ติดตั้ง" },
+              { icon: Shield, title: "เลือกวัสดุ & ระดับป้องกัน", desc: "เหล็กขาว, SUS304, SUS316 พร้อมระดับ IP ตามต้องการ" },
+              { icon: Wrench, title: "ปรับแต่งรายละเอียด", desc: "เพลทยึดอุปกรณ์, ระบบล็อก, ช่องเดินสาย ตามสเปกงาน" },
+            ].map((item) => (
+              <div key={item.title} className="card-surface p-5 text-center">
+                <item.icon className="w-7 h-7 text-primary mx-auto mb-3" />
+                <h4 className="font-bold text-foreground text-sm mb-1">{item.title}</h4>
+                <p className="text-xs text-muted-foreground">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <Button size="lg" onClick={() => { setCustomOpen(true); setCustomSubmitted(false); }}>
+              <Settings className="w-4 h-4 mr-2" /> ขอใบเสนอราคา Custom Cabinet
+            </Button>
+          </div>
+        </section>
+
         {/* CTA */}
         <div className="card-surface p-8 text-center">
           <h2 className="text-2xl font-display font-bold text-foreground mb-3">สนใจตู้ Panel PC Cabinet?</h2>
@@ -313,6 +347,109 @@ const Cabinets = () => {
           </Button>
         </div>
       </div>
+
+      {/* Custom Cabinet Dialog */}
+      <Dialog open={customOpen} onOpenChange={(o) => { if (!o) { setCustomOpen(false); setTimeout(() => setCustomSubmitted(false), 300); } }}>
+        <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Settings size={20} className="text-primary" /> สั่งผลิตตู้ Custom Cabinet
+            </DialogTitle>
+            <DialogDescription>กรอกสเปกที่ต้องการ เราจะจัดทำใบเสนอราคาให้ภายใน 24 ชม.</DialogDescription>
+          </DialogHeader>
+
+          {customSubmitted ? (
+            <div className="text-center py-6">
+              <div className="w-14 h-14 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+                <FileText size={24} className="text-primary" />
+              </div>
+              <h3 className="text-lg font-bold text-foreground mb-2">ส่งคำขอเรียบร้อย!</h3>
+              <p className="text-sm text-muted-foreground mb-4">ทีมจะติดต่อกลับเพื่อเสนอราคาตู้ Custom ภายใน 24 ชม.</p>
+              <button onClick={() => setCustomOpen(false)} className="text-sm text-primary hover:underline">ปิด</button>
+            </div>
+          ) : (
+            <form onSubmit={handleCustomSubmit} className="space-y-4">
+              {/* Contact Info */}
+              <div className="space-y-3">
+                <h4 className="text-sm font-bold text-foreground">ข้อมูลติดต่อ</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  <input name="name" placeholder="ชื่อ-นามสกุล *" required value={customForm.name} onChange={handleCustomChange} className={inputClass} />
+                  <input name="email" type="email" placeholder="อีเมล *" required value={customForm.email || user?.email || ""} onChange={handleCustomChange} className={inputClass} />
+                  <input name="phone" placeholder="เบอร์โทร" value={customForm.phone} onChange={handleCustomChange} className={inputClass} />
+                  <input name="company" placeholder="บริษัท" value={customForm.company} onChange={handleCustomChange} className={inputClass} />
+                </div>
+              </div>
+
+              {/* Cabinet Specs */}
+              <div className="space-y-3 pt-2 border-t border-border">
+                <h4 className="text-sm font-bold text-foreground">สเปกตู้ที่ต้องการ</h4>
+                <input name="panelModel" placeholder="รุ่น Panel PC ที่ใช้ (เช่น GK1501)" value={customForm.panelModel} onChange={handleCustomChange} className={inputClass} />
+                
+                <div>
+                  <label className="block text-xs font-medium text-foreground mb-1">ขนาดตู้ (mm)</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    <input name="cabinetWidth" placeholder="กว้าง (W)" value={customForm.cabinetWidth} onChange={handleCustomChange} className={inputClass} />
+                    <input name="cabinetHeight" placeholder="สูง (H)" value={customForm.cabinetHeight} onChange={handleCustomChange} className={inputClass} />
+                    <input name="cabinetDepth" placeholder="ลึก (D)" value={customForm.cabinetDepth} onChange={handleCustomChange} className={inputClass} />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-medium text-foreground mb-1">วัสดุ</label>
+                    <select name="material" value={customForm.material} onChange={handleCustomChange} className={inputClass}>
+                      <option value="">เลือกวัสดุ</option>
+                      {materialOptions.map((m) => <option key={m} value={m}>{m}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-foreground mb-1">รูปแบบติดตั้ง</label>
+                    <select name="installation" value={customForm.installation} onChange={handleCustomChange} className={inputClass}>
+                      <option value="">เลือกรูปแบบ</option>
+                      {installOptions.map((o) => <option key={o} value={o}>{o}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-foreground mb-1">กุญแจ / ล็อก</label>
+                    <select name="lock" value={customForm.lock} onChange={handleCustomChange} className={inputClass}>
+                      <option value="">เลือกประเภทกุญแจ</option>
+                      {lockOptions.map((l) => <option key={l} value={l}>{l}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-foreground mb-1">ระดับป้องกัน</label>
+                    <select name="protection" value={customForm.protection} onChange={handleCustomChange} className={inputClass}>
+                      <option value="IP54">IP54</option>
+                      <option value="IP65">IP65</option>
+                      <option value="IP66">IP66</option>
+                      <option value="IP67">IP67</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-foreground mb-1">เพลทยึดอุปกรณ์</label>
+                  <select name="plateCount" value={customForm.plateCount} onChange={handleCustomChange} className={inputClass}>
+                    <option value="1">1 ชั้น</option>
+                    <option value="2">2 ชั้น</option>
+                    <option value="3">3 ชั้น</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-foreground mb-1">รายละเอียดเพิ่มเติม</label>
+                <textarea name="details" rows={3} placeholder="เช่น ต้องการช่องเดินสายเพิ่ม, สีพิเศษ, โลโก้บริษัท ฯลฯ" value={customForm.details} onChange={handleCustomChange} className={inputClass} />
+              </div>
+
+              <Button type="submit" className="w-full" disabled={customLoading}>
+                {customLoading ? <Loader2 size={16} className="animate-spin mr-2" /> : <Send size={16} className="mr-2" />}
+                ส่งคำขอ Custom Cabinet
+              </Button>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <QuoteDialog
         open={!!quoteProduct}
