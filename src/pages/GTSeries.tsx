@@ -1372,56 +1372,76 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Spec Table — ข้อมูลจริงจากโรงงาน */}
+              {/* Spec Table — 2 คอลัมน์ */}
               <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border">
                   <h3 className="text-lg font-display font-bold text-foreground">GT3000 Specifications</h3>
                   <p className="text-xs text-muted-foreground mt-1">ข้อมูลจาก Manufacturer</p>
                 </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <tbody className="divide-y divide-border">
-                      {[
-                        { cat: "General", items: [
-                          { label: "CPU", value: "Gen i3 / i5 / i7 / Celeron (หลากหลายรุ่น เลือกได้ตามงาน)" },
+                <div className="grid md:grid-cols-2 md:divide-x divide-border">
+                  {/* Left Column */}
+                  <div>
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">General</td></tr>
+                        {[
+                          { label: "CPU", value: "Gen i3 / i5 / i7 / Celeron" },
                           { label: "Chipset", value: "Intel SOC" },
-                          { label: "Memory", value: "1× SO-DIMM DDR3L Slot, 4GB/8GB DDR3L (Optional)" },
-                          { label: "Storage", value: "1× mSATA SSD + 1× 2.5\" SATA HDD/SSD (Dual Storage)" },
-                        ]},
-                        { cat: "I/O Ports", items: [
+                          { label: "Memory", value: "1× SO-DIMM DDR3L, 4–8GB" },
+                          { label: "Storage", value: "mSATA SSD + 2.5\" SATA HDD" },
+                        ].map((s) => (
+                          <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
+                            <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                          </tr>
+                        ))}
+                        <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">I/O Ports</td></tr>
+                        {[
                           { label: "COM", value: "2× RS232 (DB9)" },
-                          { label: "USB", value: "2× USB 3.0 + 4× USB 2.0 (Total 6 ports)" },
-                          { label: "LAN", value: "2× Intel Gigabit Ethernet RJ45 (10/100/1000Mbps)" },
-                          { label: "Display", value: "VGA + HDMI (Dual Display Synchronous)" },
-                          { label: "Audio", value: "MIC-in + SPK-out (3.5mm Jack)" },
-                          { label: "WiFi", value: "Built-in WiFi + Bluetooth (Dual Antenna, Optional)" },
-                        ]},
-                        { cat: "Power & Environment", items: [
+                          { label: "USB", value: "2× USB 3.0 + 4× USB 2.0" },
+                          { label: "LAN", value: "2× Gigabit Ethernet" },
+                          { label: "Display", value: "VGA + HDMI Dual Display" },
+                          { label: "Audio", value: "MIC + SPK (3.5mm)" },
+                          { label: "WiFi", value: "WiFi + BT (Dual Antenna)" },
+                        ].map((s) => (
+                          <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
+                            <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  {/* Right Column */}
+                  <div>
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">Power & Environment</td></tr>
+                        {[
                           { label: "Power", value: "DC 12V" },
-                          { label: "Cooling", value: "Fanless — Brushed Aluminum Alloy Chassis Heatsink" },
-                          { label: "Operating Temp", value: "0°C ~ 60°C" },
+                          { label: "Cooling", value: "Fanless Aluminum Heatsink" },
+                          { label: "Temp", value: "0°C ~ 60°C" },
                           { label: "Mounting", value: "Wall Mount (Screws)" },
-                        ]},
-                        { cat: "Dimension", items: [
+                        ].map((s) => (
+                          <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
+                            <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                          </tr>
+                        ))}
+                        <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">Dimension</td></tr>
+                        {[
                           { label: "Size", value: "150 × 217 × 52 mm" },
                           { label: "Weight", value: "1.289 kg" },
-                          { label: "OS Support", value: "Windows 7 / 8 / 10 / Linux" },
-                        ]},
-                      ].map((section) => (
-                        <>
-                          <tr key={section.cat} className="bg-secondary/40">
-                            <td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">{section.cat}</td>
+                          { label: "OS", value: "Win 7 / 8 / 10 / Linux" },
+                        ].map((s) => (
+                          <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
+                            <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
                           </tr>
-                          {section.items.map((spec) => (
-                            <tr key={spec.label} className="hover:bg-secondary/30 transition-colors">
-                              <td className="p-3 font-semibold text-foreground w-[160px] whitespace-nowrap text-xs">{spec.label}</td>
-                              <td className="p-3 text-muted-foreground text-xs">{spec.value}</td>
-                            </tr>
-                          ))}
-                        </>
-                      ))}
-                    </tbody>
-                  </table>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
