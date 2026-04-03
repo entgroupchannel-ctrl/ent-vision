@@ -4,7 +4,7 @@ const ThaiLinePattern = () => (
   <svg
     className="absolute inset-0 w-full h-full text-primary pointer-events-none"
     xmlns="http://www.w3.org/2000/svg"
-    style={{ opacity: 0.045 }}
+    style={{ opacity: 0.15 }}
   >
     <defs>
       <pattern id="thai-line" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
