@@ -56,18 +56,20 @@ const HeroSection = () => {
         <a href="#" className="flex items-center gap-3">
           <img src={logo} alt="ENT GROUP" className="h-10 w-auto" />
         </a>
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-2">
+          <MegaMenu />
           {navLinks.map((l) =>
             l.href.startsWith("/") ? (
-              <Link key={l.label} to={l.href} className="text-sm font-medium text-white/70 hover:text-white transition-colors">
+              <Link key={l.label} to={l.href} className="px-3 py-2 rounded-lg text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 transition-colors">
                 {l.label}
               </Link>
             ) : (
-              <a key={l.label} href={l.href} className="text-sm font-medium text-white/70 hover:text-white transition-colors">
+              <a key={l.label} href={l.href} className="px-3 py-2 rounded-lg text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 transition-colors">
                 {l.label}
               </a>
             )
           )}
+          <div className="w-px h-6 bg-white/10 mx-1" />
           <ThemeToggle />
           <button
             onClick={() => setShowLineQR(true)}
