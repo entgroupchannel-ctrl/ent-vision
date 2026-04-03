@@ -1622,12 +1622,24 @@ const GTSeries = () => {
           {activeTab === "gt5000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_f34de018f5de4ff9a3c4704536bd6731~mv2.png/v1/fill/w_886,h_276,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_17_08.png"
-                  alt="GT5000 Logo"
-                  className="w-full h-[180px] md:h-[250px] object-contain bg-background p-8"
+                  src={gt5000Banner}
+                  alt="GT5000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    GPIO · SIM Slot · IoT Ready
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">5000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    GPIO + SIM IoT Ready — เชื่อมต่อทุกที่ ไร้ขีดจำกัด
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product Image */}
