@@ -1,4 +1,5 @@
 import { useState } from "react";
+import bannerContact from "@/assets/banner-contact.jpg";
 import teamSky from "@/assets/team-sky.png";
 import teamSom from "@/assets/team-som.png";
 import teamPreaw from "@/assets/team-preaw.png";
