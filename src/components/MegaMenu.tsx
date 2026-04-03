@@ -187,6 +187,14 @@ const menuCategories = [
   },
 ];
 
+const b2bBanners: Record<string, { icon: typeof Headset; title: string; desc: string }> = {
+  industrial: { icon: Headset, title: "ผู้เชี่ยวชาญช่วยเลือกสเปก", desc: "ทีมวิศวกรพร้อมให้คำปรึกษา เลือกรุ่นที่ตรงกับ TOR" },
+  network: { icon: ShieldCheck, title: "รับประกันหลังการขาย", desc: "ซ่อม เปลี่ยน ดูแลอย่างมืออาชีพ 1–3 ปี" },
+  display: { icon: Users, title: "ลูกค้าองค์กรชั้นนำไว้วางใจ", desc: "หน่วยงานรัฐ โรงงาน โรงพยาบาล ใช้สินค้าของเรา" },
+  rugged: { icon: Handshake, title: "B2B ราคาพิเศษสำหรับโครงการ", desc: "สั่งซื้อจำนวนมาก ราคาดีกว่า พร้อมเทรนนิ่ง" },
+  solution: { icon: Headset, title: "ทดลองฟรี 30 วัน", desc: "ลองก่อนตัดสินใจ ไม่มีค่าใช้จ่าย มีทีมติดตั้งให้" },
+};
+
 /* ═══════ Component ═══════ */
 const MegaMenu = ({
   onNavigate,
