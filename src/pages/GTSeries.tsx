@@ -3680,16 +3680,13 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Ports & Dimension — 2 คอลัมน์ */}
+              {/* Feature Highlights — 2 คอลัมน์ */}
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="card-surface p-4 overflow-hidden">
-                  <h4 className="font-bold text-foreground mb-3 px-2 text-sm">🔌 Ports & Connectivity</h4>
-                  <img src="/images/gt1300/ports1.jpg" alt="GT1300 Ports Front" className="w-full rounded-lg mb-3" loading="lazy" />
-                  <img src="/images/gt1300/ports2.jpg" alt="GT1300 Ports Rear" className="w-full rounded-lg" loading="lazy" />
+                <div className="card-surface overflow-hidden rounded-xl">
+                  <img src="/images/gt1300/feature-hdmi.png" alt="GT1300 Support 3x HDMI Triple Display" className="w-full h-auto rounded-xl" loading="lazy" />
                 </div>
-                <div className="card-surface p-4 overflow-hidden">
-                  <h4 className="font-bold text-foreground mb-3 px-2 text-sm">📐 Dimension Drawing</h4>
-                  <img src="/images/gt1300/dimension.jpg" alt="GT1300 Dimension" className="w-full rounded-lg" loading="lazy" />
+                <div className="card-surface overflow-hidden rounded-xl">
+                  <img src="/images/gt1300/feature-dustproof.png" alt="GT1300 Industrial-Grade Dust-Proof and Corrosion-Resistant" className="w-full h-auto rounded-xl" loading="lazy" />
                 </div>
               </div>
 
