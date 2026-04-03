@@ -2828,14 +2828,14 @@ const GTSeries = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
                 <div className="relative z-10 p-8 md:p-12">
-                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
-                    Intel Ice Lake Gen 10 · สเปคแรง
+                   <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-amber-500/30">
+                    Intel Ice Lake Gen 10 · Active Cooling · 🌀 มีพัดลม
                   </span>
                   <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
                     GT<span className="text-primary">8000</span>
                   </h2>
                   <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
-                    Ice Lake Gen 10 — พลังประมวลผลระดับ Data Center
+                    Ice Lake Gen 10 — พลังประมวลผลสูงสุดใน GT Series
                   </p>
                 </div>
               </div>
