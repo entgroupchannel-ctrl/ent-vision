@@ -1,4 +1,6 @@
 import { useState } from "react";
+import SEOHead from "@/components/SEOHead";
+import ProductJsonLd from "@/components/ProductJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import LineQRButton from "@/components/LineQRButton";
@@ -204,6 +206,13 @@ const VCloudPoint = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="vCloudPoint Zero Client — Thin Client ประหยัดต้นทุน" description="vCloudPoint Zero Client ลดต้นทุนฮาร์ดแวร์ ประหยัดไฟ 80% ใช้คอมเครื่องเดียวแชร์ได้หลายจุด สำหรับสำนักงาน โรงเรียน โรงแรม" path="/vcloudpoint" />
+      <ProductJsonLd
+        collectionName="vCloudPoint Zero Client"
+        collectionDescription="vCloudPoint Zero Client ลดต้นทุนฮาร์ดแวร์ ประหยัดไฟ 80% ใช้คอมเครื่องเดียวแชร์ได้หลายจุด"
+        collectionUrl="/vcloudpoint"
+        products={[{ name: "vCloudPoint S100", description: "Zero Client for vMatrix", category: "Zero Client" }]}
+      />
       {/* Sticky Nav */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 h-16">

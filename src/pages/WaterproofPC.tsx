@@ -1,4 +1,6 @@
 import { useState } from "react";
+import SEOHead from "@/components/SEOHead";
+import ProductJsonLd from "@/components/ProductJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Droplets, Shield, ThermometerSun, Cpu, Monitor, FileText } from "lucide-react";
@@ -159,6 +161,13 @@ const WaterproofPC = () => {
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Waterproof Panel PC — IP67 IP69K กันน้ำ" description="Waterproof Panel PC มาตรฐาน IP67 IP69K กันน้ำ กันฝุ่น Stainless Steel SUS316 สำหรับอุตสาหกรรมอาหาร ยา และห้องคลีนรูม" path="/waterproof-pc" />
+      <ProductJsonLd
+        collectionName="Waterproof Panel PC IP67 IP69K"
+        collectionDescription="Waterproof Panel PC มาตรฐาน IP67 IP69K กันน้ำ กันฝุ่น Stainless Steel สำหรับอุตสาหกรรมอาหารและยา"
+        collectionUrl="/waterproof-pc"
+        products={models.map(m => ({ name: m.name, image: m.image, description: `${m.model} Waterproof Panel PC`, category: "Waterproof Panel PC" }))}
+      />
       {/* Hero */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/5" />

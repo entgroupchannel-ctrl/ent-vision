@@ -1,4 +1,6 @@
 import { useState } from "react";
+import SEOHead from "@/components/SEOHead";
+import ProductJsonLd from "@/components/ProductJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import {
@@ -736,6 +738,13 @@ const MiniPCFirewall = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Mini PC Firewall — pfSense OPNsense Router" description="Mini PC Firewall สำหรับ pfSense OPNsense VPN Gateway รองรับ 2-6 LAN Ports Fanless Intel Celeron ถึง Core i7" path="/mini-pc-firewall" />
+      <ProductJsonLd
+        collectionName="Mini PC Firewall pfSense OPNsense"
+        collectionDescription="Mini PC Firewall สำหรับ pfSense OPNsense VPN Gateway รองรับ 2-6 LAN Ports"
+        collectionUrl="/mini-pc-firewall"
+        products={models.map(m => ({ name: m.name, description: m.tagline, category: "Mini PC Firewall" }))}
+      />
       {/* Sticky Nav */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 h-16">

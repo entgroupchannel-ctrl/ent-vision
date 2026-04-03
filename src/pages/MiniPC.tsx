@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import SEOHead from "@/components/SEOHead";
+import ProductJsonLd from "@/components/ProductJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { ArrowLeft, ExternalLink, Cpu, Zap, Shield, Monitor, Wifi, ThermometerSun, HardDrive, Server, ChevronRight, FileText } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -748,6 +750,19 @@ const MiniPC = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Mini PC Series — คอมพิวเตอร์ขนาดเล็กสมรรถนะสูง" description="Mini PC จากโรงงานผู้ผลิตโดยตรง ครอบคลุมทุกการใช้งานตั้งแต่ Entry-Level จนถึง Workstation Class ราคาเริ่มต้น 4,900 บาท" path="/mini-pc" />
+      <ProductJsonLd
+        collectionName="Mini PC Series"
+        collectionDescription="คอมพิวเตอร์ขนาดเล็กสมรรถนะสูง จากโรงงานผู้ผลิตโดยตรง ราคาเริ่มต้น 4,900 บาท"
+        collectionUrl="/mini-pc"
+        products={[
+          { name: "K6-F1 Mini PC", price: "4,900", category: "Mini PC" },
+          { name: "K6-F17H Mini PC", price: "5,500", category: "Mini PC" },
+          { name: "K3-F18-6006 Mini PC", price: "8,900", category: "Mini PC" },
+          { name: "K3-F17H Mini PC", price: "8,500", category: "Mini PC" },
+          { name: "K8-F18-4405 Mini PC", price: "9,500", category: "Mini PC" },
+        ]}
+      />
       {/* Header */}
       <div className="bg-gradient-to-b from-primary/5 to-background border-b border-border">
         <div className="container max-w-7xl mx-auto px-4 py-6">
