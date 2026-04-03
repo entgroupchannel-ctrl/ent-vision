@@ -10,6 +10,12 @@ import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import smartDisplayHero from "@/assets/smart-display-hero.jpg";
 import FooterCompact from "@/components/FooterCompact";
+import kioskVisitor from "@/assets/kiosk-usecase-visitor.jpg";
+import kioskQueue from "@/assets/kiosk-usecase-queue.jpg";
+import kioskWayfinding from "@/assets/kiosk-usecase-wayfinding.jpg";
+import kioskSelforder from "@/assets/kiosk-usecase-selforder.jpg";
+import kioskBrand from "@/assets/kiosk-usecase-brand.jpg";
+import kioskCheckin from "@/assets/kiosk-usecase-checkin.jpg";
 
 /* ─── Data ─── */
 
