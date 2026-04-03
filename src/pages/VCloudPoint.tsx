@@ -178,11 +178,11 @@ const DemoCTA = ({ variant = "primary" }: { variant?: "primary" | "secondary" })
       วิศวกรติดตั้งให้ฟรี (Remote Support) · Training ฟรีพร้อมคู่มือ · ไม่พอใจคืนเงิน 100%
     </p>
     <div className="flex flex-wrap justify-center gap-3 mb-6">
-      <LineQRButton
-        className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg shadow-primary/20"
-      >
-        <Phone size={16} /> ขอทดลองใช้ฟรี
-      </LineQRButton>
+      <DemoRequestDialog>
+        <button className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg shadow-primary/20">
+          <Phone size={16} /> ขอทดลองใช้ฟรี
+        </button>
+      </DemoRequestDialog>
       <a
         href="https://vcloudpoint.info/"
         target="_blank"
