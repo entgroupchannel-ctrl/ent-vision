@@ -19,6 +19,7 @@ import SmartDisplay from "./pages/SmartDisplay.tsx";
 import Promotions from "./pages/Promotions.tsx";
 import UTCSeries from "./pages/UTCSeries.tsx";
 import MiniPCFirewall from "./pages/MiniPCFirewall.tsx";
+import VCloudPoint from "./pages/VCloudPoint.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/promotions" element={<Promotions />} />
             <Route path="/utc-series" element={<UTCSeries />} />
             <Route path="/minipc-firewall" element={<MiniPCFirewall />} />
+            <Route path="/vcloudpoint" element={<VCloudPoint />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
