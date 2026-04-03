@@ -266,12 +266,12 @@ const CollapsibleSection = ({ title, children, defaultOpen = false }: { title: s
   );
 };
 
-const ModelCard = ({ model, onQuote }: { model: FirewallModel; onQuote?: (name: string) => void }) => {
+const ModelCard = ({ model, onQuote, selected, onToggleSelect }: { model: FirewallModel; onQuote?: (name: string) => void; selected?: boolean; onToggleSelect?: (name: string) => void }) => {
   const tier = tierMeta[model.tier];
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className={`card-surface rounded-xl overflow-hidden border ${tier.border} hover:shadow-lg transition-all duration-300`}>
+    <div className={`card-surface rounded-xl overflow-hidden border ${tier.border} transition-all duration-300 ${selected ? "ring-2 ring-primary" : "hover:shadow-lg"}`}>
       {/* Header */}
       <div className="p-5">
         <div className="flex items-start justify-between mb-3">
