@@ -658,12 +658,25 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              <button
-                onClick={() => handleTabChange("overview")}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-primary/25"
-              >
-                ดูรุ่นทั้งหมด <ArrowLeft size={16} className="rotate-180" />
-              </button>
+              <div className="flex flex-wrap gap-3">
+                <button
+                  onClick={() => handleTabChange("overview")}
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-primary/25"
+                >
+                  ดูรุ่นทั้งหมด <ArrowLeft size={16} className="rotate-180" />
+                </button>
+                <button
+                  onClick={() => {
+                    const el = document.getElementById("comparison");
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border-2 border-primary/40 text-primary font-bold text-sm hover:bg-primary/10 transition-all group"
+                >
+                  <Filter size={16} />
+                  <span>เปรียบเทียบสเปก</span>
+                  <span className="px-2 py-0.5 rounded-full bg-primary/15 text-[10px] font-bold tracking-wide uppercase group-hover:bg-primary/25 transition-colors">Smart Filter</span>
+                </button>
+              </div>
             </div>
 
             {/* Right — Product showcase */}
@@ -778,7 +791,9 @@ const GTSeries = () => {
               </div>
 
               {/* Comparison Table */}
-              <ComparisonTable handleTabChange={handleTabChange} />
+              <div id="comparison">
+                <ComparisonTable handleTabChange={handleTabChange} />
+              </div>
             </div>
           )}
 
