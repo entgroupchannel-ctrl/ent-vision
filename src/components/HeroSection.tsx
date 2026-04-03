@@ -20,8 +20,6 @@ const searchTags = [
 ];
 
 const navLinks = [
-  { label: "สินค้า", href: "#products" },
-  { label: "บริการ", href: "#services" },
   { label: "โปรโมชั่น", href: "/promotions" },
   { label: "ติดต่อเรา", href: "#contact" },
 ];
