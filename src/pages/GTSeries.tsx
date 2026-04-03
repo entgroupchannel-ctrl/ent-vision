@@ -2708,52 +2708,47 @@ const GTSeries = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
                 <div className="relative z-10 p-8 md:p-12">
                   <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
-                    Triple Display · 8 COM · NVMe · DDR5
+                    3 HDMI · 6 COM · NVMe · SIM 4G · Dual-Band WiFi
                   </span>
                   <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
                     GT<span className="text-primary">9000</span>
                   </h2>
                   <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
-                    Triple Display 8 COM — เรือธงสำหรับงานหนักระดับสูงสุด
+                    Triple HDMI Display · 6 COM RS232/422/485 — เรือธงสำหรับงานหนักระดับสูงสุด
                   </p>
                 </div>
               </div>
 
-              {/* Description + Product */}
+              {/* Description + Factory Gallery */}
               <div className="grid lg:grid-cols-5 gap-8">
                 <div className="lg:col-span-3 space-y-6">
                   <div>
                     <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
-                      Triple Display · 8 COM · NVMe · DDR5 · Dual-Band WiFi
+                      Triple HDMI · 6 COM · M-SATA + SATA + NVMe · SIM 4G
                     </span>
                     <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
                       GT<span className="text-gradient">9000</span>
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      GT9000 ออกแบบด้วยการผลิตที่ปราณีต ตัวเครื่องสีดำผลิตจากโลหะผสมอลูมิเนียมขัดเงา
-                      ปราศจากพัดลมระบายอากาศ ทำงานเงียบไร้เสียงรบกวน รองรับการทำงาน 24 ชั่วโมงต่อเนื่อง
-                      พร้อมอุปกรณ์เครือข่ายไร้สาย Dual-Band และเสาอากาศภายนอก ครบครันด้วย 8 COM Port
-                      รองรับ RS232/RS422/RS485 สนับสนุน Triple Display ผ่าน 2 HDMI + 1 DP ทำงาน 3 จอพร้อมกัน
+                      GT9000 ตัวเครื่องสีดำผลิตจากอลูมิเนียมอัลลอยด์ขัดเงา (Brushed Full Aluminum Alloy)
+                      ปราศจากพัดลมระบายอากาศ ทำงานเงียบ 24 ชั่วโมงต่อเนื่อง รองรับ 4G Module พร้อมช่อง SIM Card,
+                      Dual-Band WiFi พร้อมเสาอากาศภายนอก, 6 COM Port (RS232/RS422/RS485) และ Triple Display
+                      ผ่าน 3× HDMI 1.4 แสดงผล 3 จอพร้อมกัน ติดตั้ง M-SATA SSD + 2.5" SATA HDD + M.2 2280 NVMe ได้พร้อมกัน
                     </p>
                   </div>
 
+                  {/* Product Features จากโรงงาน */}
                   <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-2">🏭 โซลูชั่นระบบจัดการโรงงานระดับมืออาชีพ</h4>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>✅ ติดตามกระบวนการผลิตแบบ Real-time</li>
-                      <li>✅ ควบคุมคุณภาพตามมาตรฐานสากล</li>
-                      <li>✅ จัดการสต็อกวัตถุดิบอัจฉริยะ</li>
-                      <li>✅ เชื่อมต่อเครื่องจักรทุกประเภท</li>
-                      <li>✅ ลดเวลา Downtime ได้ถึง 40%</li>
-                    </ul>
-                  </div>
-
-                  <div className="card-surface p-5 border-l-4 border-secondary">
-                    <h4 className="font-bold text-foreground mb-2">🎯 ปฏิวัติโรงงานสู่ยุคดิจิทัล</h4>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>🎯 ควบคุมอุณหภูมิและความดันอัตโนมัติ</li>
-                      <li>🎯 ตรวจสอบคุณภาพด้วย AI Vision</li>
-                      <li>🎯 วางแผนการผลิตแบบอัจฉริยะ</li>
+                    <h4 className="font-bold text-foreground mb-3">🏭 Products Features</h4>
+                    <ul className="text-sm text-muted-foreground space-y-2">
+                      <li>✅ Brushed Full Aluminum Alloy — โครงอลูมิเนียมขัดเงาสีดำ</li>
+                      <li>✅ Fanless 24 ชม. — ไร้พัดลม เงียบสนิท ไม่ดูดฝุ่น</li>
+                      <li>✅ Full-height 4G Module + SIM Card Slot</li>
+                      <li>✅ Dual-Band WiFi + เสาอากาศภายนอก</li>
+                      <li>✅ 6× RS232/RS422/RS485 COM Port</li>
+                      <li>✅ M-SATA SSD + 2.5" SATA HDD + M.2 2280 NVMe พร้อมกัน</li>
+                      <li>✅ 3× HDMI 1.4 Triple Display — 3 จอพร้อมกัน</li>
+                      <li>✅ Wall Mount ด้วยสกรูยาว (Optional)</li>
                     </ul>
                   </div>
 
@@ -2767,34 +2762,91 @@ const GTSeries = () => {
                     <div className="card-surface p-4 text-center">
                       <Server className="mx-auto text-primary mb-2" size={24} />
                       <div className="font-bold text-foreground text-sm">RAM & Storage</div>
-                      <div className="text-xs text-muted-foreground mt-1">DDR4/DDR5 4–32 GB / SSD + SATA + NVMe</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR4/DDR5 สูงสุด 32GB / M-SATA + SATA + NVMe</div>
                     </div>
                     <div className="card-surface p-4 text-center">
                       <Monitor className="mx-auto text-primary mb-2" size={24} />
-                      <div className="font-bold text-foreground text-sm">Triple Display</div>
-                      <div className="text-xs text-muted-foreground mt-1">2× HDMI 1.4 + 1× DP — 3 จอพร้อมกัน</div>
+                      <div className="font-bold text-foreground text-sm">3× HDMI 1.4</div>
+                      <div className="text-xs text-muted-foreground mt-1">Triple Display — แสดงผล 3 จอพร้อมกัน</div>
                     </div>
                     <div className="card-surface p-4 text-center">
                       <Shield className="mx-auto text-primary mb-2" size={24} />
-                      <div className="font-bold text-foreground text-sm">8 COM Port</div>
-                      <div className="text-xs text-muted-foreground mt-1">RS232/RS422/RS485 + Dual-Band WiFi</div>
+                      <div className="font-bold text-foreground text-sm">6 COM + SIM 4G</div>
+                      <div className="text-xs text-muted-foreground mt-1">RS232/RS422/RS485 + 4G Module + WiFi</div>
                     </div>
                   </div>
                 </div>
 
+                {/* Factory Gallery */}
                 <div className="lg:col-span-2 space-y-4">
                   <div className="card-surface overflow-hidden">
-                    <img
-                      src="https://static.wixstatic.com/media/0597a3_bee270c19b2f466a8a77aa294d528952f000.jpg/v1/fill/w_290,h_514,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_bee270c19b2f466a8a77aa294d528952f000.jpg"
-                      alt="GT9000 Product"
-                      className="w-full object-contain p-4"
-                      loading="lazy"
-                    />
+                    <img src="/images/gt9000/main.jpg" alt="GT9000 ภาพหลัก" className="w-full object-contain p-4" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { src: "/images/gt9000/front.jpg", alt: "GT9000 ด้านหน้า" },
+                      { src: "/images/gt9000/side.jpg", alt: "GT9000 ด้านข้าง" },
+                      { src: "/images/gt9000/angle.jpg", alt: "GT9000 มุมเฉียง" },
+                      { src: "/images/gt9000/motherboard.png", alt: "GT9000 เมนบอร์ด" },
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden">
+                        <img src={img.src} alt={img.alt} className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              {/* Overview & Spec Diagrams */}
+              {/* Spec Sheet จากโรงงาน */}
+              <div className="card-surface p-4 overflow-hidden">
+                <h4 className="font-bold text-foreground mb-3 px-2">📋 Products Specification</h4>
+                <img src="/images/gt9000/spec.png" alt="GT9000 Specification Table" className="w-full rounded-lg" loading="lazy" />
+              </div>
+
+              {/* Spec 2 คอลัมน์ */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">📐 GT9000 Specifications</h3>
+                </div>
+                <div className="grid md:grid-cols-2 md:divide-x divide-border">
+                  <div className="divide-y divide-border">
+                    {[
+                      ["CPU", "Intel i5-10200H / i7-10750H (Gen 10)\ni5-1235U / i7-1255U (Gen 12)"],
+                      ["Chipset", "Intel HM470 / Intel 660P"],
+                      ["RAM", "DDR4 สูงสุด 32GB (Gen 10)\nDDR5 สูงสุด 32GB (Gen 12)"],
+                      ["Storage", "M-SATA SSD + 2.5\" SATA HDD + M.2 2280 NVMe"],
+                      ["Display Output", "3× HDMI 1.4 (Triple Display)"],
+                      ["COM Port", "6× RS232/RS422/RS485"],
+                      ["USB", "USB 3.0 × 4 + USB 2.0 × 4"],
+                      ["LAN", "2× Intel Gigabit RJ45"],
+                    ].map(([label, value], i) => (
+                      <div key={i} className="flex">
+                        <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
+                        <div className="w-2/3 p-3 text-xs text-muted-foreground whitespace-pre-line">{value}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="divide-y divide-border">
+                    {[
+                      ["WiFi", "Dual-Band WiFi + เสาอากาศภายนอก 2 ต้น"],
+                      ["4G/LTE", "Full-height 4G Module + Micro SIM Slot"],
+                      ["Audio", "MIC-IN + SPK-OUT (Line Out)"],
+                      ["GPIO", "ไม่มี"],
+                      ["Power", "DC 19V Adapter"],
+                      ["Cooling", "Fanless — ระบายความร้อนผ่านอลูมิเนียม"],
+                      ["Temp Range", "0°C ~ 60°C"],
+                      ["Mounting", "VESA / Wall Mount (Optional)"],
+                    ].map(([label, value], i) => (
+                      <div key={i} className="flex">
+                        <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
+                        <div className="w-2/3 p-3 text-xs text-muted-foreground whitespace-pre-line">{value}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Wix Detail Images — Overview & Spec Diagrams */}
               <div className="card-surface p-4 overflow-hidden">
                 <img
                   src="https://static.wixstatic.com/media/0597a3_b68e0174e2b54d39b0bdf80ae71118e5~mv2.png/v1/crop/x_0,y_0,w_2752,h_1496/fill/w_712,h_387,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT9000%20PR.png"
@@ -2804,52 +2856,24 @@ const GTSeries = () => {
                 />
               </div>
 
-              <div className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
                 {[
                   "https://static.wixstatic.com/media/0597a3_ecdc35b7d41e4cfba1afa5d11300df17~mv2.png/v1/crop/x_15,y_217,w_2352,h_655/fill/w_1095,h_305,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2012_51_54.png",
                   "https://static.wixstatic.com/media/0597a3_77a9c0395f984fde811028a4f0fbc5e4~mv2.png/v1/fill/w_1084,h_395,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2013_52_21.png",
                   "https://static.wixstatic.com/media/0597a3_c5d446300d3a4d9caabc33cad2911b4b~mv2.png/v1/fill/w_1084,h_402,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_09_11.png",
                   "https://static.wixstatic.com/media/0597a3_ffb33e04d1384bdab5c17647bd479b85~mv2.png/v1/fill/w_1084,h_401,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_09_57.png",
                   "https://static.wixstatic.com/media/0597a3_d3041b42178d4c10bece0b7ffb8f31e3~mv2.png/v1/fill/w_1083,h_401,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_30_29.png",
-                ].map((img, i) => (
-                  <div key={i} className="card-surface p-4 overflow-hidden">
-                    <img src={img} alt={`GT9000 Spec ${i + 1}`} className="w-full rounded-lg" loading="lazy" />
-                  </div>
-                ))}
-              </div>
-
-              {/* Connectivity & Design Details */}
-              <div className="grid md:grid-cols-2 gap-6">
-                {[
                   "https://static.wixstatic.com/media/0597a3_2c101c21f03f4d63b1df69669f310210~mv2.png/v1/fill/w_1083,h_401,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_01_45.png",
                   "https://static.wixstatic.com/media/0597a3_ee8b5d5430dd45118bfc9310fb269418~mv2.png/v1/fill/w_1083,h_407,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_43_57.png",
                   "https://static.wixstatic.com/media/0597a3_06cf1a8db43c4bc9b3e45e421c5f38ca~mv2.png/v1/fill/w_1083,h_395,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_28_18.png",
                   "https://static.wixstatic.com/media/0597a3_e8bf65042cdb49c7badf9b1dc833e3a2~mv2.png/v1/fill/w_1095,h_393,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2013_39_08.png",
+                  "https://static.wixstatic.com/media/0597a3_901ca65b5c4149a1b6037ff17888889b~mv2.png/v1/fill/w_1095,h_388,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2014_00_07.png",
+                  "https://static.wixstatic.com/media/0597a3_d89ddcc7673d4492ad64911fb4825364~mv2.png/v1/crop/x_0,y_264,w_2433,h_616/fill/w_1095,h_278,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2012_58_44.png",
                 ].map((img, i) => (
-                  <div key={i} className="card-surface p-4 overflow-hidden">
+                  <div key={i} className="card-surface p-3 overflow-hidden">
                     <img src={img} alt={`GT9000 Detail ${i + 1}`} className="w-full rounded-lg" loading="lazy" />
                   </div>
                 ))}
-              </div>
-
-              {/* Application & Dimension */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_901ca65b5c4149a1b6037ff17888889b~mv2.png/v1/fill/w_1095,h_388,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2014_00_07.png"
-                    alt="GT9000 Application"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_d89ddcc7673d4492ad64911fb4825364~mv2.png/v1/crop/x_0,y_264,w_2433,h_616/fill/w_1095,h_278,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2012_58_44.png"
-                    alt="GT9000 Dimensions"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
               </div>
 
               {/* Real-world Photos */}
