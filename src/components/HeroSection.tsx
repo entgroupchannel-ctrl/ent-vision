@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Search, Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import heroIndustrial from "@/assets/hero-industrial.jpg";
-import logo from "@/assets/logo-entgroup.avif";
+import logo from "@/assets/logo-entgroup-transparent.png";
 
 const searchTags = [
   { label: "Mini PC สำนักงาน", href: "#products" },
