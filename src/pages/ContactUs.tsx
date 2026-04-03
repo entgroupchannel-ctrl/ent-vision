@@ -94,6 +94,7 @@ const ContactUs = () => {
         if (error) throw error;
 
         const extracted = data?.data || {};
+        setExtractedCardData(extracted);
         setForm((prev) => ({
           ...prev,
           name: extracted.name || prev.name,
