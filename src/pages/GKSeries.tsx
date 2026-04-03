@@ -389,7 +389,17 @@ const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
               </span>
             )}
           </div>
-          <img
+          <WishlistHeart
+            item={{
+              id: model.id,
+              name: model.name,
+              category: "GK Series — Panel PC",
+              image: model.image,
+              href: `/gk-series#${model.id}`,
+              specs: `${model.screenSize} ${model.resolution} ${model.platform}`,
+            }}
+            className="absolute top-4 right-4"
+          />
             src={model.image}
             alt={model.name}
             className="max-h-[240px] object-contain mb-4"
