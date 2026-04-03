@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import LineQRButton from "@/components/LineQRButton";
 
 const softwareExamples = [
   { label: "HRM", href: "https://entgroup-job.lovable.app/" },
@@ -66,14 +67,11 @@ const SoftwareSection = () => {
               >
                 ดูตัวอย่างงาน <ExternalLink size={16} />
               </a>
-              <a
-                href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
-                target="_blank"
-                rel="noopener noreferrer"
+              <LineQRButton
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-semibold hover:bg-surface-hover transition-colors"
               >
                 เพิ่มเพื่อนขอรายละเอียด
-              </a>
+              </LineQRButton>
             </div>
           </div>
         </div>

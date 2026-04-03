@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FooterCompact from "@/components/FooterCompact";
+import LineQRButton from "@/components/LineQRButton";
 
 /* ───── Types ───── */
 type PromoStatus = "active" | "ended" | "recurring";
@@ -273,18 +274,30 @@ const PromoCard = ({ promo, featured = false }: { promo: Promo; featured?: boole
 
           {/* CTA */}
           <div className="flex flex-wrap gap-2">
-            <a
-              href={promo.ctaHref}
-              target={promo.ctaHref.startsWith("http") ? "_blank" : undefined}
-              rel={promo.ctaHref.startsWith("http") ? "noopener noreferrer" : undefined}
-              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90 ${
-                promo.status === "active"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-foreground"
-              }`}
-            >
-              {promo.ctaLabel}
-            </a>
+            {promo.ctaHref.includes("line.me") ? (
+              <LineQRButton
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90 ${
+                  promo.status === "active"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-foreground"
+                }`}
+              >
+                {promo.ctaLabel}
+              </LineQRButton>
+            ) : (
+              <a
+                href={promo.ctaHref}
+                target={promo.ctaHref.startsWith("http") ? "_blank" : undefined}
+                rel={promo.ctaHref.startsWith("http") ? "noopener noreferrer" : undefined}
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90 ${
+                  promo.status === "active"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-foreground"
+                }`}
+              >
+                {promo.ctaLabel}
+              </a>
+            )}
             {promo.downloadHref && (
               <a
                 href={promo.downloadHref}
@@ -313,14 +326,11 @@ const Promotions = () => {
             <ArrowLeft size={16} /> หน้าแรก
           </Link>
           <h1 className="text-sm font-bold">โปรโมชั่น</h1>
-          <a
-            href="https://line.me/R/ti/p/@entgroup"
-            target="_blank"
-            rel="noopener noreferrer"
+          <LineQRButton
             className="text-xs px-3 py-1.5 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
           >
             LINE @entgroup
-          </a>
+          </LineQRButton>
         </div>
       </div>
 
@@ -437,14 +447,11 @@ const Promotions = () => {
                   แอดไลน์ @entgroup เพื่อรับข่าวสารโปรโมชั่นพิเศษ ดีลเฉพาะลูกค้าไลน์ และข้อเสนอ Flash Sale ก่อนใคร
                 </p>
 
-                <a
-                  href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <LineQRButton
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity mb-6"
                 >
                   เพิ่มเพื่อน LINE @entgroup
-                </a>
+                </LineQRButton>
 
                 <div className="grid grid-cols-3 gap-4 mt-8">
                   {[
@@ -470,14 +477,11 @@ const Promotions = () => {
           <h2 className="text-2xl font-bold text-foreground mb-3">ต้องการใบเสนอราคา?</h2>
           <p className="text-muted-foreground mb-6">ติดต่อเราเพื่อขอราคาพิเศษสำหรับโปรเจกต์ของคุณ</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href="https://line.me/R/ti/p/@entgroup"
-              target="_blank"
-              rel="noopener noreferrer"
+            <LineQRButton
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
             >
               LINE @entgroup
-            </a>
+            </LineQRButton>
             <a
               href="tel:0957391053"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-border bg-card text-foreground font-semibold hover:bg-secondary/50 transition-colors"

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import LineQRButton from "@/components/LineQRButton";
 import {
   Headset, ShieldCheck, Users, Handshake, Truck, Award, ArrowLeft,
   Building2, Rocket, Globe, ShoppingCart, Monitor, Cpu, TabletSmartphone,
@@ -296,14 +297,11 @@ const AboutUs = () => {
             >
               ติดต่อเรา
             </Link>
-            <a
-              href="https://line.me/R/ti/p/@entgroup"
-              target="_blank"
-              rel="noopener noreferrer"
+            <LineQRButton
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground text-sm font-semibold hover:bg-secondary transition-colors"
             >
               LINE @entgroup
-            </a>
+            </LineQRButton>
           </div>
         </div>
       </section>
