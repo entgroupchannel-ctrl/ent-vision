@@ -2180,13 +2180,25 @@ const GTSeries = () => {
           {/* Tab: GT7000 Detail */}
           {activeTab === "gt7000" && (
             <div className="space-y-8 animate-fade-in">
-              {/* Hero Logo */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_570b404607f6492fbc9e3388e5aece33~mv2.png/v1/fill/w_494,h_135,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-12%20at%2013_47_09.png"
-                  alt="GT7000 Logo"
-                  className="w-full h-[120px] md:h-[180px] object-contain bg-background p-8"
+                  src={gt7000Banner}
+                  alt="GT7000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    DDR4 · 6 COM · 70°C · Aluminium Alloy
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">7000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    คำตอบทุกปัญหาโรงงาน — ทนทาน แกร่ง ไว้ใจได้
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product */}
