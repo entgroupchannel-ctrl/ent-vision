@@ -6,6 +6,12 @@ import {
   Droplets, UtensilsCrossed
 } from "lucide-react";
 
+import imgGT from "@/assets/product-gt-series.jpg";
+import imgFirewall from "@/assets/product-firewall.jpg";
+import imgSmart from "@/assets/product-smart-display.jpg";
+import imgRugged from "@/assets/product-rugged.jpg";
+import imgVCloud from "@/assets/product-vcloudpoint.jpg";
+
 /* ═══════ Menu Data ═══════ */
 const menuCategories = [
   {
@@ -18,7 +24,7 @@ const menuCategories = [
       desc: "Mini PC Fanless ถึก ทน แกร่ง — 12 รุ่น ครอบคลุมทุกงาน",
       href: "/gt-series",
       badge: "Best Seller",
-      image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
+      image: imgGT,
     },
     columns: [
       {
@@ -56,7 +62,7 @@ const menuCategories = [
       desc: "pfSense / OPNsense Ready — Fanless 2.5G/10G พร้อม Smart Filter",
       href: "/minipc-firewall",
       badge: "Smart Filter",
-      image: "https://static.wixstatic.com/media/0597a3_6ebc77045f9a4292bb485a4fa91ac3a2~mv2.png/v1/fill/w_211,h_155,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-15%20at%2012_02_13.png",
+      image: imgFirewall,
     },
     columns: [
       {
@@ -83,7 +89,7 @@ const menuCategories = [
       desc: "จอ Digital Signage Indoor/Outdoor ความสว่างสูง พร้อมซอฟต์แวร์จัดการเนื้อหาฟรี",
       href: "/smart-display",
       badge: "Signage",
-      image: "https://static.wixstatic.com/media/0597a3_89ddd2e3de8b4610bd0e08f02dbf25d6~mv2.png/v1/fill/w_378,h_315,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-07-12%20at%2017_18_04.png",
+      image: imgSmart,
     },
     columns: [
       {
@@ -121,7 +127,7 @@ const menuCategories = [
       desc: "กันน้ำ กันกระแทก MIL-STD-810G/H — Windows & Android สำหรับภาคสนามและโลจิสติกส์",
       href: "/rugged-tablet",
       badge: "MIL-STD",
-      image: "https://entgroup-rugged.com/assets/f9e-C3MseYpo.png",
+      image: imgRugged,
     },
     columns: [
       {
@@ -162,7 +168,7 @@ const menuCategories = [
       desc: "1 เครื่อง PC รองรับ 30 คน — ลดต้นทุน 60% ประหยัดไฟ 80%",
       href: "/vcloudpoint",
       badge: "Zero Client",
-      image: "https://static.wixstatic.com/media/0597a3_756a4a09e31d4b6d85eb8da1da91f781~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_39_10.png",
+      image: imgVCloud,
     },
     columns: [
       {
