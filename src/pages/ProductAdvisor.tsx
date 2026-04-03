@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import MegaMenu from "@/components/MegaMenu";
+
 import FooterCompact from "@/components/FooterCompact";
 
 /* ═══════ Product Database ═══════ */
@@ -621,16 +621,19 @@ const ProductAdvisor = () => {
         <title>ตัวช่วยเลือกสินค้า | ENT Group — Smart Product Advisor</title>
         <meta name="description" content="ระบบ AI ช่วยเลือกสินค้า Industrial PC, Panel PC, Rugged Tablet ที่เหมาะกับการใช้งานและงบประมาณของคุณ" />
       </Helmet>
-      <MegaMenu />
 
       <main className="min-h-screen bg-background">
+        {/* Back button */}
+        <div className="px-4 pt-4">
+          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <ArrowLeft size={16} /> กลับหน้าแรก
+          </Link>
+        </div>
+
         {/* Hero */}
-        <section className="relative py-16 md:py-24 px-4 overflow-hidden">
+        <section className="relative py-12 md:py-20 px-4 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/10" />
           <div className="container max-w-4xl mx-auto text-center relative z-10">
-            <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4">
-              <ArrowLeft size={16} /> กลับหน้าแรก
-            </Link>
             <Badge variant="secondary" className="mb-4 gap-1.5 block w-fit mx-auto">
               <Sparkles size={12} /> Smart Product Advisor
             </Badge>
