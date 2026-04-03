@@ -2,9 +2,10 @@ import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Shield, Droplets, Battery, Smartphone, Monitor, Download, ChevronLeft, ChevronRight, Wifi, FileText } from "lucide-react";
+import { ArrowLeft, ExternalLink, Shield, Droplets, Battery, Smartphone, Monitor, Download, ChevronLeft, ChevronRight, Wifi, FileText, CheckSquare, Square, ShoppingCart, X } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import ruggedHero from "@/assets/rugged-tablet-hero.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -375,15 +376,35 @@ const categories = [
 const ITEMS_PER_PAGE = 10;
 
 /* ───── Product Card ───── */
-const ProductCard = ({ product, onQuote }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string }; onQuote?: (name: string) => void }) => (
-  <div className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
+const ProductCard = ({ product, onQuote, selected, onToggleSelect }: { 
+  product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string }; 
+  onQuote?: (name: string) => void;
+  selected?: boolean;
+  onToggleSelect?: (name: string) => void;
+}) => (
+  <div className={`card-surface overflow-hidden group transition-all ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
     {product.image && (
       <div className="relative bg-secondary/30 p-4 flex items-center justify-center h-48">
         <WishlistHeart
           item={{ id: product.name.toLowerCase().replace(/\s+/g, "-"), name: product.name, category: "Rugged Tablet", image: product.image, href: "/rugged-tablet", specs: product.highlight }}
           className="absolute top-3 right-3"
         />
+        {onToggleSelect && (
+          <button
+            onClick={() => onToggleSelect(product.name)}
+            className="absolute top-3 left-3 z-10"
+          >
+            <Checkbox checked={selected} className="h-5 w-5" />
+          </button>
+        )}
         <img src={product.image} alt={product.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+      </div>
+    )}
+    {!product.image && onToggleSelect && (
+      <div className="flex justify-end p-3 pb-0">
+        <button onClick={() => onToggleSelect(product.name)}>
+          <Checkbox checked={selected} className="h-5 w-5" />
+        </button>
       </div>
     )}
     <div className="p-5 space-y-3">
@@ -424,7 +445,23 @@ const RuggedTablet = () => {
   const [winPage, setWinPage] = useState(1);
   const [androidPage, setAndroidPage] = useState(1);
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const [selectedProducts, setSelectedProducts] = useState<Set<string>>(new Set());
+  const [showMultiQuote, setShowMultiQuote] = useState(false);
 
+  const toggleSelect = useCallback((name: string) => {
+    setSelectedProducts(prev => {
+      const next = new Set(prev);
+      if (next.has(name)) next.delete(name);
+      else next.add(name);
+      return next;
+    });
+  }, []);
+
+  const clearSelection = () => setSelectedProducts(new Set());
+
+  const openMultiQuote = () => {
+    setShowMultiQuote(true);
+  };
   return (
     <div className="min-h-screen bg-background">
       <SEOHead title="Rugged Tablet & Notebook กันน้ำ กันกระแทก" description="Rugged Tablet และ Notebook ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์ และอุตสาหกรรม" path="/rugged-tablet" />
@@ -543,7 +580,7 @@ const RuggedTablet = () => {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             {goleRuggedTablets.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
 
@@ -570,7 +607,7 @@ const RuggedTablet = () => {
           <p className="text-sm text-muted-foreground mb-6">แท็บเล็ตทนทานระดับอุตสาหกรรม Windows & Android พร้อมมาตรฐาน IP65-IP68</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {emRuggedTablets.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
         </section>
@@ -593,7 +630,7 @@ const RuggedTablet = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {ruggedNotebooks.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
         </section>
@@ -606,7 +643,7 @@ const RuggedTablet = () => {
           <p className="text-sm text-muted-foreground mb-6">คอมพิวเตอร์ All-in-One จอสัมผัส สำหรับอุตสาหกรรม ประหยัดพื้นที่ VESA/Panel Mount</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {aioProducts.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
         </section>
@@ -619,7 +656,7 @@ const RuggedTablet = () => {
           <p className="text-sm text-muted-foreground mb-6">เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม พร้อม Barcode Scanner, NFC, RFID สำหรับงานภาคสนาม</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {handheldProducts.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
         </section>
@@ -641,7 +678,7 @@ const RuggedTablet = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {tpcSeries.map((p) => (
-              <ProductCard key={p.id} product={{ ...p, image: undefined }} onQuote={(name) => setQuoteProduct(name)} />
+              <ProductCard key={p.id} product={{ ...p, image: undefined }} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
             ))}
           </div>
         </section>
@@ -791,6 +828,44 @@ const RuggedTablet = () => {
           </div>
         </div>
       </div>
+
+      {/* Floating Selection Bar */}
+      {selectedProducts.size > 0 && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-primary text-primary-foreground rounded-full shadow-2xl px-6 py-3 flex items-center gap-4 animate-in slide-in-from-bottom-4">
+          <div className="flex items-center gap-2">
+            <ShoppingCart className="w-5 h-5" />
+            <span className="font-bold text-sm">{selectedProducts.size} รุ่น</span>
+          </div>
+          <Button
+            size="sm"
+            variant="secondary"
+            className="rounded-full font-bold"
+            onClick={openMultiQuote}
+          >
+            <FileText className="w-4 h-4 mr-1.5" /> ขอใบเสนอราคารวม
+          </Button>
+          <button onClick={clearSelection} className="p-1 hover:bg-primary-foreground/20 rounded-full transition-colors">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="Rugged Tablet"
+      />
+      <QuoteDialog
+        open={showMultiQuote}
+        onClose={() => { setShowMultiQuote(false); clearSelection(); }}
+        productCategory="Rugged Tablet"
+        initialProducts={Array.from(selectedProducts).map(name => ({
+          category: "Rugged Tablet / Notebook",
+          model: name,
+          qty: 1,
+        }))}
+      />
       <FooterCompact />
     </div>
   );

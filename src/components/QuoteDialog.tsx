@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -43,19 +43,31 @@ interface QuoteDialogProps {
   onClose: () => void;
   productName?: string;
   productCategory?: string;
+  initialProducts?: { category: string; model: string; qty: number }[];
 }
 
 const inputClass =
   "w-full px-3 py-2 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
 
-const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: QuoteDialogProps) => {
+const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", initialProducts }: QuoteDialogProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  const [products, setProducts] = useState<ProductItem[]>([
-    { category: productCategory, model: productName, qty: 1 },
-  ]);
+  const defaultProducts = initialProducts && initialProducts.length > 0
+    ? initialProducts
+    : [{ category: productCategory, model: productName, qty: 1 }];
+
+  const [products, setProducts] = useState<ProductItem[]>(defaultProducts);
+
+  // Sync products when dialog opens with new initialProducts
+  useEffect(() => {
+    if (open) {
+      setProducts(initialProducts && initialProducts.length > 0
+        ? initialProducts
+        : [{ category: productCategory, model: productName, qty: 1 }]);
+    }
+  }, [open]);
   const [form, setForm] = useState({
     name: "", email: "", phone: "", company: "",
     lineId: "", whatsapp: "", callbackTime: "", details: "",
@@ -81,7 +93,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: 
       // Reset states after close animation
       setTimeout(() => {
         setSubmitted(false);
-        setProducts([{ category: productCategory, model: productName, qty: 1 }]);
+        setProducts(defaultProducts);
       }, 300);
     }
   };
