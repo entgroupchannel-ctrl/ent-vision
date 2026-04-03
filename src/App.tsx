@@ -86,6 +86,8 @@ const App = () => (
               <Route path="/cabinets" element={<Cabinets />} />
               <Route path="/ibox-series" element={<IBoxSeries />} />
               <Route path="/wishlist" element={<WishlistPage />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
