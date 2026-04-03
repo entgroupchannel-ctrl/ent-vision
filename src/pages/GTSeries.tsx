@@ -4431,9 +4431,17 @@ const GTSeries = () => {
 /* M
 
       <FooterCompact />odel Card Component */
-const ModelCard = ({ model, onQuote }: { model: typeof gtModels[0]; onQuote?: (name: string) => void }) => (
+const ModelCard = ({ model, onQuote, selected, onToggleSelect }: { model: typeof gtModels[0]; onQuote?: (name: string) => void; selected?: boolean; onToggleSelect?: (name: string) => void }) => (
   <>
     <div className="relative bg-secondary/50 p-6 flex items-center justify-center min-h-[200px]">
+      {onToggleSelect && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onToggleSelect(model.name); }}
+          className="absolute top-3 left-12 z-10"
+        >
+          <Checkbox checked={selected} className="h-5 w-5" />
+        </button>
+      )}
       {model.badge ? (
         <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary text-primary-foreground text-[11px] font-bold border border-primary/20 animate-pulse">
           {model.highlight}
