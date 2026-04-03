@@ -295,54 +295,60 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: 
               </button>
             </div>
 
-            {/* Contact Info */}
+            {/* Member Quick Form */}
             <div className="space-y-3">
-              <span className="text-sm font-bold text-foreground">ข้อมูลติดต่อ</span>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-medium text-foreground mb-1">ชื่อ <span className="text-destructive">*</span></label>
-                  <input type="text" name="name" required
-                    value={form.name || user?.user_metadata?.full_name || ""}
-                    onChange={handleChange} placeholder="ชื่อ-นามสกุล" className={inputClass} />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-foreground mb-1">อีเมล</label>
-                  <input type="email" value={emailValue} disabled
-                    className={`${inputClass} opacity-60 cursor-not-allowed`} />
-                </div>
+              <div className="rounded-lg border border-primary/20 bg-primary/5 p-3 text-sm">
+                สวัสดีคุณ <span className="font-semibold">{user?.user_metadata?.full_name || user?.email}</span>
               </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-medium text-foreground mb-1">โทรศัพท์</label>
-                  <input type="tel" name="phone" value={form.phone} onChange={handleChange}
-                    placeholder="08x-xxx-xxxx" className={inputClass} />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-foreground mb-1">บริษัท</label>
-                  <input type="text" name="company" value={form.company} onChange={handleChange}
-                    placeholder="ชื่อบริษัท" className={inputClass} />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-medium text-foreground mb-1">LINE ID</label>
-                  <input type="text" name="lineId" value={form.lineId} onChange={handleChange}
-                    placeholder="@lineid" className={inputClass} />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-foreground mb-1">เวลาสะดวก</label>
-                  <select name="callbackTime" value={form.callbackTime} onChange={handleChange} className={inputClass}>
-                    {callbackTimes.map((t) => (
-                      <option key={t} value={t === "เลือก" ? "" : t}>{t}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+
               <div>
-                <label className="block text-xs font-medium text-foreground mb-1">รายละเอียดเพิ่มเติม</label>
-                <textarea name="details" rows={3} value={form.details} onChange={handleChange}
-                  placeholder="สเปก, งบประมาณ, กำหนดส่ง..."
-                  className={`${inputClass} resize-none`} />
+                <label className="block text-xs font-medium text-foreground mb-1">ระยะเวลาที่ต้องการ</label>
+                <select
+                  value={memberForm.timeline}
+                  onChange={(e) => setMemberForm({ ...memberForm, timeline: e.target.value })}
+                  className={inputClass}
+                >
+                  <option value="">เลือกระยะเวลา</option>
+                  <option value="เร่งด่วน (ภายใน 1 สัปดาห์)">เร่งด่วน (ภายใน 1 สัปดาห์)</option>
+                  <option value="1-2 สัปดาห์">1-2 สัปดาห์</option>
+                  <option value="1 เดือน">1 เดือน</option>
+                  <option value="ยังไม่แน่ใจ">ยังไม่แน่ใจ</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-foreground mb-1">จำนวนที่ต้องการ</label>
+                <input
+                  type="number" min="1" placeholder="จำนวนหน่วย"
+                  value={memberForm.quantity}
+                  onChange={(e) => setMemberForm({ ...memberForm, quantity: e.target.value })}
+                  className={inputClass}
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-foreground mb-1">งบประมาณโดยประมาณ</label>
+                <select
+                  value={memberForm.budget}
+                  onChange={(e) => setMemberForm({ ...memberForm, budget: e.target.value })}
+                  className={inputClass}
+                >
+                  <option value="">ไม่ระบุ</option>
+                  <option value="ต่ำกว่า 50,000 บาท">ต่ำกว่า 50,000 บาท</option>
+                  <option value="50,000 - 200,000 บาท">50,000 - 200,000 บาท</option>
+                  <option value="200,000 - 500,000 บาท">200,000 - 500,000 บาท</option>
+                  <option value="มากกว่า 500,000 บาท">มากกว่า 500,000 บาท</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-foreground mb-1">ความต้องการอื่นๆ / สเปคเพิ่มเติม</label>
+                <textarea
+                  rows={3} placeholder="เช่น ต้องการ RAM เพิ่ม, ระบบปฏิบัติการพิเศษ, การรับประกัน ฯลฯ"
+                  value={memberForm.requirements}
+                  onChange={(e) => setMemberForm({ ...memberForm, requirements: e.target.value })}
+                  className={`${inputClass} resize-none`}
+                />
               </div>
             </div>
 
