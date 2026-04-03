@@ -1,6 +1,7 @@
 import { Truck, Package, ClipboardCheck, MapPin, Phone, Clock, ShieldCheck, CheckCircle } from "lucide-react";
-import HeroSection from "@/components/HeroSection";
+import PageBanner from "@/components/PageBanner";
 import Footer from "@/components/Footer";
+import bannerImg from "@/assets/banner-delivery.jpg";
 
 const deliverySteps = [
   {

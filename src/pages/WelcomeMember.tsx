@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { CheckCircle, Phone, Mail, FileText, Store, Users, Star, ArrowRight, Shield, Trophy, Award } from "lucide-react";
-import HeroSection from "@/components/HeroSection";
+import PageBanner from "@/components/PageBanner";
 import Footer from "@/components/Footer";
+import bannerImg from "@/assets/banner-welcome-member.jpg";
 
 const benefits = [
   "เงื่อนไขการเป็นตัวแทนไม่ยุ่งยาก ไม่บังคับให้ตัวแทนรักษายอด",
