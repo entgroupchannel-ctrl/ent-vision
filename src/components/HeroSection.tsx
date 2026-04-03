@@ -43,6 +43,7 @@ const HeroSection = () => {
   const handleAuthClick = async () => {
     if (user) {
       await supabase.auth.signOut();
+      toast.success("ออกจากระบบเรียบร้อยแล้ว");
     } else {
       navigate("/admin-login");
     }
