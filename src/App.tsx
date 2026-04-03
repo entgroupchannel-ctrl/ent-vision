@@ -18,6 +18,7 @@ import PanelPCGTG from "./pages/PanelPCGTG.tsx";
 import SmartDisplay from "./pages/SmartDisplay.tsx";
 import Promotions from "./pages/Promotions.tsx";
 import UTCSeries from "./pages/UTCSeries.tsx";
+import MiniPCFirewall from "./pages/MiniPCFirewall.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/smart-display" element={<SmartDisplay />} />
             <Route path="/promotions" element={<Promotions />} />
             <Route path="/utc-series" element={<UTCSeries />} />
+            <Route path="/minipc-firewall" element={<MiniPCFirewall />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
