@@ -4,11 +4,12 @@ import {
   ArrowLeft, Shield, Wifi, Network, Cpu, Wind, Zap, Server,
   ChevronDown, Download, ExternalLink, Factory, Building2,
   Stethoscope, Building, Globe, Landmark, MonitorSmartphone,
-  Filter, X, Search
+  Filter, X, Search, FileText
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteDialog from "@/components/QuoteDialog";
 
 /* ═══════════════════════════════════════════
    TIER SYSTEM — like GT Series
