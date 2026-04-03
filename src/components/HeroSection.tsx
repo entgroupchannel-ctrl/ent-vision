@@ -55,7 +55,7 @@ const HeroSection = () => {
       {/* Nav */}
       <nav className="relative z-20 flex items-center justify-between px-6 md:px-12 py-5">
         <a href="#" className="flex items-center gap-3">
-          <img src={logo} alt="ENT GROUP" className="h-10 w-auto brightness-0 invert opacity-85" />
+          <img src={logo} alt="ENT GROUP" className="h-10 w-auto opacity-70" />
         </a>
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((l) =>
