@@ -43,6 +43,7 @@ import AIChatWidget from "./components/AIChatWidget.tsx";
 const queryClient = new QueryClient();
 
 const App = () => (
+  <HelmetProvider>
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <AuthProvider>
