@@ -71,6 +71,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
   const [form, setForm] = useState({
     name: "", email: "", phone: "", company: "",
     lineId: "", whatsapp: "", callbackTime: "", details: "",
+    subscribe: true,
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -133,6 +134,14 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
           : form.details || null,
       });
       if (error) throw error;
+
+      if (form.subscribe && emailValue) {
+        await (supabase.from as any)("subscribers").insert({
+          email: emailValue,
+          name: form.name || user?.user_metadata?.full_name || null,
+          source: "quote_request",
+        }).then(() => {});
+      }
       setSubmitted(true);
       toast({ title: "ส่งคำขอเรียบร้อย!", description: "ทีมฝ่ายขายจะติดต่อกลับภายใน 24 ชม." });
     } catch (err: any) {
@@ -397,6 +406,17 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
                 />
               </div>
             </div>
+
+            {/* Subscribe */}
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.subscribe}
+                onChange={(e) => setForm({ ...form, subscribe: e.target.checked })}
+                className="rounded border-border text-primary focus:ring-primary/30 w-4 h-4"
+              />
+              <span className="text-xs text-muted-foreground">สมัครรับข่าวสาร โปรโมชั่น และอัปเดตจาก ENT Group</span>
+            </label>
 
             <button type="submit" disabled={loading}
               className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60">

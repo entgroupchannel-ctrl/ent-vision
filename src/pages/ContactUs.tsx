@@ -52,6 +52,7 @@ const ContactUs = () => {
     callbackTime: "",
     category: "",
     message: "",
+    subscribe: true,
   });
   const [submitted, setSubmitted] = useState(false);
 
@@ -78,6 +79,14 @@ const ContactUs = () => {
         message: form.message,
       });
       if (error) throw error;
+
+      if (form.subscribe && form.email) {
+        await (supabase.from as any)("subscribers").insert({
+          email: form.email,
+          name: form.name || null,
+          source: "contact_form",
+        }).then(() => {});
+      }
       setSubmitted(true);
       toast({ title: "ส่งข้อความเรียบร้อย!", description: "ทีมงานจะตอบกลับภายใน 24 ชม." });
     } catch (err: any) {
@@ -239,7 +248,7 @@ const ContactUs = () => {
                     <button
                       onClick={() => {
                         setSubmitted(false);
-                        setForm({ name: "", email: "", phone: "", company: "", lineId: "", whatsapp: "", callbackTime: "", category: "", message: "" });
+                        setForm({ name: "", email: "", phone: "", company: "", lineId: "", whatsapp: "", callbackTime: "", category: "", message: "", subscribe: true });
                       }}
                       className="text-sm text-primary hover:underline"
                     >
@@ -381,6 +390,17 @@ const ContactUs = () => {
                         className={`${inputClass} resize-none`}
                       />
                     </div>
+
+                    {/* Subscribe */}
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={form.subscribe}
+                        onChange={(e) => setForm({ ...form, subscribe: e.target.checked })}
+                        className="rounded border-border text-primary focus:ring-primary/30 w-4 h-4"
+                      />
+                      <span className="text-xs text-muted-foreground">สมัครรับข่าวสาร โปรโมชั่น และอัปเดตจาก ENT Group</span>
+                    </label>
 
                     {/* Submit */}
                     <button
