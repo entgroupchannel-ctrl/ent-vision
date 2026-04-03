@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, F
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import gt1000Hero from "@/assets/gt1000-hero.jpg";
+import gt3000Banner from "@/assets/gt3000-banner.jpg";
 
 const features = [
   { icon: Thermometer, title: "ทนความร้อนสูง", desc: "ทำงานได้ในอุณหภูมิ 0–60°C อย่างต่อเนื่อง" },
@@ -979,12 +980,24 @@ const GTSeries = () => {
           {activeTab === "gt3000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_8a20389ce6514883be13fd017042afba~mv2.png/v1/fill/w_850,h_222,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2010_32_15.png"
-                  alt="GT3000 Logo"
-                  className="w-full h-[180px] md:h-[250px] object-contain bg-background p-8"
+                  src={gt3000Banner}
+                  alt="GT3000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    6 COM · 6 CPU Options · Fanless
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">3000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    6 COM หลากหลาย CPU — เลือกสเปกให้ตรงงาน
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product Image */}
