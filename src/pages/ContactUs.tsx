@@ -1,5 +1,5 @@
 import SEOHead from "@/components/SEOHead";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import bannerContact from "@/assets/banner-contact.jpg";
 import teamSky from "@/assets/team-sky.png";
 import teamSom from "@/assets/team-som.png";
