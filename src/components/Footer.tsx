@@ -227,13 +227,13 @@ const Footer = () => {
         </div>
 
         {/* PDPA */}
-        <div className="border-t border-[hsl(220,15%,18%)]">
+        <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
           <div className="container max-w-7xl mx-auto px-6 py-6">
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-[hsl(220,15%,12%)]">
+            <div className="flex items-start gap-3 p-4 rounded-lg bg-white/60 dark:bg-[hsl(220,15%,12%)]">
               <span className="text-lg">🔒</span>
               <div>
-                <p className="text-xs font-bold text-white mb-1">การคุ้มครองข้อมูลส่วนบุคคล (PDPA)</p>
-                <p className="text-[11px] text-[hsl(215,15%,50%)] leading-relaxed">
+                <p className="text-xs font-bold text-foreground mb-1">การคุ้มครองข้อมูลส่วนบุคคล (PDPA)</p>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">
                   บริษัท อีเอ็นที กรุ๊ป จำกัด ให้ความสำคัญกับการคุ้มครองข้อมูลส่วนบุคคลของท่าน ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)
                   ข้อมูลของท่าน ได้แก่ ชื่อ อีเมล เบอร์โทรศัพท์ และข้อมูลบริษัท จะถูกจัดเก็บเพื่อวัตถุประสงค์ในการจัดทำใบเสนอราคา ให้คำปรึกษาด้านเทคนิค
                   และบริการหลังการขายเท่านั้น เราจะไม่จำหน่าย แบ่งปัน หรือเปิดเผยข้อมูลส่วนบุคคลของท่านแก่บุคคลที่สาม
