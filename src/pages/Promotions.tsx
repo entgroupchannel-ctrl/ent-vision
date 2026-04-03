@@ -326,14 +326,11 @@ const Promotions = () => {
             <ArrowLeft size={16} /> หน้าแรก
           </Link>
           <h1 className="text-sm font-bold">โปรโมชั่น</h1>
-          <a
-            href="https://line.me/R/ti/p/@entgroup"
-            target="_blank"
-            rel="noopener noreferrer"
+          <LineQRButton
             className="text-xs px-3 py-1.5 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
           >
             LINE @entgroup
-          </a>
+          </LineQRButton>
         </div>
       </div>
 
