@@ -376,15 +376,35 @@ const categories = [
 const ITEMS_PER_PAGE = 10;
 
 /* ───── Product Card ───── */
-const ProductCard = ({ product, onQuote }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string }; onQuote?: (name: string) => void }) => (
-  <div className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
+const ProductCard = ({ product, onQuote, selected, onToggleSelect }: { 
+  product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string }; 
+  onQuote?: (name: string) => void;
+  selected?: boolean;
+  onToggleSelect?: (name: string) => void;
+}) => (
+  <div className={`card-surface overflow-hidden group transition-all ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
     {product.image && (
       <div className="relative bg-secondary/30 p-4 flex items-center justify-center h-48">
         <WishlistHeart
           item={{ id: product.name.toLowerCase().replace(/\s+/g, "-"), name: product.name, category: "Rugged Tablet", image: product.image, href: "/rugged-tablet", specs: product.highlight }}
           className="absolute top-3 right-3"
         />
+        {onToggleSelect && (
+          <button
+            onClick={() => onToggleSelect(product.name)}
+            className="absolute top-3 left-3 z-10"
+          >
+            <Checkbox checked={selected} className="h-5 w-5" />
+          </button>
+        )}
         <img src={product.image} alt={product.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+      </div>
+    )}
+    {!product.image && onToggleSelect && (
+      <div className="flex justify-end p-3 pb-0">
+        <button onClick={() => onToggleSelect(product.name)}>
+          <Checkbox checked={selected} className="h-5 w-5" />
+        </button>
       </div>
     )}
     <div className="p-5 space-y-3">
