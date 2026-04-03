@@ -198,6 +198,7 @@ const DemoCTA = ({ variant = "primary" }: { variant?: "primary" | "secondary" })
 /* ═══════ MAIN PAGE ═══════ */
 const VCloudPoint = () => {
   const [showVmatrix, setShowVmatrix] = useState(false);
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background">
