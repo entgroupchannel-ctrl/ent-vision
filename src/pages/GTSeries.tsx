@@ -155,7 +155,7 @@ const gtModels = [
     storage: "SSD 128 GB – 1 TB",
     ports: "USB 6, COM 6, LAN 2, VGA+HDMI",
     size: "Fanless สีดำสวยงาม",
-    image: "https://static.wixstatic.com/media/0597a3_e843641a309b4eb89bd60cf3c1696b70f000.jpg/v1/fill/w_268,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_e843641a309b4eb89bd60cf3c1696b70f000.jpg",
+    image: gt6000Product,
     tab: "gt6000",
     highlight: "ดีไซน์ใหม่",
     price: "สอบถาม",
