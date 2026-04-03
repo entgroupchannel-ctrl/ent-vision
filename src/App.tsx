@@ -47,6 +47,7 @@ const App = () => (
             <Route path="/promotions" element={<Promotions />} />
             <Route path="/utc-series" element={<UTCSeries />} />
             <Route path="/minipc-firewall" element={<MiniPCFirewall />} />
+            <Route path="/vcloudpoint" element={<VCloudPoint />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
