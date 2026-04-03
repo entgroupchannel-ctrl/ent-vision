@@ -242,83 +242,72 @@ const MegaMenu = ({
       {/* Mega dropdown overlay */}
       {active && (
         <div
-          className="fixed inset-x-0 top-0 z-50"
+          className="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 w-[min(900px,90vw)]"
           onMouseEnter={() => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }}
           onMouseLeave={handleLeave}
         >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setActiveMenu(null)} />
-
           {/* Panel */}
-          <div className="relative bg-[hsl(220,20%,8%)] border-b border-white/10 shadow-2xl animate-fade-in">
-            {/* Close bar top */}
-            <div className="h-16" />
-
-            <div className="container max-w-7xl mx-auto px-8 pb-10">
+          <div className="rounded-xl bg-[hsl(220,20%,10%)] border border-white/10 shadow-2xl animate-fade-in overflow-hidden">
+            <div className="p-5">
               {/* Category header */}
-              <div className="flex items-center gap-3 mb-6">
-                <active.icon size={20} className="text-primary" />
-                <div>
-                  <h3 className="text-white font-bold text-lg">{active.label}</h3>
-                  <p className="text-white/40 text-xs">{active.tagline}</p>
-                </div>
+              <div className="flex items-center gap-2 mb-4">
+                <active.icon size={16} className="text-primary" />
+                <h3 className="text-white font-bold text-sm">{active.label}</h3>
+                <span className="text-white/30 text-xs">— {active.tagline}</span>
               </div>
 
-              <div className="grid grid-cols-12 gap-8">
-                {/* Featured card — left */}
-                <div className="col-span-4">
+              <div className="grid grid-cols-12 gap-5">
+                {/* Featured card — left (compact) */}
+                <div className="col-span-3">
                   <Link
                     to={active.featured.href}
                     onClick={() => { setActiveMenu(null); onNavigate?.(); }}
-                    className="group block rounded-2xl bg-gradient-to-br from-primary/15 via-primary/5 to-transparent border border-primary/20 p-6 hover:border-primary/40 transition-all duration-300 h-full"
+                    className="group block rounded-xl bg-gradient-to-br from-primary/15 via-primary/5 to-transparent border border-primary/20 p-4 hover:border-primary/40 transition-all duration-300 h-full"
                   >
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-primary text-primary-foreground">
-                        {active.featured.badge}
-                      </span>
-                      <Sparkles size={12} className="text-primary" />
-                    </div>
+                    <span className="px-1.5 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider bg-primary text-primary-foreground">
+                      {active.featured.badge}
+                    </span>
                     {active.featured.image && (
-                      <div className="flex justify-center mb-4">
+                      <div className="flex justify-center my-3">
                         <img
                           src={active.featured.image}
                           alt={active.featured.title}
-                          className="h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-lg"
+                          className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                           loading="lazy"
                         />
                       </div>
                     )}
-                    <h4 className="text-xl font-black text-white mb-2 group-hover:text-primary transition-colors">
+                    <h4 className="text-sm font-bold text-white mb-1 group-hover:text-primary transition-colors">
                       {active.featured.title}
                     </h4>
-                    <p className="text-sm text-white/50 leading-relaxed mb-4">
+                    <p className="text-[11px] text-white/40 leading-relaxed mb-2 line-clamp-2">
                       {active.featured.desc}
                     </p>
-                    <span className="inline-flex items-center gap-1 text-primary text-sm font-semibold group-hover:gap-2 transition-all">
-                      ดูรายละเอียด <ArrowRight size={14} />
+                    <span className="inline-flex items-center gap-1 text-primary text-xs font-semibold group-hover:gap-1.5 transition-all">
+                      ดูเพิ่มเติม <ArrowRight size={11} />
                     </span>
                   </Link>
                 </div>
 
                 {/* Product columns — right */}
-                <div className="col-span-8 grid grid-cols-3 gap-6">
+                <div className="col-span-9 grid grid-cols-3 gap-4">
                   {active.columns.map((col) => (
                     <div key={col.heading}>
-                      <h5 className="text-[11px] font-bold uppercase tracking-wider text-white/30 mb-3">
+                      <h5 className="text-[10px] font-bold uppercase tracking-wider text-white/30 mb-2">
                         {col.heading}
                       </h5>
-                      <ul className="space-y-1">
+                      <ul className="space-y-0.5">
                         {col.links.map((link) => (
-                          <li key={link.href}>
+                          <li key={link.href + link.label}>
                             <Link
                               to={link.href}
                               onClick={() => { setActiveMenu(null); onNavigate?.(); }}
-                              className="group flex items-center gap-2 py-2 px-2 -mx-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                              className="group flex items-center gap-1.5 py-1.5 px-2 -mx-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors"
                             >
-                              <ChevronRight size={12} className="text-white/20 group-hover:text-primary transition-colors" />
-                              <span className="text-sm font-medium">{link.label}</span>
+                              <ChevronRight size={10} className="text-white/20 group-hover:text-primary transition-colors" />
+                              <span className="text-xs font-medium">{link.label}</span>
                               {link.hot && (
-                                <span className="px-1.5 py-0.5 rounded text-[8px] font-bold uppercase bg-red-500/20 text-red-400 border border-red-500/30">
+                                <span className="px-1 py-0.5 rounded text-[7px] font-bold uppercase bg-red-500/20 text-red-400 border border-red-500/30">
                                   Hot
                                 </span>
                               )}
@@ -332,18 +321,18 @@ const MegaMenu = ({
               </div>
 
               {/* Bottom quick links */}
-              <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
-                <div className="flex items-center gap-6 text-xs text-white/30">
-                  <span className="flex items-center gap-1"><Factory size={11} /> นำเข้าจากโรงงานโดยตรง</span>
-                  <span className="flex items-center gap-1"><Zap size={11} /> รับประกัน 1–3 ปี</span>
-                  <span className="flex items-center gap-1"><Server size={11} /> สต๊อกพร้อมส่งในไทย</span>
+              <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between">
+                <div className="flex items-center gap-4 text-[10px] text-white/25">
+                  <span className="flex items-center gap-1"><Factory size={10} /> นำเข้าจากโรงงานโดยตรง</span>
+                  <span className="flex items-center gap-1"><Zap size={10} /> รับประกัน 1–3 ปี</span>
+                  <span className="flex items-center gap-1"><Server size={10} /> สต๊อกพร้อมส่งในไทย</span>
                 </div>
                 <Link
                   to="/promotions"
                   onClick={() => { setActiveMenu(null); onNavigate?.(); }}
-                  className="text-xs text-primary font-semibold hover:underline flex items-center gap-1"
+                  className="text-[10px] text-primary font-semibold hover:underline flex items-center gap-1"
                 >
-                  ดูโปรโมชั่นทั้งหมด <ArrowRight size={11} />
+                  โปรโมชั่น <ArrowRight size={10} />
                 </Link>
               </div>
             </div>
