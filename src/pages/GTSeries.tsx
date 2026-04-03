@@ -2329,15 +2329,15 @@ const GTSeries = () => {
                 <div className="lg:col-span-3 space-y-6">
                   <div>
                     <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
-                      DDR4 · 6 COM RS232/422/485 · 70°C · Aluminium Alloy
+                      6 COM RS485 · GPIO · SIM 4G · DDR4
                     </span>
                     <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
                       GT<span className="text-gradient">7000</span>
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      GT7000 คำตอบสำหรับทุกปัญหาในโรงงาน ไม่ว่าจะเป็นคอมพิวเตอร์ร้อนจัด ฝุ่นเข้าเครื่อง
-                      หรือการสูญเสียเวลาผลิต ด้วยนวัตกรรมระบายความร้อนไร้พัดลม ทำงานได้ในอุณหภูมิสูงถึง 70°C
-                      โครงสร้าง Aluminium Alloy แข็งแกร่ง ขนาดกะทัดรัด 23×17.5×5 ซม. น้ำหนักเพียง 2.5 กก.
+                      Industrial Mini PC โครง Brushed Aluminum Alloy ระบบ Fanless เงียบสนิท
+                      พร้อม 6 COM (COM1/COM2 รองรับ RS485), Micro SIM 4G, VGA+HDMI Dual Display
+                      ทำงานต่อเนื่อง 24/7 ทนอุณหภูมิสูงถึง 70°C
                     </p>
                   </div>
 
@@ -2347,17 +2347,16 @@ const GTSeries = () => {
                       <li>• ประหยัดไฟด้วยการกินไฟเพียง 15W</li>
                       <li>• ระบบ Watch dog ป้องกันการค้าง</li>
                       <li>• อัพเกรด SSD และ RAM ได้ในอนาคต</li>
-                      <li>• รับประกันการใช้งานยาวนาน</li>
                     </ul>
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-secondary">
                     <h4 className="font-bold text-foreground mb-2">🔧 พร้อมใช้งานอุตสาหกรรม</h4>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• พอร์ต COM 6 พอร์ต รองรับ RS232/422/485</li>
-                      <li>• LAN Gigabit 2 พอร์ต เชื่อมต่อระบบเน็ตเวิร์คได้เสถียร</li>
-                      <li>• รองรับ CPU ถึง Intel Core i7 รุ่นล่าสุด</li>
-                      <li>• RAM DDR4 ขยายได้ถึง 32GB</li>
+                      <li>• 6 COM Port รองรับ RS232/422/485</li>
+                      <li>• Micro SIM รองรับ 3G/4G Module</li>
+                      <li>• LAN Gigabit 2 พอร์ต</li>
+                      <li>• mSATA SSD + 2.5" SATA HDD</li>
                     </ul>
                   </div>
 
@@ -2371,31 +2370,49 @@ const GTSeries = () => {
                     <div className="card-surface p-4 text-center">
                       <Server className="mx-auto text-primary mb-2" size={24} />
                       <div className="font-bold text-foreground text-sm">RAM & Storage</div>
-                      <div className="text-xs text-muted-foreground mt-1">DDR4 4–32 GB / SSD 256 GB – 1 TB</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR4 4–32 GB / mSATA + SATA</div>
                     </div>
                     <div className="card-surface p-4 text-center">
                       <Shield className="mx-auto text-primary mb-2" size={24} />
-                      <div className="font-bold text-foreground text-sm">6 COM Port</div>
-                      <div className="text-xs text-muted-foreground mt-1">RS232/RS422/RS485</div>
+                      <div className="font-bold text-foreground text-sm">6 COM + SIM 4G</div>
+                      <div className="text-xs text-muted-foreground mt-1">RS232/RS485 + Micro SIM</div>
                     </div>
                     <div className="card-surface p-4 text-center">
                       <Thermometer className="mx-auto text-primary mb-2" size={24} />
                       <div className="font-bold text-foreground text-sm">ทนร้อน 70°C</div>
-                      <div className="text-xs text-muted-foreground mt-1">Aluminium Alloy แข็งแกร่ง</div>
+                      <div className="text-xs text-muted-foreground mt-1">Fanless 24/7 · VGA+HDMI</div>
                     </div>
                   </div>
                 </div>
 
+                {/* Product Images — Factory */}
                 <div className="lg:col-span-2 space-y-4">
-                  <div className="card-surface overflow-hidden">
+                  <div className="card-surface overflow-hidden rounded-xl bg-muted/30">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_dc2525bbb341403085db99e88a32210ef000.jpg/v1/fill/w_301,h_535,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_dc2525bbb341403085db99e88a32210ef000.jpg"
-                      alt="GT7000 Product"
-                      className="w-full object-contain p-4"
+                      src="/images/gt7000/main.jpg"
+                      alt="GT7000 ภาพหลัก"
+                      className="w-full object-contain p-2"
                       loading="lazy"
                     />
                   </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { src: "/images/gt7000/front.jpg", alt: "GT7000 ด้านหน้า — พอร์ต COM" },
+                      { src: "/images/gt7000/side.jpg", alt: "GT7000 ด้านข้าง — ครีบระบายความร้อน" },
+                      { src: "/images/gt7000/angle.jpg", alt: "GT7000 มุมเอียง" },
+                      { src: "/images/gt7000/rear.jpg", alt: "GT7000 ด้านหลัง" },
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
+                        <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              </div>
+
+              {/* Factory Detail Image */}
+              <div className="card-surface overflow-hidden rounded-lg bg-muted/30">
+                <img src="/images/gt7000/detail.jpg" alt="GT7000 Spec Overview" className="w-full object-contain p-2" loading="lazy" />
               </div>
 
               {/* Port Connectivity */}
@@ -2403,18 +2420,21 @@ const GTSeries = () => {
                 <h4 className="text-xl font-display font-bold text-foreground mb-4">
                   🔌 Port Connectivity — ครบจบในเครื่องเดียว
                 </h4>
-                <img
-                  src="https://static.wixstatic.com/media/0597a3_e983e10281f44de2bf77aead50eea6b0~mv2.png/v1/crop/x_0,y_41,w_1556,h_433/fill/w_1124,h_313,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-12%20at%2014_34_58.png"
-                  alt="GT7000 Port Layout"
-                  className="w-full rounded-lg mb-4"
-                  loading="lazy"
-                />
-                <img
-                  src="https://static.wixstatic.com/media/0597a3_8cb9e95b1cb9467db25fdd471e061e43~mv2.png/v1/fill/w_555,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-12%20at%2013_58_21.png"
-                  alt="GT7000 Spec Detail"
-                  className="w-full rounded-lg"
-                  loading="lazy"
-                />
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                  {[
+                    { label: "6 COM Port", desc: "RS232 × 6 — COM1/COM2 ตั้งค่าเป็น RS485 ได้" },
+                    { label: "Micro SIM 4G", desc: "รองรับ 3G/4G Module เชื่อมต่อไร้สาย" },
+                    { label: "Dual Display", desc: "VGA + HDMI — 2 หน้าจอพร้อมกัน" },
+                    { label: "USB 6 ports", desc: "USB 3.0 + USB 2.0 เชื่อมต่ออุปกรณ์" },
+                    { label: "mSATA + SATA", desc: "mSATA SSD + 2.5\" SATA 3.0 HDD/SSD" },
+                    { label: "2 Gigabit LAN", desc: "Dual Gigabit Ethernet แยกเครือข่าย" },
+                  ].map((item, i) => (
+                    <div key={i} className="card-surface p-3">
+                      <div className="font-bold text-foreground mb-1">{item.label}</div>
+                      <div className="text-xs text-muted-foreground">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Application Scenarios */}
@@ -2435,96 +2455,45 @@ const GTSeries = () => {
                     <li>• ทำงานต่อเนื่อง 24 ชั่วโมง ไม่สะดุด</li>
                   </ul>
                 </div>
-                <div className="card-surface p-6">
-                  <h4 className="font-bold text-foreground mb-3">📺 ระบบห้องประชุม</h4>
-                  <ul className="text-sm text-muted-foreground space-y-2">
-                    <li>• รองรับจอสัมผัสความละเอียดสูง</li>
-                    <li>• เชื่อมต่อระบบประชุมทางไกล</li>
-                    <li>• นำเสนองานได้อย่างราบรื่น</li>
-                  </ul>
-                </div>
-                <div className="card-surface p-6">
-                  <h4 className="font-bold text-foreground mb-3">🖥️ ระบบ KIOSK</h4>
-                  <ul className="text-sm text-muted-foreground space-y-2">
-                    <li>• รองรับจอสัมผัสหลายขนาด</li>
-                    <li>• ทำงานได้ในสภาพแวดล้อมที่หลากหลาย</li>
-                    <li>• ติดตั้งง่าย ดูแลรักษาน้อย</li>
-                  </ul>
-                </div>
               </div>
 
-              {/* Design & Build */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_b215c732ba714a92ac15a6ce507d454d~mv2.png/v1/fill/w_640,h_361,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT7000-001.png"
-                    alt="GT7000 Design"
-                    className="w-full"
-                    loading="lazy"
-                  />
+              {/* Spec Table — 2 คอลัมน์ */}
+              <div className="card-surface overflow-hidden rounded-2xl">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">GT7000 Specifications</h3>
+                  <p className="text-xs text-muted-foreground mt-1">ข้อมูลจาก Manufacturer</p>
                 </div>
-                <div className="card-surface overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_e9a79184b4274bb38ec83aafe73b9f2b~mv2.png/v1/crop/x_0,y_186,w_1610,h_1283/fill/w_578,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT7000-008.png"
-                    alt="GT7000 Applications"
-                    className="w-full"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              {/* Detail Spec Images */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_a5259d0ec15f4fc39fd63451d1d93f5c~mv2.png/v1/fill/w_648,h_541,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-12%20at%2013_55_38.png"
-                    alt="GT7000 Spec Detail"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_a2cfc41bc5c842b785609fd8e2c79482~mv2.png/v1/crop/x_0,y_178,w_1444,h_1110/fill/w_593,h_454,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT7000-002.png"
-                    alt="GT7000 Compact Design"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              {/* Heatsink Design */}
-              <div className="card-surface p-4 overflow-hidden">
-                <img
-                  src="https://static.wixstatic.com/media/0597a3_8a949f73234e40408aa2e442b5bf6739~mv2.png/v1/fill/w_662,h_484,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT7000-007.png"
-                  alt="GT7000 Heatsink Design"
-                  className="w-full rounded-lg"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Real-world Photos */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  "https://static.wixstatic.com/media/005637_c6720e80066545c193b82047b9f1f0ae~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_c6720e80066545c193b82047b9f1f0ae~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_e440df937b0b4641b075d45be0851fa6~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_e440df937b0b4641b075d45be0851fa6~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_b50ccc19e8784753a0e90fbe92de4dd5~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_b50ccc19e8784753a0e90fbe92de4dd5~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_e2122e54f34f4c898a4aa2cd017a9804~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_e2122e54f34f4c898a4aa2cd017a9804~mv2.jpg",
-                ].map((img, i) => (
-                  <div key={i} className="card-surface overflow-hidden">
-                    <img src={img} alt={`GT7000 ใช้งานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                <div className="grid md:grid-cols-2 md:divide-x divide-border">
+                  <div>
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {[
+                          ["CPU", "Intel Core i3 / i5 / i7 (DDR4)"],
+                          ["RAM", "DDR4, สูงสุด 32 GB"],
+                          ["Storage", "mSATA SSD + 2.5\" SATA 3.0 HDD/SSD"],
+                          ["Display", "VGA + HDMI (Dual Display)"],
+                          ["COM", "6 × RS232 (COM1/COM2 → RS485)"],
+                        ].map(([k, v], i) => (
+                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3">{k}</td><td className="p-3 text-muted-foreground">{v}</td></tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
-                ))}
-              </div>
-
-              {/* Promo Info */}
-              <div className="card-surface p-6">
-                <h4 className="font-bold text-foreground mb-3">🎁 โปรโมชั่นพิเศษ</h4>
-                <div className="grid sm:grid-cols-2 gap-3 text-sm text-muted-foreground">
-                  <div>• ฟรี! ติดตั้งและตั้งค่าระบบ</div>
-                  <div>• ทดลอง (Demo) ใช้ฟรี 7 วัน</div>
-                  <div>• รับส่วนลดเพิ่ม 10% เมื่อสั่งซื้อ 3 เครื่องขึ้นไป</div>
-                  <div>• ผ่อน 0% นาน 6 เดือน</div>
+                  <div>
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {[
+                          ["LAN", "2 × Gigabit Ethernet RJ45"],
+                          ["SIM", "Micro SIM 3G/4G Module"],
+                          ["WiFi", "Built-in WiFi / Bluetooth"],
+                          ["Cooling", "Fanless — เงียบ 0 dB, ทน 70°C"],
+                          ["Mounting", "VESA / Wall Mount"],
+                        ].map(([k, v], i) => (
+                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3">{k}</td><td className="p-3 text-muted-foreground">{v}</td></tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
