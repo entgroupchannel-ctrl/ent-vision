@@ -4,7 +4,8 @@ import {
   ArrowLeft, Monitor, Cpu, Shield, Zap, Users, Server, ChevronDown,
   ExternalLink, Factory, Building2, GraduationCap, HeadphonesIcon,
   ShoppingCart, Stethoscope, DollarSign, Wrench, Lock, Leaf,
-  Play, Download, CheckCircle2, Star, ArrowRight, Phone
+  Play, Download, CheckCircle2, Star, ArrowRight, Phone,
+  Clock, TrendingUp, Award, Quote, MapPin, Calendar
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
@@ -66,29 +67,84 @@ const vmatrixFeatures = [
   "Chatting Room สื่อสารระหว่าง Admin กับ User",
 ];
 
-/* ═══════ Testimonials ═══════ */
-const testimonials = [
+/* ═══════ Success Stories — Case Studies ═══════ */
+const caseStudies = [
   {
-    quote: "เริ่มต้นจากแพ็คเกจ 10 เครื่อง ทดลองใช้ในห้อง Computer Lab ผลตอบรับดีมาก ขยายจนครบ 320 เครื่อง ครอบคลุมทุกห้องเรียน ประหยัดค่าไฟได้มหาศาล",
-    org: "โรงเรียนมัธยมขนาดใหญ่",
+    icon: Factory,
+    sector: "อุตสาหกรรมอาหาร",
+    tag: "Enterprise",
+    title: "ผู้ผลิตอาหารชั้นนำระดับประเทศ",
+    subtitle: "โรงงานผลิตอาหาร — ใช้งานต่อเนื่องมากกว่า 8 ปี",
+    quote: "ระบบ vCloudPoint ช่วยให้เราลดต้นทุน IT ได้อย่างมหาศาล ทั้งค่าอุปกรณ์ ค่าไฟ และค่าบำรุงรักษา ที่สำคัญคือเสถียรมาก ตลอดหลายปีที่ใช้งาน แทบไม่มีปัญหาเลย ตอนนี้ขยายไปครบทุกแผนกแล้ว",
+    stats: [
+      { val: "200+", label: "จุดใช้งาน" },
+      { val: "8+ ปี", label: "ใช้งานต่อเนื่อง" },
+      { val: "65%", label: "ลดต้นทุน IT" },
+    ],
+    highlights: ["QC & Production Line", "ระบบ ERP / SAP", "สภาพแวดล้อมฝุ่น ความร้อน ความชื้น", "ขยายระบบต่อเนื่องทุกปี"],
+    color: "from-amber-500/10 to-amber-500/5",
+    borderColor: "border-amber-500/20",
+    accentColor: "text-amber-500",
+  },
+  {
+    icon: GraduationCap,
     sector: "การศึกษา",
-    count: "320 เครื่อง",
-    color: "text-sky-400",
+    tag: "Education",
+    title: "มหาวิทยาลัยและโรงเรียนทั่วประเทศ",
+    subtitle: "ห้องปฏิบัติการคอมพิวเตอร์ — ใช้งานกว่า 10 ปี",
+    quote: "เริ่มใช้ vCloudPoint ตั้งแต่ปี 2015 จาก 1 ห้อง Lab ขยายจนครอบคลุมทุกห้องเรียน ทุกอาคาร นักศึกษาใช้งานได้เหมือน PC ปกติ แต่เราดูแลง่ายกว่าเดิมมาก ติดตั้ง Software ครั้งเดียว ใช้ได้ทุกเครื่อง",
+    stats: [
+      { val: "500+", label: "เครื่อง" },
+      { val: "10+ ปี", label: "ประสบการณ์" },
+      { val: "80%", label: "ประหยัดไฟ" },
+    ],
+    highlights: ["Computer Lab 20–40 เครื่องต่อห้อง", "ซอฟต์แวร์สอน Adobe, Office, Coding", "Broadcasting หน้าจอ — อาจารย์สอนได้ง่าย", "นักศึกษา 500+ คนใช้พร้อมกัน"],
+    color: "from-sky-500/10 to-sky-500/5",
+    borderColor: "border-sky-500/20",
+    accentColor: "text-sky-500",
   },
   {
-    quote: "ระบบ Shared Computing ช่วยลดต้นทุน IT ลงได้กว่า 60% สภาพแวดล้อมโรงงานที่มีฝุ่นและความร้อน Zero Client ก็ทำงานได้ดีมาก",
-    org: "โรงงานผลิตชิ้นส่วนอิเล็กทรอนิกส์",
-    sector: "อุตสาหกรรม",
-    count: "340 เครื่อง",
-    color: "text-amber-400",
+    icon: Factory,
+    sector: "โรงงานอุตสาหกรรม",
+    tag: "Manufacturing",
+    title: "โรงงานผลิตชิ้นส่วนอิเล็กทรอนิกส์",
+    subtitle: "สายการผลิต & QC Station — ทนทุกสภาพแวดล้อม",
+    quote: "สภาพแวดล้อมโรงงานมีทั้งฝุ่น ความร้อน ความชื้น PC ปกติพังบ่อย Zero Client ไม่มี Moving Part ไม่มีพัดลม ทำงานได้ตลอด 24/7 ตลอดหลายปีที่ผ่านมา เครื่องไม่เคยพัง",
+    stats: [
+      { val: "340+", label: "เครื่อง" },
+      { val: "24/7", label: "ทำงานต่อเนื่อง" },
+      { val: "0", label: "เครื่องพัง/ปี" },
+    ],
+    highlights: ["Data Entry ในไลน์ผลิต", "ระบบตรวจสอบคุณภาพ QC", "ทนฝุ่น ทนร้อน ไม่มี Moving Part", "ROI คืนทุนภายใน 6 เดือน"],
+    color: "from-emerald-500/10 to-emerald-500/5",
+    borderColor: "border-emerald-500/20",
+    accentColor: "text-emerald-500",
   },
   {
-    quote: "ขยายธุรกิจเร็วมาก vCloudPoint ช่วยให้ขยายง่าย เพียงเพิ่ม Zero Client ไม่ต้องลงทุน Server ใหม่ทุกครั้ง ระบบเสถียรมาก Uptime สูง",
-    org: "Call Center ชั้นนำ",
-    sector: "บริการ",
-    count: "280 seats",
-    color: "text-emerald-400",
+    icon: HeadphonesIcon,
+    sector: "Call Center",
+    tag: "Service",
+    title: "Call Center ระดับ 280 ที่นั่ง",
+    subtitle: "ศูนย์บริการลูกค้า — ลดต้นทุนต่อที่นั่ง",
+    quote: "ธุรกิจเราขยายตัวเร็ว vCloudPoint ช่วยให้เพิ่มที่นั่งได้ง่าย แค่เสียบ Zero Client เพิ่ม ไม่ต้องลงทุน Server ใหม่ทุกครั้ง ระบบเสถียร Uptime สูงมาก ค่าใช้จ่ายต่อ Seat ถูกกว่า PC แยกเกือบ 3 เท่า",
+    stats: [
+      { val: "280", label: "Seats" },
+      { val: "99.5%", label: "Uptime" },
+      { val: "3×", label: "ถูกกว่า PC" },
+    ],
+    highlights: ["ขยาย Seat ได้ทันที", "CRM + VoIP ทำงานลื่นไหล", "ไม่มีเสียงรบกวนจาก Fan", "Centralized Management"],
+    color: "from-violet-500/10 to-violet-500/5",
+    borderColor: "border-violet-500/20",
+    accentColor: "text-violet-500",
   },
+];
+
+/* ═══════ Track Record Stats ═══════ */
+const trackRecord = [
+  { icon: Calendar, val: "10+", label: "ปีที่ใช้งาน", desc: "ลูกค้ารายแรกของเราเริ่มใช้ตั้งแต่ปี 2015" },
+  { icon: Building2, val: "500+", label: "องค์กร", desc: "มหาวิทยาลัย โรงงาน สำนักงาน ทั่วประเทศ" },
+  { icon: Monitor, val: "5,000+", label: "เครื่องที่ติดตั้ง", desc: "ทุกเครื่องยังทำงานอยู่ อายุยาวนาน" },
+  { icon: TrendingUp, val: "95%", label: "ขยายระบบ", desc: "ลูกค้าที่ใช้แล้วเพิ่มจำนวนเครื่อง" },
 ];
 
 /* ═══════ Demo CTA Component ═══════ */
@@ -431,46 +487,108 @@ const VCloudPoint = () => {
         </div>
       </section>
 
-      {/* ── Testimonials ── */}
+      {/* ── Success Stories — Case Studies ── */}
       <section className="py-16 md:py-24">
         <div className="container max-w-7xl mx-auto px-6">
-          <div className="text-center mb-10">
+          {/* Header */}
+          <div className="text-center mb-6">
             <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">Success Stories</span>
             <h2 className="text-3xl md:text-4xl font-black text-foreground">
               เรื่องราว<span className="text-primary">ความสำเร็จ</span>
             </h2>
-            <p className="text-muted-foreground mt-2">กรณีศึกษาจริงจากองค์กรที่ประสบความสำเร็จด้วย vCloudPoint</p>
+            <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
+              กรณีศึกษาจริงจากองค์กรที่ประสบความสำเร็จด้วย vCloudPoint — ใช้งานจริงมากกว่า 10 ปี ทั้งมหาวิทยาลัย โรงงาน และธุรกิจทั่วประเทศ
+            </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-5">
-            {testimonials.map((t) => (
-              <div key={t.org} className="card-surface rounded-xl p-6">
-                <div className="flex items-center gap-1 mb-3">
-                  {[1,2,3,4,5].map((i) => <Star key={i} size={14} className="text-amber-400 fill-amber-400" />)}
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4 italic">"{t.quote}"</p>
-                <div className="flex items-center justify-between pt-3 border-t border-border">
-                  <div>
-                    <p className="text-sm font-bold text-foreground">{t.org}</p>
-                    <p className="text-[11px] text-muted-foreground">{t.sector}</p>
+
+          {/* Track Record Bar */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto">
+            {trackRecord.map((t) => (
+              <div key={t.label} className="text-center p-4 rounded-xl card-surface">
+                <t.icon size={18} className="text-primary mx-auto mb-1.5" />
+                <p className="text-2xl font-black text-primary">{t.val}</p>
+                <p className="text-xs font-bold text-foreground">{t.label}</p>
+                <p className="text-[10px] text-muted-foreground mt-0.5">{t.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Case Study Cards */}
+          <div className="space-y-6">
+            {caseStudies.map((cs) => (
+              <div key={cs.title} className={`card-surface rounded-2xl overflow-hidden border ${cs.borderColor} hover:shadow-lg transition-all duration-300`}>
+                <div className={`bg-gradient-to-r ${cs.color} p-6 md:p-8`}>
+                  <div className="flex flex-col md:flex-row md:items-start gap-6">
+                    {/* Left: Icon + Meta */}
+                    <div className="flex items-start gap-4 flex-1">
+                      <div className={`w-14 h-14 rounded-xl bg-background/80 border border-border flex items-center justify-center shrink-0`}>
+                        <cs.icon className={cs.accentColor} size={26} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex flex-wrap items-center gap-2 mb-1">
+                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${cs.borderColor} ${cs.accentColor}`}>
+                            {cs.tag}
+                          </span>
+                          <span className="text-[10px] text-muted-foreground">{cs.sector}</span>
+                        </div>
+                        <h3 className="text-lg md:text-xl font-black text-foreground">{cs.title}</h3>
+                        <p className="text-xs text-muted-foreground">{cs.subtitle}</p>
+                      </div>
+                    </div>
+                    {/* Right: Stats */}
+                    <div className="flex gap-4 md:gap-6">
+                      {cs.stats.map((s) => (
+                        <div key={s.label} className="text-center">
+                          <p className={`text-xl md:text-2xl font-black ${cs.accentColor}`}>{s.val}</p>
+                          <p className="text-[10px] text-muted-foreground font-medium">{s.label}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <span className={`text-xs font-bold ${t.color}`}>{t.count}</span>
+                </div>
+
+                <div className="p-6 md:px-8">
+                  {/* Quote */}
+                  <div className="flex gap-3 mb-5">
+                    <Quote size={20} className="text-primary/30 shrink-0 mt-0.5" />
+                    <p className="text-sm text-muted-foreground leading-relaxed italic">
+                      {cs.quote}
+                    </p>
+                  </div>
+
+                  {/* Highlights */}
+                  <div className="flex flex-wrap gap-2">
+                    {cs.highlights.map((h) => (
+                      <span key={h} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/60 text-xs text-foreground font-medium border border-border/50">
+                        <CheckCircle2 size={11} className={cs.accentColor} />
+                        {h}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 max-w-2xl mx-auto">
-            {[
-              { val: "500+", label: "องค์กรใช้งาน" },
-              { val: "1,000+", label: "เครื่องที่ติดตั้ง" },
-              { val: "95%", label: "ขยายระบบ" },
-              { val: "4.9/5", label: "คะแนนรีวิว" },
-            ].map((s) => (
-              <div key={s.label} className="text-center p-4 rounded-xl card-surface">
-                <p className="text-2xl font-black text-primary">{s.val}</p>
-                <p className="text-[11px] text-muted-foreground">{s.label}</p>
-              </div>
-            ))}
+          {/* Global proof — vCloudPoint worldwide */}
+          <div className="mt-12 card-surface rounded-2xl p-6 md:p-8 text-center border border-primary/20">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Award size={20} className="text-primary" />
+              <span className="text-xs font-bold uppercase tracking-wider text-primary">Global Trust</span>
+            </div>
+            <h3 className="text-xl md:text-2xl font-black text-foreground mb-2">
+              vCloudPoint ได้รับความไว้วางใจจากองค์กร<span className="text-primary">ทั่วโลก</span>
+            </h3>
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto mb-4">
+              ถูกใช้งานใน 100+ ประเทศ ตั้งแต่โรงเรียนในโปแลนด์ โรงแรมในจอร์แดน สถาบันในอิหร่าน ไปจนถึงโรงงานและมหาวิทยาลัยในไทย — ผ่านการพิสูจน์มานานกว่า 10 ปี
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {["FCC", "CE", "RoHS", "ISO 9001:2015", "ISO 14001:2015"].map((c) => (
+                <span key={c} className="px-3 py-1 rounded-lg text-[10px] font-medium bg-secondary text-secondary-foreground border border-border">
+                  {c}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
