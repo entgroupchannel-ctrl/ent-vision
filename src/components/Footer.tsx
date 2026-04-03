@@ -109,16 +109,6 @@ const footerSections = [
       { label: "สมัครงาน", href: "https://entgroup-job.lovable.app/", external: true },
     ],
   },
-  {
-    title: "เว็บไซต์ในเครือ",
-    links: [
-      { label: "Rugged Device", href: "https://entgroup-rugged.com", external: true },
-      { label: "NVIDIA Jetson", href: "https://nvidia-jetson.com", external: true },
-      { label: "ENT Group Biz", href: "https://www.entgroup.co.th", external: true },
-      { label: "VIMOSA", href: "https://www.vimosa.co.th/", external: true },
-      { label: "VICHAKAN", href: "https://www.vichakarn.co/", external: true },
-    ],
-  },
 ];
 
 const socials = [
@@ -239,6 +229,27 @@ const Footer = () => {
               รับข่าวสารล่าสุดเกี่ยวกับสินค้า โปรโมชั่น และเทคโนโลยีใหม่ๆ จาก ENT Group
             </p>
             <NewsletterForm />
+          </div>
+        </div>
+
+        {/* Affiliate Sites - Horizontal */}
+        <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
+          <div className="container max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span className="text-xs font-bold text-foreground mr-2">เว็บไซต์ในเครือ:</span>
+            {[
+              { label: "Rugged Device", href: "https://entgroup-rugged.com" },
+              { label: "NVIDIA Jetson", href: "https://nvidia-jetson.com" },
+              { label: "ENT Group Biz", href: "https://www.entgroup.co.th" },
+              { label: "VIMOSA", href: "https://www.vimosa.co.th/" },
+              { label: "VICHAKAN", href: "https://www.vichakarn.co/" },
+            ].map((site, i, arr) => (
+              <span key={site.label} className="inline-flex items-center gap-1">
+                <a href={site.href} target="_blank" rel="noopener noreferrer" className="text-xs text-muted-foreground hover:text-primary transition-colors">
+                  {site.label}
+                </a>
+                {i < arr.length - 1 && <span className="text-muted-foreground/40 mx-1">|</span>}
+              </span>
+            ))}
           </div>
         </div>
 
