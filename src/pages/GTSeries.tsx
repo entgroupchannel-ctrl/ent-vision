@@ -4411,11 +4411,11 @@ const GTSeries = () => {
 /* M
 
       <FooterCompact />odel Card Component */
-const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
+const ModelCard = ({ model, onQuote }: { model: typeof gtModels[0]; onQuote?: (name: string) => void }) => (
   <>
     <div className="relative bg-secondary/50 p-6 flex items-center justify-center min-h-[200px]">
       {model.badge ? (
-        <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-primary text-primary-foreground text-[11px] font-bold">
+        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary text-primary-foreground text-[11px] font-bold border border-primary/20 animate-pulse">
           {model.highlight}
         </span>
       ) : (
@@ -4458,7 +4458,14 @@ const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
             <span className="font-bold text-foreground">{model.price.startsWith("สอบถาม") ? model.price : `฿${model.price}`}</span>
           </div>
         ) : <div />}
-        <QuoteButton productName={model.name} productCategory="GT Series — Mini PC" variant="compact" />
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); onQuote?.(model.name); }}
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition-colors"
+        >
+          <FileText size={12} />
+          ขอใบเสนอราคา
+        </button>
       </div>
     </div>
   </>
