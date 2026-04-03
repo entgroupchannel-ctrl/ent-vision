@@ -78,7 +78,7 @@ const footerSections = [
       { label: "เงื่อนไขการรับประกัน", href: "/warrantys" },
       { label: "วิธีการชำระเงิน", href: "/payment" },
       { label: "ขั้นตอนการจัดส่ง", href: "/delivery" },
-      { label: "ติดตามพัสดุ Kerry", href: "/kerry" },
+      
     ],
   },
   {
