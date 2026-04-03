@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, FileText } from "lucide-react";
+import { useState, useMemo } from "react";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, FileText, Search, X } from "lucide-react";
 
 /* ───── Price Data ───── */
 type PriceItem = {
@@ -150,13 +150,35 @@ interface GBPriceListProps {
 const GBPriceList = ({ onRequestQuote }: GBPriceListProps) => {
   const [activeTab, setActiveTab] = useState<TabId>("gb1000");
   const [pages, setPages] = useState<Record<TabId, number>>({ gb1000: 1, gb2000: 1, gb4000: 1, gb5000: 1, windows: 1 });
+  const [search, setSearch] = useState("");
 
   const currentTab = tabs.find((t) => t.id === activeTab)!;
+
+  const filteredData = useMemo(() => {
+    if (!search.trim()) return currentTab.data;
+    const q = search.toLowerCase();
+    return currentTab.data.filter(
+      (item) =>
+        item.processor.toLowerCase().includes(q) ||
+        item.config.toLowerCase().includes(q) ||
+        (item.remark && item.remark.toLowerCase().includes(q))
+    );
+  }, [currentTab.data, search]);
+
   const currentPage = pages[activeTab];
-  const totalPages = Math.ceil(currentTab.data.length / ITEMS_PER_PAGE);
-  const pagedData = currentTab.data.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  const safePage = Math.min(currentPage, totalPages || 1);
+  const pagedData = filteredData.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
 
   const setPage = (page: number) => setPages((prev) => ({ ...prev, [activeTab]: page }));
+
+  // Get unique processors for quick filter chips
+  const cpuChips = useMemo(() => {
+    const seen = new Set<string>();
+    return currentTab.data
+      .filter((item) => item.processor && !seen.has(item.processor) && seen.add(item.processor))
+      .map((item) => item.processor);
+  }, [currentTab.data]);
 
   return (
     <section className="border-t border-border bg-card" id="price-list">
@@ -181,6 +203,48 @@ const GBPriceList = ({ onRequestQuote }: GBPriceListProps) => {
             </button>
           ))}
         </div>
+
+        {/* Search & CPU Filter */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-4">
+          <div className="relative flex-1 max-w-md">
+            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+              placeholder="ค้นหา CPU, RAM, SSD..."
+              className="w-full pl-9 pr-9 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+            />
+            {search && (
+              <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                <X size={14} />
+              </button>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-1.5 items-center">
+            <span className="text-xs text-muted-foreground mr-1">CPU:</span>
+            {cpuChips.map((cpu) => (
+              <button
+                key={cpu}
+                onClick={() => { setSearch(search === cpu ? "" : cpu); setPage(1); }}
+                className={`px-2.5 py-1 rounded-full text-xs font-medium border transition-all ${
+                  search === cpu
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "bg-secondary/50 text-muted-foreground border-border hover:border-primary/40"
+                }`}
+              >
+                {cpu}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Results count */}
+        {search && (
+          <p className="text-xs text-muted-foreground mb-2">
+            พบ {filteredData.length} รายการ {filteredData.length !== currentTab.data.length && `จาก ${currentTab.data.length}`}
+          </p>
+        )}
 
         {/* Table */}
         <div className="border border-border rounded-lg overflow-hidden">
