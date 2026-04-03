@@ -568,7 +568,7 @@ const VCloudPoint = () => {
                   </div>
 
                   {/* Highlights */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {cs.highlights.map((h) => (
                       <span key={h} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/60 text-xs text-foreground font-medium border border-border/50">
                         <CheckCircle2 size={11} className={cs.accentColor} />
@@ -576,6 +576,32 @@ const VCloudPoint = () => {
                       </span>
                     ))}
                   </div>
+
+                  {/* Video Embeds */}
+                  {cs.videos.length > 0 && (
+                    <div className="pt-4 border-t border-border/50">
+                      <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <Play size={12} className="text-primary" /> วิดีโอจากงานจริง
+                      </p>
+                      <div className={`grid gap-3 ${cs.videos.length === 1 ? "grid-cols-1 max-w-lg" : cs.videos.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
+                        {cs.videos.map((v: { id: string; label: string }) => (
+                          <div key={v.id} className="space-y-1.5">
+                            <div className="relative aspect-video rounded-lg overflow-hidden bg-secondary/50">
+                              <iframe
+                                src={`https://www.youtube.com/embed/${v.id}?rel=0`}
+                                title={v.label}
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                className="absolute inset-0 w-full h-full"
+                                loading="lazy"
+                              />
+                            </div>
+                            <p className="text-[11px] text-muted-foreground font-medium">{v.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
