@@ -24,6 +24,7 @@ export type Database = {
           interest: string | null
           lead_score: number | null
           line_id: string | null
+          messages: Json | null
           name: string | null
           phone: string | null
           session_id: string
@@ -39,6 +40,7 @@ export type Database = {
           interest?: string | null
           lead_score?: number | null
           line_id?: string | null
+          messages?: Json | null
           name?: string | null
           phone?: string | null
           session_id: string
@@ -54,6 +56,7 @@ export type Database = {
           interest?: string | null
           lead_score?: number | null
           line_id?: string | null
+          messages?: Json | null
           name?: string | null
           phone?: string | null
           session_id?: string

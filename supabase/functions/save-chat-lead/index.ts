@@ -13,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    const { session_id, name, email, phone, company, line_id, interest, conversation_summary } = await req.json();
+    const { session_id, name, email, phone, company, line_id, interest, conversation_summary, messages } = await req.json();
 
     if (!session_id) {
       return new Response(
@@ -47,6 +47,7 @@ serve(async (req) => {
         line_id: line_id || null,
         interest: interest || null,
         conversation_summary: conversation_summary || null,
+        messages: messages || [],
         lead_score: leadScore,
       })
       .select()

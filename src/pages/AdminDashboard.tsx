@@ -532,13 +532,50 @@ const AdminDashboard = () => {
                     </>
                   )}
 
+                  {selectedItem._type === "chatlead" && (
+                    <>
+                      {selectedItem.interest && (
+                        <div>
+                          <span className="text-muted-foreground">สนใจ:</span>
+                          <span className="ml-2 text-foreground">{selectedItem.interest}</span>
+                        </div>
+                      )}
+                      {selectedItem.conversation_summary && (
+                        <div>
+                          <span className="text-muted-foreground block mb-1">สรุปการสนทนา:</span>
+                          <p className="text-foreground bg-muted/30 rounded-lg p-3 text-xs leading-relaxed whitespace-pre-wrap">{selectedItem.conversation_summary}</p>
+                        </div>
+                      )}
+                      {Array.isArray(selectedItem.messages) && selectedItem.messages.length > 0 && (
+                        <div>
+                          <span className="text-muted-foreground block mb-1.5">ข้อความทั้งหมด ({selectedItem.messages.length}):</span>
+                          <div className="space-y-1.5 max-h-64 overflow-y-auto rounded-lg bg-muted/20 p-3">
+                            {selectedItem.messages.map((m: any, i: number) => (
+                              <div key={i} className={`flex gap-2 ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+                                <div className={`max-w-[85%] rounded-lg px-3 py-1.5 text-[11px] leading-relaxed ${
+                                  m.role === "user"
+                                    ? "bg-primary/15 text-foreground"
+                                    : "bg-muted/50 text-muted-foreground"
+                                }`}>
+                                  {m.content}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
                   {/* Status update */}
                   <div className="pt-3 border-t border-border">
                     <label className="text-muted-foreground block mb-1.5">เปลี่ยนสถานะ:</label>
                     <select
                       value={selectedItem.status}
                       onChange={(e) => {
-                        const table = selectedItem._type === "contact" ? "contact_submissions" : "quote_requests";
+                        const table = selectedItem._type === "contact" ? "contact_submissions" 
+                          : selectedItem._type === "chatlead" ? "chat_leads" 
+                          : "quote_requests";
                         updateStatus(table, selectedItem.id, e.target.value);
                       }}
                       className="w-full px-3 py-2 rounded-lg border border-border bg-background text-xs text-foreground"
