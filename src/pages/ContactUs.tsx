@@ -1,5 +1,5 @@
 import SEOHead from "@/components/SEOHead";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import bannerContact from "@/assets/banner-contact.jpg";
 import teamSky from "@/assets/team-sky.png";
 import teamSom from "@/assets/team-som.png";
@@ -9,7 +9,7 @@ import LineQRButton from "@/components/LineQRButton";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import {
-  Phone, Mail, MapPin, ArrowLeft, Send, MessageCircle, Users,
+  Phone, Mail, MapPin, ArrowLeft, Send, MessageCircle, Users, Camera, Upload, Loader2, CreditCard,
 } from "lucide-react";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
