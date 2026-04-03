@@ -144,7 +144,7 @@ const ContactUs = () => {
                   <div>
                     <h3 className="text-sm font-bold text-foreground mb-1">สำนักงานใหญ่ & สำนักงานขาย</h3>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      เมโทร บิซทาวน์ แจ้งวัฒนะ 2, 70/5 หมู่ 4<br />
+                      เมทโทร บิซทาวน์ แจ้งวัฒนะ 2, 70/5 หมู่ 4<br />
                       ตำบลคลองพระอุดม อำเภอปากเกร็ด<br />
                       นนทบุรี 11120
                     </p>
