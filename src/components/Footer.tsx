@@ -173,8 +173,8 @@ const Footer = () => {
             {/* Company Info */}
             <div className="md:col-span-1">
               <img src={logo} alt="ENT GROUP" className="h-10 w-auto mb-4" />
-              <p className="text-sm font-bold text-gray-800 dark:text-white mb-1">บริษัท อีเอ็นที กรุ๊ป จำกัด</p>
-              <p className="text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] leading-relaxed mb-4">
+              <p className="text-sm font-bold text-gray-900 dark:text-white mb-1">บริษัท อีเอ็นที กรุ๊ป จำกัด</p>
+              <p className="text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] leading-relaxed mb-4">
                 เมทโทร บิซทาวน์ แจ้งวัฒนะ2<br />
                 70/5 หมู่ 4 ต.คลองพระอุดม<br />
                 อ.ปากเกร็ด จ.นนทบุรี 11120
