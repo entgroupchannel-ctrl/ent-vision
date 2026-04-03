@@ -181,7 +181,7 @@ const gtModels = [
     storage: "SSD 128 GB – 2 TB",
     ports: "USB 8, COM 6, LAN 2, HDMI+DP",
     size: "Intel Gen 10 Ice Lake",
-    image: "https://static.wixstatic.com/media/0597a3_91532076771244788545982fbe4d1736f000.jpg/v1/fill/w_297,h_459,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_91532076771244788545982fbe4d1736f000.jpg",
+    image: gt8000Product,
     tab: "gt8000",
     highlight: "Ice Lake",
     price: "สอบถาม",
