@@ -43,7 +43,7 @@ const HeroSection = () => {
     if (user) {
       await supabase.auth.signOut();
     } else {
-      navigate("/admin/login");
+      navigate("/admin-login");
     }
   };
 
