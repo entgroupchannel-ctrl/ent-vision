@@ -67,10 +67,28 @@ const SoftwareInquiryDialog = ({ children }: SoftwareInquiryDialogProps) => {
     if (form.requirements && form.requirements.length > 20) score += 10;
 
     const { error } = await (supabase.from as any)("software_inquiries").insert({
-      ...form,
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      company: form.company,
+      line_id: form.line_id,
+      service_type: form.service_type,
+      budget_range: form.budget_range,
+      timeline: form.timeline,
+      current_problems: form.current_problems,
+      requirements: form.requirements,
       user_id: user?.id || null,
       lead_score: score,
     });
+
+    // Subscribe to newsletter if opted in
+    if (!error && form.subscribe && form.email) {
+      await (supabase.from as any)("subscribers").insert({
+        email: form.email,
+        name: form.name || null,
+        source: "software_inquiry",
+      }).then(() => {});
+    }
 
     setSubmitting(false);
 
@@ -83,7 +101,7 @@ const SoftwareInquiryDialog = ({ children }: SoftwareInquiryDialogProps) => {
       setForm({
         name: "", email: "", phone: "", company: "", line_id: "",
         service_type: "", budget_range: "", timeline: "",
-        current_problems: "", requirements: "",
+        current_problems: "", requirements: "", subscribe: true,
       });
     }
   };
