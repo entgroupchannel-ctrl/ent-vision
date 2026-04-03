@@ -43,6 +43,7 @@ const App = () => (
             <Route path="/panel-pc-gtg" element={<PanelPCGTG />} />
             <Route path="/smart-display" element={<SmartDisplay />} />
             <Route path="/promotions" element={<Promotions />} />
+            <Route path="/utc-series" element={<UTCSeries />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
