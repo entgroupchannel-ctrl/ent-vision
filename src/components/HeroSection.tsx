@@ -6,6 +6,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import MegaMenu, { MobileMegaMenu } from "@/components/MegaMenu";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { useWishlist } from "@/hooks/useWishlist";
 import heroIndustrial from "@/assets/hero-industrial.jpg";
 import logo from "@/assets/logo-entgroup.avif";
 
