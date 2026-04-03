@@ -308,6 +308,7 @@ const GBSeries = () => {
   const [activeModel, setActiveModel] = useState(0);
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [showLineQR, setShowLineQR] = useState(false);
+  const [compareFilter, setCompareFilter] = useState<number[]>(models.map((_, i) => i));
   const current = models[activeModel];
 
   return (
