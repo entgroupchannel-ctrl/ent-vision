@@ -3423,10 +3423,16 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Port Diagram */}
-              <div className="card-surface p-4 overflow-hidden">
-                <h4 className="font-bold text-foreground mb-3 px-2">🔌 Ports & Connectivity</h4>
-                <img src="/images/gt1400/ports.png" alt="GT1400 Ports Layout" className="w-full rounded-lg" loading="lazy" />
+              {/* Ports & Dimension — 2 คอลัมน์ */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="card-surface p-4 overflow-hidden">
+                  <h4 className="font-bold text-foreground mb-3 px-2 text-sm">🔌 Ports & Connectivity</h4>
+                  <img src="/images/gt1400/ports.png" alt="GT1400 Ports Layout" className="w-full rounded-lg" loading="lazy" />
+                </div>
+                <div className="card-surface p-4 overflow-hidden">
+                  <h4 className="font-bold text-foreground mb-3 px-2 text-sm">📐 Dimension Drawing</h4>
+                  <img src="/images/gt1400/dimension.png" alt="GT1400 Dimension" className="w-full rounded-lg" loading="lazy" />
+                </div>
               </div>
 
               {/* Spec 2 คอลัมน์ */}
@@ -3472,11 +3478,6 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Dimension Drawing */}
-              <div className="card-surface p-4 overflow-hidden">
-                <h4 className="font-bold text-foreground mb-3 px-2">📐 Dimension Drawing</h4>
-                <img src="/images/gt1400/dimension.png" alt="GT1400 Dimension" className="w-full rounded-lg" loading="lazy" />
-              </div>
 
               {/* Price Table */}
               <div className="card-surface overflow-hidden">
