@@ -484,12 +484,51 @@ const AdminDashboard = () => {
                           ))}
                         </div>
                       </div>
-                      {selectedItem.details && (
-                        <div>
-                          <span className="text-muted-foreground block mb-1">รายละเอียด:</span>
-                          <p className="text-foreground bg-muted/30 rounded-lg p-3 text-xs leading-relaxed">{selectedItem.details}</p>
-                        </div>
-                      )}
+                      {selectedItem.details && (() => {
+                        const parsed = parseDetails(selectedItem.details);
+                        const hasStructured = parsed.timeline || parsed.qty || parsed.budget;
+                        return (
+                          <div className="space-y-2">
+                            {hasStructured && (
+                              <div className="grid grid-cols-3 gap-2">
+                                {parsed.timeline && (
+                                  <div className="rounded-lg bg-muted/40 p-2 text-center">
+                                    <CalendarClock size={12} className="mx-auto mb-0.5 text-primary" />
+                                    <p className="text-[10px] text-muted-foreground">ระยะเวลา</p>
+                                    <p className="text-[11px] font-medium text-foreground">{parsed.timeline}</p>
+                                  </div>
+                                )}
+                                {parsed.qty && (
+                                  <div className="rounded-lg bg-muted/40 p-2 text-center">
+                                    <Hash size={12} className="mx-auto mb-0.5 text-primary" />
+                                    <p className="text-[10px] text-muted-foreground">จำนวน</p>
+                                    <p className="text-[11px] font-medium text-foreground">{parsed.qty}</p>
+                                  </div>
+                                )}
+                                {parsed.budget && (
+                                  <div className="rounded-lg bg-muted/40 p-2 text-center">
+                                    <Wallet size={12} className="mx-auto mb-0.5 text-primary" />
+                                    <p className="text-[10px] text-muted-foreground">งบประมาณ</p>
+                                    <p className="text-[11px] font-medium text-foreground">{parsed.budget}</p>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                            {parsed.extra && (
+                              <div>
+                                <span className="text-muted-foreground block mb-1">ความต้องการเพิ่มเติม:</span>
+                                <p className="text-foreground bg-muted/30 rounded-lg p-3 text-xs leading-relaxed">{parsed.extra}</p>
+                              </div>
+                            )}
+                            {!hasStructured && (
+                              <div>
+                                <span className="text-muted-foreground block mb-1">รายละเอียด:</span>
+                                <p className="text-foreground bg-muted/30 rounded-lg p-3 text-xs leading-relaxed">{selectedItem.details}</p>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })()}
                     </>
                   )}
 
