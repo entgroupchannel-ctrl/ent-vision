@@ -185,7 +185,7 @@ const ContactUs = () => {
               {/* Google Map */}
               <div className="card-surface rounded-xl overflow-hidden">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3873.0!2d100.4975!3d13.9178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2e37b6fa3c4a5%3A0x4b49b3f1e3b0a8d2!2z4Liy4LiI4LiBIOC5gOC4oeC4l-C5guC4oyDguJrguLTguIvguJfguLLguKfguJnguYw!5e0!3m2!1sth!2sth!4v1"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3872.5!2d100.4793839!3d13.9320709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2839e781a7a99%3A0xfae548f49721eb09!2sENT%20GROUP%20Co.%2CLtd.!5e0!3m2!1sth!2sth!4v1"
                   width="100%"
                   height="220"
                   style={{ border: 0 }}
