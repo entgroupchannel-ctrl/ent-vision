@@ -82,7 +82,7 @@ const QuoteRequest = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { error } = await supabase.from("quote_requests").insert({
+      const { error } = await (supabase.from as any)("quote_requests").insert({
         name: form.name,
         email: form.email,
         phone: form.phone || null,

@@ -58,7 +58,7 @@ const ContactUs = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { error } = await supabase.from("contact_submissions").insert({
+      const { error } = await (supabase.from as any)("contact_submissions").insert({
         name: form.name,
         email: form.email,
         phone: form.phone || null,
