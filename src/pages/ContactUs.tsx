@@ -39,6 +39,7 @@ const callbackTimes = [
 ];
 
 const ContactUs = () => {
+  const [quoteOpen, setQuoteOpen] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
