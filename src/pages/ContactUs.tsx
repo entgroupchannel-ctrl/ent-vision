@@ -197,7 +197,7 @@ const ContactUs = () => {
                 />
                 <div className="p-3">
                   <a
-                    href="https://maps.app.goo.gl/entgroup"
+                    href="https://maps.app.goo.gl/vuvJHVwy2n2G3o7e6"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs text-primary hover:underline flex items-center gap-1"
