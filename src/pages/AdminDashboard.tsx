@@ -115,12 +115,26 @@ const AdminDashboard = () => {
               </Link>
               <h1 className="text-lg font-display font-bold text-foreground">Admin Dashboard</h1>
             </div>
-            <button
-              onClick={fetchData}
-              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <RefreshCw size={14} className={loading ? "animate-spin" : ""} /> รีเฟรช
-            </button>
+            <div className="flex items-center gap-3">
+              {isSuperAdmin && (
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 flex items-center gap-1">
+                  <Shield size={10} /> Super Admin
+                </span>
+              )}
+              <span className="text-xs text-muted-foreground">{user?.email}</span>
+              <button
+                onClick={fetchData}
+                className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <RefreshCw size={14} className={loading ? "animate-spin" : ""} /> รีเฟรช
+              </button>
+              <button
+                onClick={signOut}
+                className="flex items-center gap-1.5 text-xs text-red-400 hover:text-red-300 transition-colors"
+              >
+                <LogOut size={14} /> ออกจากระบบ
+              </button>
+            </div>
           </div>
         </div>
       </div>
