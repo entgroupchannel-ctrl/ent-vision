@@ -16,6 +16,7 @@ import RuggedTablet from "./pages/RuggedTablet.tsx";
 import GKSeries from "./pages/GKSeries.tsx";
 import PanelPCGTG from "./pages/PanelPCGTG.tsx";
 import SmartDisplay from "./pages/SmartDisplay.tsx";
+import Promotions from "./pages/Promotions.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
