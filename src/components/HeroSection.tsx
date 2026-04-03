@@ -45,7 +45,7 @@ const HeroSection = () => {
       await supabase.auth.signOut();
       toast.success("ออกจากระบบเรียบร้อยแล้ว");
     } else {
-      navigate("/admin-login");
+      navigate("/member-register");
     }
   };
 
