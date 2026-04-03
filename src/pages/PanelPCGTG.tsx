@@ -261,7 +261,7 @@ const PanelPC = () => {
         collectionName="GTY/GTG Panel PC จอสัมผัสอุตสาหกรรม"
         collectionDescription="Panel PC จอสัมผัสอุตสาหกรรม 8-21 นิ้ว Fanless IP65 สำหรับโรงงาน POS SCADA HMI"
         collectionUrl="/panel-pc-gtg"
-        products={panelModels.map(m => ({ name: m.name, description: `${m.size} ${m.resolution}`, category: "Industrial Panel PC" }))}
+        products={panelModels.map(m => ({ name: m.name, description: `${m.screen} ${m.resolution}`, category: "Industrial Panel PC" }))}
       />
       {/* Nav */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
