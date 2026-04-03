@@ -427,6 +427,7 @@ const ComparisonTable = ({ handleTabChange }: { handleTabChange: (tab: string) =
                 <th className="text-left p-4 font-bold text-foreground min-w-[120px]">จุดเด่น</th>
                 <th className="text-left p-4 font-bold text-foreground min-w-[180px]">CPU</th>
                 <th className="text-left p-4 font-bold text-foreground min-w-[100px]">RAM</th>
+                <th className="text-center p-4 font-bold text-foreground">ระบายความร้อน</th>
                 <th className="text-center p-4 font-bold text-foreground">COM</th>
                 <th className="text-center p-4 font-bold text-foreground">USB</th>
                 <th className="text-center p-4 font-bold text-foreground">LAN</th>
