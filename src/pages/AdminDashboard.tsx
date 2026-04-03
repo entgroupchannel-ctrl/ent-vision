@@ -573,7 +573,9 @@ const AdminDashboard = () => {
                     <select
                       value={selectedItem.status}
                       onChange={(e) => {
-                        const table = selectedItem._type === "contact" ? "contact_submissions" : "quote_requests";
+                        const table = selectedItem._type === "contact" ? "contact_submissions" 
+                          : selectedItem._type === "chatlead" ? "chat_leads" 
+                          : "quote_requests";
                         updateStatus(table, selectedItem.id, e.target.value);
                       }}
                       className="w-full px-3 py-2 rounded-lg border border-border bg-background text-xs text-foreground"
