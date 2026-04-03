@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_leads: {
+        Row: {
+          company: string | null
+          conversation_summary: string | null
+          created_at: string | null
+          email: string | null
+          id: string
+          interest: string | null
+          lead_score: number | null
+          line_id: string | null
+          name: string | null
+          phone: string | null
+          session_id: string
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          company?: string | null
+          conversation_summary?: string | null
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          interest?: string | null
+          lead_score?: number | null
+          line_id?: string | null
+          name?: string | null
+          phone?: string | null
+          session_id: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          company?: string | null
+          conversation_summary?: string | null
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          interest?: string | null
+          lead_score?: number | null
+          line_id?: string | null
+          name?: string | null
+          phone?: string | null
+          session_id?: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           callback_time: string | null
