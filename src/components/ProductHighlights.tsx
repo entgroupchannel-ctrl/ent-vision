@@ -105,7 +105,7 @@ const categories = [
     description: "PC 1 เครื่อง ใช้ได้ 30 คน ประหยัดต้นทุน ประหยัดไฟ ทดลองฟรี 30 วัน",
     icon: Monitor,
     href: "/vcloudpoint",
-    models: ["S100", "V100", "vMatrix"],
+    models: ["S100", "S100-v1", "A1", "vMatrix"],
     badge: "Hot",
     image: imgVCloud,
   },
