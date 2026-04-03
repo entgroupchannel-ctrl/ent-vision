@@ -14,11 +14,6 @@ import gt8000Banner from "@/assets/gt8000-banner.jpg";
 import gt9000Banner from "@/assets/gt9000-banner.jpg";
 import gt4500Banner from "@/assets/gt4500-banner.jpg";
 import gt1000Product from "@/assets/gt1000-product.jpg";
-import gt1000Front from "@/assets/gt1000-front.jpg";
-import gt1000Rear from "@/assets/gt1000-rear.jpg";
-import gt1000Side from "@/assets/gt1000-side.jpg";
-import gt1000Top from "@/assets/gt1000-top.jpg";
-import gt1000Wifi from "@/assets/gt1000-wifi.jpg";
 import gt1200Product from "@/assets/gt1200-product.jpg";
 import gt1400Product from "@/assets/gt1400-product.jpg";
 import gt2000Product from "@/assets/gt2000-product.jpg";
@@ -674,25 +669,25 @@ const GTSeries = () => {
                   </div>
                 </div>
 
-                {/* Product Images Gallery */}
+                {/* Product Images Gallery — ภาพจริงจากโรงงาน */}
                 <div className="lg:col-span-2 space-y-4">
-                  <div className="card-surface overflow-hidden rounded-xl">
+                  <div className="card-surface overflow-hidden rounded-xl bg-muted/30">
                     <img
-                      src={gt1000Front}
+                      src="http://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874413.jpg"
                       alt="GT1000 ด้านหน้า — 2 LAN, HDMI, VGA, MIC, SPK"
-                      className="w-full object-contain"
+                      className="w-full object-contain p-2"
                       loading="lazy"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { src: gt1000Rear, alt: "GT1000 ด้านหลัง — USB, COM ports" },
-                      { src: gt1000Side, alt: "GT1000 ด้านข้าง — ครีบระบายความร้อน" },
-                      { src: gt1000Top, alt: "GT1000 VESA Mount + ด้านล่าง" },
-                      { src: gt1000Wifi, alt: "GT1000 ภายใน — WiFi Module + Mainboard" },
+                      { src: "http://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874414.jpg", alt: "GT1000 ด้านหลัง — USB, COM ports" },
+                      { src: "http://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874418.jpg", alt: "GT1000 ด้านข้าง — ครีบระบายความร้อน" },
+                      { src: "http://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874416.jpg", alt: "GT1000 ด้านล่าง — VESA Mount" },
+                      { src: "http://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874419.jpg", alt: "GT1000 ภายใน — Mainboard + WiFi" },
                     ].map((img, i) => (
-                      <div key={i} className="card-surface overflow-hidden rounded-lg">
-                        <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
+                        <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
                       </div>
                     ))}
                   </div>
