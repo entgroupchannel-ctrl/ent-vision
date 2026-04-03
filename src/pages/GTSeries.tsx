@@ -3238,7 +3238,7 @@ const ModelCard = ({ model }: { model: typeof gtModels[0] }) => (
       <h3 className="text-xl font-display font-bold text-foreground mb-1 group-hover:text-primary transition-colors flex items-center gap-2">
         {model.name}
         {model.tab && <span className="text-xs text-primary font-normal">ดูรายละเอียด →</span>}
-        {model.href && !model.tab && <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />}
+        {!model.tab && <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />}
       </h3>
       <p className="text-xs font-semibold text-primary mb-3">"{model.tagline}"</p>
       <div className="space-y-2 text-sm">
