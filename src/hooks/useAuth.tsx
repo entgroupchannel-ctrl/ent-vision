@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setSession(null);
     setIsAdmin(false);
     setIsSuperAdmin(false);
-    window.location.href = "/admin-login";
+    window.location.replace(window.location.origin + "/admin-login");
   };
 
   return (
