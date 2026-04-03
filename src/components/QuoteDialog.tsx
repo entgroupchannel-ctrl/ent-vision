@@ -53,7 +53,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: 
   const [loading, setLoading] = useState(false);
 
   // Login form state
-  const [authMode, setAuthMode] = useState<"login" | "register">("login");
+  const [authMode, setAuthMode] = useState<"login" | "register">("register");
   const [authForm, setAuthForm] = useState({ email: "", password: "", name: "" });
   const [authLoading2, setAuthLoading2] = useState(false);
 
