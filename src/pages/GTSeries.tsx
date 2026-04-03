@@ -13,6 +13,18 @@ import gt7000Banner from "@/assets/gt7000-banner.jpg";
 import gt8000Banner from "@/assets/gt8000-banner.jpg";
 import gt9000Banner from "@/assets/gt9000-banner.jpg";
 import gt4500Banner from "@/assets/gt4500-banner.jpg";
+import gt1000Product from "@/assets/gt1000-product.jpg";
+import gt1200Product from "@/assets/gt1200-product.jpg";
+import gt1400Product from "@/assets/gt1400-product.jpg";
+import gt2000Product from "@/assets/gt2000-product.jpg";
+import gt3000Product from "@/assets/gt3000-product.jpg";
+import gt4000Product from "@/assets/gt4000-product.jpg";
+import gt4500Product from "@/assets/gt4500-product.jpg";
+import gt5000Product from "@/assets/gt5000-product.jpg";
+import gt6000Product from "@/assets/gt6000-product.jpg";
+import gt7000Product from "@/assets/gt7000-product.jpg";
+import gt8000Product from "@/assets/gt8000-product.jpg";
+import gt9000Product from "@/assets/gt9000-product.jpg";
 
 const features = [
   { icon: Thermometer, title: "ทนความร้อนสูง", desc: "ทำงานได้ในอุณหภูมิ 0–60°C อย่างต่อเนื่อง" },
@@ -37,7 +49,7 @@ const gtModels = [
     storage: "SSD 128–256 GB",
     ports: "USB 6, COM 2, LAN 2, VGA+HDMI",
     size: "ขนาดเล็กกระทัดรัด",
-    image: "https://static.wixstatic.com/media/0597a3_02acff57b2204d11a615e5e8b37392b6~mv2.png/v1/fill/w_419,h_378,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_02acff57b2204d11a615e5e8b37392b6~mv2.png",
+    image: gt1000Product,
     tab: "gt1000",
     highlight: "เริ่มต้น",
     price: "15,990",
@@ -50,7 +62,7 @@ const gtModels = [
     storage: "M.2 SSD + SATA",
     ports: "USB 6, COM 2, LAN 2, HDMI",
     size: "TDP 28W Fanless",
-    image: "https://static.wixstatic.com/media/0597a3_3a64dd92132a4f54b2a9f0eb03b87ed4~mv2.png/v1/fill/w_397,h_359,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
+    image: gt1200Product,
     tab: "gt1200",
     highlight: "NEW!",
     badge: true,
@@ -64,7 +76,7 @@ const gtModels = [
     storage: "M.2 NVMe + SATA",
     ports: "USB 6, COM 2, LAN 4, HDMI",
     size: "4 LAN + DDR5 Support",
-    image: "https://static.wixstatic.com/media/0597a3_f71510351a7e4552a201130b156e2cb9~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_16_40.png",
+    image: gt1400Product,
     tab: "gt1400",
     highlight: "NEW!",
     badge: true,
@@ -78,7 +90,7 @@ const gtModels = [
     storage: "SSD 256 GB",
     ports: "USB 8 (4×3.0+4×2.0), COM 4, LAN 2, VGA+HDMI",
     size: "23.4×15×4.8 cm / 1.5 kg",
-    image: "https://static.wixstatic.com/media/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg/v1/fill/w_268,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg",
+    image: gt2000Product,
     tab: "gt2000",
     highlight: "ยอดนิยม",
     price: "15,990",
@@ -91,7 +103,7 @@ const gtModels = [
     storage: "SSD 128 GB",
     ports: "USB 6, COM 6, LAN 2, VGA+HDMI",
     size: "15×21.7×5.2 cm / 1.289 kg",
-    image: "https://static.wixstatic.com/media/0597a3_7150a12fcc844677ac9c5c0af540da06f000.jpg/v1/fill/w_296,h_522,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_7150a12fcc844677ac9c5c0af540da06f000.jpg",
+    image: gt3000Product,
     tab: "gt3000",
     highlight: "6 COM",
     price: "สอบถาม",
@@ -104,7 +116,7 @@ const gtModels = [
     storage: "SSD 128–256 GB",
     ports: "USB 8, COM 6, LAN 2, VGA+HDMI, GPIO",
     size: "17.7×21.7×5.2 cm / 1.516 kg",
-    image: "https://static.wixstatic.com/media/0597a3_420ceca8be144daaab72c850d80c8589f000.jpg/v1/fill/w_296,h_522,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_420ceca8be144daaab72c850d80c8589f000.jpg",
+    image: gt4000Product,
     tab: "gt4000",
     highlight: "GPIO",
     price: "24,990",
@@ -117,7 +129,7 @@ const gtModels = [
     storage: "SSD 256 GB",
     ports: "USB 8 (4×3.0+4×2.0), COM 6, LAN 2, VGA+HDMI, SIM",
     size: "21.2×15.5×4.5 cm / 2.5 kg",
-    image: "https://static.wixstatic.com/media/0597a3_8e53a2e85b9f42088834c613e1a9d08f~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_25_08.png",
+    image: gt4500Product,
     tab: "gt4500",
     highlight: "DDR4 + 4G",
     price: "21,900",
@@ -130,7 +142,7 @@ const gtModels = [
     storage: "SSD 128 GB – 1 TB",
     ports: "USB 8, COM 6 (RS232/RS485/RS422), LAN 2, GPIO, SIM slot",
     size: "GPIO + SIM + RS485",
-    image: "https://static.wixstatic.com/media/0597a3_68700c8f94f94588be18d47414929b55f000.jpg/v1/fill/w_296,h_522,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_68700c8f94f94588be18d47414929b55f000.jpg",
+    image: gt5000Product,
     tab: "gt5000",
     highlight: "IoT Ready",
     price: "19,490",
@@ -143,7 +155,7 @@ const gtModels = [
     storage: "SSD 128 GB – 1 TB",
     ports: "USB 6, COM 6, LAN 2, VGA+HDMI",
     size: "Fanless สีดำสวยงาม",
-    image: "https://static.wixstatic.com/media/0597a3_e843641a309b4eb89bd60cf3c1696b70f000.jpg/v1/fill/w_268,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_e843641a309b4eb89bd60cf3c1696b70f000.jpg",
+    image: gt6000Product,
     tab: "gt6000",
     highlight: "ดีไซน์ใหม่",
     price: "สอบถาม",
@@ -156,7 +168,7 @@ const gtModels = [
     storage: "SSD 256 GB – 1 TB",
     ports: "USB 6, COM 6 (RS232/422/485), LAN 2",
     size: "23×17.5×5 cm / 2.5 kg",
-    image: "https://static.wixstatic.com/media/0597a3_dc2525bbb341403085db99e88a32210ef000.jpg/v1/fill/w_301,h_535,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_dc2525bbb341403085db99e88a32210ef000.jpg",
+    image: gt7000Product,
     tab: "gt7000",
     highlight: "DDR4",
     price: "สอบถาม",
@@ -169,7 +181,7 @@ const gtModels = [
     storage: "SSD 128 GB – 2 TB",
     ports: "USB 8, COM 6, LAN 2, HDMI+DP",
     size: "Intel Gen 10 Ice Lake",
-    image: "https://static.wixstatic.com/media/0597a3_91532076771244788545982fbe4d1736f000.jpg/v1/fill/w_297,h_459,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_91532076771244788545982fbe4d1736f000.jpg",
+    image: gt8000Product,
     tab: "gt8000",
     highlight: "Ice Lake",
     price: "สอบถาม",
@@ -182,7 +194,7 @@ const gtModels = [
     storage: "SSD + 2.5\" SATA + M.2 NVMe",
     ports: "USB 8, COM 8 (RS232/422/485), LAN 2, HDMI×2+DP",
     size: "Triple Display + Dual Band WiFi",
-    image: "https://static.wixstatic.com/media/0597a3_bee270c19b2f466a8a77aa294d528952f000.jpg/v1/fill/w_290,h_514,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_bee270c19b2f466a8a77aa294d528952f000.jpg",
+    image: gt9000Product,
     tab: "gt9000",
     highlight: "Triple Display",
     price: "25,290",
