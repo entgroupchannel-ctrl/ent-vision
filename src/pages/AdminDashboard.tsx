@@ -309,6 +309,9 @@ const AdminDashboard = () => {
                     <span>{item.email}</span>
                     {item.phone && <span className="flex items-center gap-0.5"><Phone size={8} /> {item.phone}</span>}
                     <span className="flex items-center gap-0.5"><Clock size={8} /> {formatDate(item.created_at)}</span>
+                    {item.business_card_data && (
+                      <span className="px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 text-[9px] font-bold">📇 นามบัตร</span>
+                    )}
                   </div>
                 </button>
               ))
