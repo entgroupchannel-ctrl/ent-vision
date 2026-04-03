@@ -54,6 +54,7 @@ const App = () => (
             <Route path="/vcloudpoint" element={<VCloudPoint />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/quote" element={<QuoteRequest />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
