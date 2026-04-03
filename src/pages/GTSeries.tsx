@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText } from "lucide-react";
 import QuoteDialog from "@/components/QuoteDialog";
+import { LineQRDialog } from "@/components/LineQRDialog";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import gt1000Banner from "@/assets/gt1000-banner.jpg";
