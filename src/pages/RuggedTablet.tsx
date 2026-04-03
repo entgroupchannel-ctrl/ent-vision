@@ -371,7 +371,7 @@ const categories = [
 const ITEMS_PER_PAGE = 10;
 
 /* ───── Product Card ───── */
-const ProductCard = ({ product }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string } }) => (
+const ProductCard = ({ product, onQuote }: { product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string }; onQuote?: (name: string) => void }) => (
   <div className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
     {product.image && (
       <div className="bg-secondary/30 p-4 flex items-center justify-center h-48">

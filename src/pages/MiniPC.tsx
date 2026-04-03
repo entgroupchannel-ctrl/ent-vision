@@ -641,7 +641,7 @@ const legacyModels = [
 ];
 
 /* ── Product Card Component ── */
-const ProductCard = ({ model }: { model: any }) => (
+const ProductCard = ({ model, onQuote }: { model: any; onQuote?: (name: string) => void }) => (
   <div id={model.id} className="card-surface overflow-hidden scroll-mt-24">
     <div className="p-6 md:p-8">
       {/* Header */}
