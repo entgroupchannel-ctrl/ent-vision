@@ -84,7 +84,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
       // Reset states after close animation
       setTimeout(() => {
         setSubmitted(false);
-        setProducts([{ category: productCategory, model: productName, qty: 1 }]);
+        setProducts(defaultProducts);
       }, 300);
     }
   };
