@@ -255,7 +255,7 @@ const MegaMenu = ({
           onMouseLeave={handleLeave}
         >
           {/* Panel */}
-          <div className="rounded-xl bg-gradient-to-b from-white via-gray-50 to-gray-100 dark:from-[hsl(220,20%,13%)] dark:via-[hsl(220,18%,10%)] dark:to-[hsl(220,20%,8%)] border border-gray-200 dark:border-white/10 shadow-2xl animate-fade-in overflow-hidden">
+          <div className="rounded-xl bg-gradient-to-b from-white via-gray-50 to-gray-100 dark:from-[hsl(220,20%,13%)] dark:via-[hsl(220,18%,10%)] dark:to-[hsl(220,20%,8%)] border border-gray-200 dark:border-white/10 shadow-2xl animate-fade-in overflow-y-auto max-h-[80vh]">
             <div className="p-5">
               {/* Category header */}
               <div className="flex items-center gap-2 mb-4">
