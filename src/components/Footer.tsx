@@ -59,7 +59,7 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-border/30 md:border-0">
+    <div className="border-b border-[hsl(220,15%,18%)] md:border-0">
       {/* Mobile: clickable header */}
       <button
         onClick={() => setOpen(!open)}
