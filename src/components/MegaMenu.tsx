@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Cpu, Monitor, Shield, Tablet, Wifi, Server, Box, Layers,
   Factory, Zap, ChevronRight, ArrowRight, Sparkles, Tv, Sun,
-  Droplets, UtensilsCrossed
+  Droplets, UtensilsCrossed, Headset, ShieldCheck, Users, Handshake
 } from "lucide-react";
 
 import imgGT from "@/assets/product-gt-series.jpg";
