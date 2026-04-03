@@ -181,13 +181,13 @@ const Footer = () => {
               </p>
 
               <div className="space-y-1.5 mb-4">
-                <a href="tel:020456104" className="flex items-center gap-2 text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
+                <a href="tel:020456104" className="flex items-center gap-2 text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
                   <Phone size={12} /> 02-045-6104
                 </a>
-                <a href="tel:0957391053" className="flex items-center gap-2 text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
+                <a href="tel:0957391053" className="flex items-center gap-2 text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
                   <Phone size={12} /> 095-739-1053, 084-046-1315
                 </a>
-                <a href="https://www.entgroup.co.th" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
+                <a href="https://www.entgroup.co.th" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
                   <MapPin size={12} /> www.entgroup.co.th
                 </a>
               </div>
