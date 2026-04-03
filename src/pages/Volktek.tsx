@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Shield, Zap, Network, Server, ThermometerSun, Globe } from "lucide-react";
+import { ArrowLeft, ExternalLink, Shield, Zap, Network, Server, ThermometerSun, Globe, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import volktekCertifications from "@/assets/volktek-certifications.png";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteDialog from "@/components/QuoteDialog";
 
 const productCategories = [
   {
