@@ -59,6 +59,7 @@ const ContactUs = () => {
   const [submitted, setSubmitted] = useState(false);
   const [scanning, setScanning] = useState(false);
   const [cardPreview, setCardPreview] = useState<string | null>(null);
+  const [extractedCardData, setExtractedCardData] = useState<Record<string, string> | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Auto-fill from user profile
@@ -93,6 +94,7 @@ const ContactUs = () => {
         if (error) throw error;
 
         const extracted = data?.data || {};
+        setExtractedCardData(extracted);
         setForm((prev) => ({
           ...prev,
           name: extracted.name || prev.name,
@@ -131,6 +133,12 @@ const ContactUs = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      const businessCardPayload = extractedCardData ? {
+        ...extractedCardData,
+        image_preview: cardPreview ? cardPreview.substring(0, 500) + "..." : null,
+        scanned_at: new Date().toISOString(),
+      } : null;
+
       const { error } = await (supabase.from as any)("contact_submissions").insert({
         name: form.name,
         email: form.email,
@@ -141,6 +149,7 @@ const ContactUs = () => {
         callback_time: form.callbackTime || null,
         category: form.category || null,
         message: form.message,
+        business_card_data: businessCardPayload,
       });
       if (error) throw error;
 

@@ -309,6 +309,9 @@ const AdminDashboard = () => {
                     <span>{item.email}</span>
                     {item.phone && <span className="flex items-center gap-0.5"><Phone size={8} /> {item.phone}</span>}
                     <span className="flex items-center gap-0.5"><Clock size={8} /> {formatDate(item.created_at)}</span>
+                    {item.business_card_data && (
+                      <span className="px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 text-[9px] font-bold">📇 นามบัตร</span>
+                    )}
                   </div>
                 </button>
               ))
@@ -512,6 +515,34 @@ const AdminDashboard = () => {
                         <span className="text-muted-foreground block mb-1">ข้อความ:</span>
                         <p className="text-foreground bg-muted/30 rounded-lg p-3 text-xs leading-relaxed">{selectedItem.message}</p>
                       </div>
+                      {selectedItem.business_card_data && (
+                        <div className="pt-2 border-t border-border">
+                          <span className="text-muted-foreground block mb-2 flex items-center gap-1">📇 ข้อมูลจากนามบัตร</span>
+                          <div className="bg-primary/5 border border-primary/20 rounded-lg p-3 space-y-1.5">
+                            {selectedItem.business_card_data.name && (
+                              <div className="text-xs"><span className="text-muted-foreground">ชื่อ:</span> <span className="text-foreground font-medium">{selectedItem.business_card_data.name}</span></div>
+                            )}
+                            {selectedItem.business_card_data.position && (
+                              <div className="text-xs"><span className="text-muted-foreground">ตำแหน่ง:</span> <span className="text-foreground">{selectedItem.business_card_data.position}</span></div>
+                            )}
+                            {selectedItem.business_card_data.company && (
+                              <div className="text-xs"><span className="text-muted-foreground">บริษัท:</span> <span className="text-foreground">{selectedItem.business_card_data.company}</span></div>
+                            )}
+                            {selectedItem.business_card_data.email && (
+                              <div className="text-xs"><span className="text-muted-foreground">อีเมล:</span> <span className="text-primary">{selectedItem.business_card_data.email}</span></div>
+                            )}
+                            {selectedItem.business_card_data.phone && (
+                              <div className="text-xs"><span className="text-muted-foreground">โทร:</span> <span className="text-foreground">{selectedItem.business_card_data.phone}</span></div>
+                            )}
+                            {selectedItem.business_card_data.address && (
+                              <div className="text-xs"><span className="text-muted-foreground">ที่อยู่:</span> <span className="text-foreground">{selectedItem.business_card_data.address}</span></div>
+                            )}
+                            <div className="text-[10px] text-muted-foreground/60 pt-1">
+                              สแกนเมื่อ: {selectedItem.business_card_data.scanned_at ? new Date(selectedItem.business_card_data.scanned_at).toLocaleString("th-TH") : "-"}
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </>
                   )}
 
