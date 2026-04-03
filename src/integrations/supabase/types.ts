@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      business_cards: {
+        Row: {
+          address: string | null
+          company: string | null
+          created_at: string
+          email: string | null
+          extracted_data: Json | null
+          id: string
+          image_url: string
+          name: string | null
+          phone: string | null
+          position: string | null
+          user_id: string
+        }
+        Insert: {
+          address?: string | null
+          company?: string | null
+          created_at?: string
+          email?: string | null
+          extracted_data?: Json | null
+          id?: string
+          image_url: string
+          name?: string | null
+          phone?: string | null
+          position?: string | null
+          user_id: string
+        }
+        Update: {
+          address?: string | null
+          company?: string | null
+          created_at?: string
+          email?: string | null
+          extracted_data?: Json | null
+          id?: string
+          image_url?: string
+          name?: string | null
+          phone?: string | null
+          position?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       chat_leads: {
         Row: {
           company: string | null
