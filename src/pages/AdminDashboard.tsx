@@ -70,7 +70,13 @@ const AdminDashboard = () => {
     setLoading(false);
   };
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => {
+    if (!authLoading && !isAdmin) {
+      navigate("/admin-login", { replace: true });
+    }
+  }, [authLoading, isAdmin, navigate]);
+
+  useEffect(() => { if (isAdmin) fetchData(); }, [isAdmin]);
 
   const updateStatus = async (table: string, id: string, status: string) => {
     const { error } = await (supabase.from(table as any) as any).update({ status }).eq("id", id);
