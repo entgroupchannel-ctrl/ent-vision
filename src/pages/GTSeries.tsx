@@ -4434,6 +4434,17 @@ const ModelCard = ({ model, onQuote }: { model: typeof gtModels[0]; onQuote?: (n
           {model.highlight}
         </span>
       )}
+      <WishlistHeart
+        item={{
+          id: model.name.toLowerCase().replace(/\s+/g, "-"),
+          name: model.name,
+          category: "GT Series — Industrial Mini PC",
+          image: model.image,
+          href: `/gt-series?tab=${model.name}`,
+          specs: model.tagline,
+        }}
+        className="absolute top-3 right-3"
+      />
       <img
         src={model.image}
         alt={model.name}
