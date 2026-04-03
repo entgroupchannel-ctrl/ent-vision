@@ -288,7 +288,11 @@ const WaterproofPC = () => {
                 <div className="p-6 md:p-8">
                   <div className="flex flex-col md:flex-row gap-6 mb-6">
                     <div className="md:w-1/3 flex items-center justify-center">
-                      <div className="bg-secondary/50 rounded-xl p-4 w-full flex items-center justify-center min-h-[200px]">
+                      <div className="relative bg-secondary/50 rounded-xl p-4 w-full flex items-center justify-center min-h-[200px]">
+                        <WishlistHeart
+                          item={{ id: m.id, name: m.name, category: "Waterproof PC", image: m.image, href: "/waterproof-pc", specs: m.model }}
+                          className="absolute top-3 right-3"
+                        />
                         <img src={m.image} alt={m.name} className="max-w-full max-h-[220px] object-contain" loading="lazy" />
                       </div>
                     </div>

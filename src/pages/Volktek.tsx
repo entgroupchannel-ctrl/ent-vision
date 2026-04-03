@@ -260,12 +260,17 @@ const Volktek = () => {
             {productCategories.map((cat) => (
               <div key={cat.id} id={cat.id} className="card-surface overflow-hidden scroll-mt-24">
                 <div className="p-6">
-                  <h3 className="text-lg font-display font-bold text-foreground mb-1">{cat.title}</h3>
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="text-lg font-display font-bold text-foreground">{cat.title}</h3>
+                    <WishlistHeart
+                      item={{ id: cat.id, name: cat.title, category: "Volktek", image: cat.image, href: "/volktek", specs: cat.desc }}
+                    />
+                  </div>
                   <p className="text-sm text-muted-foreground mb-4">{cat.desc}</p>
                   <div className="space-y-4">
                     <img src={cat.image} alt={cat.title} className="w-full h-auto rounded-lg" loading="lazy" />
                     {cat.modelImage && (
-                      <img src={cat.modelImage} alt={`${cat.title} models`} className="w-full h-auto rounded-lg" loading="lazy" />
+                      <img src={`${cat.modelImage}`} alt={`${cat.title} models`} className="w-full h-auto rounded-lg" loading="lazy" />
                     )}
                   </div>
                 </div>

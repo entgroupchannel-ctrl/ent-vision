@@ -640,7 +640,11 @@ const SmartDisplay = () => {
                   { image: "https://static.wixstatic.com/media/0597a3_923cc29817714f80b57ba97aba096dac~mv2.png/v1/fill/w_388,h_350,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk%20(2).png", title: "KIOSK แบบติดผนัง", desc: "ประหยัดพื้นที่ / Self-service" },
                 ].map((k) => (
                   <div key={k.title} className="card-surface p-5 hover:border-primary/30 transition-all hover:-translate-y-1 group">
-                    <div className="bg-secondary/30 rounded-xl p-4 mb-4 flex items-center justify-center h-52 overflow-hidden">
+                    <div className="relative bg-secondary/30 rounded-xl p-4 mb-4 flex items-center justify-center h-52 overflow-hidden">
+                      <WishlistHeart
+                        item={{ id: k.title.toLowerCase().replace(/\s+/g, "-"), name: k.title, category: "Smart Display KIOSK", image: k.image, href: "/smart-display", specs: k.desc }}
+                        className="absolute top-2 right-2 z-10"
+                      />
                       <img src={k.image} alt={k.title} className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                     </div>
                     <h3 className="font-bold text-foreground mb-1">{k.title}</h3>

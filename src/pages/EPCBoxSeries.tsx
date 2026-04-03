@@ -417,6 +417,10 @@ const SeriesSection = ({ series, index }: { series: SeriesData; index: number })
               {series.highlight}
             </span>
           )}
+          <WishlistHeart
+            item={{ id: series.id, name: series.name, category: "EPC Box Series", image: series.image, href: "/epc-box-series", specs: series.tagline }}
+            className="absolute top-4 right-4 z-10"
+          />
           <img
             src={series.image}
             alt={series.name}
