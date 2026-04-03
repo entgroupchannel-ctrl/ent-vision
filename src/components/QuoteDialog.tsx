@@ -59,6 +59,15 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
     : [{ category: productCategory, model: productName, qty: 1 }];
 
   const [products, setProducts] = useState<ProductItem[]>(defaultProducts);
+
+  // Sync products when dialog opens with new initialProducts
+  useEffect(() => {
+    if (open) {
+      setProducts(initialProducts && initialProducts.length > 0
+        ? initialProducts
+        : [{ category: productCategory, model: productName, qty: 1 }]);
+    }
+  }, [open]);
   const [form, setForm] = useState({
     name: "", email: "", phone: "", company: "",
     lineId: "", whatsapp: "", callbackTime: "", details: "",
