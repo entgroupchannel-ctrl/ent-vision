@@ -157,11 +157,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "" }: 
           </DialogDescription>
         </DialogHeader>
 
-        {authLoading ? (
-          <div className="flex items-center justify-center py-12">
-            <Loader2 className="animate-spin text-primary" size={24} />
-          </div>
-        ) : !user ? (
+        {!user ? (
           /* ─── Not Logged In ─── */
           <div className="space-y-4">
             <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 text-center">
