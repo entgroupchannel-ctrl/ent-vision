@@ -540,6 +540,13 @@ const EPCBoxSeries = () => {
   const [showLineQR, setShowLineQR] = useState(false);
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="EPC Box Series — Fanless Modular Industrial PC" description="EPC Box Series คอมพิวเตอร์อุตสาหกรรม Fanless แบบ Modular LEGO MODE รองรับ Intel N100 ถึง Core i7 สำหรับโรงงานและ IoT" path="/epc-box-series" />
+      <ProductJsonLd
+        collectionName="EPC Box Series Fanless Modular Industrial PC"
+        collectionDescription="EPC Box Series คอมพิวเตอร์อุตสาหกรรม Fanless แบบ Modular สำหรับโรงงานและ IoT"
+        collectionUrl="/epc-box-series"
+        products={priceList.map(m => ({ name: m.model, price: m.price, description: m.spec, category: "Fanless Modular Industrial PC" }))}
+      />
       {/* Nav */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 py-4">

@@ -121,6 +121,13 @@ const Volktek = () => {
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead title="Volktek Industrial Ethernet Switch" description="Volktek Industrial Ethernet Switch Managed/Unmanaged PoE สำหรับโรงงาน ระบบกล้องวงจรปิด และโครงข่ายอุตสาหกรรม" path="/volktek" />
+      <ProductJsonLd
+        collectionName="Volktek Industrial Ethernet Switch"
+        collectionDescription="Volktek Industrial Ethernet Switch Managed/Unmanaged PoE สำหรับโรงงานและระบบกล้องวงจรปิด"
+        collectionUrl="/volktek"
+        products={switches.map(m => ({ name: m.name, description: m.desc, category: "Industrial Ethernet Switch" }))}
+      />
       {/* Hero */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/5" />
