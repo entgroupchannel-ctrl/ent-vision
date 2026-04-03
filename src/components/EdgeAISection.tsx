@@ -1,77 +1,18 @@
 import { ExternalLink } from "lucide-react";
-
-const ThaiLinePattern = () => (
-  <svg
-    className="absolute inset-0 w-full h-full text-primary pointer-events-none"
-    xmlns="http://www.w3.org/2000/svg"
-    style={{ opacity: 0.15 }}
-  >
-    <defs>
-      <pattern id="thai-line" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
-        {/* ลายประจำยาม — interlocking curves */}
-        <path
-          d="M60 0 Q75 15, 60 30 Q45 15, 60 0Z"
-          fill="none" stroke="currentColor" strokeWidth="0.8"
-        />
-        <path
-          d="M60 30 Q75 45, 60 60 Q45 45, 60 30Z"
-          fill="none" stroke="currentColor" strokeWidth="0.8"
-        />
-        <path
-          d="M60 60 Q75 75, 60 90 Q45 75, 60 60Z"
-          fill="none" stroke="currentColor" strokeWidth="0.8"
-        />
-        <path
-          d="M60 90 Q75 105, 60 120 Q45 105, 60 90Z"
-          fill="none" stroke="currentColor" strokeWidth="0.8"
-        />
-        {/* Horizontal leaf curves */}
-        <path
-          d="M0 60 Q15 45, 30 60 Q15 75, 0 60Z"
-          fill="none" stroke="currentColor" strokeWidth="0.8"
-        />
-        <path
-          d="M30 60 Q45 45, 60 60 Q45 75, 30 60Z"
-          fill="none" stroke="currentColor" strokeWidth="0.8"
-        />
-        <path
-          d="M60 60 Q75 45, 90 60 Q75 75, 60 60Z"
-          fill="none" stroke="currentColor" strokeWidth="0.8"
-        />
-        <path
-          d="M90 60 Q105 45, 120 60 Q105 75, 90 60Z"
-          fill="none" stroke="currentColor" strokeWidth="0.8"
-        />
-        {/* Diagonal graceful S-curves — กนกเปลว */}
-        <path
-          d="M0 0 C10 10, 20 5, 30 15 S50 25, 60 15"
-          fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.6"
-        />
-        <path
-          d="M60 60 C70 70, 80 65, 90 75 S110 85, 120 75"
-          fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.6"
-        />
-        <path
-          d="M120 0 C110 10, 100 5, 90 15 S70 25, 60 15"
-          fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.6"
-        />
-        <path
-          d="M60 60 C50 70, 40 65, 30 75 S10 85, 0 75"
-          fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.6"
-        />
-        {/* Small petal at center */}
-        <circle cx="60" cy="60" r="2.5" fill="none" stroke="currentColor" strokeWidth="0.6" />
-        <circle cx="60" cy="60" r="1" fill="currentColor" opacity="0.3" />
-      </pattern>
-    </defs>
-    <rect width="100%" height="100%" fill="url(#thai-line)" />
-  </svg>
-);
+import thaiPattern from "@/assets/thai-suphannahong-pattern.png";
 
 const EdgeAISection = () => {
   return (
     <section className="section-padding relative overflow-hidden" id="edge-ai">
-      <ThaiLinePattern />
+      {/* Thai Suphannahong pattern background */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.08] dark:opacity-[0.06]"
+        style={{
+          backgroundImage: `url(${thaiPattern})`,
+          backgroundSize: "420px",
+          backgroundRepeat: "repeat",
+        }}
+      />
       <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-[hsl(40,55%,55%)]/[0.03] pointer-events-none" />
 
       <div className="container max-w-7xl mx-auto relative z-10">
