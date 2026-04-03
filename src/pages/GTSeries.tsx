@@ -3,8 +3,15 @@ import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
-import gt1000Hero from "@/assets/gt1000-hero.jpg";
+import gt1000Banner from "@/assets/gt1000-banner.jpg";
+import gt2000Banner from "@/assets/gt2000-banner.jpg";
 import gt3000Banner from "@/assets/gt3000-banner.jpg";
+import gt4000Banner from "@/assets/gt4000-banner.jpg";
+import gt5000Banner from "@/assets/gt5000-banner.jpg";
+import gt6000Banner from "@/assets/gt6000-banner.jpg";
+import gt7000Banner from "@/assets/gt7000-banner.jpg";
+import gt8000Banner from "@/assets/gt8000-banner.jpg";
+import gt9000Banner from "@/assets/gt9000-banner.jpg";
 
 const features = [
   { icon: Thermometer, title: "ทนความร้อนสูง", desc: "ทำงานได้ในอุณหภูมิ 0–60°C อย่างต่อเนื่อง" },
@@ -403,12 +410,24 @@ const GTSeries = () => {
           {activeTab === "gt1000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src={gt1000Hero}
+                  src={gt1000Banner}
                   alt="GT1000 Industrial PC"
-                  className="w-full h-[300px] md:h-[400px] object-cover"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    Best Seller · Fanless · Compact
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">1000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    รุ่นเริ่มต้น คุ้มค่า — เล็กแต่แกร่ง ทำงาน 24/7
+                  </p>
+                </div>
               </div>
 
               {/* Description */}
@@ -612,12 +631,24 @@ const GTSeries = () => {
           {activeTab === "gt2000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_daa67000acbe4cba9d7c0564e200aab3~mv2.png/v1/fill/w_900,h_250,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_42_26.png"
-                  alt="GT2000 Logo"
-                  className="w-full h-[200px] md:h-[280px] object-contain bg-background p-8"
+                  src={gt2000Banner}
+                  alt="GT2000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    Best Seller · 8 USB · 4 COM
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">2000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    ยอดนิยม 8 USB + 4 COM — พร้อมรองรับ Windows XP
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product Image */}
@@ -1280,12 +1311,24 @@ const GTSeries = () => {
           {activeTab === "gt4000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_26e2e00d748d4b9788a3e56c3998896a~mv2.png/v1/fill/w_882,h_280,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_29_11.png"
-                  alt="GT4000 Logo"
-                  className="w-full h-[180px] md:h-[250px] object-contain bg-background p-8"
+                  src={gt4000Banner}
+                  alt="GT4000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    GPIO · VESA Mount · Core i3/i5/i7
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">4000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    GPIO พร้อมใช้ VESA Mount — ควบคุมระบบอัตโนมัติ
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product Image */}
@@ -1579,12 +1622,24 @@ const GTSeries = () => {
           {activeTab === "gt5000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_f34de018f5de4ff9a3c4704536bd6731~mv2.png/v1/fill/w_886,h_276,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2011_17_08.png"
-                  alt="GT5000 Logo"
-                  className="w-full h-[180px] md:h-[250px] object-contain bg-background p-8"
+                  src={gt5000Banner}
+                  alt="GT5000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    GPIO · SIM Slot · IoT Ready
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">5000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    GPIO + SIM IoT Ready — เชื่อมต่อทุกที่ ไร้ขีดจำกัด
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product Image */}
@@ -1901,12 +1956,24 @@ const GTSeries = () => {
           {activeTab === "gt6000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/3e5003_554d898c7cf94282902994dc90486505~mv2.jpg/v1/fill/w_1320,h_341,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1.jpg"
-                  alt="GT6000 Banner"
-                  className="w-full h-[180px] md:h-[280px] object-cover"
+                  src={gt6000Banner}
+                  alt="GT6000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    ดีไซน์ใหม่ · Intel Core i3 · Fanless
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">6000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    ดีไซน์ใหม่ สวยทุกมุม — สำหรับร้านค้าและบริการ
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product */}
@@ -2113,13 +2180,25 @@ const GTSeries = () => {
           {/* Tab: GT7000 Detail */}
           {activeTab === "gt7000" && (
             <div className="space-y-8 animate-fade-in">
-              {/* Hero Logo */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_570b404607f6492fbc9e3388e5aece33~mv2.png/v1/fill/w_494,h_135,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-12%20at%2013_47_09.png"
-                  alt="GT7000 Logo"
-                  className="w-full h-[120px] md:h-[180px] object-contain bg-background p-8"
+                  src={gt7000Banner}
+                  alt="GT7000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    DDR4 · 6 COM · 70°C · Aluminium Alloy
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">7000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    คำตอบทุกปัญหาโรงงาน — ทนทาน แกร่ง ไว้ใจได้
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product */}
@@ -2343,13 +2422,25 @@ const GTSeries = () => {
           {/* Tab: GT8000 Detail */}
           {activeTab === "gt8000" && (
             <div className="space-y-8 animate-fade-in">
-              {/* Hero Logo */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_babe61a4533e4b65bcd37184c25619f9~mv2.png/v1/fill/w_448,h_183,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2017_41_51.png"
-                  alt="GT8000 Logo"
-                  className="w-full h-[120px] md:h-[180px] object-contain bg-background p-8"
+                  src={gt8000Banner}
+                  alt="GT8000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    Intel Ice Lake Gen 10 · สเปคแรง
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">8000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    Ice Lake Gen 10 — พลังประมวลผลระดับ Data Center
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product */}
@@ -2514,13 +2605,25 @@ const GTSeries = () => {
           {/* Tab: GT9000 Detail */}
           {activeTab === "gt9000" && (
             <div className="space-y-8 animate-fade-in">
-              {/* Hero Logo */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              {/* Hero Banner */}
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_8075cfe9768d4946a716b5fe6e39ac8e~mv2.png/v1/fill/w_478,h_120,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2011_11_23.png"
-                  alt="GT9000 Logo"
-                  className="w-full h-[120px] md:h-[180px] object-contain bg-background p-8"
+                  src={gt9000Banner}
+                  alt="GT9000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    Triple Display · 8 COM · NVMe · DDR5
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">9000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    Triple Display 8 COM — เรือธงสำหรับงานหนักระดับสูงสุด
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product */}
