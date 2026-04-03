@@ -428,9 +428,7 @@ const GBSeries = () => {
           <p className="text-muted-foreground mb-8">ปรึกษาผู้เชี่ยวชาญของเราเพื่อหาโซลูชันที่เหมาะสมกับธุรกิจของคุณ</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://line.me/R/ti/p/@entgroup"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/quote?category=GB+Series+%E2%80%94+Compact"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity"
             >
               ขอใบเสนอราคา
