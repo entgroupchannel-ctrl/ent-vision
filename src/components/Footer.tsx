@@ -115,16 +115,16 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-[hsl(220,15%,18%)] md:border-0">
+    <div className="border-b border-gray-200 dark:border-[hsl(220,15%,18%)] md:border-0">
       {/* Mobile: clickable header */}
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between py-3 md:py-0 md:pointer-events-none md:cursor-default text-left"
       >
-        <h3 className="text-sm font-bold text-white">{title}</h3>
+        <h3 className="text-sm font-bold text-gray-800 dark:text-white">{title}</h3>
         <ChevronDown
           size={16}
-          className={`text-[hsl(215,15%,55%)] transition-transform duration-200 md:hidden ${open ? "rotate-180" : ""}`}
+          className={`text-gray-400 dark:text-[hsl(215,15%,55%)] transition-transform duration-200 md:hidden ${open ? "rotate-180" : ""}`}
         />
       </button>
 
@@ -141,14 +141,14 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
+                className="text-sm text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
               >
                 {link.label}
               </a>
             ) : (
               <Link
                 to={link.href}
-                className="text-sm text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
+                className="text-sm text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
               >
                 {link.label}
               </Link>
