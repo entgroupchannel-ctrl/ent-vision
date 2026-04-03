@@ -194,7 +194,7 @@ const menuCategories = [
       {
         heading: "เครื่องมือช่วยตัดสินใจ",
         links: [
-          { label: "🎯 ช่วยเลือกสินค้าที่ใช่", href: "/product-advisor", hot: true },
+          { label: "✦ ช่วยเลือกสินค้าที่ใช่", href: "/product-advisor", hot: true },
         ],
       },
     ],
