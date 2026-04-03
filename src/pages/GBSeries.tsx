@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import { LineQRDialog } from "@/components/LineQRDialog";
+import GBPriceList from "@/components/GBPriceList";
 
 /* ───── Product Data ───── */
 const models = [
@@ -618,6 +619,9 @@ const GBSeries = () => {
           </CollapsibleSpec>
         </div>
       </section>
+
+      {/* Price List */}
+      <GBPriceList onRequestQuote={(product) => setQuoteOpen(true)} />
 
       {/* CTA */}
       <section className="border-t border-border">
