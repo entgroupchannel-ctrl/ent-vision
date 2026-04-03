@@ -5,6 +5,12 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight, FileText } from "lucide-react";
+import badgeMotherboard from "@/assets/epc-badge-motherboard.png";
+import badgeFactory from "@/assets/epc-badge-factory.png";
+import badgeReliability from "@/assets/epc-badge-reliability.png";
+import badgeCustomize from "@/assets/epc-badge-customize.png";
+import badgeWarranty from "@/assets/epc-badge-warranty.png";
+import badgeCertification from "@/assets/epc-badge-certification.png";
 import { Badge } from "@/components/ui/badge";
 import epcLegoBanner from "@/assets/epc-lego-banner.png";
 import epcUsecaseFactory from "@/assets/epc-usecase-factory.jpg";
@@ -471,6 +477,25 @@ const EPCSeries = () => {
                 <span className="text-3xl mb-3 block">{item.icon}</span>
                 <h3 className="font-semibold text-foreground text-sm mb-1">{item.title}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Trust Badges */}
+        <section>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {[
+              { image: badgeMotherboard, label: "เมนบอร์ดอุตสาหกรรมแท้" },
+              { image: badgeFactory, label: "ผลิตโดยตรงจากโรงงาน" },
+              { image: badgeReliability, label: "ขัดข้อง 0.5%/ปี" },
+              { image: badgeCustomize, label: "ปรับแต่งเฉพาะลูกค้า" },
+              { image: badgeWarranty, label: "รับประกัน 1-3 ปี" },
+              { image: badgeCertification, label: "มาตรฐานสากลครบ" },
+            ].map((item) => (
+              <div key={item.label} className="card-surface p-4 flex flex-col items-center text-center rounded-xl hover:shadow-md transition-shadow">
+                <img src={item.image} alt={item.label} className="w-16 h-16 object-contain mb-3" loading="lazy" />
+                <span className="text-xs font-semibold text-foreground leading-tight">{item.label}</span>
               </div>
             ))}
           </div>
