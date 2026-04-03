@@ -103,8 +103,15 @@ const AdminDashboard = () => {
     day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit",
   });
 
+  if (authLoading || !isAdmin) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-muted-foreground text-sm">กำลังตรวจสอบสิทธิ์...</div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-10">
         <div className="container max-w-7xl mx-auto px-6 py-4">
