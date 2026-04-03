@@ -35,7 +35,6 @@ const menuCategories = [
         links: [
           { label: "GK Series — Panel PC", href: "/gk-series", hot: true },
           { label: "Panel PC GTG/GTY", href: "/panel-pc-gtg" },
-          { label: "Smart Display & KIOSK", href: "/smart-display" },
         ],
       },
       {
