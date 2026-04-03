@@ -65,14 +65,6 @@ const SoftwareSection = () => {
                   สอบถามบริการซอฟต์แวร์
                 </button>
               </SoftwareInquiryDialog>
-              <a
-                href="https://codesteel.lovable.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-semibold hover:bg-surface-hover transition-colors"
-              >
-                ดูตัวอย่างงาน <ExternalLink size={16} />
-              </a>
               <LineQRButton
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-semibold hover:bg-surface-hover transition-colors"
               >
