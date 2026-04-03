@@ -115,16 +115,16 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-[hsl(220,15%,18%)] md:border-0">
+    <div className="border-b border-gray-200 dark:border-[hsl(220,15%,18%)] md:border-0">
       {/* Mobile: clickable header */}
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between py-3 md:py-0 md:pointer-events-none md:cursor-default text-left"
       >
-        <h3 className="text-sm font-bold text-white">{title}</h3>
+        <h3 className="text-sm font-bold text-gray-800 dark:text-white">{title}</h3>
         <ChevronDown
           size={16}
-          className={`text-[hsl(215,15%,55%)] transition-transform duration-200 md:hidden ${open ? "rotate-180" : ""}`}
+          className={`text-gray-400 dark:text-[hsl(215,15%,55%)] transition-transform duration-200 md:hidden ${open ? "rotate-180" : ""}`}
         />
       </button>
 
@@ -141,14 +141,14 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
+                className="text-sm text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
               >
                 {link.label}
               </a>
             ) : (
               <Link
                 to={link.href}
-                className="text-sm text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
+                className="text-sm text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
               >
                 {link.label}
               </Link>
@@ -167,27 +167,27 @@ const Footer = () => {
 
 
       {/* Main Footer */}
-      <div className="bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 text-gray-700 dark:from-[hsl(220,20%,12%)] dark:via-[hsl(220,18%,9%)] dark:to-[hsl(220,20%,7%)] dark:text-[hsl(210,20%,85%)]">
+      <div className="bg-gradient-to-b from-white via-gray-100 to-gray-300 text-gray-700 dark:from-[hsl(220,15%,16%)] dark:via-[hsl(220,18%,10%)] dark:to-[hsl(220,20%,6%)] dark:text-[hsl(210,20%,85%)]">
         <div className="container max-w-7xl mx-auto px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             {/* Company Info */}
             <div className="md:col-span-1">
               <img src={logo} alt="ENT GROUP" className="h-10 w-auto mb-4" />
-              <p className="text-sm font-bold text-white mb-1">บริษัท อีเอ็นที กรุ๊ป จำกัด</p>
-              <p className="text-xs text-[hsl(215,15%,55%)] leading-relaxed mb-4">
+              <p className="text-sm font-bold text-gray-800 dark:text-white mb-1">บริษัท อีเอ็นที กรุ๊ป จำกัด</p>
+              <p className="text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] leading-relaxed mb-4">
                 เมทโทร บิซทาวน์ แจ้งวัฒนะ2<br />
                 70/5 หมู่ 4 ต.คลองพระอุดม<br />
                 อ.ปากเกร็ด จ.นนทบุรี 11120
               </p>
 
               <div className="space-y-1.5 mb-4">
-                <a href="tel:020456104" className="flex items-center gap-2 text-xs text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
+                <a href="tel:020456104" className="flex items-center gap-2 text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
                   <Phone size={12} /> 02-045-6104
                 </a>
-                <a href="tel:0957391053" className="flex items-center gap-2 text-xs text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
+                <a href="tel:0957391053" className="flex items-center gap-2 text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
                   <Phone size={12} /> 095-739-1053, 084-046-1315
                 </a>
-                <a href="https://www.entgroup.co.th" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
+                <a href="https://www.entgroup.co.th" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
                   <MapPin size={12} /> www.entgroup.co.th
                 </a>
               </div>
@@ -199,7 +199,7 @@ const Footer = () => {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 hover:text-primary hover:bg-gray-300 transition-colors dark:bg-[hsl(220,15%,18%)] dark:text-[hsl(215,15%,55%)] dark:hover:bg-[hsl(220,15%,22%)]"
+                    className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:text-primary hover:bg-gray-300 transition-colors dark:bg-[hsl(220,15%,18%)] dark:text-[hsl(215,15%,55%)] dark:hover:bg-[hsl(220,15%,22%)]"
                     aria-label={s.label}
                   >
                     <s.icon size={14} />
@@ -216,10 +216,10 @@ const Footer = () => {
         </div>
 
         {/* Newsletter */}
-        <div className="border-t border-[hsl(220,15%,18%)]">
+        <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
           <div className="container max-w-7xl mx-auto px-6 py-8 text-center">
-            <h3 className="text-base font-bold text-white mb-1">สมัครรับข่าวสาร</h3>
-            <p className="text-xs text-[hsl(215,15%,55%)] mb-4">
+            <h3 className="text-base font-bold text-gray-800 dark:text-white mb-1">สมัครรับข่าวสาร</h3>
+            <p className="text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] mb-4">
               รับข่าวสารล่าสุดเกี่ยวกับสินค้า โปรโมชั่น และเทคโนโลยีใหม่ๆ จาก ENT Group
             </p>
             <NewsletterForm />
