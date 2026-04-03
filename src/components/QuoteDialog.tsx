@@ -407,6 +407,17 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
               </div>
             </div>
 
+            {/* Subscribe */}
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.subscribe}
+                onChange={(e) => setForm({ ...form, subscribe: e.target.checked })}
+                className="rounded border-border text-primary focus:ring-primary/30 w-4 h-4"
+              />
+              <span className="text-xs text-muted-foreground">สมัครรับข่าวสาร โปรโมชั่น และอัปเดตจาก ENT Group</span>
+            </label>
+
             <button type="submit" disabled={loading}
               className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60">
               {loading ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
