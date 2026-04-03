@@ -103,10 +103,10 @@ const HeroSection = () => {
           <div className="flex items-center justify-between mt-4 gap-3 pt-4 border-t border-border">
             <ThemeToggle />
             <button
-              onClick={() => { setShowLineQR(true); setMobileMenuOpen(false); }}
-              className="flex-1 text-center px-5 py-2.5 rounded-lg bg-[hsl(142,70%,45%)] text-white text-sm font-semibold"
+              onClick={() => { handleAuthClick(); setMobileMenuOpen(false); }}
+              className="flex-1 text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
             >
-              LINE @entgroup
+              {user ? "ออกจากระบบ" : "สมัครสมาชิก"}
             </button>
           </div>
         </div>
