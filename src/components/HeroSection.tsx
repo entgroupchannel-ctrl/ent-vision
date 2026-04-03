@@ -160,6 +160,7 @@ const HeroSection = () => {
               </span>
             )}
           </Link>
+          <div className="relative" ref={userMenuRef}>
             <button
               onClick={() => setUserMenuOpen(!userMenuOpen)}
               className="p-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
