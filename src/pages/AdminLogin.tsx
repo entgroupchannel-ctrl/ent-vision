@@ -144,10 +144,6 @@ const AdminLogin = () => {
         <p className="text-center text-xs text-muted-foreground mt-4">
           เฉพาะผู้ดูแลระบบเท่านั้น
         </p>
-        <p className="text-center text-xs text-muted-foreground mt-2">
-          ยังไม่มีบัญชี?{" "}
-          <a href="/member-register" className="text-primary hover:underline font-medium">สมัครสมาชิก</a>
-        </p>
       </div>
     </div>
   );

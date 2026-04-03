@@ -253,6 +253,8 @@ const Footer = () => {
               <a href="#" className="hover:text-primary transition-colors">ติดต่อเรา</a>
               <span>|</span>
               <span className="text-primary">เป็นไปตาม PDPA ✓</span>
+              <span>|</span>
+              <Link to="/admin-login" className="hover:text-primary transition-colors">Admin</Link>
             </div>
             <p className="text-[11px] text-[hsl(215,15%,40%)]">
               © {new Date().getFullYear()} ENT Group Co., Ltd. All rights reserved. — NVIDIA Jetson Solutions by ENT Group
