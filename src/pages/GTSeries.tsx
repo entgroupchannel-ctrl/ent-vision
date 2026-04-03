@@ -487,6 +487,17 @@ const ComparisonTable = ({ handleTabChange }: { handleTabChange: (tab: string) =
                       <span className="text-xs text-muted-foreground">{row.ram}</span>
                     </td>
                     <td className="p-4 text-center">
+                      {row.fanless ? (
+                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold">
+                          <Wind size={12} /> Fanless
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 text-[10px] font-bold border border-amber-500/30">
+                          🌀 มีพัดลม
+                        </span>
+                      )}
+                    </td>
+                    <td className="p-4 text-center">
                       <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold ${
                         row.com >= 8 ? "bg-amber-500/20 text-amber-600 dark:text-amber-400" :
                         row.com >= 6 ? "bg-blue-500/20 text-blue-600 dark:text-blue-400" :
