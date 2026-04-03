@@ -218,8 +218,8 @@ const Footer = () => {
         {/* Newsletter */}
         <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
           <div className="container max-w-7xl mx-auto px-6 py-8 text-center">
-            <h3 className="text-base font-bold text-gray-800 dark:text-white mb-1">สมัครรับข่าวสาร</h3>
-            <p className="text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] mb-4">
+            <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1">สมัครรับข่าวสาร</h3>
+            <p className="text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] mb-4">
               รับข่าวสารล่าสุดเกี่ยวกับสินค้า โปรโมชั่น และเทคโนโลยีใหม่ๆ จาก ENT Group
             </p>
             <NewsletterForm />
