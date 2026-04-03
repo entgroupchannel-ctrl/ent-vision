@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Set
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
+import FooterCompact from "@/components/FooterCompact";
 
 /* ─── Concept: "One Body, Multiple Brains" ─── */
 const concepts = [
