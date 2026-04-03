@@ -39,10 +39,9 @@ const footerSections = [
   {
     title: "เกี่ยวกับเรา",
     links: [
-      { label: "เกี่ยวกับเรา", href: "https://www.entgroup.co.th", external: true },
-      { label: "ดาวน์โหลดเอกสาร", href: "https://www.entgroup.co.th", external: true },
-      { label: "ติดต่อเรา / แผนที่", href: "https://www.entgroup.co.th", external: true },
-      { label: "ลงทะเบียนผลิตภัณฑ์", href: "https://www.entgroup.co.th", external: true },
+      { label: "เกี่ยวกับเรา", href: "/about-us" },
+      { label: "ติดต่อเรา / แผนที่", href: "/contact" },
+      { label: "โปรโมชั่น", href: "/promotions" },
       { label: "Smart Display", href: "/smart-display" },
       { label: "Touch Monitor", href: "/panel-pc-gtg" },
     ],
