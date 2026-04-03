@@ -289,7 +289,7 @@ const ContactUs = () => {
         </div>
       </section>
 
-      <Footer />
+      <FooterCompact />
     </div>
   );
 };
