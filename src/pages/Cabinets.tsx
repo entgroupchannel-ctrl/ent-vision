@@ -1,4 +1,5 @@
 import SEOHead from "@/components/SEOHead";
+import WishlistHeart from "@/components/WishlistHeart";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {

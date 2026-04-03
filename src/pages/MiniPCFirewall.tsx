@@ -1,4 +1,5 @@
 import { useState } from "react";
+import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft, Shield, Wifi, Network, Cpu, Wind, Zap, Server,
