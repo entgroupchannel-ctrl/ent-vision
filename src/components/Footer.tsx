@@ -59,22 +59,22 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-border/30 md:border-0">
+    <div className="border-b border-[hsl(220,15%,18%)] md:border-0">
       {/* Mobile: clickable header */}
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-3 md:py-0 md:pointer-events-none md:cursor-default"
+        className="w-full flex items-center justify-between py-3 md:py-0 md:pointer-events-none md:cursor-default text-left"
       >
-        <h3 className="text-sm font-bold text-foreground">{title}</h3>
+        <h3 className="text-sm font-bold text-white">{title}</h3>
         <ChevronDown
           size={16}
-          className={`text-muted-foreground md:hidden transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`text-[hsl(215,15%,55%)] transition-transform duration-200 md:hidden ${open ? "rotate-180" : ""}`}
         />
       </button>
 
       {/* Links — always visible on desktop, collapsible on mobile */}
       <ul
-        className={`overflow-hidden transition-all duration-300 md:!max-h-[500px] md:mt-3 ${
+        className={`overflow-hidden transition-[max-height] duration-300 ease-in-out md:!max-h-[500px] md:mt-3 ${
           open ? "max-h-[500px] pb-3" : "max-h-0"
         }`}
       >
@@ -85,14 +85,14 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
               >
                 {link.label}
               </a>
             ) : (
               <Link
                 to={link.href}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
               >
                 {link.label}
               </Link>
