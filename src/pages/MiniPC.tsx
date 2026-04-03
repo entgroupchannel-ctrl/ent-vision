@@ -717,8 +717,8 @@ const ProductCard = ({ model, onQuote }: { model: any; onQuote?: (name: string) 
 );
 
 /* ── Section Component ── */
-const CategorySection = ({ id, title, subtitle, icon: Icon, models }: {
-  id: string; title: string; subtitle: string; icon: any; models: any[];
+const CategorySection = ({ id, title, subtitle, icon: Icon, models, onQuote }: {
+  id: string; title: string; subtitle: string; icon: any; models: any[]; onQuote?: (name: string) => void;
 }) => (
   <section id={id} className="scroll-mt-24">
     <div className="flex items-center gap-3 mb-6">
@@ -731,7 +731,7 @@ const CategorySection = ({ id, title, subtitle, icon: Icon, models }: {
       </div>
     </div>
     <div className="space-y-6">
-      {models.map((m) => <ProductCard key={m.id} model={m} onQuote={(name) => setQuoteProduct(name)} />)}
+      {models.map((m) => <ProductCard key={m.id} model={m} onQuote={onQuote} />)}
     </div>
   </section>
 );
