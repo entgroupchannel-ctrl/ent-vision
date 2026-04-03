@@ -121,7 +121,7 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between py-3 md:py-0 md:pointer-events-none md:cursor-default text-left"
       >
-        <h3 className="text-sm font-bold text-gray-800 dark:text-white">{title}</h3>
+        <h3 className="text-sm font-bold text-gray-900 dark:text-white">{title}</h3>
         <ChevronDown
           size={16}
           className={`text-gray-400 dark:text-[hsl(215,15%,55%)] transition-transform duration-200 md:hidden ${open ? "rotate-180" : ""}`}
@@ -141,14 +141,14 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
+                className="text-sm text-gray-600 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
               >
                 {link.label}
               </a>
             ) : (
               <Link
                 to={link.href}
-                className="text-sm text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
+                className="text-sm text-gray-600 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
               >
                 {link.label}
               </Link>
@@ -173,21 +173,21 @@ const Footer = () => {
             {/* Company Info */}
             <div className="md:col-span-1">
               <img src={logo} alt="ENT GROUP" className="h-10 w-auto mb-4" />
-              <p className="text-sm font-bold text-gray-800 dark:text-white mb-1">บริษัท อีเอ็นที กรุ๊ป จำกัด</p>
-              <p className="text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] leading-relaxed mb-4">
+              <p className="text-sm font-bold text-gray-900 dark:text-white mb-1">บริษัท อีเอ็นที กรุ๊ป จำกัด</p>
+              <p className="text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] leading-relaxed mb-4">
                 เมทโทร บิซทาวน์ แจ้งวัฒนะ2<br />
                 70/5 หมู่ 4 ต.คลองพระอุดม<br />
                 อ.ปากเกร็ด จ.นนทบุรี 11120
               </p>
 
               <div className="space-y-1.5 mb-4">
-                <a href="tel:020456104" className="flex items-center gap-2 text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
+                <a href="tel:020456104" className="flex items-center gap-2 text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
                   <Phone size={12} /> 02-045-6104
                 </a>
-                <a href="tel:0957391053" className="flex items-center gap-2 text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
+                <a href="tel:0957391053" className="flex items-center gap-2 text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
                   <Phone size={12} /> 095-739-1053, 084-046-1315
                 </a>
-                <a href="https://www.entgroup.co.th" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
+                <a href="https://www.entgroup.co.th" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] hover:text-primary transition-colors">
                   <MapPin size={12} /> www.entgroup.co.th
                 </a>
               </div>
@@ -218,8 +218,8 @@ const Footer = () => {
         {/* Newsletter */}
         <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
           <div className="container max-w-7xl mx-auto px-6 py-8 text-center">
-            <h3 className="text-base font-bold text-gray-800 dark:text-white mb-1">สมัครรับข่าวสาร</h3>
-            <p className="text-xs text-gray-500 dark:text-[hsl(215,15%,55%)] mb-4">
+            <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1">สมัครรับข่าวสาร</h3>
+            <p className="text-xs text-gray-600 dark:text-[hsl(215,15%,55%)] mb-4">
               รับข่าวสารล่าสุดเกี่ยวกับสินค้า โปรโมชั่น และเทคโนโลยีใหม่ๆ จาก ENT Group
             </p>
             <NewsletterForm />
