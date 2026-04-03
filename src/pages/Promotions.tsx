@@ -325,7 +325,7 @@ const Promotions = () => {
           <Link to="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
             <ArrowLeft size={16} /> หน้าแรก
           </Link>
-          <h1 className="text-sm font-bold">โปรโมชั่น</h1>
+          <h1 className="text-sm font-bold">​</h1>
           <div className="w-16" />
         </div>
       </div>
