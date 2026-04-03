@@ -2797,28 +2797,22 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Spec Sheet จากโรงงาน */}
-              <div className="card-surface p-4 overflow-hidden">
-                <h4 className="font-bold text-foreground mb-3 px-2">📋 Products Specification</h4>
-                <img src="/images/gt9000/spec.png" alt="GT9000 Specification Table" className="w-full rounded-lg" loading="lazy" />
-              </div>
-
               {/* Spec 2 คอลัมน์ */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">📐 GT9000 Specifications</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground">📋 GT9000 Specifications</h3>
                 </div>
                 <div className="grid md:grid-cols-2 md:divide-x divide-border">
                   <div className="divide-y divide-border">
                     {[
-                      ["CPU", "Intel i5-10200H / i7-10750H (Gen 10)\ni5-1235U / i7-1255U (Gen 12)"],
-                      ["Chipset", "Intel HM470 / Intel 660P"],
-                      ["RAM", "DDR4 สูงสุด 32GB (Gen 10)\nDDR5 สูงสุด 32GB (Gen 12)"],
-                      ["Storage", "M-SATA SSD + 2.5\" SATA HDD + M.2 2280 NVMe"],
-                      ["Display Output", "3× HDMI 1.4 (Triple Display)"],
-                      ["COM Port", "6× RS232/RS422/RS485"],
-                      ["USB", "USB 3.0 × 4 + USB 2.0 × 4"],
-                      ["LAN", "2× Intel Gigabit RJ45"],
+                      ["CPU", "1. Intel Core i5-9300H 4C/8T 2.4–4.1GHz 8MB TDP 45W\n2. Intel Core i7-9750H 6C/12T 2.6–4.5GHz 12MB TDP 45W\n3. Intel Core i5-10200H 4C/8T 2.4–4.1GHz 8MB TDP 45W\n4. Intel Core i7-10870H 8C/16T 2.2–5.0GHz 16MB TDP 45W"],
+                      ["TDP", "45W"],
+                      ["Chipset", "Intel SOC"],
+                      ["BIOS", "AMI BIOS, ACPI supported"],
+                      ["RAM", "2× DDR4 SO-DIMM สูงสุด 64GB"],
+                      ["Storage", "1× M-SATA SSD\n1× 2.5\" SATA HDD/SSD\n1× M.2 2280 NVMe SSD"],
+                      ["Display Output", "3× HDMI 1.4 (Triple Display พร้อมกัน)"],
+                      ["COM Port", "6× RS232/RS422/RS485 (ตั้งค่าผ่าน BIOS)"],
                     ].map(([label, value], i) => (
                       <div key={i} className="flex">
                         <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
@@ -2828,14 +2822,16 @@ const GTSeries = () => {
                   </div>
                   <div className="divide-y divide-border">
                     {[
-                      ["WiFi", "Dual-Band WiFi + เสาอากาศภายนอก 2 ต้น"],
-                      ["4G/LTE", "Full-height 4G Module + Micro SIM Slot"],
+                      ["USB", "USB 3.0 × 4 + USB 2.0 × 4 (รวม 8 พอร์ต)"],
+                      ["LAN", "2× Intel i211 Gigabit RJ45"],
+                      ["WiFi", "Dual-Band WiFi (M.2 2230) + เสาอากาศภายนอก 2 ต้น"],
+                      ["4G/LTE", "Full-height Mini PCIe 4G Module + Micro SIM Slot"],
                       ["Audio", "MIC-IN + SPK-OUT (Line Out)"],
-                      ["GPIO", "ไม่มี"],
                       ["Power", "DC 19V Adapter"],
-                      ["Cooling", "Fanless — ระบายความร้อนผ่านอลูมิเนียม"],
-                      ["Temp Range", "0°C ~ 60°C"],
-                      ["Mounting", "VESA / Wall Mount (Optional)"],
+                      ["Cooling", "Fanless — ระบายความร้อนผ่านอลูมิเนียม Heatsink"],
+                      ["Temp Range", "0°C ~ 60°C (Operating)"],
+                      ["Mounting", "Desktop / VESA / Wall Mount (Optional)"],
+                      ["OS Support", "Windows 10/11, Linux"],
                     ].map(([label, value], i) => (
                       <div key={i} className="flex">
                         <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
