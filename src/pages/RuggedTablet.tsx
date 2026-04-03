@@ -445,7 +445,23 @@ const RuggedTablet = () => {
   const [winPage, setWinPage] = useState(1);
   const [androidPage, setAndroidPage] = useState(1);
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const [selectedProducts, setSelectedProducts] = useState<Set<string>>(new Set());
+  const [showMultiQuote, setShowMultiQuote] = useState(false);
 
+  const toggleSelect = useCallback((name: string) => {
+    setSelectedProducts(prev => {
+      const next = new Set(prev);
+      if (next.has(name)) next.delete(name);
+      else next.add(name);
+      return next;
+    });
+  }, []);
+
+  const clearSelection = () => setSelectedProducts(new Set());
+
+  const openMultiQuote = () => {
+    setShowMultiQuote(true);
+  };
   return (
     <div className="min-h-screen bg-background">
       <SEOHead title="Rugged Tablet & Notebook กันน้ำ กันกระแทก" description="Rugged Tablet และ Notebook ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์ และอุตสาหกรรม" path="/rugged-tablet" />
