@@ -71,6 +71,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
   const [form, setForm] = useState({
     name: "", email: "", phone: "", company: "",
     lineId: "", whatsapp: "", callbackTime: "", details: "",
+    subscribe: true,
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
