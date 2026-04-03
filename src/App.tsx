@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/hooks/use-theme";
+import { AuthProvider } from "@/hooks/useAuth";
 import Index from "./pages/Index.tsx";
 import GTSeries from "./pages/GTSeries.tsx";
 import GBSeries from "./pages/GBSeries.tsx";
@@ -23,6 +24,7 @@ import VCloudPoint from "./pages/VCloudPoint.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import ContactUs from "./pages/ContactUs.tsx";
 import QuoteRequest from "./pages/QuoteRequest.tsx";
+import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -31,37 +33,40 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/gt-series" element={<GTSeries />} />
-            <Route path="/gb-series" element={<GBSeries />} />
-            <Route path="/epc-box-series" element={<EPCBoxSeries />} />
-            <Route path="/gk-series" element={<GKSeries />} />
-            <Route path="/mini-pc" element={<MiniPC />} />
-            <Route path="/waterproof-pc" element={<WaterproofPC />} />
-            <Route path="/volktek" element={<Volktek />} />
-            <Route path="/epc-series" element={<EPCSeries />} />
-            <Route path="/rugged-tablet" element={<RuggedTablet />} />
-            <Route path="/panel-pc-gtg" element={<PanelPCGTG />} />
-            <Route path="/smart-display" element={<SmartDisplay />} />
-            <Route path="/promotions" element={<Promotions />} />
-            <Route path="/utc-series" element={<UTCSeries />} />
-            <Route path="/minipc-firewall" element={<MiniPCFirewall />} />
-            <Route path="/mini-pc-firewall" element={<MiniPCFirewall />} />
-            <Route path="/vcloudpoint" element={<VCloudPoint />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/quote" element={<QuoteRequest />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/gt-series" element={<GTSeries />} />
+              <Route path="/gb-series" element={<GBSeries />} />
+              <Route path="/epc-box-series" element={<EPCBoxSeries />} />
+              <Route path="/gk-series" element={<GKSeries />} />
+              <Route path="/mini-pc" element={<MiniPC />} />
+              <Route path="/waterproof-pc" element={<WaterproofPC />} />
+              <Route path="/volktek" element={<Volktek />} />
+              <Route path="/epc-series" element={<EPCSeries />} />
+              <Route path="/rugged-tablet" element={<RuggedTablet />} />
+              <Route path="/panel-pc-gtg" element={<PanelPCGTG />} />
+              <Route path="/smart-display" element={<SmartDisplay />} />
+              <Route path="/promotions" element={<Promotions />} />
+              <Route path="/utc-series" element={<UTCSeries />} />
+              <Route path="/minipc-firewall" element={<MiniPCFirewall />} />
+              <Route path="/mini-pc-firewall" element={<MiniPCFirewall />} />
+              <Route path="/vcloudpoint" element={<VCloudPoint />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/quote" element={<QuoteRequest />} />
+              <Route path="/admin-login" element={<AdminLogin />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );

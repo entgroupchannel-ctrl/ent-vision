@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, Users, FileText, Mail, TrendingUp,
   Filter, RefreshCw, Eye, Clock, CheckCircle, XCircle,
-  Star, Phone, Building2, MessageSquare,
+  Star, Phone, Building2, MessageSquare, LogOut, Shield,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 type Tab = "contacts" | "quotes" | "subscribers";
 
@@ -46,6 +47,8 @@ const LeadScoreBadge = ({ score }: { score: number }) => {
 
 const AdminDashboard = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const { user, isAdmin, isSuperAdmin, loading: authLoading, signOut } = useAuth();
   const [tab, setTab] = useState<Tab>("contacts");
   const [contacts, setContacts] = useState<any[]>([]);
   const [quotes, setQuotes] = useState<any[]>([]);
@@ -67,7 +70,13 @@ const AdminDashboard = () => {
     setLoading(false);
   };
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => {
+    if (!authLoading && !isAdmin) {
+      navigate("/admin-login", { replace: true });
+    }
+  }, [authLoading, isAdmin, navigate]);
+
+  useEffect(() => { if (isAdmin) fetchData(); }, [isAdmin]);
 
   const updateStatus = async (table: string, id: string, status: string) => {
     const { error } = await (supabase.from(table as any) as any).update({ status }).eq("id", id);
@@ -94,6 +103,14 @@ const AdminDashboard = () => {
     day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit",
   });
 
+  if (authLoading || !isAdmin) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-muted-foreground text-sm">กำลังตรวจสอบสิทธิ์...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -106,12 +123,26 @@ const AdminDashboard = () => {
               </Link>
               <h1 className="text-lg font-display font-bold text-foreground">Admin Dashboard</h1>
             </div>
-            <button
-              onClick={fetchData}
-              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <RefreshCw size={14} className={loading ? "animate-spin" : ""} /> รีเฟรช
-            </button>
+            <div className="flex items-center gap-3">
+              {isSuperAdmin && (
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 flex items-center gap-1">
+                  <Shield size={10} /> Super Admin
+                </span>
+              )}
+              <span className="text-xs text-muted-foreground">{user?.email}</span>
+              <button
+                onClick={fetchData}
+                className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <RefreshCw size={14} className={loading ? "animate-spin" : ""} /> รีเฟรช
+              </button>
+              <button
+                onClick={signOut}
+                className="flex items-center gap-1.5 text-xs text-red-400 hover:text-red-300 transition-colors"
+              >
+                <LogOut size={14} /> ออกจากระบบ
+              </button>
+            </div>
           </div>
         </div>
       </div>
