@@ -185,8 +185,8 @@ const gkModels: GKModel[] = [
     resolution: "1920×1080 Full HD",
     tagline: "Full HD — Best Seller!",
     desc: "Panel PC อุตสาหกรรม 15.6 นิ้ว Full HD จอสัมผัส 10 จุด โครงสร้าง IP65 ทั้งด้านหน้าและด้านหลัง ทนฝุ่น ทนน้ำ รองรับ CPU ตั้งแต่ Pentium ถึง Core i7 — เลือกสเปกให้ตรงกับงบประมาณและการใช้งาน",
-    image: "https://www.sharevdi.com/upload/portal/20250709/202507092029118445.jpg",
-    bannerImage: "https://www.sharevdi.com/upload/portal/20241226/202412261546429083.jpg",
+    image: gk1506img1,
+    bannerImage: gk1506banner,
     datasheetUrls: [
       { label: "A15 Datasheet (PDF)", url: "https://www.sharevdi.com/upload/portal/20250704/202507042002221664.pdf" },
       { label: "GK1506 Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_d2a55f290be74f049d8099a7666f5153.pdf" },
