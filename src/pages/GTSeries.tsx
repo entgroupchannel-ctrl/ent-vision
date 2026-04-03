@@ -694,59 +694,75 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Spec Table from Factory */}
+              {/* Spec Table — ข้อมูลจริงจากโรงงาน */}
               <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border">
                   <h3 className="text-lg font-display font-bold text-foreground">GT1000 Specifications</h3>
+                  <p className="text-xs text-muted-foreground mt-1">ข้อมูลจาก Manufacturer · Intel Bay Trail Platform</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <tbody className="divide-y divide-border">
                       {[
-                        { label: "CPU", value: "Intel Celeron N2920 (2.0GHz Quad-Core) / N3520 (2.16GHz Quad-Core)" },
-                        { label: "Chipset", value: "Intel Bay Trail SoC" },
-                        { label: "RAM", value: "1× DDR3L SO-DIMM, Max 8GB (1600MHz)" },
-                        { label: "Storage", value: "1× mSATA SSD + 1× 2.5\" SATA HDD/SSD (Dual Storage)" },
-                        { label: "Display Output", value: "VGA + HDMI (Dual Display Synchronous)" },
-                        { label: "LAN", value: "2× Intel Gigabit Ethernet RJ45" },
-                        { label: "USB", value: "2× USB 3.0 + 4× USB 2.0 (Total 6 ports)" },
-                        { label: "COM Port", value: "2× RS232 (DB9)" },
-                        { label: "Audio", value: "MIC-in + SPK-out (3.5mm Jack)" },
-                        { label: "WiFi / BT", value: "Built-in WiFi + Bluetooth (Dual Antenna, Optional)" },
-                        { label: "SIM Slot", value: "1× Mini SIM Card Slot (Support 3G/4G LTE Module)" },
-                        { label: "Power", value: "12V DC-IN, TDP ~15W" },
-                        { label: "Cooling", value: "Fanless — Brushed Aluminum Alloy Chassis Heatsink" },
-                        { label: "Temperature", value: "Operating: 0°C ~ 60°C / Storage: -20°C ~ 70°C" },
-                        { label: "Mounting", value: "VESA 100×100mm / Wall Mount (Screws)" },
-                        { label: "OS Support", value: "Windows 7 / 8 / 10 / 11, Linux Ubuntu" },
-                      ].map((spec) => (
-                        <tr key={spec.label} className="hover:bg-secondary/30 transition-colors">
-                          <td className="p-3 font-semibold text-foreground w-[160px] whitespace-nowrap">{spec.label}</td>
-                          <td className="p-3 text-muted-foreground">{spec.value}</td>
-                        </tr>
+                        { cat: "General", items: [
+                          { label: "CPU", value: "Intel Pentium N3520 (2.16GHz, Quad-Core, Turbo Boost) / Celeron N2920 (1.86GHz, Quad-Core, Turbo 2.0GHz)" },
+                          { label: "Core (FSB)", value: "100MHz" },
+                          { label: "CPU Technique", value: "22nm" },
+                          { label: "L3 Cache", value: "2 MB, CPU Integrated" },
+                          { label: "Motherboard", value: "Intel CRESCENTBAY (Lynx Point-LP), Support GPIO" },
+                          { label: "BIOS", value: "AMI BIOS, ACPI Supported, Auto Power On" },
+                          { label: "Chipset", value: "Intel BTY SOC" },
+                        ]},
+                        { cat: "Memory & Storage", items: [
+                          { label: "Memory", value: "1× SO-DIMM DDR3L Slot, 4GB/8GB DDR3L 1333MHz (Optional)" },
+                          { label: "Storage", value: "1× mSATA SSD: 16G–1TB + 1× SATA HDD: 320G–1TB (Optional)" },
+                        ]},
+                        { cat: "I/O Ports", items: [
+                          { label: "Front Panel", value: "1× Switch On/Off, 1× LED, 2× USB 3.0, 4× USB 2.0, 2× RS232/422/485 COM" },
+                          { label: "Backside", value: "1× MIC, 1× SPK, 2× RJ45 LAN, 1× HDMI, 1× VGA, 1× DC-IN, 2× WiFi Antenna" },
+                          { label: "COM", value: "2× RS232/RS422/RS485 (เปลี่ยนจาก BIOS ได้)" },
+                          { label: "Internal", value: "1× M-SATA 3.0 (6Gb/s), 1× SATA 3.0 (6Gb/s), 1× mini PCIe-half (WiFi), 1× mini PCIe-full (4G)" },
+                          { label: "SIM Slot", value: "Micro SIM พร้อม Push Function (ด้านข้าง)" },
+                        ]},
+                        { cat: "Display & Audio", items: [
+                          { label: "Video", value: "Intel Haswell ULT Integrated Graphics, Intel HD Graphics" },
+                          { label: "Display Output", value: "VGA + HDMI (Dual Display Synchronous)" },
+                          { label: "Audio", value: "ALC662 HD Audio, 6 Channel Sound" },
+                        ]},
+                        { cat: "Network", items: [
+                          { label: "LAN", value: "Onboard Intel i211 Gigabit × 2, 10/100/1000Mbps BaseT" },
+                          { label: "WiFi / BT", value: "Built-in WiFi + Bluetooth (Dual Antenna, Optional)" },
+                        ]},
+                        { cat: "Power & Environment", items: [
+                          { label: "Input", value: "DC 100–240V AC / 50–60Hz" },
+                          { label: "Output", value: "DC 12V / 5A" },
+                          { label: "Consumption", value: "10W" },
+                          { label: "Operating Temp", value: "-10°C ~ 60°C (22°F ~ 130°F)" },
+                          { label: "Storage Temp", value: "-20°C ~ 80°C (-68°F ~ 176°F)" },
+                          { label: "Humidity", value: "10%–90% (Non-condensing)" },
+                        ]},
+                        { cat: "Dimension", items: [
+                          { label: "Size", value: "175 × 125 × 37 mm" },
+                          { label: "Net Weight", value: "0.85 kg" },
+                          { label: "Gross Weight", value: "1.5 kg (รวม Package)" },
+                          { label: "Mounting", value: "VESA 100×100mm / Wall Mount" },
+                          { label: "OS Support", value: "Windows 7 / 8 / 10 / Linux" },
+                        ]},
+                      ].map((section) => (
+                        <>
+                          <tr key={section.cat} className="bg-secondary/40">
+                            <td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">{section.cat}</td>
+                          </tr>
+                          {section.items.map((spec) => (
+                            <tr key={spec.label} className="hover:bg-secondary/30 transition-colors">
+                              <td className="p-3 font-semibold text-foreground w-[160px] whitespace-nowrap text-xs">{spec.label}</td>
+                              <td className="p-3 text-muted-foreground text-xs">{spec.value}</td>
+                            </tr>
+                          ))}
+                        </>
                       ))}
                     </tbody>
                   </table>
-                </div>
-              </div>
-
-              {/* Spec Diagrams from Factory */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-4 overflow-hidden rounded-xl">
-                  <img
-                    src="https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874185.jpg"
-                    alt="GT1000 Product Features Diagram"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card-surface p-4 overflow-hidden rounded-xl">
-                  <img
-                    src="https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874193.png"
-                    alt="GT1000 Specification Sheet"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
                 </div>
               </div>
 
