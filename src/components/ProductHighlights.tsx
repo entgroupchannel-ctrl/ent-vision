@@ -88,6 +88,16 @@ const categories = [
     badge: "Hot",
     image: "https://static.wixstatic.com/media/0597a3_6ebc77045f9a4292bb485a4fa91ac3a2~mv2.png/v1/fill/w_211,h_155,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-15%20at%2012_02_13.png",
   },
+  {
+    title: "vCloudPoint",
+    subtitle: "Zero Client Solution",
+    description: "PC 1 เครื่อง ใช้ได้ 30 คน ประหยัดต้นทุน ประหยัดไฟ ทดลองฟรี 30 วัน",
+    icon: Monitor,
+    href: "/vcloudpoint",
+    models: ["S100", "V100", "vMatrix"],
+    badge: "Hot",
+    image: "https://static.wixstatic.com/media/0597a3_756a4a09e31d4b6d85eb8da1da91f781~mv2.png/v1/fill/w_211,h_238,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_39_10.png",
+  },
 ];
 
 const ProductHighlights = () => {
