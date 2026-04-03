@@ -21,7 +21,7 @@ const searchTags = [
 
 const navLinks = [
   { label: "โปรโมชั่น", href: "/promotions" },
-  { label: "ติดต่อเรา", href: "#contact" },
+  { label: "ติดต่อเรา", href: "/contact" },
 ];
 
 const heroStats = [
