@@ -759,10 +759,8 @@ const MiniPC = () => {
               </p>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" asChild>
-                <a href="/quote">
-                  ขอใบเสนอราคา
-                </a>
+              <Button variant="outline" size="sm" onClick={() => setQuoteProduct("Mini PC")}>
+                <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
               </Button>
             </div>
           </div>
