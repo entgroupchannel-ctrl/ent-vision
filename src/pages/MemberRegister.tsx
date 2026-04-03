@@ -50,7 +50,42 @@ const MemberRegister = () => {
   const inputClass =
     "w-full px-4 py-2.5 rounded-xl border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all";
 
+  // Save business card to DB (called after successful scan + signup)
+  const saveBusinessCard = useCallback(async (userId: string, file: File, info: Record<string, string>) => {
+    try {
+      const ext = file.name.split('.').pop() || 'jpg';
+      const filePath = `${userId}/${Date.now()}.${ext}`;
+      
+      const { error: uploadErr } = await supabase.storage
+        .from('business-cards')
+        .upload(filePath, file, { contentType: file.type });
+      
+      if (uploadErr) throw uploadErr;
+
+      const { data: urlData } = supabase.storage
+        .from('business-cards')
+        .getPublicUrl(filePath);
+
+      await supabase.from('business_cards').insert({
+        user_id: userId,
+        image_url: filePath,
+        extracted_data: info,
+        name: info.name || null,
+        email: info.email || null,
+        phone: info.phone || null,
+        company: info.company || null,
+        position: info.position || null,
+        address: info.address || null,
+      });
+    } catch (err) {
+      console.error('Failed to save business card:', err);
+    }
+  }, []);
+
   // Business card scan
+  const scannedFileRef = useRef<File | null>(null);
+  const scannedInfoRef = useRef<Record<string, string>>({});
+
   const handleCardScan = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -58,6 +93,7 @@ const MemberRegister = () => {
     // Show preview
     const previewUrl = URL.createObjectURL(file);
     setCardPreview(previewUrl);
+    scannedFileRef.current = file;
 
     setScanning(true);
     try {
@@ -74,6 +110,7 @@ const MemberRegister = () => {
       if (error) throw error;
 
       const info = data?.data || {};
+      scannedInfoRef.current = info;
       setForm((prev) => ({
         ...prev,
         name: info.name || prev.name,
