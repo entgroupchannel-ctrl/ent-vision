@@ -1980,32 +1980,6 @@ const GTSeries = () => {
                 ))}
               </div>
 
-              {/* Real-world Photos */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  "https://static.wixstatic.com/media/3e5003_353f2e1c28cd4ced91fa948dd3a20563~mv2_d_2000_2000_s_2.jpg/v1/crop/x_0,y_10,w_2000,h_1395/fill/w_420,h_289,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/5.jpg",
-                  "https://static.wixstatic.com/media/3e5003_3b9a3c13be6d40818c8d1ea360ec47e5~mv2_d_2000_2000_s_2.jpg/v1/crop/x_5,y_629,w_1995,h_1366/fill/w_420,h_289,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/55.jpg",
-                  "https://static.wixstatic.com/media/3e5003_49a9b217d7a34a91a854b102d6b82ab2~mv2.jpg/v1/fill/w_449,h_289,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/workshop-assembling-televisions_88135-20.jpg",
-                  "https://static.wixstatic.com/media/0597a3_7717b28cf6f342e28792f638f1897be6~mv2.jpg/v1/fill/w_454,h_456,q_90,enc_avif,quality_auto/0597a3_7717b28cf6f342e28792f638f1897be6~mv2.jpg",
-                ].map((img, i) => (
-                  <div key={i} className="card-surface overflow-hidden">
-                    <img src={img} alt={`GT5000 ใช้งานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
-                  </div>
-                ))}
-              </div>
-
-              {/* Application Photos */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  "https://static.wixstatic.com/media/0597a3_7e0cb5260eb24a959851af54ee40888a~mv2.jpg/v1/fill/w_454,h_454,q_90,enc_avif,quality_auto/0597a3_7e0cb5260eb24a959851af54ee40888a~mv2.jpg",
-                  "https://static.wixstatic.com/media/0597a3_2fe2c45da02a451db7bd76de10edea54~mv2.jpg/v1/fill/w_454,h_456,q_90,enc_avif,quality_auto/0597a3_2fe2c45da02a451db7bd76de10edea54~mv2.jpg",
-                  "https://static.wixstatic.com/media/0597a3_93b14d0607e34448872fe4f1036ae10e~mv2.jpg/v1/fill/w_454,h_454,q_90,enc_avif,quality_auto/0597a3_93b14d0607e34448872fe4f1036ae10e~mv2.jpg",
-                ].map((img, i) => (
-                  <div key={i} className="card-surface overflow-hidden aspect-square">
-                    <img src={img} alt={`GT5000 Application ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
-                  </div>
-                ))}
-              </div>
 
               {/* GT5000 Price Table */}
               <div className="card-surface overflow-hidden">
