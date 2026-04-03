@@ -11,7 +11,7 @@ const socials = [
   { icon: <Facebook size={18} />, label: "Facebook", href: "https://www.facebook.com/entgroup.th/", bg: "bg-[#1877F2]" },
   { icon: <Instagram size={18} />, label: "Instagram", href: "https://www.instagram.com/entgroup.co.th", bg: "bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888]" },
   { icon: <TiktokIcon size={18} />, label: "TikTok", href: "https://www.tiktok.com/@entgroup", bg: "bg-[#010101]" },
-  { icon: <Youtube size={18} />, label: "YouTube", href: "https://www.youtube.com/@entgroup", bg: "bg-[#FF0000]" },
+  { icon: <Youtube size={18} />, label: "YouTube", href: "https://www.youtube.com/@ENTGROUP-TH", bg: "bg-[#FF0000]" },
 ];
 
 const SocialRibbon = () => {
