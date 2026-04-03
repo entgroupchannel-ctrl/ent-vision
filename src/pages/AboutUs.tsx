@@ -191,9 +191,9 @@ const AboutUs = () => {
       </section>
 
       {/* ═══════ Timeline ═══════ */}
-      <section className="py-16 px-4 md:px-8">
-        <div className="container max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+      <section className="py-16 px-4 md:px-8 overflow-hidden">
+        <div className="container max-w-7xl mx-auto">
+          <div className="text-center mb-10">
             <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2 block">
               Our Journey
             </span>
@@ -205,44 +205,52 @@ const AboutUs = () => {
             </p>
           </div>
 
-          {/* Timeline line */}
+          {/* Horizontal timeline */}
           <div className="relative">
-            {/* Vertical line */}
-            <div className="absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-primary/10" />
+            {/* Horizontal line */}
+            <div className="absolute top-[28px] left-0 right-0 h-0.5 bg-gradient-to-r from-primary/10 via-primary to-primary/10" />
 
-            <div className="space-y-8">
-              {timeline.map((item, i) => {
-                const isLeft = i % 2 === 0;
-                return (
-                  <div key={item.year} className={`relative flex items-start gap-4 md:gap-0 ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}>
-                    {/* Content */}
-                    <div className={`flex-1 pl-14 md:pl-0 ${isLeft ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
-                      <div className={`card-surface rounded-xl p-5 inline-block ${item.current ? "ring-1 ring-primary/30 shadow-lg shadow-primary/5" : ""}`}>
-                        <div className={`flex items-center gap-2 mb-2 ${isLeft ? "md:justify-end" : ""}`}>
-                          <span className="text-lg font-display font-black text-primary">{item.year}</span>
-                          <span className="text-[10px] text-muted-foreground/50">({item.yearEn})</span>
-                          {item.current && (
-                            <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-primary text-primary-foreground">
-                              ปัจจุบัน
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="text-sm font-bold text-foreground mb-1">{item.title}</h3>
-                        <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
-                      </div>
+            <div className="overflow-x-auto pb-4 -mx-4 px-4 scrollbar-thin">
+              <div className="flex gap-0 min-w-max">
+                {timeline.map((item, i) => (
+                  <div key={item.year} className="flex flex-col items-center w-[140px] md:w-[160px] shrink-0 relative">
+                    {/* Circle */}
+                    <div className={`w-14 h-14 rounded-full border-2 flex items-center justify-center z-10 mb-3 transition-all ${
+                      item.current
+                        ? "bg-primary border-primary shadow-lg shadow-primary/30"
+                        : "bg-background border-primary/40 hover:border-primary/70"
+                    }`}>
+                      <item.icon size={18} className={item.current ? "text-primary-foreground" : "text-primary/70"} />
                     </div>
 
-                    {/* Circle on the line */}
-                    <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-background border-2 border-primary/40 flex items-center justify-center z-10">
-                      <item.icon size={16} className={item.current ? "text-primary animate-pulse" : "text-primary/70"} />
+                    {/* Year */}
+                    <div className="flex items-center gap-1 mb-1">
+                      <span className={`text-sm font-display font-black ${item.current ? "text-primary" : "text-foreground"}`}>
+                        {item.year}
+                      </span>
+                      {item.current && (
+                        <span className="px-1.5 py-0.5 rounded-full text-[8px] font-bold bg-primary text-primary-foreground leading-none">
+                          NOW
+                        </span>
+                      )}
                     </div>
 
-                    {/* Spacer for opposite side */}
-                    <div className="hidden md:block flex-1" />
+                    {/* Title & desc */}
+                    <h3 className="text-[11px] font-bold text-foreground text-center leading-tight mb-1 px-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-[9px] text-muted-foreground text-center leading-relaxed px-2 line-clamp-3">
+                      {item.desc}
+                    </p>
                   </div>
-                );
-              })}
+                ))}
+              </div>
             </div>
+
+            {/* Scroll hint on mobile */}
+            <p className="text-center text-[10px] text-muted-foreground/50 mt-2 md:hidden">
+              ← เลื่อนดูเพิ่มเติม →
+            </p>
           </div>
         </div>
       </section>
