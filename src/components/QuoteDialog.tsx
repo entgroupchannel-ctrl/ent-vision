@@ -134,6 +134,14 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
           : form.details || null,
       });
       if (error) throw error;
+
+      if (form.subscribe && emailValue) {
+        await (supabase.from as any)("subscribers").insert({
+          email: emailValue,
+          name: form.name || user?.user_metadata?.full_name || null,
+          source: "quote_request",
+        }).then(() => {});
+      }
       setSubmitted(true);
       toast({ title: "ส่งคำขอเรียบร้อย!", description: "ทีมฝ่ายขายจะติดต่อกลับภายใน 24 ชม." });
     } catch (err: any) {
