@@ -43,6 +43,7 @@ interface QuoteDialogProps {
   onClose: () => void;
   productName?: string;
   productCategory?: string;
+  initialProducts?: { category: string; model: string; qty: number }[];
 }
 
 const inputClass =
