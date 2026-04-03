@@ -829,6 +829,7 @@ const EPCBoxSeries = () => {
         </div>
       </section>
       <FooterCompact />
+      <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
     </div>
   );
 };

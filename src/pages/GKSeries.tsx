@@ -837,6 +837,7 @@ const GKSeries = () => {
       </section>
 
       <FooterCompact />
+      <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
     </div>
   );
 };
