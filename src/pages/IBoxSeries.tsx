@@ -1,6 +1,7 @@
 import SEOHead from "@/components/SEOHead";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import WishlistHeart from "@/components/WishlistHeart";
 import {
   ArrowLeft, Cpu, Thermometer, Shield, Usb, Wifi, Download,
   FileText, ChevronRight, Layers, HardDrive, Monitor, Zap, Box,
