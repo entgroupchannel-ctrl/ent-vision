@@ -90,7 +90,7 @@ const gtModels = [
     storage: "SSD 256 GB",
     ports: "USB 8 (4×3.0+4×2.0), COM 4, LAN 2, VGA+HDMI",
     size: "23.4×15×4.8 cm / 1.5 kg",
-    image: "https://static.wixstatic.com/media/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg/v1/fill/w_268,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg",
+    image: gt2000Product,
     tab: "gt2000",
     highlight: "ยอดนิยม",
     price: "15,990",
