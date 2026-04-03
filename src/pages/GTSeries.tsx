@@ -800,7 +800,7 @@ const GTSeries = () => {
                     onClick={() => model.tab ? handleTabChange(model.tab) : undefined}
                     className={`group card-surface overflow-hidden hover:border-primary/30 transition-all hover:-translate-y-1 text-left cursor-pointer`}
                   >
-                    <ModelCard model={model} />
+                    <ModelCard model={model} onQuote={setQuoteProduct} />
                   </button>
                 ))}
               </div>
