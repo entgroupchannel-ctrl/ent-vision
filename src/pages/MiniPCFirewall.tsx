@@ -264,7 +264,7 @@ const CollapsibleSection = ({ title, children, defaultOpen = false }: { title: s
   );
 };
 
-const ModelCard = ({ model }: { model: FirewallModel }) => {
+const ModelCard = ({ model, onQuote }: { model: FirewallModel; onQuote?: (name: string) => void }) => {
   const tier = tierMeta[model.tier];
   const [expanded, setExpanded] = useState(false);
 
