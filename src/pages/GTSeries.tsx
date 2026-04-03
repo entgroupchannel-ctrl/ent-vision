@@ -2425,9 +2425,51 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Factory Detail Image */}
-              <div className="card-surface overflow-hidden rounded-lg bg-muted/30">
-                <img src="/images/gt7000/detail.jpg" alt="GT7000 Spec Overview" className="w-full object-contain p-2" loading="lazy" />
+              {/* Feature Highlights — 2 คอลัมน์ จาก Wix */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="card-surface overflow-hidden rounded-xl">
+                  <img src="/images/gt7000-wix/cost-saving.png" alt="GT7000 ประหยัดต้นทุนระยะยาว" className="w-full h-auto rounded-xl" loading="lazy" />
+                </div>
+                <div className="card-surface overflow-hidden rounded-xl">
+                  <img src="/images/gt7000-wix/ports-overview.png" alt="GT7000 พอร์ตครบครัน พร้อมใช้งานอุตสาหกรรม" className="w-full h-auto rounded-xl" loading="lazy" />
+                </div>
+              </div>
+
+              {/* Compact + Heatsink — 2 คอลัมน์ */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="card-surface overflow-hidden rounded-xl p-4">
+                  <h4 className="font-bold text-foreground mb-3 text-sm">📦 กะทัดรัด แต่แกร่ง</h4>
+                  <img src="/images/gt7000-wix/compact-design.png" alt="GT7000 Compact Design" className="w-full rounded-lg" loading="lazy" />
+                  <ul className="text-xs text-muted-foreground mt-3 space-y-1">
+                    <li>• ขนาดเล็กเท่ากล่องรองเท้า 23×17.5×5 ซม.</li>
+                    <li>• ติดตั้งง่าย ประหยัดพื้นที่</li>
+                    <li>• พอร์ตครบครัน รองรับการเชื่อมต่อทุกระบบ</li>
+                  </ul>
+                </div>
+                <div className="card-surface overflow-hidden rounded-xl p-4">
+                  <h4 className="font-bold text-foreground mb-3 text-sm">🔥 ครีบระบายความร้อนพิเศษ</h4>
+                  <img src="/images/gt7000-wix/heatsink.png" alt="GT7000 Heatsink Design" className="w-full rounded-lg" loading="lazy" />
+                  <ul className="text-xs text-muted-foreground mt-3 space-y-1">
+                    <li>• ไม่ต้องใช้พัดลม — เงียบสนิท 0 dB</li>
+                    <li>• ทนความร้อนสูงถึง 70°C</li>
+                    <li>• ป้องกันฝุ่นเข้าเครื่องขั้นสูง</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Spec Detail + Use Case — 2 คอลัมน์ */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="card-surface overflow-hidden rounded-xl">
+                  <img src="/images/gt7000-wix/spec-detail.png" alt="GT7000 Specifications Detail" className="w-full h-auto rounded-xl" loading="lazy" />
+                </div>
+                <div className="card-surface overflow-hidden rounded-xl">
+                  <img src="/images/gt7000-wix/use-case.png" alt="GT7000 Use Case Applications" className="w-full h-auto rounded-xl" loading="lazy" />
+                </div>
+              </div>
+
+              {/* Application Gallery — Full Width */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <img src="/images/gt7000-wix/factory-app.jpg" alt="GT7000 Factory Automation Application" className="w-full h-auto rounded-xl" loading="lazy" />
               </div>
 
               {/* Port Connectivity */}
@@ -2452,62 +2494,74 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Application Scenarios */}
+              {/* Application Scenarios — 2 คอลัมน์ */}
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-6">
-                  <h4 className="font-bold text-foreground mb-3">🏭 ระบบโรงงานอัตโนมัติ</h4>
-                  <ul className="text-sm text-muted-foreground space-y-2">
-                    <li>• ควบคุมแขนกล และระบบการผลิตอัตโนมัติ</li>
-                    <li>• เก็บข้อมูลการผลิตแบบเรียลไทม์</li>
-                    <li>• เชื่อมต่อกับระบบ SCADA ได้อย่างเสถียร</li>
-                  </ul>
+                <div className="card-surface overflow-hidden rounded-xl">
+                  <img src="/images/gt7000-wix/app-restaurant.jpg" alt="GT7000 Restaurant & POS Application" className="w-full h-48 object-cover" loading="lazy" />
+                  <div className="p-5">
+                    <h4 className="font-bold text-foreground mb-3">🍽️ ระบบร้านอาหาร & POS</h4>
+                    <ul className="text-sm text-muted-foreground space-y-2">
+                      <li>• จัดการออเดอร์และสต๊อกสินค้า</li>
+                      <li>• เชื่อมต่อระบบจอทัชสกรีนสั่งอาหาร</li>
+                      <li>• ทำงานต่อเนื่อง 24 ชม. ไม่สะดุด</li>
+                    </ul>
+                  </div>
                 </div>
-                <div className="card-surface p-6">
-                  <h4 className="font-bold text-foreground mb-3">🍽️ ระบบร้านอาหาร & POS</h4>
-                  <ul className="text-sm text-muted-foreground space-y-2">
-                    <li>• จัดการออเดอร์และสต๊อกสินค้า</li>
-                    <li>• เชื่อมต่อระบบจอทัชสกรีนสั่งอาหาร</li>
-                    <li>• ทำงานต่อเนื่อง 24 ชั่วโมง ไม่สะดุด</li>
-                  </ul>
+                <div className="card-surface overflow-hidden rounded-xl">
+                  <div className="grid grid-cols-2 gap-1">
+                    <img src="/images/gt7000-wix/install1.jpg" alt="GT7000 Installation 1" className="w-full h-24 object-cover" loading="lazy" />
+                    <img src="/images/gt7000-wix/install2.jpg" alt="GT7000 Installation 2" className="w-full h-24 object-cover" loading="lazy" />
+                    <img src="/images/gt7000-wix/install3.jpg" alt="GT7000 Installation 3" className="w-full h-24 object-cover" loading="lazy" />
+                    <img src="/images/gt7000-wix/install4.jpg" alt="GT7000 Installation 4" className="w-full h-24 object-cover" loading="lazy" />
+                  </div>
+                  <div className="p-5">
+                    <h4 className="font-bold text-foreground mb-3">🏭 ระบบโรงงานอัตโนมัติ</h4>
+                    <ul className="text-sm text-muted-foreground space-y-2">
+                      <li>• ควบคุมแขนกลและระบบผลิตอัตโนมัติ</li>
+                      <li>• เก็บข้อมูลการผลิตแบบเรียลไทม์</li>
+                      <li>• เชื่อมต่อ SCADA ได้อย่างเสถียร</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
               {/* Spec Table — 2 คอลัมน์ */}
               <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">GT7000 Specifications</h3>
-                  <p className="text-xs text-muted-foreground mt-1">ข้อมูลจาก Manufacturer</p>
+                  <h3 className="text-lg font-display font-bold text-foreground">📋 GT7000 Specifications</h3>
                 </div>
                 <div className="grid md:grid-cols-2 md:divide-x divide-border">
-                  <div>
-                    <table className="w-full text-sm">
-                      <tbody className="divide-y divide-border">
-                        {[
-                          ["CPU", "Intel Core i3 / i5 / i7 (DDR4)"],
-                          ["RAM", "DDR4, สูงสุด 32 GB"],
-                          ["Storage", "mSATA SSD + 2.5\" SATA 3.0 HDD/SSD"],
-                          ["Display", "VGA + HDMI (Dual Display)"],
-                          ["COM", "6 × RS232 (COM1/COM2 → RS485)"],
-                        ].map(([k, v], i) => (
-                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3">{k}</td><td className="p-3 text-muted-foreground">{v}</td></tr>
-                        ))}
-                      </tbody>
-                    </table>
+                  <div className="divide-y divide-border">
+                    {[
+                      ["CPU", "Intel Core i3 / i5 / i7 (DDR4)\nTDP 15W ประหยัดไฟ"],
+                      ["RAM", "DDR4 SO-DIMM สูงสุด 32GB"],
+                      ["Storage", "mSATA SSD + 2.5\" SATA 3.0 HDD/SSD"],
+                      ["Display", "VGA + HDMI (Dual Display)"],
+                      ["COM", "6× RS232 (COM1/COM2 → RS422/RS485)"],
+                      ["LAN", "2× Gigabit Ethernet RJ45"],
+                    ].map(([label, value], i) => (
+                      <div key={i} className="flex">
+                        <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
+                        <div className="w-2/3 p-3 text-xs text-muted-foreground whitespace-pre-line">{value}</div>
+                      </div>
+                    ))}
                   </div>
-                  <div>
-                    <table className="w-full text-sm">
-                      <tbody className="divide-y divide-border">
-                        {[
-                          ["LAN", "2 × Gigabit Ethernet RJ45"],
-                          ["SIM", "Micro SIM 3G/4G Module"],
-                          ["WiFi", "Built-in WiFi / Bluetooth"],
-                          ["Cooling", "Fanless — เงียบ 0 dB, ทน 70°C"],
-                          ["Mounting", "VESA / Wall Mount"],
-                        ].map(([k, v], i) => (
-                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3">{k}</td><td className="p-3 text-muted-foreground">{v}</td></tr>
-                        ))}
-                      </tbody>
-                    </table>
+                  <div className="divide-y divide-border">
+                    {[
+                      ["USB", "USB 3.0 + USB 2.0 (รวม 6 พอร์ต)"],
+                      ["SIM", "Micro SIM 3G/4G Module"],
+                      ["WiFi", "Built-in WiFi / Bluetooth"],
+                      ["Cooling", "Fanless — เงียบ 0 dB ทน 70°C"],
+                      ["Size / Weight", "230 × 175 × 50mm / 2.5kg"],
+                      ["Mounting", "VESA / Wall Mount / Desktop"],
+                      ["Functions", "Watchdog, Wake On LAN, RTC"],
+                      ["OS", "Windows 10/11, Linux"],
+                    ].map(([label, value], i) => (
+                      <div key={i} className="flex">
+                        <div className="w-1/3 p-3 bg-secondary/30 text-xs font-semibold text-foreground">{label}</div>
+                        <div className="w-2/3 p-3 text-xs text-muted-foreground whitespace-pre-line">{value}</div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
