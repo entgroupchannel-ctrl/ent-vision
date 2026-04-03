@@ -258,32 +258,53 @@ const HeroSection = () => {
           </p>
 
           {/* Search */}
-          <div className="relative max-w-xl mb-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
+          <div ref={searchRef} className="relative max-w-xl mb-8 animate-fade-up" style={{ animationDelay: "0.3s" }}>
             <div className="flex items-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden focus-within:ring-2 focus-within:ring-primary/50 transition-shadow">
               <Search className="ml-4 text-white/50" size={20} />
               <input
                 type="text"
                 placeholder="บอกความต้องการ เช่น Mini PC โรงงาน, Firewall SME..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => { setSearchQuery(e.target.value); setSearchOpen(true); }}
+                onFocus={() => setSearchOpen(true)}
+                onKeyDown={handleSearchKeyDown}
                 className="flex-1 bg-transparent px-4 py-4 text-white placeholder:text-white/40 outline-none text-sm md:text-base"
               />
-              <button className="px-6 py-4 bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity">
+              <button
+                onClick={handleSearch}
+                className="px-6 py-4 bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity"
+              >
                 ค้นเลย
               </button>
             </div>
+
+            {/* Autocomplete dropdown */}
+            {searchOpen && searchResults.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-background/95 backdrop-blur-xl border border-border rounded-xl shadow-2xl overflow-hidden z-50 animate-fade-in">
+                {searchResults.map((item, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { navigate(item.href); setSearchQuery(""); setSearchOpen(false); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-primary/10 transition-colors border-b border-border/50 last:border-0"
+                  >
+                    <Search size={14} className="text-muted-foreground shrink-0" />
+                    <span className="text-sm text-foreground">{item.label}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 max-w-xl animate-fade-up" style={{ animationDelay: "0.4s" }}>
             {searchTags.slice(0, 6).map((tag) => (
-              <a
+              <button
                 key={tag.label}
-                href={tag.href}
+                onClick={() => navigate(tag.href)}
                 className="px-3 py-1.5 rounded-full bg-white/10 text-white/80 text-xs border border-white/10 hover:bg-white/20 hover:border-white/30 transition-all backdrop-blur-sm"
               >
                 {tag.label}
-              </a>
+              </button>
             ))}
           </div>
 
