@@ -53,6 +53,7 @@ const AdminDashboard = () => {
   const [contacts, setContacts] = useState<any[]>([]);
   const [quotes, setQuotes] = useState<any[]>([]);
   const [subscribers, setSubscribers] = useState<any[]>([]);
+  const [chatLeads, setChatLeads] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<any>(null);
