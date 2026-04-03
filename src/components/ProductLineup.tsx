@@ -1,27 +1,27 @@
-import { ExternalLink, ArrowRight, BarChart3, Search } from "lucide-react";
+import { BarChart3, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const gtModels = [
-  { name: "GT1000", href: "https://www.entgroup.co.th/ipc-gt1000" },
-  { name: "GT1200 / GT1400", href: "https://www.entgroup.co.th/gt-series-2023", badge: "ราคาใหม่!" },
-  { name: "GT2000", href: "https://www.entgroup.co.th/mini-pc-gt2000" },
-  { name: "GT3000", href: "https://www.entgroup.co.th/mini-pc-3000" },
-  { name: "GT4000", href: "https://www.entgroup.co.th/minipc-gt4000" },
-  { name: "GT4500", href: "https://www.entgroup.co.th/ipc-gt4500" },
-  { name: "GT5000", href: "https://www.entgroup.co.th/gt5000" },
-  { name: "GT6000", href: "https://www.entgroup.co.th/gt6000" },
-  { name: "GT7000", href: "https://www.entgroup.co.th/ipc-gt7000" },
-  { name: "GT8000", href: "https://www.entgroup.co.th/gt8000" },
-  { name: "GT9000", href: "https://www.entgroup.co.th/gt9000" },
+  { name: "GT1000", href: "/gt-series" },
+  { name: "GT1200 / GT1400", href: "/gt-series", badge: "ราคาใหม่!" },
+  { name: "GT2000", href: "/gt-series" },
+  { name: "GT3000", href: "/gt-series" },
+  { name: "GT4000", href: "/gt-series" },
+  { name: "GT4500", href: "/gt-series" },
+  { name: "GT5000", href: "/gt-series" },
+  { name: "GT6000", href: "/gt-series" },
+  { name: "GT7000", href: "/gt-series" },
+  { name: "GT8000", href: "/gt-series" },
+  { name: "GT9000", href: "/gt-series" },
 ];
 
 const panelPCModels = [
-  { name: "FPM - Touch Monitor", href: "https://www.entgroup.co.th/industrial-touch-monitor" },
-  { name: "UTC Series", href: "https://www.entgroup.co.th/utc-series" },
-  { name: "GTP Series", href: "https://www.entgroup.co.th/gtp-series" },
-  { name: "GK Series", href: "https://www.entgroup.co.th/gk-series" },
-  { name: "GTC Series", href: "https://www.entgroup.co.th/gtc-series" },
-  { name: "SPC Series", href: "https://www.entgroup.co.th/spc-series" },
+  { name: "FPM - Touch Monitor", href: "/panel-pc-gtg" },
+  { name: "UTC Series", href: "/utc-series" },
+  { name: "GTP Series", href: "/panel-pc-gtg" },
+  { name: "GK Series", href: "/gk-series" },
+  { name: "GTC Series", href: "/panel-pc-gtg" },
+  { name: "SPC Series", href: "/panel-pc-gtg" },
 ];
 
 const ProductLineup = () => {
@@ -79,11 +79,9 @@ const ProductLineup = () => {
               {/* Model chips */}
               <div className="flex flex-wrap gap-1.5">
                 {gtModels.map((model) => (
-                  <a
+                  <Link
                     key={model.name}
-                    href={model.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    to={model.href}
                     className="relative inline-flex items-center gap-1 px-2.5 py-1 rounded-md border border-border text-[11px] font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5 transition-all"
                   >
                     {model.name}
@@ -92,7 +90,7 @@ const ProductLineup = () => {
                         {model.badge}
                       </span>
                     )}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -135,15 +133,13 @@ const ProductLineup = () => {
               {/* Model chips */}
               <div className="flex flex-wrap gap-1.5">
                 {panelPCModels.map((model) => (
-                  <a
+                  <Link
                     key={model.name}
-                    href={model.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    to={model.href}
                     className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md border border-border text-[11px] font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5 transition-all"
                   >
                     {model.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
