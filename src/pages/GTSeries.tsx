@@ -1956,12 +1956,24 @@ const GTSeries = () => {
           {activeTab === "gt6000" && (
             <div className="space-y-8 animate-fade-in">
               {/* Hero Banner */}
-              <div className="card-surface overflow-hidden rounded-2xl">
+              <div className="card-surface overflow-hidden rounded-2xl relative min-h-[220px] md:min-h-[300px] flex items-center">
                 <img
-                  src="https://static.wixstatic.com/media/3e5003_554d898c7cf94282902994dc90486505~mv2.jpg/v1/fill/w_1320,h_341,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1.jpg"
-                  alt="GT6000 Banner"
-                  className="w-full h-[180px] md:h-[280px] object-cover"
+                  src={gt6000Banner}
+                  alt="GT6000 Industrial PC"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+                <div className="relative z-10 p-8 md:p-12">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-primary/30">
+                    ดีไซน์ใหม่ · Intel Core i3 · Fanless
+                  </span>
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
+                    GT<span className="text-primary">6000</span>
+                  </h2>
+                  <p className="text-white/80 text-lg md:text-xl font-medium max-w-md">
+                    ดีไซน์ใหม่ สวยทุกมุม — สำหรับร้านค้าและบริการ
+                  </p>
+                </div>
               </div>
 
               {/* Description + Product */}
