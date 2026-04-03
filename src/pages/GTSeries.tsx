@@ -4405,6 +4405,13 @@ const GTSeries = () => {
           © {new Date().getFullYear()} ENT GROUP Co., Ltd. All rights reserved.
         </p>
       </footer>
+
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+        productCategory="GT Series — Mini PC"
+      />
     </div>
   );
 };
