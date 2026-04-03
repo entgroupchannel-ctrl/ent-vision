@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import LineQRButton from "@/components/LineQRButton";
 
 const softwareExamples = [
   { label: "HRM", href: "https://entgroup-job.lovable.app/" },

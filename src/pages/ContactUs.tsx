@@ -3,6 +3,7 @@ import teamSky from "@/assets/team-sky.png";
 import teamSom from "@/assets/team-som.png";
 import teamPreaw from "@/assets/team-preaw.png";
 import { Link } from "react-router-dom";
+import LineQRButton from "@/components/LineQRButton";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import {

@@ -1,4 +1,5 @@
-import { Phone, MapPin, Facebook, Youtube, Instagram, ExternalLink } from "lucide-react";
+import { Phone, MapPin, Facebook, Youtube, Instagram } from "lucide-react";
+import LineQRButton from "@/components/LineQRButton";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo-entgroup.avif";
 

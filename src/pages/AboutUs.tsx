@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import LineQRButton from "@/components/LineQRButton";
 import {
   Headset, ShieldCheck, Users, Handshake, Truck, Award, ArrowLeft,
   Building2, Rocket, Globe, ShoppingCart, Monitor, Cpu, TabletSmartphone,
