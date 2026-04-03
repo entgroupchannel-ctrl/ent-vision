@@ -1,5 +1,6 @@
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import WishlistHeart from "@/components/WishlistHeart";
@@ -142,6 +143,7 @@ const IBoxSeries = () => {
         collectionDescription="iBox Series คอมพิวเตอร์อุตสาหกรรม Fanless ขนาดกะทัดรัด สำหรับ Edge Computing, IoT Gateway, Digital Signage"
         collectionUrl="/ibox-series"
         products={iboxModels.map(m => ({ name: m.name, image: m.image, description: m.cpu, category: "Embedded Fanless Industrial PC" }))}
+      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "iBox Series", path: "/ibox-series" }]} />
       />
       {/* Banner */}
       <div className="relative h-48 md:h-64 overflow-hidden">

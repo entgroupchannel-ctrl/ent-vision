@@ -1,5 +1,6 @@
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -432,6 +433,7 @@ const RuggedTablet = () => {
         collectionDescription="Rugged Tablet และ Notebook ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์"
         collectionUrl="/rugged-tablet"
         products={[...goleWindowsModels, ...goleAndroidModels].map(m => ({ name: m.name, price: m.price, category: "Rugged Tablet" }))}
+      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "Rugged Tablet", path: "/rugged-tablet" }]} />
       />
       <div className="relative overflow-hidden">
         {/* Hero Background */}

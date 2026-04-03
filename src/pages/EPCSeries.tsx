@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight, FileText } from "lucide-react";
@@ -336,6 +337,7 @@ const EPCSeries = () => {
         collectionDescription="Panel PC อุตสาหกรรม จอสัมผัส IP65 Fanless ขนาด 10-21 นิ้ว สำหรับโรงงาน POS SCADA"
         collectionUrl="/epc-series"
         products={priceListSquare.map(m => ({ name: m.model, price: m.price, description: m.config, category: "Industrial Panel PC" }))}
+      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "EPC Series", path: "/epc-series" }]} />
       />
       {/* Hero */}
       <div className="relative overflow-hidden">
