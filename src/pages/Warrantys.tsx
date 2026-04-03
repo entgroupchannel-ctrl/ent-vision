@@ -1,6 +1,7 @@
 import { Shield, AlertTriangle, Monitor, Truck, Phone, FileDown, CheckCircle, XCircle } from "lucide-react";
-import HeroSection from "@/components/HeroSection";
+import PageBanner from "@/components/PageBanner";
 import Footer from "@/components/Footer";
+import bannerImg from "@/assets/banner-warranty.jpg";
 
 const generalExclusions = [
   "อาการเสียหรือความเสียหายอันเนื่องมาจากของเหลวหรืออาหารหกใส่ผลิตภัณฑ์ หรือภัยธรรมชาติ เช่น ไฟไหม้ น้ำท่วม แผ่นดินไหว หรือใช้แรงดันไฟฟ้าผิดจากที่กำหนด",
@@ -35,7 +36,7 @@ const shippingWarranty = [
 const Warrantys = () => {
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection />
+      <PageBanner image={bannerImg} title="เงื่อนไขการรับประกัน" subtitle="Warranty Policy — ENT Group" />
 
       {/* Header */}
       <section className="py-12 md:py-16 bg-gradient-to-b from-primary/5 to-background">

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { CheckCircle, Phone, Mail, FileText, Store, Users, Star, ArrowRight, Shield, Trophy, Award } from "lucide-react";
-import HeroSection from "@/components/HeroSection";
+import PageBanner from "@/components/PageBanner";
 import Footer from "@/components/Footer";
+import bannerImg from "@/assets/banner-welcome-member.jpg";
 
 const benefits = [
   "เงื่อนไขการเป็นตัวแทนไม่ยุ่งยาก ไม่บังคับให้ตัวแทนรักษายอด",
@@ -59,7 +60,7 @@ const documents = [
 const WelcomeMember = () => {
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection />
+      <PageBanner image={bannerImg} title="สมัครตัวแทนจำหน่าย" subtitle="ร่วมเป็นพาร์ทเนอร์กับ ENT Group" />
 
       {/* Hero Banner */}
       <section className="bg-gradient-to-br from-primary/10 via-background to-primary/5 py-16 md:py-24">

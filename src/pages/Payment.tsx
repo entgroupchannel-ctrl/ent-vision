@@ -1,6 +1,7 @@
 import { CreditCard, Building2, Phone, Mail, AlertCircle, Send, Info } from "lucide-react";
-import HeroSection from "@/components/HeroSection";
+import PageBanner from "@/components/PageBanner";
 import Footer from "@/components/Footer";
+import bannerImg from "@/assets/banner-payment.jpg";
 
 const bankAccounts = [
   {
@@ -34,7 +35,7 @@ const taxNotes = [
 const Payment = () => {
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection />
+      <PageBanner image={bannerImg} title="วิธีการชำระเงิน" subtitle="Payment Methods — ENT Group" />
 
       {/* Header */}
       <section className="py-12 md:py-16 bg-gradient-to-b from-primary/5 to-background">
