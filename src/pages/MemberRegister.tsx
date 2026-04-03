@@ -29,6 +29,7 @@ const MemberRegister = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [scanning, setScanning] = useState(false);
+  const [cardPreview, setCardPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
     name: "",
