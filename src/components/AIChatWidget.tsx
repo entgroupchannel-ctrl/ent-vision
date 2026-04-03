@@ -53,6 +53,11 @@ const AIChatWidget = () => {
           .map((m) => `${m.role}: ${m.content.substring(0, 200)}`)
           .join("\n");
 
+        const fullMessages = messages.map((m) => ({
+          role: m.role,
+          content: m.content.replace(/\[LEAD_DATA\].*?\[\/LEAD_DATA\]/s, "").trim(),
+        }));
+
         await fetch(SAVE_LEAD_URL, {
           method: "POST",
           headers: {
@@ -68,6 +73,7 @@ const AIChatWidget = () => {
             line_id: leadData.line_id || null,
             interest: leadData.interest || null,
             conversation_summary: summary,
+            messages: fullMessages,
           }),
         });
       } catch (err) {
