@@ -2,6 +2,7 @@ import SEOHead from "@/components/SEOHead";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Settings, Maximize, Wifi, ChevronDown, Smartphone, Factory, BarChart3, Gauge } from "lucide-react";
+import WishlistHeart from "@/components/WishlistHeart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
@@ -388,6 +389,17 @@ const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
               </span>
             )}
           </div>
+          <WishlistHeart
+            item={{
+              id: model.id,
+              name: model.name,
+              category: "GK Series — Panel PC",
+              image: model.image,
+              href: `/gk-series#${model.id}`,
+              specs: `${model.screenSize} ${model.resolution} ${model.platform}`,
+            }}
+            className="absolute top-4 right-4"
+          />
           <img
             src={model.image}
             alt={model.name}
