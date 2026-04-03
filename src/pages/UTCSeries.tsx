@@ -650,6 +650,19 @@ const UTCSeries = () => {
             </a>
 
             <Link
+              to="/quote?category=UTC+Series"
+              className="card-surface rounded-xl p-5 hover:border-primary/30 transition-all group flex items-center gap-3"
+            >
+              <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                <ShoppingCart className="text-primary" size={18} />
+              </div>
+              <div>
+                <h4 className="font-bold text-foreground group-hover:text-primary transition-colors">ขอใบเสนอราคา</h4>
+                <p className="text-xs text-muted-foreground">รับใบเสนอราคาภายใน 24 ชม.</p>
+              </div>
+            </Link>
+
+            <Link
               to="/"
               className="card-surface rounded-xl p-5 hover:border-primary/30 transition-all group flex items-center gap-3"
             >
