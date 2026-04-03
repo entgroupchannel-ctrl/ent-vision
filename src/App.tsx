@@ -38,6 +38,7 @@ import IBoxSeries from "./pages/IBoxSeries.tsx";
 import WishlistPage from "./pages/WishlistPage.tsx";
 import ForgotPassword from "./pages/ForgotPassword.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
+import ProductAdvisor from "./pages/ProductAdvisor.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import FloatingContact from "./components/FloatingContact.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
@@ -88,6 +89,7 @@ const App = () => (
               <Route path="/wishlist" element={<WishlistPage />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/product-advisor" element={<ProductAdvisor />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

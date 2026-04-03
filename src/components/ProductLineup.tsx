@@ -69,7 +69,7 @@ const ProductLineup = () => {
                   <BarChart3 size={13} /> เปรียบเทียบรุ่น
                 </Link>
                 <Link
-                  to="/gt-series"
+                  to="/product-advisor"
                   className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-primary/30 text-primary text-xs font-semibold hover:bg-primary/10 transition-colors"
                 >
                   <Search size={13} /> ช่วยเลือกรุ่น
