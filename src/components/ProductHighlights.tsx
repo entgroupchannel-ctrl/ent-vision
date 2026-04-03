@@ -36,10 +36,10 @@ const categories = [
   {
     title: "Panel PC",
     subtitle: "Industrial Touch Panel",
-    description: "จอสัมผัสอุตสาหกรรม GTG/GTY Series",
+    description: "จอสัมผัสอุตสาหกรรม GTG/GTY Series และ GK Series",
     icon: Monitor,
     href: "/panel-pc-gtg",
-    models: ["GTG Series", "Stainless Steel"],
+    models: ["GTG Series", "GK Series", "Stainless Steel"],
     image: imgPanel,
   },
   {
