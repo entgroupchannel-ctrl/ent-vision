@@ -67,29 +67,84 @@ const vmatrixFeatures = [
   "Chatting Room สื่อสารระหว่าง Admin กับ User",
 ];
 
-/* ═══════ Testimonials ═══════ */
-const testimonials = [
+/* ═══════ Success Stories — Case Studies ═══════ */
+const caseStudies = [
   {
-    quote: "เริ่มต้นจากแพ็คเกจ 10 เครื่อง ทดลองใช้ในห้อง Computer Lab ผลตอบรับดีมาก ขยายจนครบ 320 เครื่อง ครอบคลุมทุกห้องเรียน ประหยัดค่าไฟได้มหาศาล",
-    org: "โรงเรียนมัธยมขนาดใหญ่",
+    icon: Factory,
+    sector: "อุตสาหกรรมอาหาร",
+    tag: "Enterprise",
+    title: "ผู้ผลิตอาหารชั้นนำระดับประเทศ",
+    subtitle: "โรงงานผลิตอาหาร — ใช้งานต่อเนื่องมากกว่า 8 ปี",
+    quote: "ระบบ vCloudPoint ช่วยให้เราลดต้นทุน IT ได้อย่างมหาศาล ทั้งค่าอุปกรณ์ ค่าไฟ และค่าบำรุงรักษา ที่สำคัญคือเสถียรมาก ตลอดหลายปีที่ใช้งาน แทบไม่มีปัญหาเลย ตอนนี้ขยายไปครบทุกแผนกแล้ว",
+    stats: [
+      { val: "200+", label: "จุดใช้งาน" },
+      { val: "8+ ปี", label: "ใช้งานต่อเนื่อง" },
+      { val: "65%", label: "ลดต้นทุน IT" },
+    ],
+    highlights: ["QC & Production Line", "ระบบ ERP / SAP", "สภาพแวดล้อมฝุ่น ความร้อน ความชื้น", "ขยายระบบต่อเนื่องทุกปี"],
+    color: "from-amber-500/10 to-amber-500/5",
+    borderColor: "border-amber-500/20",
+    accentColor: "text-amber-500",
+  },
+  {
+    icon: GraduationCap,
     sector: "การศึกษา",
-    count: "320 เครื่อง",
-    color: "text-sky-400",
+    tag: "Education",
+    title: "มหาวิทยาลัยและโรงเรียนทั่วประเทศ",
+    subtitle: "ห้องปฏิบัติการคอมพิวเตอร์ — ใช้งานกว่า 10 ปี",
+    quote: "เริ่มใช้ vCloudPoint ตั้งแต่ปี 2015 จาก 1 ห้อง Lab ขยายจนครอบคลุมทุกห้องเรียน ทุกอาคาร นักศึกษาใช้งานได้เหมือน PC ปกติ แต่เราดูแลง่ายกว่าเดิมมาก ติดตั้ง Software ครั้งเดียว ใช้ได้ทุกเครื่อง",
+    stats: [
+      { val: "500+", label: "เครื่อง" },
+      { val: "10+ ปี", label: "ประสบการณ์" },
+      { val: "80%", label: "ประหยัดไฟ" },
+    ],
+    highlights: ["Computer Lab 20–40 เครื่องต่อห้อง", "ซอฟต์แวร์สอน Adobe, Office, Coding", "Broadcasting หน้าจอ — อาจารย์สอนได้ง่าย", "นักศึกษา 500+ คนใช้พร้อมกัน"],
+    color: "from-sky-500/10 to-sky-500/5",
+    borderColor: "border-sky-500/20",
+    accentColor: "text-sky-500",
   },
   {
-    quote: "ระบบ Shared Computing ช่วยลดต้นทุน IT ลงได้กว่า 60% สภาพแวดล้อมโรงงานที่มีฝุ่นและความร้อน Zero Client ก็ทำงานได้ดีมาก",
-    org: "โรงงานผลิตชิ้นส่วนอิเล็กทรอนิกส์",
-    sector: "อุตสาหกรรม",
-    count: "340 เครื่อง",
-    color: "text-amber-400",
+    icon: Factory,
+    sector: "โรงงานอุตสาหกรรม",
+    tag: "Manufacturing",
+    title: "โรงงานผลิตชิ้นส่วนอิเล็กทรอนิกส์",
+    subtitle: "สายการผลิต & QC Station — ทนทุกสภาพแวดล้อม",
+    quote: "สภาพแวดล้อมโรงงานมีทั้งฝุ่น ความร้อน ความชื้น PC ปกติพังบ่อย Zero Client ไม่มี Moving Part ไม่มีพัดลม ทำงานได้ตลอด 24/7 ตลอดหลายปีที่ผ่านมา เครื่องไม่เคยพัง",
+    stats: [
+      { val: "340+", label: "เครื่อง" },
+      { val: "24/7", label: "ทำงานต่อเนื่อง" },
+      { val: "0", label: "เครื่องพัง/ปี" },
+    ],
+    highlights: ["Data Entry ในไลน์ผลิต", "ระบบตรวจสอบคุณภาพ QC", "ทนฝุ่น ทนร้อน ไม่มี Moving Part", "ROI คืนทุนภายใน 6 เดือน"],
+    color: "from-emerald-500/10 to-emerald-500/5",
+    borderColor: "border-emerald-500/20",
+    accentColor: "text-emerald-500",
   },
   {
-    quote: "ขยายธุรกิจเร็วมาก vCloudPoint ช่วยให้ขยายง่าย เพียงเพิ่ม Zero Client ไม่ต้องลงทุน Server ใหม่ทุกครั้ง ระบบเสถียรมาก Uptime สูง",
-    org: "Call Center ชั้นนำ",
-    sector: "บริการ",
-    count: "280 seats",
-    color: "text-emerald-400",
+    icon: HeadphonesIcon,
+    sector: "Call Center",
+    tag: "Service",
+    title: "Call Center ระดับ 280 ที่นั่ง",
+    subtitle: "ศูนย์บริการลูกค้า — ลดต้นทุนต่อที่นั่ง",
+    quote: "ธุรกิจเราขยายตัวเร็ว vCloudPoint ช่วยให้เพิ่มที่นั่งได้ง่าย แค่เสียบ Zero Client เพิ่ม ไม่ต้องลงทุน Server ใหม่ทุกครั้ง ระบบเสถียร Uptime สูงมาก ค่าใช้จ่ายต่อ Seat ถูกกว่า PC แยกเกือบ 3 เท่า",
+    stats: [
+      { val: "280", label: "Seats" },
+      { val: "99.5%", label: "Uptime" },
+      { val: "3×", label: "ถูกกว่า PC" },
+    ],
+    highlights: ["ขยาย Seat ได้ทันที", "CRM + VoIP ทำงานลื่นไหล", "ไม่มีเสียงรบกวนจาก Fan", "Centralized Management"],
+    color: "from-violet-500/10 to-violet-500/5",
+    borderColor: "border-violet-500/20",
+    accentColor: "text-violet-500",
   },
+];
+
+/* ═══════ Track Record Stats ═══════ */
+const trackRecord = [
+  { icon: Calendar, val: "10+", label: "ปีที่ใช้งาน", desc: "ลูกค้ารายแรกของเราเริ่มใช้ตั้งแต่ปี 2015" },
+  { icon: Building2, val: "500+", label: "องค์กร", desc: "มหาวิทยาลัย โรงงาน สำนักงาน ทั่วประเทศ" },
+  { icon: Monitor, val: "5,000+", label: "เครื่องที่ติดตั้ง", desc: "ทุกเครื่องยังทำงานอยู่ อายุยาวนาน" },
+  { icon: TrendingUp, val: "95%", label: "ขยายระบบ", desc: "ลูกค้าที่ใช้แล้วเพิ่มจำนวนเครื่อง" },
 ];
 
 /* ═══════ Demo CTA Component ═══════ */
