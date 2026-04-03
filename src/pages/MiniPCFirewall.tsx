@@ -294,6 +294,11 @@ const ModelCard = ({ model, onQuote, selected, onToggleSelect }: { model: Firewa
 
         {/* Image */}
         <div className="relative h-36 mb-4 flex items-center justify-center bg-secondary/30 rounded-lg overflow-hidden">
+          {onToggleSelect && (
+            <button onClick={() => onToggleSelect(model.name)} className="absolute top-2 left-2 z-10">
+              <Checkbox checked={selected} className="h-5 w-5" />
+            </button>
+          )}
           <WishlistHeart
             item={{ id: model.id, name: model.name, category: "Mini PC Firewall", image: model.image, href: "/mini-pc-firewall", specs: model.tagline }}
             className="absolute top-2 right-2 z-10"
