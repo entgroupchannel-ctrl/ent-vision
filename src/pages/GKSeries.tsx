@@ -260,12 +260,12 @@ const gkModels: GKModel[] = [
     ],
     applications: ["HMI Dashboard", "Quality Control", "Factory Monitoring", "Self-Service Terminal", "Kiosk & POS", "Digital Signage"],
     gallery: [
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029118445.jpg",
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029155415.jpg",
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029188041.jpg",
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029228350.jpg",
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029258587.jpg",
-      "https://www.sharevdi.com/upload/portal/20250709/202507092029288272.jpg",
+      gk1506img1,
+      gk1506img2,
+      gk1506img3,
+      gk1506img4,
+      gk1506img5,
+      gk1506img6,
     ],
   },
   {
