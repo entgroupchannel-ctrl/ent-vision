@@ -4,7 +4,8 @@ import {
   ArrowLeft, Monitor, Cpu, Shield, Zap, Users, Server, ChevronDown,
   ExternalLink, Factory, Building2, GraduationCap, HeadphonesIcon,
   ShoppingCart, Stethoscope, DollarSign, Wrench, Lock, Leaf,
-  Play, Download, CheckCircle2, Star, ArrowRight, Phone
+  Play, Download, CheckCircle2, Star, ArrowRight, Phone,
+  Clock, TrendingUp, Award, Quote, MapPin, Calendar
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
