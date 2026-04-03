@@ -308,8 +308,21 @@ const HeroSection = () => {
             )}
           </div>
 
-          {/* CTA + Tags */}
-          <div className="flex flex-wrap items-center gap-3 mb-6 animate-fade-up" style={{ animationDelay: "0.35s" }}>
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 max-w-xl mb-6 animate-fade-up" style={{ animationDelay: "0.35s" }}>
+            {searchTags.slice(0, 6).map((tag) => (
+              <button
+                key={tag.label}
+                onClick={() => navigate(tag.href)}
+                className="px-3 py-1.5 rounded-full bg-white/10 text-white/80 text-xs border border-white/10 hover:bg-white/20 hover:border-white/30 transition-all backdrop-blur-sm"
+              >
+                {tag.label}
+              </button>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "0.4s" }}>
             <Link
               to="/product-advisor"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
@@ -322,19 +335,6 @@ const HeroSection = () => {
             >
               ปรึกษาผู้เชี่ยวชาญ
             </Link>
-          </div>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 max-w-xl animate-fade-up" style={{ animationDelay: "0.4s" }}>
-            {searchTags.slice(0, 6).map((tag) => (
-              <button
-                key={tag.label}
-                onClick={() => navigate(tag.href)}
-                className="px-3 py-1.5 rounded-full bg-white/10 text-white/80 text-xs border border-white/10 hover:bg-white/20 hover:border-white/30 transition-all backdrop-blur-sm"
-              >
-                {tag.label}
-              </button>
-            ))}
           </div>
 
           {/* Stats bar */}
