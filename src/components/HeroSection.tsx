@@ -70,22 +70,47 @@ const HeroSection = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
+  const [searchOpen, setSearchOpen] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Close menus on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
         setUserMenuOpen(false);
+      }
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  return (
-    <section className="relative min-h-screen flex flex-col">
-      {/* Full-bleed background image */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={heroIndustrial}
+  // Search logic
+  const searchResults = searchQuery.trim().length >= 1
+    ? searchIndex.filter((item) => {
+        const q = searchQuery.toLowerCase();
+        return item.label.toLowerCase().includes(q) || item.keywords.some((k) => k.includes(q));
+      }).slice(0, 8)
+    : [];
+
+  const handleSearch = () => {
+    if (searchResults.length > 0) {
+      navigate(searchResults[0].href);
+      setSearchQuery("");
+      setSearchOpen(false);
+    } else if (searchQuery.trim()) {
+      navigate(`/contact?q=${encodeURIComponent(searchQuery)}`);
+      setSearchQuery("");
+      setSearchOpen(false);
+    }
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") handleSearch();
+    if (e.key === "Escape") setSearchOpen(false);
+  };
           alt="Industrial Computing Production Line"
           className="w-full h-full object-cover"
           width={1920}
