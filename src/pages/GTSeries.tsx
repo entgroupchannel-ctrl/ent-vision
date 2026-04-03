@@ -12,6 +12,7 @@ import gt6000Banner from "@/assets/gt6000-banner.jpg";
 import gt7000Banner from "@/assets/gt7000-banner.jpg";
 import gt8000Banner from "@/assets/gt8000-banner.jpg";
 import gt9000Banner from "@/assets/gt9000-banner.jpg";
+import gt4500Banner from "@/assets/gt4500-banner.jpg";
 
 const features = [
   { icon: Thermometer, title: "ทนความร้อนสูง", desc: "ทำงานได้ในอุณหภูมิ 0–60°C อย่างต่อเนื่อง" },
