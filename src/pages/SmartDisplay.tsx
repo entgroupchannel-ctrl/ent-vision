@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { LineQRDialog } from "@/components/LineQRDialog";
-import QuoteButton from "@/components/QuoteButton";
+import QuoteDialog from "@/components/QuoteDialog";
 import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Sun, Shield, Monitor, Cpu, Phone, MessageCircle,
