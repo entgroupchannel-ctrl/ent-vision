@@ -83,10 +83,12 @@ const HeroSection = () => {
           <div className="w-px h-6 bg-white/10 mx-1" />
           <ThemeToggle />
           <button
-            onClick={() => setShowLineQR(true)}
-            className="px-5 py-2.5 rounded-lg bg-[hsl(142,70%,45%)] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+            onClick={handleAuthClick}
+            className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
           >
-            <span className="flex items-center gap-2"><MessageCircle size={16} /> LINE @entgroup</span>
+            <span className="flex items-center gap-2">
+              {user ? <><LogOut size={16} /> ออกจากระบบ</> : <><UserPlus size={16} /> สมัครสมาชิก</>}
+            </span>
           </button>
         </div>
         <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-white">
