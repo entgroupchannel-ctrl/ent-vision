@@ -87,14 +87,49 @@ const HeroSection = () => {
           )}
           <div className="w-px h-6 bg-white/10 mx-1" />
           <ThemeToggle />
-          <button
-            onClick={handleAuthClick}
-            className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
-          >
-            <span className="flex items-center gap-2">
-              {user ? <><LogOut size={16} /> ออกจากระบบ</> : <><UserPlus size={16} /> สมัครสมาชิก</>}
-            </span>
-          </button>
+          <div className="relative" ref={userMenuRef}>
+            <button
+              onClick={() => setUserMenuOpen(!userMenuOpen)}
+              className="p-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+              aria-label="บัญชีผู้ใช้"
+            >
+              <User size={20} />
+            </button>
+            {userMenuOpen && (
+              <div className="absolute right-0 top-full mt-2 w-48 rounded-xl bg-card border border-border shadow-xl py-1 z-50 animate-fade-in">
+                {user ? (
+                  <>
+                    <div className="px-4 py-2 text-xs text-muted-foreground border-b border-border truncate">
+                      {user.email}
+                    </div>
+                    <button
+                      onClick={() => { signOut(); setUserMenuOpen(false); }}
+                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                    >
+                      <LogOut size={14} /> ออกจากระบบ
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/admin-login"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                    >
+                      <LogIn size={14} /> เข้าสู่ระบบ
+                    </Link>
+                    <Link
+                      to="/member-register"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                    >
+                      <UserPlus size={14} /> สมัครสมาชิก
+                    </Link>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
         </div>
         <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-white">
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
