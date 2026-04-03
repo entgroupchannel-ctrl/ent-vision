@@ -154,7 +154,7 @@ const ProductHighlights = () => {
                   width={640}
                   height={512}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
               </div>
 
               <div className="p-5">
