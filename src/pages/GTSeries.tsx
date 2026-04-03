@@ -3256,43 +3256,48 @@ const GTSeries = () => {
               {/* GT4500 Price Table */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT4500 Price List — รับประกัน 1 ปี</h3>
-                  <p className="text-sm text-muted-foreground mt-1">ถูกกว่าตลาด 20-30% สเปคและความทนทานเทียบเท่าหรือดีกว่า</p>
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT4500 Price List (อัปเดตตามหน้า GT4500)</h3>
+                  <p className="text-sm text-muted-foreground mt-1">ราคาขึ้นกับ CPU / RAM / SSD / WiFi และออปชันเสริม — ใช้ตารางนี้เพื่อเทียบและเลือกสเปกได้เร็ว</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-muted/50">
-                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
-                        <th className="text-left p-3 font-semibold text-foreground">RAM</th>
-                        <th className="text-left p-3 font-semibold text-foreground">SSD</th>
-                        <th className="text-right p-3 font-semibold text-foreground">ราคา (฿)</th>
+                        <th className="text-left p-3 font-semibold text-foreground min-w-[170px]">กลุ่ม CPU</th>
+                        <th className="text-left p-3 font-semibold text-foreground min-w-[280px]">สเปกตัวอย่าง (RAM + SSD + WiFi)</th>
+                        <th className="text-right p-3 font-semibold text-foreground min-w-[120px]">ราคา (฿)</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border">
                       <tr className="hover:bg-muted/30 transition-colors">
-                        <td className="p-3 text-muted-foreground">Intel Core i3-6006U</td>
-                        <td className="p-3 text-muted-foreground">4 GB DDR4</td>
-                        <td className="p-3 text-muted-foreground">256 GB</td>
-                        <td className="p-3 text-right font-bold text-foreground">21,900</td>
+                        <td className="p-3 text-muted-foreground font-medium">i3-7100U</td>
+                        <td className="p-3 text-muted-foreground">4GB + 128GB / 4GB + 256GB / 8GB + 128GB / 8GB + 256GB</td>
+                        <td className="p-3 text-right font-bold text-foreground">15,990–16,990</td>
+                      </tr>
+                      <tr className="hover:bg-muted/30 transition-colors">
+                        <td className="p-3 text-muted-foreground font-medium">i5-7267U / i5-7300U</td>
+                        <td className="p-3 text-muted-foreground">4GB + 128GB / 8GB + 128GB / 4GB + 256GB / 8GB + 256GB</td>
+                        <td className="p-3 text-right font-bold text-foreground">19,990–20,990</td>
                       </tr>
                       <tr className="hover:bg-muted/30 transition-colors bg-primary/5">
-                        <td className="p-3 text-muted-foreground">Intel Core i5-7260U <span className="text-xs text-primary font-bold">ยอดนิยม</span></td>
-                        <td className="p-3 text-muted-foreground">4 GB DDR4</td>
-                        <td className="p-3 text-muted-foreground">256 GB</td>
-                        <td className="p-3 text-right font-bold text-foreground">22,900</td>
+                        <td className="p-3 text-muted-foreground font-medium">i5-8250U <span className="text-xs text-primary font-bold">ยอดนิยม</span></td>
+                        <td className="p-3 text-muted-foreground">4GB + 128GB / 4GB + 256GB / 8GB + 128GB / 8GB + 256GB</td>
+                        <td className="p-3 text-right font-bold text-foreground">20,990–21,990</td>
                       </tr>
                       <tr className="hover:bg-muted/30 transition-colors">
-                        <td className="p-3 text-muted-foreground">Intel Core i5-8250U</td>
-                        <td className="p-3 text-muted-foreground">4 GB DDR4</td>
-                        <td className="p-3 text-muted-foreground">256 GB</td>
-                        <td className="p-3 text-right font-bold text-foreground">23,900</td>
+                        <td className="p-3 text-muted-foreground font-medium">i7-7510U</td>
+                        <td className="p-3 text-muted-foreground">4GB + 128GB / 4GB + 256GB / 8GB + 128GB / 8GB + 256GB</td>
+                        <td className="p-3 text-right font-bold text-foreground">21,990–22,990</td>
                       </tr>
                       <tr className="hover:bg-muted/30 transition-colors">
-                        <td className="p-3 text-muted-foreground">Intel Core i7-8550U</td>
-                        <td className="p-3 text-muted-foreground">4 GB DDR4</td>
-                        <td className="p-3 text-muted-foreground">256 GB</td>
-                        <td className="p-3 text-right font-bold text-foreground">25,900</td>
+                        <td className="p-3 text-muted-foreground font-medium">i7-8550U</td>
+                        <td className="p-3 text-muted-foreground">4GB + 128GB / 4GB + 256GB / 8GB + 128GB / 8GB + 256GB</td>
+                        <td className="p-3 text-right font-bold text-foreground">24,990–25,990</td>
+                      </tr>
+                      <tr className="hover:bg-muted/30 transition-colors">
+                        <td className="p-3 text-muted-foreground font-medium">i7-10510U</td>
+                        <td className="p-3 text-muted-foreground">4GB + 128GB (เริ่มต้น)</td>
+                        <td className="p-3 text-right font-bold text-foreground">25,990</td>
                       </tr>
                     </tbody>
                   </table>
@@ -3302,23 +3307,22 @@ const GTSeries = () => {
               {/* Options Table */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">🛒 Options เสริม</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground">🛒 Windows License / Options</h3>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <tbody className="divide-y divide-border">
                       <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 10 Pro OEM</td><td className="p-3 text-right font-bold text-foreground">฿3,950</td></tr>
                       <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 11 Pro OEM</td><td className="p-3 text-right font-bold text-foreground">฿4,590</td></tr>
-                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 10 IOT</td><td className="p-3 text-right font-bold text-foreground">฿3,950</td></tr>
-                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 11 IOT</td><td className="p-3 text-right font-bold text-foreground">฿4,590</td></tr>
-                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Upgrade WiFi ABGN/AC → WiFi 6</td><td className="p-3 text-right font-bold text-foreground">สอบถาม</td></tr>
-                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">4G SIM Card Module</td><td className="p-3 text-right font-bold text-foreground">สอบถาม</td></tr>
-                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">5G SIM Card Module</td><td className="p-3 text-right font-bold text-foreground">สอบถาม</td></tr>
-                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">ซื้อประกันเพิ่ม ปีที่ 2</td><td className="p-3 text-right font-bold text-foreground">15%</td></tr>
-                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">ซื้อประกันเพิ่ม ปีที่ 3</td><td className="p-3 text-right font-bold text-foreground">20%</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 10 IoT</td><td className="p-3 text-right font-bold text-foreground">฿3,950</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 11 IoT</td><td className="p-3 text-right font-bold text-foreground">฿4,590</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">WiFi Module / WiFi 6 Upgrade</td><td className="p-3 text-right font-bold text-foreground">สอบถาม</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">4G / 5G SIM Module</td><td className="p-3 text-right font-bold text-foreground">สอบถาม</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">ประกันเพิ่มปีที่ 2 / 3</td><td className="p-3 text-right font-bold text-foreground">15% / 20%</td></tr>
                     </tbody>
                   </table>
                 </div>
+                <p className="px-5 py-3 text-xs text-muted-foreground border-t border-border">*ข้อมูลราคาอ้างอิงจากตาราง GT4500 ล่าสุดบนหน้าเว็บไซต์และอาจมีการเปลี่ยนแปลงตามสเปกที่เลือก</p>
               </div>
 
               {/* Gallery */}
