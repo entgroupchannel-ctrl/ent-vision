@@ -13,6 +13,18 @@ import gt7000Banner from "@/assets/gt7000-banner.jpg";
 import gt8000Banner from "@/assets/gt8000-banner.jpg";
 import gt9000Banner from "@/assets/gt9000-banner.jpg";
 import gt4500Banner from "@/assets/gt4500-banner.jpg";
+import gt1000Product from "@/assets/gt1000-product.jpg";
+import gt1200Product from "@/assets/gt1200-product.jpg";
+import gt1400Product from "@/assets/gt1400-product.jpg";
+import gt2000Product from "@/assets/gt2000-product.jpg";
+import gt3000Product from "@/assets/gt3000-product.jpg";
+import gt4000Product from "@/assets/gt4000-product.jpg";
+import gt4500Product from "@/assets/gt4500-product.jpg";
+import gt5000Product from "@/assets/gt5000-product.jpg";
+import gt6000Product from "@/assets/gt6000-product.jpg";
+import gt7000Product from "@/assets/gt7000-product.jpg";
+import gt8000Product from "@/assets/gt8000-product.jpg";
+import gt9000Product from "@/assets/gt9000-product.jpg";
 
 const features = [
   { icon: Thermometer, title: "ทนความร้อนสูง", desc: "ทำงานได้ในอุณหภูมิ 0–60°C อย่างต่อเนื่อง" },
