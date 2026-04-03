@@ -6,6 +6,7 @@ import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import LineQRButton from "@/components/LineQRButton";
 import QuoteDialog from "@/components/QuoteDialog";
+import DemoRequestDialog from "@/components/DemoRequestDialog";
 import {
   ArrowLeft, Monitor, Cpu, Shield, Zap, Users, Server, ChevronDown,
   ExternalLink, Factory, Building2, GraduationCap, HeadphonesIcon,
