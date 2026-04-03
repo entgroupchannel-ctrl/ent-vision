@@ -744,9 +744,9 @@ const MiniPCFirewall = () => {
         collectionName="Mini PC Firewall pfSense OPNsense"
         collectionDescription="Mini PC Firewall สำหรับ pfSense OPNsense VPN Gateway รองรับ 2-6 LAN Ports"
         collectionUrl="/mini-pc-firewall"
-        products={models.map(m => ({ name: m.name, description: m.tagline, category: "Mini PC Firewall" }))}
+        products={models.map(m => ({ name: m.name, description: m.tagline, category: "Mini PC Firewall" }))}      />
+
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "Mini PC Firewall", path: "/mini-pc-firewall" }]} />
-      />
       {/* Sticky Nav */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 h-16">

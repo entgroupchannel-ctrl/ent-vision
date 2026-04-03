@@ -160,9 +160,9 @@ const Cabinets = () => {
         collectionName="ตู้ Rack & Cabinet อุตสาหกรรม"
         collectionDescription="ตู้ Rack, ตู้ Cabinet อุตสาหกรรม สั่งผลิตขนาดพิเศษ วัสดุ Steel/SUS304/SUS316 มาตรฐาน IP65"
         collectionUrl="/cabinets"
-        products={[{ name: "Custom Industrial Cabinet", category: "ตู้ Rack & Cabinet" }]}
+        products={[{ name: "Custom Industrial Cabinet", category: "ตู้ Rack & Cabinet" }]}      />
+
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "ตู้ Rack & Cabinet", path: "/cabinets" }]} />
-      />
       <div className="relative h-48 md:h-64 overflow-hidden">
         <img src={bannerCabinets} alt="ตู้พาเนลพีซีเกรดอุตสาหกรรม" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />

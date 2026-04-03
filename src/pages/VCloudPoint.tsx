@@ -212,9 +212,9 @@ const VCloudPoint = () => {
         collectionName="vCloudPoint Zero Client"
         collectionDescription="vCloudPoint Zero Client ลดต้นทุนฮาร์ดแวร์ ประหยัดไฟ 80% ใช้คอมเครื่องเดียวแชร์ได้หลายจุด"
         collectionUrl="/vcloudpoint"
-        products={[{ name: "vCloudPoint S100", description: "Zero Client for vMatrix", category: "Zero Client" }]}
+        products={[{ name: "vCloudPoint S100", description: "Zero Client for vMatrix", category: "Zero Client" }]}      />
+
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "vCloudPoint", path: "/vcloudpoint" }]} />
-      />
       {/* Sticky Nav */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 h-16">

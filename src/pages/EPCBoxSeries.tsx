@@ -546,9 +546,9 @@ const EPCBoxSeries = () => {
         collectionName="EPC Box Series Fanless Modular Industrial PC"
         collectionDescription="EPC Box Series คอมพิวเตอร์อุตสาหกรรม Fanless แบบ Modular สำหรับโรงงานและ IoT"
         collectionUrl="/epc-box-series"
-        products={priceList.map(m => ({ name: m.model, price: m.price, description: m.spec, category: "Fanless Modular Industrial PC" }))}
+        products={priceList.map(m => ({ name: m.model, price: m.price, description: m.spec, category: "Fanless Modular Industrial PC" }))}      />
+
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "EPC Box Series", path: "/epc-box-series" }]} />
-      />
       {/* Nav */}
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 py-4">

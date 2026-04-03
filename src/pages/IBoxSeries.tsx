@@ -142,9 +142,9 @@ const IBoxSeries = () => {
         collectionName="iBox Series Embedded Fanless Industrial PC"
         collectionDescription="iBox Series คอมพิวเตอร์อุตสาหกรรม Fanless ขนาดกะทัดรัด สำหรับ Edge Computing, IoT Gateway, Digital Signage"
         collectionUrl="/ibox-series"
-        products={iboxModels.map(m => ({ name: m.name, image: m.image, description: m.cpu, category: "Embedded Fanless Industrial PC" }))}
+        products={iboxModels.map(m => ({ name: m.name, image: m.image, description: m.cpu, category: "Embedded Fanless Industrial PC" }))}      />
+
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "iBox Series", path: "/ibox-series" }]} />
-      />
       {/* Banner */}
       <div className="relative h-48 md:h-64 overflow-hidden">
         <img src={bannerIBox} alt="iBox Series — Industrial Mini PC" className="w-full h-full object-cover" />

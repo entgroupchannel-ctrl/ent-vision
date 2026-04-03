@@ -171,9 +171,9 @@ const SmartDisplay = () => {
         collectionName="Smart Display, KIOSK & Digital Signage"
         collectionDescription="จอ Smart Display, ตู้ KIOSK สำเร็จรูป และ Digital Signage สำหรับร้านค้า โรงแรม โรงพยาบาล สำนักงาน"
         collectionUrl="/smart-display"
-        products={fpmTouchMonitors.map(m => ({ name: m.model, price: m.price, description: m.config, category: "Smart Display & Touch Monitor" }))}
+        products={fpmTouchMonitors.map(m => ({ name: m.model, price: m.price, description: m.config, category: "Smart Display & Touch Monitor" }))}      />
+
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "Smart Display", path: "/smart-display" }]} />
-      />
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">

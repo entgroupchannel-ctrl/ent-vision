@@ -382,7 +382,7 @@ const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
         {/* Image side */}
         <div className={`lg:col-span-2 relative bg-secondary/30 p-8 flex flex-col items-center justify-center ${isReversed ? "lg:order-2" : ""}`}>
           <div className="absolute top-4 left-4 flex items-center gap-2">
-      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "GK Series", path: "/gk-series" }]} />
+      
             <span className="px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
               {model.screenSize}
             </span>
@@ -623,6 +623,7 @@ const GKSeries = () => {
         collectionUrl="/gk-series"
         products={gkModels.map(m => ({ name: m.name, price: m.priceTable?.[0]?.configs?.[0]?.price, image: m.image, description: `${m.screenSize} ${m.tagline}`, category: "Industrial Panel PC" }))}
       />
+      <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "GK Series", path: "/gk-series" }]} />
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">

@@ -336,9 +336,9 @@ const EPCSeries = () => {
         collectionName="EPC Series Industrial Panel PC"
         collectionDescription="Panel PC อุตสาหกรรม จอสัมผัส IP65 Fanless ขนาด 10-21 นิ้ว สำหรับโรงงาน POS SCADA"
         collectionUrl="/epc-series"
-        products={priceListSquare.map(m => ({ name: m.model, price: m.price, description: m.config, category: "Industrial Panel PC" }))}
+        products={priceListSquare.map(m => ({ name: m.model, price: m.price, description: m.config, category: "Industrial Panel PC" }))}      />
+
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "EPC Series", path: "/epc-series" }]} />
-      />
       {/* Hero */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/5" />

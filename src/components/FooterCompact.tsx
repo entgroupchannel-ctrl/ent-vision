@@ -33,8 +33,8 @@ const FooterCompact = () => {
                 <a href="tel:020456104" className="flex items-center gap-1 hover:text-primary transition-colors">
                   <Phone size={10} /> 02-045-6104
                 </a>
-                <a href="https://www.entgroup.co.th" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-primary transition-colors">
-                  <MapPin size={10} /> entgroup.co.th
+                <a href="https://maps.app.goo.gl/3NcEVup5QNTS88xj6" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-primary transition-colors">
+                  <MapPin size={10} /> แผนที่
                 </a>
               </div>
             </div>
