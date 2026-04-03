@@ -337,8 +337,8 @@ const MegaMenu = ({
                         className="group col-span-1 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/15 p-3 flex flex-col justify-center hover:border-primary/30 transition-all"
                       >
                         <BannerIcon size={18} className="text-primary mb-2" />
-                        <p className="text-xs font-bold text-white mb-1">{banner.title}</p>
-                        <p className="text-[10px] text-white/40 leading-relaxed mb-2">{banner.desc}</p>
+                        <p className="text-xs font-bold text-foreground mb-1">{banner.title}</p>
+                        <p className="text-[10px] text-muted-foreground leading-relaxed mb-2">{banner.desc}</p>
                         <span className="text-[10px] text-primary font-semibold group-hover:underline flex items-center gap-1">
                           เกี่ยวกับเรา <ArrowRight size={9} />
                         </span>
