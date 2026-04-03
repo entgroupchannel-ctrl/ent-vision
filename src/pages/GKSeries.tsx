@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
+import QuoteButton from "@/components/QuoteButton";
 
 /* ─── Concept: "One Body, Multiple Brains" ─── */
 const concepts = [
