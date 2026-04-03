@@ -10,10 +10,12 @@ import {
   Stethoscope, Building, Globe, Landmark, MonitorSmartphone,
   Filter, X, Search, FileText
 } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 
 /* ═══════════════════════════════════════════
    TIER SYSTEM — like GT Series
@@ -264,12 +266,12 @@ const CollapsibleSection = ({ title, children, defaultOpen = false }: { title: s
   );
 };
 
-const ModelCard = ({ model, onQuote }: { model: FirewallModel; onQuote?: (name: string) => void }) => {
+const ModelCard = ({ model, onQuote, selected, onToggleSelect }: { model: FirewallModel; onQuote?: (name: string) => void; selected?: boolean; onToggleSelect?: (name: string) => void }) => {
   const tier = tierMeta[model.tier];
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className={`card-surface rounded-xl overflow-hidden border ${tier.border} hover:shadow-lg transition-all duration-300`}>
+    <div className={`card-surface rounded-xl overflow-hidden border ${tier.border} transition-all duration-300 ${selected ? "ring-2 ring-primary" : "hover:shadow-lg"}`}>
       {/* Header */}
       <div className="p-5">
         <div className="flex items-start justify-between mb-3">
@@ -292,6 +294,11 @@ const ModelCard = ({ model, onQuote }: { model: FirewallModel; onQuote?: (name: 
 
         {/* Image */}
         <div className="relative h-36 mb-4 flex items-center justify-center bg-secondary/30 rounded-lg overflow-hidden">
+          {onToggleSelect && (
+            <button onClick={() => onToggleSelect(model.name)} className="absolute top-2 left-2 z-10">
+              <Checkbox checked={selected} className="h-5 w-5" />
+            </button>
+          )}
           <WishlistHeart
             item={{ id: model.id, name: model.name, category: "Mini PC Firewall", image: model.image, href: "/mini-pc-firewall", specs: model.tagline }}
             className="absolute top-2 right-2 z-10"
@@ -742,6 +749,7 @@ const FirewallComparisonTable = () => {
 const MiniPCFirewall = () => {
   const [activeTier, setActiveTier] = useState<Tier | "all">("all");
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
   const filtered = activeTier === "all" ? models : models.filter((m) => m.tier === activeTier);
 
   return (
@@ -1039,6 +1047,7 @@ const MiniPCFirewall = () => {
         productName={quoteProduct || ""}
         productCategory="Mini PC Firewall"
       />
+      <MultiSelectQuoteBar selectedProducts={selectedProducts} onClear={clearSelection} productCategory="Mini PC Firewall" />
       <FooterCompact />
     </div>
   );

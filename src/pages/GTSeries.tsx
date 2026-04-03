@@ -5,7 +5,9 @@ import WishlistHeart from "@/components/WishlistHeart";
 import { useState, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import QuoteDialog from "@/components/QuoteDialog";
+import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import { LineQRDialog } from "@/components/LineQRDialog";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
@@ -587,6 +589,7 @@ const GTSeries = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "overview");
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
   const [showLineQR, setShowLineQR] = useState(false);
 
   const handleTabChange = (tab: string) => {
@@ -811,9 +814,9 @@ const GTSeries = () => {
                   <button
                     key={model.name}
                     onClick={() => model.tab ? handleTabChange(model.tab) : undefined}
-                    className={`group card-surface overflow-hidden hover:border-primary/30 transition-all hover:-translate-y-1 text-left cursor-pointer`}
+                    className={`group card-surface overflow-hidden hover:border-primary/30 transition-all hover:-translate-y-1 text-left cursor-pointer ${selectedProducts.has(model.name) ? "ring-2 ring-primary border-primary/50" : ""}`}
                   >
-                    <ModelCard model={model} onQuote={setQuoteProduct} />
+                    <ModelCard model={model} onQuote={setQuoteProduct} selected={selectedProducts.has(model.name)} onToggleSelect={toggleSelect} />
                   </button>
                 ))}
               </div>
@@ -4424,6 +4427,7 @@ const GTSeries = () => {
         productCategory="GT Series — Mini PC"
       />
       <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
+      <MultiSelectQuoteBar selectedProducts={selectedProducts} onClear={clearSelection} productCategory="GT Series — Mini PC" />
     </div>
   );
 };
@@ -4431,9 +4435,17 @@ const GTSeries = () => {
 /* M
 
       <FooterCompact />odel Card Component */
-const ModelCard = ({ model, onQuote }: { model: typeof gtModels[0]; onQuote?: (name: string) => void }) => (
+const ModelCard = ({ model, onQuote, selected, onToggleSelect }: { model: typeof gtModels[0]; onQuote?: (name: string) => void; selected?: boolean; onToggleSelect?: (name: string) => void }) => (
   <>
     <div className="relative bg-secondary/50 p-6 flex items-center justify-center min-h-[200px]">
+      {onToggleSelect && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onToggleSelect(model.name); }}
+          className="absolute top-3 left-12 z-10"
+        >
+          <Checkbox checked={selected} className="h-5 w-5" />
+        </button>
+      )}
       {model.badge ? (
         <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary text-primary-foreground text-[11px] font-bold border border-primary/20 animate-pulse">
           {model.highlight}
