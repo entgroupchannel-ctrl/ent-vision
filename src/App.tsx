@@ -16,6 +16,7 @@ import RuggedTablet from "./pages/RuggedTablet.tsx";
 import GKSeries from "./pages/GKSeries.tsx";
 import PanelPCGTG from "./pages/PanelPCGTG.tsx";
 import SmartDisplay from "./pages/SmartDisplay.tsx";
+import Promotions from "./pages/Promotions.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/rugged-tablet" element={<RuggedTablet />} />
             <Route path="/panel-pc-gtg" element={<PanelPCGTG />} />
             <Route path="/smart-display" element={<SmartDisplay />} />
+            <Route path="/promotions" element={<Promotions />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
