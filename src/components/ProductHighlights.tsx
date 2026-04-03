@@ -78,6 +78,16 @@ const categories = [
     models: ["EPC Box", "GK Series", "Mini PC"],
     image: "https://static.wixstatic.com/media/0597a3_47b98b7d2cc34a1da2b4e89e4499834d~mv2.png/v1/fill/w_204,h_229,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-04%20at%2010_23_10.png",
   },
+  {
+    title: "Mini PC Firewall",
+    subtitle: "Network Security Appliance",
+    description: "Firewall สำหรับทุกขนาดองค์กร pfSense / OPNsense Ready",
+    icon: Shield,
+    href: "/minipc-firewall",
+    models: ["GT194L", "GT196L", "IPC068", "IPC090"],
+    badge: "Hot",
+    image: "https://static.wixstatic.com/media/0597a3_6ebc77045f9a4292bb485a4fa91ac3a2~mv2.png/v1/fill/w_211,h_155,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-15%20at%2012_02_13.png",
+  },
 ];
 
 const ProductHighlights = () => {
