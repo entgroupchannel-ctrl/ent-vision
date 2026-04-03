@@ -9,6 +9,9 @@ import { Badge } from "@/components/ui/badge";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import bannerCabinets from "@/assets/banner-cabinets.jpg";
+import cabinetGallery4 from "@/assets/cabinet-gallery-4.jpg";
+import cabinetGallery5 from "@/assets/cabinet-gallery-5.jpg";
+import cabinetGallery6 from "@/assets/cabinet-gallery-6.jpg";
 
 /* ═══════ Product Data ═══════ */
 const cabinetModels = [
