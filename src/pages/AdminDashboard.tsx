@@ -4,13 +4,13 @@ import {
   ArrowLeft, Users, FileText, Mail, TrendingUp,
   Filter, RefreshCw, Eye, Clock, CheckCircle, XCircle,
   Star, Phone, Building2, MessageSquare, LogOut, Shield, Download,
-  CalendarClock, Hash, Wallet,
+  CalendarClock, Hash, Wallet, Code2, Cloud,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 
-type Tab = "contacts" | "quotes" | "subscribers" | "chatleads";
+type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -64,22 +64,25 @@ const AdminDashboard = () => {
   const [quotes, setQuotes] = useState<any[]>([]);
   const [subscribers, setSubscribers] = useState<any[]>([]);
   const [chatLeads, setChatLeads] = useState<any[]>([]);
+  const [softwareInquiries, setSoftwareInquiries] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<any>(null);
 
   const fetchData = async () => {
     setLoading(true);
-    const [c, q, s, cl] = await Promise.all([
+    const [c, q, s, cl, sw] = await Promise.all([
       (supabase.from as any)("contact_submissions").select("*").order("created_at", { ascending: false }),
       (supabase.from as any)("quote_requests").select("*").order("created_at", { ascending: false }),
       (supabase.from as any)("subscribers").select("*").order("created_at", { ascending: false }),
       (supabase.from as any)("chat_leads").select("*").order("created_at", { ascending: false }),
+      (supabase.from as any)("software_inquiries").select("*").order("created_at", { ascending: false }),
     ]);
     if (c.data) setContacts(c.data);
     if (q.data) setQuotes(q.data);
     if (s.data) setSubscribers(s.data);
     if (cl.data) setChatLeads(cl.data);
+    if (sw.data) setSoftwareInquiries(sw.data);
     setLoading(false);
   };
 
@@ -185,6 +188,7 @@ const AdminDashboard = () => {
           {([
             { id: "contacts" as Tab, label: "ติดต่อเข้ามา", count: contacts.length },
             { id: "quotes" as Tab, label: "ใบเสนอราคา", count: quotes.length },
+            { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", count: softwareInquiries.length },
             { id: "chatleads" as Tab, label: "AI Chat Leads", count: chatLeads.length },
             { id: "subscribers" as Tab, label: "สมาชิก", count: subscribers.length },
           ] as const).map((t) => (
@@ -341,6 +345,47 @@ const AdminDashboard = () => {
                   <div className="flex items-center gap-3 text-[10px] text-muted-foreground/70">
                     <span>{item.email}</span>
                     {item.phone && <span className="flex items-center gap-0.5"><Phone size={8} /> {item.phone}</span>}
+                    <span className="flex items-center gap-0.5"><Clock size={8} /> {formatDate(item.created_at)}</span>
+                  </div>
+                </button>
+              ))
+            ) : tab === "software" ? (
+              softwareInquiries.length === 0 ? (
+                <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มีการสอบถามซอฟต์แวร์</div>
+              ) : softwareInquiries.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setSelectedItem({ ...item, _type: "software" })}
+                  className={`w-full text-left card-surface rounded-xl p-4 hover:border-primary/30 transition-colors ${
+                    selectedItem?.id === item.id ? "border-primary/50 ring-1 ring-primary/20" : ""
+                  }`}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <span className="text-sm font-bold text-foreground">{item.name}</span>
+                      {item.company && (
+                        <span className="ml-2 text-xs text-muted-foreground inline-flex items-center gap-1">
+                          <Building2 size={10} /> {item.company}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${
+                        item.service_type === "saas" ? "bg-blue-500/10 text-blue-400 border-blue-500/20" : "bg-purple-500/10 text-purple-400 border-purple-500/20"
+                      }`}>
+                        {item.service_type === "saas" ? "SaaS" : "พัฒนาเฉพาะ"}
+                      </span>
+                      <LeadScoreBadge score={item.lead_score} />
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${statusColors[item.status] || statusColors.new}`}>
+                        {statusLabels[item.status] || item.status}
+                      </span>
+                    </div>
+                  </div>
+                  {item.current_problems && <p className="text-xs text-muted-foreground line-clamp-1 mb-1">{item.current_problems}</p>}
+                  <div className="flex items-center gap-3 text-[10px] text-muted-foreground/70">
+                    <span>{item.email}</span>
+                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={8} /> {item.phone}</span>}
+                    {item.budget_range && <span className="flex items-center gap-0.5"><Wallet size={8} /> {item.budget_range}</span>}
                     <span className="flex items-center gap-0.5"><Clock size={8} /> {formatDate(item.created_at)}</span>
                   </div>
                 </button>
@@ -532,6 +577,43 @@ const AdminDashboard = () => {
                     </>
                   )}
 
+                  {selectedItem._type === "software" && (
+                    <>
+                      <div>
+                        <span className="text-muted-foreground">ประเภทบริการ:</span>
+                        <span className={`ml-2 inline-flex items-center gap-1 font-medium ${
+                          selectedItem.service_type === "saas" ? "text-blue-400" : "text-purple-400"
+                        }`}>
+                          {selectedItem.service_type === "saas" ? <><Cloud size={12} /> SaaS</> : <><Code2 size={12} /> พัฒนาเฉพาะ</>}
+                        </span>
+                      </div>
+                      {selectedItem.budget_range && (
+                        <div>
+                          <span className="text-muted-foreground">งบประมาณ:</span>
+                          <span className="ml-2 text-foreground">{selectedItem.budget_range}</span>
+                        </div>
+                      )}
+                      {selectedItem.timeline && (
+                        <div>
+                          <span className="text-muted-foreground">ระยะเวลา:</span>
+                          <span className="ml-2 text-foreground">{selectedItem.timeline}</span>
+                        </div>
+                      )}
+                      {selectedItem.current_problems && (
+                        <div>
+                          <span className="text-muted-foreground block mb-1">ปัญหาปัจจุบัน:</span>
+                          <p className="text-foreground bg-muted/30 rounded-lg p-3 text-xs leading-relaxed">{selectedItem.current_problems}</p>
+                        </div>
+                      )}
+                      {selectedItem.requirements && (
+                        <div>
+                          <span className="text-muted-foreground block mb-1">ความต้องการ:</span>
+                          <p className="text-foreground bg-muted/30 rounded-lg p-3 text-xs leading-relaxed">{selectedItem.requirements}</p>
+                        </div>
+                      )}
+                    </>
+                  )}
+
                   {selectedItem._type === "chatlead" && (
                     <>
                       {selectedItem.interest && (
@@ -574,7 +656,8 @@ const AdminDashboard = () => {
                       value={selectedItem.status}
                       onChange={(e) => {
                         const table = selectedItem._type === "contact" ? "contact_submissions" 
-                          : selectedItem._type === "chatlead" ? "chat_leads" 
+                          : selectedItem._type === "chatlead" ? "chat_leads"
+                          : selectedItem._type === "software" ? "software_inquiries"
                           : "quote_requests";
                         updateStatus(table, selectedItem.id, e.target.value);
                       }}

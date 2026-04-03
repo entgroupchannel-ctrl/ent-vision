@@ -224,6 +224,66 @@ export type Database = {
         }
         Relationships: []
       }
+      software_inquiries: {
+        Row: {
+          budget_range: string | null
+          company: string | null
+          created_at: string
+          current_problems: string | null
+          email: string
+          id: string
+          lead_score: number
+          line_id: string | null
+          name: string
+          notes: string | null
+          phone: string | null
+          requirements: string | null
+          service_type: string
+          status: string
+          timeline: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          budget_range?: string | null
+          company?: string | null
+          created_at?: string
+          current_problems?: string | null
+          email: string
+          id?: string
+          lead_score?: number
+          line_id?: string | null
+          name: string
+          notes?: string | null
+          phone?: string | null
+          requirements?: string | null
+          service_type?: string
+          status?: string
+          timeline?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          budget_range?: string | null
+          company?: string | null
+          created_at?: string
+          current_problems?: string | null
+          email?: string
+          id?: string
+          lead_score?: number
+          line_id?: string | null
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          requirements?: string | null
+          service_type?: string
+          status?: string
+          timeline?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       subscribers: {
         Row: {
           created_at: string
