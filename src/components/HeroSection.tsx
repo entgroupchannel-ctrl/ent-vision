@@ -142,12 +142,31 @@ const HeroSection = () => {
           <MobileMegaMenu onNavigate={() => setMobileMenuOpen(false)} />
           <div className="flex items-center justify-between mt-4 gap-3 pt-4 border-t border-border">
             <ThemeToggle />
-            <button
-              onClick={() => { handleAuthClick(); setMobileMenuOpen(false); }}
-              className="flex-1 text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
-            >
-              {user ? "ออกจากระบบ" : "สมัครสมาชิก"}
-            </button>
+            {user ? (
+              <button
+                onClick={() => { signOut(); setMobileMenuOpen(false); }}
+                className="flex-1 text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
+              >
+                ออกจากระบบ
+              </button>
+            ) : (
+              <div className="flex-1 flex gap-2">
+                <Link
+                  to="/admin-login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex-1 text-center px-3 py-2.5 rounded-lg border border-border text-foreground text-sm font-semibold hover:bg-muted transition-colors"
+                >
+                  เข้าสู่ระบบ
+                </Link>
+                <Link
+                  to="/member-register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex-1 text-center px-3 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
+                >
+                  สมัครสมาชิก
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       )}
