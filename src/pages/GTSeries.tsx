@@ -2119,23 +2119,23 @@ const GTSeries = () => {
                 <div className="lg:col-span-3 space-y-6">
                   <div>
                     <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-3">
-                      ดีไซน์ใหม่ · สีดำ · Fanless · Intel Core i3
+                      Gen 8/10 · DDR4 64GB · Triple Display · NVMe
                     </span>
                     <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
                       GT<span className="text-gradient">6000</span>
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      GT6000 ปรับโฉมใหม่ ตัวเครื่องสีดำดีไซน์สวยงาม พร้อม CPU Intel Core i3-5005U
-                      ระบบ Fanless ไม่มีพัดลม เงียบสนิท ทำงาน 24/7 รองรับ Windows 8/10/11
-                      เหมาะสำหรับโรงงานที่กำลังมีแผนขยายไลน์ผลิต
+                      Industrial Mini PC โครง Brushed Aluminum Alloy สีดำ ระบบ Fanless เงียบสนิท ทำงานต่อเนื่อง 24 ชม.
+                      รองรับ DDR4 สูงสุด 64GB, Triple Display (HDMI 2.0 + HDMI 1.4 + DP 1.2),
+                      พร้อม M.2 NVMe SSD + mSATA + 2.5" SATA HDD
                     </p>
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-2">🏭 "โรงงานที่กำลังมีแผนขยายไลน์ผลิต นึกถึง Industrial Grade PC จากเรา"</h4>
+                    <h4 className="font-bold text-foreground mb-2">🏭 ออกแบบมาเพื่อโรงงานโดยเฉพาะ</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      GT6000 ออกแบบมาสำหรับงานอุตสาหกรรมที่ต้องการความเสถียรและทนทาน
-                      ระบบระบายความร้อนด้วยครีบอลูมิเนียม ไม่ดูดฝุ่น ไม่มีชิ้นส่วนเคลื่อนไหว
+                      ทนทานต่อสภาพแวดล้อมที่เต็มไปด้วยน้ำมัน ฝุ่นละออง และความร้อน
+                      รองรับ VESA Mounting บนรถกอล์ฟ โฟคลิฟท์ หรือตู้คอนเทนเนอร์ — สมบูรณ์แบบสำหรับขยายไลน์ผลิต
                     </p>
                   </div>
 
@@ -2144,161 +2144,146 @@ const GTSeries = () => {
                     <div className="card-surface p-4 text-center">
                       <Cpu className="mx-auto text-primary mb-2" size={24} />
                       <div className="font-bold text-foreground text-sm">CPU</div>
-                      <div className="text-xs text-muted-foreground mt-1">Intel Core i3-5005U</div>
+                      <div className="text-xs text-muted-foreground mt-1">Core i3/i5/i7 Gen 8–10</div>
+                      <div className="text-xs text-muted-foreground">Celeron / Pentium ได้</div>
                     </div>
                     <div className="card-surface p-4 text-center">
                       <Server className="mx-auto text-primary mb-2" size={24} />
                       <div className="font-bold text-foreground text-sm">RAM & Storage</div>
-                      <div className="text-xs text-muted-foreground mt-1">DDR3L 4–8 GB / SSD 128 GB – 1 TB</div>
+                      <div className="text-xs text-muted-foreground mt-1">DDR4 สูงสุด 64 GB</div>
+                      <div className="text-xs text-muted-foreground">NVMe + mSATA + SATA</div>
                     </div>
                     <div className="card-surface p-4 text-center">
-                      <Shield className="mx-auto text-primary mb-2" size={24} />
-                      <div className="font-bold text-foreground text-sm">6 COM + 6 USB</div>
-                      <div className="text-xs text-muted-foreground mt-1">RS232, Dual LAN Gigabit</div>
+                      <Monitor className="mx-auto text-primary mb-2" size={24} />
+                      <div className="font-bold text-foreground text-sm">Triple Display</div>
+                      <div className="text-xs text-muted-foreground mt-1">HDMI 2.0 + HDMI 1.4 + DP 1.2</div>
                     </div>
                     <div className="card-surface p-4 text-center">
                       <Wind className="mx-auto text-primary mb-2" size={24} />
                       <div className="font-bold text-foreground text-sm">Fanless 24/7</div>
-                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB ทนอุณหภูมิสูง</div>
+                      <div className="text-xs text-muted-foreground mt-1">เงียบ 0 dB · 2 COM · 2 LAN</div>
                     </div>
                   </div>
                 </div>
 
+                {/* Product Images — Factory */}
                 <div className="lg:col-span-2 space-y-4">
-                  <div className="card-surface overflow-hidden">
+                  <div className="card-surface overflow-hidden rounded-xl bg-muted/30">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_e843641a309b4eb89bd60cf3c1696b70f000.jpg/v1/fill/w_268,h_477,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_e843641a309b4eb89bd60cf3c1696b70f000.jpg"
-                      alt="GT6000 Product"
-                      className="w-full object-contain p-4"
+                      src="/images/gt6000/main.jpg"
+                      alt="GT6000 ภาพหลัก — ด้านหน้า"
+                      className="w-full object-contain p-2"
                       loading="lazy"
                     />
                   </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { src: "/images/gt6000/front.jpg", alt: "GT6000 ด้านหน้า" },
+                      { src: "/images/gt6000/top.jpg", alt: "GT6000 ด้านบน" },
+                      { src: "/images/gt6000/angle.jpg", alt: "GT6000 มุมเอียง" },
+                      { src: "/images/gt6000/rear.jpg", alt: "GT6000 ด้านหลัง — พอร์ต" },
+                    ].map((img, i) => (
+                      <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
+                        <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* New Design Banner */}
-              <div className="card-surface overflow-hidden rounded-xl">
-                <img
-                  src="https://static.wixstatic.com/media/3e5003_e91656b596354fcb9ad029cf24284022~mv2.jpg/v1/crop/x_5,y_0,w_1983,h_448/fill/w_938,h_213,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3.jpg"
-                  alt="GT6000 New Design"
-                  className="w-full"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Port & Spec Diagrams */}
+              {/* Port Connectivity — Factory Images */}
               <div className="card-surface p-6 md:p-8">
                 <h4 className="text-xl font-display font-bold text-foreground mb-4">
-                  🔌 Port Connectivity
+                  🔌 Port Connectivity — ครบจบในเครื่องเดียว
                 </h4>
-                <img
-                  src="https://static.wixstatic.com/media/3e5003_765929b17afa49eaa2bb5ada3eb35701~mv2.jpg/v1/crop/x_11,y_3,w_1743,h_317/fill/w_1320,h_240,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.jpg"
-                  alt="GT6000 Port Layout"
-                  className="w-full rounded-lg mb-4"
-                  loading="lazy"
-                />
-                <img
-                  src="https://static.wixstatic.com/media/3e5003_78ccf2ae02044a51b5b755a2e01026f5~mv2.jpg/v1/crop/x_0,y_0,w_2187,h_837/fill/w_1320,h_501,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5.jpg"
-                  alt="GT6000 Spec Detail"
-                  className="w-full rounded-lg"
-                  loading="lazy"
-                />
+                <div className="grid md:grid-cols-2 gap-4 mb-6">
+                  <img src="/images/gt6000/ports1.jpg" alt="GT6000 พอร์ตด้านหน้า" className="w-full rounded-lg" loading="lazy" />
+                  <img src="/images/gt6000/ports2.jpg" alt="GT6000 พอร์ตด้านหลัง" className="w-full rounded-lg" loading="lazy" />
+                </div>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                  {[
+                    { label: "2 COM Port", desc: "RS232 × 2 สำหรับเชื่อมต่ออุปกรณ์อุตสาหกรรม" },
+                    { label: "Triple Display", desc: "HDMI 2.0 + HDMI 1.4 + DP 1.2 — 3 หน้าจอพร้อมกัน" },
+                    { label: "DDR4 สูงสุด 64GB", desc: "2 × DDR4 RAM Slot รองรับงานหนัก" },
+                    { label: "USB 6 ports", desc: "USB 3.0 + USB 2.0 เชื่อมต่อ barcode, camera" },
+                    { label: "NVMe + SATA", desc: "M.2 NVMe 2280 + mSATA + 2.5\" SATA HDD" },
+                    { label: "2 Gigabit LAN", desc: "แยกเครือข่ายระบบผลิตและ office" },
+                  ].map((item, i) => (
+                    <div key={i} className="card-surface p-3">
+                      <div className="font-bold text-foreground mb-1">{item.label}</div>
+                      <div className="text-xs text-muted-foreground">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              {/* Gallery Photos */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {/* Factory Gallery */}
+              <div className="grid md:grid-cols-3 gap-4">
                 {[
-                  "https://static.wixstatic.com/media/3e5003_7c11550ab9c24928aa9808980a62344a~mv2.jpg/v1/fill/w_638,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/6666.jpg",
-                  "https://static.wixstatic.com/media/3e5003_635e2d1dc15f438a97f332e171284515~mv2.jpg/v1/fill/w_638,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/66.jpg",
-                  "https://static.wixstatic.com/media/3e5003_31631bf8d09d40bea813521482c7681f~mv2.jpg/v1/fill/w_640,h_401,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/6.jpg",
-                  "https://static.wixstatic.com/media/3e5003_2e4777ecd6f346bebdbe79054c9ba243~mv2.jpg/v1/fill/w_640,h_401,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/666.jpg",
+                  { src: "/images/gt6000/detail.jpg", alt: "GT6000 ภาพรวมพร้อม Spec" },
+                  { src: "/images/gt6000/internal.jpg", alt: "GT6000 ภายใน — Mainboard" },
+                  { src: "/images/gt6000/bottom.jpg", alt: "GT6000 ด้านล่าง — VESA Mount" },
                 ].map((img, i) => (
-                  <div key={i} className="card-surface overflow-hidden">
-                    <img src={img} alt={`GT6000 ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
+                    <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
                   </div>
                 ))}
               </div>
 
-              {/* Application & Dimensions */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/3e5003_ced01e931f054e7bb5381f60ffbfafb4~mv2.jpg/v1/fill/w_1313,h_670,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7.jpg"
-                    alt="GT6000 Applications"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/3e5003_c767b23db6fb4ba6b14ae85e7dba4193~mv2.jpg/v1/fill/w_1313,h_760,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/9.jpg"
-                    alt="GT6000 Dimensions"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              {/* Internal Detail */}
-              <div className="card-surface p-4 overflow-hidden">
-                <img
-                  src="https://static.wixstatic.com/media/3e5003_b7129e385ee8418989d1feb78d9d434a~mv2.jpg/v1/crop/x_0,y_164,w_1998,h_985/fill/w_1320,h_650,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8.jpg"
-                  alt="GT6000 Entertainment"
-                  className="w-full rounded-lg"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Internal & Connectivity Spec */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/3e5003_04e9ebb226cc4be8909ccdd9ede5cb01~mv2.jpg/v1/crop/x_0,y_36,w_2000,h_800/fill/w_1320,h_530,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/10.jpg"
-                    alt="GT6000 Connectivity"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="card-surface p-4 overflow-hidden">
-                  <img
-                    src="https://static.wixstatic.com/media/0597a3_231df7381c244ada8adfd31b95a0d7fd~mv2.png/v1/fill/w_872,h_388,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_231df7381c244ada8adfd31b95a0d7fd~mv2.png"
-                    alt="GT6000 Spec Table"
-                    className="w-full rounded-lg"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              {/* Real-world Installation Photos */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {/* More Factory Images */}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {[
-                  "https://static.wixstatic.com/media/005637_695bb857cf5d4e66a0c242ff1e85b5a9~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_695bb857cf5d4e66a0c242ff1e85b5a9~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_88fb7b2997b8481a99698046c1a2a9b4~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_88fb7b2997b8481a99698046c1a2a9b4~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_b3d70c1ff03f4f828bc4f404a058a380~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_b3d70c1ff03f4f828bc4f404a058a380~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_b8a38c621941402ebba47e73c6e5bfb4~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_b8a38c621941402ebba47e73c6e5bfb4~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_d192aa29846f4ea88334e9b367429320~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_d192aa29846f4ea88334e9b367429320~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_45f8aeb250fd4f478a2d4c064c0bb5bc~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_45f8aeb250fd4f478a2d4c064c0bb5bc~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_542e4ef44bdd433ab04ef78696ef1488~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_542e4ef44bdd433ab04ef78696ef1488~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_53f2bdfe47c84c2a9a35bc0785e5a0ee~mv2.jpg/v1/fill/w_336,h_174,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_53f2bdfe47c84c2a9a35bc0785e5a0ee~mv2.jpg",
+                  { src: "/images/gt6000/side1.jpg", alt: "GT6000 ด้านข้าง 1" },
+                  { src: "/images/gt6000/side2.jpg", alt: "GT6000 ด้านข้าง 2" },
+                  { src: "/images/gt6000/side3.jpg", alt: "GT6000 ด้านข้าง — ครีบระบายความร้อน" },
+                  { src: "/images/gt6000/spec-overview.jpg", alt: "GT6000 Spec Overview" },
                 ].map((img, i) => (
-                  <div key={i} className="card-surface overflow-hidden">
-                    <img src={img} alt={`GT6000 ใช้งานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
+                    <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
                   </div>
                 ))}
               </div>
 
-              {/* Price Table Image */}
-              <div className="card-surface overflow-hidden">
+              {/* Spec Table — 2 คอลัมน์ */}
+              <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT6000 Price List</h3>
-                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น</p>
+                  <h3 className="text-lg font-display font-bold text-foreground">GT6000 Specifications</h3>
+                  <p className="text-xs text-muted-foreground mt-1">ข้อมูลจาก Manufacturer</p>
                 </div>
-                <img
-                  src="https://static.wixstatic.com/media/005637_b6848a81c029465dbcc0164ab654c915~mv2.jpg/v1/fill/w_1314,h_645,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%95%E0%B8%B2%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B22022_WEB.jpg"
-                  alt="GT6000 Price List"
-                  className="w-full"
-                  loading="lazy"
-                />
+                <div className="grid md:grid-cols-2 md:divide-x divide-border">
+                  <div>
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {[
+                          ["CPU", "Celeron 5205U / Pentium 5405U/6405U / Core i3-8145U / i5-8265U / i7-8565U / i3-10110U / i5-10210U / i7-10510U"],
+                          ["RAM", "2 × DDR4 Slot, สูงสุด 64 GB"],
+                          ["Storage", "M.2 NVMe 2280 + mSATA SSD + 2.5\" SATA 3.0 HDD"],
+                          ["Display", "HDMI 2.0 + HDMI 1.4 + DP 1.2 (Triple)"],
+                          ["COM", "2 × RS232"],
+                          ["USB", "USB 3.0 × 4 + USB 2.0 × 2"],
+                        ].map(([k, v], i) => (
+                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3">{k}</td><td className="p-3 text-muted-foreground">{v}</td></tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div>
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {[
+                          ["LAN", "2 × Gigabit Ethernet RJ45"],
+                          ["WiFi", "Built-in WiFi / Bluetooth"],
+                          ["Audio", "MIC + SPK"],
+                          ["Cooling", "Fanless — เงียบ 0 dB"],
+                          ["Mounting", "VESA / Wall Mount"],
+                          ["OS", "Windows 8 / 10 / 11"],
+                        ].map(([k, v], i) => (
+                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3">{k}</td><td className="p-3 text-muted-foreground">{v}</td></tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
 
               {/* Datasheet CTA */}
