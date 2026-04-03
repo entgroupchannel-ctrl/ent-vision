@@ -242,7 +242,7 @@ const modelTabs = [
 
 const comparisonRows = [
   { name: "GT1000", tagline: "เริ่มต้นคุ้มค่า", cpu: "Celeron N2920/N3520", ram: "DDR3L 4–8GB", com: 2, usb: 6, lan: 2, gpio: false, sim: true, display: "VGA+HDMI", price: "15,990", cat: "entry", gen: "Gen 4", fanless: true },
-  { name: "GT1200", tagline: "คอมแพกต์ ดีไซน์ใหม่", cpu: "i3-6157U / i5 / i7", ram: "DDR3L–DDR4 64GB", com: 2, usb: 6, lan: 2, gpio: false, sim: true, display: "HDMI", price: "สอบถาม", cat: "premium", gen: "Gen 6–8", fanless: true },
+  { name: "GT1200", tagline: "คอมแพกต์ ดีไซน์ใหม่", cpu: "i3-6157U / i5 / i7", ram: "DDR3L–DDR4 64GB", com: 2, usb: 6, lan: 2, gpio: false, sim: true, display: "VGA+HDMI", price: "สอบถาม", cat: "premium", gen: "Gen 6–8", fanless: true },
   { name: "GT1400", tagline: "2.5G LAN · GPIO · 5G", cpu: "Celeron J6412 / i5-8265U / i7-10510U / i7-1165G7", ram: "DDR4/DDR5 64GB", com: 6, usb: 6, lan: 2, gpio: true, sim: true, display: "HDMI", price: "28,990", cat: "premium", gen: "Gen 8–11", fanless: true },
   { name: "GT2000", tagline: "ยอดนิยม 8 USB", cpu: "Celeron 1037U / i5-3317U", ram: "DDR3L 4GB", com: 4, usb: 8, lan: 2, gpio: false, sim: false, display: "VGA+HDMI", price: "15,990", cat: "entry", gen: "Gen 3", fanless: true },
   { name: "GT3000", tagline: "6 COM หลากหลาย CPU", cpu: "Celeron / i3 / i5 / i7", ram: "DDR3L 4GB", com: 6, usb: 6, lan: 2, gpio: false, sim: false, display: "VGA+HDMI", price: "สอบถาม", cat: "standard", gen: "Gen 3–4", fanless: true },
