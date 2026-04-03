@@ -620,6 +620,9 @@ const GBSeries = () => {
         </div>
       </section>
 
+      {/* Price List */}
+      <GBPriceList onRequestQuote={(product) => setQuoteOpen(true)} />
+
       {/* CTA */}
       <section className="border-t border-border">
         <div className="container max-w-3xl mx-auto px-6 py-16 text-center">
