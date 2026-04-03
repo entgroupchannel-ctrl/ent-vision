@@ -201,6 +201,14 @@ const b2bBanners: Record<string, { icon: typeof Headset; title: string; desc: st
   solution: { icon: Headset, title: "ทดลองฟรี 30 วัน", desc: "ลองก่อนตัดสินใจ ไม่มีค่าใช้จ่าย มีทีมติดตั้งให้" },
 };
 
+const promoBanners: Record<string, { image: string; title: string; desc: string; href: string }> = {
+  industrial: { image: bannerIndustrial, title: "Mini PC Fanless เกรดอุตสาหกรรม", desc: "ถึก ทน แกร่ง — 12 รุ่นครอบคลุมทุกงาน", href: "/gt-series" },
+  network: { image: bannerNetwork, title: "Firewall & Network Security", desc: "pfSense / OPNsense Ready — ปกป้องเครือข่ายของคุณ", href: "/minipc-firewall" },
+  display: { image: bannerDisplay, title: "Smart Display & Digital Signage", desc: "จอ Indoor/Outdoor ความสว่างสูง พร้อมซอฟต์แวร์ฟรี", href: "/smart-display" },
+  rugged: { image: bannerRugged, title: "Rugged Tablet & Notebook", desc: "กันน้ำ กันกระแทก MIL-STD — สำหรับภาคสนาม", href: "/rugged-tablet" },
+  solution: { image: bannerSolution, title: "vCloudPoint Zero Client", desc: "1 เครื่อง PC รองรับ 30 คน — ลดต้นทุน 60%", href: "/vcloudpoint" },
+};
+
 /* ═══════ Component ═══════ */
 const MegaMenu = ({
   onNavigate,
