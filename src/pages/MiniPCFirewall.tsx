@@ -10,10 +10,12 @@ import {
   Stethoscope, Building, Globe, Landmark, MonitorSmartphone,
   Filter, X, Search, FileText
 } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 
 /* ═══════════════════════════════════════════
    TIER SYSTEM — like GT Series
