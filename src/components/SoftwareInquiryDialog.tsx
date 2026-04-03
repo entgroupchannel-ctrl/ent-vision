@@ -320,6 +320,17 @@ const SoftwareInquiryDialog = ({ children }: SoftwareInquiryDialogProps) => {
           <p className="text-[11px] text-muted-foreground text-center">
             ข้อมูลของคุณจะถูกเก็บเป็นความลับ ทีมงานจะติดต่อกลับภายใน 24 ชม.
           </p>
+
+          {!user && (
+            <div className="text-center rounded-lg bg-muted/50 border border-border p-3">
+              <p className="text-xs text-muted-foreground mb-1">
+                <Link to="/member-register" onClick={() => setOpen(false)} className="text-primary font-semibold hover:underline">สมัครสมาชิก</Link>
+                {" "}หรือ{" "}
+                <Link to="/admin-login" onClick={() => setOpen(false)} className="text-primary font-semibold hover:underline">เข้าสู่ระบบ</Link>
+              </p>
+              <p className="text-[11px] text-muted-foreground">เพื่อประสานงานกับแอดมินและติดตามสถานะงานของคุณได้</p>
+            </div>
+          )}
         </form>
       </DialogContent>
     </Dialog>
