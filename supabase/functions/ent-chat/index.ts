@@ -141,6 +141,45 @@ const SYSTEM_PROMPT = `คุณคือ "ENT AI Assistant" — ผู้ช่
 - ลดต้นทุน IT, ใช้ 1 เครื่องแม่ 30+ จุด
 - ดูรายละเอียด: ${SITE_URL}/vcloudpoint
 
+## เว็บไซต์ในเครือ ENT Group (ลิงก์ภายนอก)
+
+### entgroup-rugged.com — Rugged Device & Industrial Tablet (57+ รายการ)
+- เว็บ: https://entgroup-rugged.com/products
+- หมวดสินค้า: Tablet, Rugged Handheld, Rugged Notebook, AIO PC, Mini PC
+- สินค้าเด่น:
+  - **F9E Elite Mini PC** — Intel i5-1235U, 16GB LPDDR4x, 256GB SSD, Windows 11
+  - **F9A Professional Tablet** — Intel Alder Lake N100, 8GB/16GB RAM, 10.1" FHD, IP65
+  - **F7G แท็บเล็ตอึดทนทาน 10.1"** — Intel Gemini Lake N4120, 8GB, IP67 กันน้ำ กันฝุ่น, ราคา ฿22,990
+  - **F7N Essential Tablet** — รุ่นประหยัด
+  - **F8CT** — แท็บเล็ตอึดทนทาน IP67, ราคา ฿27,990
+  - **GOLE2 Pro Ultra-Compact** — Mini PC ขนาดเล็กพิเศษ
+- ระบบปฏิบัติการ: Windows, Android
+- ช่วงราคา: ฿0 - ฿100,000
+- ตัวกรอง: CPU, ขนาดหน้าจอ, RAM, ฟีเจอร์
+
+### nvidia-jetson.com — NVIDIA Jetson & AI Solutions
+- เว็บ: https://nvidia-jetson.com/products
+- หมวดสินค้า: โมดูล Jetson, ชุดพัฒนา Developer Kit, บอร์ดพื้นฐาน Carrier Board, คอมพิวเตอร์อุตสาหกรรม (IPC), ระบบพัฒนา AI, เครื่อง AI สำเร็จรูป
+- สินค้าเด่น:
+  - **Jetson Orin Nano** — โมดูล AI ยอดนิยม (ยอดนิยม)
+  - **Jetson Orin NX** — โมดูล AI ประสิทธิภาพสูง
+  - **Jetson AGX Orin** — โมดูล AI ระดับสูงสุด
+  - **Jetson Developer Kit** — ชุดพัฒนาสำหรับเริ่มต้น AI/ML
+  - **Carrier Board** — บอร์ดพื้นฐานสำหรับ Jetson Module
+  - **คอมพิวเตอร์อุตสาหกรรมไต้หวัน** — IPC สำหรับ Edge AI
+
+### nvidia-jetson.com/gpu-server — GPU Server & AI Workstation
+- เว็บ: https://nvidia-jetson.com/gpu-server
+- สำหรับ: Deep Learning, AI Training, Inference, 3D Rendering
+- รองรับหน่วยงานภาครัฐ ออกใบกำกับภาษี
+- สินค้าเด่น:
+  - **NVIDIA DGX A100 640GB** (Flagship) — เซิร์ฟเวอร์ AI ระดับ Data Center (6U), 8x A100 80GB GPU, 640GB รวม, 5 PFLOPS
+  - **NVIDIA DGX Spark** (NEW, Blackwell) — ซูเปอร์คอมพิวเตอร์ AI บนโต๊ะทำงาน, Grace Blackwell Architecture, 128GB LPDDR5x Unified Memory, 1 PFLOP, 4TB NVMe, ConnectX-7 200Gbps, Wi-Fi 7
+
+### nvidia-jetson.com/professional-gpu — การ์ดจอ Professional
+- เว็บ: https://nvidia-jetson.com/professional-gpu
+- สินค้า: NVIDIA RTX Professional GPU สำหรับงาน Workstation, CAD, 3D Rendering, AI Development
+
 ## โปรโมชั่นปัจจุบัน
 - ขณะนี้กำลังเตรียมโปรโมชั่นพิเศษ กรุณาติดตามที่ ${SITE_URL}/promotions
 - แอดไลน์ @entgroup เพื่อรับแจ้งเตือนโปรโมชั่นก่อนใคร
