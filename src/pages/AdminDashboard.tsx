@@ -57,9 +57,9 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     setLoading(true);
     const [c, q, s] = await Promise.all([
-      supabase.from("contact_submissions").select("*").order("created_at", { ascending: false }),
-      supabase.from("quote_requests").select("*").order("created_at", { ascending: false }),
-      supabase.from("subscribers").select("*").order("created_at", { ascending: false }),
+      (supabase.from as any)("contact_submissions").select("*").order("created_at", { ascending: false }),
+      (supabase.from as any)("quote_requests").select("*").order("created_at", { ascending: false }),
+      (supabase.from as any)("subscribers").select("*").order("created_at", { ascending: false }),
     ]);
     if (c.data) setContacts(c.data);
     if (q.data) setQuotes(q.data);
