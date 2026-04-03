@@ -244,9 +244,9 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-[hsl(220,15%,18%)]">
+        <div className="border-t border-gray-300 dark:border-[hsl(220,15%,18%)]">
           <div className="container max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-[hsl(215,15%,45%)]">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-muted-foreground">
               <a href="#" className="hover:text-primary transition-colors">เงื่อนไขการรับประกัน</a>
               <span>|</span>
               <a href="#" className="hover:text-primary transition-colors">การชำระเงิน</a>
@@ -257,7 +257,7 @@ const Footer = () => {
               <span>|</span>
               <Link to="/admin-login" className="hover:text-primary transition-colors">Admin</Link>
             </div>
-            <p className="text-[11px] text-[hsl(215,15%,40%)]">
+            <p className="text-[11px] text-muted-foreground">
               © {new Date().getFullYear()} ENT Group Co., Ltd. All rights reserved. — NVIDIA Jetson Solutions by ENT Group
             </p>
           </div>
