@@ -143,6 +143,7 @@ const caseStudies = [
       { val: "3×", label: "ถูกกว่า PC" },
     ],
     highlights: ["ขยาย Seat ได้ทันที", "CRM + VoIP ทำงานลื่นไหล", "ไม่มีเสียงรบกวนจาก Fan", "Centralized Management"],
+    videos: [],
     color: "from-violet-500/10 to-violet-500/5",
     borderColor: "border-violet-500/20",
     accentColor: "text-violet-500",
