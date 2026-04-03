@@ -8,17 +8,27 @@ import FooterCompact from "@/components/FooterCompact";
 const categories = [
   "เลือกหมวดหมู่",
   "GT Series — Mini PC",
-  "GB Series",
-  "Panel PC GTG/GTY",
+  "GB Series — Compact",
+  "EPC Series",
+  "EPC Box Series",
   "GK Series — Panel PC",
+  "Panel PC GTG/GTY",
   "UTC Series",
   "Smart Display & KIOSK",
   "Rugged Tablet / Notebook",
   "Volktek Switch",
   "Mini PC Firewall",
   "vCloudPoint",
-  "EPC Series",
+  "Waterproof PC IP69K",
   "อื่นๆ",
+];
+
+const callbackTimes = [
+  "เลือก",
+  "เช้า (9:00-12:00)",
+  "บ่าย (13:00-16:00)",
+  "เย็น (16:00-18:00)",
+  "เวลาใดก็ได้",
 ];
 
 const ContactUs = () => {
@@ -26,6 +36,10 @@ const ContactUs = () => {
     name: "",
     email: "",
     phone: "",
+    company: "",
+    lineId: "",
+    whatsapp: "",
+    callbackTime: "",
     category: "",
     message: "",
   });
@@ -37,8 +51,13 @@ const ContactUs = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // TODO: Submit to Supabase contact_submissions table
+    console.log("Contact submission:", form);
     setSubmitted(true);
   };
+
+  const inputClass =
+    "w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all";
 
   return (
     <div className="min-h-screen bg-background">
@@ -184,7 +203,10 @@ const ContactUs = () => {
                       ขอบคุณที่ติดต่อเรา ทีมงานจะตอบกลับโดยเร็วที่สุด
                     </p>
                     <button
-                      onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", category: "", message: "" }); }}
+                      onClick={() => {
+                        setSubmitted(false);
+                        setForm({ name: "", email: "", phone: "", company: "", lineId: "", whatsapp: "", callbackTime: "", category: "", message: "" });
+                      }}
                       className="text-sm text-primary hover:underline"
                     >
                       ส่งข้อความอีกครั้ง
@@ -192,24 +214,22 @@ const ContactUs = () => {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Name */}
-                    <div>
-                      <label className="block text-xs font-medium text-foreground mb-1.5">
-                        ชื่อ <span className="text-destructive">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        required
-                        value={form.name}
-                        onChange={handleChange}
-                        placeholder="ชื่อ-นามสกุล หรือชื่อบริษัท"
-                        className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all"
-                      />
-                    </div>
-
-                    {/* Email + Phone row */}
+                    {/* Name + Email */}
                     <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-medium text-foreground mb-1.5">
+                          ชื่อ <span className="text-destructive">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="name"
+                          required
+                          value={form.name}
+                          onChange={handleChange}
+                          placeholder="ชื่อ-นามสกุล"
+                          className={inputClass}
+                        />
+                      </div>
                       <div>
                         <label className="block text-xs font-medium text-foreground mb-1.5">
                           อีเมล <span className="text-destructive">*</span>
@@ -221,41 +241,95 @@ const ContactUs = () => {
                           value={form.email}
                           onChange={handleChange}
                           placeholder="email@company.com"
-                          className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all"
+                          className={inputClass}
                         />
                       </div>
+                    </div>
+
+                    {/* Phone + Company */}
+                    <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-medium text-foreground mb-1.5">
-                          โทรศัพท์
-                        </label>
+                        <label className="block text-xs font-medium text-foreground mb-1.5">โทรศัพท์</label>
                         <input
                           type="tel"
                           name="phone"
                           value={form.phone}
                           onChange={handleChange}
                           placeholder="08x-xxx-xxxx"
-                          className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all"
+                          className={inputClass}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-foreground mb-1.5">บริษัท</label>
+                        <input
+                          type="text"
+                          name="company"
+                          value={form.company}
+                          onChange={handleChange}
+                          placeholder="ชื่อบริษัท / หน่วยงาน"
+                          className={inputClass}
                         />
                       </div>
                     </div>
 
-                    {/* Category */}
-                    <div>
-                      <label className="block text-xs font-medium text-foreground mb-1.5">
-                        หมวดหมู่สินค้า
-                      </label>
-                      <select
-                        name="category"
-                        value={form.category}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all"
-                      >
-                        {categories.map((c) => (
-                          <option key={c} value={c === "เลือกหมวดหมู่" ? "" : c}>
-                            {c}
-                          </option>
-                        ))}
-                      </select>
+                    {/* LINE ID + WhatsApp */}
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-medium text-foreground mb-1.5">LINE ID</label>
+                        <input
+                          type="text"
+                          name="lineId"
+                          value={form.lineId}
+                          onChange={handleChange}
+                          placeholder="@lineid"
+                          className={inputClass}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-foreground mb-1.5">WhatsApp</label>
+                        <input
+                          type="tel"
+                          name="whatsapp"
+                          value={form.whatsapp}
+                          onChange={handleChange}
+                          placeholder="+66..."
+                          className={inputClass}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Category + Callback time */}
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-medium text-foreground mb-1.5">หมวดหมู่สินค้า</label>
+                        <select
+                          name="category"
+                          value={form.category}
+                          onChange={handleChange}
+                          className={inputClass}
+                        >
+                          {categories.map((c) => (
+                            <option key={c} value={c === "เลือกหมวดหมู่" ? "" : c}>
+                              {c}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-foreground mb-1.5">เวลาที่สะดวกให้ติดต่อกลับ</label>
+                        <select
+                          name="callbackTime"
+                          value={form.callbackTime}
+                          onChange={handleChange}
+                          className={inputClass}
+                        >
+                          {callbackTimes.map((t) => (
+                            <option key={t} value={t === "เลือก" ? "" : t}>
+                              {t}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
 
                     {/* Message */}
@@ -270,7 +344,7 @@ const ContactUs = () => {
                         value={form.message}
                         onChange={handleChange}
                         placeholder="รายละเอียดที่ต้องการสอบถาม เช่น จำนวน สเปกที่ต้องการ งบประมาณ..."
-                        className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none"
+                        className={`${inputClass} resize-none`}
                       />
                     </div>
 
@@ -283,6 +357,20 @@ const ContactUs = () => {
                     </button>
                   </form>
                 )}
+              </div>
+
+              {/* CTA to Quote page */}
+              <div className="mt-6 card-surface rounded-xl p-5 border-l-4 border-primary">
+                <p className="text-sm text-foreground font-medium mb-1">ต้องการใบเสนอราคา?</p>
+                <p className="text-xs text-muted-foreground mb-3">
+                  เลือกสินค้าและจำนวนที่ต้องการ — ฝ่ายขายจะจัดทำใบเสนอราคาให้ภายใน 24 ชม.
+                </p>
+                <Link
+                  to="/quote"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition-colors"
+                >
+                  ขอใบเสนอราคา →
+                </Link>
               </div>
             </div>
           </div>
