@@ -106,26 +106,8 @@ const CollapsibleSection = ({ title, links }: { title: string; links: typeof foo
 const Footer = () => {
   return (
     <footer className="border-t border-border" id="contact">
-      {/* Chat CTA */}
-      <div className="section-padding bg-surface/50">
-        <div className="container max-w-3xl mx-auto text-center">
-          <MessageCircle className="mx-auto mb-4 text-primary" size={40} />
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            มาแช็ต<span className="text-gradient">กัน!</span>
-          </h2>
-          <p className="text-muted-foreground mb-8">
-            สนใจสินค้าหรือบริการ? ติดต่อเราได้ทันทีผ่าน LINE
-          </p>
-          <a
-            href="https://line.me/R/ti/p/@entgroup?from=page&openQrModal=true&searchId=entgroup"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-opacity animate-pulse-glow"
-          >
-            เพิ่มเพื่อน LINE @entgroup
-          </a>
-        </div>
-      </div>
+
+
 
       {/* Main Footer */}
       <div className="bg-[hsl(220,20%,10%)] text-[hsl(210,20%,85%)]">
