@@ -29,6 +29,7 @@ const MemberRegister = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [scanning, setScanning] = useState(false);
+  const [cardPreview, setCardPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
     name: "",
@@ -53,6 +54,10 @@ const MemberRegister = () => {
   const handleCardScan = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // Show preview
+    const previewUrl = URL.createObjectURL(file);
+    setCardPreview(previewUrl);
 
     setScanning(true);
     try {
@@ -222,6 +227,32 @@ const MemberRegister = () => {
                   </>
                 )}
               </button>
+
+              {/* Card Preview */}
+              {cardPreview && (
+                <div className="mt-3 relative rounded-xl overflow-hidden border border-border bg-muted/30">
+                  <img
+                    src={cardPreview}
+                    alt="นามบัตรที่อัปโหลด"
+                    className="w-full h-auto max-h-48 object-contain"
+                  />
+                  {scanning && (
+                    <div className="absolute inset-0 bg-background/60 flex items-center justify-center">
+                      <div className="flex items-center gap-2 text-sm text-primary font-medium">
+                        <Loader2 size={18} className="animate-spin" />
+                        กำลังวิเคราะห์นามบัตร...
+                      </div>
+                    </div>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setCardPreview(null)}
+                    className="absolute top-2 right-2 w-6 h-6 rounded-full bg-background/80 border border-border flex items-center justify-center text-muted-foreground hover:text-foreground text-xs"
+                  >
+                    ✕
+                  </button>
+                </div>
+              )}
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
