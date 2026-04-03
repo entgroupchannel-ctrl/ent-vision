@@ -193,7 +193,30 @@ const AdminDashboard = () => {
         </div>
 
         {/* Filter & Export */}
-        {tab === "subscribers" ? (
+        {tab === "chatleads" ? (
+          <div className="flex items-center justify-end mb-4">
+            <button
+              onClick={() => {
+                const headers = ["Name", "Email", "Phone", "Company", "LINE ID", "Interest", "Score", "Status", "Created At"];
+                const rows = chatLeads.map((l: any) => [
+                  l.name || "", l.email || "", l.phone || "", l.company || "", l.line_id || "",
+                  l.interest || "", l.lead_score, l.status, l.created_at
+                ]);
+                const csv = [headers, ...rows].map(r => r.map((c: any) => `"${c}"`).join(",")).join("\n");
+                const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `chat_leads_${new Date().toISOString().slice(0,10)}.csv`;
+                a.click();
+                URL.revokeObjectURL(url);
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+            >
+              <Download size={14} /> Export CSV
+            </button>
+          </div>
+        ) : tab === "subscribers" ? (
           <div className="flex items-center justify-end mb-4">
             <button
               onClick={() => {
