@@ -36,7 +36,16 @@ const heroStats = [
 const HeroSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showLineQR, setShowLineQR] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleAuthClick = async () => {
+    if (user) {
+      await supabase.auth.signOut();
+    } else {
+      navigate("/admin/login");
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex flex-col">
