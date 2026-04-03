@@ -174,7 +174,7 @@ const Footer = () => {
               <img src={logo} alt="ENT GROUP" className="h-10 w-auto mb-4 brightness-0 invert" />
               <p className="text-sm font-bold text-white mb-1">บริษัท เอ็นที กรุ๊ป จำกัด</p>
               <p className="text-xs text-[hsl(215,15%,55%)] leading-relaxed mb-4">
-                เมกาโกร บิซทาวน์ แจ้งวัฒนะ2<br />
+                เมทโทร บิซทาวน์ แจ้งวัฒนะ2<br />
                 70/5 หมู่ 4 ต.คลองพระอุดม<br />
                 อ.ปากเกร็ด จ.นนทบุรี 11120
               </p>
