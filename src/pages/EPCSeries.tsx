@@ -482,6 +482,25 @@ const EPCSeries = () => {
           </div>
         </section>
 
+        {/* Trust Badges */}
+        <section>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {[
+              { image: badgeMotherboard, label: "เมนบอร์ดอุตสาหกรรมแท้" },
+              { image: badgeFactory, label: "ผลิตโดยตรงจากโรงงาน" },
+              { image: badgeReliability, label: "ขัดข้อง 0.5%/ปี" },
+              { image: badgeCustomize, label: "ปรับแต่งเฉพาะลูกค้า" },
+              { image: badgeWarranty, label: "รับประกัน 1-3 ปี" },
+              { image: badgeCertification, label: "มาตรฐานสากลครบ" },
+            ].map((item) => (
+              <div key={item.label} className="card-surface p-4 flex flex-col items-center text-center rounded-xl hover:shadow-md transition-shadow">
+                <img src={item.image} alt={item.label} className="w-16 h-16 object-contain mb-3" loading="lazy" />
+                <span className="text-xs font-semibold text-foreground leading-tight">{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Features */}
         <section id="features">
           <h2 className="text-2xl font-display font-bold text-foreground mb-2 text-center">คุณสมบัติและประโยชน์เด่น</h2>
