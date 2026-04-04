@@ -4,6 +4,7 @@ import {
   ArrowLeft, Clock, Tag, Gift, Bell, ChevronDown, ExternalLink,
   Zap, Percent, Calendar, PartyPopper, Sparkles, Timer, FileDown
 } from "lucide-react";
+import promotionsHeroBg from "@/assets/promotions-hero-bg.jpg";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FooterCompact from "@/components/FooterCompact";
 import LineQRButton from "@/components/LineQRButton";
