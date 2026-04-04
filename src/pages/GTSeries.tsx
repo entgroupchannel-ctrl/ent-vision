@@ -595,7 +595,7 @@ const ComparisonTable = ({ handleTabChange }: { handleTabChange: (tab: string) =
       </div>
 
       <p className="text-center text-xs text-muted-foreground mt-4">
-        * ราคาขึ้นอยู่กับ CPU, RAM, Storage ที่เลือก — คลิกที่แถวเพื่อดูรายละเอียดแต่ละรุ่น
+        ⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup
       </p>
     </div>
   );
