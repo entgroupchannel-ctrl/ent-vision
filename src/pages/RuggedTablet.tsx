@@ -318,7 +318,7 @@ const categories = [
   { id: "em-rugged", label: "Rugged Tablet" },
   { id: "notebook", label: "Rugged Notebook" },
   { id: "aio", label: "All-in-One PC" },
-  { id: "handheld", label: "Handheld & PDA" },
+  
   { id: "tpc", label: "TPC Series" },
   { id: "pricelist", label: "Price List" },
   { id: "downloads", label: "Downloads" },
