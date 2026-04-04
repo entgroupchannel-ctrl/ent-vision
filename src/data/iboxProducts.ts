@@ -30,6 +30,8 @@ import ibox104v2Front from "@/assets/products/ibox-104v2-front.png";
 import ibox104v2Side from "@/assets/products/ibox-104v2-side.png";
 import ibox601Gt1pFront from "@/assets/products/ibox-601-gt-1p-front.png";
 import ibox601Gt1pRear from "@/assets/products/ibox-601-gt-1p-rear.png";
+import ibox602Gt1pFront from "@/assets/products/ibox-602-gt-1p-front.png";
+import ibox602Gt1pRear from "@/assets/products/ibox-602-gt-1p-rear.png";
 import ibox501Img from "@/assets/products/ibox-501.png";
 import ibox502Img from "@/assets/products/ibox-502.png";
 import ibox601ClassicImg from "@/assets/products/ibox-601-classic.png";
