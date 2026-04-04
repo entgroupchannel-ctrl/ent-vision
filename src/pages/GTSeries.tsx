@@ -1879,7 +1879,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                         <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">I/O Ports</td></tr>
@@ -1893,7 +1893,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -1912,7 +1912,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                         <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">Dimension</td></tr>
@@ -1923,7 +1923,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -2240,7 +2240,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                         <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">I/O Ports</td></tr>
@@ -2255,7 +2255,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -2274,7 +2274,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                         <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">Dimension</td></tr>
@@ -2285,7 +2285,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                       </tbody>
