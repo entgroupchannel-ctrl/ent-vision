@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SEOHead from "@/components/SEOHead";
+import heroMiniPC from "@/assets/hero-minipc-desk.jpg";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
