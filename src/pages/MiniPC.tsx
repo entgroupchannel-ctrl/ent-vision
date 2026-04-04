@@ -902,130 +902,95 @@ const MiniPC = () => {
               </div>
             </div>
 
+            {/* Smart Filter */}
+            <div className="card-surface p-4 mb-4">
+              <div className="flex items-center gap-2 mb-3">
+                <Filter size={16} className="text-primary" />
+                <span className="text-sm font-bold text-foreground">ตัวกรองสินค้า</span>
+                {hasFilters && (
+                  <button onClick={clearFilters} className="ml-auto inline-flex items-center gap-1 text-xs text-destructive hover:underline">
+                    <X size={12} /> ล้างตัวกรอง
+                  </button>
+                )}
+              </div>
+              <div className="grid sm:grid-cols-3 gap-3">
+                {/* Category Filter */}
+                <div>
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1 block">หมวดหมู่</label>
+                  <select
+                    value={filterCat}
+                    onChange={(e) => setFilterCat(e.target.value)}
+                    className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
+                  >
+                    {priceCategories.map((c) => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                </div>
+                {/* CPU Level Filter */}
+                <div>
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1 block">ระดับ CPU</label>
+                  <select
+                    value={filterCpu}
+                    onChange={(e) => setFilterCpu(e.target.value)}
+                    className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
+                  >
+                    {cpuLevels.map((c) => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                </div>
+                {/* Price Range Filter */}
+                <div>
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1 block">ช่วงราคา</label>
+                  <select
+                    value={filterPrice}
+                    onChange={(e) => setFilterPrice(Number(e.target.value))}
+                    className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
+                  >
+                    {priceRanges.map((r, i) => <option key={i} value={i}>{r.label}</option>)}
+                  </select>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">
+                แสดง {filteredPriceItems.length} จาก {allPriceItems.length} รุ่น
+              </p>
+            </div>
+
             <div className="card-surface overflow-hidden">
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow className="bg-primary/5">
                       <TableHead className="font-bold text-foreground">รุ่น</TableHead>
+                      <TableHead className="font-bold text-foreground">หมวด</TableHead>
                       <TableHead className="font-bold text-foreground">CPU</TableHead>
                       <TableHead className="font-bold text-foreground">RAM</TableHead>
                       <TableHead className="font-bold text-foreground">Storage</TableHead>
                       <TableHead className="font-bold text-foreground text-right">ราคา (฿)</TableHead>
+                      <TableHead className="font-bold text-foreground"></TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {/* Entry-Level */}
-                    <TableRow className="bg-primary/10">
-                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 Entry-Level / Fanless</TableCell>
-                    </TableRow>
-                    {[
-                      { model: "K6-F1", cpu: "Intel N-Series 4C", ram: "4GB", storage: "128GB SSD", price: "4,900" },
-                      { model: "K6-F17H", cpu: "Intel N150 4C", ram: "4GB", storage: "128GB SSD", price: "5,500" },
-                      { model: "K3-F18-6006", cpu: "Core i3-6006U", ram: "8GB", storage: "128GB SSD", price: "8,900" },
-                      { model: "K3-F17H", cpu: "Core i3-5005U", ram: "8GB", storage: "128GB SSD", price: "8,500" },
-                    ].map((r) => (
-                      <TableRow key={r.model}>
-                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
-                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
+                    {filteredPriceItems.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
+                          ไม่พบสินค้าที่ตรงกับตัวกรอง — ลองปรับเงื่อนไขใหม่
+                        </TableCell>
                       </TableRow>
-                    ))}
-
-                    {/* High Performance */}
-                    <TableRow className="bg-primary/10">
-                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 High Performance / Industrial</TableCell>
-                    </TableRow>
-                    {[
-                      { model: "K8-F18-4405", cpu: "Pentium 4405U", ram: "8GB", storage: "128GB SSD", price: "9,500" },
-                      { model: "K3-F17HI", cpu: "Core i3 Series", ram: "8GB", storage: "128GB SSD", price: "9,900" },
-                      { model: "K8-F17HI-3710", cpu: "Pentium 3710", ram: "4GB", storage: "64GB SSD", price: "7,900" },
-                      { model: "K5-F17H", cpu: "Core i5-5300U", ram: "8GB", storage: "128GB SSD", price: "11,900" },
-                      { model: "K7-F17H", cpu: "Core i7-5500U", ram: "8GB", storage: "128GB SSD", price: "13,900" },
-                      { model: "K5-F17F", cpu: "Core i5-1155G7", ram: "8GB", storage: "256GB SSD", price: "16,900" },
-                      { model: "K7-F17F", cpu: "Core i7-1195G7", ram: "16GB", storage: "256GB SSD", price: "21,900" },
-                    ].map((r) => (
-                      <TableRow key={r.model}>
-                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
-                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
-                      </TableRow>
-                    ))}
-
-                    {/* Education & Office */}
-                    <TableRow className="bg-primary/10">
-                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 Education & Office</TableCell>
-                    </TableRow>
-                    {[
-                      { model: "G5 Nano", cpu: "Celeron J4125", ram: "4GB", storage: "64GB SSD", price: "3,900" },
-                      { model: "K3-C7", cpu: "Core i3-6157U", ram: "4GB", storage: "128GB SSD", price: "7,900" },
-                      { model: "K5-N12", cpu: "Core i5-8300H", ram: "8GB", storage: "256GB SSD", price: "12,900" },
-                      { model: "K7-N12", cpu: "Core i7-8750H", ram: "8GB", storage: "256GB SSD", price: "15,900" },
-                    ].map((r) => (
-                      <TableRow key={r.model}>
-                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
-                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
-                      </TableRow>
-                    ))}
-
-                    {/* Nano & Firewall */}
-                    <TableRow className="bg-primary/10">
-                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 Nano PC & Firewall Appliance</TableCell>
-                    </TableRow>
-                    {[
-                      { model: "K1-F6-6400T", cpu: "AMD A4-6400T", ram: "2GB", storage: "32GB SSD", price: "3,500" },
-                      { model: "K8-F12 (4LAN)", cpu: "Pentium N3700", ram: "4GB", storage: "64GB SSD", price: "6,900" },
-                      { model: "K8-F12C (6LAN)", cpu: "Pentium N3700", ram: "4GB", storage: "64GB SSD", price: "7,900" },
-                    ].map((r) => (
-                      <TableRow key={r.model}>
-                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
-                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
-                      </TableRow>
-                    ))}
-
-                    {/* Digital Signage */}
-                    <TableRow className="bg-primary/10">
-                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 Digital Signage (Android)</TableCell>
-                    </TableRow>
-                    {[
-                      { model: "R9 Player", cpu: "ARM SoC", ram: "2GB", storage: "16GB", price: "สอบถาม" },
-                      { model: "X7 Player", cpu: "RK3288", ram: "2GB", storage: "16GB", price: "สอบถาม" },
-                    ].map((r) => (
-                      <TableRow key={r.model}>
-                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
-                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
-                      </TableRow>
-                    ))}
-
-                    {/* Budget */}
-                    <TableRow className="bg-primary/10">
-                      <TableCell colSpan={5} className="font-bold text-primary text-sm">🔹 Budget Series</TableCell>
-                    </TableRow>
-                    {[
-                      { model: "K6-F13A", cpu: "N2840 Quad Core", ram: "4GB", storage: "64GB SSD", price: "3,900" },
-                      { model: "K6-F13D", cpu: "N3710 Quad Core", ram: "2GB", storage: "64GB SSD", price: "3,500" },
-                    ].map((r) => (
-                      <TableRow key={r.model}>
-                        <TableCell className="font-medium text-foreground">{r.model}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
-                        <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
-                        <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
-                      </TableRow>
-                    ))}
+                    ) : (
+                      filteredPriceItems.map((r) => (
+                        <TableRow key={r.model}>
+                          <TableCell className="font-medium text-foreground">{r.model}</TableCell>
+                          <TableCell><Badge variant="outline" className="text-[10px]">{r.category}</Badge></TableCell>
+                          <TableCell className="text-muted-foreground text-sm">{r.cpu}</TableCell>
+                          <TableCell className="text-muted-foreground text-sm">{r.ram}</TableCell>
+                          <TableCell className="text-muted-foreground text-sm">{r.storage}</TableCell>
+                          <TableCell className="text-right font-semibold text-foreground">{r.price}</TableCell>
+                          <TableCell className="text-right">
+                            <Button size="sm" variant="ghost" className="text-xs text-primary" onClick={() => setQuoteProduct(r.model)}>
+                              <FileText className="w-3 h-3 mr-1" /> ขอราคา
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
                   </TableBody>
                 </Table>
               </div>
