@@ -35,6 +35,7 @@ import gt6000Product from "@/assets/gt6000-product.jpg";
 import gt7000Product from "@/assets/gt7000-product.jpg";
 import gt8000Product from "@/assets/gt8000-product.jpg";
 import gt9000Product from "@/assets/gt9000-product.jpg";
+import gt3000CpuOptions from "@/assets/gt3000-cpu-options.png";
 import FooterCompact from "@/components/FooterCompact";
 
 const features = [
@@ -1847,8 +1848,8 @@ const GTSeries = () => {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
                   <img
-                    src="https://static.wixstatic.com/media/3e5003_da8e76c7792f47e5a3a39288166d69f9~mv2.png/v1/fill/w_774,h_408,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.png"
-                    alt="GT3000 I/O Diagram"
+                    src={gt3000CpuOptions}
+                    alt="GT3000 CPU Options — Celeron, Core i3, i5, i7"
                     className="w-full rounded-lg"
                     loading="lazy"
                   />
