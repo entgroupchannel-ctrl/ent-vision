@@ -339,7 +339,9 @@ const IBoxSeries = () => {
           </div>
         </section>
 
+        {/* Product Models */}
         <section>
+          <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
             รุ่นสินค้า iBox Series
           </h2>
           <p className="text-center text-sm text-muted-foreground mb-8">
