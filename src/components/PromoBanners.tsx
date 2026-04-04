@@ -75,7 +75,7 @@ const PromoBanners = () => {
 
         {/* Featured promo */}
         <Link
-          to="/promotions"
+          to={featured.link || "/promotions"}
           className="card-surface overflow-hidden group hover:border-primary/30 transition-all mb-6 flex flex-col md:flex-row"
         >
           <div className="relative bg-secondary/20 flex items-center justify-center p-8 md:w-2/5">
