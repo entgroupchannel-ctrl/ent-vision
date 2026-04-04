@@ -45,6 +45,7 @@ import ProductAdvisor from "./pages/ProductAdvisor.tsx";
 import RuggedNotebook from "./pages/RuggedNotebook.tsx";
 import RuggedNotebookDetail from "./pages/RuggedNotebookDetail.tsx";
 import AllInOnePC from "./pages/AllInOnePC.tsx";
+import AIODetail from "./pages/AIODetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import FloatingContact from "./components/FloatingContact.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
