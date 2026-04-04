@@ -41,6 +41,7 @@ import ResetPassword from "./pages/ResetPassword.tsx";
 import ProductAdvisor from "./pages/ProductAdvisor.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import FloatingContact from "./components/FloatingContact.tsx";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
 import AIChatWidget from "./components/AIChatWidget.tsx";
 
