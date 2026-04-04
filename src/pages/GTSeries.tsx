@@ -3238,7 +3238,7 @@ const GTSeries = () => {
                     {[
                       ["USB", "USB 3.0 + USB 2.0 (รวม 6 พอร์ต)"],
                       ["SIM", "Micro SIM 3G/4G Module"],
-                      ["WiFi", "Built-in WiFi / Bluetooth"],
+                      ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม"],
                       ["Cooling", "Fanless — เงียบ 0 dB ทน 70°C"],
                       ["Size / Weight", "230 × 175 × 50mm / 2.5kg"],
                       ["Mounting", "VESA / Wall Mount / Desktop"],
