@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import LineQRButton from "@/components/LineQRButton";
 import { useState } from "react";
 import {
   ArrowLeft, Check, ChevronRight, Cpu, FileText, Mail, Shield, Zap,
