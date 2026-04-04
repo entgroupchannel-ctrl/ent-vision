@@ -333,7 +333,7 @@ const AllInOnePC = () => {
 
       {/* Quote Dialog */}
       <QuoteDialog
-        isOpen={!!quoteProduct}
+        open={!!quoteProduct}
         onClose={() => setQuoteProduct(null)}
         productName={quoteProduct || ""}
       />
