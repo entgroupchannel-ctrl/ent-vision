@@ -750,6 +750,58 @@ const MiniPC = () => {
   const [activeCategory, setActiveCategory] = useState("entry");
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
+  /* ── Price List Data & Filters ── */
+  const allPriceItems = [
+    { model: "K6-F1", cpu: "Intel N-Series 4C", ram: "4GB", storage: "128GB SSD", price: "4,900", priceNum: 4900, category: "Entry-Level", cpuLevel: "Celeron/Atom" },
+    { model: "K6-F17H", cpu: "Intel N150 4C", ram: "4GB", storage: "128GB SSD", price: "5,500", priceNum: 5500, category: "Entry-Level", cpuLevel: "Celeron/Atom" },
+    { model: "K3-F18-6006", cpu: "Core i3-6006U", ram: "8GB", storage: "128GB SSD", price: "8,900", priceNum: 8900, category: "Entry-Level", cpuLevel: "Core i3" },
+    { model: "K3-F17H", cpu: "Core i3-5005U", ram: "8GB", storage: "128GB SSD", price: "8,500", priceNum: 8500, category: "Entry-Level", cpuLevel: "Core i3" },
+    { model: "K8-F18-4405", cpu: "Pentium 4405U", ram: "8GB", storage: "128GB SSD", price: "9,500", priceNum: 9500, category: "High Performance", cpuLevel: "Pentium" },
+    { model: "K3-F17HI", cpu: "Core i3 Series", ram: "8GB", storage: "128GB SSD", price: "9,900", priceNum: 9900, category: "High Performance", cpuLevel: "Core i3" },
+    { model: "K8-F17HI-3710", cpu: "Pentium 3710", ram: "4GB", storage: "64GB SSD", price: "7,900", priceNum: 7900, category: "High Performance", cpuLevel: "Pentium" },
+    { model: "K5-F17H", cpu: "Core i5-5300U", ram: "8GB", storage: "128GB SSD", price: "11,900", priceNum: 11900, category: "High Performance", cpuLevel: "Core i5" },
+    { model: "K7-F17H", cpu: "Core i7-5500U", ram: "8GB", storage: "128GB SSD", price: "13,900", priceNum: 13900, category: "High Performance", cpuLevel: "Core i7" },
+    { model: "K5-F17F", cpu: "Core i5-1155G7", ram: "8GB", storage: "256GB SSD", price: "16,900", priceNum: 16900, category: "High Performance", cpuLevel: "Core i5" },
+    { model: "K7-F17F", cpu: "Core i7-1195G7", ram: "16GB", storage: "256GB SSD", price: "21,900", priceNum: 21900, category: "High Performance", cpuLevel: "Core i7" },
+    { model: "G5 Nano", cpu: "Celeron J4125", ram: "4GB", storage: "64GB SSD", price: "3,900", priceNum: 3900, category: "Education & Office", cpuLevel: "Celeron/Atom" },
+    { model: "K3-C7", cpu: "Core i3-6157U", ram: "4GB", storage: "128GB SSD", price: "7,900", priceNum: 7900, category: "Education & Office", cpuLevel: "Core i3" },
+    { model: "K5-N12", cpu: "Core i5-8300H", ram: "8GB", storage: "256GB SSD", price: "12,900", priceNum: 12900, category: "Education & Office", cpuLevel: "Core i5" },
+    { model: "K7-N12", cpu: "Core i7-8750H", ram: "8GB", storage: "256GB SSD", price: "15,900", priceNum: 15900, category: "Education & Office", cpuLevel: "Core i7" },
+    { model: "K1-F6-6400T", cpu: "AMD A4-6400T", ram: "2GB", storage: "32GB SSD", price: "3,500", priceNum: 3500, category: "Nano & Firewall", cpuLevel: "Celeron/Atom" },
+    { model: "K8-F12 (4LAN)", cpu: "Pentium N3700", ram: "4GB", storage: "64GB SSD", price: "6,900", priceNum: 6900, category: "Nano & Firewall", cpuLevel: "Pentium" },
+    { model: "K8-F12C (6LAN)", cpu: "Pentium N3700", ram: "4GB", storage: "64GB SSD", price: "7,900", priceNum: 7900, category: "Nano & Firewall", cpuLevel: "Pentium" },
+    { model: "R9 Player", cpu: "ARM SoC", ram: "2GB", storage: "16GB", price: "สอบถาม", priceNum: 0, category: "Digital Signage", cpuLevel: "ARM" },
+    { model: "X7 Player", cpu: "RK3288", ram: "2GB", storage: "16GB", price: "สอบถาม", priceNum: 0, category: "Digital Signage", cpuLevel: "ARM" },
+    { model: "K6-F13A", cpu: "N2840 Quad Core", ram: "4GB", storage: "64GB SSD", price: "3,900", priceNum: 3900, category: "Budget", cpuLevel: "Celeron/Atom" },
+    { model: "K6-F13D", cpu: "N3710 Quad Core", ram: "2GB", storage: "64GB SSD", price: "3,500", priceNum: 3500, category: "Budget", cpuLevel: "Celeron/Atom" },
+  ];
+
+  const priceCategories = ["ทั้งหมด", "Entry-Level", "High Performance", "Education & Office", "Nano & Firewall", "Digital Signage", "Budget"];
+  const cpuLevels = ["ทั้งหมด", "Celeron/Atom", "Pentium", "Core i3", "Core i5", "Core i7", "ARM"];
+  const priceRanges = [
+    { label: "ทั้งหมด", min: 0, max: Infinity },
+    { label: "ต่ำกว่า ฿5,000", min: 0, max: 5000 },
+    { label: "฿5,000–10,000", min: 5000, max: 10000 },
+    { label: "฿10,000–20,000", min: 10000, max: 20000 },
+    { label: "฿20,000 ขึ้นไป", min: 20000, max: Infinity },
+  ];
+
+  const [filterCat, setFilterCat] = useState("ทั้งหมด");
+  const [filterCpu, setFilterCpu] = useState("ทั้งหมด");
+  const [filterPrice, setFilterPrice] = useState(0);
+
+  const filteredPriceItems = allPriceItems.filter((item) => {
+    if (filterCat !== "ทั้งหมด" && item.category !== filterCat) return false;
+    if (filterCpu !== "ทั้งหมด" && item.cpuLevel !== filterCpu) return false;
+    const range = priceRanges[filterPrice];
+    if (item.priceNum === 0 && filterPrice !== 0) return false;
+    if (item.priceNum > 0 && (item.priceNum < range.min || item.priceNum > range.max)) return false;
+    return true;
+  });
+
+  const hasFilters = filterCat !== "ทั้งหมด" || filterCpu !== "ทั้งหมด" || filterPrice !== 0;
+  const clearFilters = () => { setFilterCat("ทั้งหมด"); setFilterCpu("ทั้งหมด"); setFilterPrice(0); };
+
   return (
     <div className="min-h-screen bg-background">
       <SEOHead title="Mini PC Series — คอมพิวเตอร์ขนาดเล็กสมรรถนะสูง" description="Mini PC จากโรงงานผู้ผลิตโดยตรง ครอบคลุมทุกการใช้งานตั้งแต่ Entry-Level จนถึง Workstation Class ราคาเริ่มต้น 4,900 บาท" path="/mini-pc" />
