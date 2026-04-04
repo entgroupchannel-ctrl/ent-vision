@@ -115,9 +115,9 @@ const IBoxDetail = () => {
 
             {/* Price / Contact */}
             <div className="p-4 bg-primary/5 rounded-xl border border-primary/20">
-              <p className="text-sm text-muted-foreground mb-1">ช่วงราคา</p>
-              <p className="text-xl font-bold text-foreground mb-3">
-                {product.priceRange || "สอบถามราคา"}
+              <p className="text-sm text-muted-foreground mb-1">ราคา</p>
+              <p className="text-xl font-bold text-primary mb-3">
+                สอบถามราคา
               </p>
               <div className="flex flex-wrap gap-2 text-sm">
                 <a

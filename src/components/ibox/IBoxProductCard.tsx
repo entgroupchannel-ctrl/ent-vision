@@ -107,10 +107,8 @@ const IBoxProductCard = ({ product, selectedProducts, toggleSelect, onQuote }: I
           </div>
         </div>
 
-        {/* Price */}
-        {product.priceRange && (
-          <p className="text-sm font-semibold text-primary mb-3">{product.priceRange}</p>
-        )}
+        {/* Price - always show "สอบถามราคา" */}
+        <p className="text-sm font-semibold text-primary mb-3">สอบถามราคา</p>
 
         {/* Actions */}
         <div className="flex gap-2 pt-3 border-t border-border">

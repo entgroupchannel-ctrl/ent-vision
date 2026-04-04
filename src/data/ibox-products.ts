@@ -131,7 +131,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["AI Inference", "Deep Learning", "Edge AI", "Machine Vision", "Autonomous Systems"],
     datasheet: "/datasheets/IBOX-601-GT-PRO.pdf",
-    priceRange: "฿120,000 - ฿200,000",
     isHot: true,
     isNew: true,
   },
@@ -172,7 +171,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["AI Training", "Deep Learning", "3D Rendering", "Edge AI", "Computer Vision"],
     datasheet: "/datasheets/IBOX-602-GT-PRO.pdf",
-    priceRange: "฿150,000 - ฿250,000",
     isHot: true,
     isNew: true,
   },
@@ -209,7 +207,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Multi-camera Inspection", "AI Inference", "Smart Manufacturing", "Deep Learning"],
     datasheet: "/datasheets/IBOX-601-GT-2P.pdf",
-    priceRange: "฿185,000 - ฿245,000",
     isNew: true,
   },
   {
@@ -246,7 +243,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["AI Vision", "Deep Learning", "Machine Vision", "Video Analytics", "Edge Computing"],
     datasheet: "/datasheets/IBOX-602-GT-2P.pdf",
-    priceRange: "฿175,000 - ฿220,000",
     isNew: true,
   },
 
@@ -287,7 +283,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["AI Inference", "Edge Computing", "Machine Vision", "Industrial Server", "Intelligent Control"],
     datasheet: "/datasheets/IBOX-007.pdf",
-    priceRange: "฿95,000 - ฿150,000",
     isHot: true,
   },
   {
@@ -322,7 +317,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Factory Automation", "Edge Control", "PLC Replacement", "SCADA"],
     datasheet: "/datasheets/IBOX-103-2L2C.pdf",
-    priceRange: "฿45,000 - ฿65,000",
     isNew: true,
   },
   {
@@ -357,7 +351,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Industrial Control", "Automation", "Kiosk", "Digital Signage"],
     datasheet: "/datasheets/IBOX-103-2L2C-J4125.pdf",
-    priceRange: "฿22,000 - ฿28,000",
     isNew: true,
   },
   {
@@ -392,7 +385,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Distributed Control", "Factory Automation", "Industrial Gateway", "PLC Replacement"],
     datasheet: "/datasheets/IBOX-103-2L3C.pdf",
-    priceRange: "฿55,000 - ฿75,000",
     isNew: true,
   },
   {
@@ -427,7 +419,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Factory Automation", "Industrial Gateway", "SCADA"],
     datasheet: "/datasheets/IBOX-603-2L4C-1P.pdf",
-    priceRange: "฿75,000 - ฿95,000",
     isNew: true,
   },
   {
@@ -462,7 +453,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Edge Gateway", "Industrial HMI", "Intelligent Control", "Automation"],
     datasheet: "/datasheets/IBOX-205SBC-12TH.pdf",
-    priceRange: "฿58,000 - ฿85,000",
     isNew: true,
   },
 
@@ -499,7 +489,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Industrial Gateway", "Network Edge", "IoT Gateway", "Firewall"],
     datasheet: "/datasheets/IBOX-103-4L2C-J4125.pdf",
-    priceRange: "฿28,000 - ฿35,000",
     isNew: true,
   },
   {
@@ -533,7 +522,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["IoT Gateway", "Building Automation", "Energy Management"],
     datasheet: "/datasheets/ATLAS-DR-ARM.pdf",
-    priceRange: "฿28,000 - ฿38,000",
   },
 
   // ═══════ PoE & Multi-LAN ═══════
@@ -569,7 +557,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Network Automation", "Edge Computing", "Surveillance"],
     datasheet: "/datasheets/IBOX-604-5L2C2P.pdf",
-    priceRange: "฿95,000 - ฿125,000",
   },
   {
     id: "IBOX-601-9L2C4P",
@@ -603,7 +590,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Automation Control", "Surveillance", "Industrial Networking", "Edge Computing"],
     datasheet: "/datasheets/IBOX-601-9L2C4P.pdf",
-    priceRange: "฿125,000 - ฿165,000",
     isNew: true,
   },
   {
@@ -638,7 +624,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Edge Networking", "Machine Vision", "Industrial Gateway", "Surveillance"],
     datasheet: "/datasheets/IBOX-205-4L2C2P.pdf",
-    priceRange: "฿75,000 - ฿95,000",
     isNew: true,
   },
 
@@ -675,7 +660,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Fleet Management", "Mobile Surveillance", "Intelligent Transportation"],
     datasheet: "/datasheets/VBOX-105-2L6C.pdf",
-    priceRange: "฿65,000 - ฿85,000",
     isNew: true,
   },
 
@@ -715,7 +699,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Machine Vision", "AOI Inspection", "Robotics Vision", "Industrial Automation", "Quality Control"],
     datasheet: "/datasheets/AEOLUS-TL9-6L2C4P.pdf",
-    priceRange: "฿85,000 - ฿120,000",
     isHot: true,
     isNew: true,
   },
@@ -753,7 +736,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Industrial Gateway", "Edge Computing", "Network Appliance", "Automation Control", "Transportation"],
     datasheet: "/datasheets/AEOLUS-SV9-6L2C-1P.pdf",
-    priceRange: "฿65,000 - ฿95,000",
     isHot: true,
     isNew: true,
   },
@@ -790,7 +772,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Machine Vision", "AI Edge Computing", "AOI Inspection"],
     datasheet: "/datasheets/AEOLUS-SV9-6L2C.pdf",
-    priceRange: "฿85,000 - ฿120,000",
     isNew: true,
   },
   {
@@ -828,7 +809,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["IoT Gateway", "Industrial Automation", "Building Automation", "Energy Monitoring", "Transportation"],
     datasheet: "/datasheets/AEOLUS-SVA35-2L10C.pdf",
-    priceRange: "฿35,000 - ฿55,000",
     isHot: true,
     isNew: true,
   },
@@ -865,7 +845,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["Network Appliance", "Edge Gateway", "Industrial IoT"],
     datasheet: "/datasheets/KRONOS-SV6-4L8C.pdf",
-    priceRange: "฿65,000 - ฿85,000",
   },
   {
     id: "APOLLO-SV12-8P",
@@ -898,7 +877,6 @@ export const iboxProducts: IBoxProduct[] = [
     ],
     applications: ["AOI", "Machine Vision", "Deep Learning"],
     datasheet: "/datasheets/APOLLO-SV12-8P.pdf",
-    priceRange: "฿95,000 - ฿135,000",
     isNew: true,
   },
 ];
