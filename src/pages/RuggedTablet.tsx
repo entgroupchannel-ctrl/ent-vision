@@ -30,6 +30,9 @@ import TabletProductFilter, {
   TabletActiveFilterChips,
 } from "@/components/tablet/TabletProductFilter";
 import tabletHero from "@/assets/tablet-hero.jpg";
+import relatedNotebook from "@/assets/related-rugged-notebook.jpg";
+import relatedHandheld from "@/assets/related-rugged-handheld.jpg";
+import relatedAio from "@/assets/related-aio-pc.jpg";
 
 /* ═══════ Product Data — 15 models ═══════ */
 type TabletProduct = {
