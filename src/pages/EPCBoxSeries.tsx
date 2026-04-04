@@ -857,7 +857,18 @@ const EPCBoxSeries = () => {
         </div>
       </section>
 
-      {/* Industrial Grade */}
+      {/* Quick Compare System */}
+      <section className="section-padding bg-muted/30" id="comparison">
+        <div className="container max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Quick Compare</span>
+            <h2 className="text-2xl md:text-3xl font-display font-bold">เปรียบเทียบ<span className="text-gradient">ซีรีส์ทั้งหมด</span></h2>
+            <p className="text-muted-foreground mt-3">เลือกมุมมอง สเปก / ราคา / ความคุ้มค่า พร้อมระบบกรอง</p>
+          </div>
+          <EPCComparisonSystem onQuote={(name) => { setQuoteProduct(name); setQuoteOpen(true); }} />
+        </div>
+      </section>
+
       <section className="section-padding bg-muted/30">
         <div className="container max-w-7xl mx-auto">
           <div className="text-center mb-8">
@@ -923,17 +934,6 @@ const EPCBoxSeries = () => {
         </div>
       </section>
 
-      {/* Quick Compare System */}
-      <section className="section-padding bg-muted/30" id="comparison">
-        <div className="container max-w-7xl mx-auto">
-          <div className="text-center mb-8">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Quick Compare</span>
-            <h2 className="text-2xl md:text-3xl font-display font-bold">เปรียบเทียบ<span className="text-gradient">ซีรีส์ทั้งหมด</span></h2>
-            <p className="text-muted-foreground mt-3">เลือกมุมมอง สเปก / ราคา / ความคุ้มค่า พร้อมระบบกรอง</p>
-          </div>
-          <EPCComparisonSystem onQuote={(name) => { setQuoteProduct(name); setQuoteOpen(true); }} />
-        </div>
-      </section>
 
       {/* Price List */}
       <section className="section-padding" id="pricing">
