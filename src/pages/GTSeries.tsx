@@ -5014,10 +5014,7 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Use Cases */}
-              <div className="card-surface rounded-xl overflow-hidden">
-                <div className="p-6 border-b border-border">
-                  <h3 className="text-xl font-display font-bold text-foreground mb-2">🎨 เพิ่มสีสันสดใส ด้วยการทำสีใหม่ให้กับสินค้าของคุณ</h3>
+              {useCasesGrid}
                   <p className="text-muted-foreground">สร้างภาพลักษณ์องค์กร — พนักงานภูมิใจที่ได้ใช้ผลิตภัณฑ์ระดับโลก ออกแบบเครื่องให้เข้ากับแบรนด์ของคุณได้อย่างลงตัว</p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0 divide-x divide-y divide-border">
