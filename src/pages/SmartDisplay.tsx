@@ -266,10 +266,10 @@ const SmartDisplay = () => {
                     </div>
                     <p className="text-sm text-muted-foreground">{p.type}</p>
                     <button
-                      onClick={() => setShowLineQR(true)}
-                      className="mt-4 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
+                      onClick={() => setQuoteOpen(true)}
+                      className="mt-4 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
                     >
-                      <MessageCircle size={14} /> สอบถามราคา
+                      <FileText size={14} /> ขอใบเสนอราคา
                     </button>
                   </div>
                 ))}
@@ -391,6 +391,7 @@ const SmartDisplay = () => {
                           <th className="text-left p-3 font-semibold text-muted-foreground">รุ่น</th>
                           <th className="text-left p-3 font-semibold text-muted-foreground">สเปค</th>
                           <th className="text-right p-3 font-semibold text-muted-foreground">ราคา (฿)</th>
+                          <th className="p-3"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -400,6 +401,14 @@ const SmartDisplay = () => {
                             <td className="p-3 font-semibold text-foreground">{item.model}</td>
                             <td className="p-3 text-muted-foreground">{item.config}</td>
                             <td className="p-3 text-right font-bold text-primary">{item.price}</td>
+                            <td className="p-3 text-right">
+                              <button
+                                onClick={() => setQuoteOpen(true)}
+                                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity"
+                              >
+                                <FileText size={12} /> ขอราคา
+                              </button>
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -475,13 +484,19 @@ const SmartDisplay = () => {
 
               {/* Outdoor sizes */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-                {outdoorSizes.map((s, i) => (
+               {outdoorSizes.map((s, i) => (
                   <div key={i} className="card-surface p-5 text-center hover:border-primary/30 transition-all">
                     <p className="text-3xl font-display font-black text-primary mb-1">{s.size}</p>
                     <p className="text-sm font-semibold text-foreground mb-1">{s.nits}</p>
-                    <a href={s.datasheet} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-2">
+                    <a href={s.datasheet} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-1">
                       <Download size={12} /> Datasheet
                     </a>
+                    <button
+                      onClick={() => setQuoteOpen(true)}
+                      className="mt-2 w-full inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity"
+                    >
+                      <FileText size={12} /> ขอใบเสนอราคา
+                    </button>
                   </div>
                 ))}
               </div>
@@ -656,7 +671,13 @@ const SmartDisplay = () => {
                       <img src={k.image} alt={k.title} className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                     </div>
                     <h3 className="font-bold text-foreground mb-1">{k.title}</h3>
-                    <p className="text-sm text-muted-foreground">{k.desc}</p>
+                    <p className="text-sm text-muted-foreground mb-3">{k.desc}</p>
+                    <button
+                      onClick={() => setQuoteOpen(true)}
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
+                    >
+                      <FileText size={14} /> ขอใบเสนอราคา
+                    </button>
                   </div>
                 ))}
               </div>
@@ -928,11 +949,17 @@ const SmartDisplay = () => {
                       Digital signage is the ideal product for digitally showcasing your content.
                       Find out how easy it is to create impactful messages that will get results.
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {applications.map((app) => (
                         <span key={app} className="text-[11px] px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground">{app}</span>
                       ))}
                     </div>
+                    <button
+                      onClick={() => setQuoteOpen(true)}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:opacity-90 transition-opacity"
+                    >
+                      <FileText size={16} /> ขอใบเสนอราคา
+                    </button>
                   </div>
                   <div className="bg-secondary/30 p-6 flex items-center justify-center">
                     <img
