@@ -825,6 +825,10 @@ const GKSeries = () => {
               { id: "cUqG6xWQegE", title: "GK1004 How to Choose" },
               { id: "jWM0vEKoAAE", title: "GK1004 รายละเอียดเพิ่มเติม" },
               { id: "xXaUYlbVy5o", title: "GK1004 การใช้งาน" },
+              { id: "O5fd-_ZfWR0", title: "GK1506 Introduction" },
+              { id: "szVVTv5tmJs", title: "GK1506 รีวิวเพิ่มเติม" },
+              { id: "ZZlkdSgJAzs", title: "GK1506 สาธิตการใช้งาน" },
+              { id: "PeOizgJEVBc", title: "GK1506 เปรียบเทียบสเปก" },
               { id: "_CZTxWtK3rw", title: "รีวิว Industrial Panel PC - GK Series" },
               { id: "POvzJ1FWtTU", title: "Panel PC - GK2101" },
             ].map((v) => (
