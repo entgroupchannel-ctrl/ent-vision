@@ -177,23 +177,30 @@ const Handheld = () => {
         </div>
       </div>
 
-      {/* Sticky Filter */}
-      <div className="sticky top-[57px] z-30 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="container max-w-7xl mx-auto px-4 py-2 flex items-center gap-2 overflow-x-auto scrollbar-hide">
-          {filterOptions.map((opt) => (
-            <button
-              key={opt.id}
-              onClick={() => setFilter(opt.id)}
-              className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
-                filter === opt.id
-                  ? "bg-primary text-primary-foreground shadow-sm"
-                  : "bg-muted text-muted-foreground hover:bg-muted/80"
-              }`}
-            >
-              {opt.label}
-            </button>
-          ))}
-          <span className="text-xs text-muted-foreground ml-auto shrink-0">{filtered.length} รุ่น</span>
+      {/* Sticky Bar: Back + Quick Filters */}
+      <div className="sticky top-0 z-30 bg-background/90 backdrop-blur-md border-b border-border">
+        <div className="container max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between py-1.5 border-b border-border/50">
+            <Link to="/" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
+              <ArrowLeft className="w-3.5 h-3.5" /> กลับหน้าหลัก
+            </Link>
+            <span className="text-[10px] text-muted-foreground">Handheld & PDA — {filtered.length} รุ่น</span>
+          </div>
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide py-2">
+            {filterOptions.map((opt) => (
+              <button
+                key={opt.id}
+                onClick={() => setFilter(opt.id)}
+                className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
+                  filter === opt.id
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
