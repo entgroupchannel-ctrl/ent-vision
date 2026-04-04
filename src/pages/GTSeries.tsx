@@ -1909,35 +1909,79 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Video Section */}
-              <div className="card-surface overflow-hidden rounded-xl">
+              {/* Video Section — YouTube */}
+              <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border flex items-center gap-3">
                   <Play className="text-primary" size={20} />
-                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT3000</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground">🎬 วิดีโอ GT3000</h3>
                 </div>
-                <a
-                  href="https://www.youtube.com/watch?v=ifkzyVY9Z-g"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block relative group"
-                >
-                  <img
-                    src="https://img.youtube.com/vi/ifkzyVY9Z-g/maxresdefault.jpg"
-                    alt="การเลือกซื้อคอมพิวเตอร์สำหรับงานอุตสาหกรรม GT Series"
-                    className="w-full aspect-video object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                    <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Play className="text-primary-foreground ml-1" size={28} fill="currentColor" />
+                <div className="p-5 space-y-6">
+                  {/* Intro Video — Hero */}
+                  <div>
+                    <h4 className="text-sm font-bold text-foreground mb-2">📌 GT3000 Intro</h4>
+                    <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+                      <iframe
+                        src="https://www.youtube.com/embed/ifkzyVY9Z-g"
+                        title="GT3000 Intro"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="mt-3">
+                      <ShareButtons url="https://youtu.be/ifkzyVY9Z-g" title="GT3000 Intro — ENT GROUP" />
                     </div>
                   </div>
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-white text-sm font-semibold bg-black/60 px-3 py-1 rounded-full">
-                      การเลือกซื้อ GT Series — 14:20
-                    </span>
+
+                  {/* Other Videos — Grid */}
+                  <div>
+                    <h4 className="text-sm font-bold text-foreground mb-3">🎥 วิดีโอเพิ่มเติม</h4>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      {[
+                        { id: "aQ5z_JJzALo", title: "GT3000 รีวิวเจาะลึก" },
+                        { id: "FV7oo7GHp9Q", title: "GT3000 สาธิตการใช้งาน" },
+                        { id: "31SEStppvKw", title: "GT3000 ติดตั้งจริง" },
+                      ].map((video) => (
+                        <div key={video.id} className="space-y-2">
+                          <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                            <iframe
+                              src={`https://www.youtube.com/embed/${video.id}`}
+                              title={video.title}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              className="absolute inset-0 w-full h-full"
+                              loading="lazy"
+                            />
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <p className="text-xs text-muted-foreground font-medium">{video.title}</p>
+                            <ShareButtons url={`https://youtu.be/${video.id}`} title={`${video.title} — ENT GROUP`} compact />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </a>
+
+                  {/* YouTube Channel CTA */}
+                  <a
+                    href="https://www.youtube.com/@ENTGROUP-TH"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 rounded-xl border border-red-500/20 bg-red-500/5 hover:bg-red-500/10 transition-colors group"
+                  >
+                    <div className="shrink-0 w-10 h-10 rounded-full bg-red-600 flex items-center justify-center">
+                      <Play className="text-white ml-0.5" size={18} fill="white" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-bold text-foreground">ENT GROUP — YouTube Channel</p>
+                      <p className="text-xs text-muted-foreground">กดติดตามเพื่อรับวิดีโอสินค้าใหม่ รีวิว และเทคนิคการใช้งาน</p>
+                    </div>
+                    <span className="shrink-0 px-3 py-1.5 rounded-lg bg-red-600 text-white text-xs font-bold group-hover:bg-red-700 transition-colors">
+                      Subscribe
+                    </span>
+                  </a>
+                </div>
               </div>
 
               {/* Datasheet CTA */}
