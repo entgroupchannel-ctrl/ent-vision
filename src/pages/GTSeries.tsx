@@ -595,7 +595,7 @@ const ComparisonTable = ({ handleTabChange }: { handleTabChange: (tab: string) =
       </div>
 
       <p className="text-center text-xs text-muted-foreground mt-4">
-        * ราคาขึ้นอยู่กับ CPU, RAM, Storage ที่เลือก — คลิกที่แถวเพื่อดูรายละเอียดแต่ละรุ่น
+        ⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup
       </p>
     </div>
   );
@@ -1119,7 +1119,7 @@ const GTSeries = () => {
               <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border">
                   <h3 className="text-lg font-display font-bold text-foreground">GT1000 Price List</h3>
-                  <p className="text-xs text-muted-foreground mt-1">ราคารวม VAT แล้ว · รับประกัน 1 ปี</p>
+                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -1585,7 +1585,7 @@ const GTSeries = () => {
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
                   <h3 className="text-lg font-display font-bold text-foreground">💰 GT2000 Price List</h3>
-                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น</p>
+                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -2150,7 +2150,7 @@ const GTSeries = () => {
                   </table>
                 </div>
                 <div className="p-3 text-xs text-muted-foreground bg-muted/10 border-t border-border">
-                  * ราคาดังกล่าวยังไม่รวม VAT 7% และอาจมีการเปลี่ยนแปลงโดยไม่ต้องแจ้งล่วงหน้า
+                  ⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup
                 </div>
                 <div className="p-4 border-t border-border text-center">
                   <button onClick={() => setQuoteProduct("GT3000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg">
@@ -2375,7 +2375,7 @@ const GTSeries = () => {
               <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border">
                   <h3 className="text-lg font-display font-bold text-foreground">GT4000 Price List</h3>
-                  <p className="text-xs text-muted-foreground mt-1">ราคารวม VAT แล้ว · รับประกัน 1 ปี</p>
+                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -2649,7 +2649,7 @@ const GTSeries = () => {
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
                   <h3 className="text-lg font-display font-bold text-foreground">💰 GT5000 Price List</h3>
-                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿19,490</p>
+                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -3904,7 +3904,7 @@ const GTSeries = () => {
                       <CollapsibleTrigger className="w-full p-5 border-b border-border flex items-center justify-between hover:bg-secondary/30 transition-colors">
                         <div>
                           <h3 className="text-lg font-display font-bold text-foreground text-left">💰 GT9000 Price List</h3>
-                          <p className="text-sm text-muted-foreground mt-1 text-left">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿25,290 · {gt9000Prices.length} รายการ</p>
+                          <p className="text-xs text-muted-foreground mt-1 text-left">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา · {gt9000Prices.length} รายการ</p>
                         </div>
                         <ChevronDown size={20} className="text-muted-foreground transition-transform duration-200 [[data-state=open]>&]:rotate-180" />
                       </CollapsibleTrigger>
@@ -4637,7 +4637,7 @@ const GTSeries = () => {
                       <CollapsibleTrigger className="w-full p-5 border-b border-border flex items-center justify-between hover:bg-secondary/30 transition-colors">
                         <div>
                           <h3 className="text-lg font-display font-bold text-foreground text-left">💰 GT1400 Price List</h3>
-                          <p className="text-sm text-muted-foreground mt-1 text-left">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿28,990 · {gt1400Prices.length} รายการ</p>
+                          <p className="text-xs text-muted-foreground mt-1 text-left">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา · {gt1400Prices.length} รายการ</p>
                         </div>
                         <ChevronDown size={20} className="text-muted-foreground transition-transform duration-200 [[data-state=open]>&]:rotate-180" />
                       </CollapsibleTrigger>
@@ -4673,7 +4673,7 @@ const GTSeries = () => {
                             <button onClick={() => setGt1400PricePage(Math.min(totalPages - 1, gt1400PricePage + 1))} disabled={gt1400PricePage === totalPages - 1} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ถัดไป</button>
                           </div>
                         )}
-                        <p className="text-xs text-muted-foreground text-center py-3 border-t border-border">* ราคาอาจเปลี่ยนแปลงได้โดยมิต้องแจ้งให้ทราบล่วงหน้า</p>
+                        <p className="text-xs text-muted-foreground text-center py-3 border-t border-border">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
                       </CollapsibleContent>
                     </div>
                   </Collapsible>
