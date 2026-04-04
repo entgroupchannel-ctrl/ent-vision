@@ -1534,54 +1534,103 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Video Section */}
-              <div className="card-surface overflow-hidden rounded-xl">
+              {/* Podcast Section */}
+              <div className="card-surface overflow-hidden rounded-2xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+                  <h3 className="text-lg font-display font-bold text-foreground">🎙️ Podcast — GT2000 Introduction</h3>
+                </div>
+                <div className="p-5">
+                  <div className="flex items-start gap-4 p-4 rounded-xl bg-secondary/40 border border-border">
+                    <div className="shrink-0 w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-foreground">GT2000 Introduction</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">แนะนำ GT2000 — Industrial PC ยอดนิยม 8 USB + 4 COM</p>
+                      <audio controls className="w-full mt-3 h-10" preload="metadata">
+                        <source src="/audio/GT2000_Intro.wav" type="audio/wav" />
+                        เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
+                      </audio>
+                      <div className="mt-3">
+                        <ShareButtons url={window.location.origin + "/gt-series?tab=gt2000"} title="GT2000 Podcast — ENT GROUP" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Video Section — YouTube */}
+              <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border flex items-center gap-3">
                   <Play className="text-primary" size={20} />
-                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT2000</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground">🎬 วิดีโอ GT2000</h3>
                 </div>
-                <div className="grid md:grid-cols-2 gap-0 md:divide-x divide-border">
+                <div className="p-5 space-y-6">
+                  {/* Intro Video — Hero */}
+                  <div>
+                    <h4 className="text-sm font-bold text-foreground mb-2">📌 GT2000 Intro</h4>
+                    <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+                      <iframe
+                        src="https://www.youtube.com/embed/XLhFAF_8Da4"
+                        title="GT2000 Intro"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="mt-3">
+                      <ShareButtons url="https://youtu.be/XLhFAF_8Da4" title="GT2000 Intro — ENT GROUP" />
+                    </div>
+                  </div>
+
+                  {/* Other Videos — Grid */}
+                  <div>
+                    <h4 className="text-sm font-bold text-foreground mb-3">🎥 วิดีโอเพิ่มเติม</h4>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      {[
+                        { id: "uc0Qj3DcNuQ", title: "GT2000 รีวิวเจาะลึก" },
+                        { id: "ifkzyVY9Z-g", title: "การเลือกซื้อ GT Series" },
+                        { id: "Z4hTYAIDs2s", title: "GT2000 สาธิตการใช้งาน" },
+                      ].map((video) => (
+                        <div key={video.id} className="space-y-2">
+                          <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                            <iframe
+                              src={`https://www.youtube.com/embed/${video.id}`}
+                              title={video.title}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              className="absolute inset-0 w-full h-full"
+                              loading="lazy"
+                            />
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <p className="text-xs text-muted-foreground font-medium">{video.title}</p>
+                            <ShareButtons url={`https://youtu.be/${video.id}`} title={`${video.title} — ENT GROUP`} compact />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* YouTube Channel CTA */}
                   <a
-                    href="https://www.youtube.com/watch?v=XLhFAF_8Da4"
+                    href="https://www.youtube.com/@ENTGROUP-TH"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block relative group"
+                    className="flex items-center gap-3 p-4 rounded-xl border border-red-500/20 bg-red-500/5 hover:bg-red-500/10 transition-colors group"
                   >
-                    <img
-                      src="https://img.youtube.com/vi/XLhFAF_8Da4/maxresdefault.jpg"
-                      alt="เปิดตัวน้องใหม่ Mini GT2000"
-                      className="w-full aspect-video object-cover"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
-                      </div>
+                    <div className="shrink-0 w-10 h-10 rounded-full bg-red-600 flex items-center justify-center">
+                      <Play className="text-white ml-0.5" size={18} fill="white" />
                     </div>
-                    <div className="absolute bottom-3 left-3">
-                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">เปิดตัว Mini GT2000 — 04:53</span>
+                    <div className="flex-1">
+                      <p className="text-sm font-bold text-foreground">ENT GROUP — YouTube Channel</p>
+                      <p className="text-xs text-muted-foreground">กดติดตามเพื่อรับวิดีโอสินค้าใหม่ รีวิว และเทคนิคการใช้งาน</p>
                     </div>
-                  </a>
-                  <a
-                    href="https://www.youtube.com/watch?v=ifkzyVY9Z-g"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block relative group"
-                  >
-                    <img
-                      src="https://img.youtube.com/vi/ifkzyVY9Z-g/maxresdefault.jpg"
-                      alt="การเลือกซื้อคอมพิวเตอร์สำหรับงานอุตสาหกรรม GT Series"
-                      className="w-full aspect-video object-cover"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
-                      </div>
-                    </div>
-                    <div className="absolute bottom-3 left-3">
-                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">การเลือกซื้อ GT Series — 14:20</span>
-                    </div>
+                    <span className="shrink-0 px-3 py-1.5 rounded-lg bg-red-600 text-white text-xs font-bold group-hover:bg-red-700 transition-colors">
+                      Subscribe
+                    </span>
                   </a>
                 </div>
               </div>
