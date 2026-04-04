@@ -196,7 +196,7 @@ const NotebookCard = ({ product }: { product: RuggedNotebook }) => {
           <QuoteButton productName={product.model} productCategory="Rugged Notebook" variant="compact" />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
