@@ -35,6 +35,7 @@ import gt6000Product from "@/assets/gt6000-product.jpg";
 import gt7000Product from "@/assets/gt7000-product.jpg";
 import gt8000Product from "@/assets/gt8000-product.jpg";
 import gt9000Product from "@/assets/gt9000-product.jpg";
+import gt3000CpuOptions from "@/assets/gt3000-cpu-options.png";
 import FooterCompact from "@/components/FooterCompact";
 
 const features = [
