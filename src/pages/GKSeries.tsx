@@ -625,7 +625,7 @@ const PaginatedPriceTable = ({ rows, perPage, totalPages }: {
 };
 
 /* ─── Model Card Component ─── */
-const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
+const ModelSection = ({ model, index, onQuote }: { model: GKModel; index: number; onQuote: (name: string) => void }) => {
   const isReversed = index % 2 === 1;
 
   return (
@@ -688,7 +688,13 @@ const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
           <p className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">{model.tagline}</p>
           <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-1">{model.name}</h3>
           <p className="text-sm text-muted-foreground mb-1">{model.screenSize} • {model.resolution} • {model.platform}</p>
-          <p className="text-muted-foreground mb-6 leading-relaxed">{model.desc}</p>
+          <p className="text-muted-foreground mb-4 leading-relaxed">{model.desc}</p>
+          <button
+            onClick={() => onQuote(model.name)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors mb-6"
+          >
+            <ExternalLink size={14} /> ขอใบเสนอราคา {model.name}
+          </button>
 
           {/* Highlights */}
           <ul className="space-y-2 mb-6">
@@ -820,7 +826,15 @@ const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
                   <PaginatedPriceTable rows={allRows} perPage={PRICE_PER_PAGE} totalPages={totalPricePages} />
                 );
               })()}
-              <PriceDisclaimer />
+              <div className="flex items-center justify-between p-4 border-t border-border bg-muted/20">
+                <PriceDisclaimer />
+                <button
+                  onClick={() => onQuote(model.name)}
+                  className="shrink-0 ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors"
+                >
+                  <ExternalLink size={14} /> ขอใบเสนอราคา
+                </button>
+              </div>
             </TabsContent>
           )}
 
@@ -885,6 +899,7 @@ const ComparisonTable = () => (
 /* ─── Page ─── */
 const GKSeries = () => {
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [quoteProduct, setQuoteProduct] = useState("");
   const [showLineQR, setShowLineQR] = useState(false);
   const [activeVideoTab, setActiveVideoTab] = useState("ทั้งหมด");
   return (
@@ -1060,7 +1075,7 @@ const GKSeries = () => {
 
           <div className="space-y-10">
             {gkModels.map((model, idx) => (
-              <ModelSection key={model.id} model={model} index={idx} />
+              <ModelSection key={model.id} model={model} index={idx} onQuote={(name) => { setQuoteProduct(name); setQuoteOpen(true); }} />
             ))}
           </div>
         </div>
@@ -1343,7 +1358,7 @@ const GKSeries = () => {
             <button onClick={() => setQuoteOpen(true)} className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg hover:bg-primary/90 transition-colors">
               ขอใบเสนอราคา
             </button>
-            <QuoteDialog open={quoteOpen} onClose={() => setQuoteOpen(false)} productCategory="GK Series — Panel PC" />
+            <QuoteDialog open={quoteOpen} onClose={() => { setQuoteOpen(false); setQuoteProduct(""); }} productCategory="GK Series — Panel PC" productName={quoteProduct} />
             <button
               onClick={() => setShowLineQR(true)}
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[hsl(142,70%,45%)] text-white font-bold text-lg hover:opacity-90 transition-opacity"
