@@ -1,0 +1,344 @@
+import { useState, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft, Monitor, Cpu, Box, Layers, FileText, ExternalLink, ChevronRight } from "lucide-react";
+import SEOHead from "@/components/SEOHead";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
+import WishlistHeart from "@/components/WishlistHeart";
+import FooterCompact from "@/components/FooterCompact";
+import QuoteDialog from "@/components/QuoteDialog";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { aioProducts, categoryLabels, type AIOCategory, type AIOOS } from "@/data/aio-products";
+
+/* ── Filter Tabs ── */
+const osFilters: { label: string; value: AIOOS | "all" }[] = [
+  { label: "ทั้งหมด", value: "all" },
+  { label: "Windows", value: "Windows" },
+  { label: "Android", value: "Android" },
+  { label: "Linux", value: "Linux" },
+];
+
+const catFilters: { label: string; value: AIOCategory | "all"; icon: typeof Monitor }[] = [
+  { label: "ทั้งหมด", value: "all", icon: Layers },
+  { label: "Box PC", value: "box-pc", icon: Box },
+  { label: "AIO Desktop", value: "aio-desktop", icon: Monitor },
+  { label: "Panel PC", value: "panel-pc", icon: Cpu },
+];
+
+/* ── Product Card ── */
+const AIOCard = ({
+  product,
+  onQuote,
+  selected,
+  onToggleSelect,
+}: {
+  product: (typeof aioProducts)[0];
+  onQuote: (name: string) => void;
+  selected: boolean;
+  onToggleSelect: (name: string) => void;
+}) => (
+  <div
+    className={`card-surface overflow-hidden group transition-all ${
+      selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"
+    }`}
+  >
+    {/* Image */}
+    <div className="relative bg-secondary/30 p-4 flex items-center justify-center h-52">
+      <WishlistHeart
+        item={{
+          id: product.id,
+          name: product.model,
+          category: "All-in-One PC",
+          image: product.image,
+          href: `/aio`,
+          specs: product.title,
+        }}
+        className="absolute top-3 right-3"
+      />
+      <button
+        onClick={() => onToggleSelect(product.model)}
+        className="absolute top-3 left-3 z-10"
+      >
+        <Checkbox checked={selected} className="h-5 w-5" />
+      </button>
+      <img
+        src={product.image}
+        alt={product.model}
+        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+        loading="lazy"
+      />
+    </div>
+
+    {/* Info */}
+    <div className="p-5 space-y-3">
+      <div className="flex items-center gap-2 flex-wrap">
+        {product.os.map((o) => (
+          <Badge
+            key={o}
+            variant="outline"
+            className={`text-[10px] ${
+              o === "Windows"
+                ? "border-blue-500/30 text-blue-500"
+                : o === "Android"
+                ? "border-green-500/30 text-green-500"
+                : "border-orange-500/30 text-orange-500"
+            }`}
+          >
+            {o}
+          </Badge>
+        ))}
+        <Badge variant="secondary" className="text-[10px]">
+          {product.screenSize}
+        </Badge>
+      </div>
+
+      <h3 className="font-display font-bold text-foreground text-sm">{product.model}</h3>
+      <p className="text-xs font-medium text-foreground/80">{product.title}</p>
+
+      <ul className="space-y-1">
+        {[product.cpu, `${product.ram} / ${product.storage}`, product.mount, ...product.highlights.slice(-1)].map(
+          (line, i) => (
+            <li key={i} className="text-[11px] text-muted-foreground flex items-start gap-1.5">
+              <ChevronRight size={10} className="text-primary/50 mt-0.5 shrink-0" />
+              {line}
+            </li>
+          )
+        )}
+      </ul>
+
+      <div className="flex gap-2 pt-1">
+        {product.productUrl && (
+          <Button variant="outline" size="sm" asChild className="flex-1">
+            <a href={product.productUrl} target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
+            </a>
+          </Button>
+        )}
+        <Button
+          size="sm"
+          className="flex-1"
+          onClick={() => onQuote(product.model)}
+        >
+          <FileText className="w-3.5 h-3.5 mr-1.5" /> สอบถามราคา
+        </Button>
+      </div>
+    </div>
+  </div>
+);
+
+/* ══════════ Main Page ══════════ */
+const AllInOnePC = () => {
+  const [osFilter, setOsFilter] = useState<AIOOS | "all">("all");
+  const [catFilter, setCatFilter] = useState<AIOCategory | "all">("all");
+  const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const [selectedProducts, setSelectedProducts] = useState<Set<string>>(new Set());
+
+  const toggleSelect = useCallback((name: string) => {
+    setSelectedProducts((prev) => {
+      const next = new Set(prev);
+      if (next.has(name)) next.delete(name);
+      else next.add(name);
+      return next;
+    });
+  }, []);
+
+  const filtered = aioProducts.filter((p) => {
+    if (osFilter !== "all" && !p.os.includes(osFilter)) return false;
+    if (catFilter !== "all" && p.category !== catFilter) return false;
+    return true;
+  });
+
+  const stats = {
+    total: aioProducts.length,
+    windows: aioProducts.filter((p) => p.os.includes("Windows")).length,
+    android: aioProducts.filter((p) => p.os.includes("Android")).length,
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      <SEOHead
+        title="All-in-One PC อุตสาหกรรม — Box PC, Panel PC, AIO Desktop"
+        description="คอมพิวเตอร์ All-in-One สำหรับอุตสาหกรรม จอสัมผัส ประหยัดพื้นที่ VESA/Panel Mount — 15 รุ่น Windows & Android"
+        path="/aio"
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "สินค้า", path: "/products" },
+          { name: "All-in-One PC", path: "/aio" },
+        ]}
+      />
+
+      {/* ── Hero ── */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-background via-primary/5 to-background">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+        </div>
+        <div className="container max-w-7xl mx-auto px-4 py-8 relative z-10">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6"
+          >
+            <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
+          </Link>
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
+            <div>
+              <Badge className="bg-primary/10 text-primary border-primary/20 mb-3">Industrial Grade</Badge>
+              <h1 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-3">
+                All-in-One <span className="text-gradient">Industrial PC</span>
+              </h1>
+              <p className="text-muted-foreground max-w-2xl leading-relaxed">
+                คอมพิวเตอร์ All-in-One สำหรับอุตสาหกรรม ออกแบบมาเพื่อประหยัดพื้นที่และเพิ่มประสิทธิภาพการทำงาน
+                พร้อมจอสัมผัสคุณภาพสูง รองรับ VESA / Panel Mount
+              </p>
+            </div>
+            <Button size="sm" onClick={() => setQuoteProduct("All-in-One PC")}>
+              <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
+            </Button>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-3 max-w-md">
+            {[
+              { label: "รุ่นทั้งหมด", value: stats.total },
+              { label: "Windows", value: stats.windows },
+              { label: "Android", value: stats.android },
+            ].map((s) => (
+              <div key={s.label} className="card-surface p-3 text-center">
+                <p className="text-lg font-bold text-primary">{s.value}</p>
+                <p className="text-[10px] text-muted-foreground">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Sticky Filters ── */}
+      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border">
+        <div className="container max-w-7xl mx-auto px-4 py-2">
+          <div className="flex flex-col sm:flex-row gap-2">
+            {/* OS filter */}
+            <div className="flex gap-1 overflow-x-auto scrollbar-hide">
+              {osFilters.map((f) => (
+                <button
+                  key={f.value}
+                  onClick={() => setOsFilter(f.value)}
+                  className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    osFilter === f.value
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-secondary/50 text-foreground/70 hover:bg-secondary"
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+            {/* Category filter */}
+            <div className="flex gap-1 overflow-x-auto scrollbar-hide sm:ml-auto">
+              {catFilters.map((f) => (
+                <button
+                  key={f.value}
+                  onClick={() => setCatFilter(f.value)}
+                  className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
+                    catFilter === f.value
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-secondary/50 text-foreground/70 hover:bg-secondary"
+                  }`}
+                >
+                  <f.icon size={12} />
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Product Grid ── */}
+      <div className="container max-w-7xl mx-auto px-4 py-10">
+        <p className="text-sm text-muted-foreground mb-6">
+          แสดง {filtered.length} จาก {aioProducts.length} รุ่น
+          {selectedProducts.size > 0 && (
+            <span className="ml-3 text-primary font-medium">
+              เลือกแล้ว {selectedProducts.size} รุ่น —{" "}
+              <button
+                className="underline hover:no-underline"
+                onClick={() => {
+                  setQuoteProduct(Array.from(selectedProducts).join(", "));
+                }}
+              >
+                ขอใบเสนอราคารวม
+              </button>
+            </span>
+          )}
+        </p>
+
+        {/* Group by category */}
+        {(catFilter === "all"
+          ? (["box-pc", "aio-desktop", "panel-pc"] as AIOCategory[])
+          : [catFilter]
+        ).map((cat) => {
+          const items = filtered.filter((p) => p.category === cat);
+          if (items.length === 0) return null;
+          return (
+            <div key={cat} className="mb-12">
+              <h2 className="text-xl font-display font-bold text-foreground mb-1">
+                {categoryLabels[cat]}
+              </h2>
+              <p className="text-xs text-muted-foreground mb-4">
+                {cat === "box-pc" && "Box PC อุตสาหกรรม จอสัมผัส พร้อมติดตั้ง VESA / Desktop / Wall Mount"}
+                {cat === "aio-desktop" && "All-in-One PC จอสัมผัส สำหรับโต๊ะทำงานและติดผนัง"}
+                {cat === "panel-pc" && "Panel PC อุตสาหกรรม สำหรับฝังตู้คอนโทรล Panel Mount / VESA"}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {items.map((p) => (
+                  <AIOCard
+                    key={p.id}
+                    product={p}
+                    onQuote={setQuoteProduct}
+                    selected={selectedProducts.has(p.model)}
+                    onToggleSelect={toggleSelect}
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        })}
+
+        {filtered.length === 0 && (
+          <div className="text-center py-20">
+            <Monitor className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
+            <p className="text-muted-foreground">ไม่พบสินค้าที่ตรงกับตัวกรอง</p>
+            <Button
+              variant="outline"
+              size="sm"
+              className="mt-3"
+              onClick={() => {
+                setOsFilter("all");
+                setCatFilter("all");
+              }}
+            >
+              รีเซ็ตตัวกรอง
+            </Button>
+          </div>
+        )}
+
+        <PriceDisclaimer />
+      </div>
+
+      <FooterCompact />
+
+      {/* Quote Dialog */}
+      <QuoteDialog
+        open={!!quoteProduct}
+        onClose={() => setQuoteProduct(null)}
+        productName={quoteProduct || ""}
+      />
+    </div>
+  );
+};
+
+export default AllInOnePC;

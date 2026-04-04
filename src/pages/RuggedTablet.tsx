@@ -180,56 +180,6 @@ const tpcSeries = [
   },
 ];
 
-const aioProducts = [
-  {
-    id: "h10pro", name: "H10PRO Box PC", size: '10"',
-    highlight: "Intel J4125 Quad Core, จอ IPS Touch 1920x1200, แบต 10000mAh, VESA/Wall Mount",
-    image: "https://entgroup-rugged.com/assets/h10pro-8mKFXuc7.jpg", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/h10pro",
-  },
-  {
-    id: "h10f", name: "H10F Box PC + Scanner", size: '10.1"',
-    highlight: "Intel J4125 Quad Core, 2D Scanner ในตัว, ถอดแบตได้, Desktop/Wall Mount",
-    image: "https://entgroup-rugged.com/assets/h10f-BONJ3fIQ.jpg", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/h10f",
-  },
-  {
-    id: "f10-aio", name: "F10 All-in-One PC", size: '10.1"',
-    highlight: "Intel Celeron N5095, จอ IPS 1200x1920, Windows 11 Pro, VESA Mount",
-    image: "https://entgroup-rugged.com/assets/f10-C93ZGwZ7.jpg", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/f10",
-  },
-  {
-    id: "f15", name: "F15 Industrial AIO", size: '15.6"',
-    highlight: "Intel Celeron N5095, จอ FHD IPS Touch 15.6 นิ้ว พร้อมขาตั้ง, Windows 11 Pro",
-    image: "https://entgroup-rugged.com/assets/f15-fmf9sjOL.jpg", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/f15",
-  },
-  {
-    id: "f3apl", name: "F3APL Mini Tablet", size: '8"',
-    highlight: "Intel N4200, จอ HD IPS Touch 8 นิ้ว, Wall Mount, ขนาดกะทัดรัด",
-    image: "https://entgroup-rugged.com/assets/f3apl-BmanKFN1.jpg", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/f3apl",
-  },
-  {
-    id: "em-p18r", name: "EM-P18R Panel PC", size: '18.5"',
-    highlight: "Rockchip RK3568 Quad Core, จอ HD+ Touch 18.5 นิ้ว, Panel/VESA Mount",
-    image: "https://entgroup-rugged.com/assets/em-p18r-BXxSGPUz.jpg", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/em-p18r",
-  },
-  {
-    id: "em-pt21", name: "EM-PT21 Panel Display", size: '21.5"',
-    highlight: "Intel Processor, จอ FHD 1920x1080 Touch 21.5 นิ้ว, Panel/VESA Mount",
-    image: "https://entgroup-rugged.com/assets/em-pt21-Bb8yF9hD.png", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/em-pt21",
-  },
-  {
-    id: "em-p21r", name: "EM-P21R Android Panel PC", size: '21.5"',
-    highlight: "Rockchip RK3568, จอ FHD Touch 21.5 นิ้ว, Android 12, Embedded Panel",
-    image: "https://entgroup-rugged.com/assets/em-p21r-DY_u1Sch.png", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/em-p21r",
-  },
-];
 
 
 const features = [
@@ -247,7 +197,7 @@ const categories = [
   { id: "gole", label: "Gole Series" },
   { id: "em-rugged", label: "Rugged Tablet" },
   
-  { id: "aio", label: "All-in-One PC" },
+  
   
   { id: "tpc", label: "TPC Series" },
   { id: "pricelist", label: "Price List" },
@@ -529,17 +479,17 @@ const RuggedTablet = () => {
           </Link>
         </section>
 
-        {/* All-in-One PC */}
-        <section id="aio">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-            All-in-One <span className="text-gradient">Industrial PC</span>
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">คอมพิวเตอร์ All-in-One จอสัมผัส สำหรับอุตสาหกรรม ประหยัดพื้นที่ VESA/Panel Mount</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {aioProducts.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
-            ))}
-          </div>
+        {/* All-in-One PC — Link to dedicated page */}
+        <section id="aio-link">
+          <Link to="/aio" className="card-surface p-6 flex items-center justify-between group hover:border-primary/30 transition-all">
+            <div>
+              <h2 className="text-xl font-display font-bold text-foreground mb-1">
+                All-in-One <span className="text-gradient">Industrial PC</span>
+              </h2>
+              <p className="text-sm text-muted-foreground">คอมพิวเตอร์ All-in-One จอสัมผัส สำหรับอุตสาหกรรม — 15 รุ่น Box PC, AIO Desktop, Panel PC</p>
+            </div>
+            <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+          </Link>
         </section>
 
         {/* Handheld & PDA — Link to dedicated page */}
