@@ -879,12 +879,15 @@ const EPCBoxSeries = () => {
               CESIPC Industrial Box PC ไม่ได้แค่ติดป้าย "มาตรฐานอุตสาหกรรม" แต่ถูกออกแบบและผลิตให้ตอบสนองความต้องการที่เข้มงวดของสภาพแวดล้อมโรงงานจริง
             </p>
           </div>
-          <div className="max-w-2xl mx-auto card-surface p-8">
-            <div className="space-y-3">
-              {certifications.map((c, i) => (
-                <p key={i} className="text-muted-foreground">{c}</p>
-              ))}
-            </div>
+          <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            {certifications.map((c, i) => (
+              <div key={i} className="card-surface p-5 flex items-start gap-4 hover:border-primary/30 transition-colors">
+                <div className={`shrink-0 w-11 h-11 rounded-xl bg-background flex items-center justify-center border border-border ${c.color}`}>
+                  <c.icon size={22} />
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed pt-1">{c.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
