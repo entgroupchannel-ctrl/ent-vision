@@ -298,23 +298,22 @@ const RuggedNotebookPage = () => {
 
         {/* YouTube — 2-column compact grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-          <div className="card-surface rounded-xl overflow-hidden">
-            <div className="relative w-full pb-[56.25%]">
-              <iframe src="https://www.youtube.com/embed/Zu5rGL96Qu8" title="Rugged Notebook Review" className="absolute inset-0 w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+          {[
+            { id: "Zu5rGL96Qu8", title: "รีวิว Rugged Notebook — ทดสอบการใช้งานจริง" },
+            { id: "vMInVhSNhn0", title: "ทดสอบความทนทาน Rugged Notebook" },
+            { id: "ZxbNjUT0_i0", title: "Rugged Notebook ใช้งานภาคสนาม" },
+            { id: "Q1KmwMqmZjY", title: "รีวิว Rugged Notebook สำหรับอุตสาหกรรม" },
+          ].map((v) => (
+            <div key={v.id} className="card-surface rounded-xl overflow-hidden">
+              <div className="relative w-full pb-[56.25%]">
+                <iframe src={`https://www.youtube.com/embed/${v.id}`} title={v.title} className="absolute inset-0 w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              </div>
+              <div className="p-2.5 flex items-center justify-between">
+                <p className="font-semibold text-xs text-foreground line-clamp-1">{v.title}</p>
+                <ShareButtons url={`https://youtu.be/${v.id}`} title={v.title} compact />
+              </div>
             </div>
-            <div className="p-2.5 flex items-center justify-between">
-              <p className="font-semibold text-xs text-foreground line-clamp-1">รีวิว Rugged Notebook — ทดสอบการใช้งานจริง</p>
-              <ShareButtons url="https://youtu.be/Zu5rGL96Qu8" title="Rugged Notebook Review" compact />
-            </div>
-          </div>
-
-          {/* Placeholder for future videos */}
-          <a href="https://www.youtube.com/@entgroup" target="_blank" rel="noopener noreferrer" className="card-surface rounded-xl overflow-hidden flex flex-col items-center justify-center min-h-[200px] hover:border-destructive/30 transition-colors group">
-            <div className="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-              <Play className="w-5 h-5 text-destructive" />
-            </div>
-            <p className="text-xs font-bold text-muted-foreground">ดูวิดีโอทั้งหมดบน YouTube</p>
-          </a>
+          ))}
         </div>
 
         {/* Facebook Reels — compact row */}
