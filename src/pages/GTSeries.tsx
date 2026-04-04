@@ -4209,29 +4209,6 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Video */}
-              <div className="card-surface p-6">
-                <h4 className="text-lg font-display font-bold text-foreground mb-4">🎬 วิดีโอ GT4500</h4>
-                <a
-                  href="https://www.youtube.com/watch?v=ou3yHel3ijU"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative block rounded-xl overflow-hidden max-w-lg mx-auto"
-                >
-                  <img
-                    src="https://img.youtube.com/vi/ou3yHel3ijU/maxresdefault.jpg"
-                    alt="GT4500 Video"
-                    className="w-full group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
-                    <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg">
-                      <Play size={28} className="text-primary-foreground ml-1" fill="currentColor" />
-                    </div>
-                  </div>
-                  <span className="absolute bottom-3 left-3 text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">Industrial Computer รุ่น GT4500</span>
-                </a>
-              </div>
 
               {/* Intro Video */}
               <div className="card-surface overflow-hidden rounded-xl">
