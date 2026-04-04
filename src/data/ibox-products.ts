@@ -18,6 +18,24 @@ import ibox007 from "@/assets/products/ibox-007.png";
 import ibox601Gt2p from "@/assets/products/ibox-601-gt-2p.png";
 import ibox601_9l2c4p from "@/assets/products/ibox-601-9l2c4p.png";
 
+// Embedded Box PC imports
+import ibox007Main from "@/assets/products/ibox-007-main.png";
+import ibox007Angle2 from "@/assets/products/ibox-007-angle2.png";
+import ibox007Angle3 from "@/assets/products/ibox-007-angle3.png";
+import ibox007Angle4 from "@/assets/products/ibox-007-angle4.png";
+import ibox007Angle5 from "@/assets/products/ibox-007-angle5.png";
+import ibox007Angle6 from "@/assets/products/ibox-007-angle6.png";
+import ibox007Dimension from "@/assets/products/ibox-007-dimension.png";
+import ibox103 from "@/assets/products/ibox-103.png";
+import ibox103Mini from "@/assets/products/ibox-103-mini.png";
+import ibox103_2l2c from "@/assets/products/ibox-103-2l2c.png";
+import ibox103_2l2cJ4125 from "@/assets/products/ibox-103-2l2c-j4125.png";
+import ibox103_2l3c from "@/assets/products/ibox-103-2l3c.png";
+import ibox104v2 from "@/assets/products/ibox-104v2.png";
+import ibox104v2Ns from "@/assets/products/ibox-104v2-ns.png";
+import ibox603_2l4c from "@/assets/products/ibox-603-2l4c-1p.png";
+import ibox205sbc12th from "@/assets/products/ibox-205sbc-12th.png";
+
 export interface IBoxProduct {
   id: string;
   name: string;
