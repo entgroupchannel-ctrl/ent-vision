@@ -1107,35 +1107,54 @@ const GTSeries = () => {
                 ))}
               </div>
 
-              {/* Video Section */}
-              <div className="card-surface overflow-hidden rounded-xl">
+              {/* Video Section — YouTube */}
+              <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border flex items-center gap-3">
                   <Play className="text-primary" size={20} />
-                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT1000</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground">🎬 วิดีโอ GT1000</h3>
                 </div>
-                <a
-                  href="https://www.entgroup.co.th/ipc-gt1000"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block relative group"
-                >
-                  <img
-                    src="https://static.wixstatic.com/media/3e5003_1654215f900c48fdbc594d46658d067b~mv2.jpg/v1/fill/w_1270,h_590,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/22.jpg"
-                    alt="GT1000 Video Thumbnail"
-                    className="w-full aspect-video object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                    <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Play className="text-primary-foreground ml-1" size={28} fill="currentColor" />
+                <div className="p-5 space-y-6">
+                  {/* Intro Video — Hero */}
+                  <div>
+                    <h4 className="text-sm font-bold text-foreground mb-2">📌 GT1000 Intro</h4>
+                    <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+                      <iframe
+                        src="https://www.youtube.com/embed/YRDo5EkmpRw"
+                        title="GT1000 Intro"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                        loading="lazy"
+                      />
                     </div>
                   </div>
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-white text-sm font-semibold bg-black/60 px-3 py-1 rounded-full">
-                      GT1000 Detail Specification — 02:00
-                    </span>
+
+                  {/* Other Videos — Grid */}
+                  <div>
+                    <h4 className="text-sm font-bold text-foreground mb-3">🎥 วิดีโอเพิ่มเติม</h4>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      {[
+                        { id: "7wE6fxMpJB4", title: "GT1000 รีวิวทั่วไป" },
+                        { id: "DLJ2eghWoMQ", title: "GT1000 Short" },
+                        { id: "HQnWY8T7pDM", title: "GT1000 สาธิตการใช้งาน" },
+                      ].map((video) => (
+                        <div key={video.id} className="space-y-2">
+                          <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                            <iframe
+                              src={`https://www.youtube.com/embed/${video.id}`}
+                              title={video.title}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              className="absolute inset-0 w-full h-full"
+                              loading="lazy"
+                            />
+                          </div>
+                          <p className="text-xs text-muted-foreground font-medium">{video.title}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </a>
+                </div>
               </div>
 
               {/* Factory Application Image */}
