@@ -106,6 +106,7 @@ const App = () => (
               <Route path="/rugged-notebook" element={<RuggedNotebook />} />
               <Route path="/rugged-notebook/:id" element={<RuggedNotebookDetail />} />
               <Route path="/aio" element={<AllInOnePC />} />
+              <Route path="/aio/:id" element={<AIODetail />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
