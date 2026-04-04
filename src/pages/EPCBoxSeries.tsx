@@ -1012,6 +1012,104 @@ const EPCBoxSeries = () => {
         </div>
       </section>
 
+      {/* YouTube & Podcast Section */}
+      <section className="section-padding" id="media">
+        <div className="container max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Video & Podcast</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold">
+              วิดีโอและ<span className="text-gradient">พอดแคสต์</span> EPC Box Series
+            </h2>
+            <p className="text-muted-foreground mt-3">เรียนรู้เพิ่มเติมเกี่ยวกับ EPC Box PC ผ่านวิดีโอและเสียงบรรยาย</p>
+          </div>
+
+          {/* Main Video */}
+          <div className="mb-8">
+            <div className="card-surface overflow-hidden">
+              <div className="px-6 py-3 bg-primary/10 border-b border-border flex items-center gap-2">
+                <Play size={16} className="text-primary" />
+                <span className="font-bold text-foreground text-sm">🎬 วิดีโอแนะนำหลัก — EPC Box Series Overview</span>
+              </div>
+              <div className="aspect-video">
+                <iframe
+                  src="https://www.youtube.com/embed/n_AVEOTjeAA"
+                  title="EPC Box Series Overview"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Additional Videos Grid */}
+          <div className="mb-12">
+            <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+              <Play size={18} className="text-primary" /> วิดีโอเพิ่มเติม
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { id: "mtamL6vkDv8", title: "EPC Box Series — คุณสมบัติเด่น" },
+                { id: "bQdfhE03b78", title: "EPC Box Series — การติดตั้งและใช้งาน" },
+                { id: "mKcqTs1tloA", title: "EPC Box Series — LEGO Mode Design" },
+                { id: "dWf112ejtEY", title: "EPC Box Series — Fanless Technology" },
+                { id: "JrTOOQGR1d0", title: "EPC Box Series — Industrial Applications" },
+              ].map((video) => (
+                <div key={video.id} className="card-surface overflow-hidden group hover:border-primary/30 transition-colors">
+                  <div className="aspect-video">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${video.id}`}
+                      title={video.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-3">
+                    <p className="text-sm font-medium text-foreground">{video.title}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Podcast Section */}
+          <div>
+            <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+              <Headphones size={18} className="text-primary" /> 🎙️ Podcast — ฟังบรรยายสรุป EPC Box Series
+            </h3>
+            <p className="text-sm text-muted-foreground mb-6">ฟังข้อมูลสรุปสั้นๆ เกี่ยวกับ EPC Box Series เหมาะสำหรับฟังระหว่างเดินทาง</p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { file: "/podcasts/epc-podcast-1.wav", title: "EPC Box Series Overview", desc: "ภาพรวมซีรีส์ EPC Box ทั้งหมด — จุดเด่น ความแตกต่าง" },
+                { file: "/podcasts/epc-podcast-2.wav", title: "Fanless & LEGO Mode", desc: "เทคโนโลยี Fanless และระบบ LEGO Mode ยืดหยุ่น" },
+                { file: "/podcasts/epc-podcast-3.wav", title: "เลือกรุ่นให้ตรงงาน", desc: "แนวทางเลือก EPC-10XA ถึง 40XA ตามลักษณะงาน" },
+                { file: "/podcasts/epc-podcast-4.wav", title: "CPU & Performance", desc: "เปรียบเทียบ CPU ตั้งแต่ Celeron ถึง Core i7 Gen12" },
+                { file: "/podcasts/epc-podcast-5.wav", title: "Use Cases จริง", desc: "ตัวอย่างการใช้งาน EPC Box ในโรงงานและอุตสาหกรรม" },
+              ].map((podcast, i) => (
+                <div key={i} className="card-surface p-5 hover:border-primary/30 transition-colors">
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Volume2 size={18} className="text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-foreground">{podcast.title}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{podcast.desc}</p>
+                    </div>
+                  </div>
+                  <audio controls className="w-full h-10" preload="none">
+                    <source src={podcast.file} type="audio/wav" />
+                    เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
+                  </audio>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="section-padding bg-muted/30">
         <div className="container max-w-3xl mx-auto text-center">
