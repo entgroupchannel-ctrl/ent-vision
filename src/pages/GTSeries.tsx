@@ -619,7 +619,14 @@ const GTSeries = () => {
           <p className="text-muted-foreground">สร้างภาพลักษณ์องค์กร — พนักงานภูมิใจที่ได้ใช้ผลิตภัณฑ์ระดับโลก ออกแบบเครื่องให้เข้ากับแบรนด์ของคุณได้อย่างลงตัว</p>
         </div>
         <div className="p-4">
-          <img src={gtColorfulProducts} alt="GT Series สีสันหลากหลาย ทำสีตามแบรนด์" className="w-full rounded-lg object-cover" loading="lazy" />
+          <img src={gtColorfulProducts} alt="GT Series สีสันหลากหลาย ทำสีตามแบรนด์" className="w-full rounded-lg object-cover mb-4" loading="lazy" />
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+            {galleryImages.map((img, i) => (
+              <div key={i} className="overflow-hidden rounded-lg aspect-square">
+                <img src={img} alt={`GT Series สีสัน ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -5193,27 +5200,6 @@ const GTSeries = () => {
         </div>
       </section>
 
-      {/* Applications */}
-      <section className="section-padding">
-        <div className="container max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              ตัวอย่าง<span className="text-gradient">การใช้งาน</span>
-            </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-              รองรับได้หลากหลายกิจกรรม — โรงงานอุตสาหกรรม, Factory Automation, IOT, KIOSK, HMI,
-              Digital Signage, Queue System, รถโดยสาร, รถไฟฟ้า, ตู้คอนโทรล
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {galleryImages.map((img, i) => (
-              <div key={i} className="card-surface overflow-hidden aspect-square">
-                <img src={img} alt={`ตัวอย่างการใช้งาน ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* GT Series Banner */}
       <section className="section-padding bg-surface/50">
