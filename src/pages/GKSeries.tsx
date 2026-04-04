@@ -826,7 +826,15 @@ const ModelSection = ({ model, index, onQuote }: { model: GKModel; index: number
                   <PaginatedPriceTable rows={allRows} perPage={PRICE_PER_PAGE} totalPages={totalPricePages} />
                 );
               })()}
-              <PriceDisclaimer />
+              <div className="flex items-center justify-between p-4 border-t border-border bg-muted/20">
+                <PriceDisclaimer />
+                <button
+                  onClick={() => onQuote(model.name)}
+                  className="shrink-0 ml-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors"
+                >
+                  <ExternalLink size={14} /> ขอใบเสนอราคา
+                </button>
+              </div>
             </TabsContent>
           )}
 
