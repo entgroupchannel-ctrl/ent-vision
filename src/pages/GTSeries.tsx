@@ -4,7 +4,8 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { useState, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText, Headphones } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText, Headphones, ChevronDown } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Checkbox } from "@/components/ui/checkbox";
 import QuoteDialog from "@/components/QuoteDialog";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
@@ -594,6 +595,7 @@ const GTSeries = () => {
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
   const [showLineQR, setShowLineQR] = useState(false);
+  const [gt9000PricePage, setGt9000PricePage] = useState(0);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -3709,52 +3711,85 @@ const GTSeries = () => {
               </div>
 
               {/* GT9000 Price Table */}
-              <div className="card-surface overflow-hidden">
-                <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT9000 Price List</h3>
-                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿25,290</p>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="bg-secondary/50">
-                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
-                        <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
-                        <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border">
-                      {[
-                        { cpu: "i5-10200H", config: "RAM 4GB + SSD 128GB + WIFI", price: "25,290" },
-                        { cpu: "i5-10200H", config: "RAM 4GB + SSD 256GB + WIFI", price: "26,090" },
-                        { cpu: "i5-10200H", config: "RAM 8GB + SSD 128GB + WIFI", price: "25,890" },
-                        { cpu: "i5-10200H", config: "RAM 8GB + SSD 256GB + WIFI", price: "26,490" },
-                        { cpu: "i5-10200H", config: "RAM 16GB + SSD 256GB + WIFI", price: "27,690" },
-                        { cpu: "i5-10200H", config: "RAM 8GB + SSD 512GB + HDD 500GB + WIFI", price: "26,490" },
-                        { cpu: "i7-10750H", config: "RAM 4GB + SSD 128GB + WIFI", price: "27,690" },
-                        { cpu: "i7-10750H", config: "RAM 8GB + SSD 128GB + WIFI", price: "28,190" },
-                        { cpu: "i7-10750H", config: "RAM 8GB + SSD 256GB + WIFI", price: "28,790" },
-                        { cpu: "i7-10750H", config: "RAM 16GB + SSD 512GB + WIFI", price: "31,390" },
-                        { cpu: "i7-10750H", config: "RAM 32GB + SSD 512GB + WIFI", price: "33,790" },
-                        { cpu: "i5-1235U", config: "RAM DDR5 8GB + SSD 128GB + WIFI", price: "29,790" },
-                        { cpu: "i5-1235U", config: "RAM DDR5 8GB + SSD 256GB + WIFI", price: "30,490" },
-                        { cpu: "i5-1235U", config: "RAM DDR5 16GB + SSD 128GB + WIFI", price: "31,690" },
-                        { cpu: "i5-1235U", config: "RAM DDR5 16GB + SSD 256GB + WIFI", price: "32,290" },
-                        { cpu: "i7-1255U", config: "RAM DDR5 8GB + SSD 128GB + WIFI", price: "33,190" },
-                        { cpu: "i7-1255U", config: "RAM DDR5 8GB + SSD 256GB + WIFI", price: "33,790" },
-                        { cpu: "i7-1255U", config: "RAM DDR5 8GB + SSD 256GB + 2TB HDD + WIFI + Win10", price: "42,290" },
-                        { cpu: "i7-1255U", config: "RAM DDR5 32GB + SSD 256GB + 2TB SSD + WIFI + Win10", price: "48,190" },
-                      ].map((item, i) => (
-                        <tr key={i} className="hover:bg-secondary/30 transition-colors">
-                          <td className="p-3 text-foreground font-medium">{item.cpu}</td>
-                          <td className="p-3 text-muted-foreground">{item.config}</td>
-                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              {(() => {
+                const gt9000Prices = [
+                  { cpu: "i5-10200H", config: "RAM 4GB + SSD 128GB + WIFI", price: "25,290" },
+                  { cpu: "i5-10200H", config: "RAM 4GB + SSD 256GB + WIFI", price: "26,090" },
+                  { cpu: "i5-10200H", config: "RAM 8GB + SSD 128GB + WIFI", price: "25,890" },
+                  { cpu: "i5-10200H", config: "RAM 8GB + SSD 256GB + WIFI", price: "26,490" },
+                  { cpu: "i5-10200H", config: "RAM 16GB + SSD 256GB + WIFI", price: "27,690" },
+                  { cpu: "i5-10200H", config: "RAM 8GB + SSD 512GB + HDD 500GB + WIFI", price: "26,490" },
+                  { cpu: "i7-10750H", config: "RAM 4GB + SSD 128GB + WIFI", price: "27,690" },
+                  { cpu: "i7-10750H", config: "RAM 8GB + SSD 128GB + WIFI", price: "28,190" },
+                  { cpu: "i7-10750H", config: "RAM 8GB + SSD 256GB + WIFI", price: "28,790" },
+                  { cpu: "i7-10750H", config: "RAM 16GB + SSD 512GB + WIFI", price: "31,390" },
+                  { cpu: "i7-10750H", config: "RAM 32GB + SSD 512GB + WIFI", price: "33,790" },
+                  { cpu: "i5-1235U", config: "RAM DDR5 8GB + SSD 128GB + WIFI", price: "29,790" },
+                  { cpu: "i5-1235U", config: "RAM DDR5 8GB + SSD 256GB + WIFI", price: "30,490" },
+                  { cpu: "i5-1235U", config: "RAM DDR5 16GB + SSD 128GB + WIFI", price: "31,690" },
+                  { cpu: "i5-1235U", config: "RAM DDR5 16GB + SSD 256GB + WIFI", price: "32,290" },
+                  { cpu: "i7-1255U", config: "RAM DDR5 8GB + SSD 128GB + WIFI", price: "33,190" },
+                  { cpu: "i7-1255U", config: "RAM DDR5 8GB + SSD 256GB + WIFI", price: "33,790" },
+                  { cpu: "i7-1255U", config: "RAM DDR5 8GB + SSD 256GB + 2TB HDD + WIFI + Win10", price: "42,290" },
+                  { cpu: "i7-1255U", config: "RAM DDR5 32GB + SSD 256GB + 2TB SSD + WIFI + Win10", price: "48,190" },
+                ];
+                const perPage = 10;
+                const totalPages = Math.ceil(gt9000Prices.length / perPage);
+                return (
+                  <Collapsible defaultOpen>
+                    <div className="card-surface overflow-hidden">
+                      <CollapsibleTrigger className="w-full p-5 border-b border-border flex items-center justify-between hover:bg-secondary/30 transition-colors">
+                        <div>
+                          <h3 className="text-lg font-display font-bold text-foreground text-left">💰 GT9000 Price List</h3>
+                          <p className="text-sm text-muted-foreground mt-1 text-left">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿25,290 · {gt9000Prices.length} รายการ</p>
+                        </div>
+                        <ChevronDown size={20} className="text-muted-foreground transition-transform duration-200 [[data-state=open]>&]:rotate-180" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        {(() => {
+                          const start = gt9000PricePage * perPage;
+                          const paged = gt9000Prices.slice(start, start + perPage);
+                          return (
+                            <>
+                              <div className="overflow-x-auto">
+                                <table className="w-full text-sm">
+                                  <thead>
+                                    <tr className="bg-secondary/50">
+                                      <th className="text-left p-3 font-semibold text-foreground">#</th>
+                                      <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                                      <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
+                                      <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody className="divide-y divide-border">
+                                    {paged.map((item, i) => (
+                                      <tr key={start + i} className="hover:bg-secondary/30 transition-colors">
+                                        <td className="p-3 text-muted-foreground">{start + i + 1}</td>
+                                        <td className="p-3 text-foreground font-medium">{item.cpu}</td>
+                                        <td className="p-3 text-muted-foreground">{item.config}</td>
+                                        <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </div>
+                              {totalPages > 1 && (
+                                <div className="flex items-center justify-center gap-2 p-4 border-t border-border">
+                                  <button onClick={() => setGt9000PricePage(Math.max(0, gt9000PricePage - 1))} disabled={gt9000PricePage === 0} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ก่อนหน้า</button>
+                                  {Array.from({ length: totalPages }, (_, idx) => (
+                                    <button key={idx} onClick={() => setGt9000PricePage(idx)} className={`w-8 h-8 rounded-lg text-xs font-bold transition-colors ${idx === gt9000PricePage ? "bg-primary text-primary-foreground" : "hover:bg-secondary/50 text-muted-foreground"}`}>{idx + 1}</button>
+                                  ))}
+                                  <button onClick={() => setGt9000PricePage(Math.min(totalPages - 1, gt9000PricePage + 1))} disabled={gt9000PricePage === totalPages - 1} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ถัดไป</button>
+                                </div>
+                              )}
+                            </>
+                          );
+                        })()}
+                      </CollapsibleContent>
+                    </div>
+                  </Collapsible>
+                );
+              })()}
 
               {/* Intro Video */}
               <div className="card-surface overflow-hidden rounded-xl">
