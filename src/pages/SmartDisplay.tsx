@@ -484,13 +484,19 @@ const SmartDisplay = () => {
 
               {/* Outdoor sizes */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-                {outdoorSizes.map((s, i) => (
+               {outdoorSizes.map((s, i) => (
                   <div key={i} className="card-surface p-5 text-center hover:border-primary/30 transition-all">
                     <p className="text-3xl font-display font-black text-primary mb-1">{s.size}</p>
                     <p className="text-sm font-semibold text-foreground mb-1">{s.nits}</p>
-                    <a href={s.datasheet} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-2">
+                    <a href={s.datasheet} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-1">
                       <Download size={12} /> Datasheet
                     </a>
+                    <button
+                      onClick={() => setQuoteOpen(true)}
+                      className="mt-2 w-full inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity"
+                    >
+                      <FileText size={12} /> ขอใบเสนอราคา
+                    </button>
                   </div>
                 ))}
               </div>
