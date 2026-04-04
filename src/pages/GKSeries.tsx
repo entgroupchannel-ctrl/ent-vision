@@ -234,6 +234,12 @@ const gkModels: GKModel[] = [
       },
     ],
     applications: ["HMI Control", "Factory Automation", "Warehouse Management", "SCADA", "POS & Queuing", "Digital Signage"],
+    gallery: [
+      gk1501front,
+      gk1501back,
+      gk1501io1,
+      gk1501io2,
+    ],
   },
   {
     id: "gk1506",
