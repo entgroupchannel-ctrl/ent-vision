@@ -35,6 +35,7 @@ import ibox104v2 from "@/assets/products/ibox-104v2.png";
 import ibox104v2Ns from "@/assets/products/ibox-104v2-ns.png";
 import ibox603_2l4c from "@/assets/products/ibox-603-2l4c-1p.png";
 import ibox205sbc12th from "@/assets/products/ibox-205sbc-12th.png";
+import ibox103_4l2cJ4125Dim from "@/assets/products/ibox-103-4l2c-j4125-dim.png";
 
 export interface IBoxProduct {
   id: string;
@@ -440,6 +441,76 @@ export const iboxProducts: IBoxProduct[] = [
     datasheet: "/datasheets/IBOX-205SBC-12TH.pdf",
     priceRange: "฿58,000 - ฿85,000",
     isNew: true,
+  },
+
+  // ═══════ Gateway / DIN Rail ═══════
+  {
+    id: "IBOX-103-4L2C-J4125",
+    name: "Industrial Gateway PC with 2.5G LAN",
+    nameTH: "เกตเวย์อุตสาหกรรม 2.5G LAN",
+    category: "Gateway",
+    subcategory: "Gateway PC",
+    formFactor: "mini",
+    performance: "entry",
+    image: ibox103Mini,
+    gallery: [ibox103, ibox007Main],
+    dimensionImage: ibox103_4l2cJ4125Dim,
+    specs: {
+      cpu: "Intel Celeron J4125 (4 Cores, 2.70 GHz)",
+      cpuGen: "Gemini Lake",
+      ram: "Up to 8GB DDR4",
+      storage: "2.5\" SATA + mSATA",
+      io: "4x USB 3.0, 2x COM, 4x 2.5G LAN",
+      comPorts: 2,
+      lanPorts: 4,
+      usbPorts: 4,
+      poe: false,
+      pcie: false,
+      temp: "-10°C ~ 55°C",
+    },
+    features: [
+      "4x Intel I225V 2.5G LAN",
+      "Fanless Aluminum Chassis",
+      "4-bit GPIO",
+      "Compact 141x62x127.5mm",
+    ],
+    applications: ["Industrial Gateway", "Network Edge", "IoT Gateway", "Firewall"],
+    datasheet: "/datasheets/IBOX-103-4L2C-J4125.pdf",
+    priceRange: "฿28,000 - ฿35,000",
+    isNew: true,
+  },
+  {
+    id: "ATLAS-DR-ARM",
+    name: "DIN Rail ARM Gateway",
+    nameTH: "เกตเวย์ ARM สำหรับราง DIN",
+    category: "Gateway",
+    subcategory: "DIN Rail PC",
+    formFactor: "compact",
+    performance: "entry",
+    image: ibox103Mini,
+    gallery: [ibox103, ibox007Main],
+    specs: {
+      cpu: "NXP i.MX8M Plus",
+      cpuGen: "ARM Cortex-A53",
+      ram: "4GB LPDDR4",
+      storage: "32GB eMMC",
+      io: "2x USB, 2x COM, 2x LAN, CAN Bus",
+      comPorts: 2,
+      lanPorts: 2,
+      usbPorts: 2,
+      poe: false,
+      pcie: false,
+      temp: "-40°C ~ 70°C",
+    },
+    features: [
+      "Ultra Low Power <5W",
+      "NPU for AI Inference",
+      "Industrial Protocols (CAN Bus)",
+      "Linux/Android Support",
+    ],
+    applications: ["IoT Gateway", "Building Automation", "Energy Management"],
+    datasheet: "/datasheets/ATLAS-DR-ARM.pdf",
+    priceRange: "฿28,000 - ฿38,000",
   },
 ];
 
