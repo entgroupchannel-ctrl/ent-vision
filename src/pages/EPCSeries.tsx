@@ -275,7 +275,6 @@ const categories = [
   { id: "square", label: "Square Display" },
   { id: "wide", label: "Wide Display" },
   { id: "specs", label: "Specifications" },
-  { id: "selection", label: "Product Selection" },
   { id: "pricelist", label: "Price List" },
   { id: "downloads", label: "Downloads" },
 ];
@@ -605,35 +604,6 @@ const EPCSeries = () => {
           </Tabs>
         </section>
 
-        {/* Product Selection Table */}
-        <section id="selection">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">Product Selection Guide</h2>
-          <div className="card-surface overflow-hidden">
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow className="bg-primary/10">
-                    <TableHead className="text-primary font-bold">No.</TableHead>
-                    <TableHead className="text-primary font-bold">Model</TableHead>
-                    <TableHead className="text-primary font-bold">Part Number</TableHead>
-                    <TableHead className="text-primary font-bold">Processor</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {productSelectionTable.map((row) => (
-                    <TableRow key={row.no}>
-                      <TableCell className="font-medium">{row.no}</TableCell>
-                      <TableCell className="font-mono text-sm">{row.model}</TableCell>
-                      <TableCell className="text-muted-foreground text-sm">{row.partNumber}</TableCell>
-                      <TableCell className="text-sm">{row.cpu}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </div>
-        </section>
-
         {/* Price List */}
         <section id="pricelist">
           <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">
@@ -683,40 +653,21 @@ const EPCSeries = () => {
                         </TableBody>
                       </Table>
                     </div>
-                    {/* Pagination */}
                     {totalPages > 1 && (
                       <div className="flex items-center justify-between px-4 py-3 border-t border-border">
                         <p className="text-xs text-muted-foreground">
                           แสดง {(page - 1) * ITEMS_PER_PAGE + 1}-{Math.min(page * ITEMS_PER_PAGE, data.length)} จาก {data.length} รายการ
                         </p>
                         <div className="flex items-center gap-1">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => setPage(Math.max(1, page - 1))}
-                            disabled={page === 1}
-                            className="h-8 w-8 p-0"
-                          >
+                          <Button variant="outline" size="sm" onClick={() => setPage(Math.max(1, page - 1))} disabled={page === 1} className="h-8 w-8 p-0">
                             <ChevronLeft className="w-4 h-4" />
                           </Button>
                           {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                            <Button
-                              key={p}
-                              variant={p === page ? "default" : "outline"}
-                              size="sm"
-                              onClick={() => setPage(p)}
-                              className="h-8 w-8 p-0 text-xs"
-                            >
+                            <Button key={p} variant={p === page ? "default" : "outline"} size="sm" onClick={() => setPage(p)} className="h-8 w-8 p-0 text-xs">
                               {p}
                             </Button>
                           ))}
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => setPage(Math.min(totalPages, page + 1))}
-                            disabled={page === totalPages}
-                            className="h-8 w-8 p-0"
-                          >
+                          <Button variant="outline" size="sm" onClick={() => setPage(Math.min(totalPages, page + 1))} disabled={page === totalPages} className="h-8 w-8 p-0">
                             <ChevronRight className="w-4 h-4" />
                           </Button>
                         </div>
@@ -767,13 +718,7 @@ const EPCSeries = () => {
               ...wideModels.map((m) => ({ name: m.name, url: m.datasheet })),
               { name: "EPC-W12X2A", url: "https://docs.wixstatic.com/ugd/0597a3_06738f7618f84058a4f0c1d3cc9d8a95.pdf" },
             ].map((dl, i) => (
-              <a
-                key={i}
-                href={dl.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-surface p-4 flex items-center gap-3 hover:border-primary/30 transition-all group"
-              >
+              <a key={i} href={dl.url} target="_blank" rel="noopener noreferrer" className="card-surface p-4 flex items-center gap-3 hover:border-primary/30 transition-all group">
                 <Download className="w-5 h-5 text-primary shrink-0" />
                 <div>
                   <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{dl.name}</p>
@@ -829,27 +774,16 @@ const EPCSeries = () => {
             <p className="text-sm text-muted-foreground mt-1">ชมวิดีโอสาธิตการใช้งานจริง และฟังพอดแคสต์เจาะลึกข้อมูลก่อนตัดสินใจ</p>
           </div>
 
-          {/* Two-column: Main Video + Video Grid */}
           <div className="grid lg:grid-cols-2 gap-4">
-            {/* Main Video */}
             <div className="card-surface rounded-xl overflow-hidden">
               <div className="px-3 py-2 border-b border-border flex items-center gap-2">
                 <Youtube className="w-4 h-4 text-red-500" />
                 <span className="font-bold text-foreground text-xs">วิดีโอแนะนำ EPC Panel PC</span>
               </div>
               <div className="aspect-video">
-                <iframe
-                  src="https://www.youtube.com/embed/mtamL6vkDv8"
-                  title="EPC Panel PC Introduction"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                  loading="lazy"
-                />
+                <iframe src="https://www.youtube.com/embed/mtamL6vkDv8" title="EPC Panel PC Introduction" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full h-full" loading="lazy" />
               </div>
             </div>
-
-            {/* Video Grid 2×2 */}
             <div className="grid grid-cols-2 gap-3">
               {[
                 { id: "Beaoeb0_Gwo", title: "ภาพรวมผลิตภัณฑ์" },
@@ -874,7 +808,6 @@ const EPCSeries = () => {
             </div>
           </div>
 
-          {/* Podcast Section — 2 columns */}
           <div className="card-surface rounded-xl overflow-hidden">
             <div className="px-4 py-2.5 border-b border-border flex items-center gap-2">
               <Headphones className="w-4 h-4 text-primary" />
@@ -942,7 +875,6 @@ const EPCSeries = () => {
             ))}
           </div>
 
-          {/* PDPA Disclaimer */}
           <div className="card-surface rounded-lg p-4 bg-muted/30 border-dashed">
             <p className="text-[11px] text-muted-foreground leading-relaxed text-center">
               🔒 <strong>หมายเหตุตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA):</strong> เพื่อปกป้องสิทธิ์ของลูกค้า เราไม่สามารถเปิดเผยชื่อ-นามสกุล หรือชื่อบริษัทของผู้ให้รีวิวได้ ความคิดเห็นทั้งหมดเป็นคำชมจริงที่ได้รับจากการทำงานร่วมกับลูกค้าในอุตสาหกรรมต่างๆ ทั่วประเทศไทย
