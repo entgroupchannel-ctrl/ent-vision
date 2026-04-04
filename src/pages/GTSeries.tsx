@@ -1305,13 +1305,17 @@ const GTSeries = () => {
 
                 {/* Product Images */}
                 <div className="lg:col-span-2 space-y-4">
-                  <div className="card-surface overflow-hidden">
-                    <img
-                      src="https://static.wixstatic.com/media/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg/v1/fill/w_536,h_954,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_1cf855841a5e4486b7b21fc45623d486f000.jpg"
-                      alt="GT2000 Front"
-                      className="w-full object-contain p-4"
-                      loading="lazy"
-                    />
+                  <div className="card-surface overflow-hidden rounded-xl">
+                    <div className="relative w-full aspect-video">
+                      <iframe
+                        src="https://www.youtube.com/embed/Z4hTYAIDs2s"
+                        title="GT2000 สาธิตการใช้งาน"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
                   <div className="grid grid-cols-3 gap-3">
                     {[
