@@ -949,11 +949,17 @@ const SmartDisplay = () => {
                       Digital signage is the ideal product for digitally showcasing your content.
                       Find out how easy it is to create impactful messages that will get results.
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {applications.map((app) => (
                         <span key={app} className="text-[11px] px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground">{app}</span>
                       ))}
                     </div>
+                    <button
+                      onClick={() => setQuoteOpen(true)}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:opacity-90 transition-opacity"
+                    >
+                      <FileText size={16} /> ขอใบเสนอราคา
+                    </button>
                   </div>
                   <div className="bg-secondary/30 p-6 flex items-center justify-center">
                     <img
