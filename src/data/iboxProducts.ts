@@ -22,6 +22,8 @@ import ibox603Front from "@/assets/products/ibox-603-front.png";
 import ibox603Rear from "@/assets/products/ibox-603-rear.png";
 import ibox604Front from "@/assets/products/ibox-604-front.png";
 import ibox604Rear from "@/assets/products/ibox-604-rear.png";
+import vbox105Front from "@/assets/products/vbox-105-front.png";
+import vbox105Rear from "@/assets/products/vbox-105-rear.png";
 // Main product images
 import ibox007Main from "@/assets/products/ibox-007-main.png";
 import ibox601GtProMain from "@/assets/products/ibox-601-gt-pro-main.png";
@@ -461,26 +463,30 @@ export const iboxProducts: IBoxProduct[] = [
   },
   {
     id: "vbox-105",
-    name: "VBOX-105",
-    nameTH: "Ultra-compact Fanless Box PC",
+    name: "VBOX-105-2L6C",
+    nameTH: "Ultra-compact Fanless Box PC — Celeron J6412 (Elkhart Lake)",
     category: ["embedded"],
     subcategory: "Compact Box PC",
-    cpu: "Intel Celeron / Core i3 (10th Gen)",
-    cpuGen: "10th Gen",
-    ram: "Up to 16GB DDR4",
-    storage: "M.2 2242 + 2.5\" SATA",
-    io: "4× USB, 2× COM, 2× LAN",
-    temp: "-10°C ~ 60°C",
-    lanPorts: 2, comPorts: 2, usbPorts: 4,
-    image: vbox105Img,
+    cpu: "Intel® Celeron® J6412 Quad-core 2.0GHz (Burst 2.6GHz), TDP 10W",
+    cpuGen: "10th Gen (Elkhart Lake)",
+    ram: "1× Non-ECC SO-DIMM DDR4-2666/2933/3200, Up to 32GB",
+    storage: "1× SATA 3.0 + 1× Mini PCIe (mSATA) + 1× M.2 2280 M-key (NVMe/SATA) + 1× M.2 3052 B-key",
+    io: "6× COM (3× RS232 + 2× RS232/TTL + 1× RS232/RS485/TTL), 3× USB3.0, 3× USB2.0 + 4× USB2.0 Header, 2× HDMI + 1× DP, GPIO 8-bit",
+    temp: "-20°C ~ 65°C (w/ 0.7m/s Airflow)",
+    lanPorts: 2, comPorts: 6, usbPorts: 10, pcie: true,
+    image: vbox105Front,
+    gallery: [vbox105Rear, vbox105Img],
     features: [
-      "Ultra-compact Size",
-      "Dual GbE LAN",
-      "Fanless Silent Operation",
-      "VESA/DIN-rail Mount",
+      "Intel® Celeron® J6412 Elkhart Lake — TDP เพียง 10W ประหยัดพลังงานสูง",
+      "6× COM Ports (RS232/RS485/TTL) สำหรับอุปกรณ์อุตสาหกรรมหลากหลาย",
+      "Triple Display: 2× HDMI (4096×2304@60Hz) + 1× DP (4096×2304@60Hz)",
+      "รองรับ 4G/5G, WiFi, AI Accelerator ผ่าน M.2 และ Mini PCIe",
+      "Software Ignition Control (ACC) พร้อม Surge Protection 80V",
+      "Fanless โครงอลูมิเนียมอัลลอย ติดตั้ง DIN-Rail, Wall-Mount, VESA, Embedded",
+      "จ่ายไฟกว้าง 6-42V DC, ขนาด 219.19×79.6×234 mm, น้ำหนัก 2 KG",
     ],
-    applications: ["Digital Signage", "Thin Client", "IoT Edge"],
-    priceRange: "฿20,000 - ฿35,000",
+    applications: ["Digital Signage", "Vehicle Computing", "IoT Edge", "Thin Client", "AI Edge"],
+    priceRange: "สอบถาม",
   },
   {
     id: "ibox-501",
