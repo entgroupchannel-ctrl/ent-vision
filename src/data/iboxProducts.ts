@@ -24,6 +24,8 @@ import ibox604Front from "@/assets/products/ibox-604-front.png";
 import ibox604Rear from "@/assets/products/ibox-604-rear.png";
 import vbox105Front from "@/assets/products/vbox-105-front.png";
 import vbox105Rear from "@/assets/products/vbox-105-rear.png";
+import ibox007proFront from "@/assets/products/ibox-007pro-front.png";
+import ibox007proRear from "@/assets/products/ibox-007pro-rear.png";
 // Main product images
 import ibox007Main from "@/assets/products/ibox-007-main.png";
 import ibox601GtProMain from "@/assets/products/ibox-601-gt-pro-main.png";
@@ -101,6 +103,35 @@ export const iboxProducts: IBoxProduct[] = [
     applications: ["AI Inference", "Edge Computing", "Machine Vision", "Industrial Server"],
     priceRange: "฿95,000 - ฿150,000",
     isHot: true,
+  },
+  {
+    id: "ibox-007pro",
+    name: "IBOX-007PRO",
+    nameTH: "High-Performance Industrial PC — 12th/13th/14th Gen LGA1700",
+    category: ["hot", "embedded", "edge"],
+    subcategory: "Embedded Box PC",
+    cpu: "12th/13th/14th Gen Intel® Core™ i9/i7/i5/i3 (LGA1700, Alder/Raptor Lake)",
+    cpuGen: "12th-14th Gen (Alder Lake / Raptor Lake)",
+    ram: "2× Dual-CH DDR4-3200, Up to 64GB",
+    storage: "4× SATA 3.0 (Swappable SSD, RAID 0/1/5/10) + 2× M.2 2280 M-key (NVMe/SATA) + 1× M.2 3052 B-key",
+    io: "4-6× USB3.0, 4× USB2.0, 1× Internal USB2.0, 2× COM (RS232/422/485), 2× HDMI, 1× 16-bit GPIO, 1× 8-bit GPIO",
+    temp: "-20°C ~ 55°C (w/ 0.7m/s Airflow)",
+    lanPorts: 10, comPorts: 2, usbPorts: 9, poe: true, pcie: true,
+    image: ibox007proFront,
+    gallery: [ibox007proRear, ibox007Main],
+    features: [
+      "Intel® Q670 Chipset + 12th/13th/14th Gen Desktop LGA1700 — สูงสุด 24 Cores / 32 Threads",
+      "10× GbE LAN: สูงสุด 8× PoE (IEEE802.3af, PSE, End-Span) + 2× Non-PoE",
+      "4× Swappable 2.5\" SSD พร้อม RAID 0/1/5/10 สำหรับงาน Server",
+      "Intel® UHD Graphics 730/770 สูงสุด 32 Execution Units",
+      "รองรับ vPRO (AMT) สำหรับ Remote Management",
+      "ขยายได้ด้วย I/O Daughter Card (4× PoE LAN + GPIO + USB3.0) และ Expansion Daughter Card (PCIe x16/x4/x8)",
+      "GPIO 16-bit + 8-bit, Remote Switch, SIM Slot, Mini-PCIe (WiFi/4G)",
+      "Fanless Modular Design, จ่ายไฟ 9-36V DC, ขนาด 294×194.5×293.8 mm, น้ำหนัก 7 KG",
+    ],
+    applications: ["AI Inference", "Edge Computing", "Machine Vision", "Industrial Server", "Surveillance NVR"],
+    priceRange: "สอบถาม",
+    isHot: true, isNew: true,
   },
   {
     id: "ibox-601-gt-pro",
