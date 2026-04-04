@@ -867,6 +867,8 @@ const GKSeries = () => {
             {[
               { title: "🎙️ GK1004 Intro", desc: "แนะนำ GK1004 Panel PC สเปก ฟีเจอร์ และจุดเด่น", src: "/audio/GK1004_Podcast1.wav" },
               { title: "🎙️ GK1004 How to Choose", desc: "วิธีเลือกรุ่น CPU ที่เหมาะกับงานของคุณ", src: "/audio/GK1004_Podcast2.wav" },
+              { title: "🎙️ GK1506 Intro", desc: "แนะนำ GK1506 Panel PC 15.6\" Full HD จุดเด่นและสเปก", src: "/audio/GK1506_Podcast1.wav" },
+              { title: "🎙️ GK1506 Sale Scenario", desc: "สถานการณ์การขายและการเลือกรุ่น GK1506", src: "/audio/GK1506_Podcast2.wav" },
             ].map((pod, i) => (
               <div key={i} className="card-surface p-5 rounded-xl">
                 <div className="flex items-center gap-3 mb-3">
