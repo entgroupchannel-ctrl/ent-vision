@@ -4868,7 +4868,7 @@ const GTSeries = () => {
                       ["COM", "6× DB9 COM\n(2× รองรับ RS232/RS422/RS485 ผ่าน BIOS)"],
                       ["USB", "4× USB 2.0 + 2× USB 3.0"],
                       ["GPIO", "1× GPIO (7 IN + 7 OUT)"],
-                      ["WiFi / 4G", "Mini PCIe WiFi/BT + Mini PCIe 3G/4G\n2× เสาอากาศภายนอก + SIM Slot"],
+                      ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม\nMini PCIe 3G/4G + SIM Slot"],
                       ["Power", "9V–36V DC (3-pin Phoenix Terminal)\n+ 2-pin Phoenix + ATX/AT Switch"],
                       ["Audio", "1× MIC + 1× SPK"],
                       ["Temp Range", "-20°C ~ +60°C (Operating)"],
