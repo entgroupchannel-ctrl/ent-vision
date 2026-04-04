@@ -15,6 +15,7 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import WishlistHeart from "@/components/WishlistHeart";
+import ProductGallery from "@/components/ProductGallery";
 import { getHandheldProduct, getRelatedHandhelds } from "@/data/rugged-handheld-products";
 
 /* ───── Related Product Card ───── */
@@ -114,25 +115,13 @@ const RuggedHandheldDetail = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Image + Badges */}
           <div className="space-y-4">
-            <div className="card-surface overflow-hidden relative">
+            <div className="relative">
               <WishlistHeart
                 item={{ id: product.id, name: product.model, category: "Rugged Handheld", image: product.image, href: `/handheld/${product.id}`, specs: product.nameTH }}
                 className="absolute top-3 right-3 z-10"
               />
-              <div className="bg-secondary/30 p-8 flex items-center justify-center min-h-[350px]">
-                <img src={product.image} alt={product.model} className="max-h-[320px] max-w-full object-contain" />
-              </div>
+              <ProductGallery images={product.gallery} alt={product.model} />
             </div>
-            {/* Gallery thumbnails if we have multiple */}
-            {product.gallery.length > 1 && (
-              <div className="grid grid-cols-5 gap-2">
-                {product.gallery.map((img, i) => (
-                  <div key={i} className="card-surface overflow-hidden aspect-square">
-                    <img src={img} alt={`${product.model} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
-                  </div>
-                ))}
-              </div>
-            )}
             <div className="flex flex-wrap gap-2">
               <Badge variant="secondary">{product.category === "windows" ? "Windows" : "Android"}</Badge>
               <Badge variant="outline">{product.screenSize}</Badge>
