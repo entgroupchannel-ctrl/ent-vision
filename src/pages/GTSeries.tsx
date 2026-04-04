@@ -1617,21 +1617,28 @@ const GTSeries = () => {
                   <h3 className="text-lg font-display font-bold text-foreground">🎙️ Podcast — GT2000 Introduction</h3>
                 </div>
                 <div className="p-5">
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-secondary/40 border border-border">
-                    <div className="shrink-0 w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-foreground">GT2000 Introduction</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">แนะนำ GT2000 — Industrial PC ยอดนิยม 8 USB + 4 COM</p>
-                      <audio controls className="w-full mt-3 h-10" preload="metadata">
-                        <source src="/audio/GT2000_Intro.wav" type="audio/wav" />
-                        เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
-                      </audio>
-                      <div className="mt-3">
-                        <ShareButtons url={window.location.origin + "/gt-series?tab=gt2000"} title="GT2000 Podcast — ENT GROUP" />
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {[
+                      { file: "GT2000_Intro.wav", label: "GT2000 Introduction", desc: "แนะนำ GT2000 — Industrial PC ยอดนิยม 8 USB + 4 COM" },
+                      { file: "GT2000_Detail.wav", label: "GT2000 Detail", desc: "รายละเอียดเชิงลึก GT2000 — สเปค การใช้งาน จุดเด่น" },
+                    ].map((p) => (
+                      <div key={p.file} className="flex items-start gap-4 p-4 rounded-xl bg-secondary/40 border border-border">
+                        <div className="shrink-0 w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-bold text-foreground">{p.label}</p>
+                          <p className="text-xs text-muted-foreground mt-0.5">{p.desc}</p>
+                          <audio controls className="w-full mt-3 h-10" preload="metadata">
+                            <source src={`/audio/${p.file}`} type="audio/wav" />
+                            เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
+                          </audio>
+                          <div className="mt-3">
+                            <ShareButtons url={window.location.origin + "/gt-series?tab=gt2000"} title={`Podcast ${p.label} — ENT GROUP`} />
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
