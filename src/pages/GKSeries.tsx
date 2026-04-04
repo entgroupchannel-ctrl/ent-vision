@@ -847,7 +847,7 @@ const GKSeries = () => {
           ],
         };
         const tabKeys = Object.keys(videoTabs);
-        const [activeVideoTab, setActiveVideoTab] = React.useState(tabKeys[0]);
+        const currentVideos = videoTabs[activeVideoTab] || videoTabs["ทั้งหมด"];
         const currentVideos = videoTabs[activeVideoTab] || [];
 
         return (
