@@ -4,6 +4,7 @@ import {
   ArrowLeft, Clock, Tag, Gift, Bell, ChevronDown, ExternalLink,
   Zap, Percent, Calendar, PartyPopper, Sparkles, Timer, FileDown
 } from "lucide-react";
+import promotionsHeroBg from "@/assets/promotions-hero-bg.jpg";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FooterCompact from "@/components/FooterCompact";
 import LineQRButton from "@/components/LineQRButton";
@@ -350,38 +351,45 @@ const Promotions = () => {
       </div>
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--primary)/0.1),transparent_60%)]" />
-        <div className="container max-w-5xl mx-auto px-6 py-16 relative text-center">
-          <PartyPopper className="mx-auto text-primary mb-4" size={48} />
+      <section className="relative overflow-hidden min-h-[340px] md:min-h-[400px]">
+        <img
+          src={promotionsHeroBg}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          width={1920}
+          height={768}
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="container max-w-5xl mx-auto px-6 py-16 relative text-center text-white">
+          <PartyPopper className="mx-auto text-yellow-400 mb-4" size={48} />
           <h1 className="text-4xl md:text-6xl font-display font-black tracking-tight mb-4">
             โปรโมชั่น<span className="text-gradient">พิเศษ</span>
           </h1>
           {hasCurrentPromos ? (
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-white/80 max-w-2xl mx-auto">
               ข้อเสนอสุดพิเศษสำหรับสินค้าคอมพิวเตอร์อุตสาหกรรม — อัพเดทล่าสุด
             </p>
           ) : (
             <div className="max-w-lg mx-auto">
-              <p className="text-lg text-muted-foreground mb-3">ขณะนี้ยังไม่มีโปรโมชั่น</p>
-              <p className="text-primary font-semibold text-xl">🔔 อดใจรอสักนิด! โปรดีๆ กำลังจะมา</p>
-              <p className="text-sm text-muted-foreground mt-2">แอดไลน์ @entgroup เพื่อรับแจ้งเตือนโปรใหม่ก่อนใคร</p>
+              <p className="text-lg text-white/80 mb-3">ขณะนี้ยังไม่มีโปรโมชั่น</p>
+              <p className="text-yellow-400 font-semibold text-xl">🔔 อดใจรอสักนิด! โปรดีๆ กำลังจะมา</p>
+              <p className="text-sm text-white/60 mt-2">แอดไลน์ @entgroup เพื่อรับแจ้งเตือนโปรใหม่ก่อนใคร</p>
             </div>
           )}
 
           {/* Quick Stats */}
           <div className="flex flex-wrap justify-center gap-6 mt-10">
             <div className="text-center">
-              <div className="text-3xl font-black text-primary">{activePromos.length}</div>
-              <div className="text-xs text-muted-foreground">โปรกำลังจัด</div>
+              <div className="text-3xl font-black text-yellow-400">{activePromos.length}</div>
+              <div className="text-xs text-white/70">โปรกำลังจัด</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-black text-foreground">{recurringPromos.length}</div>
-              <div className="text-xs text-muted-foreground">โปรจัดประจำ</div>
+              <div className="text-3xl font-black text-white">{recurringPromos.length}</div>
+              <div className="text-xs text-white/70">โปรจัดประจำ</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-black text-muted-foreground">{endedPromos.length}</div>
-              <div className="text-xs text-muted-foreground">โปรที่ผ่านมา</div>
+              <div className="text-3xl font-black text-white/60">{endedPromos.length}</div>
+              <div className="text-xs text-white/70">โปรที่ผ่านมา</div>
             </div>
           </div>
         </div>
