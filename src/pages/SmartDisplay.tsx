@@ -107,14 +107,15 @@ const fpmTouchMonitors = [
 ];
 
 const fpmDatasheets = [
-  { model: "FPM-0801A", href: "https://docs.wixstatic.com/ugd/005637_5e44d2b9d7cc48fa9c409252e62d861d.pdf" },
-  { model: "FPM-100XA", href: "https://docs.wixstatic.com/ugd/005637_5d760f5082bb435aaa29a55ab6298a02.pdf" },
-  { model: "FPM-150XA", href: "https://docs.wixstatic.com/ugd/005637_69e01e1d7ddb4da6a215f9b617bf7bd4.pdf" },
-  { model: "FPM-1202A", href: "https://docs.wixstatic.com/ugd/005637_a3754cf13eaa40b09346e93fdb46c16a.pdf" },
-  { model: "FPM-1702A", href: "https://docs.wixstatic.com/ugd/005637_8753cbe1d9c5428b8b55f81c9b98ee3a.pdf" },
-  { model: "FPM-1902A", href: "https://docs.wixstatic.com/ugd/005637_2e25c9d6f2974be5bcfbcf356f82f568.pdf" },
-  { model: "FPM-2102K", href: "https://docs.wixstatic.com/ugd/005637_ccc895a9d8314d8396843387d8120e18.pdf" },
-  { model: "FPM-2402KA", href: "https://docs.wixstatic.com/ugd/005637_21234f29c0c045f380e17e101ce14e17.pdf" },
+  { model: "FPM-0801A", href: "/datasheets/FPM-0801A.pdf" },
+  { model: "FPM-100XA", href: "/datasheets/FPM-100XA.pdf" },
+  { model: "FPM-150XA", href: "/datasheets/FPM-150XA.pdf" },
+  { model: "FPM-1202A", href: "/datasheets/FPM-1202A.pdf" },
+  { model: "FPM-1702A", href: "/datasheets/FPM-1702A.pdf" },
+  { model: "FPM-1902A", href: "/datasheets/FPM-1902A.pdf" },
+  { model: "FPM-2102K", href: "/datasheets/FPM-2102K.pdf" },
+  { model: "FPM-2402KA", href: "/datasheets/FPM-2402KA.pdf" },
+  { model: "FPM17 Special Edition", href: "/datasheets/FPM17-Special-Edition.pdf" },
 ];
 
 const outdoorFeatures = [
