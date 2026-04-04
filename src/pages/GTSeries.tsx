@@ -3754,7 +3754,7 @@ const GTSeries = () => {
                     {[
                       ["USB", "USB 3.0 × 4 + USB 2.0 × 4 (รวม 8 พอร์ต)"],
                       ["LAN", "2× Intel i211 Gigabit RJ45"],
-                      ["WiFi", "Dual-Band WiFi (M.2 2230) + เสาอากาศภายนอก 2 ต้น"],
+                      ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม"],
                       ["4G/LTE", "Full-height Mini PCIe 4G Module + Micro SIM Slot"],
                       ["Audio", "MIC-IN + SPK-OUT (Line Out)"],
                       ["Power", "DC 19V Adapter"],
