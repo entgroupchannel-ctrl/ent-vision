@@ -242,9 +242,9 @@ const TabletCard = ({
       )}
       <div className="flex flex-wrap gap-2 pt-1">
         <Button variant="outline" size="sm" asChild className="flex-1">
-          <a href={product.productUrl} target="_blank" rel="noopener noreferrer">
-            <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
-          </a>
+          <Link to={`/rugged-tablet/${product.id}`}>
+            <Monitor className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
+          </Link>
         </Button>
         <Button size="sm" className="flex-1" onClick={() => onQuote(product.model)}>
           <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอราคา
