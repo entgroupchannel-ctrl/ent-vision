@@ -4,7 +4,7 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Droplets, Shield, ThermometerSun, Cpu, Monitor, FileText } from "lucide-react";
+import { ArrowLeft, ExternalLink, Droplets, Shield, ThermometerSun, Cpu, Monitor, FileText, ShieldCheck, Waves, SprayCanIcon, Fan, Cog } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -239,27 +239,21 @@ const WaterproofPC = () => {
             </div>
             <div className="md:w-1/2 flex flex-col justify-center">
               <h3 className="text-xl font-display font-bold text-foreground mb-3">ระดับการป้องกัน IP67 & IP69K</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary shrink-0">✅</span>
-                  <span>ปิดผนึกป้องกันฝุ่นอย่างสมบูรณ์ 100%</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary shrink-0">✅</span>
-                  <span>ทนต่อการแช่น้ำลึก 1 เมตร นาน 30 นาที (IP67)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary shrink-0">✅</span>
-                  <span>ทนแรงดันน้ำสูง สเปรย์ล้างทำความสะอาดได้ (IP69K)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary shrink-0">✅</span>
-                  <span>ไร้พัดลม ลดจุดเสี่ยงความเสียหาย ไม่สะสมฝุ่น</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary shrink-0">✅</span>
-                  <span>ส่วนประกอบระดับอุตสาหกรรม ทนทานต่อสภาพแวดล้อมที่รุนแรง</span>
-                </li>
+              <ul className="space-y-4 text-sm">
+                {[
+                  { icon: ShieldCheck, text: "ปิดผนึกป้องกันฝุ่นอย่างสมบูรณ์ 100%" },
+                  { icon: Waves, text: "ทนต่อการแช่น้ำลึก 1 เมตร นาน 30 นาที (IP67)" },
+                  { icon: SprayCanIcon, text: "ทนแรงดันน้ำสูง สเปรย์ล้างทำความสะอาดได้ (IP69K)" },
+                  { icon: Fan, text: "ไร้พัดลม ลดจุดเสี่ยงความเสียหาย ไม่สะสมฝุ่น" },
+                  { icon: Cog, text: "ส่วนประกอบระดับอุตสาหกรรม ทนทานต่อสภาพแวดล้อมที่รุนแรง" },
+                ].map((item) => (
+                  <li key={item.text} className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <item.icon className="w-4 h-4 text-primary" />
+                    </div>
+                    <span className="text-muted-foreground leading-relaxed pt-1">{item.text}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
