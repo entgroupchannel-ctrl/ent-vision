@@ -457,22 +457,6 @@ const IBoxSeries = () => {
               </div>
             </section>
 
-            {/* Gallery */}
-            <section>
-              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
-                ตัวอย่างการใช้งานจริง
-              </h2>
-              <p className="text-center text-sm text-muted-foreground mb-8">
-                ส่งมอบประสบการณ์ที่แข็งแกร่งกับ Industrial Grade Computer
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {galleryImages.map((img, i) => (
-                  <div key={i} className="rounded-xl overflow-hidden bg-secondary/30 border border-border">
-                    <img src={img} alt={`ตัวอย่างการใช้งาน ${i + 1}`} className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
-                  </div>
-                ))}
-              </div>
-            </section>
 
             {/* CTA */}
             <div className="card-surface p-8 text-center">
