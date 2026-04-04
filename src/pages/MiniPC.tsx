@@ -800,7 +800,17 @@ const MiniPC = () => {
   });
 
   const hasFilters = filterCat !== "ทั้งหมด" || filterCpu !== "ทั้งหมด" || filterPrice !== 0;
-  const clearFilters = () => { setFilterCat("ทั้งหมด"); setFilterCpu("ทั้งหมด"); setFilterPrice(0); };
+  const clearFilters = () => { setFilterCat("ทั้งหมด"); setFilterCpu("ทั้งหมด"); setFilterPrice(0); setCurrentPage(1); };
+
+  const PAGE_SIZE = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.max(1, Math.ceil(filteredPriceItems.length / PAGE_SIZE));
+  const paginatedItems = filteredPriceItems.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+  // Reset page when filters change
+  const handleFilterCat = (v: string) => { setFilterCat(v); setCurrentPage(1); };
+  const handleFilterCpu = (v: string) => { setFilterCpu(v); setCurrentPage(1); };
+  const handleFilterPrice = (v: number) => { setFilterPrice(v); setCurrentPage(1); };
 
   return (
     <div className="min-h-screen bg-background">
