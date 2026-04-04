@@ -17,7 +17,7 @@ const models = [
     name: "Water Proof — 10 inch",
     model: "UTC-S1061G (KLD-1061D)",
     image: "https://static.wixstatic.com/media/0597a3_af7e5b509d7746fc92da5800de490b80~mv2.png/v1/fill/w_284,h_195,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Wp-004.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_21f4cb97b2764af98b370fcc99f58592.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_21f4cb97b2764af98b370fcc99f58592.pdf",
     specs: {
       "Screen Size": "10 inch LED",
       "Protection": "IP67 & IP69K",
@@ -32,7 +32,7 @@ const models = [
     name: "Water Proof — 15 inch",
     model: "Touch Panel PC",
     image: "https://static.wixstatic.com/media/0597a3_bc6d3986e2d142f693bc7447618a1d3e~mv2.png/v1/fill/w_600,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IP67%20Standless%20(6).png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_844456de2ee747ed9114dee707ae3788.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_844456de2ee747ed9114dee707ae3788.pdf",
     specs: {
       "Screen Size": "15 inch LED",
       "Resolution": "1920(H) × 1080(V) Full HD",
@@ -50,7 +50,7 @@ const models = [
     name: "Water Proof — 15.6 inch",
     model: "UTC-W1592G (KLD-1592GA)",
     image: "https://static.wixstatic.com/media/0597a3_c0a00a648d2143068e676c50a6d077df~mv2.jpg/v1/crop/x_0,y_39,w_718,h_493/fill/w_284,h_195,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WP15_edited.jpg",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_1459a6f9ce304306b4b973312f920066.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_1459a6f9ce304306b4b973312f920066.pdf",
     specs: {
       "Screen Size": "15.6 inch LED",
       "Protection": "IP67 & IP69K",
@@ -66,7 +66,7 @@ const models = [
     model: "Stainless Steel Touch Panel PC",
     badge: "Best Seller",
     image: "https://static.wixstatic.com/media/0597a3_89215803eae94d8b8dfbd8bb1cb629b1~mv2.png/v1/fill/w_600,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_89215803eae94d8b8dfbd8bb1cb629b1~mv2.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_52b921b945d54d72a95465a7309152bc.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_52b921b945d54d72a95465a7309152bc.pdf",
     specs: {
       "Screen Size": "17 inch LED",
       "Resolution": "1920(H) × 1080(V) Full HD",
@@ -84,7 +84,7 @@ const models = [
     name: "Water Proof — 21.5 inch (KLD)",
     model: "UTC-W2192G (KLD-2192GA)",
     image: "https://static.wixstatic.com/media/0597a3_265560fdc2694b42bfee0a5cfa89658f~mv2.png/v1/fill/w_284,h_195,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/WP%2021_5.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_8f9c5bb648384ba5b471eb4d369fa7b8.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_8f9c5bb648384ba5b471eb4d369fa7b8.pdf",
     specs: {
       "Screen Size": "21.5 inch LED",
       "Protection": "IP67 & IP69K",
@@ -99,7 +99,7 @@ const models = [
     name: "Water Proof — 21.5 inch (CTN)",
     model: "CTN-W21X2B",
     image: "https://static.wixstatic.com/media/0597a3_85962bd2b6c34f2eb110cfa091cb4ef4~mv2.png/v1/fill/w_284,h_195,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-30%20at%2018_14_33.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_5aaca9bb9d554fdda93138cabb9582aa.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_5aaca9bb9d554fdda93138cabb9582aa.pdf",
     specs: {
       "Screen Size": "21.5 inch LED",
       "Protection": "IP67 & IP69K",
@@ -192,7 +192,7 @@ const WaterproofPC = () => {
                   <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
                 </Button>
                 <Button variant="outline" asChild>
-                  <a href="https://www.entgroup.co.th/_files/ugd/0597a3_9c183e569b0c43bd9fe64184fff90503.pdf" target="_blank" rel="noopener noreferrer">
+                  <a href="https://docs.wixstatic.com/ugd/0597a3_9c183e569b0c43bd9fe64184fff90503.pdf" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="w-4 h-4 mr-1.5" /> Product Overview
                   </a>
                 </Button>

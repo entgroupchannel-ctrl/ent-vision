@@ -79,10 +79,10 @@ const gkModels: GKModel[] = [
     image: "https://static.wixstatic.com/media/005637_63354c2396e945468024a1170057f661~mv2.png/v1/crop/x_499,y_265,w_870,h_738/fill/w_453,h_385,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%871.png",
     bannerImage: "https://static.wixstatic.com/media/005637_e086c00fa8d945c4abf7defd3a9d838d~mv2.jpg/v1/crop/x_63,y_0,w_1937,h_328/fill/w_1245,h_224,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2%E0%B8%9B%E0%B8%81.jpg",
     datasheetUrls: [
-      { label: "GK1004 Core i3/i5/i7", url: "https://www.entgroup.co.th/_files/ugd/0597a3_494ff783ace94e86b75a19186e846b4c.pdf" },
-      { label: "GK1004 AMD A6", url: "https://www.entgroup.co.th/_files/ugd/0597a3_6f2939c704d64ad9815751e73437e63d.pdf" },
-      { label: "GK1004 A10-X7 (RK3288)", url: "https://www.entgroup.co.th/_files/ugd/0597a3_8862e83a07ef4fd588e0a969382a2037.pdf" },
-      { label: "GK1004 A10-X9 (RK3399)", url: "https://www.entgroup.co.th/_files/ugd/0597a3_f13b4842a3454efea01f796ecb37781d.pdf" },
+      { label: "GK1004 Core i3/i5/i7", url: "https://docs.wixstatic.com/ugd/0597a3_494ff783ace94e86b75a19186e846b4c.pdf" },
+      { label: "GK1004 AMD A6", url: "https://docs.wixstatic.com/ugd/0597a3_6f2939c704d64ad9815751e73437e63d.pdf" },
+      { label: "GK1004 A10-X7 (RK3288)", url: "https://docs.wixstatic.com/ugd/0597a3_8862e83a07ef4fd588e0a969382a2037.pdf" },
+      { label: "GK1004 A10-X9 (RK3399)", url: "https://docs.wixstatic.com/ugd/0597a3_f13b4842a3454efea01f796ecb37781d.pdf" },
     ],
     highlights: [
       "หน้าจอสัมผัส 10.4\" มาตรฐาน IP65 ทนฝุ่น น้ำ 10 จุดสัมผัส",
@@ -189,7 +189,7 @@ const gkModels: GKModel[] = [
     bannerImage: gk1506banner,
     datasheetUrls: [
       { label: "A15 Datasheet (PDF)", url: "https://www.sharevdi.com/upload/portal/20250704/202507042002221664.pdf" },
-      { label: "GK1506 Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_d2a55f290be74f049d8099a7666f5153.pdf" },
+      { label: "GK1506 Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_d2a55f290be74f049d8099a7666f5153.pdf" },
     ],
     highlights: [
       "หน้าจอ Full HD 15.6\" (1920×1080) Capacitive Touch 10 จุด",
@@ -277,10 +277,10 @@ const gkModels: GKModel[] = [
     desc: "จอ 19 นิ้ว พื้นที่แสดงผลกว้าง เหมาะกับงานควบคุมที่ต้องการความชัดเจน — รองรับ Core i5/i7 หลาย Generation",
     image: "https://static.wixstatic.com/media/3e5003_90384e2e610a43438fe307816e83b2d2~mv2.jpg/v1/fill/w_215,h_161,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/222.jpg",
     datasheetUrls: [
-      { label: "Core i5 (Gen4)", url: "https://www.entgroup.co.th/_files/ugd/0597a3_4370fc73cc6e4ed2bb563fb62bfa019a.pdf" },
-      { label: "Core i5 (Gen8)", url: "https://www.entgroup.co.th/_files/ugd/0597a3_9f8bb0cc44b04e348ae84eb877d408aa.pdf" },
-      { label: "Core i7 (Gen3)", url: "https://www.entgroup.co.th/_files/ugd/0597a3_e1db1f9a03934894bfb18e1b09421581.pdf" },
-      { label: "Core i7 (Gen6)", url: "https://www.entgroup.co.th/_files/ugd/0597a3_c3624924bdde4264b6cf09d61064dd68.pdf" },
+      { label: "Core i5 (Gen4)", url: "https://docs.wixstatic.com/ugd/0597a3_4370fc73cc6e4ed2bb563fb62bfa019a.pdf" },
+      { label: "Core i5 (Gen8)", url: "https://docs.wixstatic.com/ugd/0597a3_9f8bb0cc44b04e348ae84eb877d408aa.pdf" },
+      { label: "Core i7 (Gen3)", url: "https://docs.wixstatic.com/ugd/0597a3_e1db1f9a03934894bfb18e1b09421581.pdf" },
+      { label: "Core i7 (Gen6)", url: "https://docs.wixstatic.com/ugd/0597a3_c3624924bdde4264b6cf09d61064dd68.pdf" },
     ],
     highlights: [
       "หน้าจอ 19 นิ้ว พื้นที่แสดงผลกว้าง",
@@ -312,11 +312,11 @@ const gkModels: GKModel[] = [
     desc: "จอใหญ่ Full HD สำหรับงานแสดงผลแดชบอร์ด เปิดใช้งาน 24/7 — Panel PC 21 นิ้ว สมรรถนะสูง ทนอุณหภูมิ -10°C ถึง 60°C โครงสร้างจากอะลูมิเนียมอัลลอยด์และเหล็กกล้าคุณภาพสูง",
     image: "https://static.wixstatic.com/media/0597a3_1edf4296661742bab6366020a3910ac7~mv2.png/v1/fill/w_543,h_452,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK2101-008.png",
     datasheetUrls: [
-      { label: "Core i5 (Gen4)", url: "https://www.entgroup.co.th/_files/ugd/0597a3_9201a0dcffcf47e0a4f3b884b05724f3.pdf" },
-      { label: "Core i5 (Gen6)", url: "https://www.entgroup.co.th/_files/ugd/0597a3_1ab3580679584c548439ae4c648d3830.pdf" },
-      { label: "Core i5 (Gen7)", url: "https://www.entgroup.co.th/_files/ugd/0597a3_446a7000d3d244b5939a52de27087245.pdf" },
-      { label: "Core i7 (Gen3)", url: "https://www.entgroup.co.th/_files/ugd/0597a3_e9faa73e77324168a78bdf8360d76203.pdf" },
-      { label: "Core i7 (Gen6)", url: "https://www.entgroup.co.th/_files/ugd/0597a3_2de7a57857dd4c0b96dc32c688e82e0a.pdf" },
+      { label: "Core i5 (Gen4)", url: "https://docs.wixstatic.com/ugd/0597a3_9201a0dcffcf47e0a4f3b884b05724f3.pdf" },
+      { label: "Core i5 (Gen6)", url: "https://docs.wixstatic.com/ugd/0597a3_1ab3580679584c548439ae4c648d3830.pdf" },
+      { label: "Core i5 (Gen7)", url: "https://docs.wixstatic.com/ugd/0597a3_446a7000d3d244b5939a52de27087245.pdf" },
+      { label: "Core i7 (Gen3)", url: "https://docs.wixstatic.com/ugd/0597a3_e9faa73e77324168a78bdf8360d76203.pdf" },
+      { label: "Core i7 (Gen6)", url: "https://docs.wixstatic.com/ugd/0597a3_2de7a57857dd4c0b96dc32c688e82e0a.pdf" },
     ],
     highlights: [
       "หน้าจอ Full HD 21\" (1920×1080) Capacitive Touch IP65",
@@ -669,7 +669,7 @@ const GKSeries = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/0597a3_b7e91a40254040a3b28e20e2641312cd.pdf"
+                  href="https://docs.wixstatic.com/ugd/0597a3_b7e91a40254040a3b28e20e2641312cd.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"

@@ -24,7 +24,7 @@ const goleRuggedTablets = [
     os: "Android / Windows",
     highlight: "หน้าจอสัมผัส 7 นิ้ว ทนทาน กันน้ำ กันฝุ่น",
     image: "https://static.wixstatic.com/media/0597a3_7ac8863aec774fe2a9f5ef3eae9490a1~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rugged%20Tablet%20(2).png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_92835c695be34af08b00b1dc3394fe83.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_92835c695be34af08b00b1dc3394fe83.pdf",
   },
   {
     id: "f7r",
@@ -33,7 +33,7 @@ const goleRuggedTablets = [
     os: "Android",
     highlight: "คอมแพ็คท์ ทนทาน พกพาสะดวก สำหรับงานสนาม",
     image: "https://static.wixstatic.com/media/0597a3_f7670923b4fa410cb096b5a7357de026~mv2.png/v1/fill/w_350,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rugged%20Tablet%20(2).png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_b2fb7597f1b4458c862548e91b6bb6cc.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_b2fb7597f1b4458c862548e91b6bb6cc.pdf",
   },
   {
     id: "f9a",
@@ -42,7 +42,7 @@ const goleRuggedTablets = [
     os: "Android",
     highlight: "หน้าจอกว้างขึ้น พร้อมแบตเตอรี่ขนาดใหญ่",
     image: "https://static.wixstatic.com/media/0597a3_aa3fa9aff52147e780c6bdbd364e8516~mv2.png/v1/crop/x_0,y_3,w_1040,h_998/fill/w_333,h_320,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rugged%20Tablet%20(3).png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_3a33965f742b4034b974ef56aab56170.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_3a33965f742b4034b974ef56aab56170.pdf",
   },
 ];
 
@@ -50,18 +50,18 @@ const goleWindowsModels = [
   { name: "Rugged F3", price: "฿20,900", datasheet: "" },
   { name: "Rugged F3APL", price: "฿14,900", datasheet: "" },
   { name: "Rugged F6APL", price: "฿15,900", datasheet: "" },
-  { name: "Rugged F11APL", price: "฿16,900", datasheet: "https://www.entgroup.co.th/_files/ugd/005637_f02217601dad4d409461b2ddd18e56c4.pdf" },
-  { name: "Rugged F12APL", price: "฿19,900", datasheet: "https://www.entgroup.co.th/_files/ugd/005637_8b4c9a6183374654920d6774c95db305.pdf" },
-  { name: "Rugged F15APL N3450", price: "฿20,900", datasheet: "https://www.entgroup.co.th/_files/ugd/005637_b353baf418bc46279e6302dfd90a5848.pdf" },
-  { name: "Rugged F15APL J3355", price: "฿19,900", datasheet: "https://www.entgroup.co.th/_files/ugd/005637_1940ca9c1adf4d2296646195d8d9a347.pdf" },
+  { name: "Rugged F11APL", price: "฿16,900", datasheet: "https://docs.wixstatic.com/ugd/005637_f02217601dad4d409461b2ddd18e56c4.pdf" },
+  { name: "Rugged F12APL", price: "฿19,900", datasheet: "https://docs.wixstatic.com/ugd/005637_8b4c9a6183374654920d6774c95db305.pdf" },
+  { name: "Rugged F15APL N3450", price: "฿20,900", datasheet: "https://docs.wixstatic.com/ugd/005637_b353baf418bc46279e6302dfd90a5848.pdf" },
+  { name: "Rugged F15APL J3355", price: "฿19,900", datasheet: "https://docs.wixstatic.com/ugd/005637_1940ca9c1adf4d2296646195d8d9a347.pdf" },
 ];
 
 const goleAndroidModels = [
-  { name: "Rugged F3R", price: "฿10,900", datasheet: "https://www.entgroup.co.th/_files/ugd/005637_f8525dea6d034b26b5b09324b8e15bbc.pdf" },
-  { name: "Rugged F6R", price: "฿12,900", datasheet: "https://www.entgroup.co.th/_files/ugd/005637_50b47eff40c94ec28d0ae8fcb77d0ef8.pdf" },
-  { name: "Rugged F11R (RK3568)", price: "฿17,900", datasheet: "https://www.entgroup.co.th/_files/ugd/005637_b93e6728b85440fc8dba1818fafbe943.pdf" },
-  { name: "Rugged F12R", price: "฿17,900", datasheet: "https://www.entgroup.co.th/_files/ugd/005637_b121d1a8618a4a0486d7ef4f6012bf1c.pdf" },
-  { name: "Rugged F15R", price: "฿19,900", datasheet: "https://www.entgroup.co.th/_files/ugd/005637_d99131aa2339461fadbb2b2e188cd0b7.pdf" },
+  { name: "Rugged F3R", price: "฿10,900", datasheet: "https://docs.wixstatic.com/ugd/005637_f8525dea6d034b26b5b09324b8e15bbc.pdf" },
+  { name: "Rugged F6R", price: "฿12,900", datasheet: "https://docs.wixstatic.com/ugd/005637_50b47eff40c94ec28d0ae8fcb77d0ef8.pdf" },
+  { name: "Rugged F11R (RK3568)", price: "฿17,900", datasheet: "https://docs.wixstatic.com/ugd/005637_b93e6728b85440fc8dba1818fafbe943.pdf" },
+  { name: "Rugged F12R", price: "฿17,900", datasheet: "https://docs.wixstatic.com/ugd/005637_b121d1a8618a4a0486d7ef4f6012bf1c.pdf" },
+  { name: "Rugged F15R", price: "฿19,900", datasheet: "https://docs.wixstatic.com/ugd/005637_d99131aa2339461fadbb2b2e188cd0b7.pdf" },
 ];
 
 const emRuggedTablets = [
@@ -238,14 +238,14 @@ const tpcSeries = [
     name: "TPC-1062A",
     size: '10"',
     highlight: "Rugged Tablet เกรดอุตสาหกรรม หน้าจอสัมผัส",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_70c1f8faf9cd4eadb93ffb5479aa6854.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_70c1f8faf9cd4eadb93ffb5479aa6854.pdf",
   },
   {
     id: "tpc-1082a",
     name: "TPC-1082A",
     size: '10"',
     highlight: "Rugged Tablet เกรดอุตสาหกรรม สเปคสูง",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_288240e733304dba8334ca07cdc411cf.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_288240e733304dba8334ca07cdc411cf.pdf",
   },
 ];
 
@@ -495,7 +495,7 @@ const RuggedTablet = () => {
             </div>
             <div className="flex gap-3 shrink-0">
               <Button variant="outline" size="sm" asChild>
-                <a href="https://www.entgroup.co.th/_files/ugd/0597a3_67de374f10ce40cbb6008623c5212a03.pdf" target="_blank" rel="noopener noreferrer">
+                <a href="https://docs.wixstatic.com/ugd/0597a3_67de374f10ce40cbb6008623c5212a03.pdf" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Product Overview
                 </a>
               </Button>
@@ -788,18 +788,18 @@ const RuggedTablet = () => {
           <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">Downloads</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {[
-              { name: "Gole Product Overview", url: "https://www.entgroup.co.th/_files/ugd/0597a3_67de374f10ce40cbb6008623c5212a03.pdf" },
-              { name: "Rugged Knowledge", url: "https://www.entgroup.co.th/_files/ugd/0597a3_990b58aea85c404f923495453e23b027.pdf" },
-              { name: "EM Rugged Notebook", url: "https://www.entgroup.co.th/_files/ugd/0597a3_e2bfa41d47a1445b87da80e961544e2d.pdf" },
-              { name: "EM-X15 / X15M Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_55b872cb254b4f0f8d8a1075e0934606.pdf" },
-              { name: "EM-i81F Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_2be728ad3b0349d3b33554ed04c0214e.pdf" },
-              { name: "EM-i10J Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_6d72e4515e004620af862a7897168a95.pdf" },
-              { name: "TPC-1062A Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_70c1f8faf9cd4eadb93ffb5479aa6854.pdf" },
-              { name: "TPC-1082A Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_288240e733304dba8334ca07cdc411cf.pdf" },
+              { name: "Gole Product Overview", url: "https://docs.wixstatic.com/ugd/0597a3_67de374f10ce40cbb6008623c5212a03.pdf" },
+              { name: "Rugged Knowledge", url: "https://docs.wixstatic.com/ugd/0597a3_990b58aea85c404f923495453e23b027.pdf" },
+              { name: "EM Rugged Notebook", url: "https://docs.wixstatic.com/ugd/0597a3_e2bfa41d47a1445b87da80e961544e2d.pdf" },
+              { name: "EM-X15 / X15M Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_55b872cb254b4f0f8d8a1075e0934606.pdf" },
+              { name: "EM-i81F Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_2be728ad3b0349d3b33554ed04c0214e.pdf" },
+              { name: "EM-i10J Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_6d72e4515e004620af862a7897168a95.pdf" },
+              { name: "TPC-1062A Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_70c1f8faf9cd4eadb93ffb5479aa6854.pdf" },
+              { name: "TPC-1082A Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_288240e733304dba8334ca07cdc411cf.pdf" },
               
-              { name: "วารสาร Rugged", url: "https://www.entgroup.co.th/_files/ugd/0597a3_064a791320d74e85957143c869a8c0fd.pdf" },
-              { name: "Gole F9A Overview", url: "https://www.entgroup.co.th/_files/ugd/0597a3_3a33965f742b4034b974ef56aab56170.pdf" },
-              { name: "EM-i17J Datasheet", url: "https://www.entgroup.co.th/_files/ugd/0597a3_d2a64ac1b5444600b9255fcae1311289.pdf" },
+              { name: "วารสาร Rugged", url: "https://docs.wixstatic.com/ugd/0597a3_064a791320d74e85957143c869a8c0fd.pdf" },
+              { name: "Gole F9A Overview", url: "https://docs.wixstatic.com/ugd/0597a3_3a33965f742b4034b974ef56aab56170.pdf" },
+              { name: "EM-i17J Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_d2a64ac1b5444600b9255fcae1311289.pdf" },
             ].map((dl, i) => (
               <a key={i} href={dl.url} target="_blank" rel="noopener noreferrer" className="card-surface p-4 flex items-center gap-3 hover:border-primary/30 transition-all group">
                 <Download className="w-5 h-5 text-primary shrink-0" />
@@ -818,7 +818,7 @@ const RuggedTablet = () => {
           <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือก Rugged Device ที่เหมาะกับงานของคุณ</p>
           <div className="flex justify-center gap-3">
             <Button variant="outline" asChild>
-              <a href="https://www.entgroup.co.th/_files/ugd/0597a3_67de374f10ce40cbb6008623c5212a03.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="https://docs.wixstatic.com/ugd/0597a3_67de374f10ce40cbb6008623c5212a03.pdf" target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4 mr-1.5" /> ดาวน์โหลด Catalog
               </a>
             </Button>
