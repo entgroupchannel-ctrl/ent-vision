@@ -3,7 +3,7 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Settings, Maximize, Wifi, ChevronDown, Smartphone, Factory, BarChart3, Gauge, Headphones, Play, Star, Quote } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Settings, Maximize, Wifi, ChevronDown, Smartphone, Factory, BarChart3, Gauge, Headphones, Play, Star, Quote, Filter, CheckCircle2, DollarSign, SlidersHorizontal } from "lucide-react";
 import ShareButtons from "@/components/ShareButtons";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
