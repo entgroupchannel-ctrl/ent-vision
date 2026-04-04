@@ -4503,35 +4503,8 @@ const GTSeries = () => {
                   </Collapsible>
                 );
               })()}
-                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿28,990</p>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="bg-secondary/50">
-                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
-                        <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
-                        <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border">
-                      {[
-                        { cpu: "i5-8305G", config: "DDR4 RAM 4GB + SSD 128GB + WIFI", price: "28,990" },
-                        { cpu: "i5-8305G", config: "DDR4 RAM 8GB + SSD 128GB + WIFI", price: "29,190" },
-                        { cpu: "i5-8305G", config: "DDR4 RAM 4GB + SSD 256GB + WIFI", price: "29,590" },
-                        { cpu: "i5-8305G", config: "DDR4 RAM 8GB + SSD 256GB + WIFI", price: "29,990" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 8GB + SSD 128GB + WIFI", price: "34,690" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 8GB + SSD 256GB + WIFI", price: "35,290" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 16GB + SSD 128GB + WIFI", price: "36,490" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 16GB + SSD 256GB + WIFI", price: "36,990" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 8GB + SSD 128GB + WIFI", price: "37,790" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 8GB + SSD 256GB + WIFI", price: "38,390" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 16GB + SSD 128GB + WIFI", price: "39,590" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 16GB + SSD 256GB + WIFI", price: "39,990" },
-                      ].map((item, i) => (
-                        <tr key={i} className="hover:bg-secondary/30 transition-colors">
-                          <td className="p-3 text-foreground font-medium">{item.cpu}</td>
-                          <td className="p-3 text-muted-foreground">{item.config}</td>
+
+
 
               {/* Intro Video */}
               <div className="card-surface overflow-hidden rounded-xl">
