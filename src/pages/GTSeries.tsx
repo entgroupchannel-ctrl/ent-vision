@@ -1316,6 +1316,9 @@ const GTSeries = () => {
                         loading="lazy"
                       />
                     </div>
+                    <div className="p-3">
+                      <ShareButtons url="https://youtu.be/Z4hTYAIDs2s" title="GT2000 สาธิตการใช้งาน — ENT GROUP" />
+                    </div>
                   </div>
                   <div className="grid grid-cols-3 gap-3">
                     {[
