@@ -202,18 +202,26 @@ const menuCategories = [
         heading: "Shared Computing",
         links: [
           { label: "vCloudPoint Zero Client", href: "/vcloudpoint", hot: true },
+          { label: "S100 — Entry Level", href: "/vcloudpoint" },
+          { label: "A1 — Performance", href: "/vcloudpoint" },
+          { label: "vMatrix Manager", href: "/vcloudpoint" },
         ],
       },
       {
         heading: "Mini PC สำนักงาน",
         links: [
-          { label: "Mini PC — Office & SME", href: "/mini-pc" },
+          { label: "Mini PC — Office & SME", href: "/mini-pc", hot: true },
+          { label: "ตารางราคา Mini PC", href: "/mini-pc" },
+          { label: "Mini PC Firewall", href: "/minipc-firewall" },
         ],
       },
       {
-        heading: "เครื่องมือช่วยตัดสินใจ",
+        heading: "เครื่องมือ & บริการ",
         links: [
           { label: "✦ ช่วยเลือกสินค้าที่ใช่", href: "/product-advisor", hot: true },
+          { label: "ขอใบเสนอราคา", href: "/quote" },
+          { label: "โปรโมชั่น", href: "/promotions" },
+          { label: "เกี่ยวกับเรา", href: "/about-us" },
         ],
       },
     ],
