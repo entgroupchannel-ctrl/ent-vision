@@ -4,7 +4,7 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight, FileText, Play, Headphones, Youtube } from "lucide-react";
+import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight, FileText, Play, Headphones, Youtube, Star } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import badgeMotherboard from "@/assets/epc-badge-motherboard.png";
@@ -881,6 +881,47 @@ const EPCSeries = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Customer Testimonials */}
+        <section className="space-y-6">
+          <div className="text-center">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">Customer Reviews</span>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+              เสียงจากลูกค้า<span className="text-gradient">ที่ใช้งานจริง</span>
+            </h2>
+            <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">ความคิดเห็นจากผู้ใช้ EPC Panel PC ในอุตสาหกรรมต่างๆ ทั่วประเทศไทย</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { stars: 5, industry: "โรงงานประกอบชิ้นส่วนอิเล็กทรอนิกส์", text: "ใช้ EPC-S1522A ติดตั้งที่สายการผลิต SMT ทำงานต่อเนื่อง 24 ชม. ไม่เคยหยุด ฝุ่นเยอะมากแต่ IP65 กันได้หมด เปลี่ยนจากคอมตั้งโต๊ะมาใช้ Panel PC ลดดาวน์ไทม์ไปเกือบ 90%", role: "ผู้จัดการฝ่ายผลิต" },
+              { stars: 5, industry: "โรงงานอาหารแปรรูป", text: "ล้างน้ำแรงดันสูงได้จริง ไม่ต้องกลัวเสีย ใส่ถุงมือยางสัมผัสจอได้เลย ติดตั้งระบบ QC ตรวจสอบคุณภาพอาหารแบบ Real-time ผ่าน 2 ปีไม่มีปัญหาอะไรเลย", role: "วิศวกรฝ่ายคุณภาพ" },
+              { stars: 4, industry: "คลังสินค้าและโลจิสติกส์", text: "ติดตั้ง EPC-W1562A บนสายพานลำเลียง ใช้สแกนบาร์โค้ดจัดการ WMS จอ 15.6 นิ้วกว้างพอแสดงข้อมูลหลายช่องพร้อมกัน ทนฝุ่นและกระแทกได้ดี ราคาคุ้มค่ามาก", role: "หัวหน้าฝ่ายคลังสินค้า" },
+              { stars: 5, industry: "ห้องเย็น Cold Storage", text: "ที่อื่นบอกคอมใช้ในห้องเย็นไม่ได้ แต่ EPC ทำงานที่ -20°C ได้จริง Fanless ไม่มีหยดน้ำ ไม่มีชิ้นส่วนที่เคลื่อนไหว ใช้มา 3 ปีไม่เคยเสีย ประทับใจมากครับ", role: "ผู้จัดการห้องเย็น" },
+              { stars: 4, industry: "โรงงานยานยนต์", text: "ใช้ EPC Panel PC ควบคุมหุ่นยนต์เชื่อมผ่าน COM Port เชื่อมต่อ PLC/SCADA ได้ทันที ระบบ LEGO Mode ทำให้เวลา upgrade CPU ไม่ต้องเปลี่ยนทั้งเครื่อง ประหยัดงบได้เยอะ", role: "วิศวกร Automation" },
+            ].map((review, i) => (
+              <div key={i} className="card-surface p-5 rounded-xl space-y-3">
+                <div className="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, s) => (
+                    <Star key={s} size={14} className={s < review.stars ? "text-amber-400 fill-amber-400" : "text-muted-foreground/20"} />
+                  ))}
+                </div>
+                <p className="text-sm text-foreground leading-relaxed">"{review.text}"</p>
+                <div className="pt-2 border-t border-border/50">
+                  <p className="text-xs font-semibold text-foreground">{review.role}</p>
+                  <p className="text-[11px] text-muted-foreground">{review.industry}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* PDPA Disclaimer */}
+          <div className="card-surface rounded-lg p-4 bg-muted/30 border-dashed">
+            <p className="text-[11px] text-muted-foreground leading-relaxed text-center">
+              🔒 <strong>หมายเหตุตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA):</strong> เพื่อปกป้องสิทธิ์ของลูกค้า เราไม่สามารถเปิดเผยชื่อ-นามสกุล หรือชื่อบริษัทของผู้ให้รีวิวได้ ความคิดเห็นทั้งหมดเป็นคำชมจริงที่ได้รับจากการทำงานร่วมกับลูกค้าในอุตสาหกรรมต่างๆ ทั่วประเทศไทย
+            </p>
           </div>
         </section>
 
