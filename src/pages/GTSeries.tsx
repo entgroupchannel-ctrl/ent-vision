@@ -607,6 +607,7 @@ const GTSeries = () => {
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
   const [showLineQR, setShowLineQR] = useState(false);
+  const [gt1200PricePage, setGt1200PricePage] = useState(0);
   const [gt9000PricePage, setGt9000PricePage] = useState(0);
   const [gt1400PricePage, setGt1400PricePage] = useState(0);
 
