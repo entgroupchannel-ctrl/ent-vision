@@ -22,6 +22,8 @@ import ibox603Front from "@/assets/products/ibox-603-front.png";
 import ibox603Rear from "@/assets/products/ibox-603-rear.png";
 import ibox604Front from "@/assets/products/ibox-604-front.png";
 import ibox604Rear from "@/assets/products/ibox-604-rear.png";
+import vbox105Front from "@/assets/products/vbox-105-front.png";
+import vbox105Rear from "@/assets/products/vbox-105-rear.png";
 // Main product images
 import ibox007Main from "@/assets/products/ibox-007-main.png";
 import ibox601GtProMain from "@/assets/products/ibox-601-gt-pro-main.png";
