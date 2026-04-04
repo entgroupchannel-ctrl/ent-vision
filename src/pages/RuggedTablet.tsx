@@ -6,15 +6,28 @@ import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft, Shield, Droplets, Battery, Smartphone, Monitor,
-  Download, ChevronLeft, ChevronRight, Wifi, FileText,
-  ShoppingCart, X, ExternalLink,
+  Download, ChevronRight, Wifi, FileText, Search,
+  ShoppingCart, X, SlidersHorizontal, ArrowUpDown,
 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import FooterCompact from "@/components/FooterCompact";
 import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteDialog from "@/components/QuoteDialog";
+import TabletProductFilter, {
+  type TabletFilterState,
+  defaultTabletFilters,
+  TabletActiveFilterChips,
+} from "@/components/tablet/TabletProductFilter";
 import ruggedHero from "@/assets/rugged-tablet-hero.jpg";
 
 /* ═══════ Product Data — 15 models ═══════ */
@@ -187,7 +200,12 @@ const downloads = [
   { name: "Gole F9A Overview", url: "https://docs.wixstatic.com/ugd/0597a3_3a33965f742b4034b974ef56aab56170.pdf" },
 ];
 
-type OsFilter = "all" | "Windows" | "Android";
+/* ═══════ Helper: parse price to number ═══════ */
+function parsePrice(price?: string): number | null {
+  if (!price) return null;
+  const n = parseInt(price.replace(/[^0-9]/g, ""), 10);
+  return isNaN(n) ? null : n;
+}
 
 /* ═══════ Product Card ═══════ */
 const TabletCard = ({
@@ -204,13 +222,9 @@ const TabletCard = ({
         item={{ id: product.id, name: product.name, category: "Rugged Tablet", image: product.image, href: "/rugged-tablet", specs: product.cpu }}
         className="absolute top-3 right-3"
       />
-      <button
-        onClick={() => onToggleSelect(product.model)}
-        className="absolute top-3 left-3 z-10"
-      >
+      <button onClick={() => onToggleSelect(product.model)} className="absolute top-3 left-3 z-10">
         <Checkbox checked={selected} className="h-5 w-5" />
       </button>
-      {/* OS badge */}
       <Badge className={`absolute top-3 left-12 text-[10px] ${product.os === "Windows" ? "bg-blue-500/20 text-blue-400 border-blue-500/30" : "bg-green-500/20 text-green-400 border-green-500/30"}`}>
         {product.os}
       </Badge>
@@ -256,18 +270,71 @@ const TabletCard = ({
 
 /* ═══════ Main Component ═══════ */
 const RuggedTablet = () => {
-  const [osFilter, setOsFilter] = useState<OsFilter>("all");
+  const [filters, setFilters] = useState<TabletFilterState>({ ...defaultTabletFilters });
+  const [search, setSearch] = useState("");
+  const [sortBy, setSortBy] = useState("popular");
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   const [selectedProducts, setSelectedProducts] = useState<Set<string>>(new Set());
   const [showMultiQuote, setShowMultiQuote] = useState(false);
 
   const filtered = useMemo(() => {
-    if (osFilter === "all") return tablets;
-    return tablets.filter((t) => t.os === osFilter);
-  }, [osFilter]);
+    let result = [...tablets];
 
-  const winCount = tablets.filter((t) => t.os === "Windows").length;
-  const androidCount = tablets.filter((t) => t.os === "Android").length;
+    // Search
+    if (search) {
+      const s = search.toLowerCase();
+      result = result.filter((p) =>
+        p.name.toLowerCase().includes(s) || p.model.toLowerCase().includes(s) || p.cpu.toLowerCase().includes(s)
+      );
+    }
+
+    // OS
+    if (filters.os !== "all") result = result.filter((p) => p.os === filters.os);
+
+    // Screen Size
+    if (filters.screenSize !== "all") result = result.filter((p) => p.size === filters.screenSize);
+
+    // CPU Brand
+    if (filters.cpuBrand !== "all") {
+      result = result.filter((p) => {
+        const cpu = p.cpu.toLowerCase();
+        if (filters.cpuBrand === "Intel") return cpu.includes("intel");
+        if (filters.cpuBrand === "Rockchip") return cpu.includes("rk") || cpu.includes("rockchip");
+        if (filters.cpuBrand === "MTK") return cpu.includes("mt") || cpu.includes("mtk");
+        return true;
+      });
+    }
+
+    // Price Range
+    if (filters.priceRange !== "all") {
+      result = result.filter((p) => {
+        const price = parsePrice(p.price);
+        switch (filters.priceRange) {
+          case "under20k": return price !== null && price < 20000;
+          case "20k-25k": return price !== null && price >= 20000 && price <= 25000;
+          case "over25k": return price !== null && price > 25000;
+          case "contact": return price === null;
+          default: return true;
+        }
+      });
+    }
+
+    // Sort
+    switch (sortBy) {
+      case "price-low":
+        result.sort((a, b) => (parsePrice(a.price) ?? 999999) - (parsePrice(b.price) ?? 999999));
+        break;
+      case "price-high":
+        result.sort((a, b) => (parsePrice(b.price) ?? 0) - (parsePrice(a.price) ?? 0));
+        break;
+      case "name":
+        result.sort((a, b) => a.model.localeCompare(b.model));
+        break;
+    }
+
+    return result;
+  }, [search, filters, sortBy]);
 
   const toggleSelect = useCallback((model: string) => {
     setSelectedProducts((prev) => {
@@ -321,7 +388,6 @@ const RuggedTablet = () => {
               </Button>
             </div>
           </div>
-          {/* Quick stats */}
           <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
             {["IP65-IP68 Protection", '8"-12" Display', "Windows & Android", "รับประกัน 1 ปี"].map((s) => (
               <span key={s} className="px-3 py-1.5 rounded-full bg-background/60 backdrop-blur border border-border">{s}</span>
@@ -330,141 +396,199 @@ const RuggedTablet = () => {
         </div>
       </div>
 
-      {/* ── Sticky OS Filter ── */}
-      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border">
-        <div className="container max-w-7xl mx-auto px-4">
-          <div className="flex gap-1 overflow-x-auto py-2 scrollbar-hide">
-            {([
-              { id: "all" as OsFilter, label: `ทั้งหมด (${tablets.length})` },
-              { id: "Windows" as OsFilter, label: `Windows (${winCount})` },
-              { id: "Android" as OsFilter, label: `Android (${androidCount})` },
-            ]).map((tab) => (
+      {/* ── Sticky OS Tabs + Quick Filters ── */}
+      <div className="sticky top-[57px] z-30 bg-background/80 backdrop-blur-md border-b border-border">
+        <div className="container max-w-7xl mx-auto px-4 py-2">
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">👆 เลือก:</span>
+            {[
+              { id: "all", label: `ทั้งหมด` },
+              { id: "Windows", label: `Windows` },
+              { id: "Android", label: `Android` },
+            ].map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setOsFilter(tab.id)}
-                className={`shrink-0 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
-                  osFilter === tab.id
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-secondary/50 text-foreground/70 hover:bg-secondary"
+                onClick={() => setFilters({ ...filters, os: tab.id })}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all shrink-0 ${
+                  filters.os === tab.id
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "bg-muted hover:bg-muted/80 text-foreground"
                 }`}
               >
                 {tab.label}
+                <span className={`text-[10px] font-mono ${filters.os === tab.id ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                  ({tab.id === "all" ? tablets.length : tablets.filter((t) => t.os === tab.id).length})
+                </span>
               </button>
             ))}
-            {/* Quick nav links */}
-            <div className="ml-auto flex items-center gap-1">
-              {[
-                { label: "Features", href: "#features" },
-                { label: "Downloads", href: "#downloads" },
-              ].map((nav) => (
-                <a
-                  key={nav.href}
-                  href={nav.href}
-                  className="shrink-0 px-3 py-2 rounded-lg text-xs font-medium text-foreground/50 hover:bg-secondary/50 transition-colors"
-                >
-                  {nav.label}
-                </a>
-              ))}
-            </div>
+            <div className="w-px h-5 bg-border mx-1 shrink-0" />
+            {/* Quick filter pills */}
+            {[
+              { label: '8"', active: filters.screenSize === '8"', toggle: () => setFilters({ ...filters, screenSize: filters.screenSize === '8"' ? "all" : '8"' }) },
+              { label: '10"+', active: filters.screenSize === '10"' || filters.screenSize === '10.1"', toggle: () => setFilters({ ...filters, screenSize: filters.screenSize === '10.1"' ? "all" : '10.1"' }) },
+              { label: "Intel", active: filters.cpuBrand === "Intel", toggle: () => setFilters({ ...filters, cpuBrand: filters.cpuBrand === "Intel" ? "all" : "Intel" }) },
+              { label: "< ฿20k", active: filters.priceRange === "under20k", toggle: () => setFilters({ ...filters, priceRange: filters.priceRange === "under20k" ? "all" : "under20k" }) },
+            ].map((qf) => (
+              <button
+                key={qf.label}
+                onClick={qf.toggle}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border shrink-0 ${
+                  qf.active
+                    ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                    : "bg-card border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                }`}
+              >
+                {qf.label}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="container max-w-7xl mx-auto px-4 py-10 space-y-16">
-        {/* ── Product Grid ── */}
-        <section id="products">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h2 className="text-2xl font-display font-bold text-foreground">
-                Rugged <span className="text-gradient">Tablet Collection</span>
-              </h2>
-              <p className="text-sm text-muted-foreground mt-1">
-                แท็บเล็ตทนทานระดับอุตสาหกรรม — แสดง {filtered.length} รุ่น
-              </p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filtered.map((p) => (
-              <TabletCard
-                key={p.id}
-                product={p}
-                onQuote={setQuoteProduct}
-                selected={selectedProducts.has(p.model)}
-                onToggleSelect={toggleSelect}
-              />
-            ))}
-          </div>
-        </section>
+      <div className="container max-w-7xl mx-auto px-4 py-8">
+        <div className="flex gap-6">
+          {/* Sidebar Filter */}
+          <TabletProductFilter
+            filters={filters}
+            onFilterChange={setFilters}
+            isMobileOpen={isMobileFilterOpen}
+            onMobileClose={() => setIsMobileFilterOpen(false)}
+            resultCount={filtered.length}
+            allProducts={tablets}
+          />
 
-        {/* ── Features ── */}
-        <section id="features">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-2 text-center">คุณสมบัติเด่น</h2>
-          <p className="text-muted-foreground text-center mb-8">ทนทาน ยืดหยุ่น พร้อมลุยทุกสถานการณ์</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {features.map((f, i) => (
-              <div key={i} className="card-surface p-5">
-                <f.icon className="w-8 h-8 text-primary mb-3" />
-                <h3 className="font-semibold text-foreground text-sm mb-1">{f.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Related Categories ── */}
-        <section className="space-y-3">
-          <h2 className="text-lg font-display font-bold text-foreground mb-2">หมวดหมู่ที่เกี่ยวข้อง</h2>
-          {[
-            { to: "/rugged-notebook", title: "Rugged Notebook", desc: "โน้ตบุ๊คทนทานมาตรฐานทหาร MIL-STD-810G/H — 10 รุ่น", gradient: "Notebook" },
-            { to: "/handheld", title: "Rugged Handheld & PDA", desc: "เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม — 16 รุ่น", gradient: "Handheld & PDA" },
-            { to: "/aio", title: "All-in-One Industrial PC", desc: "คอมพิวเตอร์ All-in-One จอสัมผัสอุตสาหกรรม — 15 รุ่น", gradient: "Industrial PC" },
-          ].map((cat) => (
-            <Link key={cat.to} to={cat.to} className="card-surface p-5 flex items-center justify-between group hover:border-primary/30 transition-all">
-              <div>
-                <h3 className="text-base font-display font-bold text-foreground">
-                  {cat.title.replace(cat.gradient, "")} <span className="text-gradient">{cat.gradient}</span>
-                </h3>
-                <p className="text-sm text-muted-foreground">{cat.desc}</p>
-              </div>
-              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-            </Link>
-          ))}
-        </section>
-
-        {/* ── Downloads ── */}
-        <section id="downloads">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">Downloads</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {downloads.map((dl, i) => (
-              <a key={i} href={dl.url} target="_blank" rel="noopener noreferrer" className="card-surface p-4 flex items-center gap-3 hover:border-primary/30 transition-all group">
-                <Download className="w-5 h-5 text-primary shrink-0" />
-                <div>
-                  <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{dl.name}</p>
-                  <p className="text-xs text-muted-foreground">PDF</p>
+          {/* Main Content */}
+          <div className="flex-1 min-w-0 space-y-6">
+            {/* Toolbar */}
+            <div className="card-surface p-4">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    placeholder="ค้นหา... (ชื่อ, รุ่น, CPU)"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="pl-10"
+                  />
                 </div>
-              </a>
-            ))}
-          </div>
-        </section>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="icon" className="lg:hidden" onClick={() => setIsMobileFilterOpen(true)}>
+                    <SlidersHorizontal className="w-4 h-4" />
+                  </Button>
+                  <Select value={sortBy} onValueChange={setSortBy}>
+                    <SelectTrigger className="w-[160px]">
+                      <ArrowUpDown className="w-4 h-4 mr-2" />
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="popular">ยอดนิยม</SelectItem>
+                      <SelectItem value="price-low">ราคาต่ำ → สูง</SelectItem>
+                      <SelectItem value="price-high">ราคาสูง → ต่ำ</SelectItem>
+                      <SelectItem value="name">ชื่อ A-Z</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
 
-        <PriceDisclaimer />
+            {/* Active Filter Chips */}
+            <TabletActiveFilterChips filters={filters} onFilterChange={setFilters} />
 
-        {/* ── CTA ── */}
-        <div className="card-surface p-8 text-center">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-3">สนใจ Rugged Tablet?</h2>
-          <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือก Rugged Tablet ที่เหมาะกับงานของคุณ</p>
-          <div className="flex justify-center gap-3">
-            <Button variant="outline" asChild>
-              <Link to="/contact">ติดต่อเรา</Link>
-            </Button>
-            <Button onClick={() => setQuoteProduct("Rugged Tablet")}>
-              <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
-            </Button>
+            {/* Product Grid */}
+            {filtered.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                {filtered.map((p) => (
+                  <TabletCard
+                    key={p.id}
+                    product={p}
+                    onQuote={setQuoteProduct}
+                    selected={selectedProducts.has(p.model)}
+                    onToggleSelect={toggleSelect}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="card-surface p-12 text-center">
+                <Monitor className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-bold text-foreground mb-2">ไม่พบสินค้า</h3>
+                <p className="text-sm text-muted-foreground mb-4">ลองปรับตัวกรองหรือคำค้นหาใหม่</p>
+                <Button variant="outline" onClick={() => { setSearch(""); setFilters({ ...defaultTabletFilters }); }}>
+                  ล้างตัวกรองทั้งหมด
+                </Button>
+              </div>
+            )}
+
+            {/* Features */}
+            <section id="features">
+              <h2 className="text-2xl font-display font-bold text-foreground mb-2 text-center">คุณสมบัติเด่น</h2>
+              <p className="text-muted-foreground text-center mb-8">ทนทาน ยืดหยุ่น พร้อมลุยทุกสถานการณ์</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {features.map((f, i) => (
+                  <div key={i} className="card-surface p-5">
+                    <f.icon className="w-8 h-8 text-primary mb-3" />
+                    <h3 className="font-semibold text-foreground text-sm mb-1">{f.title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{f.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Related Categories */}
+            <section className="space-y-3">
+              <h2 className="text-lg font-display font-bold text-foreground mb-2">หมวดหมู่ที่เกี่ยวข้อง</h2>
+              {[
+                { to: "/rugged-notebook", title: "Rugged Notebook", desc: "โน้ตบุ๊คทนทานมาตรฐานทหาร MIL-STD-810G/H — 10 รุ่น", gradient: "Notebook" },
+                { to: "/handheld", title: "Rugged Handheld & PDA", desc: "เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม — 16 รุ่น", gradient: "Handheld & PDA" },
+                { to: "/aio", title: "All-in-One Industrial PC", desc: "คอมพิวเตอร์ All-in-One จอสัมผัสอุตสาหกรรม — 15 รุ่น", gradient: "Industrial PC" },
+              ].map((cat) => (
+                <Link key={cat.to} to={cat.to} className="card-surface p-5 flex items-center justify-between group hover:border-primary/30 transition-all">
+                  <div>
+                    <h3 className="text-base font-display font-bold text-foreground">
+                      {cat.title.replace(cat.gradient, "")} <span className="text-gradient">{cat.gradient}</span>
+                    </h3>
+                    <p className="text-sm text-muted-foreground">{cat.desc}</p>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                </Link>
+              ))}
+            </section>
+
+            {/* Downloads */}
+            <section id="downloads">
+              <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">Downloads</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {downloads.map((dl, i) => (
+                  <a key={i} href={dl.url} target="_blank" rel="noopener noreferrer" className="card-surface p-4 flex items-center gap-3 hover:border-primary/30 transition-all group">
+                    <Download className="w-5 h-5 text-primary shrink-0" />
+                    <div>
+                      <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{dl.name}</p>
+                      <p className="text-xs text-muted-foreground">PDF</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </section>
+
+            <PriceDisclaimer />
+
+            {/* CTA */}
+            <div className="card-surface p-8 text-center">
+              <h2 className="text-2xl font-display font-bold text-foreground mb-3">สนใจ Rugged Tablet?</h2>
+              <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือก Rugged Tablet ที่เหมาะกับงานของคุณ</p>
+              <div className="flex justify-center gap-3">
+                <Button variant="outline" asChild>
+                  <Link to="/contact">ติดต่อเรา</Link>
+                </Button>
+                <Button onClick={() => setQuoteProduct("Rugged Tablet")}>
+                  <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* ── Floating Selection Bar ── */}
+      {/* Floating Selection Bar */}
       {selectedProducts.size > 0 && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-primary text-primary-foreground rounded-full shadow-2xl px-6 py-3 flex items-center gap-4 animate-in slide-in-from-bottom-4">
           <div className="flex items-center gap-2">
