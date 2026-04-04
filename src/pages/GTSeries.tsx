@@ -1152,6 +1152,11 @@ const GTSeries = () => {
                     </tbody>
                   </table>
                 </div>
+                <div className="p-4 border-t border-border text-center">
+                  <button onClick={() => setQuoteProduct("GT1000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                    <FileText size={16} /> ขอใบเสนอราคา GT1000
+                  </button>
+                </div>
               </div>
 
               {/* Product Gallery — จากโรงงาน */}
@@ -1609,7 +1614,12 @@ const GTSeries = () => {
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                   </table>
+                </div>
+                <div className="p-4 border-t border-border text-center">
+                  <button onClick={() => setQuoteProduct("GT2000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                    <FileText size={16} /> ขอใบเสนอราคา GT2000
+                  </button>
                 </div>
               </div>
 
@@ -2339,7 +2349,12 @@ const GTSeries = () => {
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                   </table>
+                </div>
+                <div className="p-4 border-t border-border text-center">
+                  <button onClick={() => setQuoteProduct("GT4000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                    <FileText size={16} /> ขอใบเสนอราคา GT4000
+                  </button>
                 </div>
               </div>
 
@@ -2613,7 +2628,12 @@ const GTSeries = () => {
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                   </table>
+                </div>
+                <div className="p-4 border-t border-border text-center">
+                  <button onClick={() => setQuoteProduct("GT5000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                    <FileText size={16} /> ขอใบเสนอราคา GT5000
+                  </button>
                 </div>
               </div>
 
@@ -3876,6 +3896,11 @@ const GTSeries = () => {
                   </Collapsible>
                 );
               })()}
+              <div className="text-center">
+                <button onClick={() => setQuoteProduct("GT9000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                  <FileText size={16} /> ขอใบเสนอราคา GT9000
+                </button>
+              </div>
 
               {useCasesGrid}
 
@@ -4271,6 +4296,11 @@ const GTSeries = () => {
                 </div>
                 <p className="px-5 py-3 text-xs text-muted-foreground border-t border-border">*ข้อมูลราคาอ้างอิงจากตาราง GT4500 ล่าสุดบนหน้าเว็บไซต์และอาจมีการเปลี่ยนแปลงตามสเปกที่เลือก</p>
               </div>
+              <div className="text-center">
+                <button onClick={() => setQuoteProduct("GT4500")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                  <FileText size={16} /> ขอใบเสนอราคา GT4500
+                </button>
+              </div>
 
               {/* Gallery */}
               <div className="card-surface p-6">
@@ -4592,6 +4622,11 @@ const GTSeries = () => {
                   </Collapsible>
                 );
               })()}
+              <div className="text-center">
+                <button onClick={() => setQuoteProduct("GT1400")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                  <FileText size={16} /> ขอใบเสนอราคา GT1400
+                </button>
+              </div>
 
 
 
