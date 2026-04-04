@@ -30,6 +30,9 @@ import TabletProductFilter, {
   TabletActiveFilterChips,
 } from "@/components/tablet/TabletProductFilter";
 import tabletHero from "@/assets/tablet-hero.jpg";
+import relatedNotebook from "@/assets/related-rugged-notebook.jpg";
+import relatedHandheld from "@/assets/related-rugged-handheld.jpg";
+import relatedAio from "@/assets/related-aio-pc.jpg";
 
 /* ═══════ Product Data — 15 models ═══════ */
 type TabletProduct = {
@@ -552,18 +555,24 @@ const RuggedTablet = () => {
             <section className="space-y-3">
               <h2 className="text-lg font-display font-bold text-foreground mb-2">หมวดหมู่ที่เกี่ยวข้อง</h2>
               {[
-                { to: "/rugged-notebook", title: "Rugged Notebook", desc: "โน้ตบุ๊คทนทานมาตรฐานทหาร MIL-STD-810G/H — 10 รุ่น", gradient: "Notebook" },
-                { to: "/handheld", title: "Rugged Handheld & PDA", desc: "เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม — 16 รุ่น", gradient: "Handheld & PDA" },
-                { to: "/aio", title: "All-in-One Industrial PC", desc: "คอมพิวเตอร์ All-in-One จอสัมผัสอุตสาหกรรม — 15 รุ่น", gradient: "Industrial PC" },
+                { to: "/rugged-notebook", title: "Rugged Notebook", desc: "โน้ตบุ๊คทนทานมาตรฐานทหาร MIL-STD-810G/H — 10 รุ่น", gradient: "Notebook", image: relatedNotebook },
+                { to: "/handheld", title: "Rugged Handheld & PDA", desc: "เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม — 16 รุ่น", gradient: "Handheld & PDA", image: relatedHandheld },
+                { to: "/aio", title: "All-in-One Industrial PC", desc: "คอมพิวเตอร์ All-in-One จอสัมผัสอุตสาหกรรม — 15 รุ่น", gradient: "Industrial PC", image: relatedAio },
               ].map((cat) => (
-                <Link key={cat.to} to={cat.to} className="card-surface p-5 flex items-center justify-between group hover:border-primary/30 transition-all">
-                  <div>
-                    <h3 className="text-base font-display font-bold text-foreground">
-                      {cat.title.replace(cat.gradient, "")} <span className="text-gradient">{cat.gradient}</span>
-                    </h3>
-                    <p className="text-sm text-muted-foreground">{cat.desc}</p>
+                <Link key={cat.to} to={cat.to} className="card-surface overflow-hidden flex items-stretch group hover:border-primary/30 transition-all">
+                  <div className="w-28 sm:w-36 shrink-0 relative">
+                    <img src={cat.image} alt={cat.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" width={768} height={512} />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-background/20" />
                   </div>
-                  <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+                  <div className="flex-1 p-4 flex items-center justify-between">
+                    <div>
+                      <h3 className="text-base font-display font-bold text-foreground">
+                        {cat.title.replace(cat.gradient, "")} <span className="text-gradient">{cat.gradient}</span>
+                      </h3>
+                      <p className="text-sm text-muted-foreground">{cat.desc}</p>
+                    </div>
+                    <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0 ml-2" />
+                  </div>
                 </Link>
               ))}
             </section>
