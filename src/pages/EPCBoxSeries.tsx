@@ -118,7 +118,7 @@ const epcSeries: SeriesData[] = [
     taglineEn: "Entry-Level Industrial PC",
     desc: "คอมพิวเตอร์อุตสาหกรรมระดับเริ่มต้นที่ไม่ธรรมดา เงียบจริง ทนจริง ด้วยเทคโนโลยี Fanless — ยืดหยุ่นสุดขีดด้วยระบบ LEGO MODE โครงสร้างอลูมิเนียม 200mm แกร่งกว่าที่คิด",
     image: "https://static.wixstatic.com/media/0597a3_e66a5a6616b64254a920d2c6f05b93f8~mv2.png/v1/fill/w_258,h_261,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-28%20at%2021_24_48.png",
-    datasheetUrl: "https://docs.wixstatic.com/ugd/0597a3_7c5d5ac786764ef2b4fd3910060c41b6.pdf",
+    datasheetUrl: "/datasheets/0597a3_7c5d5ac786764ef2b4fd3910060c41b6.pdf",
     comPorts: "2×RS232 + 1×RS485 DB9",
     usbPorts: { usb2: "5×USB2.0 / 2×USB2.0", usb3: "1×USB3.0 / 4×USB3.0" },
     dimensions: "200mm compact",
@@ -160,7 +160,7 @@ const epcSeries: SeriesData[] = [
     taglineEn: "Enhanced Expansion Design",
     desc: "ความสูงเพิ่มจาก 47mm เป็น 79mm (+68% พื้นที่) พื้นที่ภายในมากขึ้นรองรับการขยายและระบายความร้อนดีขึ้น เหมาะกับ CPU ประสิทธิภาพสูง ทำงาน 24/7 ในโรงงานได้มั่นใจ",
     image: "https://static.wixstatic.com/media/0597a3_373c66cd76674aafb9d631325e3e3a26~mv2.png/v1/fill/w_347,h_240,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-28%20at%2021_57_50.png",
-    datasheetUrl: "https://docs.wixstatic.com/ugd/0597a3_88901736999d4c28bf68d683143988c3.pdf",
+    datasheetUrl: "/datasheets/0597a3_88901736999d4c28bf68d683143988c3.pdf",
     comPorts: "2×RS232 + 1×RS485 DB9",
     usbPorts: { usb2: "5×USB2.0 / 2×USB2.0", usb3: "1×USB3.0 / 4×USB3.0" },
     dimensions: "79mm height (+68%)",
@@ -192,7 +192,7 @@ const epcSeries: SeriesData[] = [
     taglineEn: "Wider Form Factor Design",
     desc: "กว้าง 337mm (+47% จาก EPC-20XA) ความสูงเพียง 47.5mm (บางกว่า EPC-20XA) — ครีบระบายความร้อนขนาดใหญ่พิเศษ เหมาะกับ Rack Mount และ Panel Mount",
     image: "https://static.wixstatic.com/media/0597a3_66f688e771804493b4e10e4daf7dd19a~mv2.png/v1/fill/w_410,h_247,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-28%20at%2022_19_47.png",
-    datasheetUrl: "https://docs.wixstatic.com/ugd/0597a3_95fc75ebfd0641c6be57dc1491e93f43.pdf",
+    datasheetUrl: "/datasheets/0597a3_95fc75ebfd0641c6be57dc1491e93f43.pdf",
     comPorts: "4×RS232 + 2×RS485 DB9",
     usbPorts: { usb2: "5×USB2.0 / 2×USB2.0", usb3: "1×USB3.0 / 4×USB3.0" },
     dimensions: "337mm wide, Low Profile 47.5mm",
@@ -234,7 +234,7 @@ const epcSeries: SeriesData[] = [
     taglineEn: "รุ่นเรือธงของซีรีส์",
     desc: "Maximum Form Factor: 337×160×79.5mm (ใหญ่ที่สุดในซีรีส์) รวมจุดเด่นของ EPC-20XA (สูง) + EPC-30XA (กว้าง) — พื้นผิวระบายความร้อน +168% จาก EPC-10XA พร้อมสำหรับงานวิกฤต",
     image: "https://static.wixstatic.com/media/0597a3_97f200930e3047dc887b96a9e8c48203~mv2.png/v1/fill/w_398,h_225,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-28%20at%2022_28_06.png",
-    datasheetUrl: "https://docs.wixstatic.com/ugd/0597a3_d306bb34abe6432eba8b356ecbe755e1.pdf",
+    datasheetUrl: "/datasheets/0597a3_d306bb34abe6432eba8b356ecbe755e1.pdf",
     comPorts: "4×RS232 + 2×RS485 DB9",
     usbPorts: { usb2: "5×USB2.0 / 2×USB2.0", usb3: "1×USB3.0 / 4×USB3.0" },
     dimensions: "337×160×79.5mm Flagship",
@@ -789,7 +789,7 @@ const EPCBoxSeries = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="https://docs.wixstatic.com/ugd/0597a3_9dad5caa6c4d4410a723cab33c3177bf.pdf"
+                  href="/datasheets/0597a3_9dad5caa6c4d4410a723cab33c3177bf.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
