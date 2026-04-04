@@ -1341,6 +1341,14 @@ const GKSeries = () => {
               </div>
             ))}
           </div>
+
+          {/* PDPA Disclaimer */}
+          <div className="mt-8 p-5 rounded-xl border border-primary/20 bg-primary/5 text-center">
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              <span className="font-semibold text-foreground">📋 หมายเหตุ:</span> ด้วยข้อบังคับตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) เราไม่สามารถเปิดเผยชื่อ-นามสกุล หรือข้อมูลที่ระบุตัวตนของลูกค้าได้
+              คำชมเหล่านี้เป็น <span className="font-semibold text-foreground">คำรีวิวจริง</span> ที่ได้รับจากลูกค้าผู้ใช้งานจริง ผ่านการทำงานหนักและบริการอย่างจริงใจของทีมเรา
+            </p>
+          </div>
         </div>
       </section>
 
