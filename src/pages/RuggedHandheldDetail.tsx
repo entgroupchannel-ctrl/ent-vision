@@ -21,7 +21,7 @@ import { getHandheldProduct, getRelatedHandhelds } from "@/data/rugged-handheld-
 const RelatedCard = ({ product, onQuote }: { product: ReturnType<typeof getHandheldProduct>; onQuote: (n: string) => void }) => {
   if (!product) return null;
   return (
-    <Link to={`/rugged-tablet/${product.id}`} className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
+    <Link to={`/handheld/${product.id}`} className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
       <div className="bg-secondary/30 p-4 flex items-center justify-center h-48">
         <img src={product.image} alt={product.model} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
       </div>
@@ -72,7 +72,7 @@ const RuggedHandheldDetail = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">ไม่พบสินค้า</h1>
-          <Link to="/rugged-tablet"><Button>กลับหน้า Rugged Tablet</Button></Link>
+          <Link to="/handheld"><Button>กลับหน้า Handheld & PDA</Button></Link>
         </div>
       </div>
     );
@@ -83,18 +83,18 @@ const RuggedHandheldDetail = () => {
       <SEOHead
         title={`${product.model} — ${product.name}`}
         description={`${product.nameTH} | ${product.specs.cpu} | ${product.specs.protection}`}
-        path={`/rugged-tablet/${product.id}`}
+        path={`/handheld/${product.id}`}
       />
       <ProductJsonLd
         collectionName={product.name}
         collectionDescription={product.nameTH}
-        collectionUrl={`/rugged-tablet/${product.id}`}
+        collectionUrl={`/handheld/${product.id}`}
         products={[{ name: product.name, image: product.image, description: product.specs.cpu, category: "Rugged Handheld" }]}
       />
       <BreadcrumbJsonLd items={[
         { name: "สินค้า", path: "/products" },
-        { name: "Rugged Tablet", path: "/rugged-tablet" },
-        { name: product.model, path: `/rugged-tablet/${product.id}` },
+        { name: "Handheld & PDA", path: "/handheld" },
+        { name: product.model, path: `/handheld/${product.id}` },
       ]} />
 
       {/* Breadcrumb */}
@@ -103,7 +103,7 @@ const RuggedHandheldDetail = () => {
           <nav className="flex items-center gap-2 text-sm flex-wrap">
             <Link to="/" className="text-muted-foreground hover:text-foreground">หน้าหลัก</Link>
             <ChevronRight className="w-3 h-3 text-muted-foreground" />
-            <Link to="/rugged-tablet" className="text-muted-foreground hover:text-foreground">Rugged Tablet</Link>
+            <Link to="/handheld" className="text-muted-foreground hover:text-foreground">Handheld & PDA</Link>
             <ChevronRight className="w-3 h-3 text-muted-foreground" />
             <span className="text-foreground font-medium">{product.model}</span>
           </nav>
@@ -116,7 +116,7 @@ const RuggedHandheldDetail = () => {
           <div className="space-y-4">
             <div className="card-surface overflow-hidden relative">
               <WishlistHeart
-                item={{ id: product.id, name: product.model, category: "Rugged Handheld", image: product.image, href: `/rugged-tablet/${product.id}`, specs: product.nameTH }}
+                item={{ id: product.id, name: product.model, category: "Rugged Handheld", image: product.image, href: `/handheld/${product.id}`, specs: product.nameTH }}
                 className="absolute top-3 right-3 z-10"
               />
               <div className="bg-secondary/30 p-8 flex items-center justify-center min-h-[350px]">

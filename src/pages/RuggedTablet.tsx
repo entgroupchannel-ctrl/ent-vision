@@ -301,56 +301,6 @@ const aioProducts = [
   },
 ];
 
-const handheldProducts = [
-  {
-    id: "w65g", name: "W65G Windows Handheld", size: '6.5"',
-    highlight: "Intel N4020, จอ IPS Gorilla Glass, 2D Scanner, IP67 MIL-STD-810H",
-    image: "https://entgroup-rugged.com/assets/w65g-N3AQKXJb.png", datasheet: "",
-    internalUrl: "/rugged-tablet/w65g",
-  },
-  {
-    id: "a55gt", name: "A55GT 5G Handheld", size: '6.5"',
-    highlight: "Octa-Core, 8GB/128GB, 5G Full Network, 2D Scanner, IP68 กันน้ำ",
-    image: "https://entgroup-rugged.com/assets/a55gt-8EiW4LT7.jpg", datasheet: "",
-    internalUrl: "/rugged-tablet/a55gt",
-  },
-  {
-    id: "p40at", name: "P40AT PDA Scanner", size: '4"',
-    highlight: "Quad/Octa-Core, 2D Barcode Scanner อ่านโค้ดสกปรกได้, IP65",
-    image: "https://entgroup-rugged.com/assets/p40at-AM0dpnMQ.jpg", datasheet: "",
-    internalUrl: "/rugged-tablet/p40at",
-  },
-  {
-    id: "a60t", name: "A60T Data Terminal", size: '6"',
-    highlight: "Octa-Core, 4GB/64GB, 2D Scanner, จอ HD IPS 6 นิ้ว สแกนเร็ว",
-    image: "https://entgroup-rugged.com/assets/a60t-Mi_-RVw_.jpg", datasheet: "",
-    internalUrl: "/rugged-tablet/a60t",
-  },
-  {
-    id: "p72t", name: "P72T Mobile Terminal", size: '7"',
-    highlight: "MTK6765 Octa-Core, 4GB/64GB, 2D + UHF RFID, จอ HD IPS 7 นิ้ว แบตอึด",
-    image: "https://entgroup-rugged.com/assets/p72t-BIVD8IBh.png", datasheet: "",
-    internalUrl: "/rugged-tablet/p72t",
-  },
-  {
-    id: "em-t2-ultra", name: "EM-T2 Ultra Outdoor Tablet", size: '10.95"',
-    highlight: "MediaTek Dimensity 7300, 12GB/256GB, จอ 2K 1200x1920, Android 15",
-    image: "https://entgroup-rugged.com/assets/em-t2-ultra-Bl924cVb.jpg", datasheet: "",
-    internalUrl: "/rugged-tablet/em-t2-ultra",
-  },
-  {
-    id: "em-p2-pro", name: "EM-P2 Pro 5G Phone", size: '6.78"',
-    highlight: "Dimensity 6300 5G, 12GB/256GB, จอ 2K 120Hz, Android 14",
-    image: "https://entgroup-rugged.com/assets/main-VATZJz47.png", datasheet: "",
-    internalUrl: "/rugged-tablet/em-p2-pro",
-  },
-  {
-    id: "em-p1", name: "EM-P1 Rugged Phone", size: '6.56"',
-    highlight: "MediaTek Helio G99, 12GB/256GB, Android 14 กันน้ำกันกระแทก",
-    image: "https://entgroup-rugged.com/assets/em-p1-KJ_Z-unN.png", datasheet: "",
-    internalUrl: "/rugged-tablet/em-p1",
-  },
-];
 
 const features = [
   { icon: Shield, title: "ทนทานระดับอุตสาหกรรม", desc: "ผ่านมาตรฐาน MIL-STD-810G ทนการตกกระแทก สั่นสะเทือน อุณหภูมิสุดขั้ว" },
@@ -368,7 +318,7 @@ const categories = [
   { id: "em-rugged", label: "Rugged Tablet" },
   { id: "notebook", label: "Rugged Notebook" },
   { id: "aio", label: "All-in-One PC" },
-  { id: "handheld", label: "Handheld & PDA" },
+  
   { id: "tpc", label: "TPC Series" },
   { id: "pricelist", label: "Price List" },
   { id: "downloads", label: "Downloads" },
@@ -672,17 +622,17 @@ const RuggedTablet = () => {
           </div>
         </section>
 
-        {/* Handheld & PDA */}
-        <section id="handheld">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-            Rugged <span className="text-gradient">Handheld & PDA</span>
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม พร้อม Barcode Scanner, NFC, RFID สำหรับงานภาคสนาม</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {handheldProducts.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
-            ))}
-          </div>
+        {/* Handheld & PDA — Link to dedicated page */}
+        <section id="handheld-link">
+          <Link to="/handheld" className="card-surface p-6 flex items-center justify-between group hover:border-primary/30 transition-all">
+            <div>
+              <h2 className="text-xl font-display font-bold text-foreground mb-1">
+                Rugged <span className="text-gradient">Handheld & PDA</span>
+              </h2>
+              <p className="text-sm text-muted-foreground">เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม — 16 รุ่น พร้อม Barcode Scanner, NFC, RFID</p>
+            </div>
+            <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+          </Link>
         </section>
 
         <section id="tpc">

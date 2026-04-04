@@ -141,10 +141,10 @@ const menuCategories = [
       {
         heading: "Handheld & PDA",
         links: [
-          { label: "W65G — Windows Handheld", href: "/rugged-tablet/w65g" },
-          { label: "A55GT — 5G Android IP68", href: "/rugged-tablet/a55gt", hot: true },
-          { label: "P40AT — PDA Scanner", href: "/rugged-tablet/p40at" },
-          { label: "EM-P2 Pro — 5G Phone", href: "/rugged-tablet/em-p2-pro" },
+          { label: "W65G — Windows Handheld", href: "/handheld/w65g" },
+          { label: "A55GT — 5G Android IP68", href: "/handheld/a55gt", hot: true },
+          { label: "P40AT — PDA Scanner", href: "/handheld/p40at" },
+          { label: "EM-P2 Pro — 5G Phone", href: "/handheld/em-p2-pro" },
           { label: "ดูทั้งหมด →", href: "/handheld", hot: true },
         ],
       },
