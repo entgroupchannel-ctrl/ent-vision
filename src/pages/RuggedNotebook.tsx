@@ -4,6 +4,7 @@ import {
   ArrowLeft, Shield, Cpu, Monitor, Laptop, Sparkles, Search,
   SlidersHorizontal, ArrowUpDown, FileText, ShoppingCart, X,
 } from "lucide-react";
+import notebookHero from "@/assets/notebook-hero.jpg";
 import SEOHead from "@/components/SEOHead";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import ProductJsonLd from "@/components/ProductJsonLd";
