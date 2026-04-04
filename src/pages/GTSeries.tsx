@@ -2771,14 +2771,9 @@ const GTSeries = () => {
 
               {/* Datasheet CTA */}
               <div className="text-center">
-                <a
-                  href="/datasheets/GT5000.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
-                >
-                  <Download size={16} /> ดาวน์โหลด Datasheet GT5000
-                </a>
+                <span className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-muted text-muted-foreground font-semibold cursor-not-allowed opacity-60">
+                  <Download size={16} /> Datasheet GT5000 — กำลังจัดทำ
+                </span>
               </div>
             </div>
           )}
