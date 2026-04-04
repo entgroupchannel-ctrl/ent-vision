@@ -1,4 +1,5 @@
 import { useState } from "react";
+import heroFirewall from "@/assets/hero-firewall.jpg";
 import ShareButtons from "@/components/ShareButtons";
 import { Play, Youtube, ThumbsUp, ExternalLink as ExtLink } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
