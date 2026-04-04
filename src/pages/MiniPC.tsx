@@ -671,7 +671,7 @@ const ProductCard = ({ model, onQuote }: { model: any; onQuote?: (name: string) 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {model.highlights?.map((h: string, i: number) => (
               <div key={i} className="flex items-start gap-2 text-sm">
-                <span className="text-primary mt-0.5 shrink-0">✅</span>
+                <CircleCheck size={15} className="text-primary mt-0.5 shrink-0" />
                 <span className="text-foreground/80">{h}</span>
               </div>
             ))}
