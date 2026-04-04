@@ -959,7 +959,7 @@ const MiniPC = () => {
                 </div>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
-                แสดง {filteredPriceItems.length} จาก {allPriceItems.length} รุ่น
+                แสดง {filteredPriceItems.length} จาก {allPriceItems.length} รุ่น {totalPages > 1 && `(หน้า ${currentPage}/${totalPages})`}
               </p>
             </div>
 
