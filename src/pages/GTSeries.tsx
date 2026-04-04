@@ -38,6 +38,17 @@ import gt7000Product from "@/assets/gt7000-product.jpg";
 import gt8000Product from "@/assets/gt8000-product.jpg";
 import gt9000Product from "@/assets/gt9000-product.jpg";
 import gt3000CpuOptions from "@/assets/gt3000-cpu-options.png";
+import gtColorfulProducts from "@/assets/gt-colorful-products.png";
+import usecaseFactory from "@/assets/usecase-factory.jpg";
+import usecaseAutomation from "@/assets/usecase-automation.jpg";
+import usecaseIot from "@/assets/usecase-iot.jpg";
+import usecaseKiosk from "@/assets/usecase-kiosk.jpg";
+import usecaseHmi from "@/assets/usecase-hmi.jpg";
+import usecaseBus from "@/assets/usecase-bus.jpg";
+import usecaseTrain from "@/assets/usecase-train.jpg";
+import usecaseQueue from "@/assets/usecase-queue.jpg";
+import usecaseControl from "@/assets/usecase-control.jpg";
+import usecaseBranding from "@/assets/usecase-branding.jpg";
 import FooterCompact from "@/components/FooterCompact";
 
 const features = [
@@ -600,30 +611,48 @@ const GTSeries = () => {
   const [gt1400PricePage, setGt1400PricePage] = useState(0);
 
   const useCasesGrid = (
-    <div className="card-surface rounded-xl overflow-hidden">
-      <div className="p-6 border-b border-border">
-        <h3 className="text-xl font-display font-bold text-foreground mb-2">🎨 เพิ่มสีสันสดใส ด้วยการทำสีใหม่ให้กับสินค้าของคุณ</h3>
-        <p className="text-muted-foreground">สร้างภาพลักษณ์องค์กร — พนักงานภูมิใจที่ได้ใช้ผลิตภัณฑ์ระดับโลก ออกแบบเครื่องให้เข้ากับแบรนด์ของคุณได้อย่างลงตัว</p>
+    <div className="space-y-6">
+      {/* Custom Branding Section */}
+      <div className="card-surface rounded-xl overflow-hidden">
+        <div className="p-6 border-b border-border">
+          <h3 className="text-xl font-display font-bold text-foreground mb-2">🎨 เพิ่มสีสันสดใส ด้วยการทำสีใหม่ให้กับสินค้าของคุณ</h3>
+          <p className="text-muted-foreground">สร้างภาพลักษณ์องค์กร — พนักงานภูมิใจที่ได้ใช้ผลิตภัณฑ์ระดับโลก ออกแบบเครื่องให้เข้ากับแบรนด์ของคุณได้อย่างลงตัว</p>
+        </div>
+        <div className="p-4">
+          <img src={gtColorfulProducts} alt="GT Series สีสันหลากหลาย ทำสีตามแบรนด์" className="w-full rounded-lg object-cover" loading="lazy" />
+        </div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0 divide-x divide-y divide-border">
-        {[
-          { icon: "🏭", title: "โรงงานอุตสาหกรรม", desc: "ควบคุมไลน์ผลิต ทนฝุ่น ทนร้อน 24/7" },
-          { icon: "⚙️", title: "Factory Automation", desc: "เชื่อมต่ออุปกรณ์ PLC, SCADA, HMI" },
-          { icon: "📡", title: "IoT Gateway", desc: "รวบรวมข้อมูลเซ็นเซอร์ ส่งขึ้น Cloud" },
-          { icon: "🖥️", title: "KIOSK & Signage", desc: "ตู้บริการอัตโนมัติ ป้ายดิจิทัล" },
-          { icon: "📊", title: "HMI Controller", desc: "จอสั่งงานเครื่องจักร แม่นยำ" },
-          { icon: "🚌", title: "รถโดยสาร", desc: "ระบบแสดงผลและจัดการเส้นทาง" },
-          { icon: "🚈", title: "รถไฟฟ้า", desc: "ระบบสารสนเทศผู้โดยสาร" },
-          { icon: "📋", title: "Queue System", desc: "ระบบคิวอัตโนมัติ คลินิก ธนาคาร" },
-          { icon: "🔧", title: "ตู้คอนโทรล", desc: "ติดตั้งในตู้ MDB, ควบคุมระบบ" },
-          { icon: "🎯", title: "Custom Branding", desc: "ทำสี สกรีนโลโก้ ตามแบรนด์คุณ" },
-        ].map((item, i) => (
-          <div key={i} className="p-4 text-center hover:bg-secondary/40 transition-colors">
-            <span className="text-2xl mb-2 block">{item.icon}</span>
-            <p className="text-xs font-bold text-foreground mb-1">{item.title}</p>
-            <p className="text-[10px] text-muted-foreground leading-tight">{item.desc}</p>
-          </div>
-        ))}
+
+      {/* Use Cases Section */}
+      <div className="card-surface rounded-xl overflow-hidden">
+        <div className="p-6 border-b border-border">
+          <h3 className="text-xl font-display font-bold text-foreground mb-2">💼 ตัวอย่าง<span className="text-primary">การใช้งาน</span></h3>
+          <p className="text-muted-foreground">รองรับได้หลากหลายกิจกรรม — โรงงานอุตสาหกรรม, Factory Automation, IOT, KIOSK, HMI, Digital Signage, Queue System, รถโดยสาร, รถไฟฟ้า, ตู้คอนโทรล</p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0 divide-x divide-y divide-border">
+          {[
+            { img: usecaseFactory, title: "โรงงานอุตสาหกรรม", desc: "ควบคุมไลน์ผลิต ทนฝุ่น ทนร้อน 24/7" },
+            { img: usecaseAutomation, title: "Factory Automation", desc: "เชื่อมต่ออุปกรณ์ PLC, SCADA, HMI" },
+            { img: usecaseIot, title: "IoT Gateway", desc: "รวบรวมข้อมูลเซ็นเซอร์ ส่งขึ้น Cloud" },
+            { img: usecaseKiosk, title: "KIOSK & Signage", desc: "ตู้บริการอัตโนมัติ ป้ายดิจิทัล" },
+            { img: usecaseHmi, title: "HMI Controller", desc: "จอสั่งงานเครื่องจักร แม่นยำ" },
+            { img: usecaseBus, title: "รถโดยสาร", desc: "ระบบแสดงผลและจัดการเส้นทาง" },
+            { img: usecaseTrain, title: "รถไฟฟ้า", desc: "ระบบสารสนเทศผู้โดยสาร" },
+            { img: usecaseQueue, title: "Queue System", desc: "ระบบคิวอัตโนมัติ คลินิก ธนาคาร" },
+            { img: usecaseControl, title: "ตู้คอนโทรล", desc: "ติดตั้งในตู้ MDB, ควบคุมระบบ" },
+            { img: usecaseBranding, title: "Custom Branding", desc: "ทำสี สกรีนโลโก้ ตามแบรนด์คุณ" },
+          ].map((item, i) => (
+            <div key={i} className="group overflow-hidden hover:bg-secondary/40 transition-colors">
+              <div className="aspect-square overflow-hidden">
+                <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" width={640} height={640} />
+              </div>
+              <div className="p-3 text-center">
+                <p className="text-xs font-bold text-foreground mb-1">{item.title}</p>
+                <p className="text-[10px] text-muted-foreground leading-tight">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
