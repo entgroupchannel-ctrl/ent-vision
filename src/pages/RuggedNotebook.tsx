@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import {
   ArrowLeft, Shield, Cpu, Monitor, Laptop, Sparkles, Search,
   SlidersHorizontal, ArrowUpDown, FileText, ShoppingCart, X,
+  Play, ThumbsUp, Share2, ExternalLink,
 } from "lucide-react";
+import ShareButtons from "@/components/ShareButtons";
 import notebookHero from "@/assets/notebook-hero.jpg";
 import SEOHead from "@/components/SEOHead";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
