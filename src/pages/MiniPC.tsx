@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import FooterCompact from "@/components/FooterCompact";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteDialog from "@/components/QuoteDialog";
 
 /* ── Category Navigation ── */
@@ -977,14 +978,8 @@ const MiniPC = () => {
                 </Table>
               </div>
 
-              {/* Remarks */}
-              <div className="p-5 bg-secondary/30 border-t border-border">
-                <h4 className="text-sm font-semibold text-foreground mb-2">📌 หมายเหตุ</h4>
-                <ul className="space-y-1 text-sm text-muted-foreground">
-                  <li>• ราคาสินค้าอาจเปลี่ยนแปลงได้โดยมิต้องแจ้งให้ทราบล่วงหน้า</li>
-                  <li>• ราคาไม่รวม VAT 7%</li>
-                  <li>• รับประกันมาตรฐาน 1 ปี ซื้อประกันเพิ่มได้สูงสุด 3 ปี</li>
-                </ul>
+              <div className="p-5">
+                <PriceDisclaimer />
               </div>
             </div>
           </section>

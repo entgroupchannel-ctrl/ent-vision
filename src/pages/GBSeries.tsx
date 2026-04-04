@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FooterCompact from "@/components/FooterCompact";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteDialog from "@/components/QuoteDialog";
 import { LineQRDialog } from "@/components/LineQRDialog";
 import GBPriceList from "@/components/GBPriceList";
@@ -462,6 +463,7 @@ const GBSeries = () => {
                   <p className="text-xs text-muted-foreground">
                     💡 สามารถ Customize สเปกได้ตามต้องการ • Windows License เพิ่มเติมได้ • ประกัน 1 ปี (ซื้อเพิ่มสูงสุด 3 ปี)
                   </p>
+                  <PriceDisclaimer />
                 </div>
               </div>
             </TabsContent>

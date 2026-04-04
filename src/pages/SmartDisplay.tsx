@@ -14,6 +14,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import smartDisplayHero from "@/assets/smart-display-hero.jpg";
 import FooterCompact from "@/components/FooterCompact";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import kioskVisitor from "@/assets/kiosk-usecase-visitor.jpg";
 import kioskQueue from "@/assets/kiosk-usecase-queue.jpg";
 import kioskWayfinding from "@/assets/kiosk-usecase-wayfinding.jpg";
@@ -408,6 +409,7 @@ const SmartDisplay = () => {
                     </table>
                   </div>
                 </div>
+                <PriceDisclaimer />
 
                 {/* Datasheet downloads */}
                 <div className="mt-6">

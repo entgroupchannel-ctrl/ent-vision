@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteDialog from "@/components/QuoteDialog";
 import { LineQRDialog } from "@/components/LineQRDialog";
 
@@ -811,6 +812,7 @@ const EPCBoxSeries = () => {
               </table>
             </div>
           </div>
+          <PriceDisclaimer />
         </div>
       </section>
 

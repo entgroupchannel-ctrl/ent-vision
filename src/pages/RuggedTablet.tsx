@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import FooterCompact from "@/components/FooterCompact";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteDialog from "@/components/QuoteDialog";
 
 /* ───── Product Categories ───── */
@@ -773,14 +774,7 @@ const RuggedTablet = () => {
             })}
           </Tabs>
 
-          <div className="mt-4 p-4 bg-secondary/30 rounded-lg border border-border">
-            <p className="text-xs font-semibold text-foreground mb-2">📌 หมายเหตุ</p>
-            <ul className="text-xs text-muted-foreground space-y-1">
-              <li>• ราคาสินค้าอาจเปลี่ยนแปลงได้โดยมิต้องแจ้งให้ทราบล่วงหน้า</li>
-              <li>• ราคาไม่รวม VAT 7%</li>
-              <li>• รับประกันมาตรฐาน 1 ปี</li>
-            </ul>
-          </div>
+          <PriceDisclaimer />
         </section>
 
         {/* Downloads */}
