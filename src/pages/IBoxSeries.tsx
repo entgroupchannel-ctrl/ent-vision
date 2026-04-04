@@ -314,6 +314,7 @@ const IBoxSeries = () => {
             isMobileOpen={isMobileFilterOpen}
             onMobileClose={() => setIsMobileFilterOpen(false)}
             resultCount={filteredProducts.length}
+            allProducts={iboxProducts}
           />
 
           {/* Main Content */}
