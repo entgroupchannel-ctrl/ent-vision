@@ -2537,54 +2537,76 @@ const GTSeries = () => {
                 </div>
               </div>
 
-              {/* Video Section */}
+              {/* Intro Video */}
               <div className="card-surface overflow-hidden rounded-xl">
                 <div className="p-5 border-b border-border flex items-center gap-3">
                   <Play className="text-primary" size={20} />
                   <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT5000</h3>
                 </div>
-                <div className="grid md:grid-cols-2 gap-0 md:divide-x divide-border">
-                  <a
-                    href="https://www.youtube.com/watch?v=ifkzyVY9Z-g"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block relative group"
-                  >
-                    <img
-                      src="https://img.youtube.com/vi/ifkzyVY9Z-g/maxresdefault.jpg"
-                      alt="การเลือกซื้อคอมพิวเตอร์สำหรับงานอุตสาหกรรม GT Series"
-                      className="w-full aspect-video object-cover"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/AfWfNNtEG74"
+                    title="GT5000 Intro"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-3 flex items-center justify-between">
+                  <span className="text-sm font-semibold text-foreground">GT5000 Introduction</span>
+                  <ShareButtons url="https://youtu.be/AfWfNNtEG74" title="GT5000 Introduction" compact />
+                </div>
+              </div>
+
+              {/* More Videos */}
+              <div className="grid md:grid-cols-3 gap-4">
+                {[
+                  { id: "Vow9kJBFyWk", label: "GT5000 รายละเอียด" },
+                  { id: "ifkzyVY9Z-g", label: "ภาพรวม GT Series" },
+                  { id: "mUdgKEBxWF4", label: "GT5000 เพิ่มเติม" },
+                ].map((v) => (
+                  <div key={v.id} className="card-surface overflow-hidden rounded-xl">
+                    <div className="aspect-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${v.id}`}
+                        title={v.label}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-3 flex items-center justify-between">
+                      <span className="text-xs font-semibold text-foreground truncate">{v.label}</span>
+                      <ShareButtons url={`https://youtu.be/${v.id}`} title={v.label} compact />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Podcast */}
+              <div className="card-surface rounded-xl p-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <Headphones className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">🎙️ Podcast — GT5000</h3>
+                </div>
+                <div className="grid md:grid-cols-3 gap-4">
+                  {[
+                    { file: "GT5000_Intro.wav", label: "GT5000 Introduction" },
+                    { file: "GT5000_Port_Specification.wav", label: "GT5000 Port Specification" },
+                    { file: "GT5000_Sale_Scenario.wav", label: "GT5000 Sale Scenario" },
+                  ].map((p) => (
+                    <div key={p.file} className="p-4 rounded-xl bg-secondary/40 border border-border">
+                      <p className="text-sm font-bold text-foreground mb-1">{p.label}</p>
+                      <audio controls className="w-full mt-2 h-10" preload="metadata">
+                        <source src={`/audio/${p.file}`} type="audio/wav" />
+                      </audio>
+                      <div className="mt-2">
+                        <ShareButtons url={`${window.location.origin}/gt-series?tab=gt5000`} title={`Podcast ${p.label}`} compact />
                       </div>
                     </div>
-                    <div className="absolute bottom-3 left-3">
-                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">การเลือกซื้อ GT Series — 14:20</span>
-                    </div>
-                  </a>
-                  <div className="flex flex-col gap-4 p-6 bg-secondary/30">
-                    <div className="text-center">
-                      <Play className="mx-auto text-primary mb-2" size={28} />
-                      <p className="text-sm font-semibold text-foreground mb-1">GT5000 Port Specification</p>
-                      <p className="text-xs text-muted-foreground mb-1">ความยาว 02:30</p>
-                    </div>
-                    <div className="text-center border-t border-border pt-4">
-                      <Play className="mx-auto text-primary mb-2" size={28} />
-                      <p className="text-sm font-semibold text-foreground mb-1">GT5000 Sale Scenario Discussion</p>
-                      <p className="text-xs text-muted-foreground mb-1">ความยาว 04:44</p>
-                    </div>
-                    <a
-                      href="https://www.entgroup.co.th/gt5000"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1 mt-2 text-xs text-primary hover:underline"
-                    >
-                      ดูวิดีโอทั้งหมดที่เว็บต้นทาง <ExternalLink size={12} />
-                    </a>
-                  </div>
+                  ))}
                 </div>
               </div>
 
