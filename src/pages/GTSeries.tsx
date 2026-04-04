@@ -5495,19 +5495,16 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     </p>
                   </div>
 
-                  <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-3">🏭 Products Features</h4>
-                    <ul className="text-sm text-muted-foreground space-y-2">
-                      <li>✅ Intel Gen 4/6/7/8/10 Core i3/i5/i7 CPU (Onboard)</li>
-                      <li>✅ 2× RJ45 Intel Gigabit LAN + 2× DB9 RS232 COM</li>
-                      <li>✅ VGA + HDMI 1.4 Dual Display พร้อมกัน</li>
-                      <li>✅ SIM Card Slot สำหรับ 3G/4G WiFi</li>
-                      <li>✅ Fanless Aluminum Alloy — เงียบสนิท 24 ชม.</li>
-                      <li>✅ TDP เพียง 28W ประหยัดพลังงาน</li>
-                      <li>✅ AWAL, Wake On LAN, Watchdog, RTC</li>
-                      <li>✅ Wall Mount ได้ — ขนาดเล็กเพียง 193.9×127×57.2mm</li>
-                    </ul>
-                  </div>
+                  <ProductFeatures features={[
+                    "Intel Gen 4/6/7/8/10 Core i3/i5/i7 CPU (Onboard)",
+                    "2× RJ45 Intel Gigabit LAN + 2× DB9 RS232 COM",
+                    "VGA + HDMI 1.4 Dual Display พร้อมกัน",
+                    "SIM Card Slot สำหรับ 3G/4G WiFi",
+                    "Fanless Aluminum Alloy — เงียบสนิท 24 ชม.",
+                    "TDP เพียง 28W ประหยัดพลังงาน",
+                    "AWAL, Wake On LAN, Watchdog, RTC",
+                    "Wall Mount ได้ — ขนาดเล็กเพียง 193.9×127×57.2mm",
+                  ]} />
 
                   {/* Key Specs */}
                   <div className="grid grid-cols-2 gap-4">
