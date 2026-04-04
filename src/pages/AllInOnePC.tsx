@@ -170,12 +170,13 @@ const AllInOnePC = () => {
       />
 
       {/* ── Hero ── */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-background via-primary/5 to-background">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={aioHero} alt="All-in-One PC ในโรงงานอุตสาหกรรม" className="w-full h-full object-cover" width={1920} height={640} />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
         </div>
-        <div className="container max-w-7xl mx-auto px-4 py-8 relative z-10">
+        <div className="container max-w-7xl mx-auto px-4 py-12 md:py-20 relative z-10">
           <Link
             to="/"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6"
@@ -183,34 +184,40 @@ const AllInOnePC = () => {
             <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
           </Link>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
-            <div>
-              <Badge className="bg-primary/10 text-primary border-primary/20 mb-3">Industrial Grade</Badge>
-              <h1 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-3">
-                All-in-One <span className="text-gradient">Industrial PC</span>
-              </h1>
-              <p className="text-muted-foreground max-w-2xl leading-relaxed">
-                คอมพิวเตอร์ All-in-One สำหรับอุตสาหกรรม ออกแบบมาเพื่อประหยัดพื้นที่และเพิ่มประสิทธิภาพการทำงาน
-                พร้อมจอสัมผัสคุณภาพสูง รองรับ VESA / Panel Mount
-              </p>
-            </div>
-            <Button size="sm" onClick={() => setQuoteProduct("All-in-One PC")}>
-              <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
-            </Button>
-          </div>
+          <div className="max-w-2xl">
+            <Badge className="bg-primary/10 text-primary border-primary/20 mb-4">Industrial Grade — Touch & Panel Mount</Badge>
+            <h1 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">
+              All-in-One <span className="text-gradient">Industrial PC</span>
+            </h1>
+            <p className="text-muted-foreground leading-relaxed mb-8">
+              คอมพิวเตอร์ All-in-One สำหรับอุตสาหกรรม ออกแบบมาเพื่อประหยัดพื้นที่และเพิ่มประสิทธิภาพ
+              พร้อมจอสัมผัสคุณภาพสูง รองรับ VESA / Panel Mount ใช้งานได้ 24/7
+            </p>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-3 max-w-md">
-            {[
-              { label: "รุ่นทั้งหมด", value: stats.total },
-              { label: "Windows", value: stats.windows },
-              { label: "Android", value: stats.android },
-            ].map((s) => (
-              <div key={s.label} className="card-surface p-3 text-center">
-                <p className="text-lg font-bold text-primary">{s.value}</p>
-                <p className="text-[10px] text-muted-foreground">{s.label}</p>
-              </div>
-            ))}
+            <div className="flex flex-wrap gap-3 mb-8">
+              <Button size="sm" onClick={() => setQuoteProduct("All-in-One PC")}>
+                <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
+              </Button>
+              <Button size="sm" variant="outline" asChild>
+                <a href="#products">ดูสินค้าทั้งหมด →</a>
+              </Button>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {[
+                { icon: Monitor, value: `${stats.total} รุ่น`, label: "ให้เลือก" },
+                { icon: Touchpad, value: "Touch", label: "หน้าจอสัมผัส" },
+                { icon: Shield, value: "IP65", label: "กันน้ำกันฝุ่น" },
+                { icon: Zap, value: "24/7", label: "ทำงานต่อเนื่อง" },
+              ].map((s) => (
+                <div key={s.label} className="bg-background/60 backdrop-blur-sm border border-border rounded-xl p-3 text-center">
+                  <s.icon className="w-5 h-5 mx-auto mb-1.5 text-primary" />
+                  <p className="text-sm font-bold text-foreground">{s.value}</p>
+                  <p className="text-[10px] text-muted-foreground">{s.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
