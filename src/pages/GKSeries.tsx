@@ -899,6 +899,7 @@ const ComparisonTable = () => (
 /* ─── Page ─── */
 const GKSeries = () => {
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [quoteProduct, setQuoteProduct] = useState("");
   const [showLineQR, setShowLineQR] = useState(false);
   const [activeVideoTab, setActiveVideoTab] = useState("ทั้งหมด");
   return (
