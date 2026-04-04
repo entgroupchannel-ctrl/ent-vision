@@ -66,8 +66,8 @@ const RuggedTabletDetail = () => {
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/" }, { name: "Rugged Tablet", path: "/rugged-tablet" }, { name: product.model, path: `/rugged-tablet/${product.id}` }]} />
       <ProductJsonLd collectionName={product.name} collectionDescription={product.nameTH} collectionUrl={`/rugged-tablet/${product.id}`} products={[{ name: product.name, price: product.price, category: "Rugged Tablet" }]} />
 
-      {/* Breadcrumb */}
-      <div className="bg-secondary/50 py-4 border-b border-border">
+      {/* Sticky Breadcrumb */}
+      <div className="sticky top-0 z-30 bg-background/90 backdrop-blur-md py-3 border-b border-border">
         <div className="container max-w-6xl mx-auto px-4">
           <nav className="flex items-center gap-2 text-sm flex-wrap">
             <Link to="/" className="text-muted-foreground hover:text-foreground">หน้าหลัก</Link>
