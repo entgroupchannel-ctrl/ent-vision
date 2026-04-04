@@ -18,6 +18,8 @@ import aeolusSv9_6l2cDimension from "@/assets/products/aeolus-sv9-6l2c-dimension
 import ibox205Front from "@/assets/products/ibox-205-front.png";
 import ibox205Side from "@/assets/products/ibox-205-side.png";
 
+import ibox603Front from "@/assets/products/ibox-603-front.png";
+import ibox603Rear from "@/assets/products/ibox-603-rear.png";
 // Main product images
 import ibox007Main from "@/assets/products/ibox-007-main.png";
 import ibox601GtProMain from "@/assets/products/ibox-601-gt-pro-main.png";
