@@ -4,7 +4,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { useState, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText, Headphones, ChevronDown, Code, Phone } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText, Headphones, ChevronDown, Code, Phone, Star, Quote } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Checkbox } from "@/components/ui/checkbox";
 import QuoteDialog from "@/components/QuoteDialog";
@@ -5920,6 +5920,80 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
             >
               <ArrowLeft size={18} /> กลับหน้าหลัก
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Testimonials */}
+      <section className="section-padding">
+        <div className="container max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Customer Reviews</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold">
+              ลูกค้าพูดถึง<span className="text-gradient"> GT Series</span>
+            </h2>
+            <p className="text-muted-foreground mt-3">เสียงจากผู้ใช้งานจริงในหลากหลายอุตสาหกรรม</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                stars: 5,
+                text: "ใช้ GT3000 ติดตั้งในตู้คอนโทรลโรงงานมา 3 ปี ทำงาน 24/7 ไม่เคยดับ ไม่มีพัดลมจึงไม่ดูดฝุ่น แก้ปัญหาเครื่องพังจากฝุ่นเหล็กได้หมด ประหยัดค่าซ่อมไปมาก",
+                role: "ผู้จัดการฝ่ายวิศวกรรม",
+                industry: "โรงงานเหล็กและโลหะ",
+              },
+              {
+                stars: 5,
+                text: "GT6000 ใช้เป็นเครื่อง Kiosk ให้บริการลูกค้าหน้าร้าน เปิดทิ้งไว้ทั้งวัน ไม่มีเสียงรบกวน ลูกค้าชม ว่าระบบลื่นไหล ทีมช่างก็ชอบที่ติดตั้งง่ายใช้เวลาไม่ถึงชั่วโมง",
+                role: "ผู้จัดการสาขา",
+                industry: "ธุรกิจค้าปลีก",
+              },
+              {
+                stars: 5,
+                text: "เลือก GT9000 สำหรับงาน AI Vision Inspection บนไลน์ผลิต ประมวลผลภาพเร็วมาก ทนความร้อนในโรงงานได้ดี ไม่ต้องติดแอร์เพิ่ม ลดต้นทุนได้เยอะ",
+                role: "วิศวกร AI",
+                industry: "โรงงานอิเล็กทรอนิกส์",
+              },
+              {
+                stars: 4,
+                text: "ติดตั้ง GT2000 จำนวน 20 เครื่องเป็นระบบ Thin Client ทดแทนเดสก์ท็อป ประหยัดไฟลดลง 60% ดูแลง่ายมาก ปัญหาเครื่องค้างแทบไม่มี ทีม IT ทำงานสบายขึ้นเยอะ",
+                role: "CTO",
+                industry: "บริษัทซอฟต์แวร์",
+              },
+              {
+                stars: 5,
+                text: "GT4500 ใช้ในห้อง Server ควบคุมระบบ Building Automation ทนร้อน ทนเย็น เสียบปุ๊บทำงานปั๊บ เสถียรมาก ลดเวลา Downtime จากเดิมเดือนละ 2-3 ครั้ง เหลือ 0 ครั้ง",
+                role: "Facility Manager",
+                industry: "อาคารสำนักงาน",
+              },
+            ].map((review, i) => (
+              <div key={i} className="card-surface p-6 relative group hover:border-primary/30 transition-colors">
+                <Quote className="absolute top-4 right-4 text-primary/10 group-hover:text-primary/20 transition-colors" size={40} />
+                <div className="flex gap-0.5 mb-3">
+                  {Array.from({ length: 5 }, (_, s) => (
+                    <Star
+                      key={s}
+                      size={16}
+                      className={s < review.stars ? "text-amber-400 fill-amber-400" : "text-muted-foreground/30"}
+                    />
+                  ))}
+                </div>
+                <p className="text-sm text-foreground leading-relaxed mb-4">"{review.text}"</p>
+                <div className="border-t border-border pt-3">
+                  <p className="text-sm font-semibold text-foreground">{review.role}</p>
+                  <p className="text-xs text-muted-foreground">{review.industry}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* PDPA Disclaimer */}
+          <div className="mt-8 p-5 rounded-xl border border-primary/20 bg-primary/5 text-center">
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              <span className="font-semibold text-foreground">📋 หมายเหตุ:</span> ด้วยข้อบังคับตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) เราไม่สามารถเปิดเผยชื่อ-นามสกุล หรือข้อมูลที่ระบุตัวตนของลูกค้าได้
+              คำชมเหล่านี้เป็น <span className="font-semibold text-foreground">คำรีวิวจริง</span> ที่ได้รับจากลูกค้าผู้ใช้งานจริง ผ่านการทำงานหนักและบริการอย่างจริงใจของทีมเรา
+            </p>
           </div>
         </div>
       </section>
