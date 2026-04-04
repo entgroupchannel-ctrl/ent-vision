@@ -90,12 +90,16 @@ const EPCSeriesCompare = ({ onQuote }: Props) => {
   const ITEMS_PER_PAGE = 10;
 
   const filtered = useMemo(() => {
+    setPage(1);
     return allModels.filter((m) => {
       if (displayFilter !== "ทั้งหมด" && m.displayType !== displayFilter) return false;
       if (cpuFilter !== "ทุกระดับ" && m.cpuTier !== cpuFilter) return false;
       return true;
     });
   }, [displayFilter, cpuFilter]);
+
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paginated = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
   const getValueScore = (m: EPCModel) => {
     const cpuScore = m.cpuTier === "high" ? 90 : m.cpuTier === "mid" ? 70 : 50;
