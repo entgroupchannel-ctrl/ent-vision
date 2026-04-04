@@ -198,11 +198,6 @@ const IBoxDetail = () => {
               <Button size="lg" className="flex-1" onClick={() => setQuoteProduct(product.name)}>
                 <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
               </Button>
-              <Button variant="outline" size="lg" asChild>
-                <a href={product.datasheet} target="_blank" rel="noopener noreferrer">
-                  <Download className="w-5 h-5 mr-2" /> Datasheet
-                </a>
-              </Button>
             </div>
           </div>
         </div>
