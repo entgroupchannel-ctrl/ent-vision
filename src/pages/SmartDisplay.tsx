@@ -164,6 +164,8 @@ const SmartDisplay = () => {
   });
   const [showLineQR, setShowLineQR] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [videoTab, setVideoTab] = useState("smart-display");
+  const [podcastTab, setPodcastTab] = useState("smart-display");
 
   return (
     <div className="min-h-screen bg-background">
