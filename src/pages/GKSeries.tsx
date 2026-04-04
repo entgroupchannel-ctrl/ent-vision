@@ -625,7 +625,7 @@ const PaginatedPriceTable = ({ rows, perPage, totalPages }: {
 };
 
 /* ─── Model Card Component ─── */
-const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
+const ModelSection = ({ model, index, onQuote }: { model: GKModel; index: number; onQuote: (name: string) => void }) => {
   const isReversed = index % 2 === 1;
 
   return (
