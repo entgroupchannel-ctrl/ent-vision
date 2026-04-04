@@ -169,11 +169,9 @@ const AIODetail = () => {
               <Button size="lg" className="flex-1" onClick={() => setQuoteOpen(true)}>
                 <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
               </Button>
-              <Button size="lg" variant="outline" className="flex-1" asChild>
-                <a href="https://line.me/R/ti/p/@entgroup" target="_blank" rel="noopener noreferrer">
-                  💬 สอบถามทาง LINE
-                </a>
-              </Button>
+              <LineQRButton className="flex-1 h-11 text-base">
+                💬 สอบถามทาง LINE
+              </LineQRButton>
             </div>
           </div>
         </div>
