@@ -45,7 +45,7 @@ const HandheldCard = ({
   onQuote: (name: string) => void;
 }) => (
   <Link
-    to={`/rugged-tablet/${product.id}`}
+    to={`/handheld/${product.id}`}
     className={`card-surface overflow-hidden group transition-all block ${
       selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"
     }`}
