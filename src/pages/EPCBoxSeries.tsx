@@ -537,6 +537,206 @@ const SeriesSection = ({ series, index }: { series: SeriesData; index: number })
   );
 };
 
+/* ─── EPC Comparison System ─── */
+const epcCompData = {
+  models: ["EPC-10XA", "EPC-20XA", "EPC-30XA", "EPC-40XA"] as const,
+  specs: {
+    "ขนาดตัวเครื่อง": ["200×160×47mm", "200×160×79mm", "337×160×47.5mm", "337×160×79.5mm"],
+    "Form Factor": ["Compact", "Enhanced Height", "Wide Low-Profile", "Maximum"],
+    "Cooling": ["Fanless", "Fanless", "Fanless", "Fanless"],
+    "CPU รองรับ": ["Celeron ~ Core i7 12th", "Celeron ~ Core i7 12th", "Celeron ~ Core i7 12th", "Celeron ~ Core i7 12th"],
+    "RAM": ["4~32GB DDR3L/DDR4/DDR5", "4~32GB DDR3L/DDR4/DDR5", "4~32GB DDR3L/DDR4/DDR5", "4~32GB DDR3L/DDR4/DDR5"],
+    "Storage": ["1× mSATA SSD", "1× mSATA SSD", "1× mSATA SSD", "1× mSATA SSD"],
+    "COM Port": ["2×RS232 + 1×RS485", "2×RS232 + 1×RS485", "4×RS232 + 2×RS485", "4×RS232 + 2×RS485"],
+    "USB": ["5×USB2.0 + 1×USB3.0", "5×USB2.0 + 1×USB3.0", "5×USB2.0 + 1×USB3.0", "5×USB2.0 + 1×USB3.0"],
+    "LAN": ["2× GbE Intel I210", "2× GbE Intel I210", "2× GbE Intel I210", "2× GbE Intel I210"],
+    "Display Out": ["HDMI + VGA Dual", "HDMI + VGA Dual", "HDMI + VGA Dual", "HDMI + VGA Dual"],
+    "Expansion": ["1× Mini PCIe", "1× Mini PCIe", "1× Mini PCIe", "1× Mini PCIe"],
+    "WiFi/BT": ["Optional", "Optional", "Optional", "Optional"],
+    "4G/5G": ["Optional", "Optional", "Optional", "Optional"],
+    "Power": ["DC 12V (9-36V opt)", "DC 12V (9-36V opt)", "DC 12V (9-36V opt)", "DC 12V (9-36V opt)"],
+    "Boot Mode": ["AT / ATX", "AT / ATX", "AT / ATX", "AT / ATX"],
+    "OS": ["Win 10/11, Linux", "Win 10/11, Linux", "Win 10/11, Linux", "Win 10/11, Linux"],
+    "MTBF": ["60,000 ชม.", "60,000 ชม.", "60,000 ชม.", "60,000 ชม."],
+  } as Record<string, string[]>,
+  prices: {
+    "ราคาเริ่มต้น (Celeron)": ["฿13,990", "฿13,990", "สอบถาม", "สอบถาม"],
+    "ราคา i3 Gen10": ["฿30,990", "฿30,990", "สอบถาม", "สอบถาม"],
+    "ราคา i5 Gen10": ["฿36,990", "฿36,990", "สอบถาม", "สอบถาม"],
+    "ราคา i7 Gen10": ["฿39,990", "฿39,990", "สอบถาม", "สอบถาม"],
+    "ราคา i3 Gen12": ["฿30,990", "฿30,990", "สอบถาม", "สอบถาม"],
+    "ราคา i5 Gen12": ["฿35,990", "฿35,990", "สอบถาม", "สอบถาม"],
+    "ราคา i7 Gen12": ["฿39,990", "฿39,990", "สอบถาม", "สอบถาม"],
+    "Windows 10 Pro OEM": ["฿3,950", "฿3,950", "฿3,950", "฿3,950"],
+    "Windows 11 Pro OEM": ["฿4,590", "฿4,590", "฿4,590", "฿4,590"],
+  } as Record<string, string[]>,
+  value: {
+    "พื้นที่ระบายความร้อน": ["★★★☆☆", "★★★★☆", "★★★★☆", "★★★★★"],
+    "ความกะทัดรัด": ["★★★★★", "★★★★☆", "★★★☆☆", "★★★☆☆"],
+    "ขยายได้ (Expansion)": ["★★★☆☆", "★★★★☆", "★★★★☆", "★★★★★"],
+    "Rack Mount": ["★★☆☆☆", "★★☆☆☆", "★★★★★", "★★★★★"],
+    "COM Port จำนวนมาก": ["★★★☆☆", "★★★☆☆", "★★★★★", "★★★★★"],
+    "ทนทาน / Vibration": ["★★★★☆", "★★★★☆", "★★★★★", "★★★★★"],
+    "คุ้มค่ารวม": ["★★★★★", "★★★★☆", "★★★★☆", "★★★★★"],
+    "เหมาะกับ": ["งานทั่วไป / Edge / POS", "24/7 Heavy / CPU แรง", "Rack Mount / Panel Mount", "Mission-Critical / Flagship"],
+  } as Record<string, string[]>,
+};
+
+const epcFilterOpts = {
+  formFactor: ["ทุกรุ่น", "Compact", "Enhanced", "Wide", "Flagship"],
+  budget: ["ทุกงบ", "ต่ำกว่า 20,000", "20,000 - 35,000", "มากกว่า 35,000"],
+};
+
+const EPCComparisonSystem = ({ onQuote }: { onQuote: (name: string) => void }) => {
+  const [viewMode, setViewMode] = useState<"specs" | "price" | "value">("specs");
+  const [formFilter, setFormFilter] = useState("ทุกรุ่น");
+  const [budgetFilter, setBudgetFilter] = useState("ทุกงบ");
+
+  const formMap: Record<string, number[]> = {
+    "ทุกรุ่น": [0, 1, 2, 3], "Compact": [0], "Enhanced": [1], "Wide": [2], "Flagship": [3],
+  };
+  const budgetMap: Record<string, number[]> = {
+    "ทุกงบ": [0, 1, 2, 3], "ต่ำกว่า 20,000": [0, 1], "20,000 - 35,000": [0, 1, 2, 3], "มากกว่า 35,000": [0, 1, 2, 3],
+  };
+
+  const visibleIndices = formMap[formFilter].filter(i => budgetMap[budgetFilter].includes(i));
+  const data = viewMode === "specs" ? epcCompData.specs : viewMode === "price" ? epcCompData.prices : epcCompData.value;
+
+  const viewTabs = [
+    { key: "specs" as const, label: "สเปก", icon: SlidersHorizontal },
+    { key: "price" as const, label: "ราคา", icon: DollarSign },
+    { key: "value" as const, label: "ความคุ้มค่า", icon: BarChart3 },
+  ];
+
+  const tierColors = ["text-emerald-500", "text-sky-500", "text-amber-500", "text-purple-500"];
+  const tierLabels = ["Compact", "Enhanced", "Wide", "Flagship"];
+
+  return (
+    <div className="space-y-6">
+      {/* Filter Bar */}
+      <div className="card-surface p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <Filter size={16} className="text-primary" />
+          <span className="text-sm font-semibold text-foreground">กรองสินค้า</span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label className="text-xs text-muted-foreground mb-1 block">Form Factor</label>
+            <div className="flex flex-wrap gap-1.5">
+              {epcFilterOpts.formFactor.map(opt => (
+                <button key={opt} onClick={() => setFormFilter(opt)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${formFilter === opt ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/50"}`}>
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label className="text-xs text-muted-foreground mb-1 block">งบประมาณ</label>
+            <div className="flex flex-wrap gap-1.5">
+              {epcFilterOpts.budget.map(opt => (
+                <button key={opt} onClick={() => setBudgetFilter(opt)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${budgetFilter === opt ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/50"}`}>
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* View Mode Tabs */}
+      <div className="flex items-center justify-center gap-2">
+        {viewTabs.map(tab => (
+          <button key={tab.key} onClick={() => setViewMode(tab.key)}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold border transition-all ${viewMode === tab.key ? "bg-primary text-primary-foreground border-primary shadow-lg" : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"}`}>
+            <tab.icon size={16} />
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Comparison Table */}
+      {visibleIndices.length === 0 ? (
+        <div className="card-surface p-8 text-center">
+          <p className="text-muted-foreground">ไม่พบสินค้าที่ตรงกับตัวกรอง — ลองเปลี่ยนเงื่อนไข</p>
+        </div>
+      ) : (
+        <div className="card-surface overflow-hidden overflow-x-auto">
+          <div className="min-w-[600px]">
+            <div className="grid border-b border-border" style={{ gridTemplateColumns: `180px repeat(${visibleIndices.length}, 1fr)` }}>
+              <div className="px-4 py-4 bg-primary/10 flex items-center">
+                <span className="text-sm font-bold text-foreground">
+                  {viewMode === "specs" ? "📋 สเปก" : viewMode === "price" ? "💰 ราคา" : "⚖️ ความคุ้มค่า"}
+                </span>
+              </div>
+              {visibleIndices.map(i => (
+                <div key={i} className="px-3 py-4 bg-primary/5 text-center border-l border-border">
+                  <p className={`text-lg font-black ${tierColors[i]}`}>{epcCompData.models[i]}</p>
+                  <p className="text-[10px] text-muted-foreground">{tierLabels[i]}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="divide-y divide-border">
+              {Object.entries(data).map(([label, values], rowIdx) => (
+                <div key={label} className={`grid items-center ${rowIdx % 2 === 0 ? "bg-muted/10" : ""}`}
+                  style={{ gridTemplateColumns: `180px repeat(${visibleIndices.length}, 1fr)` }}>
+                  <div className="px-4 py-3 text-sm font-medium text-foreground">{label}</div>
+                  {visibleIndices.map(i => (
+                    <div key={i} className="px-3 py-3 text-center text-sm text-muted-foreground border-l border-border">
+                      {values[i].startsWith("★") ? (
+                        <span className="text-amber-500 font-bold tracking-wider">{values[i]}</span>
+                      ) : values[i] === "—" ? (
+                        <span className="text-muted-foreground/40">—</span>
+                      ) : (
+                        values[i]
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            <div className="grid border-t border-border bg-muted/20"
+              style={{ gridTemplateColumns: `180px repeat(${visibleIndices.length}, 1fr)` }}>
+              <div className="px-4 py-4 text-sm font-medium text-foreground flex items-center">ขอใบเสนอราคา</div>
+              {visibleIndices.map(i => (
+                <div key={i} className="px-3 py-4 text-center border-l border-border">
+                  <button onClick={() => onQuote(String(epcCompData.models[i]))}
+                    className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition-colors">
+                    ขอราคา
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Decision Helper */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { id: "10xa", emoji: "📦", title: "พื้นที่จำกัด / งานทั่วไป", desc: "Compact 200mm เล็กที่สุด เบาที่สุด เหมาะกับ Edge Computing, POS", color: "border-emerald-500/30 bg-emerald-500/5" },
+          { id: "20xa", emoji: "🔥", title: "ต้องการ CPU แรง 24/7", desc: "สูงขึ้น 79mm ระบายความร้อนดีขึ้น 68% สำหรับงานหนักต่อเนื่อง", color: "border-sky-500/30 bg-sky-500/5" },
+          { id: "30xa", emoji: "🗄️", title: "Rack Mount / Panel Mount", desc: "กว้าง 337mm Low Profile เหมาะติดตู้ Rack หรือ Panel", color: "border-amber-500/30 bg-amber-500/5" },
+          { id: "40xa", emoji: "🚀", title: "Mission-Critical Flagship", desc: "ใหญ่ที่สุด ทนที่สุด ระบายความร้อน +168% งานวิกฤตต้องเครื่องนี้", color: "border-purple-500/30 bg-purple-500/5" },
+        ].map(item => (
+          <button key={item.id} onClick={() => {
+            const el = document.getElementById(item.id);
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }} className={`p-5 rounded-xl border ${item.color} text-left hover:scale-[1.02] transition-transform`}>
+            <p className="text-2xl mb-2">{item.emoji}</p>
+            <p className="font-bold text-foreground text-sm mb-1">{item.title}</p>
+            <p className="text-xs text-muted-foreground">{item.desc}</p>
+            <p className="text-xs font-bold text-primary mt-2">→ ดู {item.id.toUpperCase()}</p>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const EPCBoxSeries = () => {
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [quoteProduct, setQuoteProduct] = useState("");
