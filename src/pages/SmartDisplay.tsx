@@ -298,12 +298,12 @@ const SmartDisplay = () => {
                   จอภาพสัมผัสเกรดอุตสาหกรรม IP65 สำหรับงาน HMI, CNC, Factory Automation, ระบบทหาร และ Big Data — เชื่อมต่อ USB + HDMI กับคอมพิวเตอร์ที่มีอยู่ เปลี่ยนเป็นระบบสัมผัสได้ทันที
                 </p>
                 <div className="flex flex-wrap gap-4 mb-8 text-sm text-muted-foreground">
-                  <span>✅ ขนาด 8"–24"</span>
-                  <span>✅ Capacitive / Resistive Touch</span>
-                  <span>✅ IP65 Front Panel</span>
-                  <span>✅ Wide & Square Screen</span>
-                  <span>✅ สูงสุด 1000 Nits</span>
-                  <span>✅ ทำงาน 24/7</span>
+                  <span className="inline-flex items-center gap-1.5"><Monitor size={14} className="text-primary" /> ขนาด 8"–24"</span>
+                  <span className="inline-flex items-center gap-1.5"><ScanLine size={14} className="text-primary" /> Capacitive / Resistive Touch</span>
+                  <span className="inline-flex items-center gap-1.5"><Shield size={14} className="text-primary" /> IP65 Front Panel</span>
+                  <span className="inline-flex items-center gap-1.5"><Layers size={14} className="text-primary" /> Wide & Square Screen</span>
+                  <span className="inline-flex items-center gap-1.5"><Sun size={14} className="text-primary" /> สูงสุด 1000 Nits</span>
+                  <span className="inline-flex items-center gap-1.5"><Cpu size={14} className="text-primary" /> ทำงาน 24/7</span>
                 </div>
 
                 {/* Product hero image */}
