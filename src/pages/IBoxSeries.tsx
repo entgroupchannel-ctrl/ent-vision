@@ -287,7 +287,33 @@ const IBoxSeries = () => {
           </div>
         </section>
 
-        {/* Product Models */}
+        {/* ═══════ Gateway / DIN Rail Section ═══════ */}
+        <section>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-2 rounded-lg bg-emerald-500/10">
+              <Wifi className="w-6 h-6 text-emerald-500" />
+            </div>
+            <div>
+              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
+                🌐 Gateway / DIN Rail
+              </h2>
+              <p className="text-sm text-muted-foreground">เกตเวย์อุตสาหกรรม, IoT Gateway, DIN Rail PC</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
+            {iboxProducts.filter(p => p.category === "Gateway").map((product) => (
+              <IBoxProductCard
+                key={product.id}
+                product={product}
+                selectedProducts={selectedProducts}
+                toggleSelect={toggleSelect}
+                onQuote={(name) => { setQuoteProduct(name); setShowQuote(true); }}
+              />
+            ))}
+          </div>
+        </section>
+
+
         <section>
           <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
             รุ่นสินค้า iBox Series
