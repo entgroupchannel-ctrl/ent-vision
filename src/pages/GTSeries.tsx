@@ -4673,7 +4673,7 @@ const GTSeries = () => {
                             <button onClick={() => setGt1400PricePage(Math.min(totalPages - 1, gt1400PricePage + 1))} disabled={gt1400PricePage === totalPages - 1} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ถัดไป</button>
                           </div>
                         )}
-                        <p className="text-xs text-muted-foreground text-center py-3 border-t border-border">* ราคาอาจเปลี่ยนแปลงได้โดยมิต้องแจ้งให้ทราบล่วงหน้า</p>
+                        <p className="text-xs text-muted-foreground text-center py-3 border-t border-border">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
                       </CollapsibleContent>
                     </div>
                   </Collapsible>
