@@ -4,7 +4,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { useState, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText, Headphones, ChevronDown } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText, Headphones, ChevronDown, Code, Phone } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Checkbox } from "@/components/ui/checkbox";
 import QuoteDialog from "@/components/QuoteDialog";
@@ -2718,6 +2718,211 @@ const GTSeries = () => {
                 </div>
               </div>
 
+
+              {/* ═══════ GT5000 GPIO Deep Dive ═══════ */}
+              <div className="space-y-6">
+                {/* Hero Banner */}
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 lg:p-12">
+                  <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(56,189,148,0.15) 20px, rgba(56,189,148,0.15) 21px)" }} />
+                  <div className="relative z-10">
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 text-xs font-mono tracking-widest mb-6">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      INDUSTRIAL GRADE — LINUX READY
+                    </span>
+                    <h3 className="text-3xl lg:text-4xl font-display font-black text-white leading-tight">
+                      8-Channel GPIO<br />
+                      <span className="text-emerald-400">Fully Programmable</span><br />
+                      I/O Control
+                    </h3>
+                    <p className="mt-4 text-slate-300 max-w-xl leading-relaxed">
+                      เข้าถึงฮาร์ดแวร์โดยตรงผ่าน I/O Port Register —
+                      ควบคุม Output แบบ High/Low และอ่าน Input แบบ Real-time
+                      ออกแบบมาสำหรับ Embedded Linux ที่ต้องการ Zero-latency Response
+                    </p>
+                    <div className="flex flex-wrap gap-3 mt-6">
+                      <a href="#gpio-register-map" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-emerald-500 text-white text-sm font-bold hover:bg-emerald-400 transition-colors">
+                        <FileText size={16} /> ดู Register Map
+                      </a>
+                      <a href="#gpio-code" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-slate-500 text-slate-200 text-sm font-bold hover:bg-slate-700 transition-colors">
+                        <Code size={16} /> ดูตัวอย่าง Code
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* GPIO Use Cases */}
+                <div className="card-surface rounded-2xl overflow-hidden">
+                  <div className="p-5 border-b border-border bg-primary/5">
+                    <h3 className="text-lg font-display font-bold text-foreground">🔌 GPIO นำไปใช้ทำอะไรได้บ้าง?</h3>
+                    <p className="text-xs text-muted-foreground mt-1">8 ช่องสัญญาณ Digital I/O สำหรับงานอุตสาหกรรมและ IoT</p>
+                  </div>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5">
+                    {[
+                      { icon: "🏭", title: "ควบคุมเครื่องจักร", desc: "สั่งเปิด/ปิด Relay, Solenoid Valve, Motor Driver ผ่าน Digital Output โดยตรง" },
+                      { icon: "🚨", title: "ระบบแจ้งเตือน", desc: "ต่อ Tower Light, Buzzer, LED Indicator แสดงสถานะเครื่องจักรแบบ Real-time" },
+                      { icon: "📡", title: "อ่านค่า Sensor", desc: "รับสัญญาณ Digital จาก Proximity Sensor, Limit Switch, Photo Electric" },
+                      { icon: "🚪", title: "Access Control", desc: "ควบคุม Magnetic Lock, อ่าน Door Sensor, Emergency Button" },
+                      { icon: "🌡️", title: "Smart Farm / IoT", desc: "เปิด/ปิดปั๊มน้ำ พัดลม ระบบรดน้ำอัตโนมัติ ตามค่า Sensor" },
+                      { icon: "📊", title: "Production Counter", desc: "นับจำนวนชิ้นงานจาก Sensor แล้วส่งข้อมูลเข้าระบบ MES/ERP" },
+                      { icon: "🔋", title: "UPS / Power Monitor", desc: "ตรวจจับสถานะไฟฟ้า สั่ง Shutdown อัตโนมัติเมื่อไฟดับ" },
+                      { icon: "🤖", title: "Robot & Automation", desc: "Handshake กับ PLC, Robot Controller ผ่าน Digital I/O ไม่ต้องใช้ fieldbus ราคาแพง" },
+                    ].map((item, i) => (
+                      <div key={i} className="p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors border border-border/50">
+                        <span className="text-2xl">{item.icon}</span>
+                        <h4 className="font-bold text-foreground text-sm mt-2">{item.title}</h4>
+                        <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Register Map Table */}
+                <div id="gpio-register-map" className="card-surface rounded-2xl overflow-hidden">
+                  <div className="p-5 border-b border-border bg-primary/5">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-lg font-display font-bold text-foreground">📋 GPIO Register Map</h3>
+                        <p className="text-xs text-muted-foreground mt-1">INDUSTRIAL IPC — LINUX EDITION</p>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-3xl font-display font-black text-foreground">8</span>
+                        <span className="text-xs text-muted-foreground block">CHANNELS</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="bg-secondary/50">
+                          <th className="text-left p-3 font-mono font-semibold text-foreground">CHANNEL</th>
+                          <th className="text-left p-3 font-mono font-semibold text-foreground">REGISTER</th>
+                          <th className="text-left p-3 font-mono font-semibold text-foreground">HIGH MASK</th>
+                          <th className="text-left p-3 font-mono font-semibold text-foreground">LOW MASK</th>
+                          <th className="text-center p-3 font-mono font-semibold text-foreground">TYPE</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border font-mono">
+                        {[
+                          { ch: "GPIO0", reg: "0xA00", high: "0x01", low: "0xFE", type: "Output" },
+                          { ch: "GPIO1", reg: "0xA00", high: "0x04", low: "0xFB", type: "Output" },
+                          { ch: "GPIO2", reg: "0xA01", high: "0x08", low: "0xF7", type: "Output" },
+                          { ch: "GPIO3", reg: "0xA03", high: "0x10", low: "0xEF", type: "Input" },
+                          { ch: "GPIO4", reg: "0xA04", high: "0x02", low: "0xFD", type: "Output" },
+                          { ch: "GPIO5", reg: "0xA04", high: "0x04", low: "0xFB", type: "Input" },
+                          { ch: "GPIO6", reg: "0xA02", high: "0x40", low: "0xBF", type: "Output" },
+                          { ch: "GPIO7", reg: "0xA02", high: "0x80", low: "0x7F", type: "Input" },
+                        ].map((g, i) => (
+                          <tr key={i} className={i % 2 === 1 ? "bg-muted/20" : ""}>
+                            <td className="p-3 font-bold text-primary">{g.ch}</td>
+                            <td className="p-3 text-muted-foreground">{g.reg}</td>
+                            <td className="p-3 text-muted-foreground">{g.high}</td>
+                            <td className="p-3 text-muted-foreground">{g.low}</td>
+                            <td className="p-3 text-center">
+                              <span className={`px-2 py-0.5 rounded text-xs font-bold ${g.type === "Output" ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400" : "bg-amber-500/20 text-amber-600 dark:text-amber-400"}`}>
+                                {g.type}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Code Example */}
+                <div id="gpio-code" className="card-surface rounded-2xl overflow-hidden">
+                  <div className="p-5 border-b border-border bg-primary/5">
+                    <h3 className="text-lg font-display font-bold text-foreground flex items-center gap-2">
+                      <Code size={20} className="text-primary" /> ตัวอย่าง C Code — GPIO Control
+                    </h3>
+                    <p className="text-xs text-muted-foreground mt-1">ใช้ inb_p / outb_p เข้าถึง I/O Port Register โดยตรงบน Linux</p>
+                  </div>
+                  <div className="bg-slate-900 p-5 overflow-x-auto">
+                    <pre className="text-sm font-mono leading-relaxed">
+                      <code>
+{`#include <sys/io.h>
+#include <stdio.h>
+
+// ─── ขอสิทธิ์เข้าถึง I/O Port ───
+ioperm(0xA00, 0x10, 1);
+
+// ─── GPIO0 Output (Register 0xA00) ───
+unsigned char iodata8;
+
+iodata8 = inb_p(0xA00);                    // อ่านค่าปัจจุบัน
+outb_p((iodata8 & 0xFE) | 0x01, 0xA00);   // Set HIGH
+outb_p((iodata8 & 0xFE) | 0x00, 0xA00);   // Set LOW
+
+// ─── GPIO3 Input (Register 0xA03) ───
+iodata8 = inb_p(0xA03);
+int gpio3_state = (iodata8 >> 4) & 0x01;   // อ่านสถานะ
+printf("GPIO3 = %s\\n", gpio3_state ? "HIGH" : "LOW");
+
+// ─── ตัวอย่าง: สั่งเปิด Relay + อ่าน Sensor ───
+outb_p((inb_p(0xA04) & 0xFD) | 0x02, 0xA04);  // GPIO4 → Relay ON
+int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`}
+                      </code>
+                    </pre>
+                  </div>
+                  <div className="p-4 bg-muted/30 border-t border-border">
+                    <p className="text-xs text-muted-foreground">
+                      💡 <strong>หมายเหตุ:</strong> ต้องรันด้วย <code className="bg-muted px-1 rounded">sudo</code> หรือตั้งค่า capabilities —
+                      SDK เต็มรูปแบบมีให้จากโรงงาน สนใจติดต่อทีมขายเพื่อรับไฟล์ SDK
+                    </p>
+                  </div>
+                </div>
+
+                {/* Signal Visualizer */}
+                <div className="card-surface rounded-2xl overflow-hidden">
+                  <div className="p-5 border-b border-border bg-primary/5">
+                    <h3 className="text-lg font-display font-bold text-foreground">📊 GPIO Signal Overview</h3>
+                    <p className="text-xs text-muted-foreground mt-1">แผนผังสถานะสัญญาณ GPIO ทั้ง 8 ช่อง</p>
+                  </div>
+                  <div className="p-5 space-y-3">
+                    {[
+                      { ch: "GPIO0", reg: "0xA00", type: "OUT", level: 95 },
+                      { ch: "GPIO1", reg: "0xA00", type: "OUT", level: 85 },
+                      { ch: "GPIO2", reg: "0xA01", type: "OUT", level: 100 },
+                      { ch: "GPIO3", reg: "0xA03", type: "IN", level: 70 },
+                      { ch: "GPIO4", reg: "0xA04", type: "OUT", level: 90 },
+                      { ch: "GPIO5", reg: "0xA04", type: "IN", level: 60 },
+                      { ch: "GPIO6", reg: "0xA02", type: "OUT", level: 80 },
+                      { ch: "GPIO7", reg: "0xA02", type: "IN", level: 50 },
+                    ].map((g, i) => (
+                      <div key={i} className="flex items-center gap-3">
+                        <span className="font-mono text-sm font-bold text-primary w-16">{g.ch}</span>
+                        <div className="flex-1 h-3 bg-muted rounded-full overflow-hidden">
+                          <div
+                            className={`h-full rounded-full transition-all ${g.type === "OUT" ? "bg-emerald-500" : "bg-amber-400"}`}
+                            style={{ width: `${g.level}%` }}
+                          />
+                        </div>
+                        <span className={`text-xs font-mono w-10 text-right ${g.type === "OUT" ? "text-emerald-500" : "text-amber-500"}`}>
+                          {g.type}
+                        </span>
+                        <span className="font-mono text-xs text-muted-foreground w-14 text-right">{g.reg}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* SDK CTA */}
+                <div className="card-surface rounded-2xl overflow-hidden bg-gradient-to-r from-primary/5 to-emerald-500/5 p-6 lg:p-8 text-center">
+                  <h3 className="text-xl font-display font-bold text-foreground">🛠️ ต้องการ GPIO SDK สำหรับพัฒนาต่อยอด?</h3>
+                  <p className="text-sm text-muted-foreground mt-2 max-w-lg mx-auto">
+                    เรามี SDK จากโรงงานพร้อม Source Code, Library และเอกสาร API ครบชุด
+                    รองรับ C/C++ บน Linux — ติดต่อทีมขายเพื่อรับไฟล์
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-3 mt-5">
+                    <button onClick={() => setQuoteProduct("GT5000 — ขอ GPIO SDK")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg">
+                      <FileText size={16} /> ขอรับ SDK ฟรี
+                    </button>
+                    <a href="tel:0957391053" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-bold text-sm hover:bg-muted transition-colors">
+                      <Phone size={16} /> โทรสอบถาม
+                    </a>
+                  </div>
+                </div>
+              </div>
 
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
