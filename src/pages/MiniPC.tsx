@@ -13,6 +13,7 @@ import { useState } from "react";
 import FooterCompact from "@/components/FooterCompact";
 import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteDialog from "@/components/QuoteDialog";
+import LineQRButton from "@/components/LineQRButton";
 
 /* ── Category Navigation ── */
 const categories = [
