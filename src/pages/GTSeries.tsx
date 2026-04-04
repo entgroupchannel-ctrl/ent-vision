@@ -3210,25 +3210,24 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 ))}
               </div>
 
-              {/* Spec Table — 2 คอลัมน์ */}
+              {/* Spec Table — Full Detail */}
               <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">GT6000 Specifications</h3>
-                  <p className="text-xs text-muted-foreground mt-1">ข้อมูลจาก Manufacturer</p>
+                  <h3 className="text-lg font-display font-bold text-foreground">GT6000 Full Specifications</h3>
+                  <p className="text-xs text-muted-foreground mt-1">ข้อมูลจาก Manufacturer — Brushed Full Aluminum Alloy Case, Fanless Design</p>
                 </div>
                 <div className="grid md:grid-cols-2 md:divide-x divide-border">
                   <div>
                     <table className="w-full text-sm">
                       <tbody className="divide-y divide-border">
                         {[
-                          ["CPU", "Celeron 5205U / Pentium 5405U/6405U / Core i3-8145U / i5-8265U / i7-8565U / i3-10110U / i5-10210U / i7-10510U"],
-                          ["RAM", "2 × DDR4 Slot, สูงสุด 64 GB"],
-                          ["Storage", "M.2 NVMe 2280 + mSATA SSD + 2.5\" SATA 3.0 HDD"],
-                          ["Display", "HDMI 2.0 + HDMI 1.4 + DP 1.2 (Triple)"],
-                          ["COM", "2 × RS232"],
-                          ["USB", "USB 3.0 × 4 + USB 2.0 × 2"],
+                          ["ตัวเครื่อง", "Brushed Full Aluminum Alloy\nFanless 0 dB · ทำงาน 24/7"],
+                          ["CPU (Gen 8)", "Celeron 5205U\nPentium 5405U / 6405U\nCore i3-8145U\nCore i5-8265U / 8365U / 8269U\nCore i7-8565U / 8569U"],
+                          ["CPU (Gen 10)", "Core i3-10110U\nCore i5-10210U / 10310U\nCore i7-10510U / 10610U / 10710U"],
+                          ["RAM", "2 × DDR4 SO-DIMM Slot\nสูงสุด 64 GB"],
+                          ["Storage", "M.2 NVMe 2280 SSD\n+ mSATA SSD\n+ 2.5\" SATA 3.0 HDD\n(ใส่ได้พร้อมกัน 3 ตัว)"],
                         ].map(([k, v], i) => (
-                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3">{k}</td><td className="p-3 text-muted-foreground">{v}</td></tr>
+                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3 align-top">{k}</td><td className="p-3 text-muted-foreground whitespace-pre-line">{v}</td></tr>
                         ))}
                       </tbody>
                     </table>
@@ -3237,14 +3236,17 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     <table className="w-full text-sm">
                       <tbody className="divide-y divide-border">
                         {[
-                          ["LAN", "2 × Gigabit Ethernet RJ45"],
+                          ["Display", "HDMI 2.0 (4K@60Hz)\nHDMI 1.4 (4K@30Hz)\nDP 1.2 (4K@60Hz)\nรองรับ 3 จอพร้อมกัน"],
+                          ["COM", "2 × RS232 (RS485/RS422 ตั้งค่าผ่าน BIOS)"],
+                          ["USB", "USB 3.0 × 4\nUSB 2.0 × 2"],
+                          ["LAN", "2 × Gigabit Ethernet RJ45 (10/100/1000 Mbps)"],
                           ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม"],
-                          ["Audio", "MIC + SPK"],
-                          ["Cooling", "Fanless — เงียบ 0 dB"],
-                          ["Mounting", "VESA / Wall Mount"],
-                          ["OS", "Windows 8 / 10 / 11"],
+                          ["Audio", "MIC In + SPK Out (Line Out)"],
+                          ["Power", "DC 12V / 19V Adapter"],
+                          ["Mounting", "VESA 75×75 / 100×100 / Wall Mount / DIN Rail"],
+                          ["OS", "Windows 10 / 11 / Linux"],
                         ].map(([k, v], i) => (
-                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3">{k}</td><td className="p-3 text-muted-foreground">{v}</td></tr>
+                          <tr key={i}><td className="p-3 font-medium text-foreground w-1/3 align-top">{k}</td><td className="p-3 text-muted-foreground whitespace-pre-line">{v}</td></tr>
                         ))}
                       </tbody>
                     </table>
