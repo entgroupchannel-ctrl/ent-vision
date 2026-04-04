@@ -1,21 +1,31 @@
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import WishlistHeart from "@/components/WishlistHeart";
 import {
-  ArrowLeft, Cpu, Thermometer, Shield, Usb, Wifi, Download,
+  ArrowLeft, Cpu, Thermometer, Shield, Usb, Wifi, Download, Search,
   FileText, ChevronRight, Layers, HardDrive, Monitor, Zap, Box,
   Factory, Stethoscope, Truck, ScanLine, Tv, Warehouse, Sparkles,
+  SlidersHorizontal, ArrowUpDown, LayoutGrid,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import IBoxProductCard from "@/components/ibox/IBoxProductCard";
+import IBoxProductFilter, { type IBoxFilterState, defaultFilters, portFilters } from "@/components/ibox/IBoxProductFilter";
 import { iboxProducts } from "@/data/ibox-products";
 import bannerIBox from "@/assets/banner-ibox-series.jpg";
 import usecaseAutomation from "@/assets/ibox-usecase-automation.jpg";
