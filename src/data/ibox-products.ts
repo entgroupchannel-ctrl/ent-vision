@@ -35,6 +35,7 @@ import ibox104v2 from "@/assets/products/ibox-104v2.png";
 import ibox104v2Ns from "@/assets/products/ibox-104v2-ns.png";
 import ibox603_2l4c from "@/assets/products/ibox-603-2l4c-1p.png";
 import ibox205sbc12th from "@/assets/products/ibox-205sbc-12th.png";
+import ibox103_4l2cJ4125Dim from "@/assets/products/ibox-103-4l2c-j4125-dim.png";
 
 export interface IBoxProduct {
   id: string;
