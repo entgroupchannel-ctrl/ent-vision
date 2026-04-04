@@ -307,7 +307,7 @@ const IBoxSeries = () => {
                 product={product}
                 selectedProducts={selectedProducts}
                 toggleSelect={toggleSelect}
-                onQuote={(name) => { setQuoteProduct(name); setShowQuote(true); }}
+                onQuote={setQuoteProduct}
               />
             ))}
           </div>
