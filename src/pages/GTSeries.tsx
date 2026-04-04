@@ -1889,7 +1889,7 @@ const GTSeries = () => {
                           { label: "LAN", value: "2× Gigabit Ethernet" },
                           { label: "Display", value: "VGA + HDMI Dual Display" },
                           { label: "Audio", value: "MIC + SPK (3.5mm)" },
-                          { label: "WiFi", value: "WiFi + BT (Dual Antenna)" },
+                          { label: "WiFi/BT", value: "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม" },
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
