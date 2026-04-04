@@ -93,7 +93,7 @@ const FooterCompact = () => {
           <div className="flex items-center gap-3 text-[10px] text-[hsl(215,15%,40%)]">
             <Link to="/" className="hover:text-primary transition-colors">หน้าหลัก</Link>
             <span>·</span>
-            <a href="https://www.entgroup.co.th" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">เกี่ยวกับเรา</a>
+            <Link to="/about-us" className="hover:text-primary transition-colors">เกี่ยวกับเรา</Link>
             <span>·</span>
             <span className="text-primary/70">PDPA ✓</span>
           </div>

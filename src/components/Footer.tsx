@@ -246,7 +246,7 @@ const Footer = () => {
             {[
               { label: "Rugged Device", href: "https://entgroup-rugged.com" },
               { label: "NVIDIA Jetson", href: "https://nvidia-jetson.com" },
-              { label: "ENT Group Biz", href: "https://www.entgroup.co.th" },
+              { label: "ENT Group Biz", href: "/about-us" },
               { label: "VIMOSA", href: "https://www.vimosa.co.th/" },
               { label: "VICHAKAN", href: "https://www.vichakarn.co/" },
             ].map((site, i, arr) => (

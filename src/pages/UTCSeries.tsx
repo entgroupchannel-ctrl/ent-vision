@@ -225,7 +225,7 @@ const UTCSeries = () => {
           </div>
           <div className="flex items-center gap-3">
             <a
-              href="https://www.entgroup.co.th/utc-series"
+              href="/utc-series"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-muted-foreground hover:text-primary flex items-center gap-1 transition-colors"
