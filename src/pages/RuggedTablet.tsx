@@ -246,7 +246,7 @@ const categories = [
   { id: "features", label: "Features" },
   { id: "gole", label: "Gole Series" },
   { id: "em-rugged", label: "Rugged Tablet" },
-  { id: "notebook", label: "Rugged Notebook" },
+  
   { id: "aio", label: "All-in-One PC" },
   
   { id: "tpc", label: "TPC Series" },
