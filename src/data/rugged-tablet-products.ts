@@ -14,6 +14,7 @@ export interface TabletDetailProduct {
   badges: string[];
   keyFeatures: string[];
   quickSpecs: { label: string; value: string }[];
+  configs?: { label: string; ram: string; storage: string; network: string; price: string; note?: string; inStock?: boolean }[];
   overviewSections: {
     titleTH: string;
     titleEN?: string;
@@ -25,6 +26,7 @@ export interface TabletDetailProduct {
   specGroups: { groupName: string; items: { label: string; value: string }[] }[];
   applications: string[];
   accessories?: { name: string; nameEN: string; image?: string; desc: string }[];
+  certifications?: string[];
 }
 
 const products: TabletDetailProduct[] = [
