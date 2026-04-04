@@ -103,134 +103,132 @@ const EPCSeriesCompare = ({ onQuote }: Props) => {
   };
 
   return (
-    <div className="space-y-6">
-      {/* View Mode Toggle */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="flex gap-1 bg-secondary/50 rounded-lg p-1">
+    <div className="space-y-4">
+      {/* Controls Bar */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="flex gap-1 bg-secondary/50 rounded-lg p-0.5">
           {viewModes.map((v) => (
             <button
               key={v.id}
               onClick={() => setViewMode(v.id)}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium transition-all ${
+              className={`flex items-center gap-1 px-2.5 py-1.5 rounded-md text-[11px] font-medium transition-all ${
                 viewMode === v.id
                   ? "bg-primary text-primary-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <v.icon size={14} />
+              <v.icon size={12} />
               {v.label}
             </button>
           ))}
         </div>
 
-        <div className="flex gap-2 flex-wrap">
-          <div className="flex items-center gap-1.5">
-            <Filter size={13} className="text-muted-foreground" />
-            <select
-              value={displayFilter}
-              onChange={(e) => setDisplayFilter(e.target.value)}
-              className="text-xs border border-border rounded-md px-2 py-1.5 bg-background text-foreground"
-            >
-              {displayTypes.map((d) => (
-                <option key={d} value={d}>{d === "ทั้งหมด" ? "ทุกประเภทจอ" : d}</option>
-              ))}
-            </select>
-          </div>
-          <select
-            value={cpuFilter}
-            onChange={(e) => setCpuFilter(e.target.value)}
-            className="text-xs border border-border rounded-md px-2 py-1.5 bg-background text-foreground"
-          >
-            {cpuTiers.map((t) => (
-              <option key={t} value={t}>{cpuTierLabels[t]}</option>
-            ))}
+        <div className="flex items-center gap-2 flex-wrap">
+          <Filter size={12} className="text-muted-foreground" />
+          <select value={displayFilter} onChange={(e) => setDisplayFilter(e.target.value)}
+            className="text-[11px] border border-border rounded-md px-2 py-1 bg-background text-foreground">
+            {displayTypes.map((d) => <option key={d} value={d}>{d === "ทั้งหมด" ? "ทุกประเภทจอ" : d}</option>)}
           </select>
+          <select value={cpuFilter} onChange={(e) => setCpuFilter(e.target.value)}
+            className="text-[11px] border border-border rounded-md px-2 py-1 bg-background text-foreground">
+            {cpuTiers.map((t) => <option key={t} value={t}>{cpuTierLabels[t]}</option>)}
+          </select>
+          <span className="text-[10px] text-muted-foreground">{filtered.length}/{allModels.length} รายการ</span>
         </div>
       </div>
 
-      {/* Results Count */}
-      <p className="text-xs text-muted-foreground">
-        แสดง {filtered.length} รายการ จาก {allModels.length} คอนฟิกทั้งหมด
-      </p>
-
-      {/* Cards Grid */}
+      {/* Table */}
       {filtered.length === 0 ? (
-        <div className="text-center py-12 text-muted-foreground text-sm">ไม่พบสินค้าที่ตรงกับตัวกรอง</div>
+        <div className="text-center py-8 text-muted-foreground text-sm">ไม่พบสินค้าที่ตรงกับตัวกรอง</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {filtered.map((m) => (
-            <div key={m.id} className="card-surface rounded-xl overflow-hidden hover:border-primary/30 transition-all group">
-              {/* Header */}
-              <div className="px-4 pt-4 pb-3 border-b border-border/50">
-                <div className="flex items-center justify-between mb-1">
-                  <h4 className="font-display font-bold text-foreground text-sm">{m.name}</h4>
-                  <Badge variant="outline" className="text-[10px]">{m.displayType}</Badge>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge className={`text-[10px] ${m.tierColor} bg-transparent border ${m.cpuTier === "entry" ? "border-emerald-500/30" : m.cpuTier === "mid" ? "border-sky-500/30" : "border-amber-500/30"}`}>
-                    {m.tierLabel}
-                  </Badge>
-                  <span className="text-xs text-muted-foreground">{m.size} • {m.resolution}</span>
-                </div>
-              </div>
-
-              {/* Body — varies by viewMode */}
-              <div className="p-4 space-y-3">
-                {viewMode === "specs" && (
-                  <>
-                    <div className="space-y-2 text-xs">
-                      <div className="flex justify-between"><span className="text-muted-foreground">CPU</span><span className="font-medium text-foreground">{m.cpuShort}</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Display</span><span className="font-medium">{m.size} ({m.displayType.split(" ")[1]})</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Resolution</span><span className="font-medium">{m.resolution}</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">COM</span><span className="font-medium">{m.com}</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Config</span><span className="font-medium">{m.config}</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Cooling</span><span className="font-medium">Fanless</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Protection</span><span className="font-medium">IP65 Front</span></div>
-                    </div>
-                  </>
-                )}
-
-                {viewMode === "price" && (
-                  <div className="text-center py-2">
-                    <p className="text-2xl font-bold text-primary">{m.priceLabel}</p>
-                    <p className="text-[10px] text-muted-foreground mt-1">{m.config}</p>
-                    <div className="mt-3 flex items-center justify-center gap-1">
-                      <Monitor size={12} className="text-muted-foreground" />
-                      <span className="text-xs text-muted-foreground">{m.size} {m.displayType}</span>
-                    </div>
-                  </div>
-                )}
-
-                {viewMode === "value" && (() => {
+        <div className="card-surface rounded-xl overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-primary/5 border-b border-border">
+                  <th className="text-left px-3 py-2 font-semibold text-foreground">รุ่น</th>
+                  <th className="text-left px-3 py-2 font-semibold text-foreground">จอ</th>
+                  <th className="text-left px-3 py-2 font-semibold text-foreground">CPU</th>
+                  {viewMode === "specs" && (
+                    <>
+                      <th className="text-left px-3 py-2 font-semibold text-foreground">Resolution</th>
+                      <th className="text-left px-3 py-2 font-semibold text-foreground">COM</th>
+                      <th className="text-left px-3 py-2 font-semibold text-foreground">Config</th>
+                    </>
+                  )}
+                  {viewMode === "price" && (
+                    <>
+                      <th className="text-left px-3 py-2 font-semibold text-foreground">Config</th>
+                      <th className="text-right px-3 py-2 font-semibold text-foreground">ราคา</th>
+                    </>
+                  )}
+                  {viewMode === "value" && (
+                    <>
+                      <th className="text-right px-3 py-2 font-semibold text-foreground">ราคา</th>
+                      <th className="text-center px-3 py-2 font-semibold text-foreground">คะแนน</th>
+                      <th className="text-center px-3 py-2 font-semibold text-foreground">ความคุ้มค่า</th>
+                    </>
+                  )}
+                  <th className="px-3 py-2 w-10"></th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/50">
+                {filtered.map((m) => {
                   const score = getValueScore(m);
                   const stars = score >= 80 ? 5 : score >= 65 ? 4 : score >= 50 ? 3 : 2;
                   return (
-                    <div className="text-center py-2">
-                      <div className="flex justify-center gap-0.5 mb-2">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} size={16} className={i < stars ? "text-amber-400 fill-amber-400" : "text-muted-foreground/30"} />
-                        ))}
-                      </div>
-                      <p className="text-lg font-bold text-foreground">{score}/100</p>
-                      <p className="text-[10px] text-muted-foreground">คะแนนความคุ้มค่า</p>
-                      <div className="mt-3 text-xs space-y-1">
-                        <div className="flex justify-between"><span className="text-muted-foreground">ราคา</span><span className="font-medium text-primary">{m.priceLabel}</span></div>
-                        <div className="flex justify-between"><span className="text-muted-foreground">CPU</span><span className="font-medium">{m.cpuShort}</span></div>
-                        <div className="flex justify-between"><span className="text-muted-foreground">จอ</span><span className="font-medium">{m.size}</span></div>
-                      </div>
-                    </div>
-                  );
-                })()}
-              </div>
+                    <tr key={m.id} className="hover:bg-muted/30 transition-colors">
+                      <td className="px-3 py-2.5">
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-mono font-semibold text-foreground">{m.name}</span>
+                          <Badge className={`text-[9px] px-1 py-0 ${m.tierColor} bg-transparent border ${m.cpuTier === "entry" ? "border-emerald-500/30" : m.cpuTier === "mid" ? "border-sky-500/30" : "border-amber-500/30"}`}>
+                            {m.tierLabel}
+                          </Badge>
+                        </div>
+                      </td>
+                      <td className="px-3 py-2.5 text-muted-foreground whitespace-nowrap">
+                        {m.size} <span className="text-[10px]">({m.displayType.split(" ")[1]})</span>
+                      </td>
+                      <td className="px-3 py-2.5 font-medium text-foreground whitespace-nowrap">{m.cpuShort}</td>
 
-              {/* Footer */}
-              <div className="px-4 pb-4">
-                <Button size="sm" className="w-full text-xs" onClick={() => onQuote(m.name)}>
-                  <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
-                </Button>
-              </div>
-            </div>
-          ))}
+                      {viewMode === "specs" && (
+                        <>
+                          <td className="px-3 py-2.5 text-muted-foreground">{m.resolution}</td>
+                          <td className="px-3 py-2.5 text-muted-foreground whitespace-nowrap">{m.com}</td>
+                          <td className="px-3 py-2.5 text-muted-foreground">{m.config}</td>
+                        </>
+                      )}
+                      {viewMode === "price" && (
+                        <>
+                          <td className="px-3 py-2.5 text-muted-foreground">{m.config}</td>
+                          <td className="px-3 py-2.5 text-right font-bold text-primary whitespace-nowrap">{m.priceLabel}</td>
+                        </>
+                      )}
+                      {viewMode === "value" && (
+                        <>
+                          <td className="px-3 py-2.5 text-right font-medium text-primary whitespace-nowrap">{m.priceLabel}</td>
+                          <td className="px-3 py-2.5 text-center font-bold text-foreground">{score}</td>
+                          <td className="px-3 py-2.5">
+                            <div className="flex justify-center gap-0.5">
+                              {Array.from({ length: 5 }).map((_, i) => (
+                                <Star key={i} size={10} className={i < stars ? "text-amber-400 fill-amber-400" : "text-muted-foreground/20"} />
+                              ))}
+                            </div>
+                          </td>
+                        </>
+                      )}
+
+                      <td className="px-3 py-2.5">
+                        <button onClick={() => onQuote(m.name)} className="text-primary hover:text-primary/80 transition-colors" title="ขอใบเสนอราคา">
+                          <FileText size={14} />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>
