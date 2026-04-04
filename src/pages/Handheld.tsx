@@ -140,30 +140,34 @@ const Handheld = () => {
       ]} />
 
       {/* Hero */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-background via-secondary/30 to-background">
-        <div className="container max-w-7xl mx-auto px-4 py-8 relative z-10">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-4">
+      <div className="relative overflow-hidden min-h-[420px] md:min-h-[480px]">
+        <div className="absolute inset-0">
+          <img src={handheldHero} alt="Rugged Handheld ใช้งานในคลังสินค้า" className="w-full h-full object-cover" width={1920} height={768} />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30" />
+        </div>
+        <div className="container max-w-7xl mx-auto px-4 py-12 md:py-16 relative z-10">
+          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-white transition-colors mb-4">
             <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
           </Link>
 
-          <Badge className="bg-primary/10 text-primary border-primary/20 mb-3">Rugged Handheld & PDA</Badge>
+          <Badge className="bg-primary/20 text-primary border-primary/30 mb-3">Rugged Handheld & PDA</Badge>
           <h1 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-3">
             Rugged <span className="text-gradient">Handheld & PDA</span>
           </h1>
-          <p className="text-muted-foreground max-w-3xl leading-relaxed mb-6">
-            เครื่องพกพาและ PDA เกรดอุตสาหกรรม กันน้ำ กันกระแทก IP65-IP68 พร้อม Barcode Scanner, NFC, RFID
-            สำหรับคลังสินค้า โลจิสติกส์ ขนส่ง และงานภาคสนาม — Windows & Android
+          <p className="text-muted-foreground max-w-2xl leading-relaxed mb-3 text-sm md:text-base">
+            ถึก ทน แกร่ง — เครื่องพกพาเกรดอุตสาหกรรม กันน้ำ กันกระแทก IP65-IP68<br className="hidden md:block" />
+            พร้อม Barcode Scanner, NFC, RFID สำหรับคลังสินค้า โลจิสติกส์ และงานภาคสนาม
           </p>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mt-6">
             {[
               { label: "ระดับกันน้ำ", value: "IP65 – IP68" },
               { label: "หน้าจอ", value: '4" – 10.95"' },
               { label: "ระบบ", value: "Android / Windows" },
               { label: "แบตเตอรี่", value: "สูงสุด 20,000 mAh" },
             ].map((s, i) => (
-              <div key={i} className="card-surface p-3 text-center">
+              <div key={i} className="bg-background/60 backdrop-blur-sm border border-border/50 rounded-lg p-3 text-center">
                 <p className="text-xs text-muted-foreground mb-1">{s.label}</p>
                 <p className="font-bold text-foreground text-sm">{s.value}</p>
               </div>
