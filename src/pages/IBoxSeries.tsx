@@ -26,6 +26,7 @@ import QuoteDialog from "@/components/QuoteDialog";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import IBoxProductCard from "@/components/ibox/IBoxProductCard";
 import IBoxProductFilter, { type IBoxFilterState, defaultFilters, portFilters } from "@/components/ibox/IBoxProductFilter";
+import ActiveFilterChips from "@/components/ibox/ActiveFilterChips";
 import { iboxProducts } from "@/data/ibox-products";
 import bannerIBox from "@/assets/banner-ibox-series.jpg";
 import usecaseAutomation from "@/assets/ibox-usecase-automation.jpg";
