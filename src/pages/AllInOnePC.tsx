@@ -224,10 +224,16 @@ const AllInOnePC = () => {
         </div>
       </div>
 
-      {/* ── Sticky Filters ── */}
-      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border">
-        <div className="container max-w-7xl mx-auto px-4 py-2">
-          <div className="flex flex-col sm:flex-row gap-2">
+      {/* ── Sticky Bar: Back + Quick Filters ── */}
+      <div className="sticky top-0 z-40 bg-background/90 backdrop-blur-xl border-b border-border">
+        <div className="container max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between py-1.5 border-b border-border/50">
+            <Link to="/" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
+              <ArrowLeft className="w-3.5 h-3.5" /> กลับหน้าหลัก
+            </Link>
+            <span className="text-[10px] text-muted-foreground">All-in-One PC — {aioProducts.length} รุ่น</span>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2 py-2">
             {/* OS filter */}
             <div className="flex gap-1 overflow-x-auto scrollbar-hide">
               {osFilters.map((f) => (
