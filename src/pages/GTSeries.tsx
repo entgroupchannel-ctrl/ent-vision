@@ -1042,7 +1042,7 @@ const GTSeries = () => {
                             {section.items.map((spec) => (
                               <tr key={spec.label} className="hover:bg-secondary/30 transition-colors">
                                 <td className="p-3 font-semibold text-foreground w-[120px] whitespace-nowrap text-xs">{spec.label}</td>
-                                <td className="p-3 text-muted-foreground text-xs">{spec.value}</td>
+                                <td className="p-3 text-muted-foreground text-xs whitespace-pre-line">{spec.value}</td>
                               </tr>
                             ))}
                           </>
@@ -1084,7 +1084,7 @@ const GTSeries = () => {
                             {section.items.map((spec) => (
                               <tr key={spec.label} className="hover:bg-secondary/30 transition-colors">
                                 <td className="p-3 font-semibold text-foreground w-[120px] whitespace-nowrap text-xs">{spec.label}</td>
-                                <td className="p-3 text-muted-foreground text-xs">{spec.value}</td>
+                                <td className="p-3 text-muted-foreground text-xs whitespace-pre-line">{spec.value}</td>
                               </tr>
                             ))}
                           </>
