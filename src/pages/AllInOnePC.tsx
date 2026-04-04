@@ -207,7 +207,7 @@ const AllInOnePC = () => {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
                 { icon: Monitor, value: `${stats.total} รุ่น`, label: "ให้เลือก" },
-                { icon: Touchpad, value: "Touch", label: "หน้าจอสัมผัส" },
+                { icon: Hand, value: "Touch", label: "หน้าจอสัมผัส" },
                 { icon: Shield, value: "IP65", label: "กันน้ำกันฝุ่น" },
                 { icon: Zap, value: "24/7", label: "ทำงานต่อเนื่อง" },
               ].map((s) => (
