@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Monitor, Cpu, DollarSign, TrendingUp, Filter, FileText, Star } from "lucide-react";
+import { Monitor, Cpu, DollarSign, TrendingUp, Filter, FileText, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
