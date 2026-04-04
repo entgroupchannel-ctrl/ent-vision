@@ -806,7 +806,7 @@ const MiniPC = () => {
   const hasFilters = filterCat !== "ทั้งหมด" || filterCpu !== "ทั้งหมด" || filterPrice !== 0;
   const clearFilters = () => { setFilterCat("ทั้งหมด"); setFilterCpu("ทั้งหมด"); setFilterPrice(0); setCurrentPage(1); };
 
-  const PAGE_SIZE = 10;
+  const PAGE_SIZE = 8;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.max(1, Math.ceil(filteredPriceItems.length / PAGE_SIZE));
   const paginatedItems = filteredPriceItems.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
