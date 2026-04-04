@@ -619,7 +619,14 @@ const GTSeries = () => {
           <p className="text-muted-foreground">สร้างภาพลักษณ์องค์กร — พนักงานภูมิใจที่ได้ใช้ผลิตภัณฑ์ระดับโลก ออกแบบเครื่องให้เข้ากับแบรนด์ของคุณได้อย่างลงตัว</p>
         </div>
         <div className="p-4">
-          <img src={gtColorfulProducts} alt="GT Series สีสันหลากหลาย ทำสีตามแบรนด์" className="w-full rounded-lg object-cover" loading="lazy" />
+          <img src={gtColorfulProducts} alt="GT Series สีสันหลากหลาย ทำสีตามแบรนด์" className="w-full rounded-lg object-cover mb-4" loading="lazy" />
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+            {galleryImages.map((img, i) => (
+              <div key={i} className="overflow-hidden rounded-lg aspect-square">
+                <img src={img} alt={`GT Series สีสัน ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
