@@ -612,6 +612,7 @@ const GTSeries = () => {
   const [gt6000PricePage, setGt6000PricePage] = useState(0);
   const [gt9000PricePage, setGt9000PricePage] = useState(0);
   const [gt1400PricePage, setGt1400PricePage] = useState(0);
+  const [gt3000PricePage, setGt3000PricePage] = useState(0);
 
   const useCasesGrid = (
     <div className="space-y-6">
