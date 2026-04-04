@@ -820,6 +820,10 @@ const GKSeries = () => {
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {[
+              { id: "v33ZXk1KZLA", title: "GK1004 Introduction" },
+              { id: "cUqG6xWQegE", title: "GK1004 How to Choose" },
+              { id: "jWM0vEKoAAE", title: "GK1004 รายละเอียดเพิ่มเติม" },
+              { id: "xXaUYlbVy5o", title: "GK1004 การใช้งาน" },
               { id: "_CZTxWtK3rw", title: "รีวิว Industrial Panel PC - GK Series" },
               { id: "POvzJ1FWtTU", title: "Panel PC - GK2101" },
             ].map((v) => (
@@ -831,10 +835,12 @@ const GKSeries = () => {
                     className="w-full h-full"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
+                    loading="lazy"
                   />
                 </div>
-                <div className="p-4">
+                <div className="p-4 flex items-center justify-between">
                   <p className="font-semibold text-foreground text-sm">{v.title}</p>
+                  <ShareButtons url={`https://youtu.be/${v.id}`} title={v.title} compact />
                 </div>
               </div>
             ))}
