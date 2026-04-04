@@ -479,17 +479,17 @@ const RuggedTablet = () => {
           </Link>
         </section>
 
-        {/* All-in-One PC */}
-        <section id="aio">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-            All-in-One <span className="text-gradient">Industrial PC</span>
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">คอมพิวเตอร์ All-in-One จอสัมผัส สำหรับอุตสาหกรรม ประหยัดพื้นที่ VESA/Panel Mount</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {aioProducts.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
-            ))}
-          </div>
+        {/* All-in-One PC — Link to dedicated page */}
+        <section id="aio-link">
+          <Link to="/aio" className="card-surface p-6 flex items-center justify-between group hover:border-primary/30 transition-all">
+            <div>
+              <h2 className="text-xl font-display font-bold text-foreground mb-1">
+                All-in-One <span className="text-gradient">Industrial PC</span>
+              </h2>
+              <p className="text-sm text-muted-foreground">คอมพิวเตอร์ All-in-One จอสัมผัส สำหรับอุตสาหกรรม — 15 รุ่น Box PC, AIO Desktop, Panel PC</p>
+            </div>
+            <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+          </Link>
         </section>
 
         {/* Handheld & PDA — Link to dedicated page */}
