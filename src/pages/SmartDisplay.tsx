@@ -266,10 +266,10 @@ const SmartDisplay = () => {
                     </div>
                     <p className="text-sm text-muted-foreground">{p.type}</p>
                     <button
-                      onClick={() => setShowLineQR(true)}
-                      className="mt-4 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
+                      onClick={() => setQuoteOpen(true)}
+                      className="mt-4 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
                     >
-                      <MessageCircle size={14} /> สอบถามราคา
+                      <FileText size={14} /> ขอใบเสนอราคา
                     </button>
                   </div>
                 ))}
