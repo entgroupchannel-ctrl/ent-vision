@@ -405,8 +405,8 @@ const EPCSeries = () => {
                 ))}
               </div>
 
-              <div className="flex gap-3">
-                <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10" asChild>
+              <div className="flex gap-3 flex-wrap">
+                <Button size="sm" className="bg-white text-black hover:bg-white/90 font-bold" asChild>
                   <a href="https://docs.wixstatic.com/ugd/0597a3_2521046b3a214087a30e851159a6b428.pdf" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Product Overview
                   </a>
@@ -414,7 +414,7 @@ const EPCSeries = () => {
                 <Button size="sm" onClick={() => setQuoteProduct("EPC Series")}>
                   <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
                 </Button>
-                <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10" asChild>
+                <Button size="sm" className="bg-amber-500 text-black hover:bg-amber-400 font-bold" asChild>
                   <a href="#comparison">
                     <Zap className="w-3.5 h-3.5 mr-1.5" /> เปรียบเทียบรุ่น
                   </a>
