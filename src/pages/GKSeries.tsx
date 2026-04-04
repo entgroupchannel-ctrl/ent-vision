@@ -1028,7 +1028,13 @@ const GKSeries = () => {
             { id: "POvzJ1FWtTU", title: "Panel PC - GK2101" },
           ],
           "GK Series": [
-            { id: "_CZTxWtK3rw", title: "รีวิว Industrial Panel PC" },
+            { id: "_CZTxWtK3rw", title: "รีวิว Industrial Panel PC - GK Series" },
+            { id: "v33ZXk1KZLA", title: "GK1004 Introduction" },
+            { id: "_UqXHR6iCMA", title: "GK1501 Introduction" },
+            { id: "O5fd-_ZfWR0", title: "GK1506 Introduction" },
+            { id: "wNUZ1WS9Uuw", title: "GK1901 Introduction" },
+            { id: "rdHodN5fcDA", title: "GK2101 Introduction" },
+            { id: "POvzJ1FWtTU", title: "Panel PC - GK2101" },
           ],
         };
         const tabKeys = Object.keys(videoTabs);
