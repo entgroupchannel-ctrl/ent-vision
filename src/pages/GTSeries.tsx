@@ -2269,7 +2269,7 @@ const GTSeries = () => {
                           { label: "Power", value: "DC 12V / 5A" },
                           { label: "Cooling", value: "Fanless Aluminum Heatsink" },
                           { label: "Temp", value: "0°C ~ 60°C" },
-                          { label: "WiFi", value: "WiFi + BT (Dual Antenna)" },
+                          { label: "WiFi/BT", value: "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม" },
                           { label: "Mounting", value: "VESA 100×100 / Wall Mount" },
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
