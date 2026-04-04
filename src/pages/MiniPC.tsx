@@ -978,14 +978,14 @@ const MiniPC = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredPriceItems.length === 0 ? (
+                    {paginatedItems.length === 0 ? (
                       <TableRow>
                         <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
                           ไม่พบสินค้าที่ตรงกับตัวกรอง — ลองปรับเงื่อนไขใหม่
                         </TableCell>
                       </TableRow>
                     ) : (
-                      filteredPriceItems.map((r) => (
+                      paginatedItems.map((r) => (
                         <TableRow key={r.model}>
                           <TableCell className="font-medium text-foreground">{r.model}</TableCell>
                           <TableCell><Badge variant="outline" className="text-[10px]">{r.category}</Badge></TableCell>
@@ -1004,6 +1004,43 @@ const MiniPC = () => {
                   </TableBody>
                 </Table>
               </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-2 p-4 border-t border-border">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage((p) => p - 1)}
+                    className="text-xs"
+                  >
+                    ← ก่อนหน้า
+                  </Button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-8 h-8 rounded-lg text-xs font-bold transition-all ${
+                        currentPage === page
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage((p) => p + 1)}
+                    className="text-xs"
+                  >
+                    ถัดไป →
+                  </Button>
+                </div>
+              )}
 
               <div className="p-5">
                 <PriceDisclaimer />
