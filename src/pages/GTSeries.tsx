@@ -4194,20 +4194,16 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     </p>
                   </div>
 
-                  {/* Product Features จากโรงงาน */}
-                  <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-3">🏭 Products Features</h4>
-                    <ul className="text-sm text-muted-foreground space-y-2">
-                      <li>✅ Brushed Full Aluminum Alloy — โครงอลูมิเนียมขัดเงาสีดำ</li>
-                      <li>✅ Fanless 24 ชม. — ไร้พัดลม เงียบสนิท ไม่ดูดฝุ่น</li>
-                      <li>✅ Full-height 4G Module + SIM Card Slot</li>
-                      <li>✅ Dual-Band WiFi + เสาอากาศภายนอก</li>
-                      <li>✅ 6× RS232/RS422/RS485 COM Port</li>
-                      <li>✅ M-SATA SSD + 2.5" SATA HDD + M.2 2280 NVMe พร้อมกัน</li>
-                      <li>✅ 3× HDMI 1.4 Triple Display — 3 จอพร้อมกัน</li>
-                      <li>✅ Wall Mount ด้วยสกรูยาว (Optional)</li>
-                    </ul>
-                  </div>
+                  <ProductFeatures features={[
+                    "Brushed Full Aluminum Alloy — โครงอลูมิเนียมขัดเงาสีดำ",
+                    "Fanless 24 ชม. — ไร้พัดลม เงียบสนิท ไม่ดูดฝุ่น",
+                    "Full-height 4G Module + SIM Card Slot",
+                    "Dual-Band WiFi + เสาอากาศภายนอก",
+                    "6× RS232/RS422/RS485 COM Port",
+                    "M-SATA SSD + 2.5\" SATA HDD + M.2 2280 NVMe พร้อมกัน",
+                    "3× HDMI 1.4 Triple Display — 3 จอพร้อมกัน",
+                    "Wall Mount ด้วยสกรูยาว (Optional)",
+                  ]} />
 
                   {/* Key Specs */}
                   <div className="grid grid-cols-2 gap-4">
