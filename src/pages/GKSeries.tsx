@@ -1263,6 +1263,72 @@ const GKSeries = () => {
         </div>
       </section>
 
+      {/* Customer Testimonials */}
+      <section className="section-padding">
+        <div className="container max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Customer Reviews</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold">
+              ลูกค้าพูดถึง<span className="text-gradient"> GK Series</span>
+            </h2>
+            <p className="text-muted-foreground mt-3">เสียงจากผู้ใช้งานจริงในภาคอุตสาหกรรม</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                stars: 5,
+                text: "ใช้ GK2101 ติดตั้งบนไลน์ผลิตชิ้นส่วนยานยนต์มากว่า 2 ปี ฝุ่นเหล็ก น้ำมันกระเด็นตลอด แต่เครื่องไม่เคยมีปัญหา จอสัมผัสยังคงตอบสนองดีแม้ใส่ถุงมือ ประทับใจมาก",
+                role: "ผู้จัดการฝ่ายผลิต",
+                industry: "โรงงานชิ้นส่วนยานยนต์",
+              },
+              {
+                stars: 5,
+                text: "เปลี่ยนจากคอมตั้งโต๊ะทั่วไปมาใช้ GK1004 สำหรับระบบ POS ร้านอาหาร ทนน้ำ ทนความชื้นในครัว ใช้มา 1 ปีครึ่งไม่เคยค้างหรือต้อง Restart เลย คุ้มค่ากว่าที่คิด",
+                role: "เจ้าของกิจการ",
+                industry: "ธุรกิจร้านอาหาร",
+              },
+              {
+                stars: 5,
+                text: "ทีม IT ของเราชอบที่เลือก CPU ได้ตามงาน ไลน์ไหนงานเบาก็ใช้ i3 งานหนักก็อัพเป็น i7 ใส่บอดี้เดียวกัน ลดเวลาเทรนช่างได้เยอะ อะไหล่ก็ใช้ร่วมกันได้",
+                role: "IT Manager",
+                industry: "โรงงานอิเล็กทรอนิกส์",
+              },
+              {
+                stars: 4,
+                text: "ติดตั้ง GK1506 เป็นจอ Dashboard แสดงผล KPI แบบ Real-time ในห้อง Control Room ภาพชัด Full HD อ่านตัวเลขได้สบาย เปิด 24 ชม. ไม่มีพัดลมเสียงเงียบมาก",
+                role: "วิศวกรระบบ",
+                industry: "โรงไฟฟ้า",
+              },
+              {
+                stars: 5,
+                text: "ใช้ GK1004 Android สำหรับ Kiosk ลงทะเบียนผู้เยี่ยมชม บู๊ตเร็ว แอปเสถียร จอทัชลื่นไหล ลดคนดูแลจาก 3 คนเหลือ 1 คน ROI คืนทุนใน 4 เดือน เตรียมสั่งเพิ่มอีก 10 ตัว",
+                role: "ผู้จัดการอาคาร",
+                industry: "อาคารสำนักงาน",
+              },
+            ].map((review, i) => (
+              <div key={i} className="card-surface p-6 relative group hover:border-primary/30 transition-colors">
+                <Quote className="absolute top-4 right-4 text-primary/10 group-hover:text-primary/20 transition-colors" size={40} />
+                <div className="flex gap-0.5 mb-3">
+                  {Array.from({ length: 5 }, (_, s) => (
+                    <Star
+                      key={s}
+                      size={16}
+                      className={s < review.stars ? "text-amber-400 fill-amber-400" : "text-muted-foreground/30"}
+                    />
+                  ))}
+                </div>
+                <p className="text-sm text-foreground leading-relaxed mb-4">"{review.text}"</p>
+                <div className="border-t border-border pt-3">
+                  <p className="text-sm font-semibold text-foreground">{review.role}</p>
+                  <p className="text-xs text-muted-foreground">{review.industry}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="section-padding">
         <div className="container max-w-3xl mx-auto text-center">
