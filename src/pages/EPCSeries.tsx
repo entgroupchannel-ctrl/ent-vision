@@ -791,89 +791,85 @@ const EPCSeries = () => {
         </section>
 
         {/* ═══════════ YouTube & Podcast Section ═══════════ */}
-        <section className="space-y-8">
+        <section className="space-y-6">
           <div className="text-center">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">🎬 Media Center</span>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2 block">🎬 Media Center</span>
+            <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
               วิดีโอ & พอดแคสต์ <span className="text-gradient">EPC Panel PC</span>
             </h2>
-            <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">ชมวิดีโอสาธิตการใช้งานจริง และฟังพอดแคสต์เจาะลึกข้อมูลก่อนตัดสินใจ</p>
+            <p className="text-sm text-muted-foreground mt-1">ชมวิดีโอสาธิตการใช้งานจริง และฟังพอดแคสต์เจาะลึกข้อมูลก่อนตัดสินใจ</p>
           </div>
 
-          {/* Main Video */}
-          <div className="card-surface rounded-xl overflow-hidden">
-            <div className="p-4 border-b border-border flex items-center gap-2">
-              <Youtube className="w-5 h-5 text-red-500" />
-              <span className="font-bold text-foreground text-sm">วิดีโอแนะนำ EPC Panel PC</span>
+          {/* Two-column: Main Video + Video Grid */}
+          <div className="grid lg:grid-cols-2 gap-4">
+            {/* Main Video */}
+            <div className="card-surface rounded-xl overflow-hidden">
+              <div className="px-3 py-2 border-b border-border flex items-center gap-2">
+                <Youtube className="w-4 h-4 text-red-500" />
+                <span className="font-bold text-foreground text-xs">วิดีโอแนะนำ EPC Panel PC</span>
+              </div>
+              <div className="aspect-video">
+                <iframe
+                  src="https://www.youtube.com/embed/mtamL6vkDv8"
+                  title="EPC Panel PC Introduction"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
             </div>
-            <div className="aspect-video">
-              <iframe
-                src="https://www.youtube.com/embed/mtamL6vkDv8"
-                title="EPC Panel PC Introduction"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-                loading="lazy"
-              />
-            </div>
-          </div>
 
-          {/* Video Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { id: "Beaoeb0_Gwo", title: "EPC Panel PC — ภาพรวมผลิตภัณฑ์" },
-              { id: "whSUaZWJJCc", title: "การใช้งานในโรงงานจริง" },
-              { id: "-OhWfiGEsJ4", title: "คุณสมบัติเด่น & สเปก" },
-              { id: "mgTNbsmYias", title: "การติดตั้ง & เชื่อมต่อ" },
-            ].map((v) => (
-              <div key={v.id} className="card-surface rounded-lg overflow-hidden group cursor-pointer">
-                <a href={`https://youtu.be/${v.id}`} target="_blank" rel="noopener noreferrer">
+            {/* Video Grid 2×2 */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { id: "Beaoeb0_Gwo", title: "ภาพรวมผลิตภัณฑ์" },
+                { id: "whSUaZWJJCc", title: "การใช้งานในโรงงานจริง" },
+                { id: "-OhWfiGEsJ4", title: "คุณสมบัติเด่น & สเปก" },
+                { id: "mgTNbsmYias", title: "การติดตั้ง & เชื่อมต่อ" },
+              ].map((v) => (
+                <a key={v.id} href={`https://youtu.be/${v.id}`} target="_blank" rel="noopener noreferrer" className="card-surface rounded-lg overflow-hidden group">
                   <div className="relative">
-                    <img
-                      src={`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`}
-                      alt={v.title}
-                      className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
+                    <img src={`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`} alt={v.title} className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                     <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                        <Play className="w-5 h-5 text-white ml-0.5" fill="white" />
+                      <div className="w-9 h-9 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <Play className="w-4 h-4 text-white ml-0.5" fill="white" />
                       </div>
                     </div>
                   </div>
-                  <div className="p-3">
-                    <p className="text-xs font-semibold text-foreground line-clamp-2">{v.title}</p>
+                  <div className="p-2">
+                    <p className="text-[11px] font-semibold text-foreground line-clamp-1">{v.title}</p>
                   </div>
                 </a>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
-          {/* Podcast Section */}
+          {/* Podcast Section — 2 columns */}
           <div className="card-surface rounded-xl overflow-hidden">
-            <div className="p-4 border-b border-border flex items-center gap-2">
-              <Headphones className="w-5 h-5 text-primary" />
-              <span className="font-bold text-foreground text-sm">🎙️ Podcast — เจาะลึก EPC Panel PC</span>
+            <div className="px-4 py-2.5 border-b border-border flex items-center gap-2">
+              <Headphones className="w-4 h-4 text-primary" />
+              <span className="font-bold text-foreground text-xs">🎙️ Podcast — เจาะลึก EPC Panel PC</span>
             </div>
-            <div className="divide-y divide-border">
+            <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border">
               {[
-                { title: "Intro: LEGO Modular Technology คืออะไร?", desc: "ทำความรู้จักกับนวัตกรรม LEGO Modular — ยืดหยุ่นเหมือนตัวต่อ LEGO สำหรับโรงงาน", src: "/podcasts/epc-intro-lego.wav", duration: "2:46" },
-                { title: "ทำไมต้องใช้ Industrial Panel PC?", desc: "เปรียบเทียบข้อแตกต่างระหว่างคอมธรรมดากับคอมอุตสาหกรรม — ทำไมถึงคุ้มกว่า", src: "/podcasts/epc-benefit.wav", duration: "3:30" },
-                { title: "วิธีเลือก EPC Panel PC ให้เหมาะกับงาน", desc: "แนะนำการเลือกขนาดหน้าจอ 10–24 นิ้ว ให้ตรงกับประเภทงานของคุณ", src: "/podcasts/epc-how-to-choose.wav", duration: "2:39" },
-                { title: "EPC-S10X2A — ตัวเล็ก สเปกไม่เล็ก", desc: "รีวิวเจาะลึก Panel PC 10 นิ้ว 9 รุ่นย่อย — เหมาะกับจุดควบคุมเครื่องจักรและ QC", src: "/podcasts/epc-s10x2a.wav", duration: "2:27" },
+                { title: "Intro: LEGO Modular Technology", desc: "นวัตกรรม LEGO Modular — ยืดหยุ่นเหมือนตัวต่อสำหรับโรงงาน", src: "/podcasts/epc-intro-lego.wav", duration: "2:46" },
+                { title: "ทำไมต้องใช้ Industrial Panel PC?", desc: "เปรียบเทียบคอมธรรมดา vs คอมอุตสาหกรรม", src: "/podcasts/epc-benefit.wav", duration: "3:30" },
+                { title: "วิธีเลือก EPC ให้เหมาะกับงาน", desc: "แนะนำการเลือกขนาดหน้าจอ 10–24 นิ้ว", src: "/podcasts/epc-how-to-choose.wav", duration: "2:39" },
+                { title: "EPC-S10X2A — ตัวเล็ก สเปกไม่เล็ก", desc: "รีวิวเจาะลึก Panel PC 10 นิ้ว 9 รุ่นย่อย", src: "/podcasts/epc-s10x2a.wav", duration: "2:27" },
               ].map((pod, i) => (
-                <div key={i} className="p-4 hover:bg-muted/30 transition-colors">
-                  <div className="flex items-start gap-4">
-                    <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
+                <div key={i} className={`p-3 hover:bg-muted/30 transition-colors ${i >= 2 ? "md:border-t-0" : ""}`}>
+                  <div className="flex items-start gap-3">
+                    <div className="shrink-0 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">
                       {i + 1}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="text-sm font-bold text-foreground">{pod.title}</h4>
-                        <span className="text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full shrink-0">{pod.duration}</span>
+                      <div className="flex items-center gap-1.5 mb-0.5">
+                        <h4 className="text-xs font-bold text-foreground line-clamp-1">{pod.title}</h4>
+                        <span className="text-[9px] text-muted-foreground bg-muted px-1 py-0.5 rounded-full shrink-0">{pod.duration}</span>
                       </div>
-                      <p className="text-xs text-muted-foreground mb-3">{pod.desc}</p>
-                      <audio controls preload="none" className="w-full h-8 [&::-webkit-media-controls-panel]:bg-muted/50">
+                      <p className="text-[11px] text-muted-foreground mb-2 line-clamp-1">{pod.desc}</p>
+                      <audio controls preload="none" className="w-full h-7 [&::-webkit-media-controls-panel]:bg-muted/50">
                         <source src={pod.src} type="audio/wav" />
                       </audio>
                     </div>
