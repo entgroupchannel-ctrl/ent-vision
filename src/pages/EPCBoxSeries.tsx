@@ -484,54 +484,46 @@ const SeriesSection = ({ series, index }: { series: SeriesData; index: number })
         </div>
       </div>
 
-      {/* Tabs Section */}
+      {/* Spec & Video — 2 Column Layout */}
       <div className="border-t border-border">
-        <Tabs defaultValue="spec" className="w-full">
-          <TabsList className="w-full justify-start rounded-none h-auto border-b border-border bg-muted/30 p-0">
-            <TabsTrigger
-              value="spec"
-              className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 py-3 text-sm font-semibold"
-            >
-              ►Specification
-            </TabsTrigger>
-            {series.productSelection.length > 0 && (
-              <TabsTrigger
-                value="selection"
-                className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 py-3 text-sm font-semibold"
-              >
-                ►Product Selection
-              </TabsTrigger>
-            )}
-            <TabsTrigger
-              value="video"
-              className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-6 py-3 text-sm font-semibold"
-            >
-              ►Video
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="spec" className="mt-0 p-0">
+        <div className="grid lg:grid-cols-2 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-border">
+          {/* Left: Specification */}
+          <div>
+            <div className="px-6 py-3 bg-primary/10 border-b border-border">
+              <span className="text-sm font-bold text-foreground">📋 Specification</span>
+            </div>
             <SpecTable series={series} />
-          </TabsContent>
+          </div>
 
-          {series.productSelection.length > 0 && (
-            <TabsContent value="selection" className="mt-0 p-0">
-              <ProductSelectionTable products={series.productSelection} />
-            </TabsContent>
-          )}
-
-          <TabsContent value="video" className="mt-0 p-6">
-            <div className="text-center py-8">
-              <div className="inline-flex items-center gap-3 px-6 py-4 rounded-xl bg-muted/50 border border-border">
-                <Monitor size={24} className="text-primary" />
-                <div className="text-left">
-                  <p className="font-semibold text-foreground">EPC Box {series.name}</p>
-                  <p className="text-sm text-muted-foreground">วิดีโอแนะนำสินค้า — ติดต่อทีมขายเพื่อรับลิงก์วิดีโอ</p>
+          {/* Right: Product Selection + Video */}
+          <div className="flex flex-col">
+            {series.productSelection.length > 0 && (
+              <div>
+                <div className="px-6 py-3 bg-muted/30 border-b border-border">
+                  <span className="text-sm font-bold text-foreground">📦 Product Selection</span>
+                </div>
+                <ProductSelectionTable products={series.productSelection} />
+              </div>
+            )}
+            <div className="mt-auto">
+              <div className="px-6 py-3 bg-muted/20 border-y border-border">
+                <span className="text-sm font-bold text-foreground">🎬 Video</span>
+              </div>
+              <div className="p-4">
+                <div className="aspect-video rounded-lg overflow-hidden">
+                  <iframe
+                    src="https://www.youtube.com/embed/n_AVEOTjeAA"
+                    title={`EPC Box ${series.name} Video`}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
-          </TabsContent>
-        </Tabs>
+          </div>
+        </div>
       </div>
     </div>
   );
