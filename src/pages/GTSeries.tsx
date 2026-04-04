@@ -5039,14 +5039,21 @@ const GTSeries = () => {
                   <Headphones className="text-primary" size={20} />
                   <h3 className="text-lg font-display font-bold text-foreground">🎙️ Podcast — GT1200</h3>
                 </div>
-                <div className="p-4 rounded-xl bg-secondary/40 border border-border">
-                  <p className="text-sm font-bold text-foreground mb-1">GT1200 Introduction</p>
-                  <audio controls className="w-full mt-2 h-10" preload="metadata">
-                    <source src="/audio/GT1200_Intro.wav" type="audio/wav" />
-                  </audio>
-                  <div className="mt-2">
-                    <ShareButtons url={`${window.location.origin}/gt-series?tab=gt1200`} title="Podcast GT1200 Intro" compact />
-                  </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {[
+                    { file: "GT1200_Intro.wav", label: "GT1200 Introduction" },
+                    { file: "GT1200_Detail.wav", label: "GT1200 Detail" },
+                  ].map((p) => (
+                    <div key={p.file} className="p-4 rounded-xl bg-secondary/40 border border-border">
+                      <p className="text-sm font-bold text-foreground mb-1">{p.label}</p>
+                      <audio controls className="w-full mt-2 h-10" preload="metadata">
+                        <source src={`/audio/${p.file}`} type="audio/wav" />
+                      </audio>
+                      <div className="mt-2">
+                        <ShareButtons url={`${window.location.origin}/gt-series?tab=gt1200`} title={`Podcast ${p.label}`} compact />
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
