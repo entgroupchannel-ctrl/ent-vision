@@ -364,34 +364,49 @@ const EPCSeries = () => {
 
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "EPC Series", path: "/epc-series" }]} />
       {/* Hero */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/5" />
-        <div className="container max-w-7xl mx-auto px-4 py-6 relative z-10">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-4">
+      <div className="relative overflow-hidden min-h-[480px] md:min-h-[520px]">
+        {/* Background Image */}
+        <img src={epcHeroFactory} alt="Industrial factory environment" className="absolute inset-0 w-full h-full object-cover" width={1920} height={768} />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+
+        <div className="container max-w-7xl mx-auto px-4 py-8 relative z-10">
+          <Link to="/" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors mb-6">
             <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
           </Link>
 
-          <div className="flex flex-col md:flex-row gap-8 items-center mb-8">
-            <div className="md:w-1/2">
-              <img
-                src="https://static.wixstatic.com/media/0597a3_b15aa4e6e65b4d66a09d5e51e22985b8~mv2.png/v1/fill/w_600,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/EPC%20Series.png"
-                alt="EPC Panel PC Series"
-                className="w-full h-auto rounded-lg"
-              />
-            </div>
-            <div className="md:w-1/2">
-              <Badge className="bg-primary/10 text-primary border-primary/20 mb-3">CESIPC Industrial Panel PC</Badge>
-              <h1 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-3">
-                EPC <span className="text-gradient">Panel PC</span> Series
+          <div className="flex flex-col md:flex-row gap-8 items-center">
+            {/* Text Content */}
+            <div className="md:w-3/5">
+              <Badge className="bg-white/10 text-white border-white/20 backdrop-blur-sm mb-4">CESIPC Industrial Panel PC</Badge>
+              <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-3 leading-tight">
+                EPC <span className="text-primary">Panel PC</span> Series
               </h1>
-              <p className="text-lg text-muted-foreground mb-2">
-                Global Industrial Panel PC Solutions for Thai Industries
+              <p className="text-lg md:text-xl text-white/90 font-medium mb-2">
+                ถึก ทน แกร่ง — สร้างมาเพื่อโรงงานจริง
               </p>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                โซลูชั่นที่ยืดหยุ่นเหมือน LEGO สำหรับโรงงานไทย นำเสนอหน้าจอ HD คุณภาพสูง พร้อมสถาปัตยกรรมแบบโมดูลาร์ที่ปรับเปลี่ยนได้ตามความต้องการ ด้วยหน้าจอขนาด 8"-24" นิ้ว ในอัตราส่วน 4:3 และ 16:9
+              <p className="text-sm text-white/70 leading-relaxed mb-6 max-w-xl">
+                โซลูชั่นที่ยืดหยุ่นเหมือน LEGO สำหรับโรงงานไทย — ทนประกายไฟ ฝุ่นโลหะ น้ำมันกระเด็น ด้วยหน้าจอ IP65 ขนาด 10"-24" นิ้ว พร้อม CPU ตั้งแต่ Celeron ถึง Core i7 Gen 12
               </p>
+
+              {/* Quick Stats */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                {[
+                  { icon: Volume2, value: "0 dB", label: "Fanless ไร้เสียง" },
+                  { icon: Clock, value: "24/7", label: "ทำงานต่อเนื่อง" },
+                  { icon: Thermometer, value: "-20~60°C", label: "ทนอุณหภูมิสุดขั้ว" },
+                  { icon: Droplets, value: "IP65", label: "กันน้ำ-กันฝุ่น" },
+                ].map((stat) => (
+                  <div key={stat.label} className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-2.5 text-center">
+                    <stat.icon size={16} className="mx-auto mb-1 text-primary" />
+                    <p className="text-base font-bold text-white">{stat.value}</p>
+                    <p className="text-[10px] text-white/60">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+
               <div className="flex gap-3">
-                <Button variant="outline" size="sm" asChild>
+                <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10" asChild>
                   <a href="https://docs.wixstatic.com/ugd/0597a3_2521046b3a214087a30e851159a6b428.pdf" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Product Overview
                   </a>
@@ -399,10 +414,23 @@ const EPCSeries = () => {
                 <Button size="sm" onClick={() => setQuoteProduct("EPC Series")}>
                   <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
                 </Button>
+                <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10" asChild>
+                  <a href="#comparison">
+                    <Zap className="w-3.5 h-3.5 mr-1.5" /> เปรียบเทียบรุ่น
+                  </a>
+                </Button>
               </div>
             </div>
-          </div>
 
+            {/* Product Image */}
+            <div className="md:w-2/5 flex justify-center">
+              <img
+                src="https://static.wixstatic.com/media/0597a3_b15aa4e6e65b4d66a09d5e51e22985b8~mv2.png/v1/fill/w_600,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/EPC%20Series.png"
+                alt="EPC Panel PC Series"
+                className="w-full max-w-md h-auto drop-shadow-2xl"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
