@@ -25,6 +25,16 @@ const categories = [
     image: imgGT,
   },
   {
+    title: "iBox Series — Industrial PC",
+    subtitle: "Fanless Embedded Box PC",
+    description: "คอมพิวเตอร์อุตสาหกรรมไร้พัดลม สำหรับ Edge AI, IoT Gateway, Machine Vision และงานโครงการ",
+    icon: Server,
+    href: "/ibox-series",
+    models: ["AI Edge/GPU", "Embedded Box", "Gateway/DIN Rail", "PoE Multi-LAN", "Vehicle", "AEOLUS"],
+    badge: "Hot",
+    image: imgIBox,
+  },
+  {
     title: "GB Series",
     subtitle: "Industrial Grade Computer",
     description: "4 รุ่น 4 สไตล์ ตอบโจทย์ทุกความต้องการอุตสาหกรรม",
