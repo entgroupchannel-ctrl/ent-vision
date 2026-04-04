@@ -4,7 +4,11 @@ import {
   ArrowLeft, Shield, Smartphone, Battery, Scan, Wifi, FileText,
   ShoppingCart, X, Fingerprint, Radio, Play, ThumbsUp, ExternalLink,
 } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import handheldHero from "@/assets/handheld-hero.jpg";
+import relatedTablet from "@/assets/related-rugged-tablet.jpg";
+import relatedNotebook from "@/assets/related-rugged-notebook.jpg";
+import relatedAio from "@/assets/related-aio-pc.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
