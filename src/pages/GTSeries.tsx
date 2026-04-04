@@ -5607,8 +5607,8 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   { cpu: "i3-6157U (DDR4)", ram: "4 GB", ssd: "256 GB", price: "14,390" },
                   { cpu: "i3-6157U (DDR4)", ram: "8 GB", ssd: "128 GB", price: "13,690" },
                   { cpu: "i3-6157U (DDR4)", ram: "8 GB", ssd: "256 GB", price: "14,590" },
-                  { cpu: "i3-6157U (DDR4)", ram: "16 GB", ssd: "256 GB", price: "15,490" },
-                  { cpu: "i3-6157U (DDR4)", ram: "8 GB", ssd: "512 GB", price: "16,990" },
+                  { cpu: "i3-6157U (DDR4)", ram: "16 GB", ssd: "256 GB", price: "Call" },
+                  { cpu: "i3-6157U (DDR4)", ram: "8 GB", ssd: "512 GB", price: "Call" },
                   { cpu: "i5-4278U (DDR3L)", ram: "4 GB", ssd: "128 GB", price: "14,690" },
                   { cpu: "i5-4278U (DDR3L)", ram: "4 GB", ssd: "256 GB", price: "15,390" },
                   { cpu: "i5-4278U (DDR3L)", ram: "8 GB", ssd: "128 GB", price: "14,890" },
@@ -5650,7 +5650,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                               <td className="p-3 font-medium text-foreground">{item.cpu}</td>
                               <td className="p-3 text-muted-foreground">{item.ram}</td>
                               <td className="p-3 text-muted-foreground">{item.ssd}</td>
-                              <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                              <td className="p-3 text-right font-bold text-primary">{item.price === "Call" ? "Call" : `฿${item.price}`}</td>
                             </tr>
                           ))}
                         </tbody>
