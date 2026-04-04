@@ -4,7 +4,7 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Layers, Settings, Box, Maximize, ChevronDown, Monitor, HardDrive, Wifi, Power, PlugZap, Expand } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Layers, Settings, Box, Maximize, ChevronDown, Monitor, HardDrive, Wifi, Power, PlugZap, Expand, Filter, SlidersHorizontal, DollarSign, BarChart3 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
