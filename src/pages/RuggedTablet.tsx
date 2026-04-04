@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 import {
   ArrowLeft, Shield, Droplets, Battery, Smartphone, Monitor,
   Download, ChevronRight, Wifi, FileText, Search,
-  ShoppingCart, X, SlidersHorizontal, ArrowUpDown,
+  ShoppingCart, X, SlidersHorizontal, ArrowUpDown, Play, ThumbsUp, Share2,
 } from "lucide-react";
+import ShareButtons from "@/components/ShareButtons";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -574,6 +575,76 @@ const RuggedTablet = () => {
             </section>
 
             <PriceDisclaimer />
+
+            {/* ── YouTube Media Center ── */}
+            <section className="space-y-6">
+              <div className="text-center">
+                <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2 block">📺 Media Center</span>
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+                  วิดีโอ <span className="text-primary">Rugged Tablet</span>
+                </h2>
+                <p className="text-sm text-muted-foreground max-w-xl mx-auto">ชมการใช้งานจริง รีวิว และทดสอบความทนทานของ Rugged Tablet — กดไลค์และแชร์ได้เลย!</p>
+              </div>
+
+              {/* Featured Video */}
+              <div className="card-surface rounded-2xl overflow-hidden">
+                <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.youtube.com/embed/4b5kFnaEEN4"
+                    title="Rugged Tablet — Featured Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4 flex items-center justify-between">
+                  <p className="font-bold text-foreground text-sm">Rugged Tablet — ทดสอบความทนทาน</p>
+                  <ShareButtons url="https://youtu.be/4b5kFnaEEN4" title="Rugged Tablet — ทดสอบความทนทาน" compact />
+                </div>
+              </div>
+
+              {/* Video Grid */}
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  { id: "82JfH_pZtL4", title: "Rugged Tablet ใช้งานคลังสินค้า" },
+                  { id: "csZIKK8w2w0", title: "รีวิว Rugged Tablet กันน้ำ IP67" },
+                  { id: "KHJreZIfRag", title: "Rugged Tablet สำหรับงานภาคสนาม" },
+                  { id: "NGzozqZHdGQ", title: "ทดสอบ Drop Test แท็บเล็ตทนทาน" },
+                  { id: "TAQF_h4pBRg", title: "Rugged Tablet ในงานอุตสาหกรรม" },
+                  { id: "1qA8rVTsWx0", title: "เปรียบเทียบ Rugged Tablet รุ่นยอดนิยม" },
+                  { id: "wWgkc51GW_I", title: "Rugged Tablet สำหรับงานโลจิสติกส์" },
+                ].map((v) => (
+                  <div key={v.id} className="card-surface rounded-xl overflow-hidden group hover:shadow-lg transition-shadow">
+                    <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                      <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src={`https://www.youtube.com/embed/${v.id}`}
+                        title={v.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-3 flex items-center justify-between gap-2">
+                      <p className="font-semibold text-foreground text-xs line-clamp-1">{v.title}</p>
+                      <ShareButtons url={`https://youtu.be/${v.id}`} title={v.title} compact />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="text-center">
+                <a
+                  href="https://www.youtube.com/playlist?list=PLnaSAPIEkz1frFK93ge_0MUHXJ1P3edE9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-destructive hover:bg-destructive/90 text-destructive-foreground font-bold text-sm transition-colors shadow-lg hover:shadow-xl"
+                >
+                  <Play className="w-4 h-4" /> ดูวิดีโอทั้งหมดบน YouTube
+                </a>
+              </div>
+            </section>
 
             {/* CTA */}
             <div className="card-surface p-8 text-center">
