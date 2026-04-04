@@ -773,8 +773,8 @@ const MiniPC = () => {
     { model: "Windows 11 Pro OEM", cpu: "-", ram: "-", storage: "-", price: "4,590", priceNum: 4590, category: "Software", cpuLevel: "-" },
   ];
 
-  const priceCategories = ["ทั้งหมด", "Entry-Level", "High Performance", "Education & Office", "Nano & Firewall", "Digital Signage", "Budget"];
-  const cpuLevels = ["ทั้งหมด", "Celeron/Atom", "Pentium", "Core i3", "Core i5", "Core i7", "ARM"];
+  const priceCategories = ["ทั้งหมด", "Entry-Level", "High Performance", "Education & Office", "Nano & Firewall", "Software"];
+  const cpuLevels = ["ทั้งหมด", "Celeron/Atom", "Pentium", "Core i3", "Core i5", "Core i7"];
   const priceRanges = [
     { label: "ทั้งหมด", min: 0, max: Infinity },
     { label: "ต่ำกว่า ฿5,000", min: 0, max: 5000 },
