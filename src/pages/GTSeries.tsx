@@ -4637,7 +4637,7 @@ const GTSeries = () => {
                       <CollapsibleTrigger className="w-full p-5 border-b border-border flex items-center justify-between hover:bg-secondary/30 transition-colors">
                         <div>
                           <h3 className="text-lg font-display font-bold text-foreground text-left">💰 GT1400 Price List</h3>
-                          <p className="text-sm text-muted-foreground mt-1 text-left">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿28,990 · {gt1400Prices.length} รายการ</p>
+                          <p className="text-xs text-muted-foreground mt-1 text-left">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา · {gt1400Prices.length} รายการ</p>
                         </div>
                         <ChevronDown size={20} className="text-muted-foreground transition-transform duration-200 [[data-state=open]>&]:rotate-180" />
                       </CollapsibleTrigger>
