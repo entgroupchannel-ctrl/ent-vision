@@ -23,6 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import FooterCompact from "@/components/FooterCompact";
+import ShareButtons from "@/components/ShareButtons";
 import QuoteDialog from "@/components/QuoteDialog";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import IBoxProductCard from "@/components/ibox/IBoxProductCard";
