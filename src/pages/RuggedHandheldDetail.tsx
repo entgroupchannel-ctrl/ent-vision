@@ -72,7 +72,7 @@ const RuggedHandheldDetail = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">ไม่พบสินค้า</h1>
-          <Link to="/rugged-tablet"><Button>กลับหน้า Rugged Tablet</Button></Link>
+          <Link to="/handheld"><Button>กลับหน้า Handheld & PDA</Button></Link>
         </div>
       </div>
     );
