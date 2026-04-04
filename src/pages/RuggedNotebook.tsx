@@ -63,8 +63,8 @@ const RuggedNotebookPage = () => {
             <ArrowLeft size={16} /> หน้าแรก
           </Link>
           <div className="flex items-center gap-3 mb-4">
-            <Laptop className="w-10 h-10 text-orange-400" />
-            <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30 text-xs">MIL-STD-810G/H</Badge>
+            <Laptop className="w-10 h-10 text-primary" />
+            <Badge className="bg-primary/20 text-primary border-primary/30 text-xs">MIL-STD-810G/H</Badge>
           </div>
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-3">
             Rugged Notebook
