@@ -688,7 +688,13 @@ const ModelSection = ({ model, index, onQuote }: { model: GKModel; index: number
           <p className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">{model.tagline}</p>
           <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-1">{model.name}</h3>
           <p className="text-sm text-muted-foreground mb-1">{model.screenSize} • {model.resolution} • {model.platform}</p>
-          <p className="text-muted-foreground mb-6 leading-relaxed">{model.desc}</p>
+          <p className="text-muted-foreground mb-4 leading-relaxed">{model.desc}</p>
+          <button
+            onClick={() => onQuote(model.name)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors mb-6"
+          >
+            <ExternalLink size={14} /> ขอใบเสนอราคา {model.name}
+          </button>
 
           {/* Highlights */}
           <ul className="space-y-2 mb-6">
