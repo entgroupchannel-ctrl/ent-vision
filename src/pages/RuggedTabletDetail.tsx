@@ -366,11 +366,9 @@ const RuggedTabletDetail = () => {
                   <Button onClick={() => setQuoteOpen(true)}>
                     <FileText className="w-4 h-4 mr-2" /> ขอใบเสนอราคา
                   </Button>
-                  <Button variant="outline" asChild>
-                    <a href="https://line.me/R/ti/p/@entgroup" target="_blank" rel="noopener noreferrer">
-                      💬 ติดต่อ LINE @entgroup
-                    </a>
-                  </Button>
+                  <LineQRButton className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-input bg-background text-foreground font-medium text-sm hover:bg-accent hover:text-accent-foreground transition-colors">
+                    💬 ติดต่อ LINE @entgroup
+                  </LineQRButton>
                 </div>
               </div>
             </TabsContent>
