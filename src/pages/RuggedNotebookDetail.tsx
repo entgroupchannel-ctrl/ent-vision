@@ -315,11 +315,9 @@ const RuggedNotebookDetail = () => {
                   <Button onClick={() => setQuoteOpen(true)}>
                     <FileText className="w-4 h-4 mr-2" /> ขอใบเสนอราคา
                   </Button>
-                  <Button variant="outline" asChild>
-                    <a href="https://line.me/R/ti/p/@entgroup" target="_blank" rel="noopener noreferrer">
-                      💬 ติดต่อ LINE @entgroup
-                    </a>
-                  </Button>
+                  <LineQRButton>
+                    💬 ติดต่อ LINE @entgroup
+                  </LineQRButton>
                 </div>
               </div>
             </TabsContent>

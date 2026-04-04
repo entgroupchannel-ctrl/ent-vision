@@ -220,11 +220,9 @@ const RuggedHandheldDetail = () => {
               <Button size="lg" className="flex-1" onClick={() => setQuoteProduct(product.model)}>
                 <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
               </Button>
-              <Button size="lg" variant="outline" className="flex-1" asChild>
-                <a href="https://line.me/R/ti/p/@entgroup" target="_blank" rel="noopener noreferrer">
-                  💬 สอบถามราคาพิเศษ
-                </a>
-              </Button>
+              <LineQRButton className="flex-1 h-11 text-base">
+                💬 สอบถามราคาพิเศษ
+              </LineQRButton>
             </div>
           </div>
         </div>
