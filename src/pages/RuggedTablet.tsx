@@ -516,27 +516,17 @@ const RuggedTablet = () => {
           </div>
         </section>
 
-        {/* Rugged Notebook */}
-        <section id="notebook">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-            Rugged <span className="text-gradient">Notebook</span>
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">โน้ตบุ๊คทนทานมาตรฐานทหาร MIL-STD-810G สำหรับงานภาคสนาม</p>
-
-          <div className="card-surface overflow-hidden mb-6">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_326a8c23999d4b11b058da0668a45aa1~mv2.png/v1/fill/w_1314,h_561,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_326a8c23999d4b11b058da0668a45aa1~mv2.png"
-              alt="Rugged Notebook Banner"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {ruggedNotebooks.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
-            ))}
-          </div>
+        {/* Rugged Notebook — Link to dedicated page */}
+        <section id="notebook-link">
+          <Link to="/rugged-notebook" className="card-surface p-6 flex items-center justify-between group hover:border-primary/30 transition-all">
+            <div>
+              <h2 className="text-xl font-display font-bold text-foreground mb-1">
+                Rugged <span className="text-gradient">Notebook</span>
+              </h2>
+              <p className="text-sm text-muted-foreground">โน้ตบุ๊คทนทานมาตรฐานทหาร MIL-STD-810G/H — 10 รุ่น พร้อม AI PC, 2-in-1 และ Convertible</p>
+            </div>
+            <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+          </Link>
         </section>
 
         {/* All-in-One PC */}
