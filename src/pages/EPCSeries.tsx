@@ -275,7 +275,6 @@ const categories = [
   { id: "square", label: "Square Display" },
   { id: "wide", label: "Wide Display" },
   { id: "specs", label: "Specifications" },
-  { id: "selection", label: "Product Selection" },
   { id: "pricelist", label: "Price List" },
   { id: "downloads", label: "Downloads" },
 ];
