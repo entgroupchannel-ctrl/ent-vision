@@ -2105,6 +2105,63 @@ const GTSeries = () => {
                 </div>
               </div>
 
+              {/* Price List */}
+              <div className="card-surface rounded-2xl overflow-hidden">
+                <div className="p-4 border-b border-border bg-primary/5">
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT3000 Industrial PC Price List</h3>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-border bg-muted/30">
+                        <th className="text-left p-3 font-bold text-foreground">Model</th>
+                        <th className="text-left p-3 font-bold text-foreground">Configuration</th>
+                        <th className="text-right p-3 font-bold text-foreground">Price List</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        { model: "2955U", config: "Celeron 2955U DDR3L 4GB/SSD128GB/WIFI", price: "฿11,990" },
+                        { model: "", config: "Celeron 2955U DDR3L 8GB/SSD128GB/WIFI", price: "฿12,290" },
+                        { model: "i5-4200U", config: "i5-4200U RAM DDR3L 4GB/SSD128GB/WIFI", price: "฿17,790" },
+                        { model: "", config: "i5-4200U RAM DDR3L 8GB/SSD128GB/WIFI", price: "฿18,090" },
+                        { model: "i3-7110U", config: "i3-7110U RAM DDR4 4GB/SSD128GB/WIFI", price: "฿15,090" },
+                        { model: "", config: "i3-7110U RAM DDR4 8GB/SSD128GB/WIFI", price: "฿15,490" },
+                        { model: "i3-8140U", config: "i3-8140U RAM DDR4 4GB/SSD128GB/WIFI", price: "฿17,190" },
+                        { model: "", config: "i3-8140U RAM DDR4 8GB/SSD128GB/WIFI", price: "฿17,790" },
+                        { model: "i5-8260U", config: "i5-8260U RAM DDR4 4GB/SSD128GB/WIFI", price: "฿19,590" },
+                        { model: "", config: "i5-8260U RAM DDR4 8GB/SSD128GB/WIFI", price: "฿19,990" },
+                        { model: "i5-1235U", config: "i5-1235U RAM DDR4 8GB/SSD256GB/WIFI", price: "฿26,900" },
+                        { model: "", config: "i5-1235U RAM DDR4 16GB/SSD256GB/WIFI", price: "฿28,900" },
+                        { model: "i5-1335U", config: "i5-1335U RAM DDR4 8GB/SSD256GB/WIFI", price: "฿28,900" },
+                        { model: "", config: "i5-1335U RAM DDR4 16GB/SSD256GB/WIFI", price: "฿30,900" },
+                        { model: "i7-1260P", config: "i7-1260P RAM DDR4 8GB/SSD256GB/WIFI", price: "฿32,900" },
+                        { model: "", config: "i7-1260P RAM DDR4 16GB/SSD256GB/WIFI", price: "฿34,900" },
+                        { model: "i7-1355U", config: "i7-1355U RAM DDR4 8GB/SSD256GB/WIFI", price: "฿34,900" },
+                        { model: "", config: "i7-1355U RAM DDR4 16GB/SSD256GB/WIFI", price: "฿36,900" },
+                      ].map((row, i) => (
+                        <tr key={i} className={`border-b border-border/50 ${i % 2 === 1 ? "bg-muted/20" : ""}`}>
+                          <td className="p-3 font-bold text-foreground">{row.model}</td>
+                          <td className="p-3 text-muted-foreground">{row.config}</td>
+                          <td className="p-3 text-right font-bold text-primary">{row.price}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="p-3 text-xs text-muted-foreground bg-muted/10 border-t border-border">
+                  * ราคาดังกล่าวยังไม่รวม VAT 7% และอาจมีการเปลี่ยนแปลงโดยไม่ต้องแจ้งล่วงหน้า
+                </div>
+                <div className="p-4 border-t border-border text-center">
+                  <button onClick={() => setQuoteProduct("GT3000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg">
+                    <FileText size={16} /> ขอใบเสนอราคา GT3000
+                  </button>
+                </div>
+              </div>
+
+              {/* Use Cases */}
+              {useCasesGrid}
+
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
