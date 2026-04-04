@@ -19,6 +19,10 @@ import gk1506img4 from "@/assets/gk-series/gk1506-4.jpg";
 import gk1506img5 from "@/assets/gk-series/gk1506-5.jpg";
 import gk1506img6 from "@/assets/gk-series/gk1506-6.jpg";
 import gk1506banner from "@/assets/gk-series/gk1506-banner.jpg";
+import gk1501front from "@/assets/gk-series/gk1501-front.png";
+import gk1501back from "@/assets/gk-series/gk1501-back.jpg";
+import gk1501io1 from "@/assets/gk-series/gk1501-io1.jpg";
+import gk1501io2 from "@/assets/gk-series/gk1501-io2.jpg";
 
 /* ─── Concept: "One Body, Multiple Brains" ─── */
 const concepts = [
