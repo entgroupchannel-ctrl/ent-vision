@@ -38,6 +38,8 @@ import ibox801Img from "@/assets/products/ibox-801.png";
 // Main product images
 import ibox007Main from "@/assets/products/ibox-007-main.png";
 import ibox601GtProMain from "@/assets/products/ibox-601-gt-pro-main.png";
+import ibox601GtProFront2 from "@/assets/products/ibox-601-gt-pro-front2.png";
+import ibox601GtProRear2 from "@/assets/products/ibox-601-gt-pro-rear2.png";
 import ibox602GtProMain from "@/assets/products/ibox-602-gt-pro-main.png";
 import aeolusTl9Main from "@/assets/products/aeolus-tl9-6l2c4p-main.png";
 import aeolusSv9Main from "@/assets/products/aeolus-sv9-6l2c-1p-main.png";
