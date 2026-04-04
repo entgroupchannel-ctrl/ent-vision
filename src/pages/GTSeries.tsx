@@ -628,6 +628,7 @@ const GTSeries = () => {
     </div>
   );
 
+  const handleTabChange = (tab: string) => {
     setActiveTab(tab);
     setSearchParams({ tab });
     window.scrollTo({ top: document.getElementById("models")?.offsetTop ? document.getElementById("models")!.offsetTop - 80 : 0, behavior: "smooth" });
