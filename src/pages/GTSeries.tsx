@@ -2838,8 +2838,8 @@ const GTSeries = () => {
                     <p className="text-xs text-muted-foreground mt-1">ใช้ inb_p / outb_p เข้าถึง I/O Port Register โดยตรงบน Linux</p>
                   </div>
                   <div className="bg-slate-900 p-5 overflow-x-auto">
-                    <pre className="text-sm font-mono leading-relaxed">
-                      <code>
+                    <pre className="text-sm font-mono leading-relaxed text-slate-100">
+                      <code className="text-slate-100">
 {`#include <sys/io.h>
 #include <stdio.h>
 
