@@ -4,6 +4,7 @@ import {
   ArrowLeft, Shield, Smartphone, Battery, Scan, Wifi, FileText,
   ShoppingCart, X, Fingerprint, Radio,
 } from "lucide-react";
+import handheldHero from "@/assets/handheld-hero.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
