@@ -5,7 +5,11 @@ import {
   SlidersHorizontal, ArrowUpDown, FileText, ShoppingCart, X,
   Play, ThumbsUp, Share2, ExternalLink,
 } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import ShareButtons from "@/components/ShareButtons";
+import relatedTablet from "@/assets/related-rugged-tablet.jpg";
+import relatedHandheld from "@/assets/related-rugged-handheld.jpg";
+import relatedAio from "@/assets/related-aio-pc.jpg";
 import notebookHero from "@/assets/notebook-hero.jpg";
 import SEOHead from "@/components/SEOHead";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
