@@ -854,7 +854,7 @@ const MiniPC = () => {
             {[
               { value: "6W", label: "กินไฟต่ำสุด" },
               { value: "24/7", label: "ทำงานต่อเนื่อง" },
-              { value: "4,900.-", label: "ราคาเริ่มต้น" },
+              { value: "8,190.-", label: "ราคาเริ่มต้น" },
               { value: "50+", label: "รุ่นให้เลือก" },
             ].map((s) => (
               <div key={s.label} className="text-center">
