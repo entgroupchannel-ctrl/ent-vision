@@ -3896,6 +3896,11 @@ const GTSeries = () => {
                   </Collapsible>
                 );
               })()}
+              <div className="text-center">
+                <button onClick={() => setQuoteProduct("GT9000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                  <FileText size={16} /> ขอใบเสนอราคา GT9000
+                </button>
+              </div>
 
               {useCasesGrid}
 
