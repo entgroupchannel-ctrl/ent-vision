@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
+import { Play, Youtube, ThumbsUp, ExternalLink as ExtLink } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
@@ -1020,6 +1022,65 @@ const MiniPCFirewall = () => {
                 </div>
                 <h4 className="text-sm font-bold text-foreground mb-1">{uc.title}</h4>
                 <p className="text-[11px] text-muted-foreground">{uc.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── YouTube Media Center ── */}
+      <section className="py-16 md:py-20 px-4 md:px-8">
+        <div className="container max-w-5xl mx-auto">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+            <div>
+              <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2 block">Media Center</span>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+                วิดีโอรีวิว & <span className="text-gradient">สาธิตการใช้งาน</span>
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">ดูการติดตั้ง pfSense / OPNsense และรีวิวจริงจากทีมงาน</p>
+            </div>
+            <a
+              href="https://www.youtube.com/@entgroup"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-destructive text-destructive-foreground text-xs font-bold hover:opacity-90 transition-opacity"
+            >
+              <Youtube size={16} /> Subscribe
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {[
+              { id: "Uso0AuCtGvQ", title: "รีวิว Mini PC Firewall — ติดตั้ง pfSense สำหรับองค์กร" },
+              { id: "Nj56w4kUYl0", title: "สาธิตการใช้งาน OPNsense บน Mini PC Firewall" },
+            ].map((v) => (
+              <div key={v.id} className="card-surface rounded-xl overflow-hidden group">
+                <div className="relative aspect-video">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${v.id}`}
+                    title={v.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-sm font-bold text-foreground mb-2 leading-tight">{v.title}</h3>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <a
+                        href={`https://youtu.be/${v.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs text-primary font-medium hover:underline"
+                      >
+                        <ThumbsUp size={12} /> Like & Share
+                      </a>
+                    </div>
+                    <ShareButtons url={`https://youtu.be/${v.id}`} title={v.title} compact />
+                  </div>
+                </div>
               </div>
             ))}
           </div>
