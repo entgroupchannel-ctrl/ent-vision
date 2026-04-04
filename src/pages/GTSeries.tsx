@@ -2820,6 +2820,71 @@ const GTSeries = () => {
                 </div>
               </div>
 
+              {/* Intro Video */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT6000</h3>
+                </div>
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/AfWfNNtEG74"
+                    title="GT6000 Intro"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-3 flex items-center justify-between">
+                  <span className="text-sm font-semibold text-foreground">GT6000 Introduction</span>
+                  <ShareButtons url="https://youtu.be/AfWfNNtEG74" title="GT6000 Introduction" compact />
+                </div>
+              </div>
+
+              {/* More Videos */}
+              <div className="grid md:grid-cols-3 gap-4">
+                {[
+                  { id: "-xIpN8g8OkA", label: "GT6000 รายละเอียด" },
+                  { id: "gB7vAOpxEqo", label: "GT6000 เพิ่มเติม" },
+                  { id: "31SEStppvKw", label: "GT Series Overview" },
+                ].map((v) => (
+                  <div key={v.id} className="card-surface overflow-hidden rounded-xl">
+                    <div className="aspect-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${v.id}`}
+                        title={v.label}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-3 flex items-center justify-between">
+                      <span className="text-xs font-semibold text-foreground truncate">{v.label}</span>
+                      <ShareButtons url={`https://youtu.be/${v.id}`} title={v.label} compact />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Podcast */}
+              <div className="card-surface rounded-xl p-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <Headphones className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">🎙️ Podcast — GT6000</h3>
+                </div>
+                <div className="p-4 rounded-xl bg-secondary/40 border border-border">
+                  <p className="text-sm font-bold text-foreground mb-1">GT6000 Introduction</p>
+                  <audio controls className="w-full mt-2 h-10" preload="metadata">
+                    <source src="/audio/GT6000_Intro.wav" type="audio/wav" />
+                  </audio>
+                  <div className="mt-2">
+                    <ShareButtons url={`${window.location.origin}/gt-series?tab=gt6000`} title="Podcast GT6000 Intro" compact />
+                  </div>
+                </div>
+              </div>
+
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
