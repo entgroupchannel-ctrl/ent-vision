@@ -1972,7 +1972,7 @@ const GTSeries = () => {
                       />
                     </div>
                     <div className="mt-3">
-                      <ShareButtons url="https://youtu.be/ifkzyVY9Z-g" title="GT3000 Intro — ENT GROUP" />
+                      <ShareButtons url="https://youtu.be/31SEStppvKw" title="GT3000 Intro — ENT GROUP" />
                     </div>
                   </div>
 
