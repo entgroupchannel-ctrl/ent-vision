@@ -50,6 +50,7 @@ import usecaseQueue from "@/assets/usecase-queue.jpg";
 import usecaseControl from "@/assets/usecase-control.jpg";
 import usecaseBranding from "@/assets/usecase-branding.jpg";
 import FooterCompact from "@/components/FooterCompact";
+import ProductFeatures from "@/components/ProductFeatures";
 
 const features = [
   { icon: Thermometer, title: "ทนความร้อนสูง", desc: "ทำงานได้ในอุณหภูมิ 0–60°C อย่างต่อเนื่อง" },
@@ -4193,20 +4194,16 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     </p>
                   </div>
 
-                  {/* Product Features จากโรงงาน */}
-                  <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-3">🏭 Products Features</h4>
-                    <ul className="text-sm text-muted-foreground space-y-2">
-                      <li>✅ Brushed Full Aluminum Alloy — โครงอลูมิเนียมขัดเงาสีดำ</li>
-                      <li>✅ Fanless 24 ชม. — ไร้พัดลม เงียบสนิท ไม่ดูดฝุ่น</li>
-                      <li>✅ Full-height 4G Module + SIM Card Slot</li>
-                      <li>✅ Dual-Band WiFi + เสาอากาศภายนอก</li>
-                      <li>✅ 6× RS232/RS422/RS485 COM Port</li>
-                      <li>✅ M-SATA SSD + 2.5" SATA HDD + M.2 2280 NVMe พร้อมกัน</li>
-                      <li>✅ 3× HDMI 1.4 Triple Display — 3 จอพร้อมกัน</li>
-                      <li>✅ Wall Mount ด้วยสกรูยาว (Optional)</li>
-                    </ul>
-                  </div>
+                  <ProductFeatures features={[
+                    "Brushed Full Aluminum Alloy — โครงอลูมิเนียมขัดเงาสีดำ",
+                    "Fanless 24 ชม. — ไร้พัดลม เงียบสนิท ไม่ดูดฝุ่น",
+                    "Full-height 4G Module + SIM Card Slot",
+                    "Dual-Band WiFi + เสาอากาศภายนอก",
+                    "6× RS232/RS422/RS485 COM Port",
+                    "M-SATA SSD + 2.5\" SATA HDD + M.2 2280 NVMe พร้อมกัน",
+                    "3× HDMI 1.4 Triple Display — 3 จอพร้อมกัน",
+                    "Wall Mount ด้วยสกรูยาว (Optional)",
+                  ]} />
 
                   {/* Key Specs */}
                   <div className="grid grid-cols-2 gap-4">
@@ -4956,20 +4953,17 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     </p>
                   </div>
 
-                  <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-3">🏭 Products Features</h4>
-                    <ul className="text-sm text-muted-foreground space-y-2">
-                      <li>✅ Intel Celeron J4125/J6412 หรือ Gen 8/10/11 Core i3/i5/i7</li>
-                      <li>✅ 2× Intel i225V 2.5G LAN (รองรับขยายเป็น 4 LAN)</li>
-                      <li>✅ 2× RS232/RS422/RS485 COM + 4× Expanded RS232 COM</li>
-                      <li>✅ 10-way GPIO + Remote Switch</li>
-                      <li>✅ M.2 3042/3052 สำหรับ 3G/4G/5G Module + SIM Slot</li>
-                      <li>✅ Fanless Aluminum Alloy — เงียบสนิท 24 ชม.</li>
-                      <li>✅ ไฟเข้า 9–36V กว้าง (4-pin Phoenix Terminal)</li>
-                      <li>✅ AWAL, Wake On LAN, Watchdog, RTC</li>
-                      <li>✅ ขนาด 300×155×50mm / 1.8kg</li>
-                    </ul>
-                  </div>
+                  <ProductFeatures features={[
+                    "Intel Celeron J4125/J6412 หรือ Gen 8/10/11 Core i3/i5/i7",
+                    "2× Intel i225V 2.5G LAN (รองรับขยายเป็น 4 LAN)",
+                    "2× RS232/RS422/RS485 COM + 4× Expanded RS232 COM",
+                    "10-way GPIO + Remote Switch",
+                    "M.2 3042/3052 สำหรับ 3G/4G/5G Module + SIM Slot",
+                    "Fanless Aluminum Alloy — เงียบสนิท 24 ชม.",
+                    "ไฟเข้า 9–36V กว้าง (4-pin Phoenix Terminal)",
+                    "AWAL, Wake On LAN, Watchdog, RTC",
+                    "ขนาด 300×155×50mm / 1.8kg",
+                  ]} />
 
                   {/* Key Specs */}
                   <div className="grid grid-cols-2 gap-4">
@@ -5266,21 +5260,18 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     </p>
                   </div>
 
-                  <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-3">🏭 Products Features</h4>
-                    <ul className="text-sm text-muted-foreground space-y-2">
-                      <li>✅ Intel Gen 8/9/10 H-Series i5/i7 CPU (TDP 45W)</li>
-                      <li>✅ 2× Intel i225V 2.5G LAN</li>
-                      <li>✅ 6× DB9 COM (2× เปลี่ยนเป็น RS422/RS485 ผ่าน BIOS)</li>
-                      <li>✅ 3× HDMI 1.4 Triple Display พร้อมกัน</li>
-                      <li>✅ GPIO 14 ช่อง (7 IN + 7 OUT)</li>
-                      <li>✅ 2× DDR4 SO-DIMM สูงสุด 64GB</li>
-                      <li>✅ M-SATA + M.2 NVMe + SATA HDD พร้อมกัน</li>
-                      <li>✅ Fanless Aluminum Alloy — เงียบ 24 ชม.</li>
-                      <li>✅ ไฟ 9–36V (3-pin Phoenix Terminal) + ATX/AT</li>
-                      <li>✅ AWAL, Wake On LAN, Watchdog, RTC</li>
-                    </ul>
-                  </div>
+                  <ProductFeatures features={[
+                    "Intel Gen 8/9/10 H-Series i5/i7 CPU (TDP 45W)",
+                    "2× Intel i225V 2.5G LAN",
+                    "6× DB9 COM (2× เปลี่ยนเป็น RS422/RS485 ผ่าน BIOS)",
+                    "3× HDMI 1.4 Triple Display พร้อมกัน",
+                    "GPIO 14 ช่อง (7 IN + 7 OUT)",
+                    "2× DDR4 SO-DIMM สูงสุด 64GB",
+                    "M-SATA + M.2 NVMe + SATA HDD พร้อมกัน",
+                    "Fanless Aluminum Alloy — เงียบ 24 ชม.",
+                    "ไฟ 9–36V (3-pin Phoenix Terminal) + ATX/AT",
+                    "AWAL, Wake On LAN, Watchdog, RTC",
+                  ]} />
 
                   {/* Key Specs */}
                   <div className="grid grid-cols-2 gap-4">
@@ -5504,19 +5495,16 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     </p>
                   </div>
 
-                  <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-3">🏭 Products Features</h4>
-                    <ul className="text-sm text-muted-foreground space-y-2">
-                      <li>✅ Intel Gen 4/6/7/8/10 Core i3/i5/i7 CPU (Onboard)</li>
-                      <li>✅ 2× RJ45 Intel Gigabit LAN + 2× DB9 RS232 COM</li>
-                      <li>✅ VGA + HDMI 1.4 Dual Display พร้อมกัน</li>
-                      <li>✅ SIM Card Slot สำหรับ 3G/4G WiFi</li>
-                      <li>✅ Fanless Aluminum Alloy — เงียบสนิท 24 ชม.</li>
-                      <li>✅ TDP เพียง 28W ประหยัดพลังงาน</li>
-                      <li>✅ AWAL, Wake On LAN, Watchdog, RTC</li>
-                      <li>✅ Wall Mount ได้ — ขนาดเล็กเพียง 193.9×127×57.2mm</li>
-                    </ul>
-                  </div>
+                  <ProductFeatures features={[
+                    "Intel Gen 4/6/7/8/10 Core i3/i5/i7 CPU (Onboard)",
+                    "2× RJ45 Intel Gigabit LAN + 2× DB9 RS232 COM",
+                    "VGA + HDMI 1.4 Dual Display พร้อมกัน",
+                    "SIM Card Slot สำหรับ 3G/4G WiFi",
+                    "Fanless Aluminum Alloy — เงียบสนิท 24 ชม.",
+                    "TDP เพียง 28W ประหยัดพลังงาน",
+                    "AWAL, Wake On LAN, Watchdog, RTC",
+                    "Wall Mount ได้ — ขนาดเล็กเพียง 193.9×127×57.2mm",
+                  ]} />
 
                   {/* Key Specs */}
                   <div className="grid grid-cols-2 gap-4">
