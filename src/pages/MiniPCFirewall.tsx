@@ -782,55 +782,51 @@ const MiniPCFirewall = () => {
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-destructive/5" />
-        <div className="container max-w-7xl mx-auto px-6 py-16 md:py-24 relative">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-destructive/10 text-destructive border border-destructive/30">
-                  Network Security
-                </span>
-                <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-border text-muted-foreground">
-                  pfSense / OPNsense Ready
-                </span>
-              </div>
-
-              <h1 className="text-4xl md:text-6xl font-black tracking-tight text-foreground mb-4">
-                Mini PC<span className="text-primary"> Firewall</span>
-              </h1>
-
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
-                Firewall Appliance ตั้งแต่ระดับ Home Office จนถึง Data Center —
-                ประหยัดค่าใช้จ่าย ปรับแต่งได้ รองรับ <span className="text-foreground font-semibold">Open Source Firewall</span> ทุกยี่ห้อ
-              </p>
-
-              <div className="flex flex-wrap gap-3 mb-8">
-                {["Fanless Silent", "2.5G / 10G LAN", "AES-NI", "24/7 Operation"].map((tag) => (
-                  <span key={tag} className="px-3 py-1.5 rounded-lg text-xs font-medium bg-secondary text-secondary-foreground border border-border">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                <a href="#products" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors">
-                  เลือกรุ่นที่เหมาะกับคุณ <ChevronDown size={16} />
-                </a>
-                <a href="#comparison" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-primary/40 text-primary font-semibold text-sm hover:bg-primary/10 transition-all">
-                  <Filter size={16} /> เปรียบเทียบสเปก
-                  <span className="px-2 py-0.5 rounded-full bg-primary/15 text-[10px] font-bold tracking-wide uppercase">Smart Filter</span>
-                </a>
-              </div>
+        <div className="absolute inset-0">
+          <img src={heroFirewall} alt="Server room with firewall appliance" className="w-full h-full object-cover" width={1920} height={768} />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/30" />
+        </div>
+        <div className="relative container max-w-7xl mx-auto px-6 py-16 md:py-24">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-destructive/10 text-destructive border border-destructive/30">
+                Network Security
+              </span>
+              <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border border-border text-muted-foreground">
+                pfSense / OPNsense Ready
+              </span>
             </div>
 
-            <div className="relative flex items-center justify-center">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-3xl" />
-              <img
-                src="https://static.wixstatic.com/media/0597a3_6ebc77045f9a4292bb485a4fa91ac3a2~mv2.png/v1/fill/w_600,h_441,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-15%20at%2012_02_13.png"
-                alt="Firewall Appliance Lineup"
-                className="relative w-full max-w-md mx-auto drop-shadow-xl"
-                loading="eager"
-              />
+            <h1 className="text-4xl md:text-6xl font-black tracking-tight text-foreground mb-4">
+              Mini PC<span className="text-primary"> Firewall</span>
+            </h1>
+
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
+              Firewall Appliance ตั้งแต่ระดับ Home Office จนถึง Data Center —
+              ประหยัดค่าใช้จ่าย ปรับแต่งได้ รองรับ <span className="text-foreground font-semibold">Open Source Firewall</span> ทุกยี่ห้อ
+            </p>
+
+            <div className="flex flex-wrap gap-6 mb-8">
+              {[
+                { value: "2-6", label: "LAN Ports" },
+                { value: "2.5G", label: "สูงสุด" },
+                { value: "0dB", label: "Fanless เงียบสนิท" },
+                { value: "24/7", label: "ทำงานต่อเนื่อง" },
+              ].map((s) => (
+                <div key={s.label} className="text-center">
+                  <p className="text-2xl md:text-3xl font-display font-extrabold text-primary">{s.value}</p>
+                  <p className="text-xs text-muted-foreground">{s.label}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <a href="#products" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-gray-900 font-semibold text-sm hover:bg-gray-100 transition-colors shadow-lg">
+                เลือกรุ่นที่เหมาะกับคุณ <ChevronDown size={16} />
+              </a>
+              <a href="#comparison" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border-2 border-white/40 text-foreground font-semibold text-sm hover:bg-white/10 transition-all">
+                <Filter size={16} /> เปรียบเทียบสเปก
+              </a>
             </div>
           </div>
         </div>
