@@ -162,76 +162,6 @@ const emRuggedTablets = [
   },
 ];
 
-const ruggedNotebooks = [
-  {
-    id: "em-x15m",
-    name: "EM-X15M Rugged AI PC",
-    size: '15.6"',
-    highlight: "Intel AI Processor, DDR5 สูงสุด 32GB, MIL-STD-810H IP65 พร้อม NPU สำหรับ AI Workload",
-    image: "https://entgroup-rugged.com/assets/em-x15a-V7O0Cy_Y.png",
-    datasheet: "",
-    price: "฿83,900",
-    productUrl: "https://entgroup-rugged.com/product/em-x15m",
-  },
-  {
-    id: "em-x15a",
-    name: "EM-X15A Rugged Notebook",
-    size: '15.6"',
-    highlight: "Intel Core i5/i7, จอ FHD IPS Touch, MIL-STD-810G IP65 ทนทานมาตรฐานทหาร",
-    image: "https://entgroup-rugged.com/assets/em-x15a-V7O0Cy_Y.png",
-    datasheet: "",
-    price: "฿83,900",
-    productUrl: "https://entgroup-rugged.com/product/em-x15a",
-  },
-  {
-    id: "em-x14a",
-    name: "EM-X14A Rugged Notebook",
-    size: '14"',
-    highlight: "Intel Core i5/i7, จอ 14 นิ้ว FHD IPS, MIL-STD-810G IP65 ขนาดกะทัดรัดพกพาสะดวก",
-    image: "https://entgroup-rugged.com/assets/em-x14a-CeYNitLa.png",
-    datasheet: "",
-    price: "฿62,900",
-    productUrl: "https://entgroup-rugged.com/product/em-x14a",
-  },
-  {
-    id: "em-x14m",
-    name: "EM-X14M Rugged AI Tablet PC",
-    size: '14"',
-    highlight: "Intel Core Ultra 5, จอ Touch 1000 nits, MIL-STD-810H IP65 พร้อม NPU โหมด Tablet",
-    image: "https://entgroup-rugged.com/assets/em-x14m-DwyheEo6.png",
-    datasheet: "",
-    price: "฿69,900",
-    productUrl: "https://entgroup-rugged.com/product/em-x14m",
-  },
-  {
-    id: "em-i22j",
-    name: "EM-I22J 2-in-1 Notebook",
-    size: '12.2"',
-    highlight: "จอ FHD IPS Touch 12.2 นิ้ว, MIL-STD-810G IP65 คีย์บอร์ดถอดได้ 2-in-1 Design",
-    image: "https://entgroup-rugged.com/assets/em-i22j-BG1wttE6.png",
-    datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/em-i22j",
-  },
-  {
-    id: "w14u-a",
-    name: "W14U-A Rugged Laptop",
-    size: '14"',
-    highlight: "Intel 11th Gen i5/i7, จอ FHD Touch 700cd/㎡, IP65 ทนอุณหภูมิ -20°C ถึง 60°C",
-    image: "https://entgroup-rugged.com/assets/w14u-t-CnIhYdCX.jpg",
-    datasheet: "",
-    price: "฿65,900",
-    productUrl: "https://entgroup-rugged.com/product/w14u-a",
-  },
-  {
-    id: "w33u",
-    name: "W33U Rugged Laptop",
-    size: '13.3"',
-    highlight: "Intel i5-1135G7, จอ FHD IPS Touch 13.3 นิ้ว, IP67 สแกนลายนิ้วมือ TPM 2.0",
-    image: "https://entgroup-rugged.com/assets/w33u-DjSixhuc.jpg",
-    datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/w33u",
-  },
-];
 
 const tpcSeries = [
   {
@@ -316,7 +246,7 @@ const categories = [
   { id: "features", label: "Features" },
   { id: "gole", label: "Gole Series" },
   { id: "em-rugged", label: "Rugged Tablet" },
-  { id: "notebook", label: "Rugged Notebook" },
+  
   { id: "aio", label: "All-in-One PC" },
   
   { id: "tpc", label: "TPC Series" },
@@ -438,10 +368,10 @@ const RuggedTablet = () => {
   };
   return (
     <div className="min-h-screen bg-background">
-      <SEOHead title="Rugged Tablet & Notebook กันน้ำ กันกระแทก" description="Rugged Tablet และ Notebook ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์ และอุตสาหกรรม" path="/rugged-tablet" />
+      <SEOHead title="Rugged Tablet กันน้ำ กันกระแทก" description="Rugged Tablet ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์ และอุตสาหกรรม" path="/rugged-tablet" />
       <ProductJsonLd
-        collectionName="Rugged Tablet & Notebook กันน้ำ กันกระแทก"
-        collectionDescription="Rugged Tablet และ Notebook ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์"
+        collectionName="Rugged Tablet กันน้ำ กันกระแทก"
+        collectionDescription="Rugged Tablet ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์"
         collectionUrl="/rugged-tablet"
         products={[...goleWindowsModels, ...goleAndroidModels].map(m => ({ name: m.name, price: m.price, category: "Rugged Tablet" }))}      />
 
@@ -586,27 +516,17 @@ const RuggedTablet = () => {
           </div>
         </section>
 
-        {/* Rugged Notebook */}
-        <section id="notebook">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-            Rugged <span className="text-gradient">Notebook</span>
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">โน้ตบุ๊คทนทานมาตรฐานทหาร MIL-STD-810G สำหรับงานภาคสนาม</p>
-
-          <div className="card-surface overflow-hidden mb-6">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_326a8c23999d4b11b058da0668a45aa1~mv2.png/v1/fill/w_1314,h_561,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_326a8c23999d4b11b058da0668a45aa1~mv2.png"
-              alt="Rugged Notebook Banner"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {ruggedNotebooks.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
-            ))}
-          </div>
+        {/* Rugged Notebook — Link to dedicated page */}
+        <section id="notebook-link">
+          <Link to="/rugged-notebook" className="card-surface p-6 flex items-center justify-between group hover:border-primary/30 transition-all">
+            <div>
+              <h2 className="text-xl font-display font-bold text-foreground mb-1">
+                Rugged <span className="text-gradient">Notebook</span>
+              </h2>
+              <p className="text-sm text-muted-foreground">โน้ตบุ๊คทนทานมาตรฐานทหาร MIL-STD-810G/H — 10 รุ่น พร้อม AI PC, 2-in-1 และ Convertible</p>
+            </div>
+            <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+          </Link>
         </section>
 
         {/* All-in-One PC */}
