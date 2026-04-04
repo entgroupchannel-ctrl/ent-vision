@@ -1294,7 +1294,7 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/3e5003_1c53b682c4294201b754a854bda9656d.pdf"
+                  href="/datasheets/GT1000.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -1734,7 +1734,7 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/3e5003_2ec45fc02f844ea7a10372cb6b9006bd.pdf"
+                  href="/datasheets/GT2000_Celeron.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -1742,7 +1742,7 @@ const GTSeries = () => {
                   <Download size={16} /> Datasheet GT2000 Celeron
                 </a>
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/005637_8c19b311f6864f2281173416d4678d2d.pdf"
+                  href="/datasheets/GT2000_i5.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-surface-hover transition-colors"
@@ -2165,7 +2165,7 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
-                  href="https://0597a32c-bc3b-4e42-bded-1a51fba8f70b.usrfiles.com/ugd/005637_2b911a4352f34910b8335bf03b624721.pdf"
+                  href="/datasheets/GT3000.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -2504,7 +2504,7 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/005637_6f182a79622e4ea79aa9611e215d4605.pdf"
+                  href="/datasheets/GT4000_i5.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -2512,7 +2512,7 @@ const GTSeries = () => {
                   <Download size={16} /> Datasheet GT4000 Core i5
                 </a>
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/005637_4fc705e00b57462d987fd3f161ab917b.pdf"
+                  href="/datasheets/GT4000_i7.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary/50 transition-colors"
@@ -2772,7 +2772,7 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
-                  href="https://www.entgroup.co.th/epc-series"
+                  href="/datasheets/GT5000.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -3049,7 +3049,7 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/005637_5d4e7e3066dc446a909ccf2c09e2bfc9.pdf"
+                  href="/datasheets/GT6000.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -3388,7 +3388,7 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/005637_bc46788d3e7d4c369da5aa7ed112b7d9.pdf"
+                  href="/datasheets/GT7000.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -3671,7 +3671,7 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/3e5003_1cc0a144983240828fc4dc69c5fe47e8.pdf"
+                  href="/datasheets/GT8000.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -4037,7 +4037,7 @@ const GTSeries = () => {
               {/* Datasheet CTAs */}
               <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/0597a3_56faa82174674e0494e3c1427715bead.pdf"
+                  href="/datasheets/GT9000_Gen12.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -4045,7 +4045,7 @@ const GTSeries = () => {
                   <Download size={16} /> Datasheet GT9000 (Gen 12)
                 </a>
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/005637_7c2186899e804684850ab39151abba04.pdf"
+                  href="/datasheets/GT9000_Gen10.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary/50 transition-colors"
@@ -4053,7 +4053,7 @@ const GTSeries = () => {
                   <Download size={16} /> Datasheet GT9000 (Gen 10)
                 </a>
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/0597a3_12a4bbf6e46f43f5821708e2157f4a2f.pdf"
+                  href="/datasheets/GT9000_extra.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary/50 transition-colors"
@@ -4439,7 +4439,7 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/0597a3_f33a4cfd614848709449d3a2d3173976.pdf"
+                  href="/datasheets/GT4500.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -4447,7 +4447,7 @@ const GTSeries = () => {
                   <Download size={16} /> ดาวน์โหลด Datasheet GT4500
                 </a>
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/0597a3_30cd5ccac16b42b79ed91d64cf12d0c9.pdf"
+                  href="/datasheets/GT4500_extra.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-surface-hover transition-colors"
@@ -4757,7 +4757,7 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/0597a3_df771f1787184c4ea82b8ca5ed7abc17.pdf"
+                  href="/datasheets/GT1400.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
@@ -5246,7 +5246,7 @@ const GTSeries = () => {
               {/* Datasheet CTA */}
               <div className="text-center">
                 <a
-                  href="https://www.entgroup.co.th/_files/ugd/0597a3_b016e32d02cf4accaa6709406df39692.pdf"
+                  href="/datasheets/GT1200.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
