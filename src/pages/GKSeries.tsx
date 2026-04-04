@@ -29,6 +29,7 @@ import gk2101front from "@/assets/gk-series/gk2101-front.png";
 import gk2101angle from "@/assets/gk-series/gk2101-angle.jpg";
 import gk2101back from "@/assets/gk-series/gk2101-back.jpg";
 import gk2101io from "@/assets/gk-series/gk2101-io.jpg";
+import gkHeroBanner from "@/assets/gk-series/gk-hero-banner.jpg";
 
 /* ─── Concept: "One Body, Multiple Brains" ─── */
 const concepts = [
