@@ -160,12 +160,13 @@ const IBoxProductFilter = ({
               <button
                 key={option.id}
                 onClick={() => onFilterChange({ ...filters, category: option.id })}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
+                className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors flex items-center gap-2 ${
                   filters.category === option.id
                     ? "bg-primary text-primary-foreground font-medium"
                     : "hover:bg-muted text-foreground"
                 }`}
               >
+                {option.icon && <option.icon className="w-4 h-4 shrink-0" />}
                 {option.name}
               </button>
             ))}
