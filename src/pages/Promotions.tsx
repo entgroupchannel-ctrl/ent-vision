@@ -107,6 +107,25 @@ const promotions: Promo[] = [
   },
   // === ACTIVE promos ===
   {
+    id: "em-t195-rugged",
+    title: "EM-T195 Rugged Tablet 5G",
+    subtitle: "บาง เบา ทน — 10.1\" Android 11 | IP65 | 5G",
+    description: "Rugged Tablet ระดับพรีเมียม บางเพียง 10.5mm น้ำหนัก 650g กันน้ำ IP65 รองรับ 5G พร้อม NFC และ Barcode Scanner สำหรับงานคลังสินค้า ขนส่ง และภาคสนาม",
+    status: "active" as PromoStatus,
+    period: "สินค้าใหม่ 2568",
+    badge: "🆕 NEW",
+    image: "https://entgroup-rugged.com/assets/stylish-tough-BZcIMZYg.jpg",
+    highlights: [
+      "จอ 10.1\" FHD สัมผัสได้แม้สวมถุงมือ",
+      "บาง 10.5mm เบา 650g พกพาสะดวก",
+      "กันน้ำกันฝุ่น IP65 ทนตก 1.2 เมตร",
+      "รองรับ 5G / NFC / Barcode Scanner",
+    ],
+    products: ["EM-T195"],
+    ctaLabel: "ดูรายละเอียด",
+    ctaHref: "/rugged-tablet/em-t195",
+  },
+  {
     id: "starter-plus",
     title: "STARTER PLUS+ อัพสเปคฟรี!",
     subtitle: "สั่งรุ่น Starter ทุกซีรีส์ — RAM & SSD อัพฟรี",
