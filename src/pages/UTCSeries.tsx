@@ -224,14 +224,6 @@ const UTCSeries = () => {
             <img src={logo} alt="ENT GROUP" className="h-7 w-auto dark:invert" />
           </div>
           <div className="flex items-center gap-3">
-            <a
-              href="/utc-series"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-muted-foreground hover:text-primary flex items-center gap-1 transition-colors"
-            >
-              entgroup.co.th <ExternalLink size={12} />
-            </a>
             <ThemeToggle />
           </div>
         </div>
