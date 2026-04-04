@@ -38,6 +38,7 @@ import Cabinets from "./pages/Cabinets.tsx";
 import IBoxSeries from "./pages/IBoxSeries.tsx";
 import IBoxDetail from "./pages/IBoxDetail.tsx";
 import RuggedHandheldDetail from "./pages/RuggedHandheldDetail.tsx";
+import RuggedTabletDetail from "./pages/RuggedTabletDetail.tsx";
 import WishlistPage from "./pages/WishlistPage.tsx";
 import ForgotPassword from "./pages/ForgotPassword.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
@@ -98,7 +99,7 @@ const App = () => (
               <Route path="/ibox-series" element={<IBoxSeries />} />
               <Route path="/ibox-series/:id" element={<IBoxDetail />} />
               <Route path="/handheld/:id" element={<RuggedHandheldDetail />} />
-              <Route path="/rugged-tablet/:id" element={<RuggedHandheldDetail />} />
+              <Route path="/rugged-tablet/:id" element={<RuggedTabletDetail />} />
               <Route path="/wishlist" element={<WishlistPage />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
