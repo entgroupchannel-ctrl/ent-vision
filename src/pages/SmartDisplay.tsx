@@ -391,6 +391,7 @@ const SmartDisplay = () => {
                           <th className="text-left p-3 font-semibold text-muted-foreground">รุ่น</th>
                           <th className="text-left p-3 font-semibold text-muted-foreground">สเปค</th>
                           <th className="text-right p-3 font-semibold text-muted-foreground">ราคา (฿)</th>
+                          <th className="p-3"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -400,6 +401,14 @@ const SmartDisplay = () => {
                             <td className="p-3 font-semibold text-foreground">{item.model}</td>
                             <td className="p-3 text-muted-foreground">{item.config}</td>
                             <td className="p-3 text-right font-bold text-primary">{item.price}</td>
+                            <td className="p-3 text-right">
+                              <button
+                                onClick={() => setQuoteOpen(true)}
+                                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity"
+                              >
+                                <FileText size={12} /> ขอราคา
+                              </button>
+                            </td>
                           </tr>
                         ))}
                       </tbody>
