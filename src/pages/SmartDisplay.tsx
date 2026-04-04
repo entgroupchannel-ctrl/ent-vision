@@ -1105,6 +1105,33 @@ const SmartDisplay = () => {
         </div>
       </section>
 
+      {/* Podcast */}
+      <section className="section-padding">
+        <div className="container max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">🎙️ Podcast</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold">
+              พอดแคสต์ <span className="text-gradient">Smart Display</span>
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              { src: "/podcasts/smart-display-intro.wav", title: "Intro Smart Display Podcast" },
+              { src: "/podcasts/outdoor-monitor-clip1.wav", title: "Outdoor Monitor Clip 1" },
+              { src: "/podcasts/outdoor-monitor-clip2.wav", title: "Outdoor Monitor Clip 2" },
+              { src: "/podcasts/software-digital-signage.wav", title: "Software Digital Signage" },
+            ].map((p) => (
+              <div key={p.src} className="card-surface rounded-xl p-4 flex flex-col gap-2">
+                <p className="font-semibold text-sm text-foreground">{p.title}</p>
+                <audio controls preload="none" className="w-full h-10">
+                  <source src={p.src} type="audio/wav" />
+                </audio>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Contact / CTA */}
       <section className="section-padding">
         <div className="container max-w-4xl mx-auto text-center">
