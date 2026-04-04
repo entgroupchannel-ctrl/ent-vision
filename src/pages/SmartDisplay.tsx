@@ -301,13 +301,20 @@ const SmartDisplay = () => {
                 <p className="text-muted-foreground max-w-3xl mb-3">
                   จอภาพสัมผัสเกรดอุตสาหกรรม IP65 สำหรับงาน HMI, CNC, Factory Automation, ระบบทหาร และ Big Data — เชื่อมต่อ USB + HDMI กับคอมพิวเตอร์ที่มีอยู่ เปลี่ยนเป็นระบบสัมผัสได้ทันที
                 </p>
-                <div className="flex flex-wrap gap-4 mb-8 text-sm text-muted-foreground">
-                  <span>✅ ขนาด 8"–24"</span>
-                  <span>✅ Capacitive / Resistive Touch</span>
-                  <span>✅ IP65 Front Panel</span>
-                  <span>✅ Wide & Square Screen</span>
-                  <span>✅ สูงสุด 1000 Nits</span>
-                  <span>✅ ทำงาน 24/7</span>
+                <div className="flex flex-wrap gap-x-5 gap-y-2 mb-8 text-sm text-muted-foreground">
+                  {[
+                    { icon: Ruler, text: 'ขนาด 8"–24"' },
+                    { icon: Fingerprint, text: "Capacitive / Resistive Touch" },
+                    { icon: ShieldCheck, text: "IP65 Front Panel" },
+                    { icon: RectangleHorizontal, text: "Wide & Square Screen" },
+                    { icon: SunDim, text: "สูงสุด 1000 Nits" },
+                    { icon: Clock, text: "ทำงาน 24/7" },
+                  ].map((f) => (
+                    <span key={f.text} className="inline-flex items-center gap-1.5">
+                      <f.icon size={16} className="text-primary shrink-0" />
+                      {f.text}
+                    </span>
+                  ))}
                 </div>
 
                 {/* Product hero image */}
