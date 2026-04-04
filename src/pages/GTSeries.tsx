@@ -38,6 +38,17 @@ import gt7000Product from "@/assets/gt7000-product.jpg";
 import gt8000Product from "@/assets/gt8000-product.jpg";
 import gt9000Product from "@/assets/gt9000-product.jpg";
 import gt3000CpuOptions from "@/assets/gt3000-cpu-options.png";
+import gtColorfulProducts from "@/assets/gt-colorful-products.png";
+import usecaseFactory from "@/assets/usecase-factory.jpg";
+import usecaseAutomation from "@/assets/usecase-automation.jpg";
+import usecaseIot from "@/assets/usecase-iot.jpg";
+import usecaseKiosk from "@/assets/usecase-kiosk.jpg";
+import usecaseHmi from "@/assets/usecase-hmi.jpg";
+import usecaseBus from "@/assets/usecase-bus.jpg";
+import usecaseTrain from "@/assets/usecase-train.jpg";
+import usecaseQueue from "@/assets/usecase-queue.jpg";
+import usecaseControl from "@/assets/usecase-control.jpg";
+import usecaseBranding from "@/assets/usecase-branding.jpg";
 import FooterCompact from "@/components/FooterCompact";
 
 const features = [
