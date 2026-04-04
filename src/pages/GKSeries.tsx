@@ -1074,7 +1074,7 @@ const GKSeries = () => {
 
           <div className="space-y-10">
             {gkModels.map((model, idx) => (
-              <ModelSection key={model.id} model={model} index={idx} />
+              <ModelSection key={model.id} model={model} index={idx} onQuote={(name) => { setQuoteOpen(true); }} />
             ))}
           </div>
         </div>
