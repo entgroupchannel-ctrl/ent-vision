@@ -91,6 +91,7 @@ const gkModels: GKModel[] = [
       "รองรับ 4G LTE + mini PCIe/M.2 expansion",
       "ติดตั้งได้หลากหลาย: VESA / ขาตั้ง / ฝังติดผนัง",
     ],
+    youtubeId: "v33ZXk1KZLA",
     cpuOptions: ["Intel Core i3/i5/i7", "AMD A6-6500T", "ARM RK3288 (Android)", "ARM RK3399 (Android)"],
     platform: "Windows / Linux / Android",
     specs: [
