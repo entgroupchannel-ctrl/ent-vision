@@ -228,10 +228,10 @@ const SmartDisplay = () => {
         </div>
       </section>
 
-      {/* Category Tabs */}
-      <section className="py-8" id="products">
-        <div className="container max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
+      {/* Category Tabs - Sticky */}
+      <div className="sticky top-0 z-40 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm">
+        <div className="container max-w-7xl mx-auto py-3">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <span className="text-sm font-bold text-foreground whitespace-nowrap">👆 เลือกหมวดสินค้า:</span>
             <div className="flex flex-wrap gap-2">
               {categories.map((cat) => (
@@ -250,6 +250,12 @@ const SmartDisplay = () => {
               ))}
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <section className="py-8" id="products">
+        <div className="container max-w-7xl mx-auto">
 
           {/* Indoor Products */}
           {activeTab === "indoor" && (
