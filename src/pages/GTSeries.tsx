@@ -1963,7 +1963,7 @@ const GTSeries = () => {
                     <h4 className="text-sm font-bold text-foreground mb-2">📌 GT3000 Intro</h4>
                     <div className="relative w-full aspect-video rounded-xl overflow-hidden">
                       <iframe
-                        src="https://www.youtube.com/embed/ifkzyVY9Z-g"
+                        src="https://www.youtube.com/embed/31SEStppvKw"
                         title="GT3000 Intro"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -1972,7 +1972,7 @@ const GTSeries = () => {
                       />
                     </div>
                     <div className="mt-3">
-                      <ShareButtons url="https://youtu.be/ifkzyVY9Z-g" title="GT3000 Intro — ENT GROUP" />
+                      <ShareButtons url="https://youtu.be/31SEStppvKw" title="GT3000 Intro — ENT GROUP" />
                     </div>
                   </div>
 
@@ -1983,7 +1983,7 @@ const GTSeries = () => {
                       {[
                         { id: "aQ5z_JJzALo", title: "GT3000 รีวิวเจาะลึก" },
                         { id: "FV7oo7GHp9Q", title: "GT3000 สาธิตการใช้งาน" },
-                        { id: "31SEStppvKw", title: "GT3000 ติดตั้งจริง" },
+                        { id: "ifkzyVY9Z-g", title: "การเลือกซื้อ GT Series" },
                       ].map((video) => (
                         <div key={video.id} className="space-y-2">
                           <div className="relative w-full aspect-video rounded-lg overflow-hidden">
