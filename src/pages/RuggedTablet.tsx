@@ -28,7 +28,7 @@ import TabletProductFilter, {
   defaultTabletFilters,
   TabletActiveFilterChips,
 } from "@/components/tablet/TabletProductFilter";
-import ruggedHero from "@/assets/rugged-tablet-hero.jpg";
+import tabletHero from "@/assets/tablet-hero.jpg";
 
 /* ═══════ Product Data — 15 models ═══════ */
 type TabletProduct = {
@@ -363,34 +363,38 @@ const RuggedTablet = () => {
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "Rugged Tablet", path: "/rugged-tablet" }]} />
 
       {/* ── Hero ── */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden min-h-[420px] md:min-h-[480px]">
         <div className="absolute inset-0">
-          <img src={ruggedHero} alt="" className="w-full h-full object-cover" width={1920} height={640} />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
+          <img src={tabletHero} alt="Rugged Tablet ใช้งานในโรงงาน" className="w-full h-full object-cover" width={1920} height={800} />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30" />
         </div>
-        <div className="container max-w-7xl mx-auto px-4 py-6 relative z-10">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-4">
+        <div className="container max-w-7xl mx-auto px-4 py-16 md:py-24 relative z-10">
+          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6">
             <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
           </Link>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4">
-            <div>
-              <Badge className="bg-primary/10 text-primary border-primary/20 mb-3">Rugged & Industrial Grade</Badge>
-              <h1 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-3">
-                Rugged <span className="text-gradient">Tablet</span>
-              </h1>
-              <p className="text-muted-foreground max-w-3xl leading-relaxed">
-                แท็บเล็ตสำหรับงานภาคสนาม คลังสินค้า โรงงาน และการใช้งานกลางแจ้ง ผ่านมาตรฐาน IP65-IP68 ทนทานต่อการตกกระแทก
-              </p>
-            </div>
-            <div className="flex gap-3 shrink-0">
-              <Button size="sm" onClick={() => setQuoteProduct("Rugged Tablet")}>
-                <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
-              </Button>
-            </div>
+          <div className="flex items-center gap-3 mb-4">
+            <Smartphone className="w-10 h-10 text-primary" />
+            <Badge className="bg-primary/20 text-primary border-primary/30 text-xs">Rugged & Industrial Grade</Badge>
           </div>
-          <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
-            {["IP65-IP68 Protection", '8"-12" Display', "Windows & Android", "รับประกัน 1 ปี"].map((s) => (
-              <span key={s} className="px-3 py-1.5 rounded-full bg-background/60 backdrop-blur border border-border">{s}</span>
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-3 text-foreground">
+            Rugged <span className="text-primary">Tablet</span>
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-2">
+            แท็บเล็ตสำหรับงานภาคสนาม คลังสินค้า โรงงาน และการใช้งานกลางแจ้ง
+          </p>
+          <p className="text-sm text-muted-foreground/70 max-w-xl mb-8">ถึก ทน แกร่ง แข็งแรง — ผ่านมาตรฐาน IP65-IP68 ทนทานต่อการตกกระแทก</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl">
+            {[
+              { icon: Shield, value: "IP65-IP68", label: "กันน้ำกันฝุ่น" },
+              { icon: Monitor, value: `${tablets.length} รุ่น`, label: "ให้เลือก" },
+              { icon: Wifi, value: "Win & Android", label: "ระบบปฏิบัติการ" },
+              { icon: Battery, value: "8,000mAh+", label: "แบตเตอรี่" },
+            ].map((s) => (
+              <div key={s.label} className="bg-card/80 backdrop-blur-sm border border-border rounded-xl p-4 text-center">
+                <s.icon className="w-6 h-6 mx-auto mb-2 text-primary" />
+                <div className="text-xl font-bold text-foreground">{s.value}</div>
+                <div className="text-xs text-muted-foreground">{s.label}</div>
+              </div>
             ))}
           </div>
         </div>
