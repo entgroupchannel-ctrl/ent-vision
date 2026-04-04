@@ -41,6 +41,25 @@ import ibox604Main from "@/assets/products/ibox-604-main.png";
 import ibox205_4l2c2p from "@/assets/products/ibox-205-4l2c2p.png";
 import vbox105_2l6c from "@/assets/products/vbox-105-2l6c.png";
 
+// AEOLUS / Machine Vision imports
+import aeolusTl9Main from "@/assets/products/aeolus-tl9-6l2c4p-main.png";
+import aeolusTl9Angle2 from "@/assets/products/aeolus-tl9-6l2c4p-angle2.png";
+import aeolusTl9Angle3 from "@/assets/products/aeolus-tl9-6l2c4p-angle3.png";
+import aeolusTl9Angle4 from "@/assets/products/aeolus-tl9-6l2c4p-angle4.png";
+import aeolusTl9Dimension from "@/assets/products/aeolus-tl9-6l2c4p-dimension.png";
+import aeolusSv9_1pMain from "@/assets/products/aeolus-sv9-6l2c-1p-main.png";
+import aeolusSv9_1pAngle2 from "@/assets/products/aeolus-sv9-6l2c-1p-angle2.png";
+import aeolusSv9_1pDimension from "@/assets/products/aeolus-sv9-6l2c-1p-dimension.png";
+import aeolusSv9 from "@/assets/products/aeolus-sv9-6l2c.png";
+import aeolusVision from "@/assets/products/aeolus-sv9-vision.png";
+import aeolusSv9Dimension from "@/assets/products/aeolus-sv9-6l2c-dimension.png";
+import aeolusSva35Main from "@/assets/products/aeolus-sva35-2l10c-main.png";
+import aeolusSva35Angle2 from "@/assets/products/aeolus-sva35-2l10c-angle2.png";
+import aeolusSva35Angle3 from "@/assets/products/aeolus-sva35-2l10c-angle3.png";
+import aeolusSva35Angle4 from "@/assets/products/aeolus-sva35-2l10c-angle4.png";
+import aeolusSva35Dimension from "@/assets/products/aeolus-sva35-2l10c-dimension.png";
+import aeolusTl9_2l2c from "@/assets/products/aeolus-tl9-2l2c.png";
+
 export interface IBoxProduct {
   id: string;
   name: string;
