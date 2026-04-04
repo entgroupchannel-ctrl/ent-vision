@@ -608,6 +608,7 @@ const GTSeries = () => {
   const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
   const [showLineQR, setShowLineQR] = useState(false);
   const [gt1200PricePage, setGt1200PricePage] = useState(0);
+  const [gt6000PricePage, setGt6000PricePage] = useState(0);
   const [gt9000PricePage, setGt9000PricePage] = useState(0);
   const [gt1400PricePage, setGt1400PricePage] = useState(0);
 
@@ -3256,57 +3257,85 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               </div>
 
               {/* GT6000 Price List */}
-              <div className="card-surface overflow-hidden">
-                <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT6000 Price List</h3>
-                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="bg-secondary/50">
-                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
-                        <th className="text-left p-3 font-semibold text-foreground">RAM</th>
-                        <th className="text-left p-3 font-semibold text-foreground">Storage</th>
-                        <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border">
-                      {[
-                        { cpu: "Pentium 6405U", ram: "4 GB", storage: "SSD 128GB", price: "15,490" },
-                        { cpu: "Pentium 6405U", ram: "4 GB", storage: "SSD 256GB", price: "15,900" },
-                        { cpu: "Pentium 6405U", ram: "8 GB", storage: "SSD 128GB", price: "16,900" },
-                        { cpu: "Pentium 6405U", ram: "8 GB", storage: "SSD 256GB", price: "17,900" },
-                        { cpu: "i3-8145U", ram: "4 GB", storage: "SSD 128GB", price: "18,590" },
-                        { cpu: "i3-8145U", ram: "4 GB", storage: "SSD 256GB", price: "19,990" },
-                        { cpu: "i3-8145U", ram: "8 GB", storage: "SSD 128GB", price: "20,190" },
-                        { cpu: "i3-8145U", ram: "8 GB", storage: "SSD 256GB", price: "21,990" },
-                        { cpu: "i5-8250U", ram: "4 GB", storage: "SSD 128GB", price: "22,900" },
-                        { cpu: "i5-8250U", ram: "4 GB", storage: "SSD 256GB", price: "23,590" },
-                        { cpu: "i5-8250U", ram: "8 GB", storage: "SSD 128GB", price: "23,900" },
-                        { cpu: "i5-8250U", ram: "8 GB", storage: "SSD 256GB", price: "24,900" },
-                        { cpu: "i7-8557U", ram: "4 GB", storage: "SSD 128GB", price: "26,590" },
-                        { cpu: "i7-8557U", ram: "4 GB", storage: "SSD 256GB", price: "26,590" },
-                        { cpu: "i7-8557U", ram: "8 GB", storage: "SSD 128GB", price: "27,590" },
-                        { cpu: "i7-8557U", ram: "8 GB", storage: "SSD 256GB", price: "28,590" },
-                      ].map((item, i) => (
-                        <tr key={i} className="hover:bg-secondary/30 transition-colors">
-                          <td className="p-3 text-foreground font-medium">{item.cpu}</td>
-                          <td className="p-3 text-muted-foreground">{item.ram}</td>
-                          <td className="p-3 text-muted-foreground">{item.storage}</td>
-                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <p className="text-xs text-muted-foreground text-center py-3 border-t border-border">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
-                <div className="p-4 border-t border-border text-center">
-                  <button onClick={() => setQuoteProduct("GT6000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                    <FileText size={16} /> ขอใบเสนอราคา GT6000
-                  </button>
-                </div>
-              </div>
+              {(() => {
+                const gt6000Prices = [
+                  { cpu: "Pentium 6405U", ram: "4 GB", storage: "SSD 128GB", price: "15,490" },
+                  { cpu: "Pentium 6405U", ram: "4 GB", storage: "SSD 256GB", price: "15,900" },
+                  { cpu: "Pentium 6405U", ram: "8 GB", storage: "SSD 128GB", price: "16,900" },
+                  { cpu: "Pentium 6405U", ram: "8 GB", storage: "SSD 256GB", price: "17,900" },
+                  { cpu: "i3-8145U", ram: "4 GB", storage: "SSD 128GB", price: "18,590" },
+                  { cpu: "i3-8145U", ram: "4 GB", storage: "SSD 256GB", price: "19,990" },
+                  { cpu: "i3-8145U", ram: "8 GB", storage: "SSD 128GB", price: "20,190" },
+                  { cpu: "i3-8145U", ram: "8 GB", storage: "SSD 256GB", price: "21,990" },
+                  { cpu: "i5-8250U", ram: "4 GB", storage: "SSD 128GB", price: "22,900" },
+                  { cpu: "i5-8250U", ram: "4 GB", storage: "SSD 256GB", price: "23,590" },
+                  { cpu: "i5-8250U", ram: "8 GB", storage: "SSD 128GB", price: "23,900" },
+                  { cpu: "i5-8250U", ram: "8 GB", storage: "SSD 256GB", price: "24,900" },
+                  { cpu: "i7-8557U", ram: "4 GB", storage: "SSD 128GB", price: "26,590" },
+                  { cpu: "i7-8557U", ram: "4 GB", storage: "SSD 256GB", price: "26,590" },
+                  { cpu: "i7-8557U", ram: "8 GB", storage: "SSD 128GB", price: "27,590" },
+                  { cpu: "i7-8557U", ram: "8 GB", storage: "SSD 256GB", price: "28,590" },
+                ];
+                const perPage = 8;
+                const totalPages = Math.ceil(gt6000Prices.length / perPage);
+                const pageItems = gt6000Prices.slice(gt6000PricePage * perPage, (gt6000PricePage + 1) * perPage);
+
+                return (
+                  <div className="card-surface overflow-hidden">
+                    <div className="p-5 border-b border-border">
+                      <h3 className="text-lg font-display font-bold text-foreground">💰 GT6000 Price List</h3>
+                      <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
+                    </div>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="bg-secondary/50">
+                            <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                            <th className="text-left p-3 font-semibold text-foreground">RAM</th>
+                            <th className="text-left p-3 font-semibold text-foreground">Storage</th>
+                            <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-border">
+                          {pageItems.map((item, i) => (
+                            <tr key={i} className="hover:bg-secondary/30 transition-colors">
+                              <td className="p-3 text-foreground font-medium">{item.cpu}</td>
+                              <td className="p-3 text-muted-foreground">{item.ram}</td>
+                              <td className="p-3 text-muted-foreground">{item.storage}</td>
+                              <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="flex items-center justify-between px-5 py-3 border-t border-border">
+                      <span className="text-xs text-muted-foreground">
+                        หน้า {gt6000PricePage + 1} / {totalPages}
+                      </span>
+                      <div className="flex gap-1">
+                        {Array.from({ length: totalPages }, (_, p) => (
+                          <button
+                            key={p}
+                            onClick={() => setGt6000PricePage(p)}
+                            className={`w-8 h-8 rounded-md text-xs font-bold transition-colors ${
+                              p === gt6000PricePage
+                                ? "bg-primary text-primary-foreground"
+                                : "bg-muted/50 text-muted-foreground hover:bg-muted"
+                            }`}
+                          >
+                            {p + 1}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="p-4 border-t border-border text-center">
+                      <button onClick={() => setQuoteProduct("GT6000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                        <FileText size={16} /> ขอใบเสนอราคา GT6000
+                      </button>
+                    </div>
+                  </div>
+                );
+              })()}
 
               {useCasesGrid}
 
