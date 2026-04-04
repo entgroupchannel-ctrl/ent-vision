@@ -50,6 +50,7 @@ import usecaseQueue from "@/assets/usecase-queue.jpg";
 import usecaseControl from "@/assets/usecase-control.jpg";
 import usecaseBranding from "@/assets/usecase-branding.jpg";
 import FooterCompact from "@/components/FooterCompact";
+import ProductFeatures from "@/components/ProductFeatures";
 
 const features = [
   { icon: Thermometer, title: "ทนความร้อนสูง", desc: "ทำงานได้ในอุณหภูมิ 0–60°C อย่างต่อเนื่อง" },
