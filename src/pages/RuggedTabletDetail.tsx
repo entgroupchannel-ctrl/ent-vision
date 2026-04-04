@@ -14,6 +14,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import LineQRButton from "@/components/LineQRButton";
 import WishlistHeart from "@/components/WishlistHeart";
 import ProductGallery from "@/components/ProductGallery";
 import { getTabletProduct, getRelatedTablets, type TabletDetailProduct } from "@/data/rugged-tablet-products";
@@ -166,11 +167,9 @@ const RuggedTabletDetail = () => {
               <Button size="lg" className="flex-1" onClick={() => setQuoteOpen(true)}>
                 <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
               </Button>
-              <Button size="lg" variant="outline" className="flex-1" asChild>
-                <a href="https://line.me/R/ti/p/@entgroup" target="_blank" rel="noopener noreferrer">
-                  💬 สอบถามทาง LINE
-                </a>
-              </Button>
+              <LineQRButton className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-input bg-background text-foreground font-medium text-sm hover:bg-accent hover:text-accent-foreground transition-colors">
+                💬 สอบถามทาง LINE
+              </LineQRButton>
             </div>
           </div>
         </div>
@@ -367,11 +366,9 @@ const RuggedTabletDetail = () => {
                   <Button onClick={() => setQuoteOpen(true)}>
                     <FileText className="w-4 h-4 mr-2" /> ขอใบเสนอราคา
                   </Button>
-                  <Button variant="outline" asChild>
-                    <a href="https://line.me/R/ti/p/@entgroup" target="_blank" rel="noopener noreferrer">
-                      💬 ติดต่อ LINE @entgroup
-                    </a>
-                  </Button>
+                  <LineQRButton className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-input bg-background text-foreground font-medium text-sm hover:bg-accent hover:text-accent-foreground transition-colors">
+                    💬 ติดต่อ LINE @entgroup
+                  </LineQRButton>
                 </div>
               </div>
             </TabsContent>
