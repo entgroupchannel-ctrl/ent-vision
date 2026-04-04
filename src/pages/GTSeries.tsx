@@ -1042,7 +1042,7 @@ const GTSeries = () => {
                             {section.items.map((spec) => (
                               <tr key={spec.label} className="hover:bg-secondary/30 transition-colors">
                                 <td className="p-3 font-semibold text-foreground w-[120px] whitespace-nowrap text-xs">{spec.label}</td>
-                                <td className="p-3 text-muted-foreground text-xs">{spec.value}</td>
+                                <td className="p-3 text-muted-foreground text-xs whitespace-pre-line">{spec.value}</td>
                               </tr>
                             ))}
                           </>
@@ -1063,7 +1063,7 @@ const GTSeries = () => {
                             { label: "Internal", value: "mSATA + SATA + mini PCIe ×2" },
                           ]},
                           { cat: "Network", items: [
-                            { label: "WiFi/BT", value: "Built-in Dual Antenna (Optional)" },
+                            { label: "WiFi/BT", value: "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม" },
                           ]},
                           { cat: "Power & Environment", items: [
                             { label: "Power", value: "DC 12V/5A (10W), AC 100–240V" },
@@ -1084,7 +1084,7 @@ const GTSeries = () => {
                             {section.items.map((spec) => (
                               <tr key={spec.label} className="hover:bg-secondary/30 transition-colors">
                                 <td className="p-3 font-semibold text-foreground w-[120px] whitespace-nowrap text-xs">{spec.label}</td>
-                                <td className="p-3 text-muted-foreground text-xs">{spec.value}</td>
+                                <td className="p-3 text-muted-foreground text-xs whitespace-pre-line">{spec.value}</td>
                               </tr>
                             ))}
                           </>
@@ -1879,7 +1879,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                         <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">I/O Ports</td></tr>
@@ -1889,11 +1889,11 @@ const GTSeries = () => {
                           { label: "LAN", value: "2× Gigabit Ethernet" },
                           { label: "Display", value: "VGA + HDMI Dual Display" },
                           { label: "Audio", value: "MIC + SPK (3.5mm)" },
-                          { label: "WiFi", value: "WiFi + BT (Dual Antenna)" },
+                          { label: "WiFi/BT", value: "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม" },
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -1912,7 +1912,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                         <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">Dimension</td></tr>
@@ -1923,7 +1923,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -2240,7 +2240,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                         <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">I/O Ports</td></tr>
@@ -2255,7 +2255,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -2269,12 +2269,12 @@ const GTSeries = () => {
                           { label: "Power", value: "DC 12V / 5A" },
                           { label: "Cooling", value: "Fanless Aluminum Heatsink" },
                           { label: "Temp", value: "0°C ~ 60°C" },
-                          { label: "WiFi", value: "WiFi + BT (Dual Antenna)" },
+                          { label: "WiFi/BT", value: "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม" },
                           { label: "Mounting", value: "VESA 100×100 / Wall Mount" },
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                         <tr className="bg-secondary/40"><td colSpan={2} className="p-3 font-bold text-foreground text-xs tracking-widest uppercase">Dimension</td></tr>
@@ -2285,7 +2285,7 @@ const GTSeries = () => {
                         ].map((s) => (
                           <tr key={s.label} className="hover:bg-secondary/30 transition-colors">
                             <td className="p-2.5 pl-3 font-semibold text-foreground w-[110px] text-xs">{s.label}</td>
-                            <td className="p-2.5 text-muted-foreground text-xs">{s.value}</td>
+                            <td className="p-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -2908,7 +2908,7 @@ const GTSeries = () => {
                       <tbody className="divide-y divide-border">
                         {[
                           ["LAN", "2 × Gigabit Ethernet RJ45"],
-                          ["WiFi", "Built-in WiFi / Bluetooth"],
+                          ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม"],
                           ["Audio", "MIC + SPK"],
                           ["Cooling", "Fanless — เงียบ 0 dB"],
                           ["Mounting", "VESA / Wall Mount"],
@@ -3238,7 +3238,7 @@ const GTSeries = () => {
                     {[
                       ["USB", "USB 3.0 + USB 2.0 (รวม 6 พอร์ต)"],
                       ["SIM", "Micro SIM 3G/4G Module"],
-                      ["WiFi", "Built-in WiFi / Bluetooth"],
+                      ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม"],
                       ["Cooling", "Fanless — เงียบ 0 dB ทน 70°C"],
                       ["Size / Weight", "230 × 175 × 50mm / 2.5kg"],
                       ["Mounting", "VESA / Wall Mount / Desktop"],
@@ -3524,7 +3524,7 @@ const GTSeries = () => {
                         {[
                           ["LAN", "2 × Gigabit Ethernet RJ45"],
                           ["SIM", "Micro SIM 4G (PUSH function)"],
-                          ["WiFi", "Built-in WiFi / Bluetooth"],
+                          ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม"],
                           ["Cooling", "Active Cooling (พัดลม) — TDP 15–25W"],
                           ["Mounting", "VESA / Wall Mount"],
                         ].map(([k, v], i) => (
@@ -3754,7 +3754,7 @@ const GTSeries = () => {
                     {[
                       ["USB", "USB 3.0 × 4 + USB 2.0 × 4 (รวม 8 พอร์ต)"],
                       ["LAN", "2× Intel i211 Gigabit RJ45"],
-                      ["WiFi", "Dual-Band WiFi (M.2 2230) + เสาอากาศภายนอก 2 ต้น"],
+                      ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม"],
                       ["4G/LTE", "Full-height Mini PCIe 4G Module + Micro SIM Slot"],
                       ["Audio", "MIC-IN + SPK-OUT (Line Out)"],
                       ["Power", "DC 19V Adapter"],
@@ -4538,7 +4538,7 @@ const GTSeries = () => {
                       ["COM", "2× RS232/RS422/RS485\n4× Expanded RS232"],
                       ["USB", "J4125/J6412: 4× USB 3.0 + 2× USB 2.0\nGen 8/10/11: 2× USB 3.0 + 4× USB 2.0"],
                       ["EXT IO", "4-way 3-wire COM + 10-way GPIO + Remote Switch"],
-                      ["WiFi / 5G", "M.2 2230 WiFi/BT + M.2 3042/3052 3G/4G/5G\n5× เสาอากาศภายนอก + SIM Slot"],
+                      ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม\nM.2 3042/3052 3G/4G/5G + SIM Slot"],
                       ["Power", "9V–36V DC (4-pin Phoenix Terminal)"],
                       ["Temp Range", "-20°C ~ +60°C (Operating)"],
                       ["Size / Weight", "300 × 155 × 50mm / 1.8kg"],
@@ -4868,7 +4868,7 @@ const GTSeries = () => {
                       ["COM", "6× DB9 COM\n(2× รองรับ RS232/RS422/RS485 ผ่าน BIOS)"],
                       ["USB", "4× USB 2.0 + 2× USB 3.0"],
                       ["GPIO", "1× GPIO (7 IN + 7 OUT)"],
-                      ["WiFi / 4G", "Mini PCIe WiFi/BT + Mini PCIe 3G/4G\n2× เสาอากาศภายนอก + SIM Slot"],
+                      ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม\nMini PCIe 3G/4G + SIM Slot"],
                       ["Power", "9V–36V DC (3-pin Phoenix Terminal)\n+ 2-pin Phoenix + ATX/AT Switch"],
                       ["Audio", "1× MIC + 1× SPK"],
                       ["Temp Range", "-20°C ~ +60°C (Operating)"],
@@ -5085,7 +5085,7 @@ const GTSeries = () => {
                       ["LAN", "2× Realtek RTL8111 Gigabit (10/100/1000Mbps)"],
                       ["COM", "2× DB9 RS232"],
                       ["USB", "4× USB 2.0 + 4× USB 3.0"],
-                      ["WiFi / 4G", "Mini PCIe WiFi/BT + Mini PCIe 3G/4G\n2× เสาอากาศภายนอก + SIM Slot"],
+                      ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม\nMini PCIe 3G/4G + SIM Slot"],
                       ["Audio", "1× MIC + 1× SPK"],
                       ["Power", "DC 12V–19V (แนะนำ 12V/5A)"],
                       ["Temp Range", "-20°C ~ +60°C (Operating)"],
