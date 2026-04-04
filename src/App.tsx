@@ -35,6 +35,7 @@ import Payment from "./pages/Payment.tsx";
 import Delivery from "./pages/Delivery.tsx";
 import Cabinets from "./pages/Cabinets.tsx";
 import IBoxSeries from "./pages/IBoxSeries.tsx";
+import IBoxProductDetail from "./pages/IBoxProductDetail.tsx";
 import WishlistPage from "./pages/WishlistPage.tsx";
 import ForgotPassword from "./pages/ForgotPassword.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
@@ -88,6 +89,7 @@ const App = () => (
               <Route path="/delivery" element={<Delivery />} />
               <Route path="/cabinets" element={<Cabinets />} />
               <Route path="/ibox-series" element={<IBoxSeries />} />
+              <Route path="/ibox-series/:productId" element={<IBoxProductDetail />} />
               <Route path="/wishlist" element={<WishlistPage />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
