@@ -5,6 +5,7 @@ import {
   Zap, Percent, Calendar, PartyPopper, Sparkles, Timer, FileDown
 } from "lucide-react";
 import promotionsHeroBg from "@/assets/promotions-hero-bg.jpg";
+import promoEmT195Hero from "@/assets/promo-em-t195-hero.jpg";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FooterCompact from "@/components/FooterCompact";
 import LineQRButton from "@/components/LineQRButton";
@@ -115,7 +116,7 @@ const promotions: Promo[] = [
     status: "active" as PromoStatus,
     period: "สินค้าใหม่ 2568",
     badge: "🆕 NEW",
-    image: "https://entgroup-rugged.com/assets/stylish-tough-BZcIMZYg.jpg",
+    image: promoEmT195Hero,
     highlights: [
       "จอ 10.1\" FHD สัมผัสได้แม้สวมถุงมือ",
       "บาง 10.5mm เบา 650g พกพาสะดวก",
