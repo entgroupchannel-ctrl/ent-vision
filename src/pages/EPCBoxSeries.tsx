@@ -730,20 +730,15 @@ const EPCBoxSeries = () => {
         </div>
       </section>
 
-      {/* Comparison Banner */}
-      <section className="section-padding bg-muted/30">
+      {/* Quick Compare System */}
+      <section className="section-padding bg-muted/30" id="comparison">
         <div className="container max-w-7xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-display font-bold">เปรียบเทียบ<span className="text-gradient">ขนาดซีรีส์</span></h2>
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Quick Compare</span>
+            <h2 className="text-2xl md:text-3xl font-display font-bold">เปรียบเทียบ<span className="text-gradient">ซีรีส์ทั้งหมด</span></h2>
+            <p className="text-muted-foreground mt-3">เลือกมุมมอง สเปก / ราคา / ความคุ้มค่า พร้อมระบบกรอง</p>
           </div>
-          <div className="card-surface overflow-hidden">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_a72276c74a174eeeb52e716ebb750fc7~mv2.png/v1/fill/w_1131,h_126,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-24%20at%2022_52_56.png"
-              alt="EPC Box Series Comparison"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
+          <EPCComparisonSystem onQuote={(name) => { setQuoteProduct(name); setQuoteOpen(true); }} />
         </div>
       </section>
 
