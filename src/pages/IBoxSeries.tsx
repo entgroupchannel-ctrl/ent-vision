@@ -26,6 +26,7 @@ import QuoteDialog from "@/components/QuoteDialog";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import IBoxProductCard from "@/components/ibox/IBoxProductCard";
 import IBoxProductFilter, { type IBoxFilterState, defaultFilters, portFilters } from "@/components/ibox/IBoxProductFilter";
+import ActiveFilterChips from "@/components/ibox/ActiveFilterChips";
 import { iboxProducts } from "@/data/ibox-products";
 import bannerIBox from "@/assets/banner-ibox-series.jpg";
 import usecaseAutomation from "@/assets/ibox-usecase-automation.jpg";
@@ -313,10 +314,35 @@ const IBoxSeries = () => {
             isMobileOpen={isMobileFilterOpen}
             onMobileClose={() => setIsMobileFilterOpen(false)}
             resultCount={filteredProducts.length}
+            allProducts={iboxProducts}
           />
 
           {/* Main Content */}
           <div className="flex-1 min-w-0 space-y-6">
+            {/* Quick Filters */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-xs text-muted-foreground shrink-0">⚡ Quick:</span>
+              {[
+                { label: "PoE", active: filters.poe === true, toggle: () => setFilters({ ...filters, poe: filters.poe === true ? null : true }) },
+                { label: "PCIe", active: filters.pcie === true, toggle: () => setFilters({ ...filters, pcie: filters.pcie === true ? null : true }) },
+                { label: "Fanless", active: filters.formFactor === "fanless", toggle: () => setFilters({ ...filters, formFactor: filters.formFactor === "fanless" ? "all" : "fanless" }) },
+                { label: "AI GPU", active: filters.category === "AI Edge Computing", toggle: () => setFilters({ ...filters, category: filters.category === "AI Edge Computing" ? "all" : "AI Edge Computing" }) },
+                { label: "High-perf", active: filters.performance === "high", toggle: () => setFilters({ ...filters, performance: filters.performance === "high" ? "all" : "high" }) },
+              ].map((qf) => (
+                <button
+                  key={qf.label}
+                  onClick={qf.toggle}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+                    qf.active
+                      ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                      : "bg-card border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                  }`}
+                >
+                  {qf.label}
+                </button>
+              ))}
+            </div>
+
             {/* Toolbar */}
             <div className="card-surface p-4">
               <div className="flex flex-col sm:flex-row gap-3">
@@ -352,6 +378,9 @@ const IBoxSeries = () => {
                 </div>
               </div>
             </div>
+
+            {/* Active Filter Chips */}
+            <ActiveFilterChips filters={filters} onFilterChange={setFilters} />
 
             {/* Product Grid */}
             {filteredProducts.length > 0 ? (
