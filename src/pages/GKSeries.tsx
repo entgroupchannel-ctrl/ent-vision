@@ -29,6 +29,7 @@ import gk2101front from "@/assets/gk-series/gk2101-front.png";
 import gk2101angle from "@/assets/gk-series/gk2101-angle.jpg";
 import gk2101back from "@/assets/gk-series/gk2101-back.jpg";
 import gk2101io from "@/assets/gk-series/gk2101-io.jpg";
+import gkHeroBanner from "@/assets/gk-series/gk-hero-banner.jpg";
 
 /* ─── Concept: "One Body, Multiple Brains" ─── */
 const concepts = [
@@ -915,52 +916,69 @@ const GKSeries = () => {
       </nav>
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background" />
+      <section className="relative overflow-hidden min-h-[500px] md:min-h-[600px]">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img
+            src={gkHeroBanner}
+            alt="GK Series Panel PC in harsh industrial environment"
+            className="w-full h-full object-cover"
+            width={1920}
+            height={800}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+        </div>
+
         <div className="relative container max-w-7xl mx-auto px-6 py-20 md:py-28">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-6">
-                Industrial Panel PC
-              </span>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black mb-6 tracking-tight">
-                GK <span className="text-gradient">Series</span>
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                คอมพิวเตอร์อุตสาหกรรมที่เลือก 'สมอง' ได้ตามใจคุณ
-              </p>
-              <p className="text-muted-foreground leading-relaxed mb-8">
-                Panel PC อุตสาหกรรม GK Series โดดเด่นด้านความยืดหยุ่นสูงที่สุด — สามารถเลือกขนาดหน้าจอและ CPU/OS ที่แตกต่างกันได้ในบอดี้ที่ทนทานเหมือนกัน ตั้งแต่ 10.4" ถึง 21" Full HD
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <a
-                  href="https://docs.wixstatic.com/ugd/0597a3_b7e91a40254040a3b28e20e2641312cd.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
-                >
-                  Product Overview <ExternalLink size={16} />
-                </a>
-                <a
-                  href="#comparison"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-semibold hover:bg-muted transition-colors"
-                >
-                  เปรียบเทียบรุ่น
-                </a>
-                <a
-                  href="#gk1004"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-semibold hover:bg-muted transition-colors"
-                >
-                  ดูสินค้าทั้งหมด <ChevronDown size={16} />
-                </a>
-              </div>
+          <div className="max-w-2xl">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 backdrop-blur-sm text-primary text-xs font-bold tracking-widest uppercase mb-6 border border-primary/20">
+              Industrial Panel PC
+            </span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-black mb-6 tracking-tight text-foreground">
+              คอมพิวเตอร์อุตสาหกรรม<br />
+              ที่เลือก <span className="text-gradient">'สมอง'</span> ได้ตามใจคุณ
+            </h1>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
+              Panel PC อุตสาหกรรม GK Series โดดเด่นด้านความยืดหยุ่นสูงที่สุด — สามารถเลือกขนาดหน้าจอและ CPU/OS ที่แตกต่างกันได้ในบอดี้ที่ทนทานเหมือนกัน ตั้งแต่ 10.4" ถึง 21" Full HD
+            </p>
+
+            {/* Quick Stats */}
+            <div className="flex flex-wrap gap-6 mb-8">
+              {[
+                { value: "IP65", label: "กันฝุ่น กันน้ำ" },
+                { value: "24/7", label: "ทำงานต่อเนื่อง" },
+                { value: "-10~60°C", label: "ทนอุณหภูมิสุดขีด" },
+                { value: "10.4\"–21\"", label: "เลือกขนาดได้" },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <p className="text-2xl font-black text-primary">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground">{stat.label}</p>
+                </div>
+              ))}
             </div>
-            <div className="card-surface p-4 overflow-hidden">
-              <img
-                src="https://static.wixstatic.com/media/3e5003_dc1a50e64b414a36a9c92b209078e0df~mv2.jpg/v1/crop/x_0,y_5,w_2007,h_596/fill/w_1134,h_336,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1.jpg"
-                alt="GK Series Industrial Panel PC"
-                className="w-full h-auto rounded-lg"
-              />
+
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="https://docs.wixstatic.com/ugd/0597a3_b7e91a40254040a3b28e20e2641312cd.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+              >
+                Product Overview <ExternalLink size={16} />
+              </a>
+              <a
+                href="#comparison"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-background/60 backdrop-blur-sm border border-border text-foreground font-semibold hover:bg-muted transition-colors"
+              >
+                เปรียบเทียบรุ่น
+              </a>
+              <a
+                href="#gk1004"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-background/60 backdrop-blur-sm border border-border text-foreground font-semibold hover:bg-muted transition-colors"
+              >
+                ดูสินค้าทั้งหมด <ChevronDown size={16} />
+              </a>
             </div>
           </div>
         </div>
