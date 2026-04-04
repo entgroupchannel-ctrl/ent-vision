@@ -378,67 +378,90 @@ const ITEMS_PER_PAGE = 10;
 
 /* ───── Product Card ───── */
 const ProductCard = ({ product, onQuote, selected, onToggleSelect }: { 
-  product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string }; 
+  product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string; internalUrl?: string }; 
   onQuote?: (name: string) => void;
   selected?: boolean;
   onToggleSelect?: (name: string) => void;
-}) => (
-  <div className={`card-surface overflow-hidden group transition-all ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
-    {product.image && (
-      <div className="relative bg-secondary/30 p-4 flex items-center justify-center h-48">
-        <WishlistHeart
-          item={{ id: product.name.toLowerCase().replace(/\s+/g, "-"), name: product.name, category: "Rugged Tablet", image: product.image, href: "/rugged-tablet", specs: product.highlight }}
-          className="absolute top-3 right-3"
-        />
-        {onToggleSelect && (
-          <button
-            onClick={() => onToggleSelect(product.name)}
-            className="absolute top-3 left-3 z-10"
-          >
+}) => {
+  const cardContent = (
+    <>
+      {product.image && (
+        <div className="relative bg-secondary/30 p-4 flex items-center justify-center h-48">
+          <WishlistHeart
+            item={{ id: product.name.toLowerCase().replace(/\s+/g, "-"), name: product.name, category: "Rugged Tablet", image: product.image, href: product.internalUrl || "/rugged-tablet", specs: product.highlight }}
+            className="absolute top-3 right-3"
+          />
+          {onToggleSelect && (
+            <button
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleSelect(product.name); }}
+              className="absolute top-3 left-3 z-10"
+            >
+              <Checkbox checked={selected} className="h-5 w-5" />
+            </button>
+          )}
+          <img src={product.image} alt={product.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+        </div>
+      )}
+      {!product.image && onToggleSelect && (
+        <div className="flex justify-end p-3 pb-0">
+          <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleSelect(product.name); }}>
             <Checkbox checked={selected} className="h-5 w-5" />
           </button>
-        )}
-        <img src={product.image} alt={product.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-      </div>
-    )}
-    {!product.image && onToggleSelect && (
-      <div className="flex justify-end p-3 pb-0">
-        <button onClick={() => onToggleSelect(product.name)}>
-          <Checkbox checked={selected} className="h-5 w-5" />
-        </button>
-      </div>
-    )}
-    <div className="p-5 space-y-3">
-      <div className="flex items-center justify-between gap-2">
-        <h3 className="font-display font-bold text-foreground text-sm">{product.name}</h3>
-        {product.size && <Badge variant="secondary" className="text-xs shrink-0">{product.size}</Badge>}
-      </div>
-      <p className="text-xs text-muted-foreground leading-relaxed">{product.highlight}</p>
-      {product.price && (
-        <p className="text-sm font-bold text-primary">{product.price}</p>
+        </div>
       )}
-      <div className="flex flex-wrap gap-2">
-        {product.productUrl && (
-          <Button variant="outline" size="sm" asChild className="flex-1">
-            <a href={product.productUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
-            </a>
-          </Button>
+      <div className="p-5 space-y-3">
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="font-display font-bold text-foreground text-sm">{product.name}</h3>
+          {product.size && <Badge variant="secondary" className="text-xs shrink-0">{product.size}</Badge>}
+        </div>
+        <p className="text-xs text-muted-foreground leading-relaxed">{product.highlight}</p>
+        {product.price && (
+          <p className="text-sm font-bold text-primary">{product.price}</p>
         )}
-        {product.datasheet && (
-          <Button variant="outline" size="sm" asChild className="flex-1">
-            <a href={product.datasheet} target="_blank" rel="noopener noreferrer">
-              <Download className="w-3.5 h-3.5 mr-1.5" /> Datasheet
-            </a>
+        <div className="flex flex-wrap gap-2">
+          {product.internalUrl && (
+            <Button variant="outline" size="sm" asChild className="flex-1">
+              <Link to={product.internalUrl}>
+                <Monitor className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
+              </Link>
+            </Button>
+          )}
+          {!product.internalUrl && product.productUrl && (
+            <Button variant="outline" size="sm" asChild className="flex-1">
+              <a href={product.productUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
+              </a>
+            </Button>
+          )}
+          {product.datasheet && (
+            <Button variant="outline" size="sm" asChild className="flex-1">
+              <a href={product.datasheet} target="_blank" rel="noopener noreferrer">
+                <Download className="w-3.5 h-3.5 mr-1.5" /> Datasheet
+              </a>
+            </Button>
+          )}
+          <Button size="sm" className="flex-1" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onQuote?.(product.name); }}>
+            <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอราคา
           </Button>
-        )}
-        <Button size="sm" className="flex-1" onClick={() => onQuote?.(product.name)}>
-          <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอราคา
-        </Button>
+        </div>
       </div>
+    </>
+  );
+
+  if (product.internalUrl) {
+    return (
+      <Link to={product.internalUrl} className={`card-surface overflow-hidden group transition-all block ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return (
+    <div className={`card-surface overflow-hidden group transition-all ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
+      {cardContent}
     </div>
-  </div>
-);
+  );
+};
 
 /* ───── Main Component ───── */
 const RuggedTablet = () => {
