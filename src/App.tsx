@@ -98,7 +98,7 @@ const App = () => (
               <Route path="/ibox-series" element={<IBoxSeries />} />
               <Route path="/ibox-series/:id" element={<IBoxDetail />} />
               <Route path="/handheld/:id" element={<RuggedHandheldDetail />} />
-              <Route path="/rugged-tablet/:id" element={<RuggedHandheldDetail />} />
+              <Route path="/rugged-tablet/:id" element={<RuggedTabletDetail />} />
               <Route path="/wishlist" element={<WishlistPage />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
