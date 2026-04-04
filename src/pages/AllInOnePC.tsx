@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Monitor, Cpu, Box, Layers, FileText, ExternalLink, ChevronRight } from "lucide-react";
+import { ArrowLeft, Monitor, Cpu, Box, Layers, FileText, ChevronRight } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
