@@ -16,6 +16,7 @@ import badgeCertification from "@/assets/epc-badge-certification.png";
 import { Badge } from "@/components/ui/badge";
 import epcLegoBanner from "@/assets/epc-lego-banner.png";
 import epcHeroFactory from "@/assets/epc-hero-factory.jpg";
+import epcHeroPanelPC from "@/assets/epc-hero-panel-pc.jpg";
 import epcUsecaseFactory from "@/assets/epc-usecase-factory.jpg";
 import epcUsecaseColdStorage from "@/assets/epc-usecase-coldstorage.jpg";
 import epcUsecaseConstruction from "@/assets/epc-usecase-construction.jpg";
