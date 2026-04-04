@@ -87,7 +87,6 @@ export interface IBoxProduct {
   };
   features: string[];
   applications: string[];
-  datasheet: string;
   priceRange?: string;
   isNew?: boolean;
   isHot?: boolean;
@@ -130,7 +129,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Fanless Rugged Aluminum Chassis",
     ],
     applications: ["AI Inference", "Deep Learning", "Edge AI", "Machine Vision", "Autonomous Systems"],
-    datasheet: "/datasheets/IBOX-601-GT-PRO.pdf",
     isHot: true,
     isNew: true,
   },
@@ -170,7 +168,6 @@ export const iboxProducts: IBoxProduct[] = [
       "8-bit GPIO + Dual SIM สำหรับ 4G/5G",
     ],
     applications: ["AI Training", "Deep Learning", "3D Rendering", "Edge AI", "Computer Vision"],
-    datasheet: "/datasheets/IBOX-602-GT-PRO.pdf",
     isHot: true,
     isNew: true,
   },
@@ -206,7 +203,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Triple Display Support",
     ],
     applications: ["Multi-camera Inspection", "AI Inference", "Smart Manufacturing", "Deep Learning"],
-    datasheet: "/datasheets/IBOX-601-GT-2P.pdf",
     isNew: true,
   },
   {
@@ -242,7 +238,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Hybrid Active + Passive Cooling",
     ],
     applications: ["AI Vision", "Deep Learning", "Machine Vision", "Video Analytics", "Edge Computing"],
-    datasheet: "/datasheets/IBOX-602-GT-2P.pdf",
     isNew: true,
   },
 
@@ -282,7 +277,6 @@ export const iboxProducts: IBoxProduct[] = [
       "16-bit GPIO + Mini-PCIe สำหรับ WiFi/4G",
     ],
     applications: ["AI Inference", "Edge Computing", "Machine Vision", "Industrial Server", "Intelligent Control"],
-    datasheet: "/datasheets/IBOX-007.pdf",
     isHot: true,
   },
   {
@@ -316,7 +310,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Full Aluminum Anti-EMI",
     ],
     applications: ["Factory Automation", "Edge Control", "PLC Replacement", "SCADA"],
-    datasheet: "/datasheets/IBOX-103-2L2C.pdf",
     isNew: true,
   },
   {
@@ -350,7 +343,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Low Power Consumption",
     ],
     applications: ["Industrial Control", "Automation", "Kiosk", "Digital Signage"],
-    datasheet: "/datasheets/IBOX-103-2L2C-J4125.pdf",
     isNew: true,
   },
   {
@@ -384,7 +376,6 @@ export const iboxProducts: IBoxProduct[] = [
       "3x COM (2x DB9 + Terminal)",
     ],
     applications: ["Distributed Control", "Factory Automation", "Industrial Gateway", "PLC Replacement"],
-    datasheet: "/datasheets/IBOX-103-2L3C.pdf",
     isNew: true,
   },
   {
@@ -418,7 +409,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Wide Voltage 12-28V DC",
     ],
     applications: ["Factory Automation", "Industrial Gateway", "SCADA"],
-    datasheet: "/datasheets/IBOX-603-2L4C-1P.pdf",
     isNew: true,
   },
   {
@@ -452,7 +442,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Support WiFi/4G/5G",
     ],
     applications: ["Edge Gateway", "Industrial HMI", "Intelligent Control", "Automation"],
-    datasheet: "/datasheets/IBOX-205SBC-12TH.pdf",
     isNew: true,
   },
 
@@ -488,7 +477,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Compact 141x62x127.5mm",
     ],
     applications: ["Industrial Gateway", "Network Edge", "IoT Gateway", "Firewall"],
-    datasheet: "/datasheets/IBOX-103-4L2C-J4125.pdf",
     isNew: true,
   },
   {
@@ -521,7 +509,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Linux/Android Support",
     ],
     applications: ["IoT Gateway", "Building Automation", "Energy Management"],
-    datasheet: "/datasheets/ATLAS-DR-ARM.pdf",
   },
 
   // ═══════ PoE & Multi-LAN ═══════
@@ -556,7 +543,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Wide 9-36V DC with Surge Protection",
     ],
     applications: ["Network Automation", "Edge Computing", "Surveillance"],
-    datasheet: "/datasheets/IBOX-604-5L2C2P.pdf",
   },
   {
     id: "IBOX-601-9L2C4P",
@@ -589,7 +575,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Wide 9-36V DC Input",
     ],
     applications: ["Automation Control", "Surveillance", "Industrial Networking", "Edge Computing"],
-    datasheet: "/datasheets/IBOX-601-9L2C4P.pdf",
     isNew: true,
   },
   {
@@ -623,7 +608,6 @@ export const iboxProducts: IBoxProduct[] = [
       "8-bit GPIO",
     ],
     applications: ["Edge Networking", "Machine Vision", "Industrial Gateway", "Surveillance"],
-    datasheet: "/datasheets/IBOX-205-4L2C2P.pdf",
     isNew: true,
   },
 
@@ -659,7 +643,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Triple Display Support",
     ],
     applications: ["Fleet Management", "Mobile Surveillance", "Intelligent Transportation"],
-    datasheet: "/datasheets/VBOX-105-2L6C.pdf",
     isNew: true,
   },
 
@@ -698,7 +681,6 @@ export const iboxProducts: IBoxProduct[] = [
       "HDMI 4K + DP 4K Display Output",
     ],
     applications: ["Machine Vision", "AOI Inspection", "Robotics Vision", "Industrial Automation", "Quality Control"],
-    datasheet: "/datasheets/AEOLUS-TL9-6L2C4P.pdf",
     isHot: true,
     isNew: true,
   },
@@ -735,7 +717,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Fan-assisted Copper Heat Pipe Cooling",
     ],
     applications: ["Industrial Gateway", "Edge Computing", "Network Appliance", "Automation Control", "Transportation"],
-    datasheet: "/datasheets/AEOLUS-SV9-6L2C-1P.pdf",
     isHot: true,
     isNew: true,
   },
@@ -771,7 +752,6 @@ export const iboxProducts: IBoxProduct[] = [
       "TPM 2.0 Support",
     ],
     applications: ["Machine Vision", "AI Edge Computing", "AOI Inspection"],
-    datasheet: "/datasheets/AEOLUS-SV9-6L2C.pdf",
     isNew: true,
   },
   {
@@ -808,7 +788,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Fanless Enclosed Design",
     ],
     applications: ["IoT Gateway", "Industrial Automation", "Building Automation", "Energy Monitoring", "Transportation"],
-    datasheet: "/datasheets/AEOLUS-SVA35-2L10C.pdf",
     isHot: true,
     isNew: true,
   },
@@ -844,7 +823,6 @@ export const iboxProducts: IBoxProduct[] = [
       "Mini-PCIe + Nano SIM",
     ],
     applications: ["Network Appliance", "Edge Gateway", "Industrial IoT"],
-    datasheet: "/datasheets/KRONOS-SV6-4L8C.pdf",
   },
   {
     id: "APOLLO-SV12-8P",
@@ -876,7 +854,6 @@ export const iboxProducts: IBoxProduct[] = [
       "MXM GPU Option",
     ],
     applications: ["AOI", "Machine Vision", "Deep Learning"],
-    datasheet: "/datasheets/APOLLO-SV12-8P.pdf",
     isNew: true,
   },
 ];
