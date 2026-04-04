@@ -23,6 +23,10 @@ import gk1501front from "@/assets/gk-series/gk1501-front.png";
 import gk1501back from "@/assets/gk-series/gk1501-back.jpg";
 import gk1501io1 from "@/assets/gk-series/gk1501-io1.jpg";
 import gk1501io2 from "@/assets/gk-series/gk1501-io2.jpg";
+import gk2101front from "@/assets/gk-series/gk2101-front.png";
+import gk2101angle from "@/assets/gk-series/gk2101-angle.jpg";
+import gk2101back from "@/assets/gk-series/gk2101-back.jpg";
+import gk2101io from "@/assets/gk-series/gk2101-io.jpg";
 
 /* ─── Concept: "One Body, Multiple Brains" ─── */
 const concepts = [
@@ -430,7 +434,7 @@ const gkModels: GKModel[] = [
     resolution: "1920×1080 Full HD",
     tagline: "Flagship — จอใหญ่ Full HD",
     desc: "Panel PC อุตสาหกรรม 21 นิ้ว Full HD จอสัมผัส Capacitive 10 จุด IP65 กันฝุ่นกันน้ำ โครงสร้างอะลูมิเนียมอัลลอยด์+เหล็กกล้า รองรับ 24/7 ทนอุณหภูมิ -10°C ถึง 60°C — เหมาะกับ Control Room, Dashboard และระบบอัตโนมัติ",
-    image: "https://static.wixstatic.com/media/0597a3_1edf4296661742bab6366020a3910ac7~mv2.png/v1/fill/w_543,h_452,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK2101-008.png",
+    image: gk2101front,
     datasheetUrls: [
       { label: "GK2101 Core i5 Gen4 (PDF)", url: "/datasheets/GK2101_i5_Gen4.pdf" },
       { label: "GK2101 Core i5 Gen6 (PDF)", url: "/datasheets/GK2101_i5_Gen6.pdf" },
@@ -535,9 +539,10 @@ const gkModels: GKModel[] = [
     ],
     applications: ["Real-time Dashboard", "ระบบอัตโนมัติและควบคุม", "Control Room", "วิเคราะห์ข้อมูลขั้นสูง", "Digital Signage", "SCADA"],
     gallery: [
-      "https://static.wixstatic.com/media/0597a3_a5ca89bcac5f44579e8c6cd8fad31808~mv2.png/v1/fill/w_600,h_561,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK2101-001.png",
-      "https://static.wixstatic.com/media/0597a3_93758bd8180f4db2b702f56db6241a3a~mv2.png/v1/fill/w_625,h_426,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK2101-002.png",
-      "https://static.wixstatic.com/media/0597a3_3ca0c2e94496439097bfdfdfdf11fc1c~mv2.png/v1/fill/w_633,h_461,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK2101-003.png",
+      gk2101front,
+      gk2101angle,
+      gk2101back,
+      gk2101io,
     ],
   },
 ];
