@@ -1,4 +1,5 @@
 // AI Edge Computing / GPU Products
+// Embedded Box PC Products
 import ibox601GtProMain from "@/assets/products/ibox-601-gt-pro-main.png";
 import ibox601GtProAngle2 from "@/assets/products/ibox-601-gt-pro-angle2.png";
 import ibox601GtProAngle3 from "@/assets/products/ibox-601-gt-pro-angle3.png";
