@@ -709,8 +709,8 @@ const EPCSeries = () => {
 
         {/* Downloads */}
         <section id="downloads">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">Downloads</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <h2 className="text-lg font-display font-bold text-foreground mb-3 text-center">📥 Downloads</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {[
               { name: "CESIPC & ENTGROUP E-Catalog", url: "https://docs.wixstatic.com/ugd/0597a3_9dad5caa6c4d4410a723cab33c3177bf.pdf" },
               ...squareModels.map((m) => ({ name: m.name, url: m.datasheet })),
@@ -718,12 +718,10 @@ const EPCSeries = () => {
               ...wideModels.map((m) => ({ name: m.name, url: m.datasheet })),
               { name: "EPC-W12X2A", url: "https://docs.wixstatic.com/ugd/0597a3_06738f7618f84058a4f0c1d3cc9d8a95.pdf" },
             ].map((dl, i) => (
-              <a key={i} href={dl.url} target="_blank" rel="noopener noreferrer" className="card-surface p-4 flex items-center gap-3 hover:border-primary/30 transition-all group">
-                <Download className="w-5 h-5 text-primary shrink-0" />
-                <div>
-                  <p className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{dl.name}</p>
-                  <p className="text-xs text-muted-foreground">PDF Datasheet</p>
-                </div>
+              <a key={i} href={dl.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border hover:border-primary/30 hover:bg-primary/5 transition-all group">
+                <Download className="w-4 h-4 text-primary shrink-0" />
+                <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate">{dl.name}</span>
+                <span className="text-[10px] text-muted-foreground ml-auto shrink-0">PDF</span>
               </a>
             ))}
           </div>
