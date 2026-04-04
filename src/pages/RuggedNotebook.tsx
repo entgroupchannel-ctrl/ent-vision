@@ -278,6 +278,8 @@ const RuggedNotebookPage = () => {
             )}
 
             <PriceDisclaimer />
+          </div>
+        </div>
       </div>
 
       {/* ─── YouTube & Facebook Media Center ─── */}
