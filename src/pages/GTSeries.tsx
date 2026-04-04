@@ -3747,8 +3747,7 @@ const GTSeries = () => {
                       </CollapsibleTrigger>
                       <CollapsibleContent>
                         {(() => {
-                          const [page, setPage] = React.useState(0);
-                          const start = page * perPage;
+                          const start = gt9000PricePage * perPage;
                           const paged = gt9000Prices.slice(start, start + perPage);
                           return (
                             <>
@@ -3776,11 +3775,11 @@ const GTSeries = () => {
                               </div>
                               {totalPages > 1 && (
                                 <div className="flex items-center justify-center gap-2 p-4 border-t border-border">
-                                  <button onClick={() => setPage(Math.max(0, page - 1))} disabled={page === 0} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ก่อนหน้า</button>
+                                  <button onClick={() => setGt9000PricePage(Math.max(0, gt9000PricePage - 1))} disabled={gt9000PricePage === 0} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ก่อนหน้า</button>
                                   {Array.from({ length: totalPages }, (_, idx) => (
-                                    <button key={idx} onClick={() => setPage(idx)} className={`w-8 h-8 rounded-lg text-xs font-bold transition-colors ${idx === page ? "bg-primary text-primary-foreground" : "hover:bg-secondary/50 text-muted-foreground"}`}>{idx + 1}</button>
+                                    <button key={idx} onClick={() => setGt9000PricePage(idx)} className={`w-8 h-8 rounded-lg text-xs font-bold transition-colors ${idx === gt9000PricePage ? "bg-primary text-primary-foreground" : "hover:bg-secondary/50 text-muted-foreground"}`}>{idx + 1}</button>
                                   ))}
-                                  <button onClick={() => setPage(Math.min(totalPages - 1, page + 1))} disabled={page === totalPages - 1} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ถัดไป</button>
+                                  <button onClick={() => setGt9000PricePage(Math.min(totalPages - 1, gt9000PricePage + 1))} disabled={gt9000PricePage === totalPages - 1} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ถัดไป</button>
                                 </div>
                               )}
                             </>
