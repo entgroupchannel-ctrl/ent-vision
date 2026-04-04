@@ -306,49 +306,49 @@ const handheldProducts = [
     id: "w65g", name: "W65G Windows Handheld", size: '6.5"',
     highlight: "Intel N4020, จอ IPS Gorilla Glass, 2D Scanner, IP67 MIL-STD-810H",
     image: "https://entgroup-rugged.com/assets/w65g-N3AQKXJb.png", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/w65g",
+    internalUrl: "/rugged-tablet/w65g",
   },
   {
     id: "a55gt", name: "A55GT 5G Handheld", size: '6.5"',
     highlight: "Octa-Core, 8GB/128GB, 5G Full Network, 2D Scanner, IP68 กันน้ำ",
     image: "https://entgroup-rugged.com/assets/a55gt-8EiW4LT7.jpg", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/a55gt",
+    internalUrl: "/rugged-tablet/a55gt",
   },
   {
     id: "p40at", name: "P40AT PDA Scanner", size: '4"',
     highlight: "Quad/Octa-Core, 2D Barcode Scanner อ่านโค้ดสกปรกได้, IP65",
     image: "https://entgroup-rugged.com/assets/p40at-AM0dpnMQ.jpg", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/p40at",
+    internalUrl: "/rugged-tablet/p40at",
   },
   {
     id: "a60t", name: "A60T Data Terminal", size: '6"',
     highlight: "Octa-Core, 4GB/64GB, 2D Scanner, จอ HD IPS 6 นิ้ว สแกนเร็ว",
     image: "https://entgroup-rugged.com/assets/a60t-Mi_-RVw_.jpg", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/a60t",
+    internalUrl: "/rugged-tablet/a60t",
   },
   {
     id: "p72t", name: "P72T Mobile Terminal", size: '7"',
     highlight: "MTK6765 Octa-Core, 4GB/64GB, 2D + UHF RFID, จอ HD IPS 7 นิ้ว แบตอึด",
     image: "https://entgroup-rugged.com/assets/p72t-BIVD8IBh.png", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/p72t",
+    internalUrl: "/rugged-tablet/p72t",
   },
   {
     id: "em-t2-ultra", name: "EM-T2 Ultra Outdoor Tablet", size: '10.95"',
     highlight: "MediaTek Dimensity 7300, 12GB/256GB, จอ 2K 1200x1920, Android 15",
     image: "https://entgroup-rugged.com/assets/em-t2-ultra-Bl924cVb.jpg", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/em-t2-ultra",
+    internalUrl: "/rugged-tablet/em-t2-ultra",
   },
   {
     id: "em-p2-pro", name: "EM-P2 Pro 5G Phone", size: '6.78"',
     highlight: "Dimensity 6300 5G, 12GB/256GB, จอ 2K 120Hz, Android 14",
     image: "https://entgroup-rugged.com/assets/main-VATZJz47.png", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/em-p2-pro",
+    internalUrl: "/rugged-tablet/em-p2-pro",
   },
   {
     id: "em-p1", name: "EM-P1 Rugged Phone", size: '6.56"',
     highlight: "MediaTek Helio G99, 12GB/256GB, Android 14 กันน้ำกันกระแทก",
     image: "https://entgroup-rugged.com/assets/em-p1-KJ_Z-unN.png", datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/em-p1",
+    internalUrl: "/rugged-tablet/em-p1",
   },
 ];
 
@@ -378,67 +378,90 @@ const ITEMS_PER_PAGE = 10;
 
 /* ───── Product Card ───── */
 const ProductCard = ({ product, onQuote, selected, onToggleSelect }: { 
-  product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string }; 
+  product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string; internalUrl?: string }; 
   onQuote?: (name: string) => void;
   selected?: boolean;
   onToggleSelect?: (name: string) => void;
-}) => (
-  <div className={`card-surface overflow-hidden group transition-all ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
-    {product.image && (
-      <div className="relative bg-secondary/30 p-4 flex items-center justify-center h-48">
-        <WishlistHeart
-          item={{ id: product.name.toLowerCase().replace(/\s+/g, "-"), name: product.name, category: "Rugged Tablet", image: product.image, href: "/rugged-tablet", specs: product.highlight }}
-          className="absolute top-3 right-3"
-        />
-        {onToggleSelect && (
-          <button
-            onClick={() => onToggleSelect(product.name)}
-            className="absolute top-3 left-3 z-10"
-          >
+}) => {
+  const cardContent = (
+    <>
+      {product.image && (
+        <div className="relative bg-secondary/30 p-4 flex items-center justify-center h-48">
+          <WishlistHeart
+            item={{ id: product.name.toLowerCase().replace(/\s+/g, "-"), name: product.name, category: "Rugged Tablet", image: product.image, href: product.internalUrl || "/rugged-tablet", specs: product.highlight }}
+            className="absolute top-3 right-3"
+          />
+          {onToggleSelect && (
+            <button
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleSelect(product.name); }}
+              className="absolute top-3 left-3 z-10"
+            >
+              <Checkbox checked={selected} className="h-5 w-5" />
+            </button>
+          )}
+          <img src={product.image} alt={product.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+        </div>
+      )}
+      {!product.image && onToggleSelect && (
+        <div className="flex justify-end p-3 pb-0">
+          <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleSelect(product.name); }}>
             <Checkbox checked={selected} className="h-5 w-5" />
           </button>
-        )}
-        <img src={product.image} alt={product.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-      </div>
-    )}
-    {!product.image && onToggleSelect && (
-      <div className="flex justify-end p-3 pb-0">
-        <button onClick={() => onToggleSelect(product.name)}>
-          <Checkbox checked={selected} className="h-5 w-5" />
-        </button>
-      </div>
-    )}
-    <div className="p-5 space-y-3">
-      <div className="flex items-center justify-between gap-2">
-        <h3 className="font-display font-bold text-foreground text-sm">{product.name}</h3>
-        {product.size && <Badge variant="secondary" className="text-xs shrink-0">{product.size}</Badge>}
-      </div>
-      <p className="text-xs text-muted-foreground leading-relaxed">{product.highlight}</p>
-      {product.price && (
-        <p className="text-sm font-bold text-primary">{product.price}</p>
+        </div>
       )}
-      <div className="flex flex-wrap gap-2">
-        {product.productUrl && (
-          <Button variant="outline" size="sm" asChild className="flex-1">
-            <a href={product.productUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
-            </a>
-          </Button>
+      <div className="p-5 space-y-3">
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="font-display font-bold text-foreground text-sm">{product.name}</h3>
+          {product.size && <Badge variant="secondary" className="text-xs shrink-0">{product.size}</Badge>}
+        </div>
+        <p className="text-xs text-muted-foreground leading-relaxed">{product.highlight}</p>
+        {product.price && (
+          <p className="text-sm font-bold text-primary">{product.price}</p>
         )}
-        {product.datasheet && (
-          <Button variant="outline" size="sm" asChild className="flex-1">
-            <a href={product.datasheet} target="_blank" rel="noopener noreferrer">
-              <Download className="w-3.5 h-3.5 mr-1.5" /> Datasheet
-            </a>
+        <div className="flex flex-wrap gap-2">
+          {product.internalUrl && (
+            <Button variant="outline" size="sm" asChild className="flex-1">
+              <Link to={product.internalUrl}>
+                <Monitor className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
+              </Link>
+            </Button>
+          )}
+          {!product.internalUrl && product.productUrl && (
+            <Button variant="outline" size="sm" asChild className="flex-1">
+              <a href={product.productUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
+              </a>
+            </Button>
+          )}
+          {product.datasheet && (
+            <Button variant="outline" size="sm" asChild className="flex-1">
+              <a href={product.datasheet} target="_blank" rel="noopener noreferrer">
+                <Download className="w-3.5 h-3.5 mr-1.5" /> Datasheet
+              </a>
+            </Button>
+          )}
+          <Button size="sm" className="flex-1" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onQuote?.(product.name); }}>
+            <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอราคา
           </Button>
-        )}
-        <Button size="sm" className="flex-1" onClick={() => onQuote?.(product.name)}>
-          <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอราคา
-        </Button>
+        </div>
       </div>
+    </>
+  );
+
+  if (product.internalUrl) {
+    return (
+      <Link to={product.internalUrl} className={`card-surface overflow-hidden group transition-all block ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return (
+    <div className={`card-surface overflow-hidden group transition-all ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
+      {cardContent}
     </div>
-  </div>
-);
+  );
+};
 
 /* ───── Main Component ───── */
 const RuggedTablet = () => {
