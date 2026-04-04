@@ -8,8 +8,7 @@ import QuoteDialog from "@/components/QuoteDialog";
 import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, Sun, Shield, Monitor, Cpu, Phone, MessageCircle,
-  Download, Smartphone, Settings, Wifi, Eye, Layers, Store, BadgePercent, Printer, ScanLine, FileText,
-  Ruler, Fingerprint, ShieldCheck, RectangleHorizontal, SunDim, Clock
+  Download, Smartphone, Settings, Wifi, Eye, Layers, Store, BadgePercent, Printer, ScanLine, FileText
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo-entgroup.avif";
@@ -107,15 +106,14 @@ const fpmTouchMonitors = [
 ];
 
 const fpmDatasheets = [
-  { model: "FPM-0801A", href: "/datasheets/FPM-0801A.pdf" },
-  { model: "FPM-100XA", href: "/datasheets/FPM-100XA.pdf" },
-  { model: "FPM-150XA", href: "/datasheets/FPM-150XA.pdf" },
-  { model: "FPM-1202A", href: "/datasheets/FPM-1202A.pdf" },
-  { model: "FPM-1702A", href: "/datasheets/FPM-1702A.pdf" },
-  { model: "FPM-1902A", href: "/datasheets/FPM-1902A.pdf" },
-  { model: "FPM-2102K", href: "/datasheets/FPM-2102K.pdf" },
-  { model: "FPM-2402KA", href: "/datasheets/FPM-2402KA.pdf" },
-  { model: "FPM17 Special Edition", href: "/datasheets/FPM17-Special-Edition.pdf" },
+  { model: "FPM-0801A", href: "https://docs.wixstatic.com/ugd/005637_5e44d2b9d7cc48fa9c409252e62d861d.pdf" },
+  { model: "FPM-100XA", href: "https://docs.wixstatic.com/ugd/005637_5d760f5082bb435aaa29a55ab6298a02.pdf" },
+  { model: "FPM-150XA", href: "https://docs.wixstatic.com/ugd/005637_69e01e1d7ddb4da6a215f9b617bf7bd4.pdf" },
+  { model: "FPM-1202A", href: "https://docs.wixstatic.com/ugd/005637_a3754cf13eaa40b09346e93fdb46c16a.pdf" },
+  { model: "FPM-1702A", href: "https://docs.wixstatic.com/ugd/005637_8753cbe1d9c5428b8b55f81c9b98ee3a.pdf" },
+  { model: "FPM-1902A", href: "https://docs.wixstatic.com/ugd/005637_2e25c9d6f2974be5bcfbcf356f82f568.pdf" },
+  { model: "FPM-2102K", href: "https://docs.wixstatic.com/ugd/005637_ccc895a9d8314d8396843387d8120e18.pdf" },
+  { model: "FPM-2402KA", href: "https://docs.wixstatic.com/ugd/005637_21234f29c0c045f380e17e101ce14e17.pdf" },
 ];
 
 const outdoorFeatures = [
@@ -302,20 +300,13 @@ const SmartDisplay = () => {
                 <p className="text-muted-foreground max-w-3xl mb-3">
                   จอภาพสัมผัสเกรดอุตสาหกรรม IP65 สำหรับงาน HMI, CNC, Factory Automation, ระบบทหาร และ Big Data — เชื่อมต่อ USB + HDMI กับคอมพิวเตอร์ที่มีอยู่ เปลี่ยนเป็นระบบสัมผัสได้ทันที
                 </p>
-                <div className="flex flex-wrap gap-x-5 gap-y-2 mb-8 text-sm text-muted-foreground">
-                  {[
-                    { icon: Ruler, text: 'ขนาด 8"–24"' },
-                    { icon: Fingerprint, text: "Capacitive / Resistive Touch" },
-                    { icon: ShieldCheck, text: "IP65 Front Panel" },
-                    { icon: RectangleHorizontal, text: "Wide & Square Screen" },
-                    { icon: SunDim, text: "สูงสุด 1000 Nits" },
-                    { icon: Clock, text: "ทำงาน 24/7" },
-                  ].map((f) => (
-                    <span key={f.text} className="inline-flex items-center gap-1.5">
-                      <f.icon size={16} className="text-primary shrink-0" />
-                      {f.text}
-                    </span>
-                  ))}
+                <div className="flex flex-wrap gap-4 mb-8 text-sm text-muted-foreground">
+                  <span>✅ ขนาด 8"–24"</span>
+                  <span>✅ Capacitive / Resistive Touch</span>
+                  <span>✅ IP65 Front Panel</span>
+                  <span>✅ Wide & Square Screen</span>
+                  <span>✅ สูงสุด 1000 Nits</span>
+                  <span>✅ ทำงาน 24/7</span>
                 </div>
 
                 {/* Product hero image */}
@@ -454,48 +445,7 @@ const SmartDisplay = () => {
                       <img src={src} alt={`FPM installation ${i + 1}`} className="w-full h-44 object-cover" loading="lazy" />
                     </div>
                   ))}
-
-                {/* Media Center — Video & Podcast */}
-                <div className="mt-8 card-surface rounded-xl p-6">
-                  <h4 className="font-bold text-foreground mb-4 text-lg">🎬 Media Center — FPM Series</h4>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {/* YouTube */}
-                    <div>
-                      <p className="text-sm font-semibold text-muted-foreground mb-2 flex items-center gap-1.5"><Eye size={14} /> วิดีโอสาธิต</p>
-                      <div className="rounded-lg overflow-hidden">
-                        <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-                          <iframe
-                            className="absolute inset-0 w-full h-full"
-                            src="https://www.youtube.com/embed/gz9E7ls-QwQ"
-                            title="FPM Series Industrial Touch Monitor"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            loading="lazy"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    {/* Podcast */}
-                    <div>
-                      <p className="text-sm font-semibold text-muted-foreground mb-2">🎙️ Podcast</p>
-                      <div className="space-y-3">
-                        {[
-                          { src: "/podcasts/fpm-intro.wav", title: "Intro FPM Series" },
-                          { src: "/podcasts/fpm-promotion.wav", title: "Promotion" },
-                          { src: "/podcasts/fpm-how-to-buy.wav", title: "How to buy FPM Series" },
-                        ].map((p) => (
-                          <div key={p.src} className="flex items-center gap-3 bg-secondary/30 rounded-lg px-4 py-2.5">
-                            <p className="font-semibold text-sm text-foreground whitespace-nowrap shrink-0">{p.title}</p>
-                            <audio controls preload="none" className="w-full h-8">
-                              <source src={p.src} type="audio/wav" />
-                            </audio>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </div>
               </div>
             </div>
           )}
