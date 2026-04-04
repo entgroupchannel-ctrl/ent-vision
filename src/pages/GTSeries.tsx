@@ -4538,7 +4538,7 @@ const GTSeries = () => {
                       ["COM", "2× RS232/RS422/RS485\n4× Expanded RS232"],
                       ["USB", "J4125/J6412: 4× USB 3.0 + 2× USB 2.0\nGen 8/10/11: 2× USB 3.0 + 4× USB 2.0"],
                       ["EXT IO", "4-way 3-wire COM + 10-way GPIO + Remote Switch"],
-                      ["WiFi / 5G", "M.2 2230 WiFi/BT + M.2 3042/3052 3G/4G/5G\n5× เสาอากาศภายนอก + SIM Slot"],
+                      ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม\nM.2 3042/3052 3G/4G/5G + SIM Slot"],
                       ["Power", "9V–36V DC (4-pin Phoenix Terminal)"],
                       ["Temp Range", "-20°C ~ +60°C (Operating)"],
                       ["Size / Weight", "300 × 155 × 50mm / 1.8kg"],
