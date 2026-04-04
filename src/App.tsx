@@ -38,6 +38,7 @@ import Cabinets from "./pages/Cabinets.tsx";
 import IBoxSeries from "./pages/IBoxSeries.tsx";
 import IBoxDetail from "./pages/IBoxDetail.tsx";
 import RuggedHandheldDetail from "./pages/RuggedHandheldDetail.tsx";
+import RuggedTabletDetail from "./pages/RuggedTabletDetail.tsx";
 import WishlistPage from "./pages/WishlistPage.tsx";
 import ForgotPassword from "./pages/ForgotPassword.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
