@@ -5698,41 +5698,53 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
 
       {/* Windows Options */}
       <section className="section-padding bg-surface/50">
-        <div className="container max-w-4xl mx-auto">
-          <div className="text-center mb-8">
+        <div className="container max-w-5xl mx-auto">
+          <div className="text-center mb-6">
             <h2 className="text-2xl md:text-3xl font-display font-bold">
               Windows & <span className="text-gradient">Options</span>
             </h2>
-            <p className="text-muted-foreground mt-2">เพิ่มเติมได้ตามต้องการ</p>
+            <p className="text-muted-foreground mt-2 text-sm">เพิ่มเติมได้ตามต้องการ</p>
           </div>
-          <div className="card-surface overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-secondary/50">
-                    <th className="text-left p-3 font-semibold text-foreground">Option</th>
-                    <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  {[
-                    { name: "Windows 10 Pro OEM", price: "฿3,950" },
-                    { name: "Windows 11 Pro OEM", price: "฿4,590" },
-                    { name: "Windows 10 IOT", price: "฿3,950" },
-                    { name: "Windows 11 IOT", price: "฿4,590" },
-                    { name: "Upgrade WIFI ABGN/AC → Wifi6", price: "Call" },
-                    { name: "4G Sim Card", price: "Call" },
-                    { name: "5G Sim Card", price: "Call" },
-                    { name: "ซื้อประกันเพิ่ม ปีที่ 2", price: "15%" },
-                    { name: "ซื้อประกันเพิ่ม ปีที่ 3", price: "20%" },
-                  ].map((item, i) => (
-                    <tr key={i} className="hover:bg-secondary/30 transition-colors">
-                      <td className="p-3 text-foreground">{item.name}</td>
-                      <td className="p-3 text-right font-bold text-primary">{item.price}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+          <div className="grid md:grid-cols-2 gap-4">
+            {/* Windows License */}
+            <div className="card-surface overflow-hidden">
+              <div className="p-3 border-b border-border bg-primary/5">
+                <h3 className="text-sm font-display font-bold text-foreground">💻 Windows License</h3>
+              </div>
+              <div className="divide-y divide-border">
+                {[
+                  { name: "Windows 10 Pro OEM", price: "฿3,950" },
+                  { name: "Windows 11 Pro OEM", price: "฿4,590" },
+                  { name: "Windows 10 IoT", price: "฿3,950" },
+                  { name: "Windows 11 IoT", price: "฿4,590" },
+                ].map((item, i) => (
+                  <div key={i} className="flex justify-between items-center px-3 py-2 hover:bg-secondary/30 transition-colors">
+                    <span className="text-xs text-foreground">{item.name}</span>
+                    <span className="text-xs font-bold text-primary">{item.price}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* Hardware Options */}
+            <div className="card-surface overflow-hidden">
+              <div className="p-3 border-b border-border bg-primary/5">
+                <h3 className="text-sm font-display font-bold text-foreground">🔧 Hardware Options</h3>
+              </div>
+              <div className="divide-y divide-border">
+                {[
+                  { name: "Upgrade WiFi AC → WiFi 6 (802.11ax)", price: "Call" },
+                  { name: "Bluetooth Module", price: "Call" },
+                  { name: "4G LTE SIM Module", price: "Call" },
+                  { name: "5G SIM Module", price: "Call" },
+                  { name: "ซื้อประกันเพิ่ม ปีที่ 2", price: "+15%" },
+                  { name: "ซื้อประกันเพิ่ม ปีที่ 3", price: "+20%" },
+                ].map((item, i) => (
+                  <div key={i} className="flex justify-between items-center px-3 py-2 hover:bg-secondary/30 transition-colors">
+                    <span className="text-xs text-foreground">{item.name}</span>
+                    <span className="text-xs font-bold text-primary">{item.price}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
