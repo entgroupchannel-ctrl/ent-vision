@@ -848,7 +848,7 @@ const MiniPC = () => {
             Mini PC <span className="text-gradient">Series</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl mb-6">
-            เล็กกว่า แต่ทำได้เท่า PC ตั้งโต๊ะ — วางบนโต๊ะทำงานแทน Desktop ได้ทันที ประหยัดพื้นที่ ประหยัดไฟ ราคาเริ่มต้นเพียง 4,900 บาท
+            เล็กกว่า แต่ทำได้เท่า PC ตั้งโต๊ะ — วางบนโต๊ะทำงานแทน Desktop ได้ทันที ประหยัดพื้นที่ ประหยัดไฟ ราคาเริ่มต้นเพียง 8,190 บาท
           </p>
           <div className="flex flex-wrap gap-6 mb-8">
             {[
