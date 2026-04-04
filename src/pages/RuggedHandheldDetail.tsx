@@ -21,7 +21,7 @@ import { getHandheldProduct, getRelatedHandhelds } from "@/data/rugged-handheld-
 const RelatedCard = ({ product, onQuote }: { product: ReturnType<typeof getHandheldProduct>; onQuote: (n: string) => void }) => {
   if (!product) return null;
   return (
-    <Link to={`/rugged-tablet/${product.id}`} className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
+    <Link to={`/handheld/${product.id}`} className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
       <div className="bg-secondary/30 p-4 flex items-center justify-center h-48">
         <img src={product.image} alt={product.model} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
       </div>
