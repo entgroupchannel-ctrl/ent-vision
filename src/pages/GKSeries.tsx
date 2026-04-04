@@ -3,7 +3,8 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Settings, Maximize, Wifi, ChevronDown, Smartphone, Factory, BarChart3, Gauge } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Settings, Maximize, Wifi, ChevronDown, Smartphone, Factory, BarChart3, Gauge, Headphones, Play } from "lucide-react";
+import ShareButtons from "@/components/ShareButtons";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -91,6 +92,7 @@ const gkModels: GKModel[] = [
       "รองรับ 4G LTE + mini PCIe/M.2 expansion",
       "ติดตั้งได้หลากหลาย: VESA / ขาตั้ง / ฝังติดผนัง",
     ],
+    youtubeId: "v33ZXk1KZLA",
     cpuOptions: ["Intel Core i3/i5/i7", "AMD A6-6500T", "ARM RK3288 (Android)", "ARM RK3399 (Android)"],
     platform: "Windows / Linux / Android",
     specs: [
@@ -819,6 +821,10 @@ const GKSeries = () => {
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {[
+              { id: "v33ZXk1KZLA", title: "GK1004 Introduction" },
+              { id: "cUqG6xWQegE", title: "GK1004 How to Choose" },
+              { id: "jWM0vEKoAAE", title: "GK1004 รายละเอียดเพิ่มเติม" },
+              { id: "xXaUYlbVy5o", title: "GK1004 การใช้งาน" },
               { id: "_CZTxWtK3rw", title: "รีวิว Industrial Panel PC - GK Series" },
               { id: "POvzJ1FWtTU", title: "Panel PC - GK2101" },
             ].map((v) => (
@@ -830,11 +836,47 @@ const GKSeries = () => {
                     className="w-full h-full"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
+                    loading="lazy"
                   />
                 </div>
-                <div className="p-4">
+                <div className="p-4 flex items-center justify-between">
                   <p className="font-semibold text-foreground text-sm">{v.title}</p>
+                  <ShareButtons url={`https://youtu.be/${v.id}`} title={v.title} compact />
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Podcast Section */}
+      <section className="section-padding bg-muted/30">
+        <div className="container max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-display font-bold">
+              <Headphones className="inline-block mr-2 text-primary" size={28} />
+              Podcast<span className="text-gradient"> GK Series</span>
+            </h2>
+            <p className="text-muted-foreground mt-2">ฟังข้อมูลสินค้าแบบสบายๆ — เปิดฟังระหว่างทำงานได้เลย</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              { title: "🎙️ GK1004 Intro", desc: "แนะนำ GK1004 Panel PC สเปก ฟีเจอร์ และจุดเด่น", src: "/audio/GK1004_Podcast1.wav" },
+              { title: "🎙️ GK1004 How to Choose", desc: "วิธีเลือกรุ่น CPU ที่เหมาะกับงานของคุณ", src: "/audio/GK1004_Podcast2.wav" },
+            ].map((pod, i) => (
+              <div key={i} className="card-surface p-5 rounded-xl">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Play size={18} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-foreground text-sm">{pod.title}</p>
+                    <p className="text-xs text-muted-foreground">{pod.desc}</p>
+                  </div>
+                </div>
+                <audio controls className="w-full h-10" preload="metadata">
+                  <source src={pod.src} type="audio/wav" />
+                </audio>
               </div>
             ))}
           </div>
