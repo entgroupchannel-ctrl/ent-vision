@@ -539,9 +539,10 @@ const gkModels: GKModel[] = [
     ],
     applications: ["Real-time Dashboard", "ระบบอัตโนมัติและควบคุม", "Control Room", "วิเคราะห์ข้อมูลขั้นสูง", "Digital Signage", "SCADA"],
     gallery: [
-      "https://static.wixstatic.com/media/0597a3_a5ca89bcac5f44579e8c6cd8fad31808~mv2.png/v1/fill/w_600,h_561,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK2101-001.png",
-      "https://static.wixstatic.com/media/0597a3_93758bd8180f4db2b702f56db6241a3a~mv2.png/v1/fill/w_625,h_426,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK2101-002.png",
-      "https://static.wixstatic.com/media/0597a3_3ca0c2e94496439097bfdfdfdf11fc1c~mv2.png/v1/fill/w_633,h_461,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK2101-003.png",
+      gk2101front,
+      gk2101angle,
+      gk2101back,
+      gk2101io,
     ],
   },
 ];
