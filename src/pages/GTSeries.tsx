@@ -1585,7 +1585,7 @@ const GTSeries = () => {
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
                   <h3 className="text-lg font-display font-bold text-foreground">💰 GT2000 Price List</h3>
-                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น</p>
+                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
