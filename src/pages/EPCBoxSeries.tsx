@@ -539,6 +539,7 @@ const SeriesSection = ({ series, index }: { series: SeriesData; index: number })
 
 const EPCBoxSeries = () => {
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [quoteProduct, setQuoteProduct] = useState("");
   const [showLineQR, setShowLineQR] = useState(false);
   return (
     <div className="min-h-screen bg-background">
