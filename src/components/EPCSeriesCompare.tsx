@@ -88,7 +88,6 @@ const EPCSeriesCompare = ({ onQuote }: Props) => {
   const [cpuFilter, setCpuFilter] = useState("ทุกระดับ");
   const [page, setPage] = useState(1);
   const ITEMS_PER_PAGE = 10;
-  const [cpuFilter, setCpuFilter] = useState("ทุกระดับ");
 
   const filtered = useMemo(() => {
     return allModels.filter((m) => {
