@@ -680,50 +680,71 @@ const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
           </TabsList>
 
           <TabsContent value="spec" className="mt-0 p-0">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <tbody className="divide-y divide-border">
-                  {model.specs.map((s, i) => (
-                    <tr key={i} className="hover:bg-muted/30 transition-colors">
-                      <td className="px-4 py-3 font-semibold text-foreground w-36 bg-muted/20 align-top">{s.label}</td>
-                      <td className="px-4 py-3 text-muted-foreground">{s.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            {(() => {
+              const SPEC_PER_PAGE = 10;
+              const totalSpecPages = Math.ceil(model.specs.length / SPEC_PER_PAGE);
+              if (totalSpecPages <= 1) {
+                return (
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {model.specs.map((s, i) => (
+                          <tr key={i} className="hover:bg-muted/30 transition-colors">
+                            <td className="px-4 py-3 font-semibold text-foreground w-36 bg-muted/20 align-top">{s.label}</td>
+                            <td className="px-4 py-3 text-muted-foreground whitespace-pre-line">{s.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                );
+              }
+              // Multi-column layout for specs > 10
+              const col1 = model.specs.slice(0, SPEC_PER_PAGE);
+              const col2 = model.specs.slice(SPEC_PER_PAGE);
+              return (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-px bg-border">
+                  <div className="bg-card overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {col1.map((s, i) => (
+                          <tr key={i} className="hover:bg-muted/30 transition-colors">
+                            <td className="px-4 py-2.5 font-semibold text-foreground w-32 bg-muted/20 align-top text-xs">{s.label}</td>
+                            <td className="px-4 py-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="bg-card overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {col2.map((s, i) => (
+                          <tr key={i} className="hover:bg-muted/30 transition-colors">
+                            <td className="px-4 py-2.5 font-semibold text-foreground w-32 bg-muted/20 align-top text-xs">{s.label}</td>
+                            <td className="px-4 py-2.5 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              );
+            })()}
           </TabsContent>
 
           {model.priceTable.length > 0 && (
             <TabsContent value="price" className="mt-0 p-0">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="bg-primary/10 border-b border-border">
-                      <th className="text-left px-4 py-3 font-semibold text-foreground">CPU</th>
-                      <th className="text-left px-4 py-3 font-semibold text-foreground">RAM</th>
-                      <th className="text-left px-4 py-3 font-semibold text-foreground">SSD</th>
-                      <th className="text-right px-4 py-3 font-semibold text-foreground">ราคา (฿)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border">
-                    {model.priceTable.map((group) =>
-                      group.configs.map((c, ci) => (
-                        <tr key={`${group.cpu}-${ci}`} className="hover:bg-muted/30 transition-colors">
-                          {ci === 0 && (
-                            <td className="px-4 py-3 font-medium text-foreground align-top" rowSpan={group.configs.length}>
-                              {group.cpu}
-                            </td>
-                          )}
-                          <td className="px-4 py-3 text-muted-foreground">{c.ram}</td>
-                          <td className="px-4 py-3 text-muted-foreground">{c.ssd}</td>
-                          <td className="px-4 py-3 text-right font-bold text-primary text-lg">{c.price}</td>
-                        </tr>
-                      ))
-                    )}
-                  </tbody>
-                </table>
-              </div>
+              {(() => {
+                const PRICE_PER_PAGE = 10;
+                const allRows = model.priceTable.flatMap((group) =>
+                  group.configs.map((c, ci) => ({ ...c, cpu: group.cpu, isFirst: ci === 0, rowSpan: group.configs.length }))
+                );
+                const totalPricePages = Math.ceil(allRows.length / PRICE_PER_PAGE);
+                return (
+                  <PaginatedPriceTable rows={allRows} perPage={PRICE_PER_PAGE} totalPages={totalPricePages} />
+                );
+              })()}
               <PriceDisclaimer />
             </TabsContent>
           )}
