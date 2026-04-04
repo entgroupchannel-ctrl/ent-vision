@@ -581,18 +581,15 @@ const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
             }}
             className="absolute top-4 right-4"
           />
-          <img
-            src={model.image}
-            alt={model.name}
-            className="max-h-[240px] object-contain mb-4"
-            loading="lazy"
-          />
-          {model.gallery && (
-            <div className="flex gap-2 mt-2 flex-wrap justify-center">
-              {model.gallery.slice(0, 3).map((img, i) => (
-                <img key={i} src={img} alt="" className="w-16 h-16 object-contain rounded-lg bg-background/50 p-1" loading="lazy" />
-              ))}
-            </div>
+          {model.gallery && model.gallery.length > 0 ? (
+            <ProductGallery images={model.gallery} alt={model.name} />
+          ) : (
+            <img
+              src={model.image}
+              alt={model.name}
+              className="max-h-[240px] object-contain mb-4"
+              loading="lazy"
+            />
           )}
           {model.datasheetUrls.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4 justify-center">
