@@ -4985,6 +4985,34 @@ const GTSeries = () => {
                 </div>
               </div>
 
+              {/* Use Cases */}
+              <div className="card-surface rounded-xl overflow-hidden">
+                <div className="p-6 border-b border-border">
+                  <h3 className="text-xl font-display font-bold text-foreground mb-2">🎨 เพิ่มสีสันสดใส ด้วยการทำสีใหม่ให้กับสินค้าของคุณ</h3>
+                  <p className="text-muted-foreground">สร้างภาพลักษณ์องค์กร — พนักงานภูมิใจที่ได้ใช้ผลิตภัณฑ์ระดับโลก ออกแบบเครื่องให้เข้ากับแบรนด์ของคุณได้อย่างลงตัว</p>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0 divide-x divide-y divide-border">
+                  {[
+                    { icon: "🏭", title: "โรงงานอุตสาหกรรม", desc: "ควบคุมไลน์ผลิต ทนฝุ่น ทนร้อน 24/7" },
+                    { icon: "⚙️", title: "Factory Automation", desc: "เชื่อมต่ออุปกรณ์ PLC, SCADA, HMI" },
+                    { icon: "📡", title: "IoT Gateway", desc: "รวบรวมข้อมูลเซ็นเซอร์ ส่งขึ้น Cloud" },
+                    { icon: "🖥️", title: "KIOSK & Signage", desc: "ตู้บริการอัตโนมัติ ป้ายดิจิทัล" },
+                    { icon: "📊", title: "HMI Controller", desc: "จอสั่งงานเครื่องจักร แม่นยำ" },
+                    { icon: "🚌", title: "รถโดยสาร", desc: "ระบบแสดงผลและจัดการเส้นทาง" },
+                    { icon: "🚈", title: "รถไฟฟ้า", desc: "ระบบสารสนเทศผู้โดยสาร" },
+                    { icon: "📋", title: "Queue System", desc: "ระบบคิวอัตโนมัติ คลินิก ธนาคาร" },
+                    { icon: "🔧", title: "ตู้คอนโทรล", desc: "ติดตั้งในตู้ MDB, ควบคุมระบบ" },
+                    { icon: "🎯", title: "Custom Branding", desc: "ทำสี สกรีนโลโก้ ตามแบรนด์คุณ" },
+                  ].map((item, i) => (
+                    <div key={i} className="p-4 text-center hover:bg-secondary/40 transition-colors">
+                      <span className="text-2xl mb-2 block">{item.icon}</span>
+                      <p className="text-xs font-bold text-foreground mb-1">{item.title}</p>
+                      <p className="text-[10px] text-muted-foreground leading-tight">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Intro Video */}
               <div className="card-surface overflow-hidden rounded-xl">
                 <div className="p-5 border-b border-border flex items-center gap-3">
