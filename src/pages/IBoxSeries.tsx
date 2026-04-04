@@ -363,131 +363,126 @@ const IBoxSeries = () => {
                 เลือกรุ่นที่เหมาะกับงานของคุณ — RAM และ SSD สามารถปรับแต่งได้
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {iboxModels.map((model) => (
-              <div key={model.id} className={`card-surface overflow-hidden group transition-all ${selectedProducts.has(model.name) ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
-                <div className="relative bg-secondary/30 p-6 flex items-center justify-center h-52">
-                  <button onClick={() => toggleSelect(model.name)} className="absolute top-3 left-3 z-10">
-                    <Checkbox checked={selectedProducts.has(model.name)} className="h-5 w-5" />
-                  </button>
-                  <WishlistHeart
-                    item={{
-                      id: model.id,
-                      name: model.name,
-                      category: "iBox Series",
-                      image: model.image,
-                      href: "/ibox-series",
-                      specs: model.cpu,
-                    }}
-                    className="absolute top-3 right-3"
-                  />
-                  <img
-                    src={model.image}
-                    alt={model.name}
-                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-5 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display font-bold text-foreground text-lg">{model.name}</h3>
-                    <Badge variant="secondary" className="text-xs">Fanless</Badge>
-                  </div>
-
-                  <div className="space-y-1.5 text-xs text-muted-foreground">
-                    <p><span className="font-medium text-foreground">CPU:</span> {model.cpu}</p>
-                    <p><span className="font-medium text-foreground">RAM:</span> {model.ram}</p>
-                    <p><span className="font-medium text-foreground">Storage:</span> {model.storage}</p>
-                    <p><span className="font-medium text-foreground">วัสดุ:</span> {model.material}</p>
-                    <p><span className="font-medium text-foreground">OS:</span> {model.os}</p>
-                  </div>
-
-                  <div className="flex gap-2 pt-2 border-t border-border">
-                    <Button variant="outline" size="sm" asChild className="flex-1">
-                      <a href={model.datasheet} target="_blank" rel="noopener noreferrer">
-                        <Download className="w-3.5 h-3.5 mr-1" /> Datasheet
-                      </a>
-                    </Button>
-                    <Button size="sm" className="flex-1" onClick={() => setQuoteProduct(model.name)}>
-                      <FileText className="w-3.5 h-3.5 mr-1" /> ขอราคา
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Key Features Strip */}
-        <section className="rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20 p-6">
-          <h3 className="text-sm font-bold text-foreground mb-4">ฟีเจอร์มาตรฐาน iBox Series</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {features.map((feat) => (
-              <div key={feat} className="flex items-start gap-2">
-                <ChevronRight size={14} className="text-primary mt-0.5 shrink-0" />
-                <span className="text-sm text-foreground">{feat}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Use Cases */}
-        <section>
-          <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
-            เหมาะสำหรับงาน
-          </h2>
-          <p className="text-center text-sm text-muted-foreground mb-8">
-            ใช้โปรแกรมได้หลากหลาย ในสำนักงาน โรงงานอุตสาหกรรม โรงเรียน ทั้งการพรีเซนต์งาน การเรียนการสอน และความบันเทิง
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {useCasesData.map((uc) => (
-              <div key={uc.title} className="group card-surface overflow-hidden hover:border-primary/30 transition-all">
-                <div className="relative h-44 overflow-hidden">
-                  <img
-                    src={uc.image}
-                    alt={uc.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute bottom-3 left-4 flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-primary/90 flex items-center justify-center">
-                      <uc.icon className="w-4 h-4 text-primary-foreground" />
+                {iboxModels.map((model) => (
+                  <div key={model.id} className={`card-surface overflow-hidden group transition-all ${selectedProducts.has(model.name) ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
+                    <div className="relative bg-secondary/30 p-6 flex items-center justify-center h-52">
+                      <button onClick={() => toggleSelect(model.name)} className="absolute top-3 left-3 z-10">
+                        <Checkbox checked={selectedProducts.has(model.name)} className="h-5 w-5" />
+                      </button>
+                      <WishlistHeart
+                        item={{
+                          id: model.id,
+                          name: model.name,
+                          category: "iBox Series",
+                          image: model.image,
+                          href: "/ibox-series",
+                          specs: model.cpu,
+                        }}
+                        className="absolute top-3 right-3"
+                      />
+                      <img
+                        src={model.image}
+                        alt={model.name}
+                        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
                     </div>
-                    <h3 className="text-sm font-bold text-white">{uc.title}</h3>
+                    <div className="p-5 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-display font-bold text-foreground text-lg">{model.name}</h3>
+                        <Badge variant="secondary" className="text-xs">Fanless</Badge>
+                      </div>
+                      <div className="space-y-1.5 text-xs text-muted-foreground">
+                        <p><span className="font-medium text-foreground">CPU:</span> {model.cpu}</p>
+                        <p><span className="font-medium text-foreground">RAM:</span> {model.ram}</p>
+                        <p><span className="font-medium text-foreground">Storage:</span> {model.storage}</p>
+                        <p><span className="font-medium text-foreground">วัสดุ:</span> {model.material}</p>
+                        <p><span className="font-medium text-foreground">OS:</span> {model.os}</p>
+                      </div>
+                      <div className="flex gap-2 pt-2 border-t border-border">
+                        <Button variant="outline" size="sm" asChild className="flex-1">
+                          <a href={model.datasheet} target="_blank" rel="noopener noreferrer">
+                            <Download className="w-3.5 h-3.5 mr-1" /> Datasheet
+                          </a>
+                        </Button>
+                        <Button size="sm" className="flex-1" onClick={() => setQuoteProduct(model.name)}>
+                          <FileText className="w-3.5 h-3.5 mr-1" /> ขอราคา
+                        </Button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </section>
 
-        {/* Gallery */}
-        <section>
-          <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
-            ตัวอย่างการใช้งานจริง
-          </h2>
-          <p className="text-center text-sm text-muted-foreground mb-8">
-            ส่งมอบประสบการณ์ที่แข็งแกร่งกับ Industrial Grade Computer
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {galleryImages.map((img, i) => (
-              <div key={i} className="rounded-xl overflow-hidden bg-secondary/30 border border-border">
-                <img src={img} alt={`ตัวอย่างการใช้งาน ${i + 1}`} className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+            {/* Key Features Strip */}
+            <section className="rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20 p-6">
+              <h3 className="text-sm font-bold text-foreground mb-4">ฟีเจอร์มาตรฐาน iBox Series</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {features.map((feat) => (
+                  <div key={feat} className="flex items-start gap-2">
+                    <ChevronRight size={14} className="text-primary mt-0.5 shrink-0" />
+                    <span className="text-sm text-foreground">{feat}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </section>
 
-        {/* CTA */}
-        <div className="card-surface p-8 text-center">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-3">สนใจ iBox Series?</h2>
-          <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือกรุ่นและสเปกที่เหมาะกับงานของคุณ</p>
-          <Button size="lg" onClick={() => setQuoteProduct("iBox Series")}>
-            <FileText className="w-4 h-4 mr-2" /> ขอใบเสนอราคา
-          </Button>
+            {/* Use Cases */}
+            <section>
+              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
+                เหมาะสำหรับงาน
+              </h2>
+              <p className="text-center text-sm text-muted-foreground mb-8">
+                ใช้โปรแกรมได้หลากหลาย ในสำนักงาน โรงงานอุตสาหกรรม โรงเรียน ทั้งการพรีเซนต์งาน การเรียนการสอน และความบันเทิง
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {useCasesData.map((uc) => (
+                  <div key={uc.title} className="group card-surface overflow-hidden hover:border-primary/30 transition-all">
+                    <div className="relative h-44 overflow-hidden">
+                      <img src={uc.image} alt={uc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      <div className="absolute bottom-3 left-4 flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-primary/90 flex items-center justify-center">
+                          <uc.icon className="w-4 h-4 text-primary-foreground" />
+                        </div>
+                        <h3 className="text-sm font-bold text-white">{uc.title}</h3>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Gallery */}
+            <section>
+              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
+                ตัวอย่างการใช้งานจริง
+              </h2>
+              <p className="text-center text-sm text-muted-foreground mb-8">
+                ส่งมอบประสบการณ์ที่แข็งแกร่งกับ Industrial Grade Computer
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {galleryImages.map((img, i) => (
+                  <div key={i} className="rounded-xl overflow-hidden bg-secondary/30 border border-border">
+                    <img src={img} alt={`ตัวอย่างการใช้งาน ${i + 1}`} className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* CTA */}
+            <div className="card-surface p-8 text-center">
+              <h2 className="text-2xl font-display font-bold text-foreground mb-3">สนใจ iBox Series?</h2>
+              <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือกรุ่นและสเปกที่เหมาะกับงานของคุณ</p>
+              <Button size="lg" onClick={() => setQuoteProduct("iBox Series")}>
+                <FileText className="w-4 h-4 mr-2" /> ขอใบเสนอราคา
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 
