@@ -102,6 +102,7 @@ const App = () => (
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/product-advisor" element={<ProductAdvisor />} />
               <Route path="/rugged-notebook" element={<RuggedNotebook />} />
+              <Route path="/rugged-notebook/:id" element={<RuggedNotebookDetail />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
