@@ -14,6 +14,7 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import WishlistHeart from "@/components/WishlistHeart";
+import ShareButtons from "@/components/ShareButtons";
 import { handheldProducts, type HandheldProduct } from "@/data/rugged-handheld-products";
 
 /* ───── Features ───── */
