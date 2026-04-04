@@ -42,6 +42,7 @@ import WishlistPage from "./pages/WishlistPage.tsx";
 import ForgotPassword from "./pages/ForgotPassword.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
 import ProductAdvisor from "./pages/ProductAdvisor.tsx";
+import RuggedNotebook from "./pages/RuggedNotebook.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import FloatingContact from "./components/FloatingContact.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
