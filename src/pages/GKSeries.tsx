@@ -23,6 +23,10 @@ import gk1501front from "@/assets/gk-series/gk1501-front.png";
 import gk1501back from "@/assets/gk-series/gk1501-back.jpg";
 import gk1501io1 from "@/assets/gk-series/gk1501-io1.jpg";
 import gk1501io2 from "@/assets/gk-series/gk1501-io2.jpg";
+import gk2101front from "@/assets/gk-series/gk2101-front.png";
+import gk2101angle from "@/assets/gk-series/gk2101-angle.jpg";
+import gk2101back from "@/assets/gk-series/gk2101-back.jpg";
+import gk2101io from "@/assets/gk-series/gk2101-io.jpg";
 
 /* ─── Concept: "One Body, Multiple Brains" ─── */
 const concepts = [
