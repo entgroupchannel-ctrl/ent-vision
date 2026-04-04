@@ -811,47 +811,92 @@ const GKSeries = () => {
         </div>
       </section>
 
-      {/* YouTube Section */}
-      <section className="section-padding">
-        <div className="container max-w-5xl mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-display font-bold">
-              วิดีโอ<span className="text-gradient">แนะนำ</span>
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { id: "v33ZXk1KZLA", title: "GK1004 Introduction" },
-              { id: "cUqG6xWQegE", title: "GK1004 How to Choose" },
-              { id: "jWM0vEKoAAE", title: "GK1004 รายละเอียดเพิ่มเติม" },
-              { id: "xXaUYlbVy5o", title: "GK1004 การใช้งาน" },
-              { id: "O5fd-_ZfWR0", title: "GK1506 Introduction" },
-              { id: "szVVTv5tmJs", title: "GK1506 รีวิวเพิ่มเติม" },
-              { id: "ZZlkdSgJAzs", title: "GK1506 สาธิตการใช้งาน" },
-              { id: "PeOizgJEVBc", title: "GK1506 เปรียบเทียบสเปก" },
-              { id: "_CZTxWtK3rw", title: "รีวิว Industrial Panel PC - GK Series" },
-              { id: "POvzJ1FWtTU", title: "Panel PC - GK2101" },
-            ].map((v) => (
-              <div key={v.id} className="card-surface overflow-hidden">
-                <div className="aspect-video">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${v.id}`}
-                    title={v.title}
-                    className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-4 flex items-center justify-between">
-                  <p className="font-semibold text-foreground text-sm">{v.title}</p>
-                  <ShareButtons url={`https://youtu.be/${v.id}`} title={v.title} compact />
-                </div>
+      {/* YouTube Section — Tabbed by model */}
+      {(() => {
+        const videoTabs: Record<string, { id: string; title: string }[]> = {
+          "ทั้งหมด": [
+            { id: "v33ZXk1KZLA", title: "GK1004 Introduction" },
+            { id: "cUqG6xWQegE", title: "GK1004 How to Choose" },
+            { id: "jWM0vEKoAAE", title: "GK1004 รายละเอียดเพิ่มเติม" },
+            { id: "xXaUYlbVy5o", title: "GK1004 การใช้งาน" },
+            { id: "O5fd-_ZfWR0", title: "GK1506 Introduction" },
+            { id: "szVVTv5tmJs", title: "GK1506 รีวิวเพิ่มเติม" },
+            { id: "ZZlkdSgJAzs", title: "GK1506 สาธิตการใช้งาน" },
+            { id: "PeOizgJEVBc", title: "GK1506 เปรียบเทียบสเปก" },
+            { id: "_CZTxWtK3rw", title: "รีวิว Industrial Panel PC - GK Series" },
+            { id: "POvzJ1FWtTU", title: "Panel PC - GK2101" },
+          ],
+          "GK1004": [
+            { id: "v33ZXk1KZLA", title: "Introduction" },
+            { id: "cUqG6xWQegE", title: "How to Choose" },
+            { id: "jWM0vEKoAAE", title: "รายละเอียดเพิ่มเติม" },
+            { id: "xXaUYlbVy5o", title: "การใช้งาน" },
+          ],
+          "GK1506": [
+            { id: "O5fd-_ZfWR0", title: "Introduction" },
+            { id: "szVVTv5tmJs", title: "รีวิวเพิ่มเติม" },
+            { id: "ZZlkdSgJAzs", title: "สาธิตการใช้งาน" },
+            { id: "PeOizgJEVBc", title: "เปรียบเทียบสเปก" },
+          ],
+          "GK2101": [
+            { id: "POvzJ1FWtTU", title: "Panel PC - GK2101" },
+          ],
+          "GK Series": [
+            { id: "_CZTxWtK3rw", title: "รีวิว Industrial Panel PC" },
+          ],
+        };
+        const tabKeys = Object.keys(videoTabs);
+        const [activeVideoTab, setActiveVideoTab] = React.useState(tabKeys[0]);
+        const currentVideos = videoTabs[activeVideoTab] || [];
+
+        return (
+          <section className="section-padding">
+            <div className="container max-w-5xl mx-auto">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl md:text-3xl font-display font-bold">
+                  วิดีโอ<span className="text-gradient">แนะนำ</span>
+                </h2>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              {/* Tabs */}
+              <div className="flex flex-wrap justify-center gap-2 mb-8">
+                {tabKeys.map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveVideoTab(tab)}
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${
+                      activeVideoTab === tab
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                {currentVideos.map((v) => (
+                  <div key={v.id} className="card-surface overflow-hidden">
+                    <div className="aspect-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${v.id}`}
+                        title={v.title}
+                        className="w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-4 flex items-center justify-between">
+                      <p className="font-semibold text-foreground text-sm">{v.title}</p>
+                      <ShareButtons url={`https://youtu.be/${v.id}`} title={v.title} compact />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* Podcast Section */}
       <section className="section-padding bg-muted/30">
