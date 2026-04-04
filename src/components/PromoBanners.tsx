@@ -4,6 +4,22 @@ import { Zap, Bell, ArrowRight, Calendar, Sparkles } from "lucide-react";
 /* ───── Shared promo data (active + recurring only) ───── */
 const activePromos = [
   {
+    id: "em-t195-deal",
+    title: "Deal of the Month — EM-T195 Rugged Tablet",
+    subtitle: '10.1" | 5G Ready | IP65 | Android 11 — ลด 15%',
+    badge: "🔥 HOT",
+    period: "พร้อมส่งทันที เพียง 5 เครื่อง",
+    image: "https://entgroup-rugged.com/assets/front-TlZtwxwQ.png",
+    highlights: [
+      "ราคาพิเศษ ฿18,615 (จาก ฿21,900)",
+      "MediaTek Dimensity 5G — ชิปเทคโนโลยีล่าสุด",
+      "4GB LPDDR4X / 64GB / WiFi+4G LTE",
+      "น้ำหนักเบา 650g / Barcode Scanner ในตัว",
+    ],
+    status: "active" as const,
+    link: "/rugged-tablet",
+  },
+  {
     id: "starter-plus",
     title: "STARTER PLUS+ อัพสเปคฟรี!",
     subtitle: "RAM & SSD อัพฟรีทุกซีรีส์",
@@ -12,6 +28,7 @@ const activePromos = [
     image: "https://static.wixstatic.com/media/0597a3_edb77d9f4150436f837edf75bf00a6e6~mv2.png/v1/fill/w_587,h_587,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IPC110%20(1).png",
     highlights: ["RAM 4→8GB ฟรี", "SSD 128→256GB ฟรี", "ประหยัด 2,700 บาท/เครื่อง"],
     status: "active" as const,
+    link: "/promotions",
   },
   {
     id: "endyear-windows",
@@ -22,6 +39,7 @@ const activePromos = [
     image: "https://static.wixstatic.com/media/0597a3_db1433a3bf0c4657a1f5d99352280129~mv2.png/v1/fill/w_487,h_487,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
     highlights: ["แถมฟรี Windows Pro OEM", "มูลค่าสูงสุด 4,900 บาท", "Fanless + พอร์ตครบ"],
     status: "active" as const,
+    link: "/promotions",
   },
   {
     id: "wifi6-free",
@@ -31,16 +49,7 @@ const activePromos = [
     image: "https://static.wixstatic.com/media/0597a3_dc716eff20664aae8238509cca867668~mv2.png/v1/fill/w_487,h_487,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT1200.png",
     highlights: ["ฟรี WiFi 6 Module", "เชื่อมต่อเร็วกว่า", "ใช้ได้ GT & GB Series"],
     status: "active" as const,
-  },
-  {
-    id: "monday-deal",
-    title: "โปรวันจันทร์!",
-    subtitle: "ดีลพิเศษทุกวันจันทร์",
-    badge: "Weekly",
-    period: "ทุกวันจันทร์",
-    image: "https://static.wixstatic.com/media/0597a3_e37368a316ff4090b336d904f95bf018~mv2.png/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/UTC%20Series.png",
-    highlights: ["ดีลเปลี่ยนทุกสัปดาห์", "ราคาพิเศษเฉพาะวันจันทร์", "หลากหลายซีรีส์"],
-    status: "recurring" as const,
+    link: "/promotions",
   },
 ];
 
