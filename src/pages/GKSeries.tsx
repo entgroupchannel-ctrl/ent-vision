@@ -19,6 +19,10 @@ import gk1506img4 from "@/assets/gk-series/gk1506-4.jpg";
 import gk1506img5 from "@/assets/gk-series/gk1506-5.jpg";
 import gk1506img6 from "@/assets/gk-series/gk1506-6.jpg";
 import gk1506banner from "@/assets/gk-series/gk1506-banner.jpg";
+import gk1501front from "@/assets/gk-series/gk1501-front.png";
+import gk1501back from "@/assets/gk-series/gk1501-back.jpg";
+import gk1501io1 from "@/assets/gk-series/gk1501-io1.jpg";
+import gk1501io2 from "@/assets/gk-series/gk1501-io2.jpg";
 
 /* ─── Concept: "One Body, Multiple Brains" ─── */
 const concepts = [
@@ -158,7 +162,7 @@ const gkModels: GKModel[] = [
     resolution: "1024×768",
     tagline: "Standard Size",
     desc: "Panel PC อุตสาหกรรม 15 นิ้ว จอสัมผัส Capacitive 10 จุด โครงสร้าง IP65 กันฝุ่นกันน้ำ รองรับ CPU ตั้งแต่ Core i5 ถึง i7 หลาย Generation — เหมาะกับงาน HMI, SCADA และ Factory Automation",
-    image: "https://static.wixstatic.com/media/3e5003_3673f727f94642d78f8b2853e87570e3~mv2.jpg/v1/fill/w_189,h_142,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2222.jpg",
+    image: gk1501front,
     datasheetUrls: [
       { label: "GK1501 Core i5 Datasheet (PDF)", url: "/datasheets/GK1501_i5.pdf" },
       { label: "GK1501 Core i7 Gen3 Datasheet (PDF)", url: "/datasheets/GK1501_i7_Gen3.pdf" },
@@ -230,6 +234,12 @@ const gkModels: GKModel[] = [
       },
     ],
     applications: ["HMI Control", "Factory Automation", "Warehouse Management", "SCADA", "POS & Queuing", "Digital Signage"],
+    gallery: [
+      gk1501front,
+      gk1501back,
+      gk1501io1,
+      gk1501io2,
+    ],
   },
   {
     id: "gk1506",
