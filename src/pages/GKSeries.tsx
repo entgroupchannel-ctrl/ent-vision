@@ -848,7 +848,6 @@ const GKSeries = () => {
         };
         const tabKeys = Object.keys(videoTabs);
         const currentVideos = videoTabs[activeVideoTab] || videoTabs["ทั้งหมด"];
-        const currentVideos = videoTabs[activeVideoTab] || [];
 
         return (
           <section className="section-padding">
