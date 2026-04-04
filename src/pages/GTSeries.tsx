@@ -596,6 +596,7 @@ const GTSeries = () => {
   const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
   const [showLineQR, setShowLineQR] = useState(false);
   const [gt9000PricePage, setGt9000PricePage] = useState(0);
+  const [gt1400PricePage, setGt1400PricePage] = useState(0);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
