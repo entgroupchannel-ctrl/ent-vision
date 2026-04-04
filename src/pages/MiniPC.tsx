@@ -833,30 +833,46 @@ const MiniPC = () => {
         ]}      />
 
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "Mini PC", path: "/mini-pc" }]} />
-      {/* Header */}
-      <div className="bg-gradient-to-b from-primary/5 to-background border-b border-border">
-        <div className="container max-w-7xl mx-auto px-4 py-6">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-4">
+      {/* ── Hero Section ── */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={heroMiniPC} alt="Mini PC on modern desk setup" className="w-full h-full object-cover" width={1920} height={768} />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
+        </div>
+        <div className="relative container max-w-7xl mx-auto px-4 py-16 md:py-24">
+          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6">
             <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
           </Link>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
-              <Badge className="bg-primary/10 text-primary border-primary/20 mb-3">Mini PC Factory Outlet</Badge>
-              <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-2">
-                Mini PC <span className="text-gradient">Series</span>
-              </h1>
-              <p className="text-muted-foreground max-w-2xl">
-                คอมพิวเตอร์ขนาดเล็กสมรรถนะสูง จากโรงงานผู้ผลิตโดยตรง — ครอบคลุมทุกการใช้งานตั้งแต่ Entry-Level จนถึง Workstation Class
-              </p>
-            </div>
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={() => setQuoteProduct("Mini PC")}>
-                <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
-              </Button>
-            </div>
+          <Badge className="bg-primary/10 text-primary border-primary/20 mb-4">Mini PC Factory Outlet</Badge>
+          <h1 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-4 max-w-2xl">
+            Mini PC <span className="text-gradient">Series</span>
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-xl mb-6">
+            เล็กกว่า แต่ทำได้เท่า PC ตั้งโต๊ะ — วางบนโต๊ะทำงานแทน Desktop ได้ทันที ประหยัดพื้นที่ ประหยัดไฟ ราคาเริ่มต้นเพียง 4,900 บาท
+          </p>
+          <div className="flex flex-wrap gap-6 mb-8">
+            {[
+              { value: "6W", label: "กินไฟต่ำสุด" },
+              { value: "24/7", label: "ทำงานต่อเนื่อง" },
+              { value: "4,900.-", label: "ราคาเริ่มต้น" },
+              { value: "50+", label: "รุ่นให้เลือก" },
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <p className="text-2xl md:text-3xl font-display font-extrabold text-primary">{s.value}</p>
+                <p className="text-xs text-muted-foreground">{s.label}</p>
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-3">
+            <Button onClick={() => setQuoteProduct("Mini PC")}>
+              <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
+            </Button>
+            <Button variant="outline" onClick={() => document.getElementById("pricelist")?.scrollIntoView({ behavior: "smooth" })}>
+              ดูตารางราคา
+            </Button>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Why ENTGROUP */}
       <div className="container max-w-7xl mx-auto px-4 py-10">
