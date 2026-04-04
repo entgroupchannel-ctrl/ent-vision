@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import LineQRButton from "@/components/LineQRButton";
 import { useState } from "react";
 import {
   ArrowLeft, Check, ChevronRight, Cpu, FileText, Mail, Shield, Zap,
@@ -166,11 +167,9 @@ const RuggedNotebookDetail = () => {
               <Button size="lg" className="flex-1" onClick={() => setQuoteOpen(true)}>
                 <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
               </Button>
-              <Button size="lg" variant="outline" className="flex-1" asChild>
-                <a href="https://line.me/R/ti/p/@entgroup" target="_blank" rel="noopener noreferrer">
-                  💬 สอบถามทาง LINE
-                </a>
-              </Button>
+              <LineQRButton className="flex-1 h-11 text-base">
+                💬 สอบถามทาง LINE
+              </LineQRButton>
             </div>
           </div>
         </div>
@@ -316,11 +315,9 @@ const RuggedNotebookDetail = () => {
                   <Button onClick={() => setQuoteOpen(true)}>
                     <FileText className="w-4 h-4 mr-2" /> ขอใบเสนอราคา
                   </Button>
-                  <Button variant="outline" asChild>
-                    <a href="https://line.me/R/ti/p/@entgroup" target="_blank" rel="noopener noreferrer">
-                      💬 ติดต่อ LINE @entgroup
-                    </a>
-                  </Button>
+                  <LineQRButton>
+                    💬 ติดต่อ LINE @entgroup
+                  </LineQRButton>
                 </div>
               </div>
             </TabsContent>
