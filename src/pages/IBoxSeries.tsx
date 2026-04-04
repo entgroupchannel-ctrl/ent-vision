@@ -273,6 +273,37 @@ const IBoxSeries = () => {
         </div>
       </div>
 
+      {/* Sticky Category Tabs */}
+      <div className="sticky top-[57px] z-30 bg-background/80 backdrop-blur-md border-b border-border">
+        <div className="container max-w-7xl mx-auto px-4 py-2">
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">👆 เลือกหมวดสินค้า:</span>
+            {[
+              { id: "all", name: "ทั้งหมด", icon: LayoutGrid },
+              { id: "AI Edge Computing", name: "AI Edge / GPU", icon: Flame },
+              { id: "Embedded Box PC", name: "Embedded Box PC", icon: Factory },
+              { id: "Gateway", name: "Gateway / DIN Rail", icon: Globe },
+              { id: "PoE & Multi-LAN", name: "PoE & Multi-LAN", icon: Radio },
+              { id: "Vehicle & Special", name: "Vehicle & Special", icon: Car },
+              { id: "Machine Vision", name: "Machine Vision", icon: Eye },
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setFilters({ ...filters, category: cat.id })}
+                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all shrink-0 ${
+                  filters.category === cat.id
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "bg-muted hover:bg-muted/80 text-foreground"
+                }`}
+              >
+                <cat.icon className="w-3.5 h-3.5" />
+                {cat.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="container max-w-7xl mx-auto px-4 py-8">
         <div className="flex gap-6">
           {/* Filter Sidebar */}
