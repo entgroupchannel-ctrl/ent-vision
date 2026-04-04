@@ -15,6 +15,8 @@ import aeolusSv9Dimension from "@/assets/products/aeolus-sv9-6l2c-1p-dimension.p
 import aeolusSva35Angle2 from "@/assets/products/aeolus-sva35-2l10c-angle2.png";
 import aeolusSva35Dimension from "@/assets/products/aeolus-sva35-2l10c-dimension.png";
 import aeolusSv9_6l2cDimension from "@/assets/products/aeolus-sv9-6l2c-dimension.png";
+import ibox205Front from "@/assets/products/ibox-205-front.png";
+import ibox205Side from "@/assets/products/ibox-205-side.png";
 
 // Main product images
 import ibox007Main from "@/assets/products/ibox-007-main.png";
@@ -384,7 +386,8 @@ export const iboxProducts: IBoxProduct[] = [
     io: "2× USB3.0, 2× USB2.0, 1× Internal USB2.0, 2× COM (RS232/485), 1× HDMI, 1× VGA, 1× GPIO 8-bit",
     temp: "-10°C ~ 55°C (w/ 0.7m/s Airflow)",
     lanPorts: 4, comPorts: 2, usbPorts: 5, pcie: true, poe: true,
-    image: ibox205Img,
+    image: ibox205Front,
+    gallery: [ibox205Side, ibox205Img],
     features: [
       "Intel® Iris® Xe Graphics — กราฟิกแรงกว่ารุ่นเดิมถึง 2.95 เท่า",
       "2× PoE LAN (Intel i211, IEEE802.3af) + 2× 2.5GbE LAN (Intel i225)",
