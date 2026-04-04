@@ -9,6 +9,7 @@ import imgSmart from "@/assets/product-smart-display.jpg";
 import imgRugged from "@/assets/product-rugged.jpg";
 import imgVolktek from "@/assets/product-volktek.jpg";
 import imgEPC from "@/assets/product-epc.jpg";
+import imgIBox from "@/assets/product-ibox-series.jpg";
 import imgFirewall from "@/assets/product-firewall.jpg";
 import imgVCloud from "@/assets/product-vcloudpoint.jpg";
 
@@ -22,6 +23,16 @@ const categories = [
     models: ["GT1000", "GT1200", "GT1300", "GT1400", "GT2000", "GT3000", "GT4000", "GT4500", "GT5000", "GT6000", "GT7000", "GT8000", "GT9000"],
     badge: "Hot",
     image: imgGT,
+  },
+  {
+    title: "iBox Series — Industrial PC",
+    subtitle: "Fanless Embedded Box PC",
+    description: "คอมพิวเตอร์อุตสาหกรรมไร้พัดลม สำหรับ Edge AI, IoT Gateway, Machine Vision และงานโครงการ",
+    icon: Server,
+    href: "/ibox-series",
+    models: ["AI Edge/GPU", "Embedded Box", "Gateway/DIN Rail", "PoE Multi-LAN", "Vehicle", "AEOLUS"],
+    badge: "Hot",
+    image: imgIBox,
   },
   {
     title: "GB Series",
