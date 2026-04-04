@@ -16,6 +16,7 @@ import badgeCertification from "@/assets/epc-badge-certification.png";
 import { Badge } from "@/components/ui/badge";
 import epcLegoBanner from "@/assets/epc-lego-banner.png";
 import epcHeroFactory from "@/assets/epc-hero-factory.jpg";
+import epcHeroPanelPC from "@/assets/epc-hero-panel-pc.jpg";
 import epcUsecaseFactory from "@/assets/epc-usecase-factory.jpg";
 import epcUsecaseColdStorage from "@/assets/epc-usecase-coldstorage.jpg";
 import epcUsecaseConstruction from "@/assets/epc-usecase-construction.jpg";
@@ -424,9 +425,11 @@ const EPCSeries = () => {
             {/* Product Image */}
             <div className="md:w-2/5 flex justify-center">
               <img
-                src="https://static.wixstatic.com/media/0597a3_b15aa4e6e65b4d66a09d5e51e22985b8~mv2.png/v1/fill/w_600,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/EPC%20Series.png"
-                alt="EPC Panel PC Series"
-                className="w-full max-w-md h-auto drop-shadow-2xl"
+                src={epcHeroPanelPC}
+                alt="EPC Industrial Panel PC with Touchscreen"
+                className="w-full max-w-md h-auto rounded-xl shadow-2xl border border-white/10"
+                width={896}
+                height={1024}
               />
             </div>
           </div>
