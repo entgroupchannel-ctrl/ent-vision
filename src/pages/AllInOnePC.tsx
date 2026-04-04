@@ -346,6 +346,32 @@ const AllInOnePC = () => {
         <PriceDisclaimer />
       </div>
 
+      {/* Related Categories */}
+      <section className="container max-w-7xl mx-auto px-4 pb-10 space-y-3">
+        <h2 className="text-lg font-display font-bold text-foreground mb-2">หมวดหมู่ที่เกี่ยวข้อง</h2>
+        {[
+          { to: "/rugged-tablet", title: "Rugged Tablet", desc: "แท็บเล็ตทนทาน กันน้ำ IP65-IP68 กันกระแทก — 16 รุ่น", gradient: "Tablet", image: relatedTablet },
+          { to: "/handheld", title: "Rugged Handheld & PDA", desc: "เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม — 16 รุ่น", gradient: "Handheld & PDA", image: relatedHandheld },
+          { to: "/rugged-notebook", title: "Rugged Notebook", desc: "โน้ตบุ๊คทนทานมาตรฐานทหาร MIL-STD-810G/H — 10 รุ่น", gradient: "Notebook", image: relatedNotebook },
+        ].map((cat) => (
+          <Link key={cat.to} to={cat.to} className="card-surface overflow-hidden flex items-stretch group hover:border-primary/30 transition-all">
+            <div className="w-28 sm:w-36 shrink-0 relative">
+              <img src={cat.image} alt={cat.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" width={768} height={512} />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-background/20" />
+            </div>
+            <div className="flex-1 p-4 flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-display font-bold text-foreground">
+                  {cat.title.replace(cat.gradient, "")} <span className="text-gradient">{cat.gradient}</span>
+                </h3>
+                <p className="text-sm text-muted-foreground">{cat.desc}</p>
+              </div>
+              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0 ml-2" />
+            </div>
+          </Link>
+        ))}
+      </section>
+
       <FooterCompact />
 
       {/* Quote Dialog */}
