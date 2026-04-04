@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Monitor, Cpu, Box, Layers, FileText, ChevronRight, Factory, Zap, Shield, Touchpad } from "lucide-react";
+import { ArrowLeft, Monitor, Cpu, Box, Layers, FileText, ChevronRight, Zap, Shield, Hand } from "lucide-react";
 import aioHero from "@/assets/aio-hero.jpg";
 import SEOHead from "@/components/SEOHead";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
