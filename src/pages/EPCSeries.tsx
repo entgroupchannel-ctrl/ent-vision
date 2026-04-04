@@ -758,12 +758,6 @@ const EPCSeries = () => {
           </div>
         </section>
 
-        {/* Banner */}
-        <section>
-          <div className="card-surface overflow-hidden rounded-lg">
-            <img src={epcLegoBanner} alt="EPC-S10X2A LEGO MODE Technology" className="w-full h-auto" loading="lazy" />
-          </div>
-        </section>
 
         {/* ═══════════ YouTube & Podcast Section ═══════════ */}
         <section className="space-y-6">
