@@ -4,7 +4,8 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Shield, Zap, Network, Server, ThermometerSun, Globe, FileText } from "lucide-react";
+import { ArrowLeft, ExternalLink, Shield, Zap, Network, Server, ThermometerSun, Globe, FileText, Youtube, ThumbsUp, Play } from "lucide-react";
+import ShareButtons from "@/components/ShareButtons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import volktekCertifications from "@/assets/volktek-certifications.png";
@@ -312,6 +313,39 @@ const Volktek = () => {
                 <img src={img} alt={`Application ${i + 1}`} className="w-full h-auto object-contain" loading="lazy" />
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* YouTube */}
+        <section className="py-12">
+          <div className="text-center mb-8">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2 block">Media</span>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+              วิดีโอ<span className="text-gradient">แนะนำ Volktek</span>
+            </h2>
+          </div>
+          <div className="card-surface rounded-xl overflow-hidden max-w-2xl mx-auto">
+            <div className="relative aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/6Y6eEitc-yQ"
+                title="Volktek Industrial Switch — รีวิวและแนะนำ"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+                loading="lazy"
+              />
+            </div>
+            <div className="p-4 flex items-center justify-between">
+              <a
+                href="https://youtu.be/6Y6eEitc-yQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-primary font-semibold hover:underline"
+              >
+                <Youtube size={16} /> ดูบน YouTube
+              </a>
+              <ShareButtons url="https://youtu.be/6Y6eEitc-yQ" title="Volktek Industrial Switch — รีวิวและแนะนำ" compact />
+            </div>
           </div>
         </section>
 
