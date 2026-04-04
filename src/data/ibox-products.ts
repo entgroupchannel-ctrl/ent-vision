@@ -39,6 +39,7 @@ import ibox103_4l2cJ4125Dim from "@/assets/products/ibox-103-4l2c-j4125-dim.png"
 import ibox604_5l2c2p from "@/assets/products/ibox-604-5l2c2p.png";
 import ibox604Main from "@/assets/products/ibox-604-main.png";
 import ibox205_4l2c2p from "@/assets/products/ibox-205-4l2c2p.png";
+import vbox105_2l6c from "@/assets/products/vbox-105-2l6c.png";
 
 export interface IBoxProduct {
   id: string;
@@ -619,6 +620,43 @@ export const iboxProducts: IBoxProduct[] = [
     applications: ["Edge Networking", "Machine Vision", "Industrial Gateway", "Surveillance"],
     datasheet: "/datasheets/IBOX-205-4L2C2P.pdf",
     priceRange: "฿75,000 - ฿95,000",
+    isNew: true,
+  },
+
+  // ═══════ Vehicle & Special ═══════
+  {
+    id: "VBOX-105-2L6C",
+    name: "Vehicle Industrial PC",
+    nameTH: "คอมพิวเตอร์อุตสาหกรรมติดรถยนต์",
+    category: "Vehicle & Special",
+    subcategory: "Vehicle Mount PC",
+    formFactor: "compact",
+    performance: "entry",
+    image: ibox103Mini,
+    gallery: [ibox103, ibox007Main],
+    dimensionImage: vbox105_2l6c,
+    specs: {
+      cpu: "Intel Celeron J6412",
+      cpuGen: "Elkhart Lake",
+      ram: "Up to 32GB DDR4",
+      storage: "M.2 NVMe + SATA + mSATA",
+      io: "10x USB, 6x COM, 2x LAN",
+      comPorts: 6,
+      lanPorts: 2,
+      usbPorts: 10,
+      poe: false,
+      pcie: false,
+      temp: "-20°C ~ 65°C",
+    },
+    features: [
+      "Wide 6-42V DC with Ignition Control",
+      "80V Surge Protection",
+      "Fanless Aluminum Chassis",
+      "Triple Display Support",
+    ],
+    applications: ["Fleet Management", "Mobile Surveillance", "Intelligent Transportation"],
+    datasheet: "/datasheets/VBOX-105-2L6C.pdf",
+    priceRange: "฿65,000 - ฿85,000",
     isNew: true,
   },
 ];

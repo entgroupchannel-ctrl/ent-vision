@@ -339,6 +339,32 @@ const IBoxSeries = () => {
           </div>
         </section>
 
+        {/* ═══════ Vehicle & Special Section ═══════ */}
+        <section>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-2 rounded-lg bg-amber-500/10">
+              <Truck className="w-6 h-6 text-amber-500" />
+            </div>
+            <div>
+              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
+                🚗 Vehicle & Special
+              </h2>
+              <p className="text-sm text-muted-foreground">คอมพิวเตอร์อุตสาหกรรมติดรถยนต์, Fleet Management</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
+            {iboxProducts.filter(p => p.category === "Vehicle & Special").map((product) => (
+              <IBoxProductCard
+                key={product.id}
+                product={product}
+                selectedProducts={selectedProducts}
+                toggleSelect={toggleSelect}
+                onQuote={setQuoteProduct}
+              />
+            ))}
+          </div>
+        </section>
+
         {/* Product Models */}
         <section>
           <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
