@@ -197,7 +197,7 @@ const categories = [
   { id: "gole", label: "Gole Series" },
   { id: "em-rugged", label: "Rugged Tablet" },
   
-  { id: "aio", label: "All-in-One PC" },
+  
   
   { id: "tpc", label: "TPC Series" },
   { id: "pricelist", label: "Price List" },
