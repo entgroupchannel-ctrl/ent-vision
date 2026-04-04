@@ -172,14 +172,6 @@ const useCasesData = [
     image: usecaseSignage,
   },
 ];
-const galleryImages = [
-  "https://static.wixstatic.com/media/3e5003_8d0fe57f33ec4c78bac1e2211f2f5680~mv2.jpg/v1/fill/w_430,h_420,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/51.jpg",
-  "https://static.wixstatic.com/media/3e5003_10530c54a885451a9145236b7c128357~mv2.jpg/v1/fill/w_424,h_420,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/52.jpg",
-  "https://static.wixstatic.com/media/3e5003_ac1383fef1fc47b8be3c350501f0a04f~mv2.jpg/v1/crop/x_18,y_0,w_1973,h_1909/fill/w_434,h_420,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/53.jpg",
-  "https://static.wixstatic.com/media/3e5003_eb830a79fd904d64bd2b43037b71966b~mv2.jpg/v1/crop/x_23,y_0,w_1955,h_2000/fill/w_323,h_330,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/56.jpg",
-  "https://static.wixstatic.com/media/3e5003_e5e46fceb4ce4226b81d1d71b1890e59~mv2.jpg/v1/crop/x_28,y_0,w_1972,h_2000/fill/w_329,h_330,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/54.jpg",
-  "https://static.wixstatic.com/media/3e5003_3d56049981a74ec191a316daa2c61096~mv2.jpg/v1/crop/x_32,y_14,w_1910,h_1964/fill/w_320,h_330,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/55.jpg",
-];
 
 /* ═══════ Component ═══════ */
 const IBoxSeries = () => {
