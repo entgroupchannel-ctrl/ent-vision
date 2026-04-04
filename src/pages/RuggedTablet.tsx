@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 import {
   ArrowLeft, Shield, Droplets, Battery, Smartphone, Monitor,
   Download, ChevronRight, Wifi, FileText, Search,
-  ShoppingCart, X, SlidersHorizontal, ArrowUpDown,
+  ShoppingCart, X, SlidersHorizontal, ArrowUpDown, Play, ThumbsUp, Share2,
 } from "lucide-react";
+import ShareButtons from "@/components/ShareButtons";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
