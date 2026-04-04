@@ -5600,61 +5600,91 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 </div>
               </div>
 
-              {/* GT1200 Price Table */}
-              <div className="card-surface overflow-hidden">
-                <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT1200 Price List</h3>
-                  <p className="text-sm text-muted-foreground mt-1">เลือก CPU / RAM / SSD ที่เหมาะกับงาน — ทุกรุ่นพร้อม WiFi</p>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="bg-muted/50">
-                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
-                        <th className="text-left p-3 font-semibold text-foreground">RAM</th>
-                        <th className="text-left p-3 font-semibold text-foreground">SSD</th>
-                        <th className="text-right p-3 font-semibold text-foreground">ราคา (฿)</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border">
-                      {[
-                        { cpu: "i3-6157U (DDR4)", ram: "4 GB", ssd: "128 GB", price: "13,390" },
-                        { cpu: "i3-6157U (DDR4)", ram: "4 GB", ssd: "256 GB", price: "14,390" },
-                        { cpu: "i3-6157U (DDR4)", ram: "8 GB", ssd: "128 GB", price: "13,690" },
-                        { cpu: "i3-6157U (DDR4)", ram: "8 GB", ssd: "256 GB", price: "14,590" },
-                        { cpu: "i3-6157U (DDR4)", ram: "16 GB", ssd: "256 GB", price: "15,490" },
-                        { cpu: "i3-6157U (DDR4)", ram: "8 GB", ssd: "512 GB", price: "16,990" },
-                        { cpu: "i5-4278U (DDR3L)", ram: "4 GB", ssd: "128 GB", price: "14,690" },
-                        { cpu: "i5-4278U (DDR3L)", ram: "4 GB", ssd: "256 GB", price: "15,390" },
-                        { cpu: "i5-4278U (DDR3L)", ram: "8 GB", ssd: "128 GB", price: "14,890" },
-                        { cpu: "i5-4278U (DDR3L)", ram: "8 GB", ssd: "256 GB", price: "15,590" },
-                        { cpu: "i5-4278U (DDR3L)", ram: "8 GB", ssd: "512 GB", price: "18,090" },
-                        { cpu: "i5-4278U (DDR3L)", ram: "8 GB", ssd: "2 TB", price: "24,790" },
-                        { cpu: "i5-7287U (DDR4)", ram: "4 GB", ssd: "128 GB", price: "16,090" },
-                        { cpu: "i5-7287U (DDR4)", ram: "4 GB", ssd: "256 GB", price: "16,990" },
-                        { cpu: "i5-7287U (DDR4)", ram: "8 GB", ssd: "128 GB", price: "16,590" },
-                        { cpu: "i7-4578U (DDR3L)", ram: "4 GB", ssd: "128 GB", price: "15,790" },
-                        { cpu: "i7-4578U (DDR3L)", ram: "4 GB", ssd: "256 GB", price: "16,490" },
-                        { cpu: "i7-4578U (DDR3L)", ram: "8 GB", ssd: "128 GB", price: "15,990" },
-                        { cpu: "i7-4578U (DDR3L)", ram: "8 GB", ssd: "256 GB", price: "16,890" },
-                        { cpu: "i7-4578U (DDR3L)", ram: "8 GB", ssd: "512 GB", price: "18,890" },
-                      ].map((item, i) => (
-                        <tr key={i} className="hover:bg-muted/30 transition-colors">
-                          <td className="p-3 font-medium text-foreground">{item.cpu}</td>
-                          <td className="p-3 text-muted-foreground">{item.ram}</td>
-                          <td className="p-3 text-muted-foreground">{item.ssd}</td>
-                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="px-5 py-3 border-t border-border bg-muted/30">
-                  <p className="text-xs text-muted-foreground">
-                    ⚠️ ราคาอาจมีการเปลี่ยนแปลงได้โดยไม่ต้องแจ้งล่วงหน้า กรุณาติดต่อฝ่ายขายเพื่อยืนยันราคาและโปรโมชันล่าสุด
-                  </p>
-                </div>
-              </div>
+              {/* GT1200 Price Table — Paginated */}
+              {(() => {
+                const gt1200Prices = [
+                  { cpu: "i3-6157U (DDR4)", ram: "4 GB", ssd: "128 GB", price: "13,390" },
+                  { cpu: "i3-6157U (DDR4)", ram: "4 GB", ssd: "256 GB", price: "14,390" },
+                  { cpu: "i3-6157U (DDR4)", ram: "8 GB", ssd: "128 GB", price: "13,690" },
+                  { cpu: "i3-6157U (DDR4)", ram: "8 GB", ssd: "256 GB", price: "14,590" },
+                  { cpu: "i3-6157U (DDR4)", ram: "16 GB", ssd: "256 GB", price: "15,490" },
+                  { cpu: "i3-6157U (DDR4)", ram: "8 GB", ssd: "512 GB", price: "16,990" },
+                  { cpu: "i5-4278U (DDR3L)", ram: "4 GB", ssd: "128 GB", price: "14,690" },
+                  { cpu: "i5-4278U (DDR3L)", ram: "4 GB", ssd: "256 GB", price: "15,390" },
+                  { cpu: "i5-4278U (DDR3L)", ram: "8 GB", ssd: "128 GB", price: "14,890" },
+                  { cpu: "i5-4278U (DDR3L)", ram: "8 GB", ssd: "256 GB", price: "15,590" },
+                  { cpu: "i5-4278U (DDR3L)", ram: "8 GB", ssd: "512 GB", price: "18,090" },
+                  { cpu: "i5-4278U (DDR3L)", ram: "8 GB", ssd: "2 TB", price: "24,790" },
+                  { cpu: "i5-7287U (DDR4)", ram: "4 GB", ssd: "128 GB", price: "16,090" },
+                  { cpu: "i5-7287U (DDR4)", ram: "4 GB", ssd: "256 GB", price: "16,990" },
+                  { cpu: "i5-7287U (DDR4)", ram: "8 GB", ssd: "128 GB", price: "16,590" },
+                  { cpu: "i7-4578U (DDR3L)", ram: "4 GB", ssd: "128 GB", price: "15,790" },
+                  { cpu: "i7-4578U (DDR3L)", ram: "4 GB", ssd: "256 GB", price: "16,490" },
+                  { cpu: "i7-4578U (DDR3L)", ram: "8 GB", ssd: "128 GB", price: "15,990" },
+                  { cpu: "i7-4578U (DDR3L)", ram: "8 GB", ssd: "256 GB", price: "16,890" },
+                  { cpu: "i7-4578U (DDR3L)", ram: "8 GB", ssd: "512 GB", price: "18,890" },
+                ];
+                const perPage = 10;
+                const totalPages = Math.ceil(gt1200Prices.length / perPage);
+                const pageItems = gt1200Prices.slice(gt1200PricePage * perPage, (gt1200PricePage + 1) * perPage);
+
+                return (
+                  <div className="card-surface overflow-hidden">
+                    <div className="p-5 border-b border-border">
+                      <h3 className="text-lg font-display font-bold text-foreground">💰 GT1200 Price List</h3>
+                      <p className="text-sm text-muted-foreground mt-1">เลือก CPU / RAM / SSD ที่เหมาะกับงาน — ทุกรุ่นพร้อม WiFi ({gt1200Prices.length} รายการ)</p>
+                    </div>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="bg-muted/50">
+                            <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                            <th className="text-left p-3 font-semibold text-foreground">RAM</th>
+                            <th className="text-left p-3 font-semibold text-foreground">SSD</th>
+                            <th className="text-right p-3 font-semibold text-foreground">ราคา (฿)</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-border">
+                          {pageItems.map((item, i) => (
+                            <tr key={i} className="hover:bg-muted/30 transition-colors">
+                              <td className="p-3 font-medium text-foreground">{item.cpu}</td>
+                              <td className="p-3 text-muted-foreground">{item.ram}</td>
+                              <td className="p-3 text-muted-foreground">{item.ssd}</td>
+                              <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    {/* Pagination */}
+                    <div className="flex items-center justify-between px-5 py-3 border-t border-border">
+                      <span className="text-xs text-muted-foreground">
+                        หน้า {gt1200PricePage + 1} / {totalPages}
+                      </span>
+                      <div className="flex gap-1">
+                        {Array.from({ length: totalPages }, (_, p) => (
+                          <button
+                            key={p}
+                            onClick={() => setGt1200PricePage(p)}
+                            className={`w-8 h-8 rounded-md text-xs font-bold transition-colors ${
+                              p === gt1200PricePage
+                                ? "bg-primary text-primary-foreground"
+                                : "bg-muted/50 text-muted-foreground hover:bg-muted"
+                            }`}
+                          >
+                            {p + 1}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="px-5 py-3 border-t border-border bg-muted/30">
+                      <p className="text-xs text-muted-foreground">
+                        ⚠️ ราคาอาจมีการเปลี่ยนแปลงได้โดยไม่ต้องแจ้งล่วงหน้า กรุณาติดต่อฝ่ายขายเพื่อยืนยันราคาและโปรโมชันล่าสุด
+                      </p>
+                    </div>
+                  </div>
+                );
+              })()}
               <div className="text-center">
                 <button onClick={() => setQuoteProduct("GT1200")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
                   <FileText size={16} /> ขอใบเสนอราคา GT1200
