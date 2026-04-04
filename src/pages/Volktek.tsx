@@ -157,7 +157,7 @@ const Volktek = () => {
             </div>
             <div className="flex gap-3 shrink-0">
               <Button variant="outline" size="sm" asChild>
-                <a href="https://www.entgroup.co.th/_files/ugd/0597a3_888cab8832d1411582ecb607c1719677.pdf" target="_blank" rel="noopener noreferrer">
+                <a href="https://docs.wixstatic.com/ugd/0597a3_888cab8832d1411582ecb607c1719677.pdf" target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Datasheet
                 </a>
               </Button>
@@ -321,7 +321,7 @@ const Volktek = () => {
           <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือกสวิตช์ที่เหมาะกับเครือข่ายของคุณ</p>
           <div className="flex justify-center gap-3">
             <Button variant="outline" asChild>
-              <a href="https://www.entgroup.co.th/_files/ugd/0597a3_888cab8832d1411582ecb607c1719677.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="https://docs.wixstatic.com/ugd/0597a3_888cab8832d1411582ecb607c1719677.pdf" target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4 mr-1.5" /> ดาวน์โหลด Catalog
               </a>
             </Button>

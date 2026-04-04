@@ -36,7 +36,7 @@ const squareModels = [
     size: '10"',
     ratio: "4:3",
     image: "https://static.wixstatic.com/media/0597a3_8989217128734f62bd47299daa9ad880~mv2.png/v1/fill/w_287,h_242,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_31_48.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_ad14d113fe1e48bdb0fb90684f6a347e.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_ad14d113fe1e48bdb0fb90684f6a347e.pdf",
     com: "2×RS232 + 1×RS485 DB9",
   },
   {
@@ -45,7 +45,7 @@ const squareModels = [
     size: '12"',
     ratio: "4:3",
     image: "https://static.wixstatic.com/media/0597a3_8d0b05f5ca794468b05502a273c955f3~mv2.png/v1/crop/x_0,y_14,w_910,h_767/fill/w_287,h_242,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_33_48.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_5bed0468c86a4b44867336905051e6fb.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_5bed0468c86a4b44867336905051e6fb.pdf",
     com: "2×RS232 + 1×RS485 DB9",
   },
   {
@@ -54,7 +54,7 @@ const squareModels = [
     size: '15"',
     ratio: "4:3",
     image: "https://static.wixstatic.com/media/0597a3_1044f895f5d842f7a7c68fcc6caf36c9~mv2.png/v1/crop/x_11,y_0,w_908,h_766/fill/w_287,h_242,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_35_15.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_7c51ca4ca1d4424f976232df9557f7e4.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_7c51ca4ca1d4424f976232df9557f7e4.pdf",
     com: "4×RS232 + 2×RS485 DB9",
   },
   {
@@ -63,7 +63,7 @@ const squareModels = [
     size: '19"',
     ratio: "4:3",
     image: "https://static.wixstatic.com/media/0597a3_74801b56e37c4badb8f6ab099f0b5651~mv2.png/v1/crop/x_5,y_0,w_892,h_752/fill/w_287,h_242,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_36_07.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_8425d3dbc3034586ac78ec28d4b12811.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_8425d3dbc3034586ac78ec28d4b12811.pdf",
     com: "4×RS232 + 2×RS485 DB9",
   },
 ];
@@ -75,7 +75,7 @@ const wideModels = [
     size: '13.3"',
     ratio: "16:9",
     image: "https://static.wixstatic.com/media/0597a3_a24a2701c3274227be9a623a39fcad77~mv2.png/v1/crop/x_0,y_13,w_950,h_801/fill/w_279,h_231,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_41_32.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_a40c0b0f82054de78ad202b3a6bce9c1.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_a40c0b0f82054de78ad202b3a6bce9c1.pdf",
     com: "2×RS232 + 1×RS485 DB9",
   },
   {
@@ -84,7 +84,7 @@ const wideModels = [
     size: '15.6"',
     ratio: "16:9",
     image: "https://static.wixstatic.com/media/0597a3_f72a672e77bc413a90eaa099e8bcfe0e~mv2.png/v1/crop/x_15,y_0,w_904,h_762/fill/w_279,h_231,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_42_24.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_b6d3208d5bfb494bb029a23ff133f57e.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_b6d3208d5bfb494bb029a23ff133f57e.pdf",
     com: "2×RS232 + 1×RS485 DB9",
   },
   {
@@ -93,7 +93,7 @@ const wideModels = [
     size: '18.5"',
     ratio: "16:9",
     image: "https://static.wixstatic.com/media/0597a3_1afba5b0dac84a259a2dd29c1fda6909~mv2.png/v1/crop/x_0,y_3,w_910,h_757/fill/w_279,h_231,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_45_41.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_7018ff96f96e4a97bbd0ecdce6e4805f.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_7018ff96f96e4a97bbd0ecdce6e4805f.pdf",
     com: "4×RS232 + 2×RS485 DB9",
   },
   {
@@ -102,7 +102,7 @@ const wideModels = [
     size: '21.5"',
     ratio: "16:9",
     image: "https://static.wixstatic.com/media/0597a3_cfe6c90e6ba44ef3ba3a0aa5a698f32d~mv2.png/v1/crop/x_0,y_5,w_906,h_753/fill/w_279,h_231,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_46_24.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_bc28e143cffa491a9a38bcf5098a87d8.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_bc28e143cffa491a9a38bcf5098a87d8.pdf",
     com: "4×RS232 + 2×RS485 DB9",
   },
   {
@@ -111,7 +111,7 @@ const wideModels = [
     size: '23.6"',
     ratio: "16:9",
     image: "https://static.wixstatic.com/media/0597a3_67653d20f0ad4119b45a29a2927e5a2f~mv2.png/v1/crop/x_0,y_1,w_902,h_750/fill/w_279,h_231,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_47_19.png",
-    datasheet: "https://www.entgroup.co.th/_files/ugd/0597a3_899307542dca4df6b763b3a52e2af574.pdf",
+    datasheet: "https://docs.wixstatic.com/ugd/0597a3_899307542dca4df6b763b3a52e2af574.pdf",
     com: "4×RS232 + 2×RS485 DB9",
   },
 ];
@@ -388,7 +388,7 @@ const EPCSeries = () => {
               </p>
               <div className="flex gap-3">
                 <Button variant="outline" size="sm" asChild>
-                  <a href="https://www.entgroup.co.th/_files/ugd/0597a3_2521046b3a214087a30e851159a6b428.pdf" target="_blank" rel="noopener noreferrer">
+                  <a href="https://docs.wixstatic.com/ugd/0597a3_2521046b3a214087a30e851159a6b428.pdf" target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Product Overview
                   </a>
                 </Button>
@@ -723,11 +723,11 @@ const EPCSeries = () => {
           <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">Downloads</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {[
-              { name: "CESIPC & ENTGROUP E-Catalog", url: "https://www.entgroup.co.th/_files/ugd/0597a3_9dad5caa6c4d4410a723cab33c3177bf.pdf" },
+              { name: "CESIPC & ENTGROUP E-Catalog", url: "https://docs.wixstatic.com/ugd/0597a3_9dad5caa6c4d4410a723cab33c3177bf.pdf" },
               ...squareModels.map((m) => ({ name: m.name, url: m.datasheet })),
-              { name: "EPC-S17X2A", url: "https://www.entgroup.co.th/_files/ugd/0597a3_4aadb2eda8ae4dcdb9e1eab7d5ecf42e.pdf" },
+              { name: "EPC-S17X2A", url: "https://docs.wixstatic.com/ugd/0597a3_4aadb2eda8ae4dcdb9e1eab7d5ecf42e.pdf" },
               ...wideModels.map((m) => ({ name: m.name, url: m.datasheet })),
-              { name: "EPC-W12X2A", url: "https://www.entgroup.co.th/_files/ugd/0597a3_06738f7618f84058a4f0c1d3cc9d8a95.pdf" },
+              { name: "EPC-W12X2A", url: "https://docs.wixstatic.com/ugd/0597a3_06738f7618f84058a4f0c1d3cc9d8a95.pdf" },
             ].map((dl, i) => (
               <a
                 key={i}
@@ -787,7 +787,7 @@ const EPCSeries = () => {
           <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือก Panel PC ที่เหมาะกับโรงงานของคุณ</p>
           <div className="flex justify-center gap-3">
             <Button variant="outline" asChild>
-              <a href="https://www.entgroup.co.th/_files/ugd/0597a3_9dad5caa6c4d4410a723cab33c3177bf.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="https://docs.wixstatic.com/ugd/0597a3_9dad5caa6c4d4410a723cab33c3177bf.pdf" target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4 mr-1.5" /> ดาวน์โหลด E-Catalog
               </a>
             </Button>
