@@ -179,7 +179,7 @@ const EPCSeriesCompare = ({ onQuote }: Props) => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/50">
-                {filtered.map((m) => {
+                {paginated.map((m) => {
                   const score = getValueScore(m);
                   const stars = score >= 80 ? 5 : score >= 65 ? 4 : score >= 50 ? 3 : 2;
                   return (
@@ -235,6 +235,32 @@ const EPCSeriesCompare = ({ onQuote }: Props) => {
               </tbody>
             </table>
           </div>
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between px-4 py-2.5 border-t border-border">
+              <p className="text-[11px] text-muted-foreground">
+                แสดง {(page - 1) * ITEMS_PER_PAGE + 1}-{Math.min(page * ITEMS_PER_PAGE, filtered.length)} จาก {filtered.length} รายการ
+              </p>
+              <div className="flex items-center gap-1">
+                <button onClick={() => setPage(Math.max(1, page - 1))} disabled={page === 1}
+                  className="w-7 h-7 flex items-center justify-center rounded border border-border text-muted-foreground hover:bg-muted disabled:opacity-30 transition-colors">
+                  <ChevronLeft size={14} />
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                  <button key={p} onClick={() => setPage(p)}
+                    className={`w-7 h-7 flex items-center justify-center rounded text-[11px] font-medium transition-colors ${
+                      p === page ? "bg-primary text-primary-foreground" : "border border-border text-muted-foreground hover:bg-muted"
+                    }`}>
+                    {p}
+                  </button>
+                ))}
+                <button onClick={() => setPage(Math.min(totalPages, page + 1))} disabled={page === totalPages}
+                  className="w-7 h-7 flex items-center justify-center rounded border border-border text-muted-foreground hover:bg-muted disabled:opacity-30 transition-colors">
+                  <ChevronRight size={14} />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
