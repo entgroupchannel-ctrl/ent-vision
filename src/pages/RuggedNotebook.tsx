@@ -278,6 +278,8 @@ const RuggedNotebookPage = () => {
             )}
 
             <PriceDisclaimer />
+          </div>
+        </div>
       </div>
 
       {/* ─── YouTube & Facebook Media Center ─── */}
@@ -369,8 +371,7 @@ const RuggedNotebookPage = () => {
           </div>
         </div>
       </section>
-        </div>
-      </div>
+
 
       {/* Floating Selection Bar */}
       {selectedProducts.size > 0 && (
