@@ -235,6 +235,32 @@ const IBoxSeries = () => {
           </div>
         </section>
 
+        {/* ═══════ AI Edge Computing / GPU Section ═══════ */}
+        <section>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
+                🔥 AI Edge Computing / GPU
+              </h2>
+              <p className="text-sm text-muted-foreground">คอมพิวเตอร์อุตสาหกรรมรองรับ GPU สำหรับ AI, Deep Learning, Machine Vision</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
+            {iboxProducts.map((product) => (
+              <IBoxProductCard
+                key={product.id}
+                product={product}
+                selectedProducts={selectedProducts}
+                toggleSelect={toggleSelect}
+                onQuote={setQuoteProduct}
+              />
+            ))}
+          </div>
+        </section>
+
         {/* Product Models */}
         <section>
           <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
