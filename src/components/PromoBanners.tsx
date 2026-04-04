@@ -17,7 +17,7 @@ const activePromos = [
       "น้ำหนักเบา 650g / Barcode Scanner ในตัว",
     ],
     status: "active" as const,
-    link: "/rugged-tablet",
+    link: "/rugged-tablet/em-t195",
   },
   {
     id: "starter-plus",
