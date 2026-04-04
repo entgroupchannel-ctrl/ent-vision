@@ -1963,7 +1963,7 @@ const GTSeries = () => {
                     <h4 className="text-sm font-bold text-foreground mb-2">📌 GT3000 Intro</h4>
                     <div className="relative w-full aspect-video rounded-xl overflow-hidden">
                       <iframe
-                        src="https://www.youtube.com/embed/ifkzyVY9Z-g"
+                        src="https://www.youtube.com/embed/31SEStppvKw"
                         title="GT3000 Intro"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
