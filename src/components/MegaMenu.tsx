@@ -160,9 +160,10 @@ const menuCategories = [
       {
         heading: "Rugged Notebook",
         links: [
-          { label: "EM-X15M — AI PC i7", href: "/rugged-tablet", hot: true },
-          { label: "EM-X14A — 14\" Compact", href: "/rugged-tablet" },
-          { label: "EM-X14M — 2-in-1 Tablet PC", href: "/rugged-tablet" },
+          { label: "EM-X15M — AI PC i7", href: "/rugged-notebook", hot: true },
+          { label: "EM-X14A — 14\" Compact", href: "/rugged-notebook" },
+          { label: "EM-X14M — 2-in-1 Tablet PC", href: "/rugged-notebook" },
+          { label: "ดูทั้งหมด →", href: "/rugged-notebook", hot: true },
         ],
       },
     ],
