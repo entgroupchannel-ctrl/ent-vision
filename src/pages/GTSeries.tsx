@@ -1063,7 +1063,7 @@ const GTSeries = () => {
                             { label: "Internal", value: "mSATA + SATA + mini PCIe ×2" },
                           ]},
                           { cat: "Network", items: [
-                            { label: "WiFi/BT", value: "Built-in Dual Antenna (Optional)" },
+                            { label: "WiFi/BT", value: "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม" },
                           ]},
                           { cat: "Power & Environment", items: [
                             { label: "Power", value: "DC 12V/5A (10W), AC 100–240V" },
