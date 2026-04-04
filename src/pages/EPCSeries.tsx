@@ -27,6 +27,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import FooterCompact from "@/components/FooterCompact";
 import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteDialog from "@/components/QuoteDialog";
+import EPCSeriesCompare from "@/components/EPCSeriesCompare";
 
 /* ───── Product Data ───── */
 
@@ -268,6 +269,7 @@ const optionsList = [
 
 const categories = [
   { id: "overview", label: "Overview" },
+  { id: "comparison", label: "Quick Compare" },
   { id: "features", label: "Features" },
   { id: "square", label: "Square Display" },
   { id: "wide", label: "Wide Display" },
@@ -402,6 +404,20 @@ const EPCSeries = () => {
 
         </div>
       </div>
+
+      {/* Quick Compare Section */}
+      <section className="section-padding bg-muted/30" id="comparison">
+        <div className="container max-w-7xl mx-auto px-4">
+          <div className="text-center mb-8">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Quick Compare</span>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+              เปรียบเทียบ<span className="text-gradient">ทุกรุ่นทุกสเปก</span>
+            </h2>
+            <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">เลือกมุมมอง สเปก / ราคา / ความคุ้มค่า พร้อมกรองตามประเภทจอและระดับ CPU</p>
+          </div>
+          <EPCSeriesCompare onQuote={(name) => { setQuoteProduct(name); }} />
+        </div>
+      </section>
 
       {/* Sticky Nav */}
       <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border">
