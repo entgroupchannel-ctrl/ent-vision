@@ -4771,6 +4771,54 @@ const GTSeries = () => {
                   <ExternalLink size={16} /> ดูข้อมูลเพิ่มเติม GT1300 (Manufacturer)
                 </a>
               </div>
+
+              {/* Intro Video */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT1300</h3>
+                </div>
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/ocai7eLpMOY"
+                    title="GT1300 Intro"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-3 flex items-center justify-between">
+                  <span className="text-sm font-semibold text-foreground">GT1300 Introduction</span>
+                  <ShareButtons url="https://youtu.be/ocai7eLpMOY" title="GT1300 Introduction" compact />
+                </div>
+              </div>
+
+              {/* More Videos */}
+              <div className="grid md:grid-cols-3 gap-4">
+                {[
+                  { id: "7wE6fxMpJB4", label: "ภาพรวม GT Series" },
+                  { id: "31SEStppvKw", label: "GT Series Overview" },
+                  { id: "lh3lgfVCwUQ", label: "GT1300 เพิ่มเติม" },
+                ].map((v) => (
+                  <div key={v.id} className="card-surface overflow-hidden rounded-xl">
+                    <div className="aspect-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${v.id}`}
+                        title={v.label}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-3 flex items-center justify-between">
+                      <span className="text-xs font-semibold text-foreground truncate">{v.label}</span>
+                      <ShareButtons url={`https://youtu.be/${v.id}`} title={v.label} compact />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
