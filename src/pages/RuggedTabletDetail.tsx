@@ -115,6 +115,30 @@ const RuggedTabletDetail = () => {
               ))}
             </div>
 
+            {/* Config selector */}
+            {product.configs && product.configs.length > 0 && (
+              <div className="space-y-2">
+                <h3 className="text-sm font-bold">เลือกคอนฟิกูเรชั่น</h3>
+                {product.configs.map((c, i) => (
+                  <div key={i} className="p-3 rounded-lg border border-border bg-card hover:border-primary/30 transition-all">
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-2">
+                        <p className="font-bold text-sm">{c.label}</p>
+                        {c.inStock && <Badge className="bg-green-500/20 text-green-600 border-green-500/30 text-[10px]">พร้อมส่ง</Badge>}
+                      </div>
+                      <span className="text-primary font-extrabold text-lg">{c.price}</span>
+                    </div>
+                    <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
+                      <span>RAM: {c.ram}</span>
+                      <span>Storage: {c.storage}</span>
+                      <span>Network: {c.network}</span>
+                    </div>
+                    {c.note && <p className="text-[10px] text-primary mt-1">{c.note}</p>}
+                  </div>
+                ))}
+              </div>
+            )}
+
             {/* Price / Contact */}
             <div className="p-4 bg-primary/5 rounded-xl border border-primary/20">
               <p className="text-sm text-muted-foreground mb-1">ราคา</p>
