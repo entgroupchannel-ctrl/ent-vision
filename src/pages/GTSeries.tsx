@@ -1177,6 +1177,25 @@ const GTSeries = () => {
                       ))}
                     </div>
                   </div>
+
+                  {/* YouTube Channel CTA */}
+                  <a
+                    href="https://www.youtube.com/@ENTGROUP-TH"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 rounded-xl border border-red-500/20 bg-red-500/5 hover:bg-red-500/10 transition-colors group"
+                  >
+                    <div className="shrink-0 w-10 h-10 rounded-full bg-red-600 flex items-center justify-center">
+                      <Play className="text-white ml-0.5" size={18} fill="white" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-bold text-foreground">ENT GROUP — YouTube Channel</p>
+                      <p className="text-xs text-muted-foreground">กดติดตามเพื่อรับวิดีโอสินค้าใหม่ รีวิว และเทคนิคการใช้งาน</p>
+                    </div>
+                    <span className="shrink-0 px-3 py-1.5 rounded-lg bg-red-600 text-white text-xs font-bold group-hover:bg-red-700 transition-colors">
+                      Subscribe
+                    </span>
+                  </a>
                 </div>
               </div>
 
