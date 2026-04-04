@@ -218,12 +218,12 @@ const TabletCard = ({
   onToggleSelect: (name: string) => void;
 }) => (
   <div className={`card-surface overflow-hidden group transition-all ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
-    <div className="relative bg-secondary/30 p-4 flex items-center justify-center h-52">
+    <Link to={`/rugged-tablet/${product.id}`} className="relative bg-secondary/30 p-4 flex items-center justify-center h-52 cursor-pointer">
       <WishlistHeart
         item={{ id: product.id, name: product.name, category: "Rugged Tablet", image: product.image, href: "/rugged-tablet", specs: product.cpu }}
         className="absolute top-3 right-3"
       />
-      <button onClick={() => onToggleSelect(product.model)} className="absolute top-3 left-3 z-10">
+      <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleSelect(product.model); }} className="absolute top-3 left-3 z-10">
         <Checkbox checked={selected} className="h-5 w-5" />
       </button>
       <Badge className={`absolute top-3 left-12 text-[10px] ${product.os === "Windows" ? "bg-blue-500/20 text-blue-400 border-blue-500/30" : "bg-green-500/20 text-green-400 border-green-500/30"}`}>
@@ -233,7 +233,7 @@ const TabletCard = ({
         <Badge className="absolute bottom-3 left-3 bg-primary text-primary-foreground text-[10px]">{product.badge}</Badge>
       )}
       <img src={product.image} alt={product.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-    </div>
+    </Link>
     <div className="p-5 space-y-3">
       <div className="flex items-center justify-between gap-2">
         <div>
