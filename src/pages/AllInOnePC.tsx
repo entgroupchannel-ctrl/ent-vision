@@ -64,12 +64,14 @@ const AIOCard = ({
       >
         <Checkbox checked={selected} className="h-5 w-5" />
       </button>
-      <img
-        src={product.image}
-        alt={product.model}
-        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
-        loading="lazy"
-      />
+      <Link to={`/aio/${product.id}`} className="flex items-center justify-center w-full h-full">
+        <img
+          src={product.image}
+          alt={product.model}
+          className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+          loading="lazy"
+        />
+      </Link>
     </div>
 
     {/* Info */}
