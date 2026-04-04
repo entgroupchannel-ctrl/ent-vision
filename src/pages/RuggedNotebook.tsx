@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import {
   ArrowLeft, Shield, Cpu, Monitor, Laptop, Sparkles, Search,
   SlidersHorizontal, ArrowUpDown, FileText, ShoppingCart, X,
+  Play, ThumbsUp, Share2, ExternalLink,
 } from "lucide-react";
+import ShareButtons from "@/components/ShareButtons";
 import notebookHero from "@/assets/notebook-hero.jpg";
 import SEOHead from "@/components/SEOHead";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
@@ -276,7 +278,97 @@ const RuggedNotebookPage = () => {
             )}
 
             <PriceDisclaimer />
+      </div>
+
+      {/* ─── YouTube & Facebook Media Center ─── */}
+      <section className="max-w-7xl mx-auto px-4 py-12">
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-1.5 rounded-full text-sm font-bold mb-4">
+            <Play className="w-4 h-4" /> Media Center
           </div>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-foreground mb-2">
+            วิดีโอรีวิว & ทดสอบ Rugged Notebook
+          </h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            ดูการทดสอบความทนทานจริง กด Like & Share ให้กำลังใจทีมงาน!
+          </p>
+        </div>
+
+        {/* Featured YouTube Video */}
+        <div className="mb-8">
+          <div className="card-surface rounded-2xl overflow-hidden">
+            <div className="relative w-full pb-[56.25%] md:pb-[42%]">
+              <iframe
+                src="https://www.youtube.com/embed/Zu5rGL96Qu8"
+                title="Rugged Notebook Review"
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <div className="p-4 flex items-center justify-between">
+              <div>
+                <p className="font-bold text-foreground">รีวิว Rugged Notebook — ทดสอบการใช้งานจริง</p>
+                <p className="text-xs text-muted-foreground">ENT Group Official</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <ShareButtons url="https://youtu.be/Zu5rGL96Qu8" title="Rugged Notebook Review" compact />
+                <a href="https://youtu.be/Zu5rGL96Qu8" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-destructive text-destructive-foreground px-4 py-2 rounded-full text-xs font-bold hover:bg-destructive/90 transition-colors">
+                  <ThumbsUp className="w-3.5 h-3.5" /> Like & Subscribe
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Facebook Reels Section */}
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-8 h-8 rounded-full bg-[hsl(221,44%,41%)] flex items-center justify-center">
+              <span className="text-white font-bold text-sm">f</span>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-foreground">Facebook Reels</h3>
+              <p className="text-xs text-muted-foreground">คลิปสั้นจาก ENT Group — กด Share ช่วยแชร์!</p>
+            </div>
+            <a
+              href="https://www.facebook.com/entgroup.th"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto inline-flex items-center gap-1.5 bg-[hsl(221,44%,41%)] text-white px-4 py-2 rounded-full text-xs font-bold hover:opacity-90 transition-opacity"
+            >
+              <ExternalLink className="w-3.5 h-3.5" /> Follow Page
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { url: "https://www.facebook.com/share/r/1FV2EVYxGG/", title: "Rugged Notebook ทดสอบกันกระแทก" },
+              { url: "https://www.facebook.com/share/r/1DbdJEFLba/", title: "Rugged Notebook ใช้งานภาคสนาม" },
+              { url: "https://www.facebook.com/share/r/1C91atFocu/", title: "Rugged Notebook กันน้ำ IP65" },
+            ].map((reel) => (
+              <a
+                key={reel.url}
+                href={reel.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group card-surface rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-primary/30"
+              >
+                <div className="relative bg-gradient-to-br from-[hsl(221,44%,41%)]/10 to-[hsl(221,44%,41%)]/5 p-8 flex flex-col items-center justify-center min-h-[200px]">
+                  <div className="w-14 h-14 rounded-full bg-[hsl(221,44%,41%)]/90 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Play className="w-6 h-6 text-white fill-white" />
+                  </div>
+                  <span className="text-xs font-bold text-[hsl(221,44%,41%)]">ดู Facebook Reel</span>
+                </div>
+                <div className="p-3 flex items-center justify-between gap-2">
+                  <p className="font-semibold text-xs text-foreground line-clamp-1">{reel.title}</p>
+                  <Share2 className="w-4 h-4 text-muted-foreground shrink-0" />
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
         </div>
       </div>
 
