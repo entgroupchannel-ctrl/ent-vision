@@ -164,6 +164,8 @@ const SmartDisplay = () => {
   });
   const [showLineQR, setShowLineQR] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [videoTab, setVideoTab] = useState("smart-display");
+  const [podcastTab, setPodcastTab] = useState("smart-display");
 
   return (
     <div className="min-h-screen bg-background">
@@ -1081,54 +1083,135 @@ const SmartDisplay = () => {
               วิดีโอ <span className="text-gradient">Smart Display & KIOSK</span>
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
+
+          {/* Video Tabs */}
+          <div className="flex justify-center gap-2 mb-8">
             {[
-              { id: "V2kmwDhKWko", title: "Smart Display Demo 1" },
-              { id: "WLGJY0Qsmlo", title: "Smart Display Demo 2" },
-              { id: "7vHHYtEinoI", title: "Smart Display Demo 3" },
-              { id: "kuBRO1LFtdo", title: "Smart Display Demo 4" },
-            ].map((v) => (
-              <div key={v.id} className="card-surface rounded-xl overflow-hidden">
+              { key: "smart-display", label: "Smart Display & KIOSK" },
+              { key: "fpm", label: "FPM Touch Monitor" },
+            ].map((t) => (
+              <button
+                key={t.key}
+                onClick={() => setVideoTab(t.key)}
+                className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                  videoTab === t.key
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                }`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          {videoTab === "smart-display" && (
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                { id: "V2kmwDhKWko", title: "Smart Display Demo 1" },
+                { id: "WLGJY0Qsmlo", title: "Smart Display Demo 2" },
+                { id: "7vHHYtEinoI", title: "Smart Display Demo 3" },
+                { id: "kuBRO1LFtdo", title: "Smart Display Demo 4" },
+              ].map((v) => (
+                <div key={v.id} className="card-surface rounded-xl overflow-hidden">
+                  <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                    <iframe
+                      className="absolute inset-0 w-full h-full"
+                      src={`https://www.youtube.com/embed/${v.id}`}
+                      title={v.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {videoTab === "fpm" && (
+            <div className="max-w-2xl mx-auto">
+              <div className="card-surface rounded-xl overflow-hidden">
                 <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                   <iframe
                     className="absolute inset-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${v.id}`}
-                    title={v.title}
+                    src="https://www.youtube.com/embed/gz9E7ls-QwQ"
+                    title="FPM Touch Monitor"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     loading="lazy"
                   />
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Podcast */}
       <section className="section-padding">
-        <div className="container max-w-4xl mx-auto">
+        <div className="container max-w-5xl mx-auto">
           <div className="text-center mb-8">
             <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">🎙️ Podcast</span>
             <h2 className="text-3xl md:text-4xl font-display font-bold">
-              พอดแคสต์ <span className="text-gradient">Smart Display</span>
+              พอดแคสต์ <span className="text-gradient">Smart Display & FPM</span>
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
+
+          {/* Podcast Sub-tabs */}
+          <div className="flex justify-center gap-2 mb-8">
             {[
-              { src: "/podcasts/smart-display-intro.wav", title: "Intro Smart Display Podcast" },
-              { src: "/podcasts/outdoor-monitor-clip1.wav", title: "Outdoor Monitor Clip 1" },
-              { src: "/podcasts/outdoor-monitor-clip2.wav", title: "Outdoor Monitor Clip 2" },
-              { src: "/podcasts/software-digital-signage.wav", title: "Software Digital Signage" },
-            ].map((p) => (
-              <div key={p.src} className="card-surface rounded-xl p-4 flex flex-col gap-2">
-                <p className="font-semibold text-sm text-foreground">{p.title}</p>
-                <audio controls preload="none" className="w-full h-10">
-                  <source src={p.src} type="audio/wav" />
-                </audio>
-              </div>
+              { key: "smart-display", label: "Smart Display" },
+              { key: "fpm", label: "FPM Monitor" },
+            ].map((t) => (
+              <button
+                key={t.key}
+                onClick={() => setPodcastTab(t.key)}
+                className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                  podcastTab === t.key
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                }`}
+              >
+                {t.label}
+              </button>
             ))}
           </div>
+
+          {podcastTab === "smart-display" && (
+            <div className="grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
+              {[
+                { src: "/podcasts/smart-display-intro.wav", title: "Intro Smart Display Podcast" },
+                { src: "/podcasts/outdoor-monitor-clip1.wav", title: "Outdoor Monitor Clip 1" },
+                { src: "/podcasts/outdoor-monitor-clip2.wav", title: "Outdoor Monitor Clip 2" },
+                { src: "/podcasts/software-digital-signage.wav", title: "Software Digital Signage" },
+              ].map((p) => (
+                <div key={p.src} className="card-surface rounded-xl p-4 flex flex-col gap-2">
+                  <p className="font-semibold text-sm text-foreground">{p.title}</p>
+                  <audio controls preload="none" className="w-full h-10">
+                    <source src={p.src} type="audio/wav" />
+                  </audio>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {podcastTab === "fpm" && (
+            <div className="grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
+              {[
+                { src: "/podcasts/fpm-series-intro.wav", title: "Podcast Intro FPM Series" },
+                { src: "/podcasts/fpm-intro.wav", title: "Podcast FPM Monitor" },
+                { src: "/podcasts/fpm-promotion.wav", title: "Promotion How to buy FPM Series" },
+                { src: "/podcasts/fpm-how-to-buy.wav", title: "How to buy FPM Series" },
+              ].map((p) => (
+                <div key={p.src} className="card-surface rounded-xl p-4 flex flex-col gap-2">
+                  <p className="font-semibold text-sm text-foreground">{p.title}</p>
+                  <audio controls preload="none" className="w-full h-10">
+                    <source src={p.src} type="audio/wav" />
+                  </audio>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
