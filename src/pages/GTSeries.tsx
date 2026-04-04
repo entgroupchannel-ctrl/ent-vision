@@ -892,6 +892,9 @@ const GTSeries = () => {
                 ))}
               </div>
 
+              {/* Use Cases & Branding */}
+              {useCasesGrid}
+
               {/* Comparison Table */}
               <div id="comparison">
                 <ComparisonTable handleTabChange={handleTabChange} />
