@@ -3,7 +3,7 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Settings, Maximize, Wifi, ChevronDown, Smartphone, Factory, BarChart3, Gauge, Headphones, Play, Star, Quote } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Settings, Maximize, Wifi, ChevronDown, Smartphone, Factory, BarChart3, Gauge, Headphones, Play, Star, Quote, Filter, CheckCircle2, DollarSign, SlidersHorizontal } from "lucide-react";
 import ShareButtons from "@/components/ShareButtons";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -857,45 +857,231 @@ const ModelSection = ({ model, index, onQuote }: { model: GKModel; index: number
   );
 };
 
-/* ─── Comparison Quick View ─── */
-const ComparisonTable = () => (
-  <div className="card-surface overflow-hidden">
-    <div className="px-6 py-4 bg-primary/10 border-b border-border">
-      <h3 className="font-bold text-foreground">คุณสมบัติเด่นของแต่ละรุ่น — เปรียบเทียบเร็ว</h3>
-    </div>
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="bg-muted/30 border-b border-border">
-            <th className="text-left px-4 py-3 font-semibold text-foreground">คุณสมบัติ</th>
-            <th className="text-center px-4 py-3 font-semibold text-primary">GK1004</th>
-            <th className="text-center px-4 py-3 font-semibold text-foreground">GK1506</th>
-            <th className="text-center px-4 py-3 font-semibold text-foreground">GK2101</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-border">
-          {[
-            { label: "ขนาดจอ", gk1004: "10.4\"", gk1506: "15.6\"", gk2101: "21\"" },
-            { label: "ความละเอียด", gk1004: "1024×768", gk1506: "Full HD", gk2101: "Full HD" },
-            { label: "มาตรฐาน", gk1004: "IP65", gk1506: "IP65", gk2101: "IP65" },
-            { label: "ซีพียู X86", gk1004: "i3/i5/i7 + AMD", gk1506: "i3/i5/i7", gk2101: "i5/i7" },
-            { label: "ซีพียู ARM", gk1004: "RK3288/RK3399", gk1506: "—", gk2101: "—" },
-            { label: "ระบบปฏิบัติการ", gk1004: "Win/Linux/Android", gk1506: "Win/Linux", gk2101: "Win/Linux" },
-            { label: "ราคาเริ่มต้น", gk1004: "฿25,990", gk1506: "฿31,990", gk2101: "฿30,990" },
-          ].map((row, i) => (
-            <tr key={i} className="hover:bg-muted/30 transition-colors">
-              <td className="px-4 py-3 font-medium text-foreground bg-muted/10">{row.label}</td>
-              <td className="px-4 py-3 text-center text-muted-foreground">{row.gk1004}</td>
-              <td className="px-4 py-3 text-center text-muted-foreground">{row.gk1506}</td>
-              <td className="px-4 py-3 text-center text-muted-foreground">{row.gk2101}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </div>
-);
+/* ─── Advanced Comparison System ─── */
+const comparisonData = {
+  models: ["GK1004", "GK1501", "GK1506", "GK1901", "GK2101"] as const,
+  specs: {
+    "ขนาดจอ": ["10.4\"", "15\"", "15.6\"", "19\"", "21.5\""],
+    "ความละเอียด": ["1024×768", "1024×768", "1920×1080 FHD", "1280×1024", "1920×1080 FHD"],
+    "Touch": ["10-Point", "10-Point", "10-Point", "10-Point", "10-Point"],
+    "มาตรฐาน IP": ["IP65 Front", "IP65 Front", "IP65 Full", "IP65 Front", "IP65"],
+    "CPU (Intel)": ["i3/i5/i7 Gen5", "i5/i7 Gen3/Gen6", "i3/i5/i7 Gen5", "i5 Gen4/8, i7 Gen3/6", "i5 Gen4-7, i7 Gen3/6"],
+    "CPU (ARM)": ["RK3288 / RK3399", "—", "—", "—", "—"],
+    "OS": ["Win/Linux/Android", "Win/Linux", "Win/Linux/IoT", "Win/Linux", "Win/Linux"],
+    "RAM สูงสุด": ["8GB DDR3", "8GB DDR3", "8GB DDR3", "8GB DDR3/DDR4", "16GB DDR3/DDR4"],
+    "SSD สูงสุด": ["512GB", "512GB", "512GB", "512GB", "512GB"],
+    "LAN": ["2× GbE", "2× GbE", "2× GbE", "2× GbE", "1-2× GbE"],
+    "USB": ["2-6 พอร์ต", "6 พอร์ต", "6 พอร์ต", "4-6 พอร์ต", "USB2.0/3.0"],
+    "COM Port": ["1-2× RS232/485", "2× RS232", "2-4× RS232/485", "2× RS232/485", "1-2× COM"],
+    "Video Out": ["VGA + HDMI", "VGA + HDMI", "VGA + HDMI", "VGA + HDMI", "HDMI"],
+    "ความสว่าง": ["250-400 nits", "250-400 nits", "250-1,000 nits", "250-400 nits", "250-400 nits"],
+    "อุณหภูมิ": ["-10~60°C", "-10~60°C", "-10~60°C", "-10~60°C", "-10~60°C"],
+    "ขนาดตัวเครื่อง": ["283×225×56 mm", "385×305×55 mm", "391×276×51 mm", "445×360×60 mm", "554×355×150 mm"],
+    "น้ำหนัก": ["~3 kg", "4.5 kg", "4.2 kg", "5.5 kg", "9-10 kg"],
+    "Wide Voltage": ["12-64V", "DC 12V", "9-36V Phoenix", "DC 12V", "12-64V"],
+    "Expansion": ["mini PCIe/M.2", "mini PCIe", "mini PCIe/M.2", "mini PCIe", "mini PCIe/M.2"],
+  } as Record<string, string[]>,
+  prices: {
+    "ราคาเริ่มต้น": ["฿25,990", "฿28,990", "฿31,990", "฿29,990", "฿30,990"],
+    "ราคาสูงสุด": ["฿38,990", "฿34,990", "฿35,990", "฿35,990", "฿36,990"],
+    "CPU เริ่มต้น": ["i3-5005U", "i5 Gen3", "i3-5005U", "i5 Gen4", "i5 Gen4"],
+    "CPU สูงสุด": ["i5-1155G7 Gen11", "i7 Gen6", "i7-5500U", "i7 Gen6", "i7 Gen6"],
+    "Config เริ่มต้น": ["4GB/128GB", "4GB/128GB", "4GB/128GB", "4GB/128GB", "4GB/128GB"],
+    "Config สูงสุด": ["16GB/512GB+WiFi", "8GB/256GB", "4GB/256GB", "8GB/256GB", "8GB/256GB"],
+  } as Record<string, string[]>,
+  value: {
+    "ราคา/นิ้ว": ["฿2,499", "฿1,933", "฿2,051", "฿1,578", "฿1,442"],
+    "ความยืดหยุ่น CPU": ["★★★★★", "★★★☆☆", "★★★★☆", "★★★★☆", "★★★★★"],
+    "ความยืดหยุ่น OS": ["★★★★★", "★★★☆☆", "★★★★☆", "★★★☆☆", "★★★☆☆"],
+    "ความทนทาน": ["★★★★☆", "★★★★☆", "★★★★★", "★★★★☆", "★★★★★"],
+    "พอร์ตครบถ้วน": ["★★★★★", "★★★★☆", "★★★★★", "★★★★☆", "★★★★☆"],
+    "คุ้มค่ารวม": ["★★★★★", "★★★★☆", "★★★★★", "★★★★☆", "★★★★★"],
+    "เหมาะกับ": ["Compact / Kiosk / POS", "HMI / Factory", "Best Seller ทุกงาน", "Control Room / SCADA", "Dashboard / Flagship"],
+  } as Record<string, string[]>,
+};
 
+const filterOptions = {
+  screenSize: ["ทุกขนาด", "10\"", "15\"", "15.6\"", "19\"", "21\""],
+  cpu: ["ทุก CPU", "Intel i3", "Intel i5", "Intel i7", "ARM Android"],
+  budget: ["ทุกงบ", "ต่ำกว่า 30,000", "30,000 - 35,000", "มากกว่า 35,000"],
+};
+
+const ComparisonSystem = ({ onQuote }: { onQuote: (name: string) => void }) => {
+  const [viewMode, setViewMode] = useState<"specs" | "price" | "value">("specs");
+  const [screenFilter, setScreenFilter] = useState("ทุกขนาด");
+  const [cpuFilter, setCpuFilter] = useState("ทุก CPU");
+  const [budgetFilter, setBudgetFilter] = useState("ทุกงบ");
+
+  const screenMap: Record<string, number[]> = {
+    "ทุกขนาด": [0, 1, 2, 3, 4],
+    "10\"": [0], "15\"": [1], "15.6\"": [2], "19\"": [3], "21\"": [4],
+  };
+  const cpuMap: Record<string, number[]> = {
+    "ทุก CPU": [0, 1, 2, 3, 4],
+    "Intel i3": [0, 2],
+    "Intel i5": [0, 1, 2, 3, 4],
+    "Intel i7": [0, 1, 2, 3, 4],
+    "ARM Android": [0],
+  };
+  const budgetMap: Record<string, number[]> = {
+    "ทุกงบ": [0, 1, 2, 3, 4],
+    "ต่ำกว่า 30,000": [0, 1, 3],
+    "30,000 - 35,000": [0, 1, 2, 3, 4],
+    "มากกว่า 35,000": [0, 2, 3, 4],
+  };
+
+  const visibleIndices = screenMap[screenFilter]
+    .filter(i => cpuMap[cpuFilter].includes(i))
+    .filter(i => budgetMap[budgetFilter].includes(i));
+
+  const data = viewMode === "specs" ? comparisonData.specs : viewMode === "price" ? comparisonData.prices : comparisonData.value;
+
+  const viewTabs = [
+    { key: "specs" as const, label: "สเปก", icon: SlidersHorizontal },
+    { key: "price" as const, label: "ราคา", icon: DollarSign },
+    { key: "value" as const, label: "ความคุ้มค่า", icon: BarChart3 },
+  ];
+
+  const tierColors = ["text-emerald-500", "text-sky-500", "text-primary", "text-amber-500", "text-purple-500"];
+  const tierLabels = ["Compact", "Standard", "Best Seller", "Large", "Flagship"];
+
+  return (
+    <div className="space-y-6">
+      {/* Filter Bar */}
+      <div className="card-surface p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <Filter size={16} className="text-primary" />
+          <span className="text-sm font-semibold text-foreground">กรองสินค้า</span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label className="text-xs text-muted-foreground mb-1 block">ขนาดจอ</label>
+            <div className="flex flex-wrap gap-1.5">
+              {filterOptions.screenSize.map(opt => (
+                <button key={opt} onClick={() => setScreenFilter(opt)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${screenFilter === opt ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/50"}`}>
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label className="text-xs text-muted-foreground mb-1 block">CPU</label>
+            <div className="flex flex-wrap gap-1.5">
+              {filterOptions.cpu.map(opt => (
+                <button key={opt} onClick={() => setCpuFilter(opt)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${cpuFilter === opt ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/50"}`}>
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label className="text-xs text-muted-foreground mb-1 block">งบประมาณ</label>
+            <div className="flex flex-wrap gap-1.5">
+              {filterOptions.budget.map(opt => (
+                <button key={opt} onClick={() => setBudgetFilter(opt)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${budgetFilter === opt ? "bg-primary text-primary-foreground border-primary" : "border-border text-muted-foreground hover:border-primary/50"}`}>
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* View Mode Tabs */}
+      <div className="flex items-center justify-center gap-2">
+        {viewTabs.map(tab => (
+          <button key={tab.key} onClick={() => setViewMode(tab.key)}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold border transition-all ${viewMode === tab.key ? "bg-primary text-primary-foreground border-primary shadow-lg" : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"}`}>
+            <tab.icon size={16} />
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Comparison Table */}
+      {visibleIndices.length === 0 ? (
+        <div className="card-surface p-8 text-center">
+          <p className="text-muted-foreground">ไม่พบสินค้าที่ตรงกับตัวกรอง — ลองเปลี่ยนเงื่อนไข</p>
+        </div>
+      ) : (
+        <div className="card-surface overflow-hidden">
+          {/* Model Header */}
+          <div className="grid border-b border-border" style={{ gridTemplateColumns: `180px repeat(${visibleIndices.length}, 1fr)` }}>
+            <div className="px-4 py-4 bg-primary/10 flex items-center">
+              <span className="text-sm font-bold text-foreground">
+                {viewMode === "specs" ? "📋 สเปก" : viewMode === "price" ? "💰 ราคา" : "⚖️ ความคุ้มค่า"}
+              </span>
+            </div>
+            {visibleIndices.map(i => (
+              <div key={i} className="px-3 py-4 bg-primary/5 text-center border-l border-border">
+                <p className={`text-lg font-black ${tierColors[i]}`}>{comparisonData.models[i]}</p>
+                <p className="text-[10px] text-muted-foreground">{tierLabels[i]}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">({comparisonData.specs["ขนาดจอ"][i]})</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Data Rows */}
+          <div className="divide-y divide-border">
+            {Object.entries(data).map(([label, values], rowIdx) => (
+              <div key={label} className={`grid items-center ${rowIdx % 2 === 0 ? "bg-muted/10" : ""}`}
+                style={{ gridTemplateColumns: `180px repeat(${visibleIndices.length}, 1fr)` }}>
+                <div className="px-4 py-3 text-sm font-medium text-foreground">{label}</div>
+                {visibleIndices.map(i => (
+                  <div key={i} className="px-3 py-3 text-center text-sm text-muted-foreground border-l border-border">
+                    {values[i].startsWith("★") ? (
+                      <span className="text-amber-500 font-bold tracking-wider">{values[i]}</span>
+                    ) : values[i] === "—" ? (
+                      <span className="text-muted-foreground/40">—</span>
+                    ) : (
+                      values[i]
+                    )}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+
+          {/* Quote Buttons Row */}
+          <div className="grid border-t border-border bg-muted/20"
+            style={{ gridTemplateColumns: `180px repeat(${visibleIndices.length}, 1fr)` }}>
+            <div className="px-4 py-4 text-sm font-medium text-foreground flex items-center">ขอใบเสนอราคา</div>
+            {visibleIndices.map(i => (
+              <div key={i} className="px-3 py-4 text-center border-l border-border">
+                <button onClick={() => onQuote(comparisonData.models[i])}
+                  className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition-colors">
+                  ขอราคา {comparisonData.models[i]}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Decision Helper */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {[
+          { model: "GK1004", emoji: "🏪", title: "ต้องการเครื่องขนาดกะทัดรัด", desc: "เหมาะกับ POS, Kiosk, ตู้จำหน่ายสินค้า, เครื่องขนาดเล็ก", color: "border-emerald-500/30 bg-emerald-500/5" },
+          { model: "GK1506", emoji: "⭐", title: "Best Seller ครบทุกงาน", desc: "Full HD 15.6\" IP65 ทั้งตัว ราคาคุ้มค่า ใช้ได้ทุกอุตสาหกรรม", color: "border-primary/30 bg-primary/5" },
+          { model: "GK2101", emoji: "🖥️", title: "ต้องการจอใหญ่ Flagship", desc: "21\" Full HD สำหรับ Control Room, Dashboard, งานวิเคราะห์ข้อมูล", color: "border-purple-500/30 bg-purple-500/5" },
+        ].map(item => (
+          <button key={item.model} onClick={() => {
+            const el = document.getElementById(gkModels.find(m => m.name === item.model)?.id || "");
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }} className={`p-5 rounded-xl border ${item.color} text-left hover:scale-[1.02] transition-transform`}>
+            <p className="text-2xl mb-2">{item.emoji}</p>
+            <p className="font-bold text-foreground text-sm mb-1">{item.title}</p>
+            <p className="text-xs text-muted-foreground">{item.desc}</p>
+            <p className="text-xs font-bold text-primary mt-2">→ ดู {item.model}</p>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
 /* ─── Page ─── */
 const GKSeries = () => {
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -1029,16 +1215,9 @@ const GKSeries = () => {
             <h2 className="text-3xl md:text-4xl font-display font-bold">
               เปรียบเทียบ<span className="text-gradient">รุ่นยอดนิยม</span>
             </h2>
+            <p className="text-muted-foreground mt-3">เลือกมุมมอง สเปก / ราคา / ความคุ้มค่า พร้อมระบบกรองสินค้า</p>
           </div>
-          <ComparisonTable />
-          <div className="mt-6 card-surface overflow-hidden">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_42dd7aa07bae417897f2e57c49c981e1~mv2.jpg/v1/fill/w_864,h_482,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK%20Series%20%E0%B9%80%E0%B8%9B%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%9A%E0%B9%80%E0%B8%97%E0%B8%B5%E0%B8%A2%E0%B8%9A%20GK1004%20GK1506%20GK21.jpg"
-              alt="GK Series Comparison"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
+          <ComparisonSystem onQuote={(name) => { setQuoteProduct(name); setQuoteOpen(true); }} />
         </div>
       </section>
 
