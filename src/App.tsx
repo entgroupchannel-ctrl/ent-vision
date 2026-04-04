@@ -15,6 +15,7 @@ import WaterproofPC from "./pages/WaterproofPC.tsx";
 import Volktek from "./pages/Volktek.tsx";
 import EPCSeries from "./pages/EPCSeries.tsx";
 import RuggedTablet from "./pages/RuggedTablet.tsx";
+import Handheld from "./pages/Handheld.tsx";
 import GKSeries from "./pages/GKSeries.tsx";
 import PanelPCGTG from "./pages/PanelPCGTG.tsx";
 import SmartDisplay from "./pages/SmartDisplay.tsx";
