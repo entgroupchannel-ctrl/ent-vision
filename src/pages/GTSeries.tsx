@@ -4436,10 +4436,73 @@ const GTSeries = () => {
               </div>
 
 
-              {/* Price Table */}
-              <div className="card-surface overflow-hidden">
-                <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT1400 Price List</h3>
+              {(() => {
+                const gt1400Prices = [
+                  { cpu: "i5-8305G", config: "DDR4 RAM 4GB + SSD 128GB + WIFI", price: "28,990" },
+                  { cpu: "i5-8305G", config: "DDR4 RAM 8GB + SSD 128GB + WIFI", price: "29,190" },
+                  { cpu: "i5-8305G", config: "DDR4 RAM 4GB + SSD 256GB + WIFI", price: "29,590" },
+                  { cpu: "i5-8305G", config: "DDR4 RAM 8GB + SSD 256GB + WIFI", price: "29,990" },
+                  { cpu: "i7-12650HX", config: "DDR5 RAM 8GB + SSD 128GB + WIFI", price: "34,690" },
+                  { cpu: "i7-12650HX", config: "DDR5 RAM 8GB + SSD 256GB + WIFI", price: "35,290" },
+                  { cpu: "i7-12650HX", config: "DDR5 RAM 16GB + SSD 128GB + WIFI", price: "36,490" },
+                  { cpu: "i7-12650HX", config: "DDR5 RAM 16GB + SSD 256GB + WIFI", price: "36,990" },
+                  { cpu: "i7-13650HX", config: "DDR5 RAM 8GB + SSD 128GB + WIFI", price: "37,790" },
+                  { cpu: "i7-13650HX", config: "DDR5 RAM 8GB + SSD 256GB + WIFI", price: "38,390" },
+                  { cpu: "i7-13650HX", config: "DDR5 RAM 16GB + SSD 128GB + WIFI", price: "39,590" },
+                  { cpu: "i7-13650HX", config: "DDR5 RAM 16GB + SSD 256GB + WIFI", price: "39,990" },
+                ];
+                const perPage = 6;
+                const totalPages = Math.ceil(gt1400Prices.length / perPage);
+                const start = gt1400PricePage * perPage;
+                const paged = gt1400Prices.slice(start, start + perPage);
+                return (
+                  <Collapsible defaultOpen>
+                    <div className="card-surface overflow-hidden">
+                      <CollapsibleTrigger className="w-full p-5 border-b border-border flex items-center justify-between hover:bg-secondary/30 transition-colors">
+                        <div>
+                          <h3 className="text-lg font-display font-bold text-foreground text-left">💰 GT1400 Price List</h3>
+                          <p className="text-sm text-muted-foreground mt-1 text-left">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿28,990 · {gt1400Prices.length} รายการ</p>
+                        </div>
+                        <ChevronDown size={20} className="text-muted-foreground transition-transform duration-200 [[data-state=open]>&]:rotate-180" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead>
+                              <tr className="bg-secondary/50">
+                                <th className="text-left p-3 font-semibold text-foreground">#</th>
+                                <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                                <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
+                                <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-border">
+                              {paged.map((item, i) => (
+                                <tr key={start + i} className="hover:bg-secondary/30 transition-colors">
+                                  <td className="p-3 text-muted-foreground">{start + i + 1}</td>
+                                  <td className="p-3 text-foreground font-medium">{item.cpu}</td>
+                                  <td className="p-3 text-muted-foreground">{item.config}</td>
+                                  <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                        {totalPages > 1 && (
+                          <div className="flex items-center justify-center gap-2 p-4 border-t border-border">
+                            <button onClick={() => setGt1400PricePage(Math.max(0, gt1400PricePage - 1))} disabled={gt1400PricePage === 0} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ก่อนหน้า</button>
+                            {Array.from({ length: totalPages }, (_, idx) => (
+                              <button key={idx} onClick={() => setGt1400PricePage(idx)} className={`w-8 h-8 rounded-lg text-xs font-bold transition-colors ${idx === gt1400PricePage ? "bg-primary text-primary-foreground" : "hover:bg-secondary/50 text-muted-foreground"}`}>{idx + 1}</button>
+                            ))}
+                            <button onClick={() => setGt1400PricePage(Math.min(totalPages - 1, gt1400PricePage + 1))} disabled={gt1400PricePage === totalPages - 1} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ถัดไป</button>
+                          </div>
+                        )}
+                        <p className="text-xs text-muted-foreground text-center py-3 border-t border-border">* ราคาอาจเปลี่ยนแปลงได้โดยมิต้องแจ้งให้ทราบล่วงหน้า</p>
+                      </CollapsibleContent>
+                    </div>
+                  </Collapsible>
+                );
+              })()}
                   <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿28,990</p>
                 </div>
                 <div className="overflow-x-auto">
