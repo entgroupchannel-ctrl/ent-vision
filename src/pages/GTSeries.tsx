@@ -10,6 +10,7 @@ import QuoteDialog from "@/components/QuoteDialog";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import { LineQRDialog } from "@/components/LineQRDialog";
 import ThemeToggle from "@/components/ThemeToggle";
+import LineQRButton from "@/components/LineQRButton";
 import logo from "@/assets/logo-entgroup.avif";
 import gtSeriesHero from "@/assets/gt-series-hero-lineup.jpg";
 import gt1000Banner from "@/assets/gt1000-banner.jpg";
