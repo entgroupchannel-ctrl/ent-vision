@@ -71,6 +71,7 @@ const App = () => (
               <Route path="/volktek" element={<Volktek />} />
               <Route path="/epc-series" element={<EPCSeries />} />
               <Route path="/rugged-tablet" element={<RuggedTablet />} />
+              <Route path="/handheld" element={<Handheld />} />
               <Route path="/panel-pc-gtg" element={<PanelPCGTG />} />
               <Route path="/smart-display" element={<SmartDisplay />} />
               <Route path="/promotions" element={<Promotions />} />
