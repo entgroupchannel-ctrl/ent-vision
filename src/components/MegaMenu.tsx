@@ -55,6 +55,7 @@ const menuCategories = [
       {
         heading: "เพิ่มเติม",
         links: [
+          { label: "All-in-One PC — 15 รุ่น", href: "/aio", hot: true },
           { label: "Panel PC — Cabinet", href: "/cabinets" },
         ],
       },
