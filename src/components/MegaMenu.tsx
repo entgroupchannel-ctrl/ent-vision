@@ -81,12 +81,25 @@ const menuCategories = [
         heading: "Firewall & Router",
         links: [
           { label: "Mini PC Firewall — 10 รุ่น", href: "/minipc-firewall", hot: true },
+          { label: "GT194L — 2.5G Best Seller", href: "/minipc-firewall" },
+          { label: "IPC068 — N100 Fanless", href: "/minipc-firewall" },
+          { label: "IPC090 — Xeon 10G SFP+", href: "/minipc-firewall" },
         ],
       },
       {
         heading: "Industrial Switch",
         links: [
           { label: "Volktek — Managed Switch", href: "/volktek" },
+          { label: "Unmanaged Switch", href: "/volktek" },
+          { label: "PoE Switch", href: "/volktek" },
+        ],
+      },
+      {
+        heading: "Network Appliance",
+        links: [
+          { label: "iBox Gateway / DIN Rail", href: "/ibox-series", hot: true },
+          { label: "iBox PoE & Multi-LAN", href: "/ibox-series" },
+          { label: "Edge AI Computing", href: "/ibox-series" },
         ],
       },
     ],
