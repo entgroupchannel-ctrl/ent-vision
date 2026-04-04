@@ -944,6 +944,7 @@ const GKSeries = () => {
             { id: "szVVTv5tmJs", title: "GK1506 รีวิวเพิ่มเติม" },
             { id: "ZZlkdSgJAzs", title: "GK1506 สาธิตการใช้งาน" },
             { id: "PeOizgJEVBc", title: "GK1506 เปรียบเทียบสเปก" },
+            { id: "wNUZ1WS9Uuw", title: "GK1901 Introduction" },
             { id: "_CZTxWtK3rw", title: "รีวิว Industrial Panel PC - GK Series" },
             { id: "POvzJ1FWtTU", title: "Panel PC - GK2101" },
           ],
@@ -962,6 +963,9 @@ const GKSeries = () => {
             { id: "szVVTv5tmJs", title: "รีวิวเพิ่มเติม" },
             { id: "ZZlkdSgJAzs", title: "สาธิตการใช้งาน" },
             { id: "PeOizgJEVBc", title: "เปรียบเทียบสเปก" },
+          ],
+          "GK1901": [
+            { id: "wNUZ1WS9Uuw", title: "Introduction" },
           ],
           "GK2101": [
             { id: "POvzJ1FWtTU", title: "Panel PC - GK2101" },
