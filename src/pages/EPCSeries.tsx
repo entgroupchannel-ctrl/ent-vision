@@ -4,7 +4,7 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight, FileText } from "lucide-react";
+import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight, FileText, Play, Headphones, Youtube } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import badgeMotherboard from "@/assets/epc-badge-motherboard.png";
@@ -771,6 +771,100 @@ const EPCSeries = () => {
         <section>
           <div className="card-surface overflow-hidden rounded-lg">
             <img src={epcLegoBanner} alt="EPC-S10X2A LEGO MODE Technology" className="w-full h-auto" loading="lazy" />
+          </div>
+        </section>
+
+        {/* ═══════════ YouTube & Podcast Section ═══════════ */}
+        <section className="space-y-8">
+          <div className="text-center">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">🎬 Media Center</span>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+              วิดีโอ & พอดแคสต์ <span className="text-gradient">EPC Panel PC</span>
+            </h2>
+            <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">ชมวิดีโอสาธิตการใช้งานจริง และฟังพอดแคสต์เจาะลึกข้อมูลก่อนตัดสินใจ</p>
+          </div>
+
+          {/* Main Video */}
+          <div className="card-surface rounded-xl overflow-hidden">
+            <div className="p-4 border-b border-border flex items-center gap-2">
+              <Youtube className="w-5 h-5 text-red-500" />
+              <span className="font-bold text-foreground text-sm">วิดีโอแนะนำ EPC Panel PC</span>
+            </div>
+            <div className="aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/mtamL6vkDv8"
+                title="EPC Panel PC Introduction"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          {/* Video Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { id: "Beaoeb0_Gwo", title: "EPC Panel PC — ภาพรวมผลิตภัณฑ์" },
+              { id: "whSUaZWJJCc", title: "การใช้งานในโรงงานจริง" },
+              { id: "-OhWfiGEsJ4", title: "คุณสมบัติเด่น & สเปก" },
+              { id: "mgTNbsmYias", title: "การติดตั้ง & เชื่อมต่อ" },
+            ].map((v) => (
+              <div key={v.id} className="card-surface rounded-lg overflow-hidden group cursor-pointer">
+                <a href={`https://youtu.be/${v.id}`} target="_blank" rel="noopener noreferrer">
+                  <div className="relative">
+                    <img
+                      src={`https://img.youtube.com/vi/${v.id}/mqdefault.jpg`}
+                      alt={v.title}
+                      className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <Play className="w-5 h-5 text-white ml-0.5" fill="white" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-3">
+                    <p className="text-xs font-semibold text-foreground line-clamp-2">{v.title}</p>
+                  </div>
+                </a>
+              </div>
+            ))}
+          </div>
+
+          {/* Podcast Section */}
+          <div className="card-surface rounded-xl overflow-hidden">
+            <div className="p-4 border-b border-border flex items-center gap-2">
+              <Headphones className="w-5 h-5 text-primary" />
+              <span className="font-bold text-foreground text-sm">🎙️ Podcast — เจาะลึก EPC Panel PC</span>
+            </div>
+            <div className="divide-y divide-border">
+              {[
+                { title: "Intro: LEGO Modular Technology คืออะไร?", desc: "ทำความรู้จักกับนวัตกรรม LEGO Modular — ยืดหยุ่นเหมือนตัวต่อ LEGO สำหรับโรงงาน", src: "/podcasts/epc-intro-lego.wav", duration: "2:46" },
+                { title: "ทำไมต้องใช้ Industrial Panel PC?", desc: "เปรียบเทียบข้อแตกต่างระหว่างคอมธรรมดากับคอมอุตสาหกรรม — ทำไมถึงคุ้มกว่า", src: "/podcasts/epc-benefit.wav", duration: "3:30" },
+                { title: "วิธีเลือก EPC Panel PC ให้เหมาะกับงาน", desc: "แนะนำการเลือกขนาดหน้าจอ 10–24 นิ้ว ให้ตรงกับประเภทงานของคุณ", src: "/podcasts/epc-how-to-choose.wav", duration: "2:39" },
+                { title: "EPC-S10X2A — ตัวเล็ก สเปกไม่เล็ก", desc: "รีวิวเจาะลึก Panel PC 10 นิ้ว 9 รุ่นย่อย — เหมาะกับจุดควบคุมเครื่องจักรและ QC", src: "/podcasts/epc-s10x2a.wav", duration: "2:27" },
+              ].map((pod, i) => (
+                <div key={i} className="p-4 hover:bg-muted/30 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
+                      {i + 1}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="text-sm font-bold text-foreground">{pod.title}</h4>
+                        <span className="text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full shrink-0">{pod.duration}</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mb-3">{pod.desc}</p>
+                      <audio controls preload="none" className="w-full h-8 [&::-webkit-media-controls-panel]:bg-muted/50">
+                        <source src={pod.src} type="audio/wav" />
+                      </audio>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
