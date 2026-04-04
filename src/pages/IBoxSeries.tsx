@@ -1,21 +1,31 @@
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import WishlistHeart from "@/components/WishlistHeart";
 import {
-  ArrowLeft, Cpu, Thermometer, Shield, Usb, Wifi, Download,
+  ArrowLeft, Cpu, Thermometer, Shield, Usb, Wifi, Download, Search,
   FileText, ChevronRight, Layers, HardDrive, Monitor, Zap, Box,
   Factory, Stethoscope, Truck, ScanLine, Tv, Warehouse, Sparkles,
+  SlidersHorizontal, ArrowUpDown, LayoutGrid,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import IBoxProductCard from "@/components/ibox/IBoxProductCard";
+import IBoxProductFilter, { type IBoxFilterState, defaultFilters, portFilters } from "@/components/ibox/IBoxProductFilter";
 import { iboxProducts } from "@/data/ibox-products";
 import bannerIBox from "@/assets/banner-ibox-series.jpg";
 import usecaseAutomation from "@/assets/ibox-usecase-automation.jpg";
@@ -175,6 +185,75 @@ const galleryImages = [
 const IBoxSeries = () => {
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
+  const [search, setSearch] = useState("");
+  const [sortBy, setSortBy] = useState("popular");
+  const [filters, setFilters] = useState<IBoxFilterState>({ ...defaultFilters });
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+
+  const filteredProducts = useMemo(() => {
+    let result = [...iboxProducts];
+
+    // Search
+    if (search) {
+      const s = search.toLowerCase();
+      result = result.filter(
+        (p) =>
+          p.name.toLowerCase().includes(s) ||
+          p.nameTH.includes(search) ||
+          p.id.toLowerCase().includes(s) ||
+          p.specs.cpu.toLowerCase().includes(s)
+      );
+    }
+
+    // Category
+    if (filters.category !== "all") {
+      result = result.filter((p) => p.category === filters.category);
+    }
+
+    // CPU Gen
+    if (filters.cpuGen !== "all") {
+      result = result.filter((p) => {
+        if (filters.cpuGen === "ARM") {
+          return p.specs.cpuGen?.includes("ARM") || p.specs.cpu.toLowerCase().includes("arm");
+        }
+        return p.specs.cpuGen === filters.cpuGen;
+      });
+    }
+
+    // COM Ports
+    if (filters.comPorts !== "all") {
+      const pf = portFilters.comPorts.find((x) => x.id === filters.comPorts);
+      if (pf) result = result.filter((p) => (p.specs.comPorts ?? 0) >= pf.min && (p.specs.comPorts ?? 0) <= pf.max);
+    }
+
+    // LAN Ports
+    if (filters.lanPorts !== "all") {
+      const pf = portFilters.lanPorts.find((x) => x.id === filters.lanPorts);
+      if (pf) result = result.filter((p) => (p.specs.lanPorts ?? 0) >= pf.min && (p.specs.lanPorts ?? 0) <= pf.max);
+    }
+
+    // PoE / PCIe
+    if (filters.poe === true) result = result.filter((p) => p.specs.poe);
+    if (filters.pcie === true) result = result.filter((p) => p.specs.pcie);
+
+    // Form Factor
+    if (filters.formFactor !== "all") result = result.filter((p) => p.formFactor === filters.formFactor);
+
+    // Performance
+    if (filters.performance !== "all") result = result.filter((p) => p.performance === filters.performance);
+
+    // Sort
+    switch (sortBy) {
+      case "newest":
+        result.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
+        break;
+      case "name":
+        result.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+    }
+
+    return result;
+  }, [search, filters, sortBy]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -183,15 +262,16 @@ const IBoxSeries = () => {
         collectionName="iBox Series Embedded Fanless Industrial PC"
         collectionDescription="iBox Series คอมพิวเตอร์อุตสาหกรรม Fanless ขนาดกะทัดรัด สำหรับ Edge Computing, IoT Gateway, Digital Signage"
         collectionUrl="/ibox-series"
-        products={iboxModels.map(m => ({ name: m.name, image: m.image, description: m.cpu, category: "Embedded Fanless Industrial PC" }))}      />
-
+        products={iboxProducts.map(m => ({ name: m.name, image: m.image, description: m.specs.cpu, category: "Embedded Fanless Industrial PC" }))}
+      />
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "iBox Series", path: "/ibox-series" }]} />
+
       {/* Banner */}
       <div className="relative h-48 md:h-64 overflow-hidden">
         <img src={bannerIBox} alt="iBox Series — Industrial Mini PC" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
         <div className="absolute inset-0 flex items-center">
-          <div className="container max-w-6xl mx-auto px-6">
+          <div className="container max-w-7xl mx-auto px-6">
             <Link to="/" className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors mb-3">
               <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
             </Link>
@@ -201,330 +281,208 @@ const IBoxSeries = () => {
         </div>
       </div>
 
-      <div className="container max-w-6xl mx-auto px-4 py-10 space-y-16">
-        {/* Intro */}
-        <section className="text-center max-w-3xl mx-auto">
-          <Badge className="mb-4">สินค้าใหม่ล่าสุด</Badge>
-          <h2 className="text-xl md:text-2xl font-display font-bold text-foreground mb-4">
-            คอมพิวเตอร์สำหรับงานอุตสาหกรรม — iBox Series
-          </h2>
-          <p className="text-muted-foreground leading-relaxed">
-            เครื่องคอมพิวเตอร์เกรดอุตสาหกรรมขนาดเล็กที่ถูกออกแบบมาเพื่อรองรับการทำงานในสภาวะแวดล้อมที่มีอุณหภูมิสูง
-            ฝุ่นละอองหนาแน่น โดยออกแบบให้มีการระบายความร้อนได้ดี ทำงานได้อย่างมีประสิทธิภาพ
-            เหมาะสมกับงานอุตสาหกรรมทุกประเภท
-          </p>
-        </section>
+      <div className="container max-w-7xl mx-auto px-4 py-8">
+        <div className="flex gap-6">
+          {/* Filter Sidebar */}
+          <IBoxProductFilter
+            filters={filters}
+            onFilterChange={setFilters}
+            isMobileOpen={isMobileFilterOpen}
+            onMobileClose={() => setIsMobileFilterOpen(false)}
+            resultCount={filteredProducts.length}
+          />
 
-        {/* Highlights */}
-        <section>
-          <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-8">
-            จุดเด่น iBox Series
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {highlights.map((h) => (
-              <div key={h.title} className="card-surface p-5 flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <h.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-foreground text-sm mb-1">{h.title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{h.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ═══════ AI Edge Computing / GPU Section ═══════ */}
-        <section>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
-                🔥 AI Edge Computing / GPU
-              </h2>
-              <p className="text-sm text-muted-foreground">คอมพิวเตอร์อุตสาหกรรมรองรับ GPU สำหรับ AI, Deep Learning, Machine Vision</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
-            {iboxProducts.filter(p => p.category === "AI Edge Computing").map((product) => (
-              <IBoxProductCard
-                key={product.id}
-                product={product}
-                selectedProducts={selectedProducts}
-                toggleSelect={toggleSelect}
-                onQuote={setQuoteProduct}
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* ═══════ Embedded Box PC Section ═══════ */}
-        <section>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Box className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
-                🏭 Embedded Box PC
-              </h2>
-              <p className="text-sm text-muted-foreground">คอมพิวเตอร์ฝังตัว Fanless สำหรับงานโรงงาน, SCADA, PLC Replacement</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
-            {iboxProducts.filter(p => p.category === "Embedded Box PC").map((product) => (
-              <IBoxProductCard
-                key={product.id}
-                product={product}
-                selectedProducts={selectedProducts}
-                toggleSelect={toggleSelect}
-                onQuote={setQuoteProduct}
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* ═══════ Gateway / DIN Rail Section ═══════ */}
-        <section>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 rounded-lg bg-emerald-500/10">
-              <Wifi className="w-6 h-6 text-emerald-500" />
-            </div>
-            <div>
-              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
-                🌐 Gateway / DIN Rail
-              </h2>
-              <p className="text-sm text-muted-foreground">เกตเวย์อุตสาหกรรม, IoT Gateway, DIN Rail PC</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
-            {iboxProducts.filter(p => p.category === "Gateway").map((product) => (
-              <IBoxProductCard
-                key={product.id}
-                product={product}
-                selectedProducts={selectedProducts}
-                toggleSelect={toggleSelect}
-                onQuote={setQuoteProduct}
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* ═══════ PoE & Multi-LAN Section ═══════ */}
-        <section>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 rounded-lg bg-blue-500/10">
-              <Layers className="w-6 h-6 text-blue-500" />
-            </div>
-            <div>
-              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
-                📡 PoE & Multi-LAN
-              </h2>
-              <p className="text-sm text-muted-foreground">คอมพิวเตอร์อุตสาหกรรม Multi LAN พร้อม PoE สำหรับ Surveillance, Networking</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
-            {iboxProducts.filter(p => p.category === "PoE & Multi-LAN").map((product) => (
-              <IBoxProductCard
-                key={product.id}
-                product={product}
-                selectedProducts={selectedProducts}
-                toggleSelect={toggleSelect}
-                onQuote={setQuoteProduct}
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* ═══════ Vehicle & Special Section ═══════ */}
-        <section>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 rounded-lg bg-amber-500/10">
-              <Truck className="w-6 h-6 text-amber-500" />
-            </div>
-            <div>
-              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
-                🚗 Vehicle & Special
-              </h2>
-              <p className="text-sm text-muted-foreground">คอมพิวเตอร์อุตสาหกรรมติดรถยนต์, Fleet Management</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
-            {iboxProducts.filter(p => p.category === "Vehicle & Special").map((product) => (
-              <IBoxProductCard
-                key={product.id}
-                product={product}
-                selectedProducts={selectedProducts}
-                toggleSelect={toggleSelect}
-                onQuote={setQuoteProduct}
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* ═══════ Machine Vision (AEOLUS) Section ═══════ */}
-        <section>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 rounded-lg bg-purple-500/10">
-              <ScanLine className="w-6 h-6 text-purple-500" />
-            </div>
-            <div>
-              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
-                👁️ Machine Vision (AEOLUS)
-              </h2>
-              <p className="text-sm text-muted-foreground">คอมพิวเตอร์อุตสาหกรรม Machine Vision, AOI, Light Controller, Vision Controller</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
-            {iboxProducts.filter(p => p.category === "Machine Vision").map((product) => (
-              <IBoxProductCard
-                key={product.id}
-                product={product}
-                selectedProducts={selectedProducts}
-                toggleSelect={toggleSelect}
-                onQuote={setQuoteProduct}
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* Product Models */}
-        <section>
-          <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
-            รุ่นสินค้า iBox Series
-          </h2>
-          <p className="text-center text-sm text-muted-foreground mb-8">
-            เลือกรุ่นที่เหมาะกับงานของคุณ — RAM และ SSD สามารถปรับแต่งได้
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {iboxModels.map((model) => (
-              <div key={model.id} className={`card-surface overflow-hidden group transition-all ${selectedProducts.has(model.name) ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
-                <div className="relative bg-secondary/30 p-6 flex items-center justify-center h-52">
-                  <button onClick={() => toggleSelect(model.name)} className="absolute top-3 left-3 z-10">
-                    <Checkbox checked={selectedProducts.has(model.name)} className="h-5 w-5" />
-                  </button>
-                  <WishlistHeart
-                    item={{
-                      id: model.id,
-                      name: model.name,
-                      category: "iBox Series",
-                      image: model.image,
-                      href: "/ibox-series",
-                      specs: model.cpu,
-                    }}
-                    className="absolute top-3 right-3"
-                  />
-                  <img
-                    src={model.image}
-                    alt={model.name}
-                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
+          {/* Main Content */}
+          <div className="flex-1 min-w-0 space-y-6">
+            {/* Toolbar */}
+            <div className="card-surface p-4">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    placeholder="ค้นหาสินค้า... (ชื่อ, รุ่น, CPU)"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="pl-10"
                   />
                 </div>
-                <div className="p-5 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display font-bold text-foreground text-lg">{model.name}</h3>
-                    <Badge variant="secondary" className="text-xs">Fanless</Badge>
-                  </div>
-
-                  <div className="space-y-1.5 text-xs text-muted-foreground">
-                    <p><span className="font-medium text-foreground">CPU:</span> {model.cpu}</p>
-                    <p><span className="font-medium text-foreground">RAM:</span> {model.ram}</p>
-                    <p><span className="font-medium text-foreground">Storage:</span> {model.storage}</p>
-                    <p><span className="font-medium text-foreground">วัสดุ:</span> {model.material}</p>
-                    <p><span className="font-medium text-foreground">OS:</span> {model.os}</p>
-                  </div>
-
-                  <div className="flex gap-2 pt-2 border-t border-border">
-                    <Button variant="outline" size="sm" asChild className="flex-1">
-                      <a href={model.datasheet} target="_blank" rel="noopener noreferrer">
-                        <Download className="w-3.5 h-3.5 mr-1" /> Datasheet
-                      </a>
-                    </Button>
-                    <Button size="sm" className="flex-1" onClick={() => setQuoteProduct(model.name)}>
-                      <FileText className="w-3.5 h-3.5 mr-1" /> ขอราคา
-                    </Button>
-                  </div>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="lg:hidden"
+                    onClick={() => setIsMobileFilterOpen(true)}
+                  >
+                    <SlidersHorizontal className="w-4 h-4" />
+                  </Button>
+                  <Select value={sortBy} onValueChange={setSortBy}>
+                    <SelectTrigger className="w-[160px]">
+                      <ArrowUpDown className="w-4 h-4 mr-2" />
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="popular">ยอดนิยม</SelectItem>
+                      <SelectItem value="newest">ใหม่ล่าสุด</SelectItem>
+                      <SelectItem value="name">ชื่อ A-Z</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
 
-        {/* Key Features Strip */}
-        <section className="rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20 p-6">
-          <h3 className="text-sm font-bold text-foreground mb-4">ฟีเจอร์มาตรฐาน iBox Series</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {features.map((feat) => (
-              <div key={feat} className="flex items-start gap-2">
-                <ChevronRight size={14} className="text-primary mt-0.5 shrink-0" />
-                <span className="text-sm text-foreground">{feat}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Use Cases */}
-        <section>
-          <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
-            เหมาะสำหรับงาน
-          </h2>
-          <p className="text-center text-sm text-muted-foreground mb-8">
-            ใช้โปรแกรมได้หลากหลาย ในสำนักงาน โรงงานอุตสาหกรรม โรงเรียน ทั้งการพรีเซนต์งาน การเรียนการสอน และความบันเทิง
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {useCasesData.map((uc) => (
-              <div key={uc.title} className="group card-surface overflow-hidden hover:border-primary/30 transition-all">
-                <div className="relative h-44 overflow-hidden">
-                  <img
-                    src={uc.image}
-                    alt={uc.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
+            {/* Product Grid */}
+            {filteredProducts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+                {filteredProducts.map((product) => (
+                  <IBoxProductCard
+                    key={product.id}
+                    product={product}
+                    selectedProducts={selectedProducts}
+                    toggleSelect={toggleSelect}
+                    onQuote={setQuoteProduct}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute bottom-3 left-4 flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-primary/90 flex items-center justify-center">
-                      <uc.icon className="w-4 h-4 text-primary-foreground" />
+                ))}
+              </div>
+            ) : (
+              <div className="card-surface p-12 text-center">
+                <ScanLine className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-bold text-foreground mb-2">ไม่พบสินค้า</h3>
+                <p className="text-sm text-muted-foreground mb-4">ลองปรับตัวกรองหรือคำค้นหาใหม่</p>
+                <Button variant="outline" onClick={() => { setSearch(""); setFilters({ ...defaultFilters }); }}>
+                  ล้างตัวกรองทั้งหมด
+                </Button>
+              </div>
+            )}
+
+            {/* Legacy iBox Models */}
+            <section>
+              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
+                รุ่นสินค้า iBox Series (Legacy)
+              </h2>
+              <p className="text-center text-sm text-muted-foreground mb-8">
+                เลือกรุ่นที่เหมาะกับงานของคุณ — RAM และ SSD สามารถปรับแต่งได้
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {iboxModels.map((model) => (
+                  <div key={model.id} className={`card-surface overflow-hidden group transition-all ${selectedProducts.has(model.name) ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
+                    <div className="relative bg-secondary/30 p-6 flex items-center justify-center h-52">
+                      <button onClick={() => toggleSelect(model.name)} className="absolute top-3 left-3 z-10">
+                        <Checkbox checked={selectedProducts.has(model.name)} className="h-5 w-5" />
+                      </button>
+                      <WishlistHeart
+                        item={{
+                          id: model.id,
+                          name: model.name,
+                          category: "iBox Series",
+                          image: model.image,
+                          href: "/ibox-series",
+                          specs: model.cpu,
+                        }}
+                        className="absolute top-3 right-3"
+                      />
+                      <img
+                        src={model.image}
+                        alt={model.name}
+                        className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
                     </div>
-                    <h3 className="text-sm font-bold text-white">{uc.title}</h3>
+                    <div className="p-5 space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-display font-bold text-foreground text-lg">{model.name}</h3>
+                        <Badge variant="secondary" className="text-xs">Fanless</Badge>
+                      </div>
+                      <div className="space-y-1.5 text-xs text-muted-foreground">
+                        <p><span className="font-medium text-foreground">CPU:</span> {model.cpu}</p>
+                        <p><span className="font-medium text-foreground">RAM:</span> {model.ram}</p>
+                        <p><span className="font-medium text-foreground">Storage:</span> {model.storage}</p>
+                        <p><span className="font-medium text-foreground">วัสดุ:</span> {model.material}</p>
+                        <p><span className="font-medium text-foreground">OS:</span> {model.os}</p>
+                      </div>
+                      <div className="flex gap-2 pt-2 border-t border-border">
+                        <Button variant="outline" size="sm" asChild className="flex-1">
+                          <a href={model.datasheet} target="_blank" rel="noopener noreferrer">
+                            <Download className="w-3.5 h-3.5 mr-1" /> Datasheet
+                          </a>
+                        </Button>
+                        <Button size="sm" className="flex-1" onClick={() => setQuoteProduct(model.name)}>
+                          <FileText className="w-3.5 h-3.5 mr-1" /> ขอราคา
+                        </Button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </section>
 
-        {/* Gallery */}
-        <section>
-          <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
-            ตัวอย่างการใช้งานจริง
-          </h2>
-          <p className="text-center text-sm text-muted-foreground mb-8">
-            ส่งมอบประสบการณ์ที่แข็งแกร่งกับ Industrial Grade Computer
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {galleryImages.map((img, i) => (
-              <div key={i} className="rounded-xl overflow-hidden bg-secondary/30 border border-border">
-                <img src={img} alt={`ตัวอย่างการใช้งาน ${i + 1}`} className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+            {/* Key Features Strip */}
+            <section className="rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20 p-6">
+              <h3 className="text-sm font-bold text-foreground mb-4">ฟีเจอร์มาตรฐาน iBox Series</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {features.map((feat) => (
+                  <div key={feat} className="flex items-start gap-2">
+                    <ChevronRight size={14} className="text-primary mt-0.5 shrink-0" />
+                    <span className="text-sm text-foreground">{feat}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </section>
 
-        {/* CTA */}
-        <div className="card-surface p-8 text-center">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-3">สนใจ iBox Series?</h2>
-          <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือกรุ่นและสเปกที่เหมาะกับงานของคุณ</p>
-          <Button size="lg" onClick={() => setQuoteProduct("iBox Series")}>
-            <FileText className="w-4 h-4 mr-2" /> ขอใบเสนอราคา
-          </Button>
+            {/* Use Cases */}
+            <section>
+              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
+                เหมาะสำหรับงาน
+              </h2>
+              <p className="text-center text-sm text-muted-foreground mb-8">
+                ใช้โปรแกรมได้หลากหลาย ในสำนักงาน โรงงานอุตสาหกรรม โรงเรียน ทั้งการพรีเซนต์งาน การเรียนการสอน และความบันเทิง
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {useCasesData.map((uc) => (
+                  <div key={uc.title} className="group card-surface overflow-hidden hover:border-primary/30 transition-all">
+                    <div className="relative h-44 overflow-hidden">
+                      <img src={uc.image} alt={uc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      <div className="absolute bottom-3 left-4 flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-primary/90 flex items-center justify-center">
+                          <uc.icon className="w-4 h-4 text-primary-foreground" />
+                        </div>
+                        <h3 className="text-sm font-bold text-white">{uc.title}</h3>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Gallery */}
+            <section>
+              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
+                ตัวอย่างการใช้งานจริง
+              </h2>
+              <p className="text-center text-sm text-muted-foreground mb-8">
+                ส่งมอบประสบการณ์ที่แข็งแกร่งกับ Industrial Grade Computer
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {galleryImages.map((img, i) => (
+                  <div key={i} className="rounded-xl overflow-hidden bg-secondary/30 border border-border">
+                    <img src={img} alt={`ตัวอย่างการใช้งาน ${i + 1}`} className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* CTA */}
+            <div className="card-surface p-8 text-center">
+              <h2 className="text-2xl font-display font-bold text-foreground mb-3">สนใจ iBox Series?</h2>
+              <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือกรุ่นและสเปกที่เหมาะกับงานของคุณ</p>
+              <Button size="lg" onClick={() => setQuoteProduct("iBox Series")}>
+                <FileText className="w-4 h-4 mr-2" /> ขอใบเสนอราคา
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 
