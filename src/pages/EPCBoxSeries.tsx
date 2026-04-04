@@ -21,10 +21,10 @@ const features = [
 ];
 
 const certifications = [
-  "✅ วิศวกรรมเฉพาะทาง: ออกแบบเพื่อสภาพแวดล้อมโรงงานโดยตรง",
-  "✅ ทดสอบเข้มงวด: ผ่านการทดสอบในสภาวะจริงหลากหลายรูปแบบ",
-  "✅ รับรองมาตรฐาน: ได้รับการรับรองสำหรับการทำงานที่เชื่อถือได้",
-  "✅ พิสูจน์ในสนาม: ใช้งานจริงในโรงงานทั่วโลก",
+  { icon: Settings, text: "วิศวกรรมเฉพาะทาง: ออกแบบเพื่อสภาพแวดล้อมโรงงานโดยตรง", color: "text-emerald-500" },
+  { icon: Shield, text: "ทดสอบเข้มงวด: ผ่านการทดสอบในสภาวะจริงหลากหลายรูปแบบ", color: "text-sky-500" },
+  { icon: Zap, text: "รับรองมาตรฐาน: ได้รับการรับรองสำหรับการทำงานที่เชื่อถือได้", color: "text-amber-500" },
+  { icon: Server, text: "พิสูจน์ในสนาม: ใช้งานจริงในโรงงานทั่วโลก", color: "text-purple-500" },
 ];
 
 // Shared spec table structure
@@ -879,12 +879,15 @@ const EPCBoxSeries = () => {
               CESIPC Industrial Box PC ไม่ได้แค่ติดป้าย "มาตรฐานอุตสาหกรรม" แต่ถูกออกแบบและผลิตให้ตอบสนองความต้องการที่เข้มงวดของสภาพแวดล้อมโรงงานจริง
             </p>
           </div>
-          <div className="max-w-2xl mx-auto card-surface p-8">
-            <div className="space-y-3">
-              {certifications.map((c, i) => (
-                <p key={i} className="text-muted-foreground">{c}</p>
-              ))}
-            </div>
+          <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+            {certifications.map((c, i) => (
+              <div key={i} className="card-surface p-5 flex items-start gap-4 hover:border-primary/30 transition-colors">
+                <div className={`shrink-0 w-11 h-11 rounded-xl bg-background flex items-center justify-center border border-border ${c.color}`}>
+                  <c.icon size={22} />
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed pt-1">{c.text}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
