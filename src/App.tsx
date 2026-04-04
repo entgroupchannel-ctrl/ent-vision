@@ -15,6 +15,7 @@ import WaterproofPC from "./pages/WaterproofPC.tsx";
 import Volktek from "./pages/Volktek.tsx";
 import EPCSeries from "./pages/EPCSeries.tsx";
 import RuggedTablet from "./pages/RuggedTablet.tsx";
+import Handheld from "./pages/Handheld.tsx";
 import GKSeries from "./pages/GKSeries.tsx";
 import PanelPCGTG from "./pages/PanelPCGTG.tsx";
 import SmartDisplay from "./pages/SmartDisplay.tsx";
@@ -70,6 +71,7 @@ const App = () => (
               <Route path="/volktek" element={<Volktek />} />
               <Route path="/epc-series" element={<EPCSeries />} />
               <Route path="/rugged-tablet" element={<RuggedTablet />} />
+              <Route path="/handheld" element={<Handheld />} />
               <Route path="/panel-pc-gtg" element={<PanelPCGTG />} />
               <Route path="/smart-display" element={<SmartDisplay />} />
               <Route path="/promotions" element={<Promotions />} />

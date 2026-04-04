@@ -139,12 +139,21 @@ const menuCategories = [
     },
     columns: [
       {
+        heading: "Handheld & PDA",
+        links: [
+          { label: "W65G — Windows Handheld", href: "/rugged-tablet/w65g" },
+          { label: "A55GT — 5G Android IP68", href: "/rugged-tablet/a55gt", hot: true },
+          { label: "P40AT — PDA Scanner", href: "/rugged-tablet/p40at" },
+          { label: "EM-P2 Pro — 5G Phone", href: "/rugged-tablet/em-p2-pro" },
+          { label: "ดูทั้งหมด →", href: "/handheld", hot: true },
+        ],
+      },
+      {
         heading: "Rugged Tablet",
         links: [
           { label: "F9E Elite — i5 Gen 12", href: "/rugged-tablet", hot: true },
           { label: "W109U — i5/i7 IP68", href: "/rugged-tablet" },
           { label: "F9A — Alder Lake N100", href: "/rugged-tablet" },
-          { label: "F9R — Android RK3588", href: "/rugged-tablet" },
           { label: "A109T — Android 14", href: "/rugged-tablet" },
         ],
       },
@@ -154,14 +163,6 @@ const menuCategories = [
           { label: "EM-X15M — AI PC i7", href: "/rugged-tablet", hot: true },
           { label: "EM-X14A — 14\" Compact", href: "/rugged-tablet" },
           { label: "EM-X14M — 2-in-1 Tablet PC", href: "/rugged-tablet" },
-          { label: "W14U-A — 14\" Laptop", href: "/rugged-tablet" },
-        ],
-      },
-      {
-        heading: "อุปกรณ์เสริม",
-        links: [
-          { label: "แท่นชาร์จ & Dock", href: "/rugged-tablet" },
-          { label: "Vehicle Mount", href: "/rugged-tablet" },
         ],
       },
     ],
