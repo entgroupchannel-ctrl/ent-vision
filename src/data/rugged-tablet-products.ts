@@ -14,6 +14,7 @@ export interface TabletDetailProduct {
   badges: string[];
   keyFeatures: string[];
   quickSpecs: { label: string; value: string }[];
+  configs?: { label: string; ram: string; storage: string; network: string; price: string; note?: string; inStock?: boolean }[];
   overviewSections: {
     titleTH: string;
     titleEN?: string;
@@ -25,6 +26,7 @@ export interface TabletDetailProduct {
   specGroups: { groupName: string; items: { label: string; value: string }[] }[];
   applications: string[];
   accessories?: { name: string; nameEN: string; image?: string; desc: string }[];
+  certifications?: string[];
 }
 
 const products: TabletDetailProduct[] = [
@@ -400,7 +402,115 @@ const products: TabletDetailProduct[] = [
     ],
     applications: ["คลังสินค้า", "โลจิสติกส์", "การขายปลีก", "งานทั่วไป"],
   },
-  // ═══════ ANDROID (6) ═══════
+  // ═══════ ANDROID (7) ═══════
+  {
+    id: "em-t195",
+    model: "EM-T195",
+    name: "EM-T195 Rugged Tablet",
+    nameTH: "The Ultimate in Mobility — 10.1 นิ้ว | 5G | Android 11 | IP65",
+    os: "Android",
+    price: "฿21,900",
+    delivery: "พร้อมส่ง 5 เครื่อง สต๊อกไทย",
+    image: "https://entgroup-rugged.com/assets/front-TlZtwxwQ.png",
+    gallery: [
+      "https://entgroup-rugged.com/assets/front-TlZtwxwQ.png",
+      "https://entgroup-rugged.com/assets/angle-left-CC2wCVzH.png",
+      "https://entgroup-rugged.com/assets/right-side-BYbWApu9.png",
+      "https://entgroup-rugged.com/assets/top-CbaN1IQY.png",
+      "https://entgroup-rugged.com/assets/bottom-Bzx_XYmI.png",
+    ],
+    screenSize: '10.1"',
+    badges: ["5G Ready", "IP65", "Barcode Scanner", "650g", "MediaTek Dimensity"],
+    keyFeatures: [
+      "น้ำหนักเบา 650g หนาเพียง 10.5mm",
+      "MediaTek Dimensity 5G — ความเร็วสูง",
+      "Barcode Scanner 1D/2D ในตัว",
+      "ทนทาน IP65 + Drop Test 1.0m",
+      "แบตเตอรี่ 9500mAh + Fast Charge 18W",
+      "กล้อง 13MP + 5MP / Dual Stereo Speakers",
+    ],
+    quickSpecs: [
+      { label: "หน้าจอ", value: '10.1" FHD 1920×1200 IPS' },
+      { label: "CPU", value: "MediaTek MT6833 Dimensity 5G" },
+      { label: "RAM / ROM", value: "8GB / 128GB-256GB" },
+      { label: "แบตเตอรี่", value: "9500mAh (18W Fast Charge)" },
+      { label: "กล้อง", value: "หน้า 5MP + หลัง 13MP" },
+      { label: "เครือข่าย", value: "5G / 4G / WiFi 5 / BT 5.1" },
+    ],
+    configs: [
+      { label: "4GB+64GB/WiFi/4G", ram: "4GB LPDDR4X", storage: "64GB", network: "WiFi + 4G LTE", price: "฿21,900", note: "พร้อมส่งตอนนี้ 5 เครื่อง สต๊อกไทย", inStock: true },
+      { label: "8GB+128GB/WiFi/5G", ram: "8GB LPDDR4X", storage: "128GB", network: "WiFi + 5G", price: "฿24,900", note: "รอสินค้า 15-30 วัน" },
+      { label: "8GB+256GB/WiFi/5G", ram: "8GB LPDDR4X", storage: "256GB", network: "WiFi + 5G", price: "฿27,900", note: "รอสินค้า 15-30 วัน" },
+    ],
+    certifications: ["IP65", "Drop Test 1.0m", "CE", "FCC"],
+    overviewSections: [
+      {
+        titleTH: "Stylishness, also toughness",
+        titleEN: "Design Excellence",
+        descTH: "EM-T195 มีความหนาเพียง 10.5mm น้ำหนัก 650g ออกแบบมาเพื่อรองรับความเข้มงวดของพนักงานมือถือในปัจจุบัน ด้วยดีไซน์ที่เรียบหรูและทนทานพร้อมกัน สะดวกในการพกพาไปทำงานได้ทุกที่",
+        image: "https://entgroup-rugged.com/assets/stylish-tough-BZcIMZYg.jpg",
+        stats: [{ value: "10.5mm", label: "บาง" }, { value: "650g", label: "เบา" }],
+      },
+      {
+        titleTH: "Perfectly Portable",
+        titleEN: "Mobility First",
+        descTH: "ออกแบบมาให้มีขนาดกะทัดรัดและน้ำหนักเบา เพื่อตอบสนองความต้องการของพนักงานภาคสนามที่ต้องเคลื่อนย้ายตลอดเวลา ไม่ว่าจะเป็นงานคลังสินค้า โลจิสติกส์ หรืองานก่อสร้าง",
+        image: "https://entgroup-rugged.com/assets/lightweight-design-BYntQyDp.jpg",
+      },
+      {
+        titleTH: "Powerful 5G Performance",
+        titleEN: "5G Ready",
+        descTH: "ติดตั้งชิปประมวลผล MediaTek Dimensity octa-core ที่มีการรวม 5G เข้าไปในชิป ให้ประสิทธิภาพการประมวลผลที่แข็งแกร่งและความเร็วในการเชื่อมต่อที่เหนือกว่า",
+        image: "https://entgroup-rugged.com/assets/mediatek-5g-CKOJpR1E.jpg",
+        stats: [{ value: "5G", label: "Ultra-fast Speed" }, { value: "8GB", label: "LPDDR4X RAM" }],
+      },
+      {
+        titleTH: "Built-in Barcode Scanner",
+        titleEN: "Built-in Scanner",
+        descTH: "Barcode Scanner ขนาดเล็กที่สุดในตัว รองรับการสแกนบาร์โค้ด 1D และ 2D ได้อย่างรวดเร็วและแม่นยำ เหมาะสำหรับงานคลังสินค้า การจัดการสินค้าคงคลัง และโลจิสติกส์",
+        image: "https://entgroup-rugged.com/assets/barcode-scanner-CQk-ZJiX.jpg",
+        stats: [{ value: "1D", label: "Barcode" }, { value: "2D", label: "QR Code" }],
+      },
+      {
+        titleTH: "Dual Stereo Speakers",
+        titleEN: "Clear Audio",
+        descTH: "ลำโพงสเตอริโอคู่ที่มีการจัดวางแบบสมมาตร รับประกันการส่งคำสั่งงานที่ชัดเจน แม้ในสภาพแวดล้อมที่มีเสียงรบกวนสูง",
+        image: "https://entgroup-rugged.com/assets/dual-speakers-B2MsVb0a.jpg",
+      },
+      {
+        titleTH: "Long-lasting Battery",
+        titleEN: "All-Day Battery",
+        descTH: "แบตเตอรี่ขนาด 9500mAh ที่ทรงพลัง ช่วยให้ทำงานได้ตลอดทั้งวันโดยไม่ต้องกังวลเรื่องการชาร์จ รองรับการชาร์จเร็ว 18W",
+        image: "https://entgroup-rugged.com/assets/battery-power-Og61s9Fq.jpg",
+        stats: [{ value: "9500", label: "mAh Capacity" }, { value: "18W", label: "Fast Charging" }],
+      },
+      {
+        titleTH: "Neither Less nor More",
+        titleEN: "Perfect Balance",
+        descTH: "การจัดวางพอร์ตที่สมบูรณ์แบบ มีครบทุกสิ่งที่จำเป็น USB Type-C, Audio Jack และพอร์ตอื่นๆ ที่จัดวางอย่างเหมาะสม",
+        image: "https://entgroup-rugged.com/assets/perfect-ports-PsrfIiGJ.jpg",
+      },
+      {
+        titleTH: "Rugged & Durable",
+        titleEN: "Military Grade",
+        descTH: "การดูดซับแรงกระแทกที่เพิ่มขึ้นสามารถทนต่อการตกจากความสูงสูงสุด 1.0 เมตร และได้รับการรับรองมาตรฐาน IP65 กันน้ำ กันฝุ่น เหมาะสำหรับการทำงานในสภาพแวดล้อมที่รุนแรง",
+        image: "https://entgroup-rugged.com/assets/rugged-durable-DjDIex4M.jpg",
+        stats: [{ value: "IP65", label: "Water & Dust Proof" }, { value: "1.0m", label: "Drop Resistant" }],
+      },
+    ],
+    specGroups: [
+      { groupName: "Display", items: [{ label: "Screen Size", value: '10.1"' }, { label: "Resolution", value: "1920×1200 FHD IPS" }, { label: "Touch", value: "10-point Multi-touch" }] },
+      { groupName: "Processor & Memory", items: [{ label: "CPU", value: "MediaTek MT6833 Dimensity 700 Octa-Core" }, { label: "RAM", value: "4GB / 8GB LPDDR4X" }, { label: "Storage", value: "64GB / 128GB / 256GB" }] },
+      { groupName: "Camera", items: [{ label: "Front", value: "5MP" }, { label: "Rear", value: "13MP Auto Focus + Flash" }] },
+      { groupName: "Connectivity", items: [{ label: "Network", value: "5G / 4G LTE" }, { label: "WiFi", value: "WiFi 5 (802.11ac)" }, { label: "Bluetooth", value: "BT 5.1" }, { label: "GNSS", value: "GPS / GLONASS / BeiDou / Galileo" }] },
+      { groupName: "Battery & Power", items: [{ label: "Battery", value: "9500mAh Li-Polymer" }, { label: "Fast Charge", value: "18W USB-C PD" }, { label: "Battery Life", value: "10+ ชั่วโมง" }] },
+      { groupName: "Protection & Durability", items: [{ label: "IP Rating", value: "IP65" }, { label: "Drop Test", value: "1.0 เมตร" }, { label: "Operating Temp", value: "-20°C ~ 60°C" }] },
+      { groupName: "Scanner", items: [{ label: "Barcode", value: "1D/2D Built-in" }, { label: "NFC", value: "รองรับ" }] },
+      { groupName: "Physical", items: [{ label: "Dimensions", value: "260 × 170 × 10.5 mm" }, { label: "Weight", value: "650g" }] },
+      { groupName: "System", items: [{ label: "OS", value: "Android 11" }] },
+    ],
+    applications: ["คลังสินค้า & โลจิสติกส์", "การแพทย์ & สาธารณสุข", "งานภาคสนาม", "การขายปลีก POS", "การจัดการสินค้าคงคลัง", "งานก่อสร้าง"],
+  },
   {
     id: "f9r",
     model: "F9R",

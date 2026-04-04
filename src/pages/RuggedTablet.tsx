@@ -128,7 +128,17 @@ const tablets: TabletProduct[] = [
     image: "https://entgroup-rugged.com/assets/w10n-main-DJomacwZ.png",
     productUrl: "https://entgroup-rugged.com/product/w10n",
   },
-  // ── Android (6) ──
+  // ── Android (7) ──
+  {
+    id: "em-t195", model: "EM-T195", name: "EM-T195 Rugged Tablet", os: "Android",
+    size: '10.1"', cpu: "MediaTek MT6833 Dimensity 5G Octa-Core", ram: "4GB-8GB / 64GB-256GB",
+    display: "10.1\" 1920×1200 FHD IPS",
+    highlights: ["5G Ready", "IP65", "Barcode Scanner", "650g", "9500mAh"],
+    image: "https://entgroup-rugged.com/assets/front-TlZtwxwQ.png",
+    price: "฿21,900",
+    badge: "🔥 HOT",
+    productUrl: "/rugged-tablet/em-t195",
+  },
   {
     id: "f9r", model: "F9R", name: "Android Powerhouse F9R", os: "Android",
     size: '10.1"', cpu: "RK3588 Octa-Core (4×A76 + 4×A55)", ram: "8GB / 128GB",
