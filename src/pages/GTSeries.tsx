@@ -4016,7 +4016,7 @@ const GTSeries = () => {
               <div className="card-surface p-4 overflow-hidden">
                 <h4 className="text-lg font-display font-bold text-foreground mb-4 px-2">🔧 เลือก CPU ได้ถึง 4 รุ่น — จ่ายตามความต้องการ</h4>
                 <img
-                  src="https://static.wixstatic.com/media/3e5003_db3073f9df72429ca103a592e5e1d47d~mv2.jpg/v1/crop/x_2,y_0,w_1997,h_603/fill/w_1181,h_357,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3.jpg"
+                  src={gt4500CpuOptions}
                   alt="GT4500 CPU Options"
                   className="w-full rounded-lg"
                   loading="lazy"
