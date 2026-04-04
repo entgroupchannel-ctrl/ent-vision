@@ -28,7 +28,7 @@ import TabletProductFilter, {
   defaultTabletFilters,
   TabletActiveFilterChips,
 } from "@/components/tablet/TabletProductFilter";
-import ruggedHero from "@/assets/rugged-tablet-hero.jpg";
+import tabletHero from "@/assets/tablet-hero.jpg";
 
 /* ═══════ Product Data — 15 models ═══════ */
 type TabletProduct = {
