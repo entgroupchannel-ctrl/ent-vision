@@ -5015,7 +5015,6 @@ const GTSeries = () => {
               </div>
 
               {useCasesGrid}
-                  <p className="text-muted-foreground">สร้างภาพลักษณ์องค์กร — พนักงานภูมิใจที่ได้ใช้ผลิตภัณฑ์ระดับโลก ออกแบบเครื่องให้เข้ากับแบรนด์ของคุณได้อย่างลงตัว</p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0 divide-x divide-y divide-border">
                   {[
