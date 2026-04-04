@@ -129,7 +129,7 @@ const NotebookCard = ({ product }: { product: RuggedNotebook }) => {
   const cfg = product.configs[selectedCfg];
 
   return (
-    <div className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col">
+    <Link to={`/rugged-notebook/${product.id}`} className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:border-primary/30 transition-all duration-300 flex flex-col">
       {/* Image */}
       <div className="relative bg-gradient-to-b from-muted/30 to-transparent p-6 flex items-center justify-center min-h-[200px]">
         <Badge className="absolute top-3 left-3 bg-primary/90 text-primary-foreground text-[10px]">
