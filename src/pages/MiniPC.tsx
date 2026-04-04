@@ -13,6 +13,7 @@ import { useState } from "react";
 import FooterCompact from "@/components/FooterCompact";
 import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteDialog from "@/components/QuoteDialog";
+import LineQRButton from "@/components/LineQRButton";
 
 /* ── Category Navigation ── */
 const categories = [
@@ -863,13 +864,16 @@ const MiniPC = () => {
               </div>
             ))}
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
             <Button onClick={() => setQuoteProduct("Mini PC")}>
               <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
             </Button>
             <Button variant="outline" onClick={() => document.getElementById("pricelist")?.scrollIntoView({ behavior: "smooth" })}>
               ดูตารางราคา
             </Button>
+            <LineQRButton className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-[#06C755] text-[#06C755] font-medium text-sm hover:bg-[#06C755]/10 transition-colors">
+              💬 สอบถามทาง LINE
+            </LineQRButton>
           </div>
         </div>
       </section>
