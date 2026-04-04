@@ -4953,20 +4953,17 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     </p>
                   </div>
 
-                  <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-3">🏭 Products Features</h4>
-                    <ul className="text-sm text-muted-foreground space-y-2">
-                      <li>✅ Intel Celeron J4125/J6412 หรือ Gen 8/10/11 Core i3/i5/i7</li>
-                      <li>✅ 2× Intel i225V 2.5G LAN (รองรับขยายเป็น 4 LAN)</li>
-                      <li>✅ 2× RS232/RS422/RS485 COM + 4× Expanded RS232 COM</li>
-                      <li>✅ 10-way GPIO + Remote Switch</li>
-                      <li>✅ M.2 3042/3052 สำหรับ 3G/4G/5G Module + SIM Slot</li>
-                      <li>✅ Fanless Aluminum Alloy — เงียบสนิท 24 ชม.</li>
-                      <li>✅ ไฟเข้า 9–36V กว้าง (4-pin Phoenix Terminal)</li>
-                      <li>✅ AWAL, Wake On LAN, Watchdog, RTC</li>
-                      <li>✅ ขนาด 300×155×50mm / 1.8kg</li>
-                    </ul>
-                  </div>
+                  <ProductFeatures features={[
+                    "Intel Celeron J4125/J6412 หรือ Gen 8/10/11 Core i3/i5/i7",
+                    "2× Intel i225V 2.5G LAN (รองรับขยายเป็น 4 LAN)",
+                    "2× RS232/RS422/RS485 COM + 4× Expanded RS232 COM",
+                    "10-way GPIO + Remote Switch",
+                    "M.2 3042/3052 สำหรับ 3G/4G/5G Module + SIM Slot",
+                    "Fanless Aluminum Alloy — เงียบสนิท 24 ชม.",
+                    "ไฟเข้า 9–36V กว้าง (4-pin Phoenix Terminal)",
+                    "AWAL, Wake On LAN, Watchdog, RTC",
+                    "ขนาด 300×155×50mm / 1.8kg",
+                  ]} />
 
                   {/* Key Specs */}
                   <div className="grid grid-cols-2 gap-4">
