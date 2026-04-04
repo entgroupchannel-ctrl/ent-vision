@@ -2645,7 +2645,80 @@ const GTSeries = () => {
               </div>
 
 
-              {/* GT5000 Price Table */}
+              {/* GT5000 Specifications */}
+              <div className="grid lg:grid-cols-2 gap-6">
+                <div className="card-surface rounded-2xl overflow-hidden">
+                  <div className="p-4 border-b border-border bg-primary/5">
+                    <h3 className="text-lg font-display font-bold text-foreground">📋 GT5000 Specifications</h3>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {[
+                          { label: "CPU", value: "Intel Core i5-4200U (1.6–2.6GHz, 2C/4T)\nIntel Core i7-4500U (1.8–3.0GHz, 2C/4T)" },
+                          { label: "TDP", value: "17W" },
+                          { label: "Chipset", value: "Intel Haswell" },
+                          { label: "BIOS", value: "AMI 5.6.5" },
+                          { label: "Memory", value: "1× SO-DIMM DDR3L, 2/4/8GB\nDDR3-L/-RS 1333/1600" },
+                          { label: "OS", value: "Windows 7/8/10/Linux" },
+                          { label: "Audio", value: "ALC662 HD Audio\n(Line-in, Line-out, Mic-in)" },
+                          { label: "Network", value: "Intel i211 Gigabit LAN\n10/100/1000 Mbps Base-T" },
+                          { label: "Video", value: "Intel HD Graphics 4400" },
+                          { label: "M-SATA", value: "1× M-SATA3.0 SSD\n6Gb/s, 8–1TB (Optional)" },
+                          { label: "SATA", value: "1× SATA3.0 HDD/SSD\n6Gb/s, 320G–2TB (Optional)" },
+                          { label: "WiFi/BT", value: "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม" },
+                          { label: "COM", value: "6× RS232 (3 line)\nCOM1/COM2 → RS485/RS422" },
+                          { label: "USB", value: "4× USB2.0 + 4× USB3.0" },
+                          { label: "Display", value: "1× VGA + 1× HDMI" },
+                          { label: "GPIO", value: "1× GPIO" },
+                          { label: "LAN", value: "2× RJ45 Gigabit LAN" },
+                          { label: "4G Module", value: "1× mini PCIe-full (USB bus)\nสำหรับ 4G Module" },
+                          { label: "SIM", value: "1× Micro SIM (PUSH)" },
+                          { label: "Audio I/O", value: "1× MIC + 1× SPK" },
+                        ].map((s, i) => (
+                          <tr key={i} className={i % 2 === 1 ? "bg-muted/20" : ""}>
+                            <td className="p-3 font-bold text-foreground w-1/3 align-top">{s.label}</td>
+                            <td className="p-3 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div className="card-surface rounded-2xl overflow-hidden">
+                  <div className="p-4 border-b border-border bg-primary/5">
+                    <h3 className="text-lg font-display font-bold text-foreground">⚡ Power & Dimensions</h3>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <tbody className="divide-y divide-border">
+                        {[
+                          { label: "Power Input", value: "DC 100–240V AC / 50–60Hz" },
+                          { label: "Power Output", value: "12V-3A-5A" },
+                          { label: "Operating Temp", value: "0 ~ +60°C" },
+                          { label: "Storage Temp", value: "-20 ~ +70°C" },
+                          { label: "Humidity", value: "0–90% (non-condensing)" },
+                          { label: "Functions", value: "Auto Power On\nWake-On-LAN\nPXE Boot" },
+                          { label: "Dimensions", value: "230 × 175 × 50 mm" },
+                          { label: "Weight", value: "Net 1.8 kg / Gross 2.5 kg" },
+                          { label: "Shell", value: "Aluminum Alloy — Black" },
+                          { label: "Cooling", value: "Fanless (Passive)" },
+                          { label: "Switch", value: "1× Power On/Off" },
+                          { label: "Package", value: "1× Mini PC\n1× Power Adapter\n1× Power Cord\n1× Screws Bag" },
+                        ].map((s, i) => (
+                          <tr key={i} className={i % 2 === 1 ? "bg-muted/20" : ""}>
+                            <td className="p-3 font-bold text-foreground w-1/3 align-top">{s.label}</td>
+                            <td className="p-3 text-muted-foreground text-xs whitespace-pre-line">{s.value}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
                   <h3 className="text-lg font-display font-bold text-foreground">💰 GT5000 Price List</h3>
