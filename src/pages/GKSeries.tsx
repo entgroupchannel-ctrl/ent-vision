@@ -871,6 +871,8 @@ const GKSeries = () => {
             { id: "cUqG6xWQegE", title: "GK1004 How to Choose" },
             { id: "jWM0vEKoAAE", title: "GK1004 รายละเอียดเพิ่มเติม" },
             { id: "xXaUYlbVy5o", title: "GK1004 การใช้งาน" },
+            { id: "_UqXHR6iCMA", title: "GK1501 Introduction" },
+            { id: "JVnNQcTupgE", title: "GK1501 รีวิวเพิ่มเติม" },
             { id: "O5fd-_ZfWR0", title: "GK1506 Introduction" },
             { id: "szVVTv5tmJs", title: "GK1506 รีวิวเพิ่มเติม" },
             { id: "ZZlkdSgJAzs", title: "GK1506 สาธิตการใช้งาน" },
@@ -883,6 +885,10 @@ const GKSeries = () => {
             { id: "cUqG6xWQegE", title: "How to Choose" },
             { id: "jWM0vEKoAAE", title: "รายละเอียดเพิ่มเติม" },
             { id: "xXaUYlbVy5o", title: "การใช้งาน" },
+          ],
+          "GK1501": [
+            { id: "_UqXHR6iCMA", title: "Introduction" },
+            { id: "JVnNQcTupgE", title: "รีวิวเพิ่มเติม" },
           ],
           "GK1506": [
             { id: "O5fd-_ZfWR0", title: "Introduction" },
