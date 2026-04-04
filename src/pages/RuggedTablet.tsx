@@ -368,10 +368,10 @@ const RuggedTablet = () => {
   };
   return (
     <div className="min-h-screen bg-background">
-      <SEOHead title="Rugged Tablet & Notebook กันน้ำ กันกระแทก" description="Rugged Tablet และ Notebook ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์ และอุตสาหกรรม" path="/rugged-tablet" />
+      <SEOHead title="Rugged Tablet กันน้ำ กันกระแทก" description="Rugged Tablet ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์ และอุตสาหกรรม" path="/rugged-tablet" />
       <ProductJsonLd
-        collectionName="Rugged Tablet & Notebook กันน้ำ กันกระแทก"
-        collectionDescription="Rugged Tablet และ Notebook ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์"
+        collectionName="Rugged Tablet กันน้ำ กันกระแทก"
+        collectionDescription="Rugged Tablet ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์"
         collectionUrl="/rugged-tablet"
         products={[...goleWindowsModels, ...goleAndroidModels].map(m => ({ name: m.name, price: m.price, category: "Rugged Tablet" }))}      />
 
