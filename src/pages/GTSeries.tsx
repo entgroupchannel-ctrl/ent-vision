@@ -1983,7 +1983,7 @@ const GTSeries = () => {
                       {[
                         { id: "aQ5z_JJzALo", title: "GT3000 รีวิวเจาะลึก" },
                         { id: "FV7oo7GHp9Q", title: "GT3000 สาธิตการใช้งาน" },
-                        { id: "31SEStppvKw", title: "GT3000 ติดตั้งจริง" },
+                        { id: "ifkzyVY9Z-g", title: "การเลือกซื้อ GT Series" },
                       ].map((video) => (
                         <div key={video.id} className="space-y-2">
                           <div className="relative w-full aspect-video rounded-lg overflow-hidden">
