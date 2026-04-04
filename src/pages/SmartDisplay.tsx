@@ -229,31 +229,26 @@ const SmartDisplay = () => {
       </section>
 
       {/* Category Tabs */}
-      <section className="section-padding" id="products">
+      <section className="py-8" id="products">
         <div className="container max-w-7xl mx-auto">
-          <div className="text-center mb-10">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Product Categories</span>
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              เลือกประเภท<span className="text-gradient">จอภาพ</span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-4 mb-12">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveTab(cat.id)}
-                className={`p-6 rounded-2xl border-2 text-left transition-all ${
-                  activeTab === cat.id
-                    ? "border-primary bg-primary/5 shadow-lg shadow-primary/10"
-                    : "border-border bg-background hover:border-primary/30"
-                }`}
-              >
-                <cat.icon size={32} className={activeTab === cat.id ? "text-primary" : "text-muted-foreground"} />
-                <h3 className={`text-lg font-bold mt-3 ${activeTab === cat.id ? "text-primary" : "text-foreground"}`}>{cat.label}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{cat.desc}</p>
-              </button>
-            ))}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
+            <span className="text-sm font-bold text-foreground whitespace-nowrap">👆 เลือกหมวดสินค้า:</span>
+            <div className="flex flex-wrap gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveTab(cat.id)}
+                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                    activeTab === cat.id
+                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  }`}
+                >
+                  <cat.icon size={16} />
+                  {cat.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Indoor Products */}
