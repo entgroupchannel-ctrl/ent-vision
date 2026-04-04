@@ -15,6 +15,7 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import WishlistHeart from "@/components/WishlistHeart";
+import ProductGallery from "@/components/ProductGallery";
 import { getHandheldProduct, getRelatedHandhelds } from "@/data/rugged-handheld-products";
 
 /* ───── Related Product Card ───── */
