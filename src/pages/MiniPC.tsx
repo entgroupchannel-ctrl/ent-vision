@@ -769,6 +769,13 @@ const MiniPC = () => {
     { model: "K3-F17H", cpu: "Intel i3-1125G4", ram: "4GB", storage: "128GB", price: "19,690", priceNum: 19690, category: "High Performance", cpuLevel: "Core i3" },
     { model: "K5-F17H", cpu: "Intel i5-1155G7", ram: "4GB", storage: "128GB", price: "24,590", priceNum: 24590, category: "High Performance", cpuLevel: "Core i5" },
     { model: "K7-F17H", cpu: "Intel i7-1195G7", ram: "4GB", storage: "128GB", price: "27,290", priceNum: 27290, category: "High Performance", cpuLevel: "Core i7" },
+    { model: "K6-F17H", cpu: "Intel N150 4C", ram: "4GB", storage: "128GB", price: "สอบถาม", priceNum: 0, category: "Entry-Level", cpuLevel: "Celeron/Atom" },
+    { model: "K3-F18-6006", cpu: "Intel Core i3-6006U", ram: "8GB", storage: "128GB", price: "สอบถาม", priceNum: 0, category: "Entry-Level", cpuLevel: "Core i3" },
+    { model: "K3-F17HI", cpu: "Intel Core i3 Series", ram: "4GB", storage: "128GB", price: "สอบถาม", priceNum: 0, category: "High Performance", cpuLevel: "Core i3" },
+    { model: "K5-F17F", cpu: "Intel i5-1155G7 11th", ram: "8GB", storage: "256GB", price: "สอบถาม", priceNum: 0, category: "High Performance", cpuLevel: "Core i5" },
+    { model: "K7-F17F", cpu: "Intel i7-1195G7 11th", ram: "16GB", storage: "256GB", price: "สอบถาม", priceNum: 0, category: "High Performance", cpuLevel: "Core i7" },
+    { model: "K8-F18-4405", cpu: "Intel Pentium 4405U", ram: "8GB", storage: "128GB", price: "สอบถาม", priceNum: 0, category: "High Performance", cpuLevel: "Pentium" },
+    { model: "K8-F12C (6LAN)", cpu: "Intel N3700", ram: "4GB", storage: "128GB", price: "สอบถาม", priceNum: 0, category: "Nano & Firewall", cpuLevel: "Pentium" },
     { model: "Windows 10 Pro OEM", cpu: "-", ram: "-", storage: "-", price: "3,950", priceNum: 3950, category: "Software", cpuLevel: "-" },
     { model: "Windows 11 Pro OEM", cpu: "-", ram: "-", storage: "-", price: "4,590", priceNum: 4590, category: "Software", cpuLevel: "-" },
   ];
