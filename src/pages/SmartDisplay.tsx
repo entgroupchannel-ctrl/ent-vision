@@ -671,7 +671,13 @@ const SmartDisplay = () => {
                       <img src={k.image} alt={k.title} className="max-h-full object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                     </div>
                     <h3 className="font-bold text-foreground mb-1">{k.title}</h3>
-                    <p className="text-sm text-muted-foreground">{k.desc}</p>
+                    <p className="text-sm text-muted-foreground mb-3">{k.desc}</p>
+                    <button
+                      onClick={() => setQuoteOpen(true)}
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
+                    >
+                      <FileText size={14} /> ขอใบเสนอราคา
+                    </button>
                   </div>
                 ))}
               </div>
