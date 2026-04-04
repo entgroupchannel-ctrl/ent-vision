@@ -3524,7 +3524,7 @@ const GTSeries = () => {
                         {[
                           ["LAN", "2 × Gigabit Ethernet RJ45"],
                           ["SIM", "Micro SIM 4G (PUSH function)"],
-                          ["WiFi", "Built-in WiFi / Bluetooth"],
+                          ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม"],
                           ["Cooling", "Active Cooling (พัดลม) — TDP 15–25W"],
                           ["Mounting", "VESA / Wall Mount"],
                         ].map(([k, v], i) => (
