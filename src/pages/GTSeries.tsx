@@ -2853,6 +2853,8 @@ const GTSeries = () => {
                 </div>
               </div>
 
+              {useCasesGrid}
+
               {/* Intro Video */}
               <div className="card-surface overflow-hidden rounded-xl">
                 <div className="p-5 border-b border-border flex items-center gap-3">
