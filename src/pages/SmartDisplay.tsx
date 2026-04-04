@@ -454,7 +454,43 @@ const SmartDisplay = () => {
                       <img src={src} alt={`FPM installation ${i + 1}`} className="w-full h-44 object-cover" loading="lazy" />
                     </div>
                   ))}
+
+                {/* YouTube FPM Series */}
+                <div className="mt-8">
+                  <h4 className="font-bold text-foreground mb-3 flex items-center gap-2"><Eye size={16} /> วิดีโอ FPM Series</h4>
+                  <div className="card-surface rounded-xl overflow-hidden">
+                    <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                      <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src="https://www.youtube.com/embed/gz9E7ls-QwQ"
+                        title="FPM Series Industrial Touch Monitor"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
                 </div>
+
+                {/* Podcast FPM Series */}
+                <div className="mt-8">
+                  <h4 className="font-bold text-foreground mb-3 flex items-center gap-2">🎙️ Podcast — FPM Series</h4>
+                  <div className="grid sm:grid-cols-3 gap-3">
+                    {[
+                      { src: "/podcasts/fpm-intro.wav", title: "Intro FPM Series" },
+                      { src: "/podcasts/fpm-promotion.wav", title: "Promotion" },
+                      { src: "/podcasts/fpm-how-to-buy.wav", title: "How to buy FPM Series" },
+                    ].map((p) => (
+                      <div key={p.src} className="card-surface rounded-xl p-4 flex flex-col gap-2">
+                        <p className="font-semibold text-sm text-foreground">{p.title}</p>
+                        <audio controls preload="none" className="w-full h-10">
+                          <source src={p.src} type="audio/wav" />
+                        </audio>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
               </div>
             </div>
           )}
