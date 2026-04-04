@@ -12,6 +12,7 @@ import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import { LineQRDialog } from "@/components/LineQRDialog";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import gk1506img1 from "@/assets/gk-series/gk1506-1.jpg";
 import gk1506img2 from "@/assets/gk-series/gk1506-2.jpg";
 import gk1506img3 from "@/assets/gk-series/gk1506-3.jpg";
