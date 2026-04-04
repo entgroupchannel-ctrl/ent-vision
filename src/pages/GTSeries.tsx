@@ -596,6 +596,7 @@ const GTSeries = () => {
   const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
   const [showLineQR, setShowLineQR] = useState(false);
   const [gt9000PricePage, setGt9000PricePage] = useState(0);
+  const [gt1400PricePage, setGt1400PricePage] = useState(0);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -4435,78 +4436,75 @@ const GTSeries = () => {
               </div>
 
 
-              {/* Price Table */}
-              <div className="card-surface overflow-hidden">
-                <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT1400 Price List</h3>
-                  <p className="text-sm text-muted-foreground mt-1">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿28,990</p>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="bg-secondary/50">
-                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
-                        <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
-                        <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border">
-                      {[
-                        { cpu: "i5-8305G", config: "DDR4 RAM 4GB + SSD 128GB + WIFI", price: "28,990" },
-                        { cpu: "i5-8305G", config: "DDR4 RAM 8GB + SSD 128GB + WIFI", price: "29,190" },
-                        { cpu: "i5-8305G", config: "DDR4 RAM 4GB + SSD 256GB + WIFI", price: "29,590" },
-                        { cpu: "i5-8305G", config: "DDR4 RAM 8GB + SSD 256GB + WIFI", price: "29,990" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 8GB + SSD 128GB + WIFI", price: "34,690" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 8GB + SSD 256GB + WIFI", price: "35,290" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 16GB + SSD 128GB + WIFI", price: "36,490" },
-                        { cpu: "i7-12650HX", config: "DDR5 RAM 16GB + SSD 256GB + WIFI", price: "36,990" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 8GB + SSD 128GB + WIFI", price: "37,790" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 8GB + SSD 256GB + WIFI", price: "38,390" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 16GB + SSD 128GB + WIFI", price: "39,590" },
-                        { cpu: "i7-13650HX", config: "DDR5 RAM 16GB + SSD 256GB + WIFI", price: "39,990" },
-                      ].map((item, i) => (
-                        <tr key={i} className="hover:bg-secondary/30 transition-colors">
-                          <td className="p-3 text-foreground font-medium">{item.cpu}</td>
-                          <td className="p-3 text-muted-foreground">{item.config}</td>
-                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              {(() => {
+                const gt1400Prices = [
+                  { cpu: "i5-8305G", config: "DDR4 RAM 4GB + SSD 128GB + WIFI", price: "28,990" },
+                  { cpu: "i5-8305G", config: "DDR4 RAM 8GB + SSD 128GB + WIFI", price: "29,190" },
+                  { cpu: "i5-8305G", config: "DDR4 RAM 4GB + SSD 256GB + WIFI", price: "29,590" },
+                  { cpu: "i5-8305G", config: "DDR4 RAM 8GB + SSD 256GB + WIFI", price: "29,990" },
+                  { cpu: "i7-12650HX", config: "DDR5 RAM 8GB + SSD 128GB + WIFI", price: "34,690" },
+                  { cpu: "i7-12650HX", config: "DDR5 RAM 8GB + SSD 256GB + WIFI", price: "35,290" },
+                  { cpu: "i7-12650HX", config: "DDR5 RAM 16GB + SSD 128GB + WIFI", price: "36,490" },
+                  { cpu: "i7-12650HX", config: "DDR5 RAM 16GB + SSD 256GB + WIFI", price: "36,990" },
+                  { cpu: "i7-13650HX", config: "DDR5 RAM 8GB + SSD 128GB + WIFI", price: "37,790" },
+                  { cpu: "i7-13650HX", config: "DDR5 RAM 8GB + SSD 256GB + WIFI", price: "38,390" },
+                  { cpu: "i7-13650HX", config: "DDR5 RAM 16GB + SSD 128GB + WIFI", price: "39,590" },
+                  { cpu: "i7-13650HX", config: "DDR5 RAM 16GB + SSD 256GB + WIFI", price: "39,990" },
+                ];
+                const perPage = 6;
+                const totalPages = Math.ceil(gt1400Prices.length / perPage);
+                const start = gt1400PricePage * perPage;
+                const paged = gt1400Prices.slice(start, start + perPage);
+                return (
+                  <Collapsible defaultOpen>
+                    <div className="card-surface overflow-hidden">
+                      <CollapsibleTrigger className="w-full p-5 border-b border-border flex items-center justify-between hover:bg-secondary/30 transition-colors">
+                        <div>
+                          <h3 className="text-lg font-display font-bold text-foreground text-left">💰 GT1400 Price List</h3>
+                          <p className="text-sm text-muted-foreground mt-1 text-left">รับประกัน 1 ปี ทุกรุ่น · เริ่มต้นเพียง ฿28,990 · {gt1400Prices.length} รายการ</p>
+                        </div>
+                        <ChevronDown size={20} className="text-muted-foreground transition-transform duration-200 [[data-state=open]>&]:rotate-180" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead>
+                              <tr className="bg-secondary/50">
+                                <th className="text-left p-3 font-semibold text-foreground">#</th>
+                                <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                                <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
+                                <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-border">
+                              {paged.map((item, i) => (
+                                <tr key={start + i} className="hover:bg-secondary/30 transition-colors">
+                                  <td className="p-3 text-muted-foreground">{start + i + 1}</td>
+                                  <td className="p-3 text-foreground font-medium">{item.cpu}</td>
+                                  <td className="p-3 text-muted-foreground">{item.config}</td>
+                                  <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                        {totalPages > 1 && (
+                          <div className="flex items-center justify-center gap-2 p-4 border-t border-border">
+                            <button onClick={() => setGt1400PricePage(Math.max(0, gt1400PricePage - 1))} disabled={gt1400PricePage === 0} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ก่อนหน้า</button>
+                            {Array.from({ length: totalPages }, (_, idx) => (
+                              <button key={idx} onClick={() => setGt1400PricePage(idx)} className={`w-8 h-8 rounded-lg text-xs font-bold transition-colors ${idx === gt1400PricePage ? "bg-primary text-primary-foreground" : "hover:bg-secondary/50 text-muted-foreground"}`}>{idx + 1}</button>
+                            ))}
+                            <button onClick={() => setGt1400PricePage(Math.min(totalPages - 1, gt1400PricePage + 1))} disabled={gt1400PricePage === totalPages - 1} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ถัดไป</button>
+                          </div>
+                        )}
+                        <p className="text-xs text-muted-foreground text-center py-3 border-t border-border">* ราคาอาจเปลี่ยนแปลงได้โดยมิต้องแจ้งให้ทราบล่วงหน้า</p>
+                      </CollapsibleContent>
+                    </div>
+                  </Collapsible>
+                );
+              })()}
 
-              {/* Video Section */}
-              <div className="card-surface overflow-hidden rounded-xl">
-                <div className="p-5 border-b border-border flex items-center gap-3">
-                  <Play className="text-primary" size={20} />
-                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT1400</h3>
-                </div>
-                <div className="grid md:grid-cols-2 gap-0 md:divide-x divide-border">
-                  <a href="https://www.entgroup.co.th/gt-series-2023" target="_blank" rel="noopener noreferrer" className="block relative group">
-                    <img src="https://static.wixstatic.com/media/0597a3_88afd8cf4a5a42a6b36b4880d59e9ebe~mv2.png/v1/fill/w_1293,h_474,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2015_12_53.png" alt="GT2023 Intro" className="w-full aspect-video object-cover" loading="lazy" />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
-                      </div>
-                    </div>
-                    <div className="absolute bottom-3 left-3">
-                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">GT2023 Intro — 02:44</span>
-                    </div>
-                  </a>
-                  <a href="https://www.entgroup.co.th/gt-series-2023" target="_blank" rel="noopener noreferrer" className="block relative group">
-                    <img src="https://static.wixstatic.com/media/0597a3_b7fd144f004b401aa284fe76f0c11462~mv2.png/v1/fill/w_1119,h_541,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-09-14%20at%2013_55_43.png" alt="GT1400 Intro" className="w-full aspect-video object-cover" loading="lazy" />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                      <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Play className="text-primary-foreground ml-1" size={24} fill="currentColor" />
-                      </div>
-                    </div>
-                    <div className="absolute bottom-3 left-3">
-                      <span className="text-white text-xs font-semibold bg-black/60 px-2 py-1 rounded-full">GT1400 Intro — 02:40</span>
-                    </div>
-                  </a>
-                </div>
-              </div>
+
 
               {/* Intro Video */}
               <div className="card-surface overflow-hidden rounded-xl">
