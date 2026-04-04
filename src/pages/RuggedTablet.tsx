@@ -2,332 +2,301 @@ import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Shield, Droplets, Battery, Smartphone, Monitor, Download, ChevronLeft, ChevronRight, Wifi, FileText, CheckSquare, Square, ShoppingCart, X } from "lucide-react";
+import {
+  ArrowLeft, Shield, Droplets, Battery, Smartphone, Monitor,
+  Download, ChevronLeft, ChevronRight, Wifi, FileText,
+  ShoppingCart, X, ExternalLink,
+} from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import ruggedHero from "@/assets/rugged-tablet-hero.jpg";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import FooterCompact from "@/components/FooterCompact";
 import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteDialog from "@/components/QuoteDialog";
+import ruggedHero from "@/assets/rugged-tablet-hero.jpg";
 
-/* ───── Product Categories ───── */
+/* ═══════ Product Data — 15 models ═══════ */
+type TabletProduct = {
+  id: string;
+  model: string;
+  name: string;
+  os: "Windows" | "Android";
+  size: string;
+  cpu: string;
+  ram: string;
+  display: string;
+  highlights: string[];
+  image: string;
+  price?: string;
+  badge?: string;
+  productUrl: string;
+};
 
-const goleRuggedTablets = [
+const tablets: TabletProduct[] = [
+  // ── Windows (9) ──
   {
-    id: "f7g",
-    name: "Gole F7G",
-    size: '7"',
-    os: "Android / Windows",
-    highlight: "หน้าจอสัมผัส 7 นิ้ว ทนทาน กันน้ำ กันฝุ่น",
-    image: "https://static.wixstatic.com/media/0597a3_7ac8863aec774fe2a9f5ef3eae9490a1~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rugged%20Tablet%20(2).png",
-    datasheet: "https://docs.wixstatic.com/ugd/0597a3_92835c695be34af08b00b1dc3394fe83.pdf",
-  },
-  {
-    id: "f7r",
-    name: "Gole F7R",
-    size: '7"',
-    os: "Android",
-    highlight: "คอมแพ็คท์ ทนทาน พกพาสะดวก สำหรับงานสนาม",
-    image: "https://static.wixstatic.com/media/0597a3_f7670923b4fa410cb096b5a7357de026~mv2.png/v1/fill/w_350,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rugged%20Tablet%20(2).png",
-    datasheet: "https://docs.wixstatic.com/ugd/0597a3_b2fb7597f1b4458c862548e91b6bb6cc.pdf",
-  },
-  {
-    id: "f9a",
-    name: "Gole F9A",
-    size: '9"',
-    os: "Android",
-    highlight: "หน้าจอกว้างขึ้น พร้อมแบตเตอรี่ขนาดใหญ่",
-    image: "https://static.wixstatic.com/media/0597a3_aa3fa9aff52147e780c6bdbd364e8516~mv2.png/v1/crop/x_0,y_3,w_1040,h_998/fill/w_333,h_320,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rugged%20Tablet%20(3).png",
-    datasheet: "https://docs.wixstatic.com/ugd/0597a3_3a33965f742b4034b974ef56aab56170.pdf",
-  },
-];
-
-const goleWindowsModels = [
-  { name: "Rugged F3", price: "฿20,900", datasheet: "" },
-  { name: "Rugged F3APL", price: "฿14,900", datasheet: "" },
-  { name: "Rugged F6APL", price: "฿15,900", datasheet: "" },
-  { name: "Rugged F11APL", price: "฿16,900", datasheet: "https://docs.wixstatic.com/ugd/005637_f02217601dad4d409461b2ddd18e56c4.pdf" },
-  { name: "Rugged F12APL", price: "฿19,900", datasheet: "https://docs.wixstatic.com/ugd/005637_8b4c9a6183374654920d6774c95db305.pdf" },
-  { name: "Rugged F15APL N3450", price: "฿20,900", datasheet: "https://docs.wixstatic.com/ugd/005637_b353baf418bc46279e6302dfd90a5848.pdf" },
-  { name: "Rugged F15APL J3355", price: "฿19,900", datasheet: "https://docs.wixstatic.com/ugd/005637_1940ca9c1adf4d2296646195d8d9a347.pdf" },
-];
-
-const goleAndroidModels = [
-  { name: "Rugged F3R", price: "฿10,900", datasheet: "https://docs.wixstatic.com/ugd/005637_f8525dea6d034b26b5b09324b8e15bbc.pdf" },
-  { name: "Rugged F6R", price: "฿12,900", datasheet: "https://docs.wixstatic.com/ugd/005637_50b47eff40c94ec28d0ae8fcb77d0ef8.pdf" },
-  { name: "Rugged F11R (RK3568)", price: "฿17,900", datasheet: "https://docs.wixstatic.com/ugd/005637_b93e6728b85440fc8dba1818fafbe943.pdf" },
-  { name: "Rugged F12R", price: "฿17,900", datasheet: "https://docs.wixstatic.com/ugd/005637_b121d1a8618a4a0486d7ef4f6012bf1c.pdf" },
-  { name: "Rugged F15R", price: "฿19,900", datasheet: "https://docs.wixstatic.com/ugd/005637_d99131aa2339461fadbb2b2e188cd0b7.pdf" },
-];
-
-const emRuggedTablets = [
-  {
-    id: "f9e",
-    name: "F9E Elite Mini PC",
-    size: '10.1"',
-    highlight: "Intel i5-1235U สูงสุด 4.4GHz, 16GB LPDDR4x / 256GB, จอ FHD 1200×1920 ประสิทธิภาพสูงสุด",
+    id: "f9e", model: "F9E", name: "Elite Mini PC F9E", os: "Windows",
+    size: '10.1"', cpu: "Intel i5-1235U Max 4.4GHz", ram: "16GB LPDDR4x / 256GB",
+    display: "10.1\" 1200×1920 FHD",
+    highlights: ["Intel i5 Processor", "FHD Display"],
     image: "https://entgroup-rugged.com/assets/f9e-C3MseYpo.png",
-    datasheet: "",
+    badge: "Best Seller",
     productUrl: "https://entgroup-rugged.com/product/f9e",
   },
   {
-    id: "w109u",
-    name: "W109U Industrial Tablet",
-    size: '10.95"',
-    highlight: "Intel i5-1235U / i7-1255U (10-core), 16-48GB RAM, IP68 กันน้ำกันฝุ่นระดับสูงสุด",
-    image: "https://entgroup-rugged.com/assets/w109u-main-C8XbCmqD.png",
-    datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/w109u",
-  },
-  {
-    id: "w10y",
-    name: "W10Y Industrial Tablet",
-    size: '10"',
-    highlight: "Intel Core i5-10210Y, จอ IPS ความสว่าง 700cd/㎡, IP68 กันน้ำกันฝุ่น",
-    image: "https://entgroup-rugged.com/assets/w10y-main-woE420pE.png",
-    datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/w10y",
-  },
-  {
-    id: "f7g",
-    name: "F7G Rugged Tablet",
-    size: '10.1"',
-    highlight: "Intel N4120, 8GB/128GB, จอ FHD IPS 1920×1200, IP67 กันน้ำ ทนตก 1.5 เมตร",
-    image: "https://entgroup-rugged.com/assets/f7g-DidJ5UAD.png",
-    datasheet: "",
-    price: "฿22,990",
-    productUrl: "https://entgroup-rugged.com/product/f7g",
-  },
-  {
-    id: "f9a",
-    name: "F9A Professional Tablet",
-    size: '10.1"',
-    highlight: "Intel Alder Lake N100 สูงสุด 3.4GHz, 8-16GB RAM, แบตอึด Multi-Touch 10 จุด",
+    id: "f9a", model: "F9A", name: "Professional Tablet F9A", os: "Windows",
+    size: '10.1"', cpu: "Intel Alder Lake-N100 up to 3.4GHz", ram: "8GB/16GB / 128GB/256GB",
+    display: "10.1\" 800×1280 HD or 1920×1200 FHD",
+    highlights: ["Long Battery Life", "10-Point Multi-Touch"],
     image: "https://entgroup-rugged.com/assets/f9a-_j8J-x2I.jpg",
-    datasheet: "",
     price: "฿27,990",
     productUrl: "https://entgroup-rugged.com/product/f9a",
   },
   {
-    id: "f8ct",
-    name: "F8CT Compact Tablet",
-    size: '8"',
-    highlight: "Intel x5-Z8350 Quad-Core, จอ IPS HD 8 นิ้ว, IP67 กันน้ำ กันฝุ่น ขนาดกะทัดรัด",
+    id: "f7g", model: "F7G", name: "แท็บเล็ตอึดทนทาน F7G ขนาด 10.1 นิ้ว", os: "Windows",
+    size: '10.1"', cpu: "Intel Gemini Lake N4120", ram: "8GB LPDDR4 / 128GB eMMC",
+    display: "10.1\" 1920×1200 FHD IPS",
+    highlights: ["หน้าจอ FHD IPS 1920×1200", "IP67 กันน้ำ ทนตก 1.5 เมตร"],
+    image: "https://entgroup-rugged.com/assets/f7g-DidJ5UAD.png",
+    price: "฿22,990",
+    productUrl: "https://entgroup-rugged.com/product/f7g",
+  },
+  {
+    id: "f7n", model: "F7N", name: "Essential Tablet F7N", os: "Windows",
+    size: '10.1"', cpu: "Intel Gemini lake N4100", ram: "4GB / 64GB",
+    display: "10.1\" 800×1280 HD",
+    highlights: ["Affordable", "Long Battery"],
+    image: "https://entgroup-rugged.com/assets/f7-series-main-DzoEL2Ov.png",
+    price: "฿19,990",
+    productUrl: "https://entgroup-rugged.com/product/f7n",
+  },
+  {
+    id: "f8ct", model: "F8CT", name: "แท็บเล็ตอึดทนทาน IP67 ขนาด 8 นิ้ว F8CT", os: "Windows",
+    size: '8"', cpu: "Intel Cherry Trail x5-Z8350 Quad-Core", ram: "4GB / 64GB eMMC",
+    display: "8\" 800×1280 IPS (300 ANSI)",
+    highlights: ["หน้าจอ IPS HD 8 นิ้ว 300 ANSI", "IP67 กันน้ำ กันฝุ่น"],
     image: "https://entgroup-rugged.com/assets/f8ct-CetUjj-d.png",
-    datasheet: "",
     price: "฿21,990",
     productUrl: "https://entgroup-rugged.com/product/f8ct",
   },
   {
-    id: "w10n",
-    name: "W10N Value Tablet",
-    size: '10"',
-    highlight: "Intel Celeron N5100, จอ IPS 700cd/㎡, IP68 รองรับมือเปียกและถุงมือ ราคาคุ้มค่า",
-    image: "https://entgroup-rugged.com/assets/w10n-main-DJomacwZ.png",
-    datasheet: "",
-    productUrl: "https://entgroup-rugged.com/product/w10n",
+    id: "f10", model: "F10", name: "All-in-One Touch PC F10", os: "Windows",
+    size: '10.1"', cpu: "Intel Celeron N5100", ram: "8GB LPDDR4 / 128GB",
+    display: "10.1\" 1920×1200",
+    highlights: ["FHD Display", "Dual HDMI"],
+    image: "https://entgroup-rugged.com/assets/f10-8McJcNcK.jpg",
+    price: "฿17,990",
+    productUrl: "https://entgroup-rugged.com/product/f10",
   },
   {
-    id: "f9r",
-    name: "F9R Android Powerhouse",
-    size: '10.1"',
-    highlight: "RK3588 Octa-Core (4×A76+4×A55), จอ IPS 600 nits, 8GB/128GB Android ประสิทธิภาพสูง",
+    id: "w109u", model: "W109U", name: "แท็บเล็ทอึดทนทานระดับอุตสาหกรรม W109U", os: "Windows",
+    size: '10.95"', cpu: "Intel i5-1235U / i7-1255U (10-core)", ram: "16GB-48GB / 256GB-2TB",
+    display: "10.95\" 1920×1200 IPS",
+    highlights: ["IPS 10.95\" ป้องกันรอยขีดข่วน", "IP68 กันน้ำ กันฝุ่น ทนทานสูงสุด"],
+    image: "https://entgroup-rugged.com/assets/w109u-main-C8XbCmqD.png",
+    productUrl: "https://entgroup-rugged.com/product/w109u",
+  },
+  {
+    id: "w10y", model: "W10Y", name: "แท็บเล็ตอุตสาหกรรมทนทาน W10Y", os: "Windows",
+    size: '10"', cpu: "Intel Core i5-10210Y", ram: "8GB / 16GB / 128GB / 256GB",
+    display: "10\" 1920×1200 IPS 700cd/㎡",
+    highlights: ["IPS 10\" ความสว่าง 700cd/㎡", "IP68 กันน้ำ กันฝุ่น"],
+    image: "https://entgroup-rugged.com/assets/w10y-main-woE420pE.png",
+    productUrl: "https://entgroup-rugged.com/product/w10y",
+  },
+  {
+    id: "w10n", model: "W10N", name: "แท็บเล็ตอุตสาหกรรมทนทาน W10N ราคาคุ้มค่า", os: "Windows",
+    size: '10"', cpu: "Intel Celeron N5100 (1.1-2.8GHz)", ram: "8GB / 128GB",
+    display: "10\" 1280×800 IPS 700cd/㎡",
+    highlights: ["IPS 10\" รองรับมือเปียก/ถุงมือ", "IP68 กันน้ำ กันฝุ่น"],
+    image: "https://entgroup-rugged.com/assets/w10n-main-DJomacwZ.png",
+    productUrl: "https://entgroup-rugged.com/product/w10n",
+  },
+  // ── Android (6) ──
+  {
+    id: "f9r", model: "F9R", name: "Android Powerhouse F9R", os: "Android",
+    size: '10.1"', cpu: "RK3588 Octa-Core (4×A76 + 4×A55)", ram: "8GB / 128GB",
+    display: "10.1\" 1200×1920 IPS 600 nits",
+    highlights: ["Octa-Core Power", "Bright 600 nits"],
     image: "https://entgroup-rugged.com/assets/f9r-V3GyP6IL.jpg",
-    datasheet: "",
     price: "฿23,990",
     productUrl: "https://entgroup-rugged.com/product/f9r",
   },
   {
-    id: "a10st",
-    name: "A10ST Rugged Android 13",
-    size: '10"',
-    highlight: "MTK8781 Octa-Core 2.2GHz, จอ IPS 700cd/㎡ 1920×1200, IP68 Android 13",
+    id: "f7r", model: "F7R", name: "Android Tablet F7R", os: "Android",
+    size: '10.1"', cpu: "RK3399 Hexa-Core (2×A72 + 4×A53)", ram: "4GB / 64GB",
+    display: "10.1\" 800×1280 IPS",
+    highlights: ["Massive Battery", "Hexa-Core CPU"],
+    image: "https://entgroup-rugged.com/assets/f7-series-main-DzoEL2Ov.png",
+    price: "฿18,990",
+    productUrl: "https://entgroup-rugged.com/product/f7r",
+  },
+  {
+    id: "f8r", model: "F8R", name: "Compact Android F8R", os: "Android",
+    size: '8"', cpu: "Rockchip RK3566 Cortex A55 Quad-Core", ram: "2GB/4GB / 32GB/64GB",
+    display: "8\" 1280×800 IPS 300ANSI",
+    highlights: ["Compact Size", "Quad-Core"],
+    image: "https://entgroup-rugged.com/assets/f8r-main-CXDYaSDl.png",
+    price: "฿13,990",
+    productUrl: "https://entgroup-rugged.com/product/f8r",
+  },
+  {
+    id: "f12r", model: "F12R", name: "Android AiO F12R", os: "Android",
+    size: '11.6"', cpu: "RK3399", ram: "4GB / 64GB",
+    display: "11.6\" 1366×768 IPS",
+    highlights: ["Large Screen", "VESA Mount"],
+    image: "https://entgroup-rugged.com/assets/f12r-A9I7xqWg.jpg",
+    price: "฿12,990",
+    productUrl: "https://entgroup-rugged.com/product/f12r",
+  },
+  {
+    id: "a10st", model: "A10ST", name: "Rugged Tablet A10ST (Android 13)", os: "Android",
+    size: '10"', cpu: "MTK8781 Octa-Core 2.2GHz", ram: "8GB / 12GB / 128GB / 256GB",
+    display: "10\" 1920×1200 IPS 700cd/㎡",
+    highlights: ["IP68 Protection", "MTK8781 Octa-Core"],
     image: "https://entgroup-rugged.com/assets/a10st-13-CjHhtG0m.jpg",
-    datasheet: "",
     productUrl: "https://entgroup-rugged.com/product/a10st-13",
   },
   {
-    id: "a109t",
-    name: "A109T Ultra-Slim Android 14",
-    size: '10"',
-    highlight: "MT6789V Octa-Core, จอ IPS 700cd/㎡, IP68 บางเฉียบ Android 14 รุ่นใหม่ล่าสุด",
+    id: "a109t", model: "A109T", name: "Ultra-Slim Tablet A109T", os: "Android",
+    size: '10"', cpu: "MT6789V Octa-Core", ram: "8GB / 128GB",
+    display: "10\" 700cd/㎡ IPS",
+    highlights: ["IP68 Rated", "Android 14"],
     image: "https://entgroup-rugged.com/assets/a109t-product-main-BDvMNhIR.png",
-    datasheet: "",
     productUrl: "https://entgroup-rugged.com/product/a109t",
   },
 ];
 
-
-const tpcSeries = [
-  {
-    id: "tpc-1062a",
-    name: "TPC-1062A",
-    size: '10"',
-    highlight: "Rugged Tablet เกรดอุตสาหกรรม หน้าจอสัมผัส",
-    datasheet: "https://docs.wixstatic.com/ugd/0597a3_70c1f8faf9cd4eadb93ffb5479aa6854.pdf",
-  },
-  {
-    id: "tpc-1082a",
-    name: "TPC-1082A",
-    size: '10"',
-    highlight: "Rugged Tablet เกรดอุตสาหกรรม สเปคสูง",
-    datasheet: "https://docs.wixstatic.com/ugd/0597a3_288240e733304dba8334ca07cdc411cf.pdf",
-  },
-];
-
-
-
 const features = [
   { icon: Shield, title: "ทนทานระดับอุตสาหกรรม", desc: "ผ่านมาตรฐาน MIL-STD-810G ทนการตกกระแทก สั่นสะเทือน อุณหภูมิสุดขั้ว" },
-  { icon: Droplets, title: "กันน้ำ กันฝุ่น IP65/IP67", desc: "มาตรฐาน IP65-IP67 ปกป้องจากฝุ่น น้ำ สารเคมี ใช้งานในทุกสภาพแวดล้อม" },
+  { icon: Droplets, title: "กันน้ำ กันฝุ่น IP65-IP68", desc: "มาตรฐาน IP65-IP68 ปกป้องจากฝุ่น น้ำ สารเคมี ใช้งานในทุกสภาพแวดล้อม" },
   { icon: Battery, title: "แบตเตอรี่อึดทนนาน", desc: "แบตเตอรี่สูงสุด 6,000 mAh ถอดเปลี่ยนได้ ใช้งานต่อเนื่องยาวนาน" },
   { icon: Smartphone, title: "หน้าจอสัมผัสคุณภาพสูง", desc: "IPS Full HD รองรับมัลติทัช ใช้งานได้แม้ใส่ถุงมือ ความสว่างสูง" },
-  { icon: Monitor, title: "หลากหลายขนาด 7-17 นิ้ว", desc: "เลือกได้ตั้งแต่ 7 นิ้วพกพาสะดวก จนถึง 17 นิ้วสำหรับงานภาคสนาม" },
-  { icon: Wifi, title: "เชื่อมต่อครบครัน", desc: "WiFi, Bluetooth, 3G/4G, NFC, สแกนลายนิ้วมือ, กล้องคู่ ตามรุ่น" },
+  { icon: Monitor, title: 'หลากหลายขนาด 8"-12"', desc: 'เลือกได้ตั้งแต่ 8 นิ้วกะทัดรัด จนถึง 11.6 นิ้วสำหรับงานภาคสนาม' },
+  { icon: Wifi, title: "เชื่อมต่อครบครัน", desc: "WiFi, Bluetooth, 4G LTE, NFC, สแกนลายนิ้วมือ, กล้องคู่ ตามรุ่น" },
 ];
 
-const categories = [
-  { id: "overview", label: "Overview" },
-  { id: "features", label: "Features" },
-  { id: "gole", label: "Gole Series" },
-  { id: "em-rugged", label: "Rugged Tablet" },
-  
-  
-  
-  { id: "tpc", label: "TPC Series" },
-  { id: "pricelist", label: "Price List" },
-  { id: "downloads", label: "Downloads" },
+const downloads = [
+  { name: "Gole Product Overview", url: "https://docs.wixstatic.com/ugd/0597a3_67de374f10ce40cbb6008623c5212a03.pdf" },
+  { name: "Rugged Knowledge", url: "https://docs.wixstatic.com/ugd/0597a3_990b58aea85c404f923495453e23b027.pdf" },
+  { name: "วารสาร Rugged", url: "https://docs.wixstatic.com/ugd/0597a3_064a791320d74e85957143c869a8c0fd.pdf" },
+  { name: "TPC-1062A Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_70c1f8faf9cd4eadb93ffb5479aa6854.pdf" },
+  { name: "TPC-1082A Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_288240e733304dba8334ca07cdc411cf.pdf" },
+  { name: "Gole F9A Overview", url: "https://docs.wixstatic.com/ugd/0597a3_3a33965f742b4034b974ef56aab56170.pdf" },
 ];
 
-const ITEMS_PER_PAGE = 10;
+type OsFilter = "all" | "Windows" | "Android";
 
-/* ───── Product Card ───── */
-const ProductCard = ({ product, onQuote, selected, onToggleSelect }: { 
-  product: { name: string; size?: string; highlight: string; image?: string; datasheet: string; price?: string; productUrl?: string; internalUrl?: string }; 
-  onQuote?: (name: string) => void;
-  selected?: boolean;
-  onToggleSelect?: (name: string) => void;
-}) => {
-  const cardContent = (
-    <>
-      {product.image && (
-        <div className="relative bg-secondary/30 p-4 flex items-center justify-center h-48">
-          <WishlistHeart
-            item={{ id: product.name.toLowerCase().replace(/\s+/g, "-"), name: product.name, category: "Rugged Tablet", image: product.image, href: product.internalUrl || "/rugged-tablet", specs: product.highlight }}
-            className="absolute top-3 right-3"
-          />
-          {onToggleSelect && (
-            <button
-              onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleSelect(product.name); }}
-              className="absolute top-3 left-3 z-10"
-            >
-              <Checkbox checked={selected} className="h-5 w-5" />
-            </button>
-          )}
-          <img src={product.image} alt={product.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-        </div>
+/* ═══════ Product Card ═══════ */
+const TabletCard = ({
+  product, onQuote, selected, onToggleSelect,
+}: {
+  product: TabletProduct;
+  onQuote: (name: string) => void;
+  selected: boolean;
+  onToggleSelect: (name: string) => void;
+}) => (
+  <div className={`card-surface overflow-hidden group transition-all ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
+    <div className="relative bg-secondary/30 p-4 flex items-center justify-center h-52">
+      <WishlistHeart
+        item={{ id: product.id, name: product.name, category: "Rugged Tablet", image: product.image, href: "/rugged-tablet", specs: product.cpu }}
+        className="absolute top-3 right-3"
+      />
+      <button
+        onClick={() => onToggleSelect(product.model)}
+        className="absolute top-3 left-3 z-10"
+      >
+        <Checkbox checked={selected} className="h-5 w-5" />
+      </button>
+      {/* OS badge */}
+      <Badge className={`absolute top-3 left-12 text-[10px] ${product.os === "Windows" ? "bg-blue-500/20 text-blue-400 border-blue-500/30" : "bg-green-500/20 text-green-400 border-green-500/30"}`}>
+        {product.os}
+      </Badge>
+      {product.badge && (
+        <Badge className="absolute bottom-3 left-3 bg-primary text-primary-foreground text-[10px]">{product.badge}</Badge>
       )}
-      {!product.image && onToggleSelect && (
-        <div className="flex justify-end p-3 pb-0">
-          <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleSelect(product.name); }}>
-            <Checkbox checked={selected} className="h-5 w-5" />
-          </button>
-        </div>
-      )}
-      <div className="p-5 space-y-3">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="font-display font-bold text-foreground text-sm">{product.name}</h3>
-          {product.size && <Badge variant="secondary" className="text-xs shrink-0">{product.size}</Badge>}
-        </div>
-        <p className="text-xs text-muted-foreground leading-relaxed">{product.highlight}</p>
-        {product.price && (
-          <p className="text-sm font-bold text-primary">{product.price}</p>
-        )}
-        <div className="flex flex-wrap gap-2">
-          {product.internalUrl && (
-            <Button variant="outline" size="sm" asChild className="flex-1">
-              <Link to={product.internalUrl}>
-                <Monitor className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
-              </Link>
-            </Button>
-          )}
-          {!product.internalUrl && product.productUrl && (
-            <Button variant="outline" size="sm" asChild className="flex-1">
-              <a href={product.productUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
-              </a>
-            </Button>
-          )}
-          {product.datasheet && (
-            <Button variant="outline" size="sm" asChild className="flex-1">
-              <a href={product.datasheet} target="_blank" rel="noopener noreferrer">
-                <Download className="w-3.5 h-3.5 mr-1.5" /> Datasheet
-              </a>
-            </Button>
-          )}
-          <Button size="sm" className="flex-1" onClick={(e) => { e.preventDefault(); e.stopPropagation(); onQuote?.(product.name); }}>
-            <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอราคา
-          </Button>
-        </div>
-      </div>
-    </>
-  );
-
-  if (product.internalUrl) {
-    return (
-      <Link to={product.internalUrl} className={`card-surface overflow-hidden group transition-all block ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
-        {cardContent}
-      </Link>
-    );
-  }
-
-  return (
-    <div className={`card-surface overflow-hidden group transition-all ${selected ? "ring-2 ring-primary border-primary/50" : "hover:border-primary/30"}`}>
-      {cardContent}
+      <img src={product.image} alt={product.name} className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
     </div>
-  );
-};
+    <div className="p-5 space-y-3">
+      <div className="flex items-center justify-between gap-2">
+        <div>
+          <p className="text-[10px] font-bold text-muted-foreground tracking-wider uppercase">{product.model}</p>
+          <h3 className="font-display font-bold text-foreground text-sm leading-tight">{product.name}</h3>
+        </div>
+        <Badge variant="secondary" className="text-xs shrink-0">{product.size}</Badge>
+      </div>
+      <div className="space-y-1 text-xs text-muted-foreground">
+        <p>{product.display}</p>
+        <p>{product.cpu}</p>
+        <p>{product.ram}</p>
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {product.highlights.map((h) => (
+          <span key={h} className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-secondary text-foreground/70">{h}</span>
+        ))}
+      </div>
+      {product.price && (
+        <p className="text-base font-bold text-primary">{product.price}</p>
+      )}
+      <div className="flex flex-wrap gap-2 pt-1">
+        <Button variant="outline" size="sm" asChild className="flex-1">
+          <a href={product.productUrl} target="_blank" rel="noopener noreferrer">
+            <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> ดูสเปก
+          </a>
+        </Button>
+        <Button size="sm" className="flex-1" onClick={() => onQuote(product.model)}>
+          <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอราคา
+        </Button>
+      </div>
+    </div>
+  </div>
+);
 
-/* ───── Main Component ───── */
+/* ═══════ Main Component ═══════ */
 const RuggedTablet = () => {
-  const [activeCategory, setActiveCategory] = useState("overview");
-  const [winPage, setWinPage] = useState(1);
-  const [androidPage, setAndroidPage] = useState(1);
+  const [osFilter, setOsFilter] = useState<OsFilter>("all");
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   const [selectedProducts, setSelectedProducts] = useState<Set<string>>(new Set());
   const [showMultiQuote, setShowMultiQuote] = useState(false);
 
-  const toggleSelect = useCallback((name: string) => {
-    setSelectedProducts(prev => {
+  const filtered = useMemo(() => {
+    if (osFilter === "all") return tablets;
+    return tablets.filter((t) => t.os === osFilter);
+  }, [osFilter]);
+
+  const winCount = tablets.filter((t) => t.os === "Windows").length;
+  const androidCount = tablets.filter((t) => t.os === "Android").length;
+
+  const toggleSelect = useCallback((model: string) => {
+    setSelectedProducts((prev) => {
       const next = new Set(prev);
-      if (next.has(name)) next.delete(name);
-      else next.add(name);
+      if (next.has(model)) next.delete(model);
+      else next.add(model);
       return next;
     });
   }, []);
 
   const clearSelection = () => setSelectedProducts(new Set());
 
-  const openMultiQuote = () => {
-    setShowMultiQuote(true);
-  };
   return (
     <div className="min-h-screen bg-background">
-      <SEOHead title="Rugged Tablet กันน้ำ กันกระแทก" description="Rugged Tablet ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์ และอุตสาหกรรม" path="/rugged-tablet" />
+      <SEOHead
+        title="Rugged Tablet กันน้ำ กันกระแทก — 15 รุ่น"
+        description="Rugged Tablet ทนทาน กันน้ำ IP65-IP68 กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์ — Windows & Android 15 รุ่น"
+        path="/rugged-tablet"
+      />
       <ProductJsonLd
         collectionName="Rugged Tablet กันน้ำ กันกระแทก"
-        collectionDescription="Rugged Tablet ทนทาน กันน้ำ กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์"
+        collectionDescription="Rugged Tablet ทนทาน กันน้ำ IP65-IP68 กันกระแทก MIL-STD-810G — 15 รุ่น Windows & Android"
         collectionUrl="/rugged-tablet"
-        products={[...goleWindowsModels, ...goleAndroidModels].map(m => ({ name: m.name, price: m.price, category: "Rugged Tablet" }))}      />
-
+        products={tablets.filter((t) => t.price).map((t) => ({ name: t.name, price: t.price, category: "Rugged Tablet" }))}
+      />
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "Rugged Tablet", path: "/rugged-tablet" }]} />
+
+      {/* ── Hero ── */}
       <div className="relative overflow-hidden">
-        {/* Hero Background */}
         <div className="absolute inset-0">
           <img src={ruggedHero} alt="" className="w-full h-full object-cover" width={1920} height={640} />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
@@ -336,80 +305,98 @@ const RuggedTablet = () => {
           <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-4">
             <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
           </Link>
-
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-4">
             <div>
               <Badge className="bg-primary/10 text-primary border-primary/20 mb-3">Rugged & Industrial Grade</Badge>
               <h1 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-3">
-                Rugged <span className="text-gradient">Tablet & Notebook</span>
+                Rugged <span className="text-gradient">Tablet</span>
               </h1>
               <p className="text-muted-foreground max-w-3xl leading-relaxed">
-                คอมพิวเตอร์หน้าจอสัมผัสเกรดอุตสาหกรรมที่ทนทานและอเนกประสงค์ รองรับทั้ง Android และ Windows พร้อมมาตรฐาน IP65/IP67 กันน้ำ กันฝุ่น ทนกระแทก เหมาะกับงานภาคสนามและโรงงานอุตสาหกรรม
+                แท็บเล็ตสำหรับงานภาคสนาม คลังสินค้า โรงงาน และการใช้งานกลางแจ้ง ผ่านมาตรฐาน IP65-IP68 ทนทานต่อการตกกระแทก
               </p>
             </div>
             <div className="flex gap-3 shrink-0">
-              <Button variant="outline" size="sm" asChild>
-                <a href="https://docs.wixstatic.com/ugd/0597a3_67de374f10ce40cbb6008623c5212a03.pdf" target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-3.5 h-3.5 mr-1.5" /> Product Overview
-                </a>
-              </Button>
               <Button size="sm" onClick={() => setQuoteProduct("Rugged Tablet")}>
                 <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
               </Button>
             </div>
           </div>
+          {/* Quick stats */}
+          <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
+            {["IP65-IP68 Protection", '8"-12" Display', "Windows & Android", "รับประกัน 1 ปี"].map((s) => (
+              <span key={s} className="px-3 py-1.5 rounded-full bg-background/60 backdrop-blur border border-border">{s}</span>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Sticky Nav */}
+      {/* ── Sticky OS Filter ── */}
       <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="flex gap-1 overflow-x-auto py-2 scrollbar-hide">
-            {categories.map((cat) => (
-              <a
-                key={cat.id}
-                href={`#${cat.id}`}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`shrink-0 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
-                  activeCategory === cat.id
+            {([
+              { id: "all" as OsFilter, label: `ทั้งหมด (${tablets.length})` },
+              { id: "Windows" as OsFilter, label: `Windows (${winCount})` },
+              { id: "Android" as OsFilter, label: `Android (${androidCount})` },
+            ]).map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setOsFilter(tab.id)}
+                className={`shrink-0 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
+                  osFilter === tab.id
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary/50 text-foreground/70 hover:bg-secondary"
                 }`}
               >
-                {cat.label}
-              </a>
+                {tab.label}
+              </button>
             ))}
+            {/* Quick nav links */}
+            <div className="ml-auto flex items-center gap-1">
+              {[
+                { label: "Features", href: "#features" },
+                { label: "Downloads", href: "#downloads" },
+              ].map((nav) => (
+                <a
+                  key={nav.href}
+                  href={nav.href}
+                  className="shrink-0 px-3 py-2 rounded-lg text-xs font-medium text-foreground/50 hover:bg-secondary/50 transition-colors"
+                >
+                  {nav.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       <div className="container max-w-7xl mx-auto px-4 py-10 space-y-16">
-        {/* Overview */}
-        <section id="overview">
-          <div className="card-surface overflow-hidden">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_c353892b50a549d3971cb83d643de648~mv2.png/v1/crop/x_0,y_27,w_2260,h_1162/fill/w_1314,h_667,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/RuggedBanner01.png"
-              alt="Rugged Tablet Overview"
-              className="w-full h-auto"
-              loading="lazy"
-            />
+        {/* ── Product Grid ── */}
+        <section id="products">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-2xl font-display font-bold text-foreground">
+                Rugged <span className="text-gradient">Tablet Collection</span>
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                แท็บเล็ตทนทานระดับอุตสาหกรรม — แสดง {filtered.length} รุ่น
+              </p>
+            </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
-            {[
-              { label: "กันน้ำ กันฝุ่น", value: "IP65 / IP67" },
-              { label: "ขนาดหน้าจอ", value: '7" - 17"' },
-              { label: "ระบบปฏิบัติการ", value: "Android / Windows" },
-              { label: "แบตเตอรี่", value: "สูงสุด 6,000 mAh" },
-            ].map((item, i) => (
-              <div key={i} className="card-surface p-4 text-center">
-                <p className="text-xs text-muted-foreground mb-1">{item.label}</p>
-                <p className="font-bold text-foreground text-sm">{item.value}</p>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filtered.map((p) => (
+              <TabletCard
+                key={p.id}
+                product={p}
+                onQuote={setQuoteProduct}
+                selected={selectedProducts.has(p.model)}
+                onToggleSelect={toggleSelect}
+              />
             ))}
           </div>
         </section>
 
-        {/* Features */}
+        {/* ── Features ── */}
         <section id="features">
           <h2 className="text-2xl font-display font-bold text-foreground mb-2 text-center">คุณสมบัติเด่น</h2>
           <p className="text-muted-foreground text-center mb-8">ทนทาน ยืดหยุ่น พร้อมลุยทุกสถานการณ์</p>
@@ -424,220 +411,31 @@ const RuggedTablet = () => {
           </div>
         </section>
 
-        {/* Gole Rugged Series */}
-        <section id="gole">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-            Gole <span className="text-gradient">Rugged Series</span>
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">
-            Rugged Tablet มาพร้อมหน้าจอสัมผัสความละเอียดสูง ลำโพงในตัว WiFi รองรับทั้ง Android & Windows
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            {goleRuggedTablets.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
-            ))}
-          </div>
-
-          {/* Gole product images */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              "https://static.wixstatic.com/media/0597a3_d864fa53281f401c87833762e860a193~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rugged%20Tablet%20(3).png",
-              "https://static.wixstatic.com/media/0597a3_cf5add6fc863487f82013b5de835a8ae~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rugged%20Tablet%20(4).png",
-              "https://static.wixstatic.com/media/0597a3_0eca70dbf64e441eb910eb4623be9857~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rugged%20Tablet%20(6).png",
-              "https://static.wixstatic.com/media/0597a3_a351201828184c4785720ce6336a78eb~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Rugged%20Tablet%20(5).png",
-            ].map((img, i) => (
-              <div key={i} className="card-surface overflow-hidden">
-                <img src={img} alt={`Gole Rugged ${i + 1}`} className="w-full h-auto object-contain" loading="lazy" />
+        {/* ── Related Categories ── */}
+        <section className="space-y-3">
+          <h2 className="text-lg font-display font-bold text-foreground mb-2">หมวดหมู่ที่เกี่ยวข้อง</h2>
+          {[
+            { to: "/rugged-notebook", title: "Rugged Notebook", desc: "โน้ตบุ๊คทนทานมาตรฐานทหาร MIL-STD-810G/H — 10 รุ่น", gradient: "Notebook" },
+            { to: "/handheld", title: "Rugged Handheld & PDA", desc: "เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม — 16 รุ่น", gradient: "Handheld & PDA" },
+            { to: "/aio", title: "All-in-One Industrial PC", desc: "คอมพิวเตอร์ All-in-One จอสัมผัสอุตสาหกรรม — 15 รุ่น", gradient: "Industrial PC" },
+          ].map((cat) => (
+            <Link key={cat.to} to={cat.to} className="card-surface p-5 flex items-center justify-between group hover:border-primary/30 transition-all">
+              <div>
+                <h3 className="text-base font-display font-bold text-foreground">
+                  {cat.title.replace(cat.gradient, "")} <span className="text-gradient">{cat.gradient}</span>
+                </h3>
+                <p className="text-sm text-muted-foreground">{cat.desc}</p>
               </div>
-            ))}
-          </div>
+              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+            </Link>
+          ))}
         </section>
 
-        {/* Rugged Tablets - Windows & Android */}
-        <section id="em-rugged">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-            Rugged <span className="text-gradient">Tablet Collection</span>
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">แท็บเล็ตทนทานระดับอุตสาหกรรม Windows & Android พร้อมมาตรฐาน IP65-IP68</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {emRuggedTablets.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
-            ))}
-          </div>
-        </section>
-
-        {/* Rugged Notebook — Link to dedicated page */}
-        <section id="notebook-link">
-          <Link to="/rugged-notebook" className="card-surface p-6 flex items-center justify-between group hover:border-primary/30 transition-all">
-            <div>
-              <h2 className="text-xl font-display font-bold text-foreground mb-1">
-                Rugged <span className="text-gradient">Notebook</span>
-              </h2>
-              <p className="text-sm text-muted-foreground">โน้ตบุ๊คทนทานมาตรฐานทหาร MIL-STD-810G/H — 10 รุ่น พร้อม AI PC, 2-in-1 และ Convertible</p>
-            </div>
-            <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-          </Link>
-        </section>
-
-        {/* All-in-One PC — Link to dedicated page */}
-        <section id="aio-link">
-          <Link to="/aio" className="card-surface p-6 flex items-center justify-between group hover:border-primary/30 transition-all">
-            <div>
-              <h2 className="text-xl font-display font-bold text-foreground mb-1">
-                All-in-One <span className="text-gradient">Industrial PC</span>
-              </h2>
-              <p className="text-sm text-muted-foreground">คอมพิวเตอร์ All-in-One จอสัมผัส สำหรับอุตสาหกรรม — 15 รุ่น Box PC, AIO Desktop, Panel PC</p>
-            </div>
-            <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-          </Link>
-        </section>
-
-        {/* Handheld & PDA — Link to dedicated page */}
-        <section id="handheld-link">
-          <Link to="/handheld" className="card-surface p-6 flex items-center justify-between group hover:border-primary/30 transition-all">
-            <div>
-              <h2 className="text-xl font-display font-bold text-foreground mb-1">
-                Rugged <span className="text-gradient">Handheld & PDA</span>
-              </h2>
-              <p className="text-sm text-muted-foreground">เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม — 16 รุ่น พร้อม Barcode Scanner, NFC, RFID</p>
-            </div>
-            <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-          </Link>
-        </section>
-
-        <section id="tpc">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-            TPC <span className="text-gradient">Series</span>
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">Rugged Tablet คอมพิวเตอร์หน้าจอสัมผัสเกรดอุตสาหกรรม ทนทานและอเนกประสงค์</p>
-
-          <div className="card-surface overflow-hidden mb-6">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_635e82bd628b488aa39a0efce082f43a~mv2.png/v1/fill/w_1316,h_456,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/tpc-banner02.png"
-              alt="TPC Series Banner"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {tpcSeries.map((p) => (
-              <ProductCard key={p.id} product={{ ...p, image: undefined }} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
-            ))}
-          </div>
-        </section>
-
-        {/* Buying Guide Banner */}
-        <section>
-          <div className="card-surface overflow-hidden">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_8b5479cc6a1342db890862413f797f37~mv2.png/v1/fill/w_849,h_474,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%81%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD%20Gole%20Rugged%20Banner.png"
-              alt="คู่มือเลือกซื้อ PC และแท็บเล็ตหน้าจอสัมผัส"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
-        </section>
-
-        {/* Price List */}
-        <section id="pricelist">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">
-            Price List <span className="text-gradient">ราคาสินค้า</span>
-          </h2>
-
-          <Tabs defaultValue="windows" className="w-full" onValueChange={() => { setWinPage(1); setAndroidPage(1); }}>
-            <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger value="windows">Windows</TabsTrigger>
-              <TabsTrigger value="android">Android</TabsTrigger>
-            </TabsList>
-
-            {[
-              { value: "windows", data: goleWindowsModels, page: winPage, setPage: setWinPage },
-              { value: "android", data: goleAndroidModels, page: androidPage, setPage: setAndroidPage },
-            ].map(({ value, data, page, setPage }) => {
-              const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
-              const paginated = data.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
-
-              return (
-                <TabsContent key={value} value={value}>
-                  <div className="card-surface overflow-hidden">
-                    <div className="overflow-x-auto">
-                      <Table>
-                        <TableHeader>
-                          <TableRow className="bg-primary/10">
-                            <TableHead className="text-primary font-bold w-12">No.</TableHead>
-                            <TableHead className="text-primary font-bold">Model</TableHead>
-                            <TableHead className="text-primary font-bold text-right">Price</TableHead>
-                            <TableHead className="text-primary font-bold text-center w-28">Datasheet</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {paginated.map((row, i) => (
-                            <TableRow key={i}>
-                              <TableCell className="font-medium">{(page - 1) * ITEMS_PER_PAGE + i + 1}</TableCell>
-                              <TableCell className="font-semibold">{row.name}</TableCell>
-                              <TableCell className="text-right font-bold text-primary">{row.price}</TableCell>
-                              <TableCell className="text-center">
-                                {row.datasheet ? (
-                                  <a href={row.datasheet} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-xs">
-                                    <Download className="w-4 h-4 inline" />
-                                  </a>
-                                ) : (
-                                  <span className="text-muted-foreground text-xs">—</span>
-                                )}
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </div>
-                    {totalPages > 1 && (
-                      <div className="flex items-center justify-between px-4 py-3 border-t border-border">
-                        <p className="text-xs text-muted-foreground">
-                          แสดง {(page - 1) * ITEMS_PER_PAGE + 1}-{Math.min(page * ITEMS_PER_PAGE, data.length)} จาก {data.length} รายการ
-                        </p>
-                        <div className="flex items-center gap-1">
-                          <Button variant="outline" size="sm" onClick={() => setPage(Math.max(1, page - 1))} disabled={page === 1} className="h-8 w-8 p-0">
-                            <ChevronLeft className="w-4 h-4" />
-                          </Button>
-                          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                            <Button key={p} variant={p === page ? "default" : "outline"} size="sm" onClick={() => setPage(p)} className="h-8 w-8 p-0 text-xs">
-                              {p}
-                            </Button>
-                          ))}
-                          <Button variant="outline" size="sm" onClick={() => setPage(Math.min(totalPages, page + 1))} disabled={page === totalPages} className="h-8 w-8 p-0">
-                            <ChevronRight className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </TabsContent>
-              );
-            })}
-          </Tabs>
-
-          <PriceDisclaimer />
-        </section>
-
-        {/* Downloads */}
+        {/* ── Downloads ── */}
         <section id="downloads">
           <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">Downloads</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {[
-              { name: "Gole Product Overview", url: "https://docs.wixstatic.com/ugd/0597a3_67de374f10ce40cbb6008623c5212a03.pdf" },
-              { name: "Rugged Knowledge", url: "https://docs.wixstatic.com/ugd/0597a3_990b58aea85c404f923495453e23b027.pdf" },
-              { name: "EM Rugged Notebook", url: "https://docs.wixstatic.com/ugd/0597a3_e2bfa41d47a1445b87da80e961544e2d.pdf" },
-              { name: "EM-X15 / X15M Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_55b872cb254b4f0f8d8a1075e0934606.pdf" },
-              { name: "EM-i81F Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_2be728ad3b0349d3b33554ed04c0214e.pdf" },
-              { name: "EM-i10J Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_6d72e4515e004620af862a7897168a95.pdf" },
-              { name: "TPC-1062A Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_70c1f8faf9cd4eadb93ffb5479aa6854.pdf" },
-              { name: "TPC-1082A Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_288240e733304dba8334ca07cdc411cf.pdf" },
-              
-              { name: "วารสาร Rugged", url: "https://docs.wixstatic.com/ugd/0597a3_064a791320d74e85957143c869a8c0fd.pdf" },
-              { name: "Gole F9A Overview", url: "https://docs.wixstatic.com/ugd/0597a3_3a33965f742b4034b974ef56aab56170.pdf" },
-              { name: "EM-i17J Datasheet", url: "https://docs.wixstatic.com/ugd/0597a3_d2a64ac1b5444600b9255fcae1311289.pdf" },
-            ].map((dl, i) => (
+            {downloads.map((dl, i) => (
               <a key={i} href={dl.url} target="_blank" rel="noopener noreferrer" className="card-surface p-4 flex items-center gap-3 hover:border-primary/30 transition-all group">
                 <Download className="w-5 h-5 text-primary shrink-0" />
                 <div>
@@ -649,15 +447,15 @@ const RuggedTablet = () => {
           </div>
         </section>
 
-        {/* CTA */}
+        <PriceDisclaimer />
+
+        {/* ── CTA ── */}
         <div className="card-surface p-8 text-center">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-3">สนใจ Rugged Tablet & Notebook?</h2>
-          <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือก Rugged Device ที่เหมาะกับงานของคุณ</p>
+          <h2 className="text-2xl font-display font-bold text-foreground mb-3">สนใจ Rugged Tablet?</h2>
+          <p className="text-muted-foreground mb-6">ปรึกษาผู้เชี่ยวชาญเพื่อเลือก Rugged Tablet ที่เหมาะกับงานของคุณ</p>
           <div className="flex justify-center gap-3">
             <Button variant="outline" asChild>
-              <a href="https://docs.wixstatic.com/ugd/0597a3_67de374f10ce40cbb6008623c5212a03.pdf" target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="w-4 h-4 mr-1.5" /> ดาวน์โหลด Catalog
-              </a>
+              <Link to="/contact">ติดต่อเรา</Link>
             </Button>
             <Button onClick={() => setQuoteProduct("Rugged Tablet")}>
               <FileText className="w-3.5 h-3.5 mr-1.5" /> ขอใบเสนอราคา
@@ -666,19 +464,14 @@ const RuggedTablet = () => {
         </div>
       </div>
 
-      {/* Floating Selection Bar */}
+      {/* ── Floating Selection Bar ── */}
       {selectedProducts.size > 0 && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-primary text-primary-foreground rounded-full shadow-2xl px-6 py-3 flex items-center gap-4 animate-in slide-in-from-bottom-4">
           <div className="flex items-center gap-2">
             <ShoppingCart className="w-5 h-5" />
             <span className="font-bold text-sm">{selectedProducts.size} รุ่น</span>
           </div>
-          <Button
-            size="sm"
-            variant="secondary"
-            className="rounded-full font-bold"
-            onClick={openMultiQuote}
-          >
+          <Button size="sm" variant="secondary" className="rounded-full font-bold" onClick={() => setShowMultiQuote(true)}>
             <FileText className="w-4 h-4 mr-1.5" /> ขอใบเสนอราคารวม
           </Button>
           <button onClick={clearSelection} className="p-1 hover:bg-primary-foreground/20 rounded-full transition-colors">
@@ -687,26 +480,16 @@ const RuggedTablet = () => {
         </div>
       )}
 
-      <QuoteDialog
-        open={!!quoteProduct}
-        onClose={() => setQuoteProduct(null)}
-        productName={quoteProduct || ""}
-        productCategory="Rugged Tablet"
-      />
+      <QuoteDialog open={!!quoteProduct} onClose={() => setQuoteProduct(null)} productName={quoteProduct || ""} productCategory="Rugged Tablet" />
       <QuoteDialog
         open={showMultiQuote}
         onClose={() => { setShowMultiQuote(false); clearSelection(); }}
         productCategory="Rugged Tablet"
-        initialProducts={Array.from(selectedProducts).map(name => ({
-          category: "Rugged Tablet / Notebook",
-          model: name,
-          qty: 1,
-        }))}
+        initialProducts={Array.from(selectedProducts).map((model) => ({ category: "Rugged Tablet", model, qty: 1 }))}
       />
       <FooterCompact />
     </div>
   );
 };
-
 
 export default RuggedTablet;
