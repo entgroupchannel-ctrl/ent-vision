@@ -1215,16 +1215,9 @@ const GKSeries = () => {
             <h2 className="text-3xl md:text-4xl font-display font-bold">
               เปรียบเทียบ<span className="text-gradient">รุ่นยอดนิยม</span>
             </h2>
+            <p className="text-muted-foreground mt-3">เลือกมุมมอง สเปก / ราคา / ความคุ้มค่า พร้อมระบบกรองสินค้า</p>
           </div>
-          <ComparisonTable />
-          <div className="mt-6 card-surface overflow-hidden">
-            <img
-              src="https://static.wixstatic.com/media/0597a3_42dd7aa07bae417897f2e57c49c981e1~mv2.jpg/v1/fill/w_864,h_482,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK%20Series%20%E0%B9%80%E0%B8%9B%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%9A%E0%B9%80%E0%B8%97%E0%B8%B5%E0%B8%A2%E0%B8%9A%20GK1004%20GK1506%20GK21.jpg"
-              alt="GK Series Comparison"
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
+          <ComparisonSystem onQuote={(name) => { setQuoteProduct(name); setQuoteOpen(true); }} />
         </div>
       </section>
 
