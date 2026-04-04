@@ -800,7 +800,17 @@ const MiniPC = () => {
   });
 
   const hasFilters = filterCat !== "ทั้งหมด" || filterCpu !== "ทั้งหมด" || filterPrice !== 0;
-  const clearFilters = () => { setFilterCat("ทั้งหมด"); setFilterCpu("ทั้งหมด"); setFilterPrice(0); };
+  const clearFilters = () => { setFilterCat("ทั้งหมด"); setFilterCpu("ทั้งหมด"); setFilterPrice(0); setCurrentPage(1); };
+
+  const PAGE_SIZE = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.max(1, Math.ceil(filteredPriceItems.length / PAGE_SIZE));
+  const paginatedItems = filteredPriceItems.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+  // Reset page when filters change
+  const handleFilterCat = (v: string) => { setFilterCat(v); setCurrentPage(1); };
+  const handleFilterCpu = (v: string) => { setFilterCpu(v); setCurrentPage(1); };
+  const handleFilterPrice = (v: number) => { setFilterPrice(v); setCurrentPage(1); };
 
   return (
     <div className="min-h-screen bg-background">
@@ -919,7 +929,7 @@ const MiniPC = () => {
                   <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1 block">หมวดหมู่</label>
                   <select
                     value={filterCat}
-                    onChange={(e) => setFilterCat(e.target.value)}
+                    onChange={(e) => handleFilterCat(e.target.value)}
                     className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
                   >
                     {priceCategories.map((c) => <option key={c} value={c}>{c}</option>)}
@@ -930,7 +940,7 @@ const MiniPC = () => {
                   <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1 block">ระดับ CPU</label>
                   <select
                     value={filterCpu}
-                    onChange={(e) => setFilterCpu(e.target.value)}
+                    onChange={(e) => handleFilterCpu(e.target.value)}
                     className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
                   >
                     {cpuLevels.map((c) => <option key={c} value={c}>{c}</option>)}
@@ -941,7 +951,7 @@ const MiniPC = () => {
                   <label className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1 block">ช่วงราคา</label>
                   <select
                     value={filterPrice}
-                    onChange={(e) => setFilterPrice(Number(e.target.value))}
+                    onChange={(e) => handleFilterPrice(Number(e.target.value))}
                     className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground focus:border-primary focus:outline-none"
                   >
                     {priceRanges.map((r, i) => <option key={i} value={i}>{r.label}</option>)}
@@ -949,7 +959,7 @@ const MiniPC = () => {
                 </div>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
-                แสดง {filteredPriceItems.length} จาก {allPriceItems.length} รุ่น
+                แสดง {filteredPriceItems.length} จาก {allPriceItems.length} รุ่น {totalPages > 1 && `(หน้า ${currentPage}/${totalPages})`}
               </p>
             </div>
 
@@ -968,14 +978,14 @@ const MiniPC = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filteredPriceItems.length === 0 ? (
+                    {paginatedItems.length === 0 ? (
                       <TableRow>
                         <TableCell colSpan={7} className="text-center text-muted-foreground py-8">
                           ไม่พบสินค้าที่ตรงกับตัวกรอง — ลองปรับเงื่อนไขใหม่
                         </TableCell>
                       </TableRow>
                     ) : (
-                      filteredPriceItems.map((r) => (
+                      paginatedItems.map((r) => (
                         <TableRow key={r.model}>
                           <TableCell className="font-medium text-foreground">{r.model}</TableCell>
                           <TableCell><Badge variant="outline" className="text-[10px]">{r.category}</Badge></TableCell>
@@ -994,6 +1004,43 @@ const MiniPC = () => {
                   </TableBody>
                 </Table>
               </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-2 p-4 border-t border-border">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage((p) => p - 1)}
+                    className="text-xs"
+                  >
+                    ← ก่อนหน้า
+                  </Button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`w-8 h-8 rounded-lg text-xs font-bold transition-all ${
+                        currentPage === page
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage((p) => p + 1)}
+                    className="text-xs"
+                  >
+                    ถัดไป →
+                  </Button>
+                </div>
+              )}
 
               <div className="p-5">
                 <PriceDisclaimer />
