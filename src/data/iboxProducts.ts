@@ -386,7 +386,8 @@ export const iboxProducts: IBoxProduct[] = [
     io: "2× USB3.0, 2× USB2.0, 1× Internal USB2.0, 2× COM (RS232/485), 1× HDMI, 1× VGA, 1× GPIO 8-bit",
     temp: "-10°C ~ 55°C (w/ 0.7m/s Airflow)",
     lanPorts: 4, comPorts: 2, usbPorts: 5, pcie: true, poe: true,
-    image: ibox205Img,
+    image: ibox205Front,
+    gallery: [ibox205Side, ibox205Img],
     features: [
       "Intel® Iris® Xe Graphics — กราฟิกแรงกว่ารุ่นเดิมถึง 2.95 เท่า",
       "2× PoE LAN (Intel i211, IEEE802.3af) + 2× 2.5GbE LAN (Intel i225)",
