@@ -819,10 +819,10 @@ const MiniPC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEOHead title="Mini PC Series — คอมพิวเตอร์ขนาดเล็กสมรรถนะสูง" description="Mini PC จากโรงงานผู้ผลิตโดยตรง ครอบคลุมทุกการใช้งานตั้งแต่ Entry-Level จนถึง Workstation Class ราคาเริ่มต้น 4,900 บาท" path="/mini-pc" />
+      <SEOHead title="Mini PC Series — คอมพิวเตอร์ขนาดเล็กสมรรถนะสูง" description="Mini PC จากโรงงานผู้ผลิตโดยตรง ครอบคลุมทุกการใช้งานตั้งแต่ Entry-Level จนถึง Workstation Class ราคาเริ่มต้น 8,190 บาท" path="/mini-pc" />
       <ProductJsonLd
         collectionName="Mini PC Series"
-        collectionDescription="คอมพิวเตอร์ขนาดเล็กสมรรถนะสูง จากโรงงานผู้ผลิตโดยตรง ราคาเริ่มต้น 4,900 บาท"
+        collectionDescription="คอมพิวเตอร์ขนาดเล็กสมรรถนะสูง จากโรงงานผู้ผลิตโดยตรง ราคาเริ่มต้น 8,190 บาท"
         collectionUrl="/mini-pc"
         products={[
           { name: "K6-F1 Mini PC", price: "4,900", category: "Mini PC" },
@@ -848,13 +848,13 @@ const MiniPC = () => {
             Mini PC <span className="text-gradient">Series</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl mb-6">
-            เล็กกว่า แต่ทำได้เท่า PC ตั้งโต๊ะ — วางบนโต๊ะทำงานแทน Desktop ได้ทันที ประหยัดพื้นที่ ประหยัดไฟ ราคาเริ่มต้นเพียง 4,900 บาท
+            เล็กกว่า แต่ทำได้เท่า PC ตั้งโต๊ะ — วางบนโต๊ะทำงานแทน Desktop ได้ทันที ประหยัดพื้นที่ ประหยัดไฟ ราคาเริ่มต้นเพียง 8,190 บาท
           </p>
           <div className="flex flex-wrap gap-6 mb-8">
             {[
               { value: "6W", label: "กินไฟต่ำสุด" },
               { value: "24/7", label: "ทำงานต่อเนื่อง" },
-              { value: "4,900.-", label: "ราคาเริ่มต้น" },
+              { value: "8,190.-", label: "ราคาเริ่มต้น" },
               { value: "50+", label: "รุ่นให้เลือก" },
             ].map((s) => (
               <div key={s.label} className="text-center">
