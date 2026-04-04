@@ -103,7 +103,7 @@ const RuggedHandheldDetail = () => {
           <nav className="flex items-center gap-2 text-sm flex-wrap">
             <Link to="/" className="text-muted-foreground hover:text-foreground">หน้าหลัก</Link>
             <ChevronRight className="w-3 h-3 text-muted-foreground" />
-            <Link to="/rugged-tablet" className="text-muted-foreground hover:text-foreground">Rugged Tablet</Link>
+            <Link to="/handheld" className="text-muted-foreground hover:text-foreground">Handheld & PDA</Link>
             <ChevronRight className="w-3 h-3 text-muted-foreground" />
             <span className="text-foreground font-medium">{product.model}</span>
           </nav>
