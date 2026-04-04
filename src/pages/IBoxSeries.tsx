@@ -313,8 +313,33 @@ const IBoxSeries = () => {
           </div>
         </section>
 
-
+        {/* ═══════ PoE & Multi-LAN Section ═══════ */}
         <section>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-2 rounded-lg bg-blue-500/10">
+              <Layers className="w-6 h-6 text-blue-500" />
+            </div>
+            <div>
+              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
+                📡 PoE & Multi-LAN
+              </h2>
+              <p className="text-sm text-muted-foreground">คอมพิวเตอร์อุตสาหกรรม Multi LAN พร้อม PoE สำหรับ Surveillance, Networking</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
+            {iboxProducts.filter(p => p.category === "PoE & Multi-LAN").map((product) => (
+              <IBoxProductCard
+                key={product.id}
+                product={product}
+                selectedProducts={selectedProducts}
+                toggleSelect={toggleSelect}
+                onQuote={setQuoteProduct}
+              />
+            ))}
+          </div>
+        </section>
+
+
           <h2 className="text-xl md:text-2xl font-display font-bold text-foreground text-center mb-2">
             รุ่นสินค้า iBox Series
           </h2>
