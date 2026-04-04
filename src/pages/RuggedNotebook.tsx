@@ -69,7 +69,7 @@ const RuggedNotebookPage = () => {
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-3">
             Rugged Notebook
           </h1>
-          <p className="text-lg md:text-xl text-white/70 max-w-2xl mb-8">
+          <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mb-8">
             โน้ตบุ๊กมาตรฐานทหาร ทนทานสุดขั้ว สำหรับงานภาคสนามและสภาพแวดล้อมที่ท้าทาย
           </p>
 
