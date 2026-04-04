@@ -18,6 +18,8 @@ import aeolusSv9_6l2cDimension from "@/assets/products/aeolus-sv9-6l2c-dimension
 import ibox205Front from "@/assets/products/ibox-205-front.png";
 import ibox205Side from "@/assets/products/ibox-205-side.png";
 
+import ibox603Front from "@/assets/products/ibox-603-front.png";
+import ibox603Rear from "@/assets/products/ibox-603-rear.png";
 // Main product images
 import ibox007Main from "@/assets/products/ibox-007-main.png";
 import ibox601GtProMain from "@/assets/products/ibox-601-gt-pro-main.png";
@@ -403,26 +405,30 @@ export const iboxProducts: IBoxProduct[] = [
   },
   {
     id: "ibox-603-tpipc",
-    name: "IBOX-603",
-    nameTH: "Mid-range Embedded Box PC",
+    name: "IBOX-603-2L4C-1P",
+    nameTH: "Embedded Box PC 2 LAN 4 COM — 10th/11th Gen LGA1200",
     category: ["embedded"],
     subcategory: "Embedded Box PC",
-    cpu: "Intel Core i3/i5/i7 (6th-8th Gen)",
-    cpuGen: "6th-8th Gen",
-    ram: "Up to 32GB DDR4",
-    storage: "M.2 SATA + 2.5\" SATA",
-    io: "6× USB, 4× COM, 2× LAN",
-    temp: "-10°C ~ 60°C",
-    lanPorts: 2, comPorts: 4, usbPorts: 6,
-    image: ibox603Img,
+    cpu: "10th/11th Gen Intel® Core™ i9/i7/i5/i3 (LGA1200)",
+    cpuGen: "10th/11th Gen (Comet Lake-S)",
+    ram: "2× Dual-CH DDR4-2933/2666, Up to 64GB",
+    storage: "1× SATA 3.0 (6Gb/s) + 1× M.2 2280 (NVMe/SATA 3.0)",
+    io: "4× USB3.2, 1× 9-Pin USB2.0, 4× COM (RS232/422/485), 2× HDMI 1.4, 1× DP, 1× GPIO 8-bit",
+    temp: "-10°C ~ 60°C (w/ 0.7m/s Airflow)",
+    lanPorts: 2, comPorts: 4, usbPorts: 5, pcie: true,
+    image: ibox603Front,
+    gallery: [ibox603Rear, ibox603Img],
     features: [
-      "Rich COM Ports (4× RS232/RS485)",
-      "Dual GbE LAN",
-      "Compact Fanless Design",
-      "Wide Voltage Input",
+      "Intel® 10th/11th Gen Desktop LGA1200 — TDP สูงสุด 65W ประสิทธิภาพระดับ Desktop",
+      "รองรับ Intel® Q470E Chipset พร้อม vPRO (Optional)",
+      "4× COM (RS232/422/485) สำหรับอุปกรณ์อุตสาหกรรม",
+      "Triple Display: 2× HDMI 1.4 + 1× DP (4096x2304@60Hz)",
+      "Fanless โครงอลูมิเนียมอัลลอย ระบายความร้อนแบบไร้พัดลม",
+      "รองรับ Half-Size PCIex16, M.2 E-key (CNVi), M.2 B-key (USB3.0/PCIe)",
+      "จ่ายไฟ 12V-28V DC, ขนาด 290.3×87.58×186 mm, น้ำหนัก 3.9 KG",
     ],
-    applications: ["Factory Automation", "POS System", "Kiosk"],
-    priceRange: "฿35,000 - ฿55,000",
+    applications: ["Factory Automation", "Edge Computing", "POS System", "Kiosk", "Digital Signage"],
+    priceRange: "สอบถาม",
   },
   {
     id: "ibox-604",
