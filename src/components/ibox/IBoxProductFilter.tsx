@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, X, Filter, Cpu, Network, Zap } from "lucide-react";
+import { ChevronDown, X, Filter, Cpu, Network, Zap, Flame, Factory, Globe, Radio, Car, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
@@ -33,13 +33,13 @@ export const defaultFilters: IBoxFilterState = {
 };
 
 const categoryOptions = [
-  { id: "all", name: "ทั้งหมด" },
-  { id: "AI Edge Computing", name: "🔥 AI Edge Computing / GPU" },
-  { id: "Embedded Box PC", name: "🏭 Embedded Box PC" },
-  { id: "Gateway", name: "🌐 Gateway / DIN Rail" },
-  { id: "PoE & Multi-LAN", name: "📡 PoE & Multi-LAN" },
-  { id: "Vehicle & Special", name: "🚗 Vehicle & Special" },
-  { id: "Machine Vision", name: "👁️ Machine Vision (AEOLUS)" },
+  { id: "all", name: "ทั้งหมด", icon: null },
+  { id: "AI Edge Computing", name: "AI Edge Computing / GPU", icon: Flame },
+  { id: "Embedded Box PC", name: "Embedded Box PC", icon: Factory },
+  { id: "Gateway", name: "Gateway / DIN Rail", icon: Globe },
+  { id: "PoE & Multi-LAN", name: "PoE & Multi-LAN", icon: Radio },
+  { id: "Vehicle & Special", name: "Vehicle & Special", icon: Car },
+  { id: "Machine Vision", name: "Machine Vision (AEOLUS)", icon: Eye },
 ];
 
 const cpuGenerations = [
@@ -160,12 +160,13 @@ const IBoxProductFilter = ({
               <button
                 key={option.id}
                 onClick={() => onFilterChange({ ...filters, category: option.id })}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
+                className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors flex items-center gap-2 ${
                   filters.category === option.id
                     ? "bg-primary text-primary-foreground font-medium"
                     : "hover:bg-muted text-foreground"
                 }`}
               >
+                {option.icon && <option.icon className="w-4 h-4 shrink-0" />}
                 {option.name}
               </button>
             ))}
