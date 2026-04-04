@@ -83,7 +83,7 @@ const RuggedHandheldDetail = () => {
       <SEOHead
         title={`${product.model} — ${product.name}`}
         description={`${product.nameTH} | ${product.specs.cpu} | ${product.specs.protection}`}
-        path={`/rugged-tablet/${product.id}`}
+        path={`/handheld/${product.id}`}
       />
       <ProductJsonLd
         collectionName={product.name}
