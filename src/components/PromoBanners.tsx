@@ -119,7 +119,7 @@ const PromoBanners = () => {
           {rest.map((promo) => (
             <Link
               key={promo.id}
-              to="/promotions"
+              to={promo.link || "/promotions"}
               className="card-surface overflow-hidden group hover:border-primary/30 transition-all flex flex-col"
             >
               <div className="relative bg-secondary/20 flex items-center justify-center p-6 h-44">
