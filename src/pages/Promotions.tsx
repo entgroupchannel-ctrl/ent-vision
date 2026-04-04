@@ -351,8 +351,15 @@ const Promotions = () => {
       </div>
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--primary)/0.1),transparent_60%)]" />
+      <section className="relative overflow-hidden min-h-[340px] md:min-h-[400px]">
+        <img
+          src={promotionsHeroBg}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          width={1920}
+          height={768}
+        />
+        <div className="absolute inset-0 bg-black/50" />
         <div className="container max-w-5xl mx-auto px-6 py-16 relative text-center">
           <PartyPopper className="mx-auto text-primary mb-4" size={48} />
           <h1 className="text-4xl md:text-6xl font-display font-black tracking-tight mb-4">
