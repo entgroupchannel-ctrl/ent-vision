@@ -5200,27 +5200,6 @@ const GTSeries = () => {
         </div>
       </section>
 
-      {/* Applications */}
-      <section className="section-padding">
-        <div className="container max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              ตัวอย่าง<span className="text-gradient">การใช้งาน</span>
-            </h2>
-            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-              รองรับได้หลากหลายกิจกรรม — โรงงานอุตสาหกรรม, Factory Automation, IOT, KIOSK, HMI,
-              Digital Signage, Queue System, รถโดยสาร, รถไฟฟ้า, ตู้คอนโทรล
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {galleryImages.map((img, i) => (
-              <div key={i} className="card-surface overflow-hidden aspect-square">
-                <img src={img} alt={`ตัวอย่างการใช้งาน ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* GT Series Banner */}
       <section className="section-padding bg-surface/50">
