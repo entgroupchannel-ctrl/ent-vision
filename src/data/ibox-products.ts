@@ -622,6 +622,43 @@ export const iboxProducts: IBoxProduct[] = [
     priceRange: "฿75,000 - ฿95,000",
     isNew: true,
   },
+
+  // ═══════ Vehicle & Special ═══════
+  {
+    id: "VBOX-105-2L6C",
+    name: "Vehicle Industrial PC",
+    nameTH: "คอมพิวเตอร์อุตสาหกรรมติดรถยนต์",
+    category: "Vehicle & Special",
+    subcategory: "Vehicle Mount PC",
+    formFactor: "compact",
+    performance: "entry",
+    image: ibox103Mini,
+    gallery: [ibox103, ibox007Main],
+    dimensionImage: vbox105_2l6c,
+    specs: {
+      cpu: "Intel Celeron J6412",
+      cpuGen: "Elkhart Lake",
+      ram: "Up to 32GB DDR4",
+      storage: "M.2 NVMe + SATA + mSATA",
+      io: "10x USB, 6x COM, 2x LAN",
+      comPorts: 6,
+      lanPorts: 2,
+      usbPorts: 10,
+      poe: false,
+      pcie: false,
+      temp: "-20°C ~ 65°C",
+    },
+    features: [
+      "Wide 6-42V DC with Ignition Control",
+      "80V Surge Protection",
+      "Fanless Aluminum Chassis",
+      "Triple Display Support",
+    ],
+    applications: ["Fleet Management", "Mobile Surveillance", "Intelligent Transportation"],
+    datasheet: "/datasheets/VBOX-105-2L6C.pdf",
+    priceRange: "฿65,000 - ฿85,000",
+    isNew: true,
+  },
 ];
 
 // Helper: get product by id
