@@ -57,7 +57,7 @@ const HandheldCard = ({
           name: product.model,
           category: "Rugged Handheld",
           image: product.image,
-          href: `/rugged-tablet/${product.id}`,
+          href: `/handheld/${product.id}`,
           specs: product.nameTH,
         }}
         className="absolute top-3 right-3"
