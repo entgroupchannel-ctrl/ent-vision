@@ -1072,6 +1072,39 @@ const SmartDisplay = () => {
         </div>
       </section>
 
+      {/* YouTube Videos */}
+      <section className="section-padding">
+        <div className="container max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">Video Gallery</span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold">
+              วิดีโอ <span className="text-gradient">Smart Display & KIOSK</span>
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              { id: "V2kmwDhKWko", title: "Smart Display Demo 1" },
+              { id: "WLGJY0Qsmlo", title: "Smart Display Demo 2" },
+              { id: "7vHHYtEinoI", title: "Smart Display Demo 3" },
+              { id: "kuBRO1LFtdo", title: "Smart Display Demo 4" },
+            ].map((v) => (
+              <div key={v.id} className="card-surface rounded-xl overflow-hidden">
+                <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src={`https://www.youtube.com/embed/${v.id}`}
+                    title={v.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Contact / CTA */}
       <section className="section-padding">
         <div className="container max-w-4xl mx-auto text-center">
