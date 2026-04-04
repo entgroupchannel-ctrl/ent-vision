@@ -4819,6 +4819,7 @@ const GTSeries = () => {
                   </div>
                 ))}
               </div>
+            </div>
           )}
 
           {/* Tab: GT1200 Detail */}
