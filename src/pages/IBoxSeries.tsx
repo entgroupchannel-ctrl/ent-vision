@@ -531,6 +531,62 @@ const IBoxSeries = () => {
         productCategory="iBox Series"
       />
       <MultiSelectQuoteBar selectedProducts={selectedProducts} onClear={clearSelection} productCategory="iBox Series" />
+
+      {/* ─── YouTube Section ─── */}
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-xl font-extrabold text-foreground flex items-center gap-2">
+              <Play className="w-5 h-5 text-destructive" /> วิดีโอรีวิว & สาธิต iBox Series
+            </h2>
+            <p className="text-xs text-muted-foreground mt-1">ดูการทำงานจริงของ Fanless Industrial PC — กด Like & Share!</p>
+          </div>
+          <a href="https://www.youtube.com/@entgroup" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-destructive text-destructive-foreground px-3 py-1.5 rounded-full text-xs font-bold hover:bg-destructive/90 transition-colors shrink-0">
+            <ThumbsUp className="w-3 h-3" /> Subscribe
+          </a>
+        </div>
+
+        {/* Featured video */}
+        <div className="card-surface rounded-xl overflow-hidden mb-4">
+          <div className="relative w-full pb-[56.25%] max-h-[420px]">
+            <iframe src="https://www.youtube.com/embed/TU80kmBXrYM" title="iBox Series — Fanless Industrial PC Review" className="absolute inset-0 w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+          </div>
+          <div className="p-3 flex items-center justify-between">
+            <div>
+              <p className="font-bold text-sm text-foreground">รีวิว iBox Series — Fanless Industrial PC สำหรับโรงงาน</p>
+              <p className="text-xs text-muted-foreground mt-0.5">ดูการติดตั้ง การใช้งาน และการเปรียบเทียบสเปคแต่ละรุ่น</p>
+            </div>
+            <ShareButtons url="https://youtu.be/TU80kmBXrYM" title="iBox Series Review" compact />
+          </div>
+        </div>
+
+        {/* Supporting videos */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            { id: "gA7_xB_O-GY", title: "สาธิตการเชื่อมต่อ iBox กับระบบ IoT" },
+            { id: "e7tVqdC0mmM", title: "ทดสอบความทนทาน Fanless PC ในโรงงาน" },
+            { id: "kxyjRKH5K-o", title: "เปรียบเทียบ iBox รุ่นต่างๆ สำหรับ Edge AI" },
+          ].map((v) => (
+            <div key={v.id} className="card-surface rounded-xl overflow-hidden group">
+              <div className="relative w-full pb-[56.25%]">
+                <iframe src={`https://www.youtube.com/embed/${v.id}`} title={v.title} className="absolute inset-0 w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              </div>
+              <div className="p-2.5 flex items-center justify-between">
+                <p className="font-semibold text-xs text-foreground line-clamp-1">{v.title}</p>
+                <ShareButtons url={`https://youtu.be/${v.id}`} title={v.title} compact />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Channel CTA */}
+        <div className="mt-4 text-center">
+          <a href="https://www.youtube.com/@entgroup" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-destructive text-destructive-foreground font-bold text-sm hover:bg-destructive/90 transition-colors">
+            <Play className="w-4 h-4" /> ดูวิดีโอทั้งหมดบน YouTube <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </section>
+
       <FooterCompact />
     </div>
   );
