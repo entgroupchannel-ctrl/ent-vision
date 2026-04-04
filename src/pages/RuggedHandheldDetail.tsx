@@ -93,8 +93,8 @@ const RuggedHandheldDetail = () => {
       />
       <BreadcrumbJsonLd items={[
         { name: "สินค้า", path: "/products" },
-        { name: "Rugged Tablet", path: "/rugged-tablet" },
-        { name: product.model, path: `/rugged-tablet/${product.id}` },
+        { name: "Handheld & PDA", path: "/handheld" },
+        { name: product.model, path: `/handheld/${product.id}` },
       ]} />
 
       {/* Breadcrumb */}
