@@ -116,7 +116,7 @@ const RuggedHandheldDetail = () => {
           <div className="space-y-4">
             <div className="card-surface overflow-hidden relative">
               <WishlistHeart
-                item={{ id: product.id, name: product.model, category: "Rugged Handheld", image: product.image, href: `/rugged-tablet/${product.id}`, specs: product.nameTH }}
+                item={{ id: product.id, name: product.model, category: "Rugged Handheld", image: product.image, href: `/handheld/${product.id}`, specs: product.nameTH }}
                 className="absolute top-3 right-3 z-10"
               />
               <div className="bg-secondary/30 p-8 flex items-center justify-center min-h-[350px]">

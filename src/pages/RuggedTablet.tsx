@@ -622,17 +622,17 @@ const RuggedTablet = () => {
           </div>
         </section>
 
-        {/* Handheld & PDA */}
-        <section id="handheld">
-          <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-            Rugged <span className="text-gradient">Handheld & PDA</span>
-          </h2>
-          <p className="text-sm text-muted-foreground mb-6">เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม พร้อม Barcode Scanner, NFC, RFID สำหรับงานภาคสนาม</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {handheldProducts.map((p) => (
-              <ProductCard key={p.id} product={p} onQuote={(name) => setQuoteProduct(name)} selected={selectedProducts.has(p.name)} onToggleSelect={toggleSelect} />
-            ))}
-          </div>
+        {/* Handheld & PDA — Link to dedicated page */}
+        <section id="handheld-link">
+          <Link to="/handheld" className="card-surface p-6 flex items-center justify-between group hover:border-primary/30 transition-all">
+            <div>
+              <h2 className="text-xl font-display font-bold text-foreground mb-1">
+                Rugged <span className="text-gradient">Handheld & PDA</span>
+              </h2>
+              <p className="text-sm text-muted-foreground">เครื่องพกพาและ PDA มาตรฐานอุตสาหกรรม — 16 รุ่น พร้อม Barcode Scanner, NFC, RFID</p>
+            </div>
+            <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+          </Link>
         </section>
 
         <section id="tpc">
