@@ -3637,6 +3637,61 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 </div>
               </div>
 
+              {/* GT7000 Price List */}
+              <div className="card-surface overflow-hidden">
+                <div className="p-5 border-b border-border">
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT7000 Price List</h3>
+                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-secondary/50">
+                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                        <th className="text-left p-3 font-semibold text-foreground">Configuration</th>
+                        <th className="text-right p-3 font-semibold text-foreground">ราคา</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border">
+                      {[
+                        { cpu: "i3-7100U", config: "RAM DDR4 4GB + SSD 128GB + WIFI", price: "15,190" },
+                        { cpu: "i3-7100U", config: "RAM DDR4 4GB + SSD 256GB + WIFI", price: "16,690" },
+                        { cpu: "i3-7100U", config: "RAM DDR4 8GB + SSD 128GB + WIFI", price: "16,590" },
+                        { cpu: "i3-7100U", config: "RAM DDR4 8GB + SSD 256GB + WIFI", price: "17,190" },
+                        { cpu: "i3-7100U", config: "RAM DDR4 8GB + SSD 128GB + WIFI + 4G + RS485", price: "19,190" },
+                        { cpu: "i5-7267U", config: "RAM DDR4 4GB + SSD 128GB + WIFI", price: "20,290" },
+                        { cpu: "i5-7267U", config: "RAM DDR4 4GB + SSD 256GB + WIFI", price: "20,790" },
+                        { cpu: "i5-7267U", config: "RAM DDR4 8GB + SSD 128GB + WIFI", price: "20,890" },
+                        { cpu: "i5-7267U", config: "RAM DDR4 8GB + SSD 256GB + WIFI", price: "21,390" },
+                        { cpu: "i5-7267U", config: "RAM DDR4 8GB + SSD 256GB + 4G Module", price: "23,890" },
+                        { cpu: "i5-8250U", config: "RAM DDR4 4GB + SSD 128GB + WIFI", price: "21,090" },
+                        { cpu: "i5-8250U", config: "RAM DDR4 4GB + SSD 256GB + WIFI", price: "21,690" },
+                        { cpu: "i5-8250U", config: "RAM DDR4 4GB + SSD 512GB + WIFI", price: "22,790" },
+                        { cpu: "i5-8250U", config: "RAM DDR4 8GB + SSD 128GB + WIFI", price: "21,490" },
+                        { cpu: "i5-8250U", config: "RAM DDR4 8GB + SSD 256GB + WIFI", price: "22,190" },
+                        { cpu: "i5-8250U", config: "RAM DDR4 8GB + SSD 256GB + 4G Module", price: "24,690" },
+                        { cpu: "i5-8250U", config: "RAM DDR4 8GB + SSD 1TB + WIFI", price: "25,490" },
+                        { cpu: "i5-8250U", config: "RAM DDR4 16GB + SSD 256GB + WIFI", price: "23,090" },
+                        { cpu: "i5-8250U", config: "RAM DDR4 16GB + SSD 1TB + WIFI", price: "26,590" },
+                        { cpu: "i7-7510U", config: "RAM DDR4 4GB + SSD 128GB + WIFI", price: "22,590" },
+                      ].map((item, i) => (
+                        <tr key={i} className="hover:bg-secondary/30 transition-colors">
+                          <td className="p-3 text-foreground font-medium">{item.cpu}</td>
+                          <td className="p-3 text-muted-foreground">{item.config}</td>
+                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-xs text-muted-foreground text-center py-3 border-t border-border">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
+                <div className="p-4 border-t border-border text-center">
+                  <button onClick={() => setQuoteProduct("GT7000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                    <FileText size={16} /> ขอใบเสนอราคา GT7000
+                  </button>
+                </div>
+              </div>
+
               {useCasesGrid}
 
               {/* Intro Video */}
