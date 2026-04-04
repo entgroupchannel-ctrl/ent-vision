@@ -4722,51 +4722,43 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* GT4500 Price Table */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT4500 Price List (อัปเดตตามหน้า GT4500)</h3>
-                  <p className="text-sm text-muted-foreground mt-1">ราคาขึ้นกับ CPU / RAM / SSD / WiFi และออปชันเสริม — ใช้ตารางนี้เพื่อเทียบและเลือกสเปกได้เร็ว</p>
+                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT4500 Price List</h3>
+                  <p className="text-sm text-muted-foreground mt-1">ทุกรุ่นมาพร้อม RAM 8GB + SSD 256GB มาตรฐาน</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-muted/50">
-                        <th className="text-left p-3 font-semibold text-foreground min-w-[170px]">กลุ่ม CPU</th>
-                        <th className="text-left p-3 font-semibold text-foreground min-w-[280px]">สเปกตัวอย่าง (RAM + SSD + WiFi)</th>
-                        <th className="text-right p-3 font-semibold text-foreground min-w-[120px]">ราคา (฿)</th>
+                        <th className="text-left p-3 font-semibold text-foreground">CPU</th>
+                        <th className="text-left p-3 font-semibold text-foreground">RAM / SSD</th>
+                        <th className="text-left p-3 font-semibold text-foreground">จุดเด่น</th>
+                        <th className="text-right p-3 font-semibold text-foreground">ราคา (฿)</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border">
-                      <tr className="hover:bg-muted/30 transition-colors">
-                        <td className="p-3 text-muted-foreground font-medium">i3-7100U</td>
-                        <td className="p-3 text-muted-foreground">4GB + 128GB / 4GB + 256GB / 8GB + 128GB / 8GB + 256GB</td>
-                        <td className="p-3 text-right font-bold text-foreground">15,990–16,990</td>
-                      </tr>
-                      <tr className="hover:bg-muted/30 transition-colors">
-                        <td className="p-3 text-muted-foreground font-medium">i5-7267U / i5-7300U</td>
-                        <td className="p-3 text-muted-foreground">4GB + 128GB / 8GB + 128GB / 4GB + 256GB / 8GB + 256GB</td>
-                        <td className="p-3 text-right font-bold text-foreground">19,990–20,990</td>
-                      </tr>
-                      <tr className="hover:bg-muted/30 transition-colors bg-primary/5">
-                        <td className="p-3 text-muted-foreground font-medium">i5-8250U <span className="text-xs text-primary font-bold">ยอดนิยม</span></td>
-                        <td className="p-3 text-muted-foreground">4GB + 128GB / 4GB + 256GB / 8GB + 128GB / 8GB + 256GB</td>
-                        <td className="p-3 text-right font-bold text-foreground">20,990–21,990</td>
-                      </tr>
-                      <tr className="hover:bg-muted/30 transition-colors">
-                        <td className="p-3 text-muted-foreground font-medium">i7-7510U</td>
-                        <td className="p-3 text-muted-foreground">4GB + 128GB / 4GB + 256GB / 8GB + 128GB / 8GB + 256GB</td>
-                        <td className="p-3 text-right font-bold text-foreground">21,990–22,990</td>
-                      </tr>
-                      <tr className="hover:bg-muted/30 transition-colors">
-                        <td className="p-3 text-muted-foreground font-medium">i7-8550U</td>
-                        <td className="p-3 text-muted-foreground">4GB + 128GB / 4GB + 256GB / 8GB + 128GB / 8GB + 256GB</td>
-                        <td className="p-3 text-right font-bold text-foreground">24,990–25,990</td>
-                      </tr>
-                      <tr className="hover:bg-muted/30 transition-colors">
-                        <td className="p-3 text-muted-foreground font-medium">i7-10510U</td>
-                        <td className="p-3 text-muted-foreground">4GB + 128GB (เริ่มต้น)</td>
-                        <td className="p-3 text-right font-bold text-foreground">25,990</td>
-                      </tr>
+                      {[
+                        { cpu: "Intel Core i3-6006U", spec: "8GB DDR4 + SSD 256GB", highlight: "ประหยัด เปิด 24 ชม.", price: "21,900", tag: "" },
+                        { cpu: "Intel Core i5-7260U", spec: "8GB DDR4 + SSD 256GB", highlight: "คุ้มค่าที่สุด มัลติทาสก์ดี", price: "22,900", tag: "ยอดนิยม" },
+                        { cpu: "Intel Core i5-8250U", spec: "8GB DDR4 + SSD 256GB", highlight: "Gen 8 แรงขึ้น 40%", price: "23,900", tag: "" },
+                        { cpu: "Intel Core i7-8550U", spec: "8GB DDR4 + SSD 256GB", highlight: "ท็อปสุด วิเคราะห์ข้อมูลหนัก", price: "25,900", tag: "" },
+                      ].map((item, i) => (
+                        <tr key={i} className={`hover:bg-muted/30 transition-colors ${item.tag ? "bg-primary/5" : ""}`}>
+                          <td className="p-3 font-medium text-foreground">
+                            {item.cpu}
+                            {item.tag && <span className="ml-2 text-xs text-primary font-bold">{item.tag}</span>}
+                          </td>
+                          <td className="p-3 text-muted-foreground">{item.spec}</td>
+                          <td className="p-3 text-muted-foreground text-xs">{item.highlight}</td>
+                          <td className="p-3 text-right font-bold text-primary">฿{item.price}</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
+                </div>
+                <div className="px-5 py-3 border-t border-border bg-muted/30">
+                  <p className="text-xs text-muted-foreground">
+                    ⚠️ ราคาอาจมีการเปลี่ยนแปลงได้โดยไม่ต้องแจ้งล่วงหน้า กรุณาติดต่อฝ่ายขายเพื่อยืนยันราคาและโปรโมชันล่าสุด
+                  </p>
                 </div>
               </div>
 
@@ -4782,13 +4774,12 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                       <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 11 Pro OEM</td><td className="p-3 text-right font-bold text-foreground">฿4,590</td></tr>
                       <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 10 IoT</td><td className="p-3 text-right font-bold text-foreground">฿3,950</td></tr>
                       <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">Windows 11 IoT</td><td className="p-3 text-right font-bold text-foreground">฿4,590</td></tr>
-                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">WiFi Module / WiFi 6 Upgrade</td><td className="p-3 text-right font-bold text-foreground">สอบถาม</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">WiFi Module / WiFi 6</td><td className="p-3 text-right font-bold text-foreground">สอบถาม</td></tr>
                       <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">4G / 5G SIM Module</td><td className="p-3 text-right font-bold text-foreground">สอบถาม</td></tr>
-                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">ประกันเพิ่มปีที่ 2 / 3</td><td className="p-3 text-right font-bold text-foreground">15% / 20%</td></tr>
+                      <tr className="hover:bg-muted/30"><td className="p-3 text-muted-foreground">ประกันเพิ่มปีที่ 2 / 3</td><td className="p-3 text-right font-bold text-foreground">+15% / +20%</td></tr>
                     </tbody>
                   </table>
                 </div>
-                <p className="px-5 py-3 text-xs text-muted-foreground border-t border-border">*ข้อมูลราคาอ้างอิงจากตาราง GT4500 ล่าสุดบนหน้าเว็บไซต์และอาจมีการเปลี่ยนแปลงตามสเปกที่เลือก</p>
               </div>
               <div className="text-center">
                 <button onClick={() => setQuoteProduct("GT4500")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
