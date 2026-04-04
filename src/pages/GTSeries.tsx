@@ -2150,7 +2150,7 @@ const GTSeries = () => {
                   </table>
                 </div>
                 <div className="p-3 text-xs text-muted-foreground bg-muted/10 border-t border-border">
-                  * ราคาดังกล่าวยังไม่รวม VAT 7% และอาจมีการเปลี่ยนแปลงโดยไม่ต้องแจ้งล่วงหน้า
+                  ⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup
                 </div>
                 <div className="p-4 border-t border-border text-center">
                   <button onClick={() => setQuoteProduct("GT3000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg">
