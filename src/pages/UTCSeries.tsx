@@ -526,6 +526,7 @@ const UTCSeries = () => {
               </div>
             </div>
           </div>
+          <PriceDisclaimer />
         </div>
       </section>
 

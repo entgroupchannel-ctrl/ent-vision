@@ -773,14 +773,7 @@ const RuggedTablet = () => {
             })}
           </Tabs>
 
-          <div className="mt-4 p-4 bg-secondary/30 rounded-lg border border-border">
-            <p className="text-xs font-semibold text-foreground mb-2">📌 หมายเหตุ</p>
-            <ul className="text-xs text-muted-foreground space-y-1">
-              <li>• ราคาสินค้าอาจเปลี่ยนแปลงได้โดยมิต้องแจ้งให้ทราบล่วงหน้า</li>
-              <li>• ราคาไม่รวม VAT 7%</li>
-              <li>• รับประกันมาตรฐาน 1 ปี</li>
-            </ul>
-          </div>
+          <PriceDisclaimer />
         </section>
 
         {/* Downloads */}

@@ -408,6 +408,7 @@ const SmartDisplay = () => {
                     </table>
                   </div>
                 </div>
+                <PriceDisclaimer />
 
                 {/* Datasheet downloads */}
                 <div className="mt-6">

@@ -726,6 +726,7 @@ const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
                   </tbody>
                 </table>
               </div>
+              <PriceDisclaimer />
             </TabsContent>
           )}
 

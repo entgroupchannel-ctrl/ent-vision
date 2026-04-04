@@ -462,6 +462,7 @@ const GBSeries = () => {
                   <p className="text-xs text-muted-foreground">
                     💡 สามารถ Customize สเปกได้ตามต้องการ • Windows License เพิ่มเติมได้ • ประกัน 1 ปี (ซื้อเพิ่มสูงสุด 3 ปี)
                   </p>
+                  <PriceDisclaimer />
                 </div>
               </div>
             </TabsContent>

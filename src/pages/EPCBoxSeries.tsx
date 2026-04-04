@@ -811,6 +811,7 @@ const EPCBoxSeries = () => {
               </table>
             </div>
           </div>
+          <PriceDisclaimer />
         </div>
       </section>
 
