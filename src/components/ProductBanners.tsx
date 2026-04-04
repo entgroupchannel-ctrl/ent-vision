@@ -1,4 +1,4 @@
-import { ExternalLink, Flame } from "lucide-react";
+import { Flame, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import kioskBanner from "@/assets/kiosk-banner.jpg";
 
@@ -8,8 +8,8 @@ const productBanners = [
     description: "จอสัมผัส Capacitive สำหรับโรงงาน POS และงานบริการ",
     productImage: "https://static.wixstatic.com/media/0597a3_f2ee4bdde8a64cbc970eb9f33c141b3d~mv2.png/v1/fill/w_413,h_449,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GTY150%20(4).png",
     links: [
-      { label: "ดูราคาสินค้า", href: "https://gty-gtg-panelpc.lovable.app/#pricing" },
-      { label: "ดูรุ่นทั้งหมด", href: "https://gty-gtg-panelpc.lovable.app/#models" },
+      { label: "ดูราคาสินค้า", href: "/panel-pc-gtg" },
+      { label: "GK Series", href: "/gk-series" },
     ],
   },
   {
@@ -17,18 +17,19 @@ const productBanners = [
     description: "แท็บเล็ตและโน้ตบุ๊กเกรดทหาร MIL-STD-810G",
     productImage: "https://entgroup-rugged.com/assets/f9a-_j8J-x2I.jpg",
     links: [
-      { label: "ดูเว็บไซต์", href: "https://entgroup-rugged.com/" },
-      { label: "ดูรุ่นทั้งหมด", href: "https://entgroup-rugged.com/products" },
+      { label: "Rugged Tablet", href: "/rugged-tablet" },
+      { label: "Rugged Notebook", href: "/rugged-notebook" },
+      { label: "Handheld", href: "/handheld" },
     ],
   },
   {
-    title: "IPC งานประมูล งานโครงการ",
-    description: "คอมพิวเตอร์อุตสาหกรรม นำเข้าจากโรงงานโดยตรง",
+    title: "iBox Industrial PC",
+    description: "คอมพิวเตอร์อุตสาหกรรม Fanless สำหรับงานโครงการ",
     productImage: "https://rugged-ipc.lovable.app/assets/ibox-601-gt-pro-main-DGne0Wqp.png",
     hot: true,
     links: [
-      { label: "ดูสินค้า", href: "https://rugged-ipc.lovable.app/products" },
-      { label: "ขอใบเสนอราคา", href: "https://rugged-ipc.lovable.app/rfq" },
+      { label: "ดูสินค้า", href: "/ibox-series" },
+      { label: "ขอใบเสนอราคา", href: "/quote" },
     ],
   },
   {
@@ -54,14 +55,12 @@ const ProductBanners = () => {
                 banner.hot ? "ring-1 ring-primary/30" : ""
               }`}
             >
-              {/* Badge */}
               {banner.hot && (
                 <span className="absolute top-3 right-3 z-20 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold uppercase tracking-wider">
                   <Flame size={10} /> Hot
                 </span>
               )}
 
-              {/* Image area */}
               {banner.backgroundImage ? (
                 <div className="relative h-44 overflow-hidden">
                   <img
@@ -83,7 +82,6 @@ const ProductBanners = () => {
                 </div>
               )}
 
-              {/* Content */}
               <div className="p-4 flex-1 flex flex-col">
                 <h3 className="text-sm font-bold text-foreground mb-1 leading-tight">
                   {banner.title}
@@ -95,19 +93,17 @@ const ProductBanners = () => {
                 )}
                 <div className="mt-auto flex flex-wrap gap-2">
                   {banner.links.map((link) => (
-                    <a
+                    <Link
                       key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      to={link.href}
                       className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border text-xs font-medium transition-all ${
                         banner.hot
                           ? "border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground"
                           : "border-border text-muted-foreground hover:text-foreground hover:border-primary/30"
                       }`}
                     >
-                      {link.label} <ExternalLink size={11} />
-                    </a>
+                      {link.label} <ArrowRight size={11} />
+                    </Link>
                   ))}
                 </div>
               </div>
