@@ -269,6 +269,7 @@ const optionsList = [
 
 const categories = [
   { id: "overview", label: "Overview" },
+  { id: "comparison", label: "Quick Compare" },
   { id: "features", label: "Features" },
   { id: "square", label: "Square Display" },
   { id: "wide", label: "Wide Display" },
