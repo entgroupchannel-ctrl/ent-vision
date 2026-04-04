@@ -249,7 +249,33 @@ const IBoxSeries = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
-            {iboxProducts.map((product) => (
+            {iboxProducts.filter(p => p.category === "AI Edge Computing").map((product) => (
+              <IBoxProductCard
+                key={product.id}
+                product={product}
+                selectedProducts={selectedProducts}
+                toggleSelect={toggleSelect}
+                onQuote={setQuoteProduct}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* ═══════ Embedded Box PC Section ═══════ */}
+        <section>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Box className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
+                🏭 Embedded Box PC
+              </h2>
+              <p className="text-sm text-muted-foreground">คอมพิวเตอร์ฝังตัว Fanless สำหรับงานโรงงาน, SCADA, PLC Replacement</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-6">
+            {iboxProducts.filter(p => p.category === "Embedded Box PC").map((product) => (
               <IBoxProductCard
                 key={product.id}
                 product={product}
