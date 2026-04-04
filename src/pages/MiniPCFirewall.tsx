@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ShareButtons from "@/components/ShareButtons";
+import { Play, Youtube, ThumbsUp, ExternalLink as ExtLink } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
