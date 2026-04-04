@@ -549,6 +549,80 @@ const gkModels: GKModel[] = [
   },
 ];
 
+/* ─── Paginated Price Table ─── */
+const PaginatedPriceTable = ({ rows, perPage, totalPages }: {
+  rows: { cpu: string; ram: string; ssd: string; price: string; isFirst: boolean; rowSpan: number }[];
+  perPage: number;
+  totalPages: number;
+}) => {
+  const [page, setPage] = useState(1);
+  const pageRows = rows.slice((page - 1) * perPage, page * perPage);
+
+  // Recalculate rowSpan for paginated view
+  const renderRows: typeof rows = [];
+  let lastCpu = "";
+  pageRows.forEach((r) => {
+    if (r.cpu !== lastCpu) {
+      const sameCpuCount = pageRows.filter(pr => pr.cpu === r.cpu).length;
+      renderRows.push({ ...r, isFirst: true, rowSpan: sameCpuCount });
+      lastCpu = r.cpu;
+    } else {
+      renderRows.push({ ...r, isFirst: false });
+    }
+  });
+
+  return (
+    <div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-primary/10 border-b border-border">
+              <th className="text-left px-4 py-3 font-semibold text-foreground">CPU</th>
+              <th className="text-left px-4 py-3 font-semibold text-foreground">RAM</th>
+              <th className="text-left px-4 py-3 font-semibold text-foreground">SSD</th>
+              <th className="text-right px-4 py-3 font-semibold text-foreground">ราคา (฿)</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border">
+            {renderRows.map((r, i) => (
+              <tr key={i} className="hover:bg-muted/30 transition-colors">
+                {r.isFirst && (
+                  <td className="px-4 py-3 font-medium text-foreground align-top" rowSpan={r.rowSpan}>
+                    {r.cpu}
+                  </td>
+                )}
+                <td className="px-4 py-3 text-muted-foreground">{r.ram}</td>
+                <td className="px-4 py-3 text-muted-foreground">{r.ssd}</td>
+                <td className="px-4 py-3 text-right font-bold text-primary text-lg">{r.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between px-4 py-3 border-t border-border bg-muted/20">
+          <p className="text-xs text-muted-foreground">
+            หน้า {page}/{totalPages} ({rows.length} รายการ)
+          </p>
+          <div className="flex items-center gap-1">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+              <button
+                key={p}
+                onClick={() => setPage(p)}
+                className={`h-7 w-7 rounded text-xs font-medium transition-colors ${
+                  p === page ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground hover:bg-muted"
+                }`}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 /* ─── Model Card Component ─── */
 const ModelSection = ({ model, index }: { model: GKModel; index: number }) => {
   const isReversed = index % 2 === 1;
