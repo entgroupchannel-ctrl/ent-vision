@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft, Shield, Smartphone, Battery, Scan, Wifi, FileText,
-  ShoppingCart, X, Fingerprint, Radio,
+  ShoppingCart, X, Fingerprint, Radio, Play, ThumbsUp, ExternalLink,
 } from "lucide-react";
 import handheldHero from "@/assets/handheld-hero.jpg";
 import { Badge } from "@/components/ui/badge";
@@ -14,6 +14,7 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import WishlistHeart from "@/components/WishlistHeart";
+import ShareButtons from "@/components/ShareButtons";
 import { handheldProducts, type HandheldProduct } from "@/data/rugged-handheld-products";
 
 /* ───── Features ───── */
@@ -282,6 +283,41 @@ const Handheld = () => {
           qty: 1,
         }))}
       />
+
+      {/* ─── Media Center ─── */}
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-xl font-extrabold text-foreground flex items-center gap-2">
+              <Play className="w-5 h-5 text-destructive" /> วิดีโอรีวิว & สาธิตการใช้งาน
+            </h2>
+            <p className="text-xs text-muted-foreground mt-1">ดูการใช้งาน Handheld & PDA ในสถานการณ์จริง — กด Like & Share!</p>
+          </div>
+          <a href="https://www.youtube.com/@entgroup" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-destructive text-destructive-foreground px-3 py-1.5 rounded-full text-xs font-bold hover:bg-destructive/90 transition-colors shrink-0">
+            <ThumbsUp className="w-3 h-3" /> Subscribe
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            { id: "GkYoTiAYSQc", title: "รีวิว Rugged Handheld — สแกนบาร์โค้ดในคลังสินค้า" },
+            { id: "IJwJkix-aWA", title: "ทดสอบความทนทาน Handheld กันน้ำ IP65" },
+            { id: "dvmnmO3DX18", title: "สาธิต Handheld PDA สำหรับงานโลจิสติกส์" },
+            { id: "pmqQdovRthE", title: "รีวิว Rugged PDA สำหรับอุตสาหกรรม" },
+          ].map((v) => (
+            <div key={v.id} className="card-surface rounded-xl overflow-hidden">
+              <div className="relative w-full pb-[56.25%]">
+                <iframe src={`https://www.youtube.com/embed/${v.id}`} title={v.title} className="absolute inset-0 w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              </div>
+              <div className="p-2.5 flex items-center justify-between">
+                <p className="font-semibold text-xs text-foreground line-clamp-1">{v.title}</p>
+                <ShareButtons url={`https://youtu.be/${v.id}`} title={v.title} compact />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <FooterCompact />
     </div>
   );
