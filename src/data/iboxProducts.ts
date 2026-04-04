@@ -28,6 +28,8 @@ import ibox007proFront from "@/assets/products/ibox-007pro-front.png";
 import ibox007proRear from "@/assets/products/ibox-007pro-rear.png";
 import ibox104v2Front from "@/assets/products/ibox-104v2-front.png";
 import ibox104v2Side from "@/assets/products/ibox-104v2-side.png";
+import ibox601Gt1pFront from "@/assets/products/ibox-601-gt-1p-front.png";
+import ibox601Gt1pRear from "@/assets/products/ibox-601-gt-1p-rear.png";
 import ibox501Img from "@/assets/products/ibox-501.png";
 import ibox502Img from "@/assets/products/ibox-502.png";
 import ibox601ClassicImg from "@/assets/products/ibox-601-classic.png";
@@ -173,6 +175,36 @@ export const iboxProducts: IBoxProduct[] = [
     applications: ["AI Inference", "Deep Learning", "Edge AI", "Machine Vision", "Industrial Server"],
     priceRange: "สอบถาม",
     isHot: true, isNew: true,
+  },
+  {
+    id: "ibox-601-gt-1p",
+    name: "IBOX-601-GT-1P",
+    nameTH: "Industrial PC Fanless — 12th/13th/14th Gen LGA1700 (H770)",
+    category: ["hot", "embedded", "edge"],
+    subcategory: "Edge Computing",
+    cpu: "12th/13th/14th Gen Intel® Core™ i3/i5/i7/i9 (LGA1700)",
+    cpuGen: "12th-14th Gen (Alder/Raptor Lake)",
+    ram: "2× Dual-CH DDR4-3200 MHz SO-DIMM, Up to 64GB",
+    storage: "1× 2.5\" SATA Bay + 4× SATA 3.0 (RAID 0/1/5/10) + 1× mSATA + 2× M.2 2280 (NVMe/SATA)",
+    io: "4× USB3.2 Gen2 (10Gb/s) + 4× USB3.0 + 1× Internal USB2.0, 1× RS232/485 (DB9) + 1× RS232/485 (Jumper), 1× DP + 1× HDMI, GPIO 8-bit",
+    temp: "-10°C ~ 55°C (w/ 0.7m/s Airflow)",
+    lanPorts: 8, comPorts: 2, usbPorts: 9, poe: true, pcie: true,
+    image: ibox601Gt1pFront,
+    gallery: [ibox601Gt1pRear],
+    features: [
+      "Intel® H770 Chipset + 12th/13th/14th Gen Desktop LGA1700 — i3 TDP 65W / i5-i9 TDP 35W",
+      "1× PCIe 4.0 x16 Slot สำหรับ Expansion Card (ไม่มี GPU Module ในตัว)",
+      "8× GbE LAN: 2× Intel i210AT + 1× Intel i219LM + 1× Intel i226 + 6× PoE (PSE End-Span, shared Mini-PCIe)",
+      "4× USB3.2 Gen2x1 (10Gb/s) + 4× USB3.0 (5Gb/s) + 3× USB2.0",
+      "5× SATA 3.0 (RAID 0/1/5/10) + 2× M.2 NVMe + 1× mSATA",
+      "Dual Display: 1× DP (4096×2160@60Hz) + 1× HDMI (4096×2304@24Hz) + Optional HDMI via TP-IPC Daughter Card",
+      "2× External SIM Slot + M.2 B-key (4G/5G LTE) + M.2 E-key (WiFi/BT), TPM Header",
+      "Audio: 1× MIC + 1× SPK (7.1+2 CH, Realtek ALC897)",
+      "จ่ายไฟ 9-36 VDC, ขนาด 290.35×109.28×190 mm, น้ำหนัก 4.25 KG",
+    ],
+    applications: ["Edge Computing", "Industrial Server", "Surveillance NVR", "IoT Gateway", "Digital Signage"],
+    priceRange: "สอบถาม",
+    isNew: true,
   },
   {
     id: "ibox-602-gt-pro",
