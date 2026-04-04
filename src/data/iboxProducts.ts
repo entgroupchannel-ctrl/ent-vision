@@ -15,6 +15,8 @@ import aeolusSv9Dimension from "@/assets/products/aeolus-sv9-6l2c-1p-dimension.p
 import aeolusSva35Angle2 from "@/assets/products/aeolus-sva35-2l10c-angle2.png";
 import aeolusSva35Dimension from "@/assets/products/aeolus-sva35-2l10c-dimension.png";
 import aeolusSv9_6l2cDimension from "@/assets/products/aeolus-sv9-6l2c-dimension.png";
+import ibox205Front from "@/assets/products/ibox-205-front.png";
+import ibox205Side from "@/assets/products/ibox-205-side.png";
 
 // Main product images
 import ibox007Main from "@/assets/products/ibox-007-main.png";
