@@ -4233,6 +4233,55 @@ const GTSeries = () => {
                 </a>
               </div>
 
+              {/* Intro Video */}
+              <div className="card-surface overflow-hidden rounded-xl">
+                <div className="p-5 border-b border-border flex items-center gap-3">
+                  <Play className="text-primary" size={20} />
+                  <h3 className="text-lg font-display font-bold text-foreground">วิดีโอ GT4500</h3>
+                </div>
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/ou3yHel3ijU"
+                    title="GT4500 Intro"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-3 flex items-center justify-between">
+                  <span className="text-sm font-semibold text-foreground">GT4500 Introduction</span>
+                  <ShareButtons url="https://youtu.be/ou3yHel3ijU" title="GT4500 Introduction" compact />
+                </div>
+              </div>
+
+              {/* More Videos */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { id: "oXJho2icWAo", label: "GT4500 รายละเอียด" },
+                  { id: "7wE6fxMpJB4", label: "ภาพรวม GT Series" },
+                  { id: "31SEStppvKw", label: "GT Series Overview" },
+                  { id: "ifkzyVY9Z-g", label: "การเลือกซื้อ GT Series" },
+                ].map((v) => (
+                  <div key={v.id} className="card-surface overflow-hidden rounded-xl">
+                    <div className="aspect-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${v.id}`}
+                        title={v.label}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-3 flex items-center justify-between">
+                      <span className="text-xs font-semibold text-foreground truncate">{v.label}</span>
+                      <ShareButtons url={`https://youtu.be/${v.id}`} title={v.label} compact />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
               {/* Datasheet CTA */}
               <div className="flex flex-wrap justify-center gap-4">
                 <a
