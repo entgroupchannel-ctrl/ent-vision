@@ -434,7 +434,7 @@ const gkModels: GKModel[] = [
     resolution: "1920×1080 Full HD",
     tagline: "Flagship — จอใหญ่ Full HD",
     desc: "Panel PC อุตสาหกรรม 21 นิ้ว Full HD จอสัมผัส Capacitive 10 จุด IP65 กันฝุ่นกันน้ำ โครงสร้างอะลูมิเนียมอัลลอยด์+เหล็กกล้า รองรับ 24/7 ทนอุณหภูมิ -10°C ถึง 60°C — เหมาะกับ Control Room, Dashboard และระบบอัตโนมัติ",
-    image: "https://static.wixstatic.com/media/0597a3_1edf4296661742bab6366020a3910ac7~mv2.png/v1/fill/w_543,h_452,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK2101-008.png",
+    image: gk2101front,
     datasheetUrls: [
       { label: "GK2101 Core i5 Gen4 (PDF)", url: "/datasheets/GK2101_i5_Gen4.pdf" },
       { label: "GK2101 Core i5 Gen6 (PDF)", url: "/datasheets/GK2101_i5_Gen6.pdf" },
