@@ -258,6 +258,7 @@ const RuggedTabletDetail = () => {
                       <Badge key={a} variant="secondary" className="text-sm px-3 py-1">{a}</Badge>
                     ))}
                   </div>
+                </div>
               )}
 
               {/* Certifications */}
