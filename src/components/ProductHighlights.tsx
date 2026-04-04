@@ -9,6 +9,7 @@ import imgSmart from "@/assets/product-smart-display.jpg";
 import imgRugged from "@/assets/product-rugged.jpg";
 import imgVolktek from "@/assets/product-volktek.jpg";
 import imgEPC from "@/assets/product-epc.jpg";
+import imgIBox from "@/assets/product-ibox-series.jpg";
 import imgFirewall from "@/assets/product-firewall.jpg";
 import imgVCloud from "@/assets/product-vcloudpoint.jpg";
 
