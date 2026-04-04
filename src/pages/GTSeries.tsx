@@ -2908,7 +2908,7 @@ const GTSeries = () => {
                       <tbody className="divide-y divide-border">
                         {[
                           ["LAN", "2 × Gigabit Ethernet RJ45"],
-                          ["WiFi", "Built-in WiFi / Bluetooth"],
+                          ["WiFi/BT", "Built-in Dual Antenna\nWiFi 5 (802.11ac) — ฟรีมาพร้อมเครื่อง\nWiFi 6 (802.11ax) — Option เสริม\nBluetooth — Option เสริม"],
                           ["Audio", "MIC + SPK"],
                           ["Cooling", "Fanless — เงียบ 0 dB"],
                           ["Mounting", "VESA / Wall Mount"],
