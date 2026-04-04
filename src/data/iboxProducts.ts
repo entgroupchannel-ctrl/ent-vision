@@ -26,6 +26,8 @@ import vbox105Front from "@/assets/products/vbox-105-front.png";
 import vbox105Rear from "@/assets/products/vbox-105-rear.png";
 import ibox007proFront from "@/assets/products/ibox-007pro-front.png";
 import ibox007proRear from "@/assets/products/ibox-007pro-rear.png";
+import ibox104v2Front from "@/assets/products/ibox-104v2-front.png";
+import ibox104v2Side from "@/assets/products/ibox-104v2-side.png";
 // Main product images
 import ibox007Main from "@/assets/products/ibox-007-main.png";
 import ibox601GtProMain from "@/assets/products/ibox-601-gt-pro-main.png";
@@ -389,26 +391,30 @@ export const iboxProducts: IBoxProduct[] = [
   },
   {
     id: "ibox-104v2",
-    name: "IBOX-104V2",
-    nameTH: "Compact Fanless Network PC",
+    name: "IBOX-104V2-2L6C-XP",
+    nameTH: "Ultra-thin Fanless Embedded PC — Core i5-3317U",
     category: ["embedded"],
-    subcategory: "Network Appliance",
-    cpu: "Intel Celeron J4125 / N5105",
-    cpuGen: "Gemini Lake / Jasper Lake",
-    ram: "Up to 16GB DDR4",
-    storage: "M.2 SATA + mSATA",
-    io: "4× USB, 2× COM, 4× LAN",
-    temp: "-10°C ~ 60°C",
-    lanPorts: 4, comPorts: 2, usbPorts: 4,
-    image: ibox104v2Img,
+    subcategory: "Compact Box PC",
+    cpu: "Intel® Core™ i5-3317U Dual-core 1.70GHz (Turbo 2.60GHz), TDP 17W",
+    cpuGen: "3rd Gen (Ivy Bridge)",
+    ram: "1× SO-DIMM DDR3L-1333/1600, Up to 8GB",
+    storage: "1× mSATA 3.0 (6Gb/s) + 1× SATA 2.0 (3Gb/s)",
+    io: "6× COM (2× RS232/485 DB9 + 2× RS232/485 Header + 2× RS232 Header), 4× USB3.0, 5× USB2.0 (Wafer), 1× HDMI",
+    temp: "-10°C ~ 50°C (w/ 0.7m/s Airflow)",
+    lanPorts: 2, comPorts: 6, usbPorts: 9,
+    image: ibox104v2Front,
+    gallery: [ibox104v2Side, ibox104v2Img],
     features: [
-      "4× Intel GbE LAN",
-      "Fanless Passive Cooling",
-      "Compact Size",
-      "pfSense/OPNsense Compatible",
+      "Ultra-thin 44mm โครงอลูมิเนียมอัลลอย Fanless กันฝุ่น กันสั่นสะเทือน",
+      "6× COM Ports (RS232/RS485) สำหรับอุปกรณ์อุตสาหกรรมหลากหลาย",
+      "2× GbE LAN (Realtek RTL8111H) รองรับ Wake on LAN/PXE",
+      "2× Mini-PCIe สำหรับ 4G-LTE, WiFi, BT, GNSS",
+      "GPIO 8-bit (4-In/4-Out) + SIM Card Slot + TPM2.0",
+      "รองรับ VESA และ Wall Mount ติดตั้งง่าย",
+      "จ่ายไฟ 12V DC (Optional 9-30V DC), ขนาด 250×44×153 mm, น้ำหนัก 1.5 KG",
     ],
-    applications: ["Firewall", "Network Gateway", "VPN Router"],
-    priceRange: "฿18,000 - ฿28,000",
+    applications: ["Industrial Automation", "POS System", "Kiosk", "Digital Signage", "IoT Gateway"],
+    priceRange: "สอบถาม",
   },
   {
     id: "ibox-205",
