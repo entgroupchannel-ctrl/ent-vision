@@ -47,7 +47,7 @@ const IBoxDetail = () => {
     if (product) {
       trackEvent({
         eventType: "product_view",
-        productSlug: product.id,
+        productId: product.id,
         productCategory: product.subcategory || "iBox Series",
         productName: product.name,
       });

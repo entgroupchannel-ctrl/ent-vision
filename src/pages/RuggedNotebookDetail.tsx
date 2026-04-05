@@ -58,7 +58,7 @@ const RuggedNotebookDetail = () => {
     if (nb) {
       trackEvent({
         eventType: "product_view",
-        productSlug: nb.id,
+        productId: nb.id,
         productCategory: "Rugged Notebook",
         productName: nb.model,
       });

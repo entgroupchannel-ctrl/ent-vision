@@ -77,7 +77,7 @@ const RuggedHandheldDetail = () => {
     if (product) {
       trackEvent({
         eventType: "product_view",
-        productSlug: product.id,
+        productId: product.id,
         productCategory: "Rugged Handheld",
         productName: product.model,
       });

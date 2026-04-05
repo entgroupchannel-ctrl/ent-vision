@@ -61,7 +61,7 @@ const AIODetail = () => {
     if (product) {
       trackEvent({
         eventType: "product_view",
-        productSlug: product.id,
+        productId: product.id,
         productCategory: "All-in-One PC",
         productName: product.model,
       });

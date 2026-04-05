@@ -57,7 +57,7 @@ const RuggedTabletDetail = () => {
     if (product) {
       trackEvent({
         eventType: "product_view",
-        productSlug: product.id,
+        productId: product.id,
         productCategory: "Rugged Tablet",
         productName: product.model,
       });
