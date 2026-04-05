@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, Menu, X, ChevronDown, UserPlus, LogOut, User, LogIn, FileText, Heart } from "lucide-react";
+import { Search, Menu, X, ChevronDown, UserPlus, LogOut, User, LogIn, FileText, Heart, Shield } from "lucide-react";
 import { toast } from "sonner";
 import ThemeToggle from "@/components/ThemeToggle";
 import MegaMenu, { MobileMegaMenu } from "@/components/MegaMenu";
@@ -68,7 +68,7 @@ const HeroSection = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
-  const { user, signOut } = useAuth();
+  const { user, isAdmin, isSuperAdmin, signOut } = useAuth();
   const navigate = useNavigate();
   const { count: wishlistCount } = useWishlist();
   const [searchOpen, setSearchOpen] = useState(false);
@@ -180,8 +180,22 @@ const HeroSection = () => {
                 {user ? (
                   <>
                     <div className="px-4 py-2 text-xs text-muted-foreground border-b border-border truncate">
-                      {user.email}
+                      <span>{user.email}</span>
+                      {isAdmin && (
+                        <span className="ml-1.5 inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold border border-primary/20">
+                          <Shield size={9} /> {isSuperAdmin ? "Super Admin" : "Admin"}
+                        </span>
+                      )}
                     </div>
+                    {isAdmin && (
+                      <Link
+                        to="/admin"
+                        onClick={() => setUserMenuOpen(false)}
+                        className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-primary font-medium hover:bg-primary/5 transition-colors"
+                      >
+                        <Shield size={14} /> Admin Dashboard
+                      </Link>
+                    )}
                     <Link
                       to="/my-quotes"
                       onClick={() => setUserMenuOpen(false)}
@@ -227,17 +241,48 @@ const HeroSection = () => {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 z-30 bg-card border-b border-border p-6 animate-fade-in max-h-[80vh] overflow-y-auto">
           <MobileMegaMenu onNavigate={() => setMobileMenuOpen(false)} />
-          <div className="flex items-center justify-between mt-4 gap-3 pt-4 border-t border-border">
-            <ThemeToggle />
+          <div className="flex flex-col mt-4 gap-2 pt-4 border-t border-border">
             {user ? (
-              <button
-                onClick={async () => { setMobileMenuOpen(false); await signOut(); }}
-                className="flex-1 text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
-              >
-                ออกจากระบบ
-              </button>
+              <>
+                <div className="px-3 py-2 text-xs text-muted-foreground truncate flex items-center gap-2">
+                  <User size={12} /> {user.email}
+                  {isAdmin && (
+                    <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold border border-primary/20">
+                      <Shield size={8} /> {isSuperAdmin ? "Super Admin" : "Admin"}
+                    </span>
+                  )}
+                </div>
+                {isAdmin && (
+                  <Link
+                    to="/admin"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-primary/10 text-primary text-sm font-semibold border border-primary/20"
+                  >
+                    <Shield size={14} /> Admin Dashboard
+                  </Link>
+                )}
+                <div className="flex gap-2">
+                  <Link
+                    to="/my-quotes"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg border border-border text-foreground text-sm font-semibold hover:bg-muted transition-colors"
+                  >
+                    <FileText size={14} /> ใบเสนอราคา
+                  </Link>
+                  <button
+                    onClick={async () => { setMobileMenuOpen(false); await signOut(); }}
+                    className="flex-1 text-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold"
+                  >
+                    ออกจากระบบ
+                  </button>
+                </div>
+                <div className="flex justify-center pt-1">
+                  <ThemeToggle />
+                </div>
+              </>
             ) : (
-              <div className="flex-1 flex gap-2">
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
                 <Link
                   to="/admin-login"
                   onClick={() => setMobileMenuOpen(false)}
