@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { icons } from "lucide-react";
 import LineQRButton from "@/components/LineQRButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ArrowLeft, Check, ChevronRight, Cpu, FileText, Mail, Shield, Zap, Phone, MessageSquare, Sparkles,
 } from "lucide-react";
@@ -19,6 +19,7 @@ import QuoteDialog from "@/components/QuoteDialog";
 import WishlistHeart from "@/components/WishlistHeart";
 import ProductGallery from "@/components/ProductGallery";
 import { getAIOProduct, getRelatedAIO, categoryLabels, type AIOProduct } from "@/data/aio-products";
+import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 
 /* ── Related Card ── */
 const RelatedCard = ({ p }: { p: AIOProduct }) => (
@@ -49,9 +50,21 @@ const AIODetail = () => {
   const { id } = useParams<{ id: string }>();
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [tab, setTab] = useState("overview");
+  const { trackEvent } = useEngagementTracker();
 
   const product = id ? getAIOProduct(id) : undefined;
   const related = id ? getRelatedAIO(id) : [];
+
+  useEffect(() => {
+    if (product) {
+      trackEvent({
+        eventType: "product_view",
+        productId: product.id,
+        productCategory: product.category || "AIO",
+        productName: product.model,
+      });
+    }
+  }, [product?.id]);
 
   if (!product) {
     return (

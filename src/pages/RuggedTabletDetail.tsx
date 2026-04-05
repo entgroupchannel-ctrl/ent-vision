@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Check, ChevronRight, Cpu, FileText, Mail, Shield, Zap, Phone, MessageSquare,
 } from "lucide-react";
@@ -18,6 +18,7 @@ import LineQRButton from "@/components/LineQRButton";
 import WishlistHeart from "@/components/WishlistHeart";
 import ProductGallery from "@/components/ProductGallery";
 import { getTabletProduct, getRelatedTablets, type TabletDetailProduct } from "@/data/rugged-tablet-products";
+import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 
 /* ───── Related Card ───── */
 const RelatedCard = ({ product }: { product: TabletDetailProduct }) => (
@@ -45,9 +46,21 @@ const RuggedTabletDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [tab, setTab] = useState("overview");
+  const { trackEvent } = useEngagementTracker();
 
   const product = getTabletProduct(id || "");
   const related = getRelatedTablets(id || "");
+
+  useEffect(() => {
+    if (product) {
+      trackEvent({
+        eventType: "product_view",
+        productId: product.id,
+        productCategory: "Rugged Tablet",
+        productName: product.model,
+      });
+    }
+  }, [product?.id]);
 
   if (!product) {
     return (
