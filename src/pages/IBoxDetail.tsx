@@ -36,10 +36,21 @@ const IBoxDetail = () => {
   const navigate = useNavigate();
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
+  const { trackEvent } = useEngagementTracker();
 
   const product = id ? getIBoxProduct(id) : undefined;
   const relatedProducts = id ? getRelatedProducts(id) : [];
 
+  useEffect(() => {
+    if (product) {
+      trackEvent({
+        eventType: "product_view",
+        productId: product.id,
+        productCategory: product.subcategory || "iBox Series",
+        productName: product.name,
+      });
+    }
+  }, [product?.id]);
   if (!product) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
