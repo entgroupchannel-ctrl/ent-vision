@@ -9,8 +9,9 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
+import EngagementAnalytics from "@/components/EngagementAnalytics";
 
-type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software";
+type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -191,7 +192,8 @@ const AdminDashboard = () => {
             { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", count: softwareInquiries.length },
             { id: "chatleads" as Tab, label: "AI Chat Leads", count: chatLeads.length },
             { id: "subscribers" as Tab, label: "สมาชิก", count: subscribers.length },
-          ] as const).map((t) => (
+            { id: "engagement" as Tab, label: "📊 Engagement", count: null },
+          ]).map((t) => (
             <button
               key={t.id}
               onClick={() => { setTab(t.id); setStatusFilter("all"); setSelectedItem(null); }}
@@ -272,6 +274,9 @@ const AdminDashboard = () => {
         )}
 
         {/* Content */}
+        {tab === "engagement" ? (
+          <EngagementAnalytics />
+        ) : (
         <div className="grid lg:grid-cols-3 gap-4">
           {/* List */}
           <div className="lg:col-span-2 space-y-2">
@@ -712,6 +717,7 @@ const AdminDashboard = () => {
             )}
           </div>
         </div>
+        )}
       </div>
     </div>
   );

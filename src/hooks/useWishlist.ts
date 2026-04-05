@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 
 export interface WishlistItem {
   id: string;
@@ -26,6 +27,7 @@ function saveWishlist(items: WishlistItem[]) {
 
 export function useWishlist() {
   const [items, setItems] = useState<WishlistItem[]>(getWishlist);
+  const { trackEvent } = useEngagementTracker();
 
   useEffect(() => {
     const handler = () => setItems(getWishlist());
@@ -51,8 +53,15 @@ export function useWishlist() {
         : [...current, item];
       saveWishlist(next);
       setItems(next);
+
+      trackEvent({
+        eventType: exists ? "wishlist_remove" : "wishlist_add",
+        productId: item.id,
+        productCategory: item.category,
+        productName: item.name,
+      });
     },
-    []
+    [trackEvent]
   );
 
   const remove = useCallback((id: string) => {

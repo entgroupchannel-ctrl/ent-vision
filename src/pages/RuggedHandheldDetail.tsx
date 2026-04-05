@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import LineQRButton from "@/components/LineQRButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ArrowLeft, Check, ChevronRight, Cpu, HardDrive, Monitor, Shield,
   Battery, Camera, Wifi, Smartphone, FileText, Mail, Scan, Zap, Phone, MessageSquare,
@@ -18,6 +18,7 @@ import QuoteDialog from "@/components/QuoteDialog";
 import WishlistHeart from "@/components/WishlistHeart";
 import ProductGallery from "@/components/ProductGallery";
 import { getHandheldProduct, getRelatedHandhelds } from "@/data/rugged-handheld-products";
+import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 
 /* ───── Related Product Card ───── */
 const RelatedCard = ({ product, onQuote }: { product: ReturnType<typeof getHandheldProduct>; onQuote: (n: string) => void }) => {
@@ -65,9 +66,21 @@ const specRows = [
 const RuggedHandheldDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
+  const { trackEvent } = useEngagementTracker();
 
   const product = id ? getHandheldProduct(id) : undefined;
   const related = id ? getRelatedHandhelds(id) : [];
+
+  useEffect(() => {
+    if (product) {
+      trackEvent({
+        eventType: "product_view",
+        productId: product.id,
+        productCategory: "Rugged Handheld",
+        productName: product.model,
+      });
+    }
+  }, [product?.id]);
 
   if (!product) {
     return (

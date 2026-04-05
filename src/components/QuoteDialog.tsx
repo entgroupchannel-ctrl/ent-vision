@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 import {
   FileText, Send, ShoppingCart, Plus, Trash2, Minus,
   Loader2, Camera, Sparkles, LogIn, UserPlus,
@@ -53,6 +54,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { trackEvent } = useEngagementTracker();
 
   const defaultProducts = initialProducts && initialProducts.length > 0
     ? initialProducts
@@ -169,6 +171,16 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
 
       setSubmitted(true);
       toast({ title: "ส่งคำขอเรียบร้อย!", description: "ทีมฝ่ายขายจะติดต่อกลับภายใน 24 ชม." });
+
+      // Engagement Tracking
+      products.filter((p) => p.category || p.model).forEach((p) => {
+        trackEvent({
+          eventType: "quote_request",
+          productId: p.model || undefined,
+          productCategory: p.category || undefined,
+          productName: p.model || undefined,
+        });
+      });
     } catch (err: any) {
       toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
     } finally {

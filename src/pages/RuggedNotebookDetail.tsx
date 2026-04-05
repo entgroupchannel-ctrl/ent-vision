@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import LineQRButton from "@/components/LineQRButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ArrowLeft, Check, ChevronRight, Cpu, FileText, Mail, Shield, Zap, Phone, MessageSquare, Sparkles,
 } from "lucide-react";
@@ -19,6 +19,7 @@ import WishlistHeart from "@/components/WishlistHeart";
 import ProductGallery from "@/components/ProductGallery";
 import QuoteButton from "@/components/QuoteButton";
 import { getNotebook, getRelatedNotebooks, type RuggedNotebook } from "@/data/rugged-notebook-products";
+import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 
 /* ───── Related Card ───── */
 const RelatedCard = ({ nb }: { nb: RuggedNotebook }) => (
@@ -46,9 +47,21 @@ const RuggedNotebookDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [tab, setTab] = useState("overview");
+  const { trackEvent } = useEngagementTracker();
 
   const nb = id ? getNotebook(id) : undefined;
   const related = id ? getRelatedNotebooks(id) : [];
+
+  useEffect(() => {
+    if (nb) {
+      trackEvent({
+        eventType: "product_view",
+        productId: nb.id,
+        productCategory: "Rugged Notebook",
+        productName: nb.model,
+      });
+    }
+  }, [nb?.id]);
 
   if (!nb) {
     return (
