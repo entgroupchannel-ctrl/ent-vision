@@ -215,6 +215,42 @@ export type Database = {
         }
         Relationships: []
       }
+      document_library: {
+        Row: {
+          created_at: string
+          description: string | null
+          document_type: string
+          download_count: number
+          file_url: string
+          id: string
+          is_public: boolean
+          product_model: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          document_type: string
+          download_count?: number
+          file_url: string
+          id?: string
+          is_public?: boolean
+          product_model?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          document_type?: string
+          download_count?: number
+          file_url?: string
+          id?: string
+          is_public?: boolean
+          product_model?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
       document_requests: {
         Row: {
           admin_notes: string | null
