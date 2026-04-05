@@ -6,7 +6,7 @@ import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft, ExternalLink, Shield, Wind, Monitor, Cpu, Zap, Factory,
-  Phone, MessageCircle, ChevronLeft, ChevronRight, Settings, Wifi,
+  Phone, MessageCircle, ChevronLeft, ChevronRight, Settings, Wifi, Flame, Fan, Snowflake, DollarSign, FileText, Star, Package, Search as SearchIcon, ClipboardList, CheckCircle,
   HardDrive, MemoryStick, Layers, RectangleHorizontal, Square
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -175,17 +175,17 @@ const panelModels: PanelModel[] = [
 ];
 
 const cpuTabs = [
-  { id: "j1900", label: "Celeron J1900", group: "Celeron", cols: ["4GB+64SSD", "8GB+128GB", "8GB+256GB ⭐"] },
-  { id: "j6412", label: "Celeron J6412", group: "Celeron", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
-  { id: "i3-6100u", label: "i3-6100U", group: "Gen 6", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
-  { id: "i5-6300u", label: "i5-6300U", group: "Gen 6", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
-  { id: "i7-6500u", label: "i7-6500U", group: "Gen 6", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
-  { id: "i3-8145u", label: "i3-8145U", group: "Gen 8", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
-  { id: "i5-8350u", label: "i5-8350U", group: "Gen 8", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
-  { id: "i7-8650u", label: "i7-8650U", group: "Gen 8", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
-  { id: "i3-10110u", label: "i3-10110U", group: "Gen 10", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
-  { id: "i5-10310u", label: "i5-10310U", group: "Gen 10", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
-  { id: "i7-1065g7", label: "i7-1065G7", group: "Gen 10", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ⭐"] },
+  { id: "j1900", label: "Celeron J1900", group: "Celeron", cols: ["4GB+64SSD", "8GB+128GB", "8GB+256GB ★"] },
+  { id: "j6412", label: "Celeron J6412", group: "Celeron", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ★"] },
+  { id: "i3-6100u", label: "i3-6100U", group: "Gen 6", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ★"] },
+  { id: "i5-6300u", label: "i5-6300U", group: "Gen 6", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ★"] },
+  { id: "i7-6500u", label: "i7-6500U", group: "Gen 6", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ★"] },
+  { id: "i3-8145u", label: "i3-8145U", group: "Gen 8", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ★"] },
+  { id: "i5-8350u", label: "i5-8350U", group: "Gen 8", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ★"] },
+  { id: "i7-8650u", label: "i7-8650U", group: "Gen 8", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ★"] },
+  { id: "i3-10110u", label: "i3-10110U", group: "Gen 10", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ★"] },
+  { id: "i5-10310u", label: "i5-10310U", group: "Gen 10", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ★"] },
+  { id: "i7-1065g7", label: "i7-1065G7", group: "Gen 10", cols: ["4GB+128SSD", "8GB+128GB", "8GB+256GB ★"] },
 ];
 
 const cpuGroups = ["Celeron", "Gen 6", "Gen 8", "Gen 10"];
@@ -303,10 +303,10 @@ const PanelPC = () => {
               </p>
               <div className="flex flex-wrap gap-4 mb-6">
                 <a href="#pricing" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity">
-                  📋 ดูราคาสินค้า →
+                  <ClipboardList size={16} className="inline mr-1" />ดูราคาสินค้า →
                 </a>
                 <a href="#specs" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-secondary transition-colors">
-                  🔍 ดูสเปค
+                  <SearchIcon size={16} className="inline mr-1" />ดูสเปค
                 </a>
               </div>
               <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
@@ -580,7 +580,7 @@ import FooterCompact from "@/components/FooterCompact";
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               <div>
                 <span className="inline-block px-3 py-1 rounded-full bg-destructive/10 text-destructive text-xs font-bold mb-4">
-                  🔥 GTG Series — Built-in FAN
+                  <Flame size={14} className="inline mr-1" />GTG Series — Built-in FAN
                 </span>
                 <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-4">
                   GTG 23.8" / 27" / 32"
@@ -638,7 +638,7 @@ import FooterCompact from "@/components/FooterCompact";
 
           {/* Filters */}
           <div className="flex flex-wrap gap-2 mb-6 justify-center">
-            {([["all", "ทั้งหมด"], ["FANLESS", "🧊 FANLESS"], ["FAN", "🌀 FAN (GTG)"]] as const).map(([val, label]) => (
+            {([["all", "ทั้งหมด"], ["FANLESS", "FANLESS"], ["FAN", "FAN (GTG)"]] as const).map(([val, label]) => (
               <button key={val} onClick={() => { setCoolingFilter(val); setPage(1); }}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${coolingFilter === val ? "bg-primary/20 text-primary border border-primary/30" : "bg-secondary/50 text-muted-foreground hover:bg-secondary"}`}>
                 {label}
@@ -655,7 +655,7 @@ import FooterCompact from "@/components/FooterCompact";
 
           {/* Price heading */}
           <div className="text-center mb-4">
-            <p className="text-sm font-semibold text-foreground">💰 ราคาขายปลีก (บาท) — Intel® {currentTab.label}</p>
+            <p className="text-sm font-semibold text-foreground"><DollarSign size={16} className="inline mr-1 text-primary" />ราคาขายปลีก (บาท) — Intel® {currentTab.label}</p>
           </div>
 
           {/* Table */}
@@ -681,7 +681,7 @@ import FooterCompact from "@/components/FooterCompact";
                           <span className="text-[10px] px-1.5 py-0.5 rounded bg-secondary text-secondary-foreground font-mono">{m.series}</span>
                           <div>
                             <span className="font-semibold text-foreground">{m.name}</span>
-                            {m.popular && <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground font-bold">⭐</span>}
+                            {m.popular && <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground font-bold"><Star size={10} className="inline" /></span>}
                             <p className="text-[11px] text-muted-foreground">{m.highlight}</p>
                           </div>
                         </div>
@@ -691,13 +691,13 @@ import FooterCompact from "@/components/FooterCompact";
                       </td>
                       <td className="text-center p-3">
                         <span className={`text-xs px-2 py-1 rounded-full ${m.cooling === "FANLESS" ? "bg-blue-500/10 text-blue-600 dark:text-blue-400" : "bg-orange-500/10 text-orange-600 dark:text-orange-400"}`}>
-                          {m.cooling === "FANLESS" ? "🧊 FANLESS" : "🌀 FAN"}
+                          {m.cooling === "FANLESS" ? "FANLESS" : "🌀 FAN"}
                         </span>
                       </td>
                       {prices.map((p, i) => (
                         <td key={i} className="text-center p-3 font-semibold whitespace-nowrap">
                           {p === 0 ? (
-                            <span className="text-muted-foreground text-xs">📞 สอบถาม</span>
+                            <span className="text-muted-foreground text-xs"><Phone size={12} className="inline mr-0.5" />สอบถาม</span>
                           ) : (
                             <span className="text-primary">฿{fmt(p)}</span>
                           )}
@@ -727,8 +727,8 @@ import FooterCompact from "@/components/FooterCompact";
 
           {/* Notes */}
           <div className="mt-6 text-xs text-muted-foreground space-y-1 text-center">
-            <p>✅ ราคารวม Windows 10 OEM + WiFi ยังไม่รวม VAT & ค่าขนส่ง</p>
-            <p>📞 สอบถามราคาพิเศษสำหรับการสั่งซื้อจำนวนมาก</p>
+            <p><CheckCircle size={12} className="inline mr-1 text-emerald-500" />ราคารวม Windows 10 OEM + WiFi ยังไม่รวม VAT & ค่าขนส่ง</p>
+            <p><Phone size={12} className="inline mr-0.5" />สอบถามราคาพิเศษสำหรับการสั่งซื้อจำนวนมาก</p>
             <p>* ทุกรุ่นรองรับ DDR3L / DDR4 SODIMM สูงสุด 64GB | หน้าจอสัมผัส Capacitive 10 จุด</p>
           </div>
         </div>
@@ -821,7 +821,7 @@ import FooterCompact from "@/components/FooterCompact";
           {/* LINE QR Dialog */}
           <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
           <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
-            {[{ label: "📦 Sample", time: "3–5 วัน" }, { label: "📦 50 ชิ้น", time: "10–15 วัน" }, { label: "📦 100+", time: "15–30 วัน" }].map((lt) => (
+            {[{ label: "<Package size={14} className="inline mr-1" />Sample", time: "3–5 วัน" }, { label: "<Package size={14} className="inline mr-1" />50 ชิ้น", time: "10–15 วัน" }, { label: "<Package size={14} className="inline mr-1" />100+", time: "15–30 วัน" }].map((lt) => (
               <div key={lt.label} className="card-surface p-4 text-center">
                 <p className="text-sm font-semibold text-foreground">{lt.label}</p>
                 <p className="text-xs text-muted-foreground">{lt.time}</p>
