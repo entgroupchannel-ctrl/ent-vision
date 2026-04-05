@@ -92,11 +92,13 @@ const footerSections = [
   {
     title: "บริการ & ข้อมูล",
     links: [
+      { label: "กรณีศึกษาลูกค้า", href: "/case-studies" },
+      { label: "ราคาองค์กร / Volume", href: "/corporate-pricing" },
+      { label: "บทความเทคนิค", href: "/blog" },
       { label: "สมัครตัวแทนจำหน่าย", href: "/welcome-member" },
       { label: "เงื่อนไขการรับประกัน", href: "/warrantys" },
       { label: "วิธีการชำระเงิน", href: "/payment" },
       { label: "ขั้นตอนการจัดส่ง", href: "/delivery" },
-      
     ],
   },
   {
