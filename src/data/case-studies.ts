@@ -38,7 +38,7 @@ export const caseStudies: CaseStudy[] = [
       { name: "GT Series Fanless PC", path: "/gt-series" },
       { name: "Smart Display", path: "/smart-display" },
     ],
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=800&q=80",
+    image: "/images/unsplash/airport_w800.jpg",
     testimonial: "ระบบแสดงผลเที่ยวบินที่ติดตั้งไปทำงานได้อย่างเสถียร ไม่เคยมีเหตุขัดข้องจากฝั่ง Hardware เลย",
     testimonialAuthor: "ผู้จัดการฝ่าย IT",
     testimonialRole: "โครงการสนามบิน",
