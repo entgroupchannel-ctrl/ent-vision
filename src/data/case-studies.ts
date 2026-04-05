@@ -150,7 +150,7 @@ export const caseStudies: CaseStudy[] = [
     testimonialRole: "โรงเรียนนันทนวิทย์",
     facebookVideoId: "1004417266383986",
     externalLinks: [
-      { label: "📺 ดูวิดีโอรีวิวจากมหาวิทยาลัยธนบุรี (Facebook)", url: "https://www.facebook.com/entgroup.th/videos/1004417266383986/" },
+      { label: "📺 ดูวิดีโอ vCloudPoint โรงเรียนนันทนวิทย์ (Facebook)", url: "https://www.facebook.com/share/v/1GTHavarXz/" },
     ],
     internalLinks: [
       { label: "ดู vCloudPoint ทั้งหมด", path: "/vcloudpoint" },
