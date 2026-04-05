@@ -54,7 +54,7 @@ const CaseStudies = () => {
                   <p className="text-sm text-muted-foreground line-clamp-2">{cs.challenge}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {cs.products.map((p) => (
-                      <Badge key={p} variant="outline" className="text-xs">{p}</Badge>
+                      <Badge key={p.name} variant="outline" className="text-xs">{p.name}</Badge>
                     ))}
                   </div>
                   {cs.testimonial && (

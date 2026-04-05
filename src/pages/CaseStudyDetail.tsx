@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { ArrowLeft, Factory, CheckCircle, Quote, FileText, ExternalLink, ArrowRight } from "lucide-react";
+import { ArrowLeft, Factory, CheckCircle, Quote, FileText, ExternalLink, ArrowRight, Play } from "lucide-react";
 import { caseStudies } from "@/data/case-studies";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -106,9 +106,15 @@ const CaseStudyDetail = () => {
               <CardContent className="p-5 space-y-4">
                 <h3 className="font-bold text-foreground">สินค้าที่ใช้</h3>
                 <div className="flex flex-wrap gap-2">
-                  {cs.products.map((p) => (
-                    <Badge key={p} variant="secondary">{p}</Badge>
-                  ))}
+                  {cs.products.map((p) =>
+                    p.path ? (
+                      <Link key={p.name} to={p.path}>
+                        <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">{p.name}</Badge>
+                      </Link>
+                    ) : (
+                      <Badge key={p.name} variant="secondary">{p.name}</Badge>
+                    )
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -155,7 +161,7 @@ const CaseStudyDetail = () => {
         open={showQuote}
         onClose={() => setShowQuote(false)}
         productCategory={cs.industry}
-        initialProducts={cs.products.map((p) => ({ category: cs.industry, model: p, qty: 1 }))}
+        initialProducts={cs.products.map((p) => ({ category: cs.industry, model: p.name, qty: 1 }))}
       />
 
       <Footer />
