@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { MessageCircle, X, Send, Bot, User, Minimize2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { supabase } from "@/integrations/supabase/client";
+import { useAutoHideWidget } from "@/hooks/useAutoHideWidget";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -26,6 +27,14 @@ const AIChatWidget = () => {
   const [leadSaved, setLeadSaved] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-hide for the closed-state button (staggered from FloatingContact)
+  const { visible: buttonVisible, onInteraction, forceShow } = useAutoHideWidget({
+    initialDelay: 3000,
+    hideAfter: 10000,
+    showInterval: 40000,
+    showDuration: 6000,
+  });
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -158,7 +167,6 @@ const AIChatWidget = () => {
         }
       }
 
-      // Check for lead data in final response
       if (assistantSoFar) {
         extractAndSaveLead(assistantSoFar);
       }
@@ -186,13 +194,15 @@ const AIChatWidget = () => {
   if (!open) {
     return (
       <button
-        onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-xl hover:scale-110 transition-transform flex items-center justify-center group"
+        onClick={() => { setOpen(true); forceShow(); }}
+        onMouseEnter={onInteraction}
+        className={`fixed bottom-24 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-xl hover:scale-110 transition-all duration-500 flex items-center justify-center group ${
+          buttonVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
+        }`}
         aria-label="Open AI Chat"
       >
         <MessageCircle size={24} />
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-        {/* Tooltip */}
         <span className="absolute right-16 bg-foreground text-background text-xs px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
           สนทนากับ AI ผู้เชี่ยวชาญ
         </span>
