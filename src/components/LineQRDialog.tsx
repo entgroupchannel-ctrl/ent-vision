@@ -19,9 +19,9 @@ const LineQRDialog = ({ open, onClose }: LineQRDialogProps) => {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4" onClick={onClose}>
       <div
-        className="bg-card rounded-2xl border border-border shadow-2xl p-6 max-w-sm w-full text-center space-y-4 animate-in fade-in zoom-in-95 duration-200"
+        className="bg-gradient-to-b from-white to-gray-100 dark:from-[hsl(220,20%,18%)] dark:to-[hsl(220,15%,12%)] rounded-2xl border border-border shadow-2xl p-6 max-w-sm w-full text-center space-y-4 animate-in fade-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
