@@ -47,11 +47,6 @@ const CorporatePricing = () => {
         image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80"
       />
 
-      <div className="container mx-auto px-4 py-4">
-        <Link to="/" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors">
-          <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
-        </Link>
-      </div>
 
       {/* Volume tiers */}
       <section className="container mx-auto px-4 py-12">
