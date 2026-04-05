@@ -821,9 +821,9 @@ import FooterCompact from "@/components/FooterCompact";
           {/* LINE QR Dialog */}
           <LineQRDialog open={showLineQR} onClose={() => setShowLineQR(false)} />
           <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
-            {[{ label: "<Package size={14} className="inline mr-1" />Sample", time: "3–5 วัน" }, { label: "<Package size={14} className="inline mr-1" />50 ชิ้น", time: "10–15 วัน" }, { label: "<Package size={14} className="inline mr-1" />100+", time: "15–30 วัน" }].map((lt) => (
+            {[{ label: "Sample", time: "3–5 วัน" }, { label: "50 ชิ้น", time: "10–15 วัน" }, { label: "100+", time: "15–30 วัน" }].map((lt) => (
               <div key={lt.label} className="card-surface p-4 text-center">
-                <p className="text-sm font-semibold text-foreground">{lt.label}</p>
+                <p className="text-sm font-semibold text-foreground flex items-center justify-center gap-1"><Package size={14} className="text-primary" />{lt.label}</p>
                 <p className="text-xs text-muted-foreground">{lt.time}</p>
               </div>
             ))}
