@@ -224,6 +224,14 @@ const menuCategories = [
           { label: "เกี่ยวกับเรา", href: "/about-us" },
         ],
       },
+      {
+        heading: "B2B & ความรู้",
+        links: [
+          { label: "กรณีศึกษาลูกค้า", href: "/case-studies", hot: true },
+          { label: "ราคาองค์กร / Volume", href: "/corporate-pricing" },
+          { label: "บทความเทคนิค", href: "/blog" },
+        ],
+      },
     ],
   },
 ];
