@@ -490,7 +490,7 @@ const SeriesSection = ({ series, index }: { series: SeriesData; index: number })
           {/* Left: Specification */}
           <div>
             <div className="px-6 py-3 bg-primary/10 border-b border-border">
-              <span className="text-sm font-bold text-foreground">📋 Specification</span>
+              <span className="text-sm font-bold text-foreground flex items-center gap-1"><SlidersHorizontal size={14} className="text-primary" /> Specification</span>
             </div>
             <SpecTable series={series} />
           </div>
@@ -500,14 +500,14 @@ const SeriesSection = ({ series, index }: { series: SeriesData; index: number })
             {series.productSelection.length > 0 && (
               <div>
                 <div className="px-6 py-3 bg-muted/30 border-b border-border">
-                  <span className="text-sm font-bold text-foreground">📦 Product Selection</span>
+                  <span className="text-sm font-bold text-foreground flex items-center gap-1"><Box size={14} className="text-primary" /> Product Selection</span>
                 </div>
                 <ProductSelectionTable products={series.productSelection} />
               </div>
             )}
             <div className="mt-auto">
               <div className="px-6 py-3 bg-muted/20 border-y border-border">
-                <span className="text-sm font-bold text-foreground">🎬 Video</span>
+                <span className="text-sm font-bold text-foreground flex items-center gap-1"><Play size={14} className="text-primary" /> Video</span>
               </div>
               <div className="p-4">
                 <div className="aspect-video rounded-lg overflow-hidden">
@@ -659,7 +659,7 @@ const EPCComparisonSystem = ({ onQuote }: { onQuote: (name: string) => void }) =
             <div className="grid border-b border-border" style={{ gridTemplateColumns: `180px repeat(${visibleIndices.length}, 1fr)` }}>
               <div className="px-4 py-4 bg-primary/10 flex items-center">
                 <span className="text-sm font-bold text-foreground">
-                  {viewMode === "specs" ? "📋 สเปก" : viewMode === "price" ? "💰 ราคา" : "⚖️ ความคุ้มค่า"}
+                  {viewMode === "specs" ? <><SlidersHorizontal size={14} className="inline mr-1" /> สเปก</> : viewMode === "price" ? <><DollarSign size={14} className="inline mr-1" /> ราคา</> : <><BarChart3 size={14} className="inline mr-1" /> ความคุ้มค่า</>}
                 </span>
               </div>
               {visibleIndices.map(i => (
@@ -709,16 +709,16 @@ const EPCComparisonSystem = ({ onQuote }: { onQuote: (name: string) => void }) =
       {/* Decision Helper */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { id: "10xa", emoji: "📦", title: "พื้นที่จำกัด / งานทั่วไป", desc: "Compact 200mm เล็กที่สุด เบาที่สุด เหมาะกับ Edge Computing, POS", color: "border-emerald-500/30 bg-emerald-500/5" },
-          { id: "20xa", emoji: "🔥", title: "ต้องการ CPU แรง 24/7", desc: "สูงขึ้น 79mm ระบายความร้อนดีขึ้น 68% สำหรับงานหนักต่อเนื่อง", color: "border-sky-500/30 bg-sky-500/5" },
-          { id: "30xa", emoji: "🗄️", title: "Rack Mount / Panel Mount", desc: "กว้าง 337mm Low Profile เหมาะติดตู้ Rack หรือ Panel", color: "border-amber-500/30 bg-amber-500/5" },
-          { id: "40xa", emoji: "🚀", title: "Mission-Critical Flagship", desc: "ใหญ่ที่สุด ทนที่สุด ระบายความร้อน +168% งานวิกฤตต้องเครื่องนี้", color: "border-purple-500/30 bg-purple-500/5" },
+          { id: "10xa", Icon: Box, title: "พื้นที่จำกัด / งานทั่วไป", desc: "Compact 200mm เล็กที่สุด เบาที่สุด เหมาะกับ Edge Computing, POS", color: "border-emerald-500/30 bg-emerald-500/5" },
+          { id: "20xa", Icon: Zap, title: "ต้องการ CPU แรง 24/7", desc: "สูงขึ้น 79mm ระบายความร้อนดีขึ้น 68% สำหรับงานหนักต่อเนื่อง", color: "border-sky-500/30 bg-sky-500/5" },
+          { id: "30xa", Icon: Server, title: "Rack Mount / Panel Mount", desc: "กว้าง 337mm Low Profile เหมาะติดตู้ Rack หรือ Panel", color: "border-amber-500/30 bg-amber-500/5" },
+          { id: "40xa", Icon: Shield, title: "Mission-Critical Flagship", desc: "ใหญ่ที่สุด ทนที่สุด ระบายความร้อน +168% งานวิกฤตต้องเครื่องนี้", color: "border-purple-500/30 bg-purple-500/5" },
         ].map(item => (
           <button key={item.id} onClick={() => {
             const el = document.getElementById(item.id);
             if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
           }} className={`p-5 rounded-xl border ${item.color} text-left hover:scale-[1.02] transition-transform`}>
-            <p className="text-2xl mb-2">{item.emoji}</p>
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2"><item.Icon size={22} className="text-primary" /></div>
             <p className="font-bold text-foreground text-sm mb-1">{item.title}</p>
             <p className="text-xs text-muted-foreground">{item.desc}</p>
             <p className="text-xs font-bold text-primary mt-2">→ ดู {item.id.toUpperCase()}</p>
@@ -1023,7 +1023,7 @@ const EPCBoxSeries = () => {
             <div className="card-surface overflow-hidden">
               <div className="px-6 py-3 bg-primary/10 border-b border-border flex items-center gap-2">
                 <Play size={16} className="text-primary" />
-                <span className="font-bold text-foreground text-sm">🎬 วิดีโอแนะนำหลัก — EPC Box Series Overview</span>
+                <span className="font-bold text-foreground text-sm">วิดีโอแนะนำหลัก — EPC Box Series Overview</span>
               </div>
               <div className="aspect-video">
                 <iframe
@@ -1073,7 +1073,7 @@ const EPCBoxSeries = () => {
           {/* Podcast Section */}
           <div>
             <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-              <Headphones size={18} className="text-primary" /> 🎙️ Podcast — ฟังบรรยายสรุป EPC Box Series
+              <Headphones size={18} className="text-primary" /> Podcast — ฟังบรรยายสรุป EPC Box Series
             </h3>
             <p className="text-sm text-muted-foreground mb-6">ฟังข้อมูลสรุปสั้นๆ เกี่ยวกับ EPC Box Series เหมาะสำหรับฟังระหว่างเดินทาง</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

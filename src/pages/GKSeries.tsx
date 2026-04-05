@@ -3,7 +3,7 @@ import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Settings, Maximize, Wifi, ChevronDown, Smartphone, Factory, BarChart3, Gauge, Headphones, Play, Star, Quote, Filter, CheckCircle2, DollarSign, SlidersHorizontal } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Monitor, Shield, Zap, Server, Layers, Settings, Maximize, Wifi, ChevronDown, Smartphone, Factory, BarChart3, Gauge, Headphones, Play, Star, Quote, Filter, CheckCircle2, DollarSign, SlidersHorizontal, FileText } from "lucide-react";
 import ShareButtons from "@/components/ShareButtons";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -1012,7 +1012,7 @@ const ComparisonSystem = ({ onQuote }: { onQuote: (name: string) => void }) => {
           <div className="grid border-b border-border" style={{ gridTemplateColumns: `180px repeat(${visibleIndices.length}, 1fr)` }}>
             <div className="px-4 py-4 bg-primary/10 flex items-center">
               <span className="text-sm font-bold text-foreground">
-                {viewMode === "specs" ? "📋 สเปก" : viewMode === "price" ? "💰 ราคา" : "⚖️ ความคุ้มค่า"}
+                {viewMode === "specs" ? <><FileText size={14} className="inline mr-1" /> สเปก</> : viewMode === "price" ? <><DollarSign size={14} className="inline mr-1" /> ราคา</> : <><BarChart3 size={14} className="inline mr-1" /> ความคุ้มค่า</>}
               </span>
             </div>
             {visibleIndices.map(i => (
@@ -1064,15 +1064,15 @@ const ComparisonSystem = ({ onQuote }: { onQuote: (name: string) => void }) => {
       {/* Decision Helper */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {[
-          { model: "GK1004", emoji: "🏪", title: "ต้องการเครื่องขนาดกะทัดรัด", desc: "เหมาะกับ POS, Kiosk, ตู้จำหน่ายสินค้า, เครื่องขนาดเล็ก", color: "border-emerald-500/30 bg-emerald-500/5" },
-          { model: "GK1506", emoji: "⭐", title: "Best Seller ครบทุกงาน", desc: "Full HD 15.6\" IP65 ทั้งตัว ราคาคุ้มค่า ใช้ได้ทุกอุตสาหกรรม", color: "border-primary/30 bg-primary/5" },
-          { model: "GK2101", emoji: "🖥️", title: "ต้องการจอใหญ่ Flagship", desc: "21\" Full HD สำหรับ Control Room, Dashboard, งานวิเคราะห์ข้อมูล", color: "border-purple-500/30 bg-purple-500/5" },
+          { model: "GK1004", Icon: Smartphone, title: "ต้องการเครื่องขนาดกะทัดรัด", desc: "เหมาะกับ POS, Kiosk, ตู้จำหน่ายสินค้า, เครื่องขนาดเล็ก", color: "border-emerald-500/30 bg-emerald-500/5" },
+          { model: "GK1506", Icon: Star, title: "Best Seller ครบทุกงาน", desc: "Full HD 15.6\" IP65 ทั้งตัว ราคาคุ้มค่า ใช้ได้ทุกอุตสาหกรรม", color: "border-primary/30 bg-primary/5" },
+          { model: "GK2101", Icon: Monitor, title: "ต้องการจอใหญ่ Flagship", desc: "21\" Full HD สำหรับ Control Room, Dashboard, งานวิเคราะห์ข้อมูล", color: "border-purple-500/30 bg-purple-500/5" },
         ].map(item => (
           <button key={item.model} onClick={() => {
             const el = document.getElementById(gkModels.find(m => m.name === item.model)?.id || "");
             if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
           }} className={`p-5 rounded-xl border ${item.color} text-left hover:scale-[1.02] transition-transform`}>
-            <p className="text-2xl mb-2">{item.emoji}</p>
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2"><item.Icon size={22} className="text-primary" /></div>
             <p className="font-bold text-foreground text-sm mb-1">{item.title}</p>
             <p className="text-xs text-muted-foreground">{item.desc}</p>
             <p className="text-xs font-bold text-primary mt-2">→ ดู {item.model}</p>
@@ -1406,10 +1406,10 @@ const GKSeries = () => {
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { title: "🎙️ GK1004 Intro", desc: "แนะนำ GK1004 Panel PC สเปก ฟีเจอร์ และจุดเด่น", src: "/audio/GK1004_Podcast1.wav" },
-              { title: "🎙️ GK1004 How to Choose", desc: "วิธีเลือกรุ่น CPU ที่เหมาะกับงานของคุณ", src: "/audio/GK1004_Podcast2.wav" },
-              { title: "🎙️ GK1506 Intro", desc: "แนะนำ GK1506 Panel PC 15.6\" Full HD จุดเด่นและสเปก", src: "/audio/GK1506_Podcast1.wav" },
-              { title: "🎙️ GK1506 Sale Scenario", desc: "สถานการณ์การขายและการเลือกรุ่น GK1506", src: "/audio/GK1506_Podcast2.wav" },
+              { title: "GK1004 Intro", desc: "แนะนำ GK1004 Panel PC สเปก ฟีเจอร์ และจุดเด่น", src: "/audio/GK1004_Podcast1.wav" },
+              { title: "GK1004 How to Choose", desc: "วิธีเลือกรุ่น CPU ที่เหมาะกับงานของคุณ", src: "/audio/GK1004_Podcast2.wav" },
+              { title: "GK1506 Intro", desc: "แนะนำ GK1506 Panel PC 15.6\" Full HD จุดเด่นและสเปก", src: "/audio/GK1506_Podcast1.wav" },
+              { title: "GK1506 Sale Scenario", desc: "สถานการณ์การขายและการเลือกรุ่น GK1506", src: "/audio/GK1506_Podcast2.wav" },
             ].map((pod, i) => (
               <div key={i} className="card-surface p-5 rounded-xl">
                 <div className="flex items-center gap-3 mb-3">
@@ -1524,7 +1524,7 @@ const GKSeries = () => {
           {/* PDPA Disclaimer */}
           <div className="mt-8 p-5 rounded-xl border border-primary/20 bg-primary/5 text-center">
             <p className="text-sm text-muted-foreground leading-relaxed">
-              <span className="font-semibold text-foreground">📋 หมายเหตุ:</span> ด้วยข้อบังคับตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) เราไม่สามารถเปิดเผยชื่อ-นามสกุล หรือข้อมูลที่ระบุตัวตนของลูกค้าได้
+              <span className="font-semibold text-foreground"><FileText size={14} className="inline mr-1" /> หมายเหตุ:</span> ด้วยข้อบังคับตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) เราไม่สามารถเปิดเผยชื่อ-นามสกุล หรือข้อมูลที่ระบุตัวตนของลูกค้าได้
               คำชมเหล่านี้เป็น <span className="font-semibold text-foreground">คำรีวิวจริง</span> ที่ได้รับจากลูกค้าผู้ใช้งานจริง ผ่านการทำงานหนักและบริการอย่างจริงใจของทีมเรา
             </p>
           </div>

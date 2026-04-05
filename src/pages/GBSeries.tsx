@@ -8,7 +8,7 @@ import {
   ArrowLeft, Cpu, Wifi, Monitor, Usb, ThermometerSun, Wind,
   Shield, Zap, HardDrive, Network, ChevronDown, ExternalLink,
   Factory, Building2, Truck, Stethoscope, Server, MonitorSmartphone,
-  FileText
+  FileText, DollarSign, Plug
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FooterCompact from "@/components/FooterCompact";
@@ -416,10 +416,10 @@ const GBSeries = () => {
           {/* Tabs */}
           <Tabs defaultValue="pricing" className="space-y-6">
             <TabsList className="w-full justify-start bg-secondary/30 p-1 h-auto flex-wrap">
-              <TabsTrigger value="pricing" className="text-xs sm:text-sm">💰 ราคา</TabsTrigger>
-              <TabsTrigger value="usecases" className="text-xs sm:text-sm">🏭 การใช้งาน</TabsTrigger>
-              <TabsTrigger value="specs" className="text-xs sm:text-sm">📋 Specifications</TabsTrigger>
-              <TabsTrigger value="ports" className="text-xs sm:text-sm">🔌 Ports & I/O</TabsTrigger>
+              <TabsTrigger value="pricing" className="text-xs sm:text-sm"><DollarSign size={14} className="mr-1 inline" /> ราคา</TabsTrigger>
+              <TabsTrigger value="usecases" className="text-xs sm:text-sm"><Factory size={14} className="mr-1 inline" /> การใช้งาน</TabsTrigger>
+              <TabsTrigger value="specs" className="text-xs sm:text-sm"><FileText size={14} className="mr-1 inline" /> Specifications</TabsTrigger>
+              <TabsTrigger value="ports" className="text-xs sm:text-sm"><Plug size={14} className="mr-1 inline" /> Ports & I/O</TabsTrigger>
             </TabsList>
 
             <TabsContent value="pricing">
@@ -461,7 +461,7 @@ const GBSeries = () => {
                 </div>
                 <div className="p-4 bg-secondary/20 border-t border-border">
                   <p className="text-xs text-muted-foreground">
-                    💡 สามารถ Customize สเปกได้ตามต้องการ • Windows License เพิ่มเติมได้ • ประกัน 1 ปี (ซื้อเพิ่มสูงสุด 3 ปี)
+                    <Zap size={14} className="inline mr-1 text-primary" /> สามารถ Customize สเปกได้ตามต้องการ • Windows License เพิ่มเติมได้ • ประกัน 1 ปี (ซื้อเพิ่มสูงสุด 3 ปี)
                   </p>
                   <PriceDisclaimer />
                 </div>
@@ -574,7 +574,7 @@ const GBSeries = () => {
       {/* Full Comparison Table with Filter */}
       <section className="border-t border-border bg-secondary/20">
         <div className="container max-w-7xl mx-auto px-6 py-12">
-          <CollapsibleSpec title="📊 เปรียบเทียบทุกรุ่น GB Series (5 รุ่น)" defaultOpen={true}>
+          <CollapsibleSpec title="เปรียบเทียบทุกรุ่น GB Series (5 รุ่น)" defaultOpen={true}>
             <div className="p-4 space-y-4">
               {/* Model Filter Chips */}
               <div className="flex flex-wrap gap-2 items-center">
