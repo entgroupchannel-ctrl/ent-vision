@@ -402,7 +402,6 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
                       </button>
                     )}
                   </div>
-                    </div>
                   {/* Product detail from catalog */}
                   {product.model && product._catalogData && (
                     <div className="ml-6 mt-1 mb-2 p-2.5 rounded-lg bg-secondary/30 border border-border/50 text-xs space-y-1">
@@ -423,7 +422,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
                       )}
                     </div>
                   )}
-                  </div>
+                </div>
                 ))}
               </div>
               <button type="button" onClick={addProduct}
