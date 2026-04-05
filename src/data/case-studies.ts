@@ -12,6 +12,8 @@ export interface CaseStudy {
   testimonial?: string;
   testimonialAuthor?: string;
   testimonialRole?: string;
+  externalLinks?: { label: string; url: string }[];
+  internalLinks?: { label: string; path: string }[];
 }
 
 export const caseStudies: CaseStudy[] = [
