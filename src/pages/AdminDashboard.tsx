@@ -274,6 +274,9 @@ const AdminDashboard = () => {
         )}
 
         {/* Content */}
+        {tab === "engagement" ? (
+          <EngagementAnalytics />
+        ) : (
         <div className="grid lg:grid-cols-3 gap-4">
           {/* List */}
           <div className="lg:col-span-2 space-y-2">
