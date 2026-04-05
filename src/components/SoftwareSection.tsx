@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Code2, Rocket, Shield, Cpu, Palette, BarChart3 } from "lucide-react";
 import LineQRButton from "@/components/LineQRButton";
 import SoftwareInquiryDialog from "@/components/SoftwareInquiryDialog";
 
@@ -15,58 +15,109 @@ const softwareExamples = [
   { label: "ร้านอาหาร", href: "https://phimm.lovable.app/" },
 ];
 
+const highlights = [
+  { icon: Rocket, label: "พัฒนาเร็ว", desc: "เห็นผลภายใน 2 สัปดาห์" },
+  { icon: Shield, label: "ปลอดภัย", desc: "ระบบ Cloud ระดับสากล" },
+  { icon: Palette, label: "ออกแบบสวย", desc: "UX/UI มืออาชีพ" },
+  { icon: BarChart3, label: "วัดผลได้", desc: "Dashboard & Analytics" },
+];
+
 const SoftwareSection = () => {
   return (
-    <section className="section-padding bg-surface/50" id="services">
-      <div className="container max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="order-2 lg:order-1">
-            <div className="card-surface p-2 overflow-hidden">
-              <img
-                src="https://static.wixstatic.com/media/0597a3_9e1fa56a9a7c40f9813a78e9e8b4edce~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/about-team-collaboration-BHxS3QL6.jpg"
-                alt="ทีมพัฒนาซอฟต์แวร์"
-                className="w-full rounded-lg"
-                loading="lazy"
-                width={600}
-                height={450}
-              />
-            </div>
-          </div>
-          <div className="order-1 lg:order-2">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">บริการใหม่ 2026</span>
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 leading-tight">
-              เป็นเจ้าของ{" "}
-              <span className="text-gradient">ซอฟต์แวร์</span>
-            </h2>
-            <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-              พัฒนาซอฟต์แวร์ตามความต้องการของธุรกิจคุณ ด้วยทีมงานมืออาชีพ
-            </p>
+    <section className="section-padding relative overflow-hidden" id="services">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary/5 blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/4" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-accent/5 blur-3xl pointer-events-none translate-y-1/2 -translate-x-1/4" />
 
-            <div className="mb-6">
-              <p className="text-sm text-muted-foreground mb-3">ตัวอย่างผลงาน:</p>
-              <div className="flex flex-wrap gap-2">
-                {softwareExamples.map((ex) => (
-                  <a
-                    key={ex.label}
-                    href={ex.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground text-xs border border-border hover:border-primary/30 hover:bg-surface-hover transition-all"
-                  >
-                    {ex.label} <ExternalLink size={10} />
-                  </a>
-                ))}
+      <div className="container max-w-7xl mx-auto relative z-10">
+        {/* Header */}
+        <div className="text-center mb-12 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-4">
+            <Code2 size={16} />
+            <span>บริการใหม่ 2026</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-display font-bold mb-4 leading-tight">
+            เป็นเจ้าของ{" "}
+            <span className="text-gradient">ซอฟต์แวร์</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            พัฒนาซอฟต์แวร์ตามความต้องการของธุรกิจคุณ ด้วยทีมงานมืออาชีพ
+          </p>
+        </div>
+
+        {/* Highlight stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          {highlights.map((h, i) => (
+            <div
+              key={h.label}
+              className="group card-surface p-5 text-center hover:border-primary/30 transition-all duration-300 hover:-translate-y-1"
+              style={{ animationDelay: `${i * 100}ms` }}
+            >
+              <div className="w-11 h-11 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                <h.icon size={20} className="text-primary" />
+              </div>
+              <p className="text-sm font-bold text-foreground">{h.label}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{h.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Main content: image + examples */}
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+          {/* Image */}
+          <div className="order-2 lg:order-1">
+            <div className="relative group">
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative card-surface p-2 overflow-hidden">
+                <img
+                  src="https://static.wixstatic.com/media/0597a3_9e1fa56a9a7c40f9813a78e9e8b4edce~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/about-team-collaboration-BHxS3QL6.jpg"
+                  alt="ทีมพัฒนาซอฟต์แวร์"
+                  className="w-full rounded-lg transition-transform duration-500 group-hover:scale-[1.02]"
+                  loading="lazy"
+                  width={600}
+                  height={450}
+                />
+                {/* Floating badge */}
+                <div className="absolute bottom-4 left-4 right-4 bg-background/80 backdrop-blur-md rounded-xl p-3 border border-border/50">
+                  <div className="flex items-center gap-2">
+                    <Cpu size={16} className="text-primary" />
+                    <span className="text-xs font-semibold text-foreground">Hardware + Software Integration</span>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground mt-1">ออกแบบซอฟต์แวร์ให้ทำงานร่วมกับ Mini PC ได้อย่างสมบูรณ์แบบ</p>
+                </div>
               </div>
             </div>
+          </div>
 
+          {/* Right side */}
+          <div className="order-1 lg:order-2">
+            <h3 className="text-xl font-bold text-foreground mb-4">ตัวอย่างผลงาน</h3>
+            <div className="flex flex-wrap gap-2 mb-8">
+              {softwareExamples.map((ex, i) => (
+                <a
+                  key={ex.label}
+                  href={ex.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-secondary text-secondary-foreground text-xs font-medium border border-border hover:border-primary/40 hover:bg-primary/10 hover:text-primary hover:-translate-y-0.5 transition-all duration-200"
+                  style={{ animationDelay: `${i * 50}ms` }}
+                >
+                  {ex.label} <ExternalLink size={10} />
+                </a>
+              ))}
+            </div>
+
+            {/* CTA */}
             <div className="flex flex-wrap gap-4">
               <SoftwareInquiryDialog>
-                <button className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity">
+                <button className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all duration-200 hover:shadow-lg hover:shadow-primary/25">
+                  <Rocket size={16} className="group-hover:animate-[bounce_0.6s_ease-in-out]" />
                   สอบถามบริการซอฟต์แวร์
                 </button>
               </SoftwareInquiryDialog>
               <LineQRButton
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-border text-foreground font-semibold hover:bg-surface-hover transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-semibold hover:bg-surface-hover hover:border-primary/30 transition-all duration-200"
               >
                 เพิ่มเพื่อนขอรายละเอียด
               </LineQRButton>
