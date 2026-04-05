@@ -78,7 +78,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
-            <Suspense fallback={<PageLoader />}>
+            <Suspense fallback={null}>
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/gt-series" element={<GTSeries />} />
