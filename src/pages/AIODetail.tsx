@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { icons } from "lucide-react";
 import LineQRButton from "@/components/LineQRButton";
 import { useState } from "react";
 import {
@@ -242,7 +243,7 @@ const AIODetail = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {product.applications.map((app) => (
                       <div key={app.titleEN} className="p-4 bg-card border border-border rounded-lg text-center">
-                        <span className="text-2xl mb-2 block">{app.icon}</span>
+                        {(() => { const Icon = icons[app.icon as keyof typeof icons]; return Icon ? <Icon className="w-6 h-6 mx-auto mb-2 text-primary" /> : <span className="text-2xl mb-2 block">{app.icon}</span>; })()}
                         <p className="font-bold text-sm">{app.titleTH}</p>
                         <p className="text-xs text-muted-foreground">{app.titleEN}</p>
                       </div>
