@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Zap, Bell, ArrowRight, Calendar, Sparkles } from "lucide-react";
+import { Zap, Bell, ArrowRight, Calendar, Sparkles, Flame } from "lucide-react";
 
 /* ───── Shared promo data (active + recurring only) ───── */
 const activePromos = [
@@ -7,7 +7,8 @@ const activePromos = [
     id: "em-t195-deal",
     title: "Deal of the Month — EM-T195 Rugged Tablet",
     subtitle: '10.1" | 5G Ready | IP65 | Android 11 — ลด 15%',
-    badge: "🔥 HOT",
+    badge: "HOT",
+    badgeIcon: "flame",
     period: "พร้อมส่งทันที เพียง 5 เครื่อง",
     image: "https://entgroup-rugged.com/assets/front-TlZtwxwQ.png",
     highlights: [
@@ -34,7 +35,8 @@ const activePromos = [
     id: "endyear-windows",
     title: "END YEAR SALE แถม Windows ฟรี!",
     subtitle: "GT Series + Windows OEM มูลค่า 4,900 บาท",
-    badge: "🔥 HOT",
+    badge: "HOT",
+    badgeIcon: "flame",
     period: "จนถึง 31 ธ.ค. 2568",
     image: "https://static.wixstatic.com/media/0597a3_db1433a3bf0c4657a1f5d99352280129~mv2.png/v1/fill/w_487,h_487,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
     highlights: ["แถมฟรี Windows Pro OEM", "มูลค่าสูงสุด 4,900 บาท", "Fanless + พอร์ตครบ"],
@@ -80,8 +82,8 @@ const PromoBanners = () => {
         >
           <div className="relative bg-secondary/20 flex items-center justify-center p-8 md:w-2/5">
             {featured.badge && (
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-destructive text-destructive-foreground">
-                {featured.badge}
+              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-destructive text-destructive-foreground inline-flex items-center gap-1">
+                <Flame size={10} /> {featured.badge}
               </span>
             )}
             <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-500 text-white">
@@ -124,11 +126,12 @@ const PromoBanners = () => {
             >
               <div className="relative bg-secondary/20 flex items-center justify-center p-6 h-44">
                 {promo.badge && (
-                  <span className={`absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                  <span className={`absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1 ${
                     promo.status === "active"
                       ? "bg-destructive text-destructive-foreground"
                       : "bg-amber-500 text-white"
                   }`}>
+                    {(promo as any).badgeIcon === "flame" && <Flame size={8} />}
                     {promo.badge}
                   </span>
                 )}

@@ -8,7 +8,7 @@ import {
   ArrowLeft, Cpu, Thermometer, Shield, Usb, Wifi, Download, Search,
   FileText, ChevronRight, Layers, HardDrive, Monitor, Zap, Box,
   Factory, Stethoscope, Truck, ScanLine, Tv, Warehouse, Sparkles,
-  SlidersHorizontal, ArrowUpDown, LayoutGrid, Flame, Globe, Radio, Car, Eye,
+  SlidersHorizontal, ArrowUpDown, LayoutGrid, Flame, Globe, Radio, Car, Eye, Pointer,
   Play, ThumbsUp, ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -280,7 +280,7 @@ const IBoxSeries = () => {
       <div className="sticky top-0 z-30 bg-background/90 backdrop-blur-md border-b border-border shadow-sm">
         <div className="container max-w-7xl mx-auto px-4 py-2">
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
-            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">👆 เลือกหมวดสินค้า:</span>
+            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0 inline-flex items-center gap-1"><Pointer size={12} /> เลือกหมวดสินค้า:</span>
             {[
               { id: "all", name: "ทั้งหมด", icon: LayoutGrid },
               { id: "AI Edge Computing", name: "AI Edge / GPU", icon: Flame },
@@ -323,7 +323,7 @@ const IBoxSeries = () => {
           <div className="flex-1 min-w-0 space-y-6">
             {/* Quick Filters */}
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs text-muted-foreground shrink-0">⚡ Quick:</span>
+              <span className="text-xs text-muted-foreground shrink-0 inline-flex items-center gap-1"><Zap size={12} className="text-primary" /> Quick:</span>
               {[
                 { label: "PoE", active: filters.poe === true, toggle: () => setFilters({ ...filters, poe: filters.poe === true ? null : true }) },
                 { label: "PCIe", active: filters.pcie === true, toggle: () => setFilters({ ...filters, pcie: filters.pcie === true ? null : true }) },

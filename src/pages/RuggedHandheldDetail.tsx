@@ -3,7 +3,7 @@ import LineQRButton from "@/components/LineQRButton";
 import { useState } from "react";
 import {
   ArrowLeft, Check, ChevronRight, Cpu, HardDrive, Monitor, Shield,
-  Battery, Camera, Wifi, Smartphone, FileText, Mail, Scan, Zap,
+  Battery, Camera, Wifi, Smartphone, FileText, Mail, Scan, Zap, Phone, MessageSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -157,7 +157,7 @@ const RuggedHandheldDetail = () => {
                   <Mail className="w-4 h-4" /> sales@entgroup.co.th
                 </button>
                 <a href="tel:020456104" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary hover:bg-secondary/80 transition-colors">
-                  📞 02-045-6104
+                  <Phone className="w-3.5 h-3.5" /> 02-045-6104
                 </a>
               </div>
             </div>
@@ -221,7 +221,7 @@ const RuggedHandheldDetail = () => {
                 <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
               </Button>
               <LineQRButton className="flex-1 h-11 text-base">
-                💬 สอบถามราคาพิเศษ
+                <MessageSquare className="w-4 h-4" /> สอบถามราคาพิเศษ
               </LineQRButton>
             </div>
           </div>

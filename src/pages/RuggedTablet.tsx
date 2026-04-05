@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import {
   ArrowLeft, Shield, Droplets, Battery, Smartphone, Monitor,
   Download, ChevronRight, Wifi, FileText, Search,
-  ShoppingCart, X, SlidersHorizontal, ArrowUpDown, Play, ThumbsUp, Share2,
+  ShoppingCart, X, SlidersHorizontal, ArrowUpDown, Play, ThumbsUp, Share2, Flame,
 } from "lucide-react";
 import ShareButtons from "@/components/ShareButtons";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -139,7 +139,7 @@ const tablets: TabletProduct[] = [
     highlights: ["5G Ready", "IP65", "Barcode Scanner", "650g", "9500mAh"],
     image: "https://entgroup-rugged.com/assets/front-TlZtwxwQ.png",
     price: "฿21,900",
-    badge: "🔥 HOT",
+    badge: "HOT",
     productUrl: "/rugged-tablet/em-t195",
   },
   {
@@ -426,7 +426,7 @@ const RuggedTablet = () => {
           </div>
           {/* Quick Filters row */}
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide py-2">
-            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">👆 เลือก:</span>
+            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">เลือก:</span>
             {[
               { id: "all", label: `ทั้งหมด` },
               { id: "Windows", label: `Windows` },

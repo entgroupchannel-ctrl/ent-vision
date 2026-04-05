@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Eye, Cpu, Network, Thermometer, Sparkles, FileText, Download } from "lucide-react";
+import { Eye, Cpu, Network, Thermometer, Sparkles, FileText, Download, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
@@ -40,7 +40,7 @@ const IBoxProductCard = ({ product, selectedProducts, toggleSelect, onQuote }: I
             </Badge>
           )}
           {product.isHot && (
-            <Badge variant="destructive" className="text-xs">🔥 HOT</Badge>
+            <Badge variant="destructive" className="text-xs"><Flame className="inline w-3 h-3 mr-0.5" /> HOT</Badge>
           )}
         </div>
 

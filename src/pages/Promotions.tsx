@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft, Clock, Tag, Gift, Bell, ChevronDown, ExternalLink,
-  Zap, Percent, Calendar, PartyPopper, Sparkles, Timer, FileDown
+  Zap, Percent, Calendar, PartyPopper, Sparkles, Timer, FileDown, Flame, Phone
 } from "lucide-react";
 import promotionsHeroBg from "@/assets/promotions-hero-bg.jpg";
 import promoEmT195Hero from "@/assets/promo-em-t195-hero.jpg";
@@ -156,7 +156,7 @@ const promotions: Promo[] = [
     status: "active",
     period: "จนถึง 31 ธ.ค. 2568",
     endDate: "2568-12-31",
-    badge: "🔥 HOT",
+    badge: "HOT",
     image: "https://static.wixstatic.com/media/0597a3_db1433a3bf0c4657a1f5d99352280129~mv2.png/v1/fill/w_487,h_487,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
     highlights: [
       "แถมฟรี Windows 10/11 Pro OEM",
@@ -373,7 +373,7 @@ const Promotions = () => {
           ) : (
             <div className="max-w-lg mx-auto">
               <p className="text-lg text-white/80 mb-3">ขณะนี้ยังไม่มีโปรโมชั่น</p>
-              <p className="text-yellow-400 font-semibold text-xl">🔔 อดใจรอสักนิด! โปรดีๆ กำลังจะมา</p>
+              <p className="text-yellow-400 font-semibold text-xl inline-flex items-center gap-2"><Bell className="w-5 h-5" /> อดใจรอสักนิด! โปรดีๆ กำลังจะมา</p>
               <p className="text-sm text-white/60 mt-2">แอดไลน์ @entgroup เพื่อรับแจ้งเตือนโปรใหม่ก่อนใคร</p>
             </div>
           )}
@@ -510,7 +510,7 @@ const Promotions = () => {
               href="tel:0957391053"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-border bg-card text-foreground font-semibold hover:bg-secondary/50 transition-colors"
             >
-              📞 095-739-1053
+              <Phone className="w-4 h-4" /> 095-739-1053
             </a>
           </div>
         </div>

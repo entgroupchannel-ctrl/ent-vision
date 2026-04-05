@@ -549,7 +549,7 @@ const SmartDisplay = () => {
                 <div className="grid lg:grid-cols-2 gap-8 items-center">
                   <div>
                     <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold mb-4">
-                      🏪 KIOSK สำเร็จรูป — พร้อมใช้งานทันที
+                      KIOSK สำเร็จรูป — พร้อมใช้งานทันที
                     </span>
                     <h3 className="text-3xl md:text-4xl font-display font-black text-foreground mb-4 leading-tight">
                       ตู้คีออสอินทัชสกรีน

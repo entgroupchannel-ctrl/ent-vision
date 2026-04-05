@@ -4,7 +4,7 @@ import heroMiniPC from "@/assets/hero-minipc-desk.jpg";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
-import { ArrowLeft, ExternalLink, Cpu, Zap, Shield, Monitor, Wifi, ThermometerSun, HardDrive, Server, ChevronRight, FileText, CircleCheck, Filter, X } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Zap, Shield, Monitor, Wifi, ThermometerSun, HardDrive, Server, ChevronRight, FileText, CircleCheck, Filter, X, MessageSquare } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -872,7 +872,7 @@ const MiniPC = () => {
               ดูตารางราคา
             </Button>
             <LineQRButton className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-[#06C755] text-[#06C755] font-medium text-sm hover:bg-[#06C755]/10 transition-colors">
-              💬 สอบถามทาง LINE
+              <MessageSquare className="w-4 h-4" /> สอบถามทาง LINE
             </LineQRButton>
           </div>
         </div>
