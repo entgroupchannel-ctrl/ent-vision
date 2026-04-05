@@ -363,7 +363,7 @@ const RuggedTablet = () => {
   const clearSelection = () => setSelectedProducts(new Set());
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead
         title="Rugged Tablet กันน้ำ กันกระแทก — 15 รุ่น"
         description="Rugged Tablet ทนทาน กันน้ำ IP65-IP68 กันกระแทก MIL-STD-810G สำหรับงานภาคสนาม ทหาร โลจิสติกส์ — Windows & Android 15 รุ่น"

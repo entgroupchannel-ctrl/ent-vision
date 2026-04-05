@@ -201,7 +201,7 @@ const QuoteBuilder = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="สร้างใบเสนอราคา — ENT Group" description="เลือกสินค้าและขอใบเสนอราคาออนไลน์" path="/quote-builder" />
 
       {/* Header */}
