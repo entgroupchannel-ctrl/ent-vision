@@ -10,7 +10,7 @@ const activePromos = [
     badge: "HOT",
     badgeIcon: "flame",
     period: "พร้อมส่งทันที เพียง 5 เครื่อง",
-    image: "https://entgroup-rugged.com/assets/front-TlZtwxwQ.png",
+    image: "/images/rugged/front-TlZtwxwQ.png",
     highlights: [
       "ราคาพิเศษ ฿18,615 (จาก ฿21,900)",
       "MediaTek Dimensity 5G — ชิปเทคโนโลยีล่าสุด",
