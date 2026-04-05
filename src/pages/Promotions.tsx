@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { firePageConfetti } from "@/lib/confetti";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft, Clock, Tag, Gift, Bell, ChevronDown, ExternalLink,
@@ -350,11 +349,6 @@ const PromoCard = ({ promo, featured = false }: { promo: Promo; featured?: boole
 
 /* ───── Main Page ───── */
 const Promotions = () => {
-  useEffect(() => {
-    const timer = setTimeout(() => firePageConfetti(), 400);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
       {/* Nav */}

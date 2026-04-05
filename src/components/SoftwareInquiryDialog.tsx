@@ -111,7 +111,6 @@ const SoftwareInquiryDialog = ({ children }: SoftwareInquiryDialogProps) => {
       console.error(error);
     } else {
       toast.success("ส่งข้อมูลเรียบร้อย! ทีมงานจะติดต่อกลับโดยเร็ว");
-      import("@/lib/confetti").then(m => m.fireSuccessConfetti());
       setOpen(false);
       setForm({
         name: "", email: "", phone: "", company: "", line_id: "",

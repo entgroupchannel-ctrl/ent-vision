@@ -1,24 +1,20 @@
 import { Link } from "react-router-dom";
-import {
-  Building2, Users, FileText, Phone, CheckCircle, TrendingDown, ShieldCheck,
-  Headphones, ArrowRight, Star, Globe, Truck, Award, Handshake, Clock, Layers
-} from "lucide-react";
+import { ArrowLeft, Building2, Users, FileText, Phone, CheckCircle, TrendingDown, ShieldCheck, Headphones, Layers, Truck, Award, Star, Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
 import Footer from "@/components/Footer";
 import QuoteDialog from "@/components/QuoteDialog";
-import { useState } from "react";
-import corporateHero from "@/assets/corporate-hero.jpg";
-import corporateFlatlay from "@/assets/corporate-products-flatlay.jpg";
-import corporateFactory from "@/assets/corporate-factory.jpg";
+import { useState, useEffect, useRef } from "react";
+import heroImg from "@/assets/corporate-hero-v2.jpg";
+import factoryImg from "@/assets/corporate-factory.jpg";
 
 const tiers = [
-  { qty: "5–9 เครื่อง", discount: "ส่วนลดพิเศษ", icon: Layers, accent: "border-primary/20" },
-  { qty: "10–49 เครื่อง", discount: "ส่วนลด + จัดส่งฟรี", icon: Truck, accent: "border-primary/40" },
-  { qty: "50–99 เครื่อง", discount: "ราคาโปรเจกต์ + On-site", icon: Building2, accent: "border-primary/60" },
-  { qty: "100+ เครื่อง", discount: "ราคา OEM/ODM พิเศษ", icon: Award, accent: "border-primary" },
+  { qty: "5–9 เครื่อง", discount: "ส่วนลดพิเศษ", icon: Layers, highlight: false },
+  { qty: "10–49 เครื่อง", discount: "ส่วนลด + จัดส่งฟรี", icon: Truck, highlight: false },
+  { qty: "50–99 เครื่อง", discount: "ราคาโปรเจกต์ + On-site", icon: Building2, highlight: true },
+  { qty: "100+ เครื่อง", discount: "ราคา OEM/ODM พิเศษ", icon: Award, highlight: false },
 ];
 
 const benefits = [
@@ -35,15 +31,74 @@ const steps = [
   { step: 4, title: "จัดส่งและติดตั้ง", desc: "จัดส่งพร้อมทีมวิศวกรติดตั้ง On-site (ถ้าต้องการ)" },
 ];
 
-const trustStats = [
-  { val: "8,000+", label: "ลูกค้าองค์กร", icon: Users },
-  { val: "10+", label: "ปีประสบการณ์", icon: Clock },
-  { val: "500+", label: "โครงการส่งมอบ", icon: Globe },
-  { val: "99%", label: "ลูกค้าพึงพอใจ", icon: Star },
+const testimonials = [
+  {
+    quote: "ENT Group ช่วยให้โรงงานของเราอัพเกรดระบบ Panel PC กว่า 120 เครื่อง ได้อย่างราบรื่น ส่วนลดดี บริการ On-site ตอบโจทย์มาก",
+    name: "คุณสมชาย วิศวกรรม",
+    role: "ผู้จัดการฝ่าย IT — โรงงานผลิตชิ้นส่วนยานยนต์",
+    stars: 5,
+  },
+  {
+    quote: "สั่ง Rugged Tablet 50 เครื่อง สำหรับทีมสำรวจภาคสนาม ได้ราคาโปรเจกต์พิเศษ มี Account Manager ดูแลตลอด",
+    name: "คุณวิภา ศรีสุข",
+    role: "ผู้อำนวยการฝ่ายจัดซื้อ — บริษัทสำรวจพลังงาน",
+    stars: 5,
+  },
+  {
+    quote: "ใช้บริการ ENT Group มากว่า 5 ปี ทั้ง Mini PC และ Firewall ราคาองค์กรคุ้มค่า เอกสารครบ ส่งตรงเวลา",
+    name: "คุณพิชิต รัตนา",
+    role: "CTO — บริษัทพัฒนาซอฟต์แวร์",
+    stars: 5,
+  },
 ];
+
+const clientLogos = [
+  "การไฟฟ้าส่วนภูมิภาค", "ปตท.", "SCG", "CP ALL", "กรมชลประทาน",
+  "Toyota", "Honda", "Samsung", "Delta Electronics", "Mitsubishi",
+];
+
+const stats = [
+  { value: "8,000+", label: "ลูกค้าองค์กร" },
+  { value: "10+", label: "ปีประสบการณ์" },
+  { value: "50+", label: "แบรนด์พาร์ทเนอร์" },
+  { value: "24 ชม.", label: "ตอบกลับเร็ว" },
+];
+
+/* Intersection Observer hook for scroll animations */
+function useInView(threshold = 0.15) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } }, { threshold });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return { ref, inView };
+}
+
+const AnimatedSection = ({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) => {
+  const { ref, inView } = useInView();
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+};
 
 const CorporatePricing = () => {
   const [showQuote, setShowQuote] = useState(false);
+  const [heroLoaded, setHeroLoaded] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setHeroLoaded(true), 100);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -53,221 +108,273 @@ const CorporatePricing = () => {
         path="/corporate-pricing"
       />
 
-      {/* ── Hero Section ── */}
-      <section className="relative h-[480px] md:h-[520px] overflow-hidden">
+      {/* ─── HERO ─── */}
+      <section className="relative h-[420px] md:h-[520px] overflow-hidden">
         <img
-          src={corporateHero}
-          alt="Corporate partnership meeting"
-          className="absolute inset-0 w-full h-full object-cover"
+          src={heroImg}
+          alt="Corporate partnership"
+          className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out ${heroLoaded ? "scale-100" : "scale-110"}`}
           width={1920}
-          height={800}
+          height={768}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
-        <div className="relative z-10 h-full container mx-auto px-4 flex flex-col justify-center">
-          <Badge className="w-fit mb-4 bg-primary/90 text-primary-foreground border-0 text-xs px-3 py-1">
-            <Handshake className="w-3.5 h-3.5 mr-1.5" /> Enterprise Partner Program
-          </Badge>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white leading-tight max-w-2xl">
-            ราคาองค์กร<br />
-            <span className="text-primary">Volume Discount</span>
-          </h1>
-          <p className="text-white/80 mt-4 max-w-lg text-sm md:text-base leading-relaxed">
-            เงื่อนไขพิเศษสำหรับลูกค้าองค์กร โรงงาน และโครงการภาครัฐ —
-            ด้วยประสบการณ์กว่า 10 ปี ในการจัดหาโซลูชัน Industrial PC ให้องค์กรชั้นนำ
-          </p>
-          <div className="flex gap-3 mt-6">
-            <Button size="lg" onClick={() => setShowQuote(true)} className="text-sm md:text-base shadow-lg">
-              <FileText className="w-4 h-4 mr-2" /> ขอใบเสนอราคา
-            </Button>
-            <Link to="/contact-us">
-              <Button size="lg" variant="outline" className="text-sm md:text-base border-white/30 text-white hover:bg-white/10">
-                <Phone className="w-4 h-4 mr-2" /> ติดต่อทีมขาย
-              </Button>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+
+        <div className="relative h-full flex items-center">
+          <div className="container max-w-7xl mx-auto px-6">
+            <div className={`max-w-2xl transition-all duration-1000 ease-out ${heroLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+              <Badge className="mb-4 bg-primary/20 text-primary border-primary/30 backdrop-blur-sm text-xs px-3 py-1">
+                B2B Enterprise Program
+              </Badge>
+              <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-4">
+                ราคาองค์กร &<br />Volume Discount
+              </h1>
+              <p className="text-base md:text-lg text-white/80 mb-8 max-w-lg">
+                เงื่อนไขพิเศษสำหรับลูกค้าองค์กร โรงงาน และโครงการภาครัฐ — ส่วนลดตามปริมาณ พร้อมทีมดูแลเฉพาะ
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Button
+                  size="lg"
+                  onClick={() => setShowQuote(true)}
+                  className="text-base px-8 bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-lg"
+                >
+                  <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคาองค์กร
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-base px-8 border-white/40 text-white bg-white/10 hover:bg-white/20 hover:text-white backdrop-blur-sm"
+                  asChild
+                >
+                  <Link to="/contact">
+                    <Phone className="w-5 h-5 mr-2" /> ติดต่อทีมขาย
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Back navigation */}
+        <div className="absolute top-4 left-0 right-0">
+          <div className="container max-w-7xl mx-auto px-6">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
+            >
+              <ArrowLeft size={14} />
+              กลับหน้าหลัก
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Trust Stats Bar ── */}
-      <section className="bg-primary/5 border-y border-border/50">
-        <div className="container mx-auto px-4 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {trustStats.map((s) => (
-              <div key={s.label} className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <s.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-xl font-extrabold text-foreground">{s.val}</p>
-                  <p className="text-xs text-muted-foreground">{s.label}</p>
-                </div>
-              </div>
+      {/* ─── STATS BAR ─── */}
+      <section className="bg-foreground text-background">
+        <div className="container max-w-5xl mx-auto px-6 py-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            {stats.map((s, i) => (
+              <AnimatedSection key={s.label} delay={i * 100}>
+                <div className="text-2xl md:text-3xl font-bold text-primary">{s.value}</div>
+                <div className="text-xs md:text-sm opacity-70 mt-1">{s.label}</div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Volume Tiers ── */}
-      <section className="container mx-auto px-4 py-14">
-        <div className="text-center mb-10">
-          <Badge variant="outline" className="mb-3 text-xs">Tiered Pricing</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground">โครงสร้างส่วนลดตามจำนวน</h2>
-          <p className="text-muted-foreground mt-2 max-w-md mx-auto">ราคาพิเศษสำหรับการสั่งซื้อจำนวนมาก — ยิ่งซื้อมาก ยิ่งคุ้ม</p>
-        </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
+      {/* ─── VOLUME TIERS ─── */}
+      <section className="container mx-auto px-4 py-16">
+        <AnimatedSection>
+          <div className="text-center mb-10">
+            <Badge variant="secondary" className="mb-3">Volume Discount</Badge>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">โครงสร้างส่วนลดตามจำนวน</h2>
+            <p className="text-muted-foreground mt-2">ราคาพิเศษสำหรับการสั่งซื้อจำนวนมาก</p>
+          </div>
+        </AnimatedSection>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
           {tiers.map((t, i) => (
-            <Card key={t.qty} className={`relative overflow-hidden border-2 ${t.accent} hover:shadow-xl transition-all duration-300 group`}>
-              {i === 3 && (
-                <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-[10px] font-bold px-3 py-1 rounded-bl-lg">
-                  BEST VALUE
-                </div>
-              )}
-              <CardContent className="p-6 text-center space-y-4">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors">
-                  <t.icon className="w-7 h-7 text-primary" />
-                </div>
-                <div>
-                  <p className="text-lg font-extrabold text-foreground">{t.qty}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{t.discount}</p>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowQuote(true)}
-                  className="text-primary text-xs"
-                >
-                  ขอราคา <ArrowRight className="w-3 h-3 ml-1" />
-                </Button>
-              </CardContent>
-            </Card>
+            <AnimatedSection key={t.qty} delay={i * 120}>
+              <Card className={`text-center border-border/60 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${t.highlight ? "ring-2 ring-primary shadow-lg relative" : ""}`}>
+                {t.highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <Badge className="bg-primary text-primary-foreground text-[10px]">แนะนำ</Badge>
+                  </div>
+                )}
+                <CardContent className="p-6 pt-8">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <t.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="text-lg font-bold text-foreground mb-2">{t.qty}</div>
+                  <p className="text-sm text-muted-foreground">{t.discount}</p>
+                </CardContent>
+              </Card>
+            </AnimatedSection>
           ))}
         </div>
-        <p className="text-center text-xs text-muted-foreground mt-6 max-w-lg mx-auto">
+        <p className="text-center text-xs text-muted-foreground mt-6">
           * ส่วนลดและเงื่อนไขขึ้นอยู่กับรุ่นสินค้าและโปรโมชันปัจจุบัน กรุณาติดต่อทีมขายเพื่อรับใบเสนอราคาที่แม่นยำ
         </p>
       </section>
 
-      {/* ── Product Showcase ── */}
-      <section className="relative overflow-hidden">
-        <div className="grid md:grid-cols-2">
-          <div className="relative h-64 md:h-auto">
-            <img
-              src={corporateFlatlay}
-              alt="Industrial PC product lineup"
-              className="absolute inset-0 w-full h-full object-cover"
-              loading="lazy"
-              width={1200}
-              height={600}
-            />
-          </div>
-          <div className="bg-card p-8 md:p-12 flex flex-col justify-center">
-            <Badge variant="outline" className="w-fit mb-4 text-xs">สินค้าครบวงจร</Badge>
-            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-4">โซลูชัน Industrial PC ครบทุกกลุ่ม</h2>
-            <ul className="space-y-3">
-              {[
-                "Panel PC / Touch Monitor — สำหรับ Production Line",
-                "Mini PC / Fanless Box — งาน Edge Computing",
-                "Rugged Tablet & Notebook — ใช้งานสนาม",
-                "All-in-One PC — สำหรับ POS & Kiosk",
-                "Network Switch (Volktek) — L2/L3 Managed",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm text-foreground/90">
-                  <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <Link to="/product-advisor" className="mt-6">
-              <Button variant="outline" size="sm" className="text-xs">
-                ปรึกษาผู้เชี่ยวชาญ <ArrowRight className="w-3.5 h-3.5 ml-1" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Benefits ── */}
-      <section className="bg-muted/30 py-14">
+      {/* ─── BENEFITS ─── */}
+      <section className="bg-muted/30 py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10">
-            <Badge variant="outline" className="mb-3 text-xs">Enterprise Benefits</Badge>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground">สิทธิพิเศษลูกค้าองค์กร</h2>
-          </div>
+          <AnimatedSection>
+            <div className="text-center mb-10">
+              <Badge variant="secondary" className="mb-3">Enterprise Benefits</Badge>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground">สิทธิพิเศษลูกค้าองค์กร</h2>
+            </div>
+          </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
-            {benefits.map((b) => (
-              <Card key={b.title} className="border-border/60 hover:shadow-lg transition-shadow group">
-                <CardContent className="p-6 text-center space-y-4">
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
-                    <b.icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <h3 className="font-bold text-foreground">{b.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
-                </CardContent>
-              </Card>
+            {benefits.map((b, i) => (
+              <AnimatedSection key={b.title} delay={i * 100}>
+                <Card className="border-border/60 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
+                  <CardContent className="p-6 text-center space-y-3">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
+                      <b.icon className="w-7 h-7 text-primary" />
+                    </div>
+                    <h3 className="font-bold text-foreground">{b.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
+                  </CardContent>
+                </Card>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Factory / On-site Section ── */}
-      <section className="relative h-72 md:h-80 overflow-hidden">
-        <img
-          src={corporateFactory}
-          alt="Factory production line with panel PCs"
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="lazy"
-          width={1200}
-          height={600}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30" />
-        <div className="relative z-10 h-full container mx-auto px-4 flex flex-col justify-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white max-w-lg">
-            ส่งมอบและติดตั้งพร้อม<br />ทีมวิศวกร On-site
-          </h2>
-          <p className="text-white/70 mt-3 max-w-md text-sm md:text-base">
-            ทีมวิศวกรของ ENT Group พร้อมให้บริการติดตั้ง ตั้งค่า และทดสอบอุปกรณ์ถึงหน้างาน ทั่วประเทศไทย
-          </p>
+      {/* ─── PRODUCT SHOWCASE ─── */}
+      <section className="relative py-16 overflow-hidden">
+        <img src={factoryImg} alt="Industrial application" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <div className="absolute inset-0 bg-black/75" />
+        <div className="relative container max-w-5xl mx-auto px-6 text-center">
+          <AnimatedSection>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">สินค้าครอบคลุมทุกอุตสาหกรรม</h2>
+            <p className="text-white/70 mb-8 max-w-2xl mx-auto">
+              Panel PC, Rugged Tablet, Mini PC Firewall, Industrial Notebook และอีกมากมาย — ทุกรุ่นรองรับราคาองค์กร
+            </p>
+            <div className="flex flex-wrap gap-2 justify-center mb-8">
+              {["Panel PC / AIO", "Rugged Tablet", "Rugged Notebook", "Mini PC", "Firewall", "Handheld PDA", "Smart Display"].map((cat) => (
+                <Badge key={cat} className="bg-white/10 text-white border-white/20 backdrop-blur-sm px-3 py-1.5">
+                  {cat}
+                </Badge>
+              ))}
+            </div>
+            <Button
+              size="lg"
+              onClick={() => setShowQuote(true)}
+              className="text-base px-8 bg-primary text-primary-foreground hover:bg-primary/90 font-bold"
+            >
+              <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคาทันที
+            </Button>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* ── Process Steps ── */}
-      <section className="container mx-auto px-4 py-14">
-        <div className="text-center mb-10">
-          <Badge variant="outline" className="mb-3 text-xs">How It Works</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground">ขั้นตอนง่ายๆ 4 ขั้นตอน</h2>
-        </div>
-        <div className="grid gap-0 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto relative">
-          {/* Connecting line */}
-          <div className="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-border" />
-          {steps.map((s) => (
-            <div key={s.step} className="text-center space-y-4 relative px-4 py-6">
-              <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto text-xl font-extrabold relative z-10 shadow-lg shadow-primary/20">
-                {s.step}
+      {/* ─── PROCESS ─── */}
+      <section className="container mx-auto px-4 py-16">
+        <AnimatedSection>
+          <div className="text-center mb-10">
+            <Badge variant="secondary" className="mb-3">How It Works</Badge>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">ขั้นตอนการขอใบเสนอราคาองค์กร</h2>
+          </div>
+        </AnimatedSection>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto relative">
+          {/* Connector line (desktop) */}
+          <div className="hidden lg:block absolute top-6 left-[12.5%] right-[12.5%] h-0.5 bg-border" />
+          {steps.map((s, i) => (
+            <AnimatedSection key={s.step} delay={i * 150}>
+              <div className="text-center space-y-3 relative">
+                <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center mx-auto text-lg font-bold relative z-10 shadow-md">
+                  {s.step}
+                </div>
+                <h3 className="font-bold text-foreground">{s.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
               </div>
-              <h3 className="font-bold text-foreground">{s.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </section>
 
-      {/* ── CTA Section ── */}
-      <section className="bg-primary/5 border-y border-border/50">
-        <div className="container mx-auto px-4 py-12 text-center">
-          <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">พร้อมเริ่มต้นโครงการ?</h2>
-          <p className="text-muted-foreground mb-6 max-w-md mx-auto text-sm">
-            ทีมฝ่ายขาย ENT Group พร้อมจัดทำใบเสนอราคาพิเศษให้ภายใน 1 วันทำการ
-          </p>
-          <div className="flex gap-3 justify-center flex-wrap">
-            <Button size="lg" onClick={() => setShowQuote(true)} className="shadow-lg">
-              <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคาองค์กร
-            </Button>
-            <Link to="/case-studies">
-              <Button size="lg" variant="outline">
-                <Building2 className="w-5 h-5 mr-2" /> ดูผลงานจริง
-              </Button>
-            </Link>
+      {/* ─── TESTIMONIALS ─── */}
+      <section className="bg-muted/30 py-16">
+        <div className="container mx-auto px-4">
+          <AnimatedSection>
+            <div className="text-center mb-10">
+              <Badge variant="secondary" className="mb-3">Testimonials</Badge>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground">ลูกค้าองค์กรพูดถึงเรา</h2>
+            </div>
+          </AnimatedSection>
+          <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
+            {testimonials.map((t, i) => (
+              <AnimatedSection key={t.name} delay={i * 120}>
+                <Card className="border-border/60 h-full hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6 space-y-4">
+                    <Quote className="w-8 h-8 text-primary/30" />
+                    <p className="text-sm text-foreground leading-relaxed italic">"{t.quote}"</p>
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: t.stars }).map((_, si) => (
+                        <Star key={si} className="w-4 h-4 fill-primary text-primary" />
+                      ))}
+                    </div>
+                    <div className="pt-2 border-t border-border">
+                      <div className="font-bold text-sm text-foreground">{t.name}</div>
+                      <div className="text-xs text-muted-foreground">{t.role}</div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </AnimatedSection>
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* ─── CLIENT LOGOS ─── */}
+      <section className="container mx-auto px-4 py-16">
+        <AnimatedSection>
+          <div className="text-center mb-8">
+            <h3 className="text-lg font-bold text-muted-foreground">ลูกค้าองค์กรที่ไว้วางใจ</h3>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+            {clientLogos.map((name) => (
+              <div
+                key={name}
+                className="px-5 py-3 rounded-lg bg-muted/50 border border-border/50 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5 transition-all duration-200"
+              >
+                {name}
+              </div>
+            ))}
+          </div>
+        </AnimatedSection>
+      </section>
+
+      {/* ─── FINAL CTA ─── */}
+      <section className="bg-foreground text-background py-16">
+        <div className="container max-w-3xl mx-auto px-6 text-center">
+          <AnimatedSection>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">พร้อมเริ่มต้นโปรเจกต์ของคุณ?</h2>
+            <p className="opacity-70 mb-8">ทีมขายของเราพร้อมให้คำปรึกษา และจัดทำใบเสนอราคาพิเศษภายใน 1 วันทำการ</p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Button
+                size="lg"
+                onClick={() => setShowQuote(true)}
+                className="text-base px-8 bg-primary text-primary-foreground hover:bg-primary/90 font-bold"
+              >
+                <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคาองค์กร
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-base px-8 border-background/30 text-background hover:bg-background/10"
+                asChild
+              >
+                <Link to="/contact">
+                  <Phone className="w-5 h-5 mr-2" /> ติดต่อทีมขาย
+                </Link>
+              </Button>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
