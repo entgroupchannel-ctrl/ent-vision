@@ -372,6 +372,7 @@ const AllInOnePC = () => {
         ))}
       </section>
 
+      <B2BCTABanner variant="compact" />
       <FooterCompact />
 
       {/* Quote Dialog */}
