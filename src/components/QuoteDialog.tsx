@@ -156,6 +156,17 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
           source: "quote_request",
         }).then(() => {});
       }
+
+      // Send auto-reply email (best-effort)
+      supabase.functions.invoke('send-auto-reply', {
+        body: {
+          type: 'quote',
+          name: form.name || user?.user_metadata?.full_name || '',
+          email: emailValue,
+          products: products.filter((p) => p.category || p.model),
+        },
+      }).catch((err) => console.warn('Auto-reply email failed:', err));
+
       setSubmitted(true);
       toast({ title: "ส่งคำขอเรียบร้อย!", description: "ทีมฝ่ายขายจะติดต่อกลับภายใน 24 ชม." });
     } catch (err: any) {

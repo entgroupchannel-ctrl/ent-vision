@@ -244,6 +244,12 @@ const ContactUs = () => {
           email: form.email, name: form.name || null, source: "contact_form",
         }).then(() => {});
       }
+
+      // Send auto-reply email (best-effort, don't block on failure)
+      supabase.functions.invoke('send-auto-reply', {
+        body: { type: 'contact', name: form.name, email: form.email },
+      }).catch((err) => console.warn('Auto-reply email failed:', err));
+
       setSubmitted(true);
       toast({ title: i.submitSuccess, description: i.submitSuccessDesc });
     } catch (err: any) {
