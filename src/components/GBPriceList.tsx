@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, FileText, Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, FileText, Search, X, DollarSign } from "lucide-react";
 
 /* ───── Price Data ───── */
 type PriceItem = {

@@ -8,7 +8,7 @@ import {
   ArrowLeft, Cpu, Wifi, Monitor, Usb, ThermometerSun, Wind,
   Shield, Zap, HardDrive, Network, ChevronDown, ExternalLink,
   Factory, Building2, Truck, Stethoscope, Server, MonitorSmartphone,
-  FileText
+  FileText, DollarSign, Plug
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FooterCompact from "@/components/FooterCompact";
