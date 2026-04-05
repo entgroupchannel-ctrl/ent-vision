@@ -150,6 +150,7 @@ const App = () => (
           </BrowserRouter>
         </TooltipProvider>
         </QuoteCartProvider>
+      </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>
   </HelmetProvider>
