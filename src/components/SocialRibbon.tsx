@@ -43,6 +43,8 @@ const SocialRibbon = () => {
     setTimeout(() => setManualExpanded(null), 15000);
   };
 
+  if (isPortalPage) return null;
+
   return (
     <div
       className="fixed left-0 top-1/2 -translate-y-1/2 z-40 transition-transform duration-500 ease-in-out"
