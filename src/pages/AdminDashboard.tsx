@@ -11,8 +11,10 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import EngagementAnalytics from "@/components/EngagementAnalytics";
 import AdminDocumentManager from "@/components/AdminDocumentManager";
+import AdminProductCatalog from "@/components/AdminProductCatalog";
+import AdminQuoteReview from "@/components/AdminQuoteReview";
 
-type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents";
+type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -186,7 +188,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex items-center gap-1 mb-4 border-b border-border">
+        <div className="flex items-center gap-1 mb-4 border-b border-border overflow-x-auto">
           {([
             { id: "contacts" as Tab, label: "ติดต่อเข้ามา", count: contacts.length },
             { id: "quotes" as Tab, label: "ใบเสนอราคา", count: quotes.length },
@@ -195,21 +197,34 @@ const AdminDashboard = () => {
             { id: "subscribers" as Tab, label: "สมาชิก", count: subscribers.length },
             { id: "engagement" as Tab, label: "📊 Engagement", count: null },
             { id: "documents" as Tab, label: "📄 เอกสาร", count: null },
+            { id: "catalog" as Tab, label: "📦 สินค้า+ราคา", count: null },
+            { id: "quote_review" as Tab, label: "💰 จัดการ Quote", count: null },
           ]).map((t) => (
             <button
               key={t.id}
               onClick={() => { setTab(t.id); setStatusFilter("all"); setSelectedItem(null); }}
-              className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
+              className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                 tab === t.id
                   ? "border-primary text-primary"
                   : "border-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
-              {t.label} <span className="text-xs opacity-60">({t.count})</span>
+              {t.label} {t.count !== null && <span className="text-xs opacity-60">({t.count})</span>}
             </button>
           ))}
         </div>
 
+        {/* Engagement Analytics Tab — full width, no filter/export */}
+        {tab === "engagement" ? (
+          <EngagementAnalytics />
+        ) : tab === "documents" ? (
+          <AdminDocumentManager />
+        ) : tab === "catalog" ? (
+          <AdminProductCatalog />
+        ) : tab === "quote_review" ? (
+          <AdminQuoteReview />
+        ) : (
+        <>
         {/* Filter & Export */}
         {tab === "chatleads" ? (
           <div className="flex items-center justify-end mb-4">
@@ -276,11 +291,6 @@ const AdminDashboard = () => {
         )}
 
         {/* Content */}
-        {tab === "engagement" ? (
-          <EngagementAnalytics />
-        ) : tab === "documents" ? (
-          <AdminDocumentManager />
-        ) : (
         <div className="grid lg:grid-cols-3 gap-4">
           {/* List */}
           <div className="lg:col-span-2 space-y-2">
@@ -721,6 +731,7 @@ const AdminDashboard = () => {
             )}
           </div>
         </div>
+        </>
         )}
       </div>
     </div>
