@@ -184,7 +184,7 @@ const GBPriceList = ({ onRequestQuote }: GBPriceListProps) => {
     <section className="border-t border-border bg-card" id="price-list">
       <div className="container max-w-7xl mx-auto px-6 py-12">
         <h2 className="text-2xl font-display font-bold text-foreground mb-6 text-center">
-          💰 ราคา <span className="text-primary">GB Series</span> ทุกรุ่น
+          <DollarSign size={20} className="inline mr-1 text-primary" /> ราคา <span className="text-primary">GB Series</span> ทุกรุ่น
         </h2>
 
         {/* Tab Buttons */}

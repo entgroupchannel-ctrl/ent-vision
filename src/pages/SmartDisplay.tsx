@@ -218,7 +218,7 @@ const SmartDisplay = () => {
             </p>
             <div className="flex flex-wrap gap-4">
               <a href="#products" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-opacity">
-                📋 ดูสินค้าทั้งหมด →
+                <FileText size={16} className="inline mr-1" /> ดูสินค้าทั้งหมด →
               </a>
               <a href="#downloads" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold hover:bg-white/20 transition-colors">
                 <Download size={18} /> ดาวน์โหลด Price List
@@ -232,7 +232,7 @@ const SmartDisplay = () => {
       <div className="sticky top-[57px] z-40 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm">
         <div className="container max-w-7xl mx-auto py-3">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-            <span className="text-sm font-bold text-foreground whitespace-nowrap">👆 เลือกหมวดสินค้า:</span>
+            <span className="text-sm font-bold text-foreground whitespace-nowrap flex items-center gap-1"><Filter size={14} className="text-primary" /> เลือกหมวดสินค้า:</span>
             <div className="flex flex-wrap gap-2">
               {categories.map((cat) => (
                 <button
@@ -734,7 +734,7 @@ const SmartDisplay = () => {
                 <div className="grid lg:grid-cols-2 gap-8 items-center">
                   <div>
                     <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold mb-4">
-                      ⭐ รุ่นขายดี
+                      <Star size={14} className="inline mr-1" /> รุ่นขายดี
                     </span>
                     <h3 className="text-2xl font-display font-bold text-foreground mb-4">
                       KIOSK-GK2101
@@ -858,13 +858,13 @@ const SmartDisplay = () => {
               {/* Installation Types */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
                 {[
-                  { label: "Indoor", desc: "ติดตั้งภายในอาคาร", emoji: "🏢" },
-                  { label: "Outdoor", desc: "ติดตั้งภายนอกอาคาร IP65", emoji: "☀️" },
-                  { label: "Floor Standing", desc: "ตั้งพื้น พร้อมล็อค", emoji: "🧍" },
-                  { label: "Wall Mounting", desc: "ติดผนัง ประหยัดพื้นที่", emoji: "🖼️" },
+                  { label: "Indoor", desc: "ติดตั้งภายในอาคาร", Icon: Building2 },
+                  { label: "Outdoor", desc: "ติดตั้งภายนอกอาคาร IP65", Icon: Sun },
+                  { label: "Floor Standing", desc: "ตั้งพื้น พร้อมล็อค", Icon: Maximize },
+                  { label: "Wall Mounting", desc: "ติดผนัง ประหยัดพื้นที่", Icon: Monitor },
                 ].map((t) => (
                   <div key={t.label} className="card-surface p-5 text-center hover:border-primary/30 transition-all">
-                    <span className="text-3xl block mb-2">{t.emoji}</span>
+                    <div className="w-12 h-12 mx-auto mb-2 rounded-xl bg-primary/10 flex items-center justify-center"><t.Icon size={24} className="text-primary" /></div>
                     <h4 className="font-bold text-foreground text-sm mb-1">{t.label}</h4>
                     <p className="text-xs text-muted-foreground">{t.desc}</p>
                   </div>
@@ -890,7 +890,7 @@ const SmartDisplay = () => {
               <div className="card-surface overflow-hidden border-primary/20 mb-10">
                 <div className="bg-gradient-to-r from-primary/10 to-transparent p-6 md:p-10">
                   <span className="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold mb-4">
-                    📱 Case Study — ระบบคิวอัจฉริยะ
+                    <Smartphone size={14} className="inline mr-1" /> Case Study — ระบบคิวอัจฉริยะ
                   </span>
                   <h3 className="text-xl md:text-2xl font-display font-bold text-foreground mb-4">
                     โรงพยาบาลติดตั้ง KIOSK ระบบคิว ผลลัพธ์เกินคาด
@@ -1009,7 +1009,7 @@ const SmartDisplay = () => {
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               <div>
                 <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold mb-4">
-                  💡 ทางเลือกเพิ่มเติม
+                  <Lightbulb size={14} className="inline mr-1" /> ทางเลือกเพิ่มเติม
                 </span>
                 <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-4">
                   เปลี่ยนเป็น <span className="text-primary">Windows 10 Pro</span> ได้
@@ -1179,7 +1179,7 @@ const SmartDisplay = () => {
       <section className="section-padding">
         <div className="container max-w-5xl mx-auto">
           <div className="text-center mb-8">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 block">🎙️ Podcast</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-4 flex items-center justify-center gap-1"><Headphones size={14} /> Podcast</span>
             <h2 className="text-3xl md:text-4xl font-display font-bold">
               พอดแคสต์ <span className="text-gradient">Smart Display & FPM</span>
             </h2>

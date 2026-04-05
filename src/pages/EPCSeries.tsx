@@ -498,23 +498,23 @@ const EPCSeries = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               {
-                icon: "💧",
+                Icon: Droplets,
                 title: "มาตรฐานป้องกัน IP65",
                 desc: "แผงหน้าระดับ IP65 ปกป้องชิ้นส่วนภายในจากฝุ่น เศษโลหะ สายน้ำแรงดันสูง และสารทำความสะอาด",
               },
               {
-                icon: "🔧",
+                Icon: Wrench,
                 title: "ชิ้นส่วนระดับอุตสาหกรรมแท้",
                 desc: "ทนทานต่ออุณหภูมิสุดขั้ว การสั่นสะเทือน ความชื้นสูง การทำงานต่อเนื่อง 24/7 ต่างจากชิ้นส่วนระดับผู้บริโภค",
               },
               {
-                icon: "☀️",
+                Icon: Sun,
                 title: "หน้าจอคมชัด",
                 desc: "ความสว่างสูง 1,000 nits เหมาะกลางแจ้ง เคลือบ Anti-glare ลดแสงสะท้อน เพิ่มการมองเห็นที่ชัดเจน",
               },
             ].map((item, i) => (
               <div key={i} className="card-surface p-5">
-                <span className="text-3xl mb-3 block">{item.icon}</span>
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3"><item.Icon size={24} className="text-primary" /></div>
                 <h3 className="font-semibold text-foreground text-sm mb-1">{item.title}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
               </div>
@@ -762,7 +762,7 @@ const EPCSeries = () => {
         {/* ═══════════ YouTube & Podcast Section ═══════════ */}
         <section className="space-y-6">
           <div className="text-center">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2 block">🎬 Media Center</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2 flex items-center justify-center gap-1"><Play size={14} /> Media Center</span>
             <h2 className="text-xl md:text-2xl font-display font-bold text-foreground">
               วิดีโอ & พอดแคสต์ <span className="text-gradient">EPC Panel PC</span>
             </h2>
@@ -806,7 +806,7 @@ const EPCSeries = () => {
           <div className="card-surface rounded-xl overflow-hidden">
             <div className="px-4 py-2.5 border-b border-border flex items-center gap-2">
               <Headphones className="w-4 h-4 text-primary" />
-              <span className="font-bold text-foreground text-xs">🎙️ Podcast — เจาะลึก EPC Panel PC</span>
+              <span className="font-bold text-foreground text-xs">Podcast — เจาะลึก EPC Panel PC</span>
             </div>
             <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border">
               {[
@@ -872,7 +872,7 @@ const EPCSeries = () => {
 
           <div className="card-surface rounded-lg p-4 bg-muted/30 border-dashed">
             <p className="text-[11px] text-muted-foreground leading-relaxed text-center">
-              🔒 <strong>หมายเหตุตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA):</strong> เพื่อปกป้องสิทธิ์ของลูกค้า เราไม่สามารถเปิดเผยชื่อ-นามสกุล หรือชื่อบริษัทของผู้ให้รีวิวได้ ความคิดเห็นทั้งหมดเป็นคำชมจริงที่ได้รับจากการทำงานร่วมกับลูกค้าในอุตสาหกรรมต่างๆ ทั่วประเทศไทย
+              <Shield size={14} className="inline mr-1" /> <strong>หมายเหตุตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA):</strong> เพื่อปกป้องสิทธิ์ของลูกค้า เราไม่สามารถเปิดเผยชื่อ-นามสกุล หรือชื่อบริษัทของผู้ให้รีวิวได้ ความคิดเห็นทั้งหมดเป็นคำชมจริงที่ได้รับจากการทำงานร่วมกับลูกค้าในอุตสาหกรรมต่างๆ ทั่วประเทศไทย
             </p>
           </div>
         </section>
