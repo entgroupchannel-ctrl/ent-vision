@@ -60,6 +60,13 @@ const CorporatePricing = lazy(() => import("./pages/CorporatePricing.tsx"));
 const Blog = lazy(() => import("./pages/Blog.tsx"));
 const BlogDetail = lazy(() => import("./pages/BlogDetail.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const MyAccount = lazy(() => import("./pages/MyAccount.tsx"));
+const MyProfile = lazy(() => import("./pages/MyProfile.tsx"));
+const MyAccountQuotes = lazy(() => import("./pages/MyAccountQuotes.tsx"));
+const MyAccountWishlist = lazy(() => import("./pages/MyAccountWishlist.tsx"));
+const MyDocuments = lazy(() => import("./pages/MyDocuments.tsx"));
+const MyNotifications = lazy(() => import("./pages/MyNotifications.tsx"));
+const MyDemos = lazy(() => import("./pages/MyDemos.tsx"));
 
 /* ── Loading fallback ── */
 const PageLoader = () => (
@@ -132,6 +139,14 @@ const App = () => (
                 <Route path="/corporate-pricing" element={<CorporatePricing />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogDetail />} />
+                <Route path="/my-account" element={<MyAccount />}>
+                  <Route index element={<MyProfile />} />
+                  <Route path="quotes" element={<MyAccountQuotes />} />
+                  <Route path="wishlist" element={<MyAccountWishlist />} />
+                  <Route path="documents" element={<MyDocuments />} />
+                  <Route path="notifications" element={<MyNotifications />} />
+                  <Route path="demos" element={<MyDemos />} />
+                </Route>
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
