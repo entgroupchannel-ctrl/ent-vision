@@ -20,7 +20,7 @@ const Blog = () => {
       <PageBanner
         title="บทความเทคนิค"
         subtitle="เรื่องเล่าจากประสบการณ์จริง เคล็ดลับจากทีมวิศวกร เพื่อช่วยคุณตัดสินใจเลือกเทคโนโลยีที่เหมาะสม"
-        image="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&q=80"
+        image="/images/unsplash/1504868584819-f8e8b4_w1200.jpg"
       />
 
 
