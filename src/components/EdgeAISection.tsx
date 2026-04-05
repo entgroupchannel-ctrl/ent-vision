@@ -77,7 +77,7 @@ const EdgeAISection = () => {
 
           {/* Image Carousel */}
           <div
-80:             className="relative group"
+className="relative group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
