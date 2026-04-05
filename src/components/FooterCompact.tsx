@@ -1,4 +1,4 @@
-import { Phone, MapPin, Facebook, Youtube, Instagram } from "lucide-react";
+import { Phone, MapPin, Facebook, Youtube, Instagram, Crosshair, Server, ShieldCheck, Monitor, Tablet, Cloud, Tv } from "lucide-react";
 import LineQRButton from "@/components/LineQRButton";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo-entgroup.avif";
@@ -17,13 +17,13 @@ const socials = [
 ];
 
 const quickLinks = [
-  { label: "GT Series", href: "/gt-series" },
-  { label: "Mini PC Firewall", href: "/minipc-firewall" },
-  { label: "Panel PC", href: "/panel-pc-gtg" },
-  { label: "Rugged Tablet", href: "/rugged-tablet" },
-  { label: "vCloudPoint", href: "/vcloudpoint" },
-  { label: "Smart Display", href: "/smart-display" },
-  { label: "🎯 ช่วยเลือกสินค้า", href: "/product-advisor" },
+  { label: "GT Series", href: "/gt-series", icon: Server },
+  { label: "Mini PC Firewall", href: "/minipc-firewall", icon: ShieldCheck },
+  { label: "Panel PC", href: "/panel-pc-gtg", icon: Monitor },
+  { label: "Rugged Tablet", href: "/rugged-tablet", icon: Tablet },
+  { label: "vCloudPoint", href: "/vcloudpoint", icon: Cloud },
+  { label: "Smart Display", href: "/smart-display", icon: Tv },
+  { label: "ช่วยเลือกสินค้า", href: "/product-advisor", icon: Crosshair },
 ];
 
 const FooterCompact = () => {
@@ -54,8 +54,9 @@ const FooterCompact = () => {
               <Link
                 key={link.label}
                 to={link.href}
-                className="text-[11px] text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
+                className="inline-flex items-center gap-1 text-[11px] text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
               >
+                <link.icon size={10} />
                 {link.label}
               </Link>
             ))}
