@@ -145,6 +145,7 @@ const App = () => (
                 <Route path="/my-account" element={<MyAccount />}>
                   <Route index element={<MyProfile />} />
                   <Route path="quotes" element={<MyAccountQuotes />} />
+                  <Route path="quotes/create" element={<UserQuoteCreate />} />
                   <Route path="wishlist" element={<MyAccountWishlist />} />
                   <Route path="documents" element={<MyDocuments />} />
                   <Route path="notifications" element={<MyNotifications />} />
