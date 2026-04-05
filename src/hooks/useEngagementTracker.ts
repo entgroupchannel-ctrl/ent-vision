@@ -76,7 +76,7 @@ export function useEngagementTracker() {
               product_name: productName || null,
               channel: channel || null,
               page_url: window.location.pathname,
-              metadata,
+              metadata: metadata as any,
             }]);
           } catch (err) {
             // Silent — never block UI
