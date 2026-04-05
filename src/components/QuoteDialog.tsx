@@ -37,7 +37,8 @@ const callbackTimes = [
   "เย็น (16:00-18:00)", "เวลาใดก็ได้",
 ];
 
-type ProductItem = { category: string; model: string; qty: number };
+type CatalogData = { name_th: string; description: string; base_price: number; specs: Record<string, string> };
+type ProductItem = { category: string; model: string; qty: number; _catalogData?: CatalogData | null };
 
 interface QuoteDialogProps {
   open: boolean;
@@ -122,10 +123,30 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleProductChange = (index: number, field: keyof ProductItem, value: string | number) => {
+  const handleProductChange = async (index: number, field: keyof ProductItem, value: string | number) => {
     const updated = [...products];
     updated[index] = { ...updated[index], [field]: value };
     setProducts(updated);
+
+    // Fetch catalog data when model changes
+    if (field === "model" && typeof value === "string" && value) {
+      try {
+        const { data } = await (supabase.from as any)("product_catalog")
+          .select("name_th, description, base_price, specs")
+          .eq("is_active", true)
+          .ilike("model", value)
+          .limit(1);
+        if (data && data.length > 0) {
+          const updatedWithCatalog = [...products];
+          updatedWithCatalog[index] = { ...updatedWithCatalog[index], [field]: value, _catalogData: data[0] };
+          setProducts(updatedWithCatalog);
+        } else {
+          const updatedNoCatalog = [...products];
+          updatedNoCatalog[index] = { ...updatedNoCatalog[index], [field]: value, _catalogData: null };
+          setProducts(updatedNoCatalog);
+        }
+      } catch { /* silent */ }
+    }
   };
 
   const addProduct = () => setProducts([...products, { category: "", model: "", qty: 1 }]);
@@ -172,13 +193,14 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
       setSubmitted(true);
       toast({ title: "ส่งคำขอเรียบร้อย!", description: "ทีมฝ่ายขายจะติดต่อกลับภายใน 24 ชม." });
 
-      // Engagement Tracking
+      // ── Engagement Tracking ──
       products.filter((p) => p.category || p.model).forEach((p) => {
         trackEvent({
           eventType: "quote_request",
-          productId: p.model || undefined,
+          productSlug: p.model || undefined,
           productCategory: p.category || undefined,
           productName: p.model || undefined,
+          metadata: { qty: p.qty, email: emailValue },
         });
       });
     } catch (err: any) {
@@ -379,6 +401,27 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
                       </button>
                     )}
                   </div>
+                  {/* Product detail from catalog */}
+                  {product.model && product._catalogData && (
+                    <div className="ml-6 mt-1 mb-2 p-2.5 rounded-lg bg-secondary/30 border border-border/50 text-xs space-y-1">
+                      <p className="font-medium text-foreground">{product._catalogData.name_th || product.model}</p>
+                      {product._catalogData.description && (
+                        <p className="text-muted-foreground line-clamp-2">{product._catalogData.description}</p>
+                      )}
+                      <div className="flex flex-wrap gap-x-4 gap-y-0.5 text-muted-foreground">
+                        {product._catalogData.specs?.cpu && <span>CPU: {product._catalogData.specs.cpu}</span>}
+                        {product._catalogData.specs?.ram && <span>RAM: {product._catalogData.specs.ram}</span>}
+                        {product._catalogData.specs?.storage && <span>Storage: {product._catalogData.specs.storage}</span>}
+                        {product._catalogData.specs?.display && <span>Display: {product._catalogData.specs.display}</span>}
+                        {product._catalogData.specs?.lan && <span>LAN: {product._catalogData.specs.lan}</span>}
+                        {product._catalogData.specs?.com && <span>COM: {product._catalogData.specs.com}</span>}
+                      </div>
+                      {product._catalogData.base_price > 0 && (
+                        <p className="text-primary font-bold">ราคาเริ่มต้น ฿{product._catalogData.base_price.toLocaleString()}</p>
+                      )}
+                    </div>
+                  )}
+                </div>
                 ))}
               </div>
               <button type="button" onClick={addProduct}
