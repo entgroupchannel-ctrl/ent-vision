@@ -67,6 +67,7 @@ const MyAccountWishlist = lazy(() => import("./pages/MyAccountWishlist.tsx"));
 const MyDocuments = lazy(() => import("./pages/MyDocuments.tsx"));
 const MyNotifications = lazy(() => import("./pages/MyNotifications.tsx"));
 const MyDemos = lazy(() => import("./pages/MyDemos.tsx"));
+const QuoteBuilder = lazy(() => import("./pages/QuoteBuilder.tsx"));
 
 /* ── Loading fallback ── */
 const PageLoader = () => (
