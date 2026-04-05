@@ -209,15 +209,15 @@ const AdminDocumentManager = () => {
       <div className="flex items-center gap-2">
         <button
           onClick={() => setActiveTab("requests")}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
             activeTab === "requests" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
           }`}
         >
-          📋 คำขอเอกสาร {pendingCount > 0 && <span className="ml-1 px-1.5 py-0.5 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold">{pendingCount}</span>}
+          📋 คำขอเอกสาร {pendingCount > 0 && <span className="ml-1 px-1.5 py-0.5 rounded-full bg-destructive text-destructive-foreground text-xs font-bold">{pendingCount}</span>}
         </button>
         <button
           onClick={() => setActiveTab("library")}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
             activeTab === "library" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
           }`}
         >
@@ -249,7 +249,7 @@ const AdminDocumentManager = () => {
                 <button
                   key={f.value}
                   onClick={() => setStatusFilter(f.value)}
-                  className={`px-2.5 py-1 rounded-lg text-[11px] font-medium transition-colors ${
+                  className={`px-2.5 py-1 rounded-lg text-sm font-medium transition-colors ${
                     statusFilter === f.value ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary/60"
                   }`}
                 >
@@ -280,16 +280,16 @@ const AdminDocumentManager = () => {
                       }`}
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xs font-bold text-foreground">
+                        <span className="text-sm font-bold text-foreground">
                           {DOC_TYPE_LABELS[req.document_type] || req.document_type}
                         </span>
-                        <span className={`text-[10px] px-1.5 py-0.5 rounded-full border font-medium ${status.color}`}>
+                        <span className={`text-xs px-1.5 py-0.5 rounded-full border font-medium ${status.color}`}>
                           {status.label}
                         </span>
                       </div>
-                      {req.product_model && <p className="text-[11px] text-muted-foreground">รุ่น: {req.product_model}</p>}
-                      {req.serial_number && <p className="text-[11px] text-muted-foreground">S/N: {req.serial_number}</p>}
-                      <p className="text-[10px] text-muted-foreground/60 mt-1">
+                      {req.product_model && <p className="text-xs text-muted-foreground">รุ่น: {req.product_model}</p>}
+                      {req.serial_number && <p className="text-xs text-muted-foreground">S/N: {req.serial_number}</p>}
+                      <p className="text-xs text-muted-foreground/60 mt-1">
                         User: {req.user_id.slice(0, 8)}... · {formatDate(req.created_at)}
                       </p>
                     </button>
@@ -311,7 +311,7 @@ const AdminDocumentManager = () => {
                 <div className="space-y-2 text-xs">
                   <div>
                     <span className="text-muted-foreground">User ID:</span>
-                    <span className="ml-2 text-foreground font-mono text-[11px]">{selectedRequest.user_id}</span>
+                    <span className="ml-2 text-foreground font-mono text-xs">{selectedRequest.user_id}</span>
                   </div>
                   {selectedRequest.product_model && (
                     <div>
@@ -340,7 +340,7 @@ const AdminDocumentManager = () => {
                 {/* Action Form */}
                 <div className="space-y-3 pt-3 border-t border-border">
                   <div>
-                    <label className="block text-xs font-medium text-foreground mb-1">URL ไฟล์เอกสาร</label>
+                    <label className="block text-sm font-medium text-foreground mb-1">URL ไฟล์เอกสาร</label>
                     <input
                       value={replyForm.file_url}
                       onChange={(e) => setReplyForm((f) => ({ ...f, file_url: e.target.value }))}
@@ -349,7 +349,7 @@ const AdminDocumentManager = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-foreground mb-1">หมายเหตุจาก Admin</label>
+                    <label className="block text-sm font-medium text-foreground mb-1">หมายเหตุจาก Admin</label>
                     <textarea
                       value={replyForm.admin_notes}
                       onChange={(e) => setReplyForm((f) => ({ ...f, admin_notes: e.target.value }))}
@@ -362,7 +362,7 @@ const AdminDocumentManager = () => {
                     <button
                       onClick={() => handleUpdateRequest(selectedRequest.id, "ready", replyForm.file_url, replyForm.admin_notes)}
                       disabled={actionLoading}
-                      className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-green-500/10 text-green-500 border border-green-500/20 text-xs font-bold hover:bg-green-500/20 transition-colors disabled:opacity-60"
+                      className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-green-500/10 text-green-500 border border-green-500/20 text-sm font-bold hover:bg-green-500/20 transition-colors disabled:opacity-60"
                     >
                       {actionLoading ? <Loader2 size={12} className="animate-spin" /> : <CheckCircle size={12} />}
                       อนุมัติ + ส่งไฟล์
@@ -370,7 +370,7 @@ const AdminDocumentManager = () => {
                     <button
                       onClick={() => handleUpdateRequest(selectedRequest.id, "rejected", undefined, replyForm.admin_notes)}
                       disabled={actionLoading}
-                      className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-bold hover:bg-red-500/20 transition-colors disabled:opacity-60"
+                      className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 text-sm font-bold hover:bg-red-500/20 transition-colors disabled:opacity-60"
                     >
                       <XCircle size={12} /> ปฏิเสธ
                     </button>
@@ -394,7 +394,7 @@ const AdminDocumentManager = () => {
           <div className="flex justify-end">
             <button
               onClick={() => setShowUploadForm(!showUploadForm)}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors"
             >
               <Plus size={14} /> เพิ่มเอกสาร
             </button>
@@ -406,7 +406,7 @@ const AdminDocumentManager = () => {
               <h3 className="text-sm font-bold text-foreground">เพิ่มเอกสารเข้าคลัง</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-foreground mb-1">ประเภทเอกสาร</label>
+                  <label className="block text-sm font-medium text-foreground mb-1">ประเภทเอกสาร</label>
                   <select
                     value={uploadForm.document_type}
                     onChange={(e) => setUploadForm((f) => ({ ...f, document_type: e.target.value }))}
@@ -418,7 +418,7 @@ const AdminDocumentManager = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-foreground mb-1">ชื่อเอกสาร *</label>
+                  <label className="block text-sm font-medium text-foreground mb-1">ชื่อเอกสาร *</label>
                   <input
                     value={uploadForm.title}
                     onChange={(e) => setUploadForm((f) => ({ ...f, title: e.target.value }))}
@@ -427,7 +427,7 @@ const AdminDocumentManager = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-foreground mb-1">URL ไฟล์ *</label>
+                  <label className="block text-sm font-medium text-foreground mb-1">URL ไฟล์ *</label>
                   <input
                     value={uploadForm.file_url}
                     onChange={(e) => setUploadForm((f) => ({ ...f, file_url: e.target.value }))}
@@ -436,7 +436,7 @@ const AdminDocumentManager = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-foreground mb-1">รุ่นสินค้า (ถ้ามี)</label>
+                  <label className="block text-sm font-medium text-foreground mb-1">รุ่นสินค้า (ถ้ามี)</label>
                   <input
                     value={uploadForm.product_model}
                     onChange={(e) => setUploadForm((f) => ({ ...f, product_model: e.target.value }))}
@@ -445,7 +445,7 @@ const AdminDocumentManager = () => {
                   />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-medium text-foreground mb-1">คำอธิบาย</label>
+                  <label className="block text-sm font-medium text-foreground mb-1">คำอธิบาย</label>
                   <input
                     value={uploadForm.description}
                     onChange={(e) => setUploadForm((f) => ({ ...f, description: e.target.value }))}
@@ -467,7 +467,7 @@ const AdminDocumentManager = () => {
                 <button
                   onClick={handleUploadToLibrary}
                   disabled={uploadLoading}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition-colors disabled:opacity-60"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60"
                 >
                   {uploadLoading ? <Loader2 size={12} className="animate-spin" /> : <Upload size={12} />}
                   บันทึก
@@ -503,19 +503,19 @@ const AdminDocumentManager = () => {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-foreground">{item.title}</span>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-secondary text-muted-foreground">
+                        <span className="text-sm font-bold text-foreground">{item.title}</span>
+                        <span className="text-xs px-1.5 py-0.5 rounded-full bg-secondary text-muted-foreground">
                           {DOC_TYPE_LABELS[item.document_type] || item.document_type}
                         </span>
                         {item.is_public && (
-                          <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">
+                          <span className="text-xs px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">
                             สาธารณะ
                           </span>
                         )}
                       </div>
-                      {item.description && <p className="text-[11px] text-muted-foreground mt-0.5">{item.description}</p>}
-                      {item.product_model && <p className="text-[10px] text-muted-foreground">รุ่น: {item.product_model}</p>}
-                      <p className="text-[10px] text-muted-foreground/60 mt-1">
+                      {item.description && <p className="text-xs text-muted-foreground mt-0.5">{item.description}</p>}
+                      {item.product_model && <p className="text-xs text-muted-foreground">รุ่น: {item.product_model}</p>}
+                      <p className="text-xs text-muted-foreground/60 mt-1">
                         ดาวน์โหลด {item.download_count} ครั้ง · {formatDate(item.created_at)}
                       </p>
                     </div>

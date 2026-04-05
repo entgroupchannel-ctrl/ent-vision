@@ -304,7 +304,7 @@ const AdminQuoteReview = () => {
             <button
               key={f.value}
               onClick={() => setStatusFilter(f.value)}
-              className={`px-2.5 py-1 rounded-lg text-[11px] font-medium transition-colors ${
+              className={`px-2.5 py-1 rounded-lg text-sm font-medium transition-colors ${
                 statusFilter === f.value ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary/60"
               }`}
             >
@@ -312,7 +312,7 @@ const AdminQuoteReview = () => {
             </button>
           ))}
         </div>
-        <button onClick={fetchQuotes} className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
+        <button onClick={fetchQuotes} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
           <RefreshCw size={12} className={loading ? "animate-spin" : ""} /> รีเฟรช
         </button>
       </div>
@@ -325,7 +325,7 @@ const AdminQuoteReview = () => {
               <Loader2 size={20} className="animate-spin text-muted-foreground" />
             </div>
           ) : filteredQuotes.length === 0 ? (
-            <div className="card-surface rounded-xl p-8 text-center text-muted-foreground text-xs">ไม่มีใบเสนอราคา</div>
+            <div className="card-surface rounded-xl p-10 text-center text-muted-foreground text-sm">ไม่มีใบเสนอราคา</div>
           ) : (
             filteredQuotes.map((q) => {
               const status = STATUS_CONFIG[q.status] || STATUS_CONFIG.new;
@@ -339,19 +339,19 @@ const AdminQuoteReview = () => {
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-bold text-foreground">{q.quote_number || "Q-draft"}</span>
-                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full border font-medium ${status.color}`}>
+                    <span className="text-base font-bold text-foreground">{q.quote_number || "Q-draft"}</span>
+                    <span className={`text-xs px-1.5 py-0.5 rounded-full border font-medium ${status.color}`}>
                       {status.label}
                     </span>
                     {q.customer_response === "accepted" && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">ลูกค้ายอมรับ</span>
+                      <span className="text-xs px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">ลูกค้ายอมรับ</span>
                     )}
                   </div>
-                  <p className="text-[11px] text-muted-foreground">{q.name} · {q.company || q.email}</p>
+                  <p className="text-sm text-muted-foreground">{q.name} · {q.company || q.email}</p>
                   <div className="flex items-center gap-3 mt-1">
-                    <span className="text-[10px] text-muted-foreground">{formatDate(q.created_at)}</span>
+                    <span className="text-sm text-muted-foreground">{formatDate(q.created_at)}</span>
                     {q.grand_total > 0 && (
-                      <span className="text-[10px] font-bold text-primary">฿{formatPrice(q.grand_total)}</span>
+                      <span className="text-sm font-bold text-primary">฿{formatPrice(q.grand_total)}</span>
                     )}
                   </div>
                 </button>
@@ -366,12 +366,12 @@ const AdminQuoteReview = () => {
             <div className="card-surface rounded-xl p-4 space-y-4 sticky top-24">
               {/* Customer info */}
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-foreground">{selectedQuote.quote_number || "Draft"}</h3>
-                <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${(STATUS_CONFIG[selectedQuote.status] || STATUS_CONFIG.new).color}`}>
+                <h3 className="text-base font-bold text-foreground">{selectedQuote.quote_number || "Draft"}</h3>
+                <span className={`text-xs px-2 py-0.5 rounded-full border font-medium ${(STATUS_CONFIG[selectedQuote.status] || STATUS_CONFIG.new).color}`}>
                   {(STATUS_CONFIG[selectedQuote.status] || STATUS_CONFIG.new).label}
                 </span>
               </div>
-              <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="grid grid-cols-2 gap-3 text-sm">
                 <span className="flex items-center gap-1 text-muted-foreground"><User size={11} /> {selectedQuote.name}</span>
                 <span className="flex items-center gap-1 text-muted-foreground"><Mail size={11} /> {selectedQuote.email}</span>
                 {selectedQuote.company && <span className="flex items-center gap-1 text-muted-foreground"><Building2 size={11} /> {selectedQuote.company}</span>}
@@ -381,8 +381,8 @@ const AdminQuoteReview = () => {
               {/* Line Items */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="text-xs font-bold text-foreground">รายการสินค้า</h4>
-                  <button onClick={addLineItem} className="flex items-center gap-1 text-[10px] text-primary hover:underline">
+                  <h4 className="text-base font-bold text-foreground">รายการสินค้า</h4>
+                  <button onClick={addLineItem} className="flex items-center gap-1.5 text-sm text-primary hover:underline">
                     <Plus size={10} /> เพิ่มรายการ
                   </button>
                 </div>
@@ -393,11 +393,11 @@ const AdminQuoteReview = () => {
                     {lineItems.map((item, i) => (
                       <div key={item.id} className="p-2.5 rounded-lg border border-border bg-secondary/10 space-y-2">
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] text-muted-foreground w-4 shrink-0">{i + 1}.</span>
+                          <span className="text-sm text-muted-foreground w-5 shrink-0">{i + 1}.</span>
                           <select
                             value={item.product_id || ""}
                             onChange={(e) => e.target.value ? selectCatalogProduct(i, e.target.value) : null}
-                            className={`${inputClass} text-xs flex-1`}
+                            className={`${inputClass} text-sm flex-1`}
                           >
                             <option value="">เลือกจาก catalog...</option>
                             {catalogProducts.map((cp) => (
@@ -410,20 +410,20 @@ const AdminQuoteReview = () => {
                         </div>
                         <div className="grid grid-cols-4 gap-2">
                           <div>
-                            <label className="text-[9px] text-muted-foreground">รุ่น</label>
-                            <input value={item.model} onChange={(e) => updateLineItem(i, "model", e.target.value)} className={`${inputClass} text-xs`} />
+                            <label className="text-sm text-muted-foreground">รุ่น</label>
+                            <input value={item.model} onChange={(e) => updateLineItem(i, "model", e.target.value)} className={`${inputClass} text-sm`} />
                           </div>
                           <div>
-                            <label className="text-[9px] text-muted-foreground">จำนวน</label>
-                            <input type="number" min="1" value={item.qty} onChange={(e) => updateLineItem(i, "qty", parseInt(e.target.value) || 1)} className={`${inputClass} text-xs`} />
+                            <label className="text-sm text-muted-foreground">จำนวน</label>
+                            <input type="number" min="1" value={item.qty} onChange={(e) => updateLineItem(i, "qty", parseInt(e.target.value) || 1)} className={`${inputClass} text-sm`} />
                           </div>
                           <div>
-                            <label className="text-[9px] text-muted-foreground">ราคา/หน่วย</label>
-                            <input type="number" value={item.unit_price} onChange={(e) => updateLineItem(i, "unit_price", parseFloat(e.target.value) || 0)} className={`${inputClass} text-xs`} />
+                            <label className="text-sm text-muted-foreground">ราคา/หน่วย</label>
+                            <input type="number" value={item.unit_price} onChange={(e) => updateLineItem(i, "unit_price", parseFloat(e.target.value) || 0)} className={`${inputClass} text-sm`} />
                           </div>
                           <div>
-                            <label className="text-[9px] text-muted-foreground">ส่วนลด %</label>
-                            <input type="number" min="0" max="100" value={item.discount_percent} onChange={(e) => updateLineItem(i, "discount_percent", parseFloat(e.target.value) || 0)} className={`${inputClass} text-xs`} />
+                            <label className="text-sm text-muted-foreground">ส่วนลด %</label>
+                            <input type="number" min="0" max="100" value={item.discount_percent} onChange={(e) => updateLineItem(i, "discount_percent", parseFloat(e.target.value) || 0)} className={`${inputClass} text-sm`} />
                           </div>
                         </div>
                         <div className="text-right text-xs font-bold text-primary">
@@ -459,20 +459,20 @@ const AdminQuoteReview = () => {
               {/* Terms */}
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="text-[10px] text-muted-foreground">ราคาใช้ได้ถึง</label>
-                  <input type="date" value={quoteEdit.valid_until} onChange={(e) => setQuoteEdit((f) => ({ ...f, valid_until: e.target.value }))} className={`${inputClass} text-xs`} />
+                  <label className="text-sm text-muted-foreground">ราคาใช้ได้ถึง</label>
+                  <input type="date" value={quoteEdit.valid_until} onChange={(e) => setQuoteEdit((f) => ({ ...f, valid_until: e.target.value }))} className={`${inputClass} text-sm`} />
                 </div>
                 <div>
-                  <label className="text-[10px] text-muted-foreground">เงื่อนไขชำระ</label>
-                  <input value={quoteEdit.payment_terms} onChange={(e) => setQuoteEdit((f) => ({ ...f, payment_terms: e.target.value }))} className={`${inputClass} text-xs`} placeholder="30 วันหลังส่งมอบ" />
+                  <label className="text-sm text-muted-foreground">เงื่อนไขชำระ</label>
+                  <input value={quoteEdit.payment_terms} onChange={(e) => setQuoteEdit((f) => ({ ...f, payment_terms: e.target.value }))} className={`${inputClass} text-sm`} placeholder="30 วันหลังส่งมอบ" />
                 </div>
                 <div>
-                  <label className="text-[10px] text-muted-foreground">เงื่อนไขจัดส่ง</label>
-                  <input value={quoteEdit.delivery_terms} onChange={(e) => setQuoteEdit((f) => ({ ...f, delivery_terms: e.target.value }))} className={`${inputClass} text-xs`} placeholder="ส่งฟรีทั่วประเทศ" />
+                  <label className="text-sm text-muted-foreground">เงื่อนไขจัดส่ง</label>
+                  <input value={quoteEdit.delivery_terms} onChange={(e) => setQuoteEdit((f) => ({ ...f, delivery_terms: e.target.value }))} className={`${inputClass} text-sm`} placeholder="ส่งฟรีทั่วประเทศ" />
                 </div>
                 <div>
-                  <label className="text-[10px] text-muted-foreground">URL ไฟล์ PDF</label>
-                  <input value={quoteEdit.pdf_url} onChange={(e) => setQuoteEdit((f) => ({ ...f, pdf_url: e.target.value }))} className={`${inputClass} text-xs`} placeholder="https://..." />
+                  <label className="text-sm text-muted-foreground">URL ไฟล์ PDF</label>
+                  <input value={quoteEdit.pdf_url} onChange={(e) => setQuoteEdit((f) => ({ ...f, pdf_url: e.target.value }))} className={`${inputClass} text-sm`} placeholder="https://..." />
                 </div>
               </div>
 
@@ -481,7 +481,7 @@ const AdminQuoteReview = () => {
                 <button
                   onClick={handleApprove}
                   disabled={saving || lineItems.length === 0}
-                  className="flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition-colors disabled:opacity-60"
+                  className="flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60"
                 >
                   {saving ? <Loader2 size={12} className="animate-spin" /> : <CheckCircle size={12} />}
                   อนุมัติ + ส่งราคาให้ลูกค้า
@@ -489,7 +489,7 @@ const AdminQuoteReview = () => {
               </div>
             </div>
           ) : (
-            <div className="card-surface rounded-xl p-8 text-center text-muted-foreground text-xs">
+            <div className="card-surface rounded-xl p-10 text-center text-muted-foreground text-sm">
               <Eye size={24} className="mx-auto mb-2 opacity-30" />
               เลือกใบเสนอราคาเพื่อตรวจสอบ
             </div>
