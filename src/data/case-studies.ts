@@ -6,7 +6,7 @@ export interface CaseStudy {
   challenge: string;
   solution: string;
   results: string[];
-  products: string[];
+  products: { name: string; path?: string }[];
   image: string;
   logo?: string;
   testimonial?: string;
@@ -14,6 +14,7 @@ export interface CaseStudy {
   testimonialRole?: string;
   externalLinks?: { label: string; url: string }[];
   internalLinks?: { label: string; path: string }[];
+  youtubeVideos?: { title: string; videoId: string }[];
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -29,11 +30,25 @@ export const caseStudies: CaseStudy[] = [
       "เพิ่ม OEE (Overall Equipment Effectiveness) จาก 72% เป็น 89%",
       "ROI คืนทุนภายใน 8 เดือน",
     ],
-    products: ["GT Series Panel PC 15\"", "GT Series Panel PC 21\""],
+    products: [
+      { name: "GT Series Panel PC 15\"", path: "/gt-series" },
+      { name: "GT Series Panel PC 21\"", path: "/gt-series" },
+    ],
     image: "https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&q=80",
     testimonial: "ระบบทำงานได้เสถียรมาก ไม่เคยมี Downtime จากฝั่ง Hardware เลยตลอด 2 ปีที่ใช้งาน",
     testimonialAuthor: "ผู้จัดการฝ่ายผลิต",
     testimonialRole: "โรงงานชิ้นส่วนยานยนต์ ระยอง",
+    youtubeVideos: [
+      { title: "GT Series Panel PC สำหรับงานโรงงาน", videoId: "GVAwUx4_eO0" },
+    ],
+    internalLinks: [
+      { label: "ดู GT Series ทั้งหมด", path: "/gt-series" },
+      { label: "ดู GK Series Panel PC", path: "/gk-series" },
+    ],
+    externalLinks: [
+      { label: "ดูข้อมูลเพิ่มเติมที่ ENT Group", url: "https://therdpume.wixsite.com/entgroup/gt-series" },
+      { label: "📦 ติดตามการส่งมอบสินค้าจริง", url: "https://www.facebook.com/entgroup.th/" },
+    ],
   },
   {
     id: "hospital-mini-pc-thin-client",
@@ -47,11 +62,20 @@ export const caseStudies: CaseStudy[] = [
       "ลดค่าบำรุงรักษา IT ลง 70% ต่อปี",
       "Zero Downtime จาก Hardware failure ในปีแรก",
     ],
-    products: ["vCloudPoint S100", "vCloudPoint V100"],
+    products: [
+      { name: "vCloudPoint S100", path: "/vcloudpoint" },
+      { name: "vCloudPoint V100", path: "/vcloudpoint" },
+    ],
     image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80",
     testimonial: "ช่วยลดภาระงาน IT ได้อย่างมาก สามารถ Deploy จุดบริการใหม่ได้ภายใน 5 นาที",
     testimonialAuthor: "ผู้อำนวยการฝ่าย IT",
     testimonialRole: "โรงพยาบาลเอกชน กรุงเทพฯ",
+    internalLinks: [
+      { label: "ดู vCloudPoint ทั้งหมด", path: "/vcloudpoint" },
+    ],
+    externalLinks: [
+      { label: "📦 ติดตามความเคลื่อนไหว ENT Group", url: "https://www.facebook.com/entgroup.th/" },
+    ],
   },
   {
     id: "warehouse-rugged-tablet",
@@ -65,11 +89,21 @@ export const caseStudies: CaseStudy[] = [
       "เพิ่มความเร็วในการหยิบสินค้า 40%",
       "Tablet ทนทานต่อการตกจากความสูง 1.2 เมตร ลดค่าซ่อมอุปกรณ์",
     ],
-    products: ["EM-T195 Rugged Tablet 5G"],
+    products: [
+      { name: "EM-T195 Rugged Tablet 5G", path: "/rugged-tablet/em-t195" },
+    ],
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
     testimonial: "จาก Pick Error เกือบ 4% ตอนนี้เหลือไม่ถึง 0.1% ลูกค้าพอใจมาก",
     testimonialAuthor: "Warehouse Manager",
     testimonialRole: "บริษัทโลจิสติกส์ สมุทรปราการ",
+    internalLinks: [
+      { label: "ดู Rugged Tablet ทั้งหมด", path: "/rugged-tablet" },
+      { label: "ดู Handheld ทั้งหมด", path: "/handheld" },
+    ],
+    externalLinks: [
+      { label: "ดูข้อมูล Rugged Devices เพิ่มเติม", url: "https://entgroup-rugged.com/" },
+      { label: "📦 ติดตามการส่งมอบสินค้าจริง", url: "https://www.facebook.com/entgroup.th/" },
+    ],
   },
   {
     id: "food-factory-waterproof-pc",
@@ -83,8 +117,16 @@ export const caseStudies: CaseStudy[] = [
       "ลดค่าซ่อมอุปกรณ์ลง 90% เทียบกับ PC ทั่วไป",
       "บันทึกข้อมูลคุณภาพแบบ Digital 100% ตอบสนอง Audit ได้ทันที",
     ],
-    products: ["Waterproof Panel PC IP69K"],
+    products: [
+      { name: "Waterproof Panel PC IP69K", path: "/waterproof-pc" },
+    ],
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
+    internalLinks: [
+      { label: "ดู Waterproof PC ทั้งหมด", path: "/waterproof-pc" },
+    ],
+    externalLinks: [
+      { label: "ดูข้อมูลเพิ่มเติมที่ ENT Group", url: "https://therdpume.wixsite.com/entgroup/wp-pc" },
+    ],
   },
   {
     id: "school-aio-computer-lab",
@@ -98,8 +140,13 @@ export const caseStudies: CaseStudy[] = [
       "ลดปัญหาสายไฟ/สายต่อหลุดจาก 10 ครั้ง/เดือนเหลือ 0",
       "นักเรียนเข้าถึงเทคโนโลยีได้ทั่วถึงทุกคน",
     ],
-    products: ["All-in-One PC 21.5\""],
+    products: [
+      { name: "All-in-One PC 21.5\"", path: "/aio" },
+    ],
     image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80",
+    internalLinks: [
+      { label: "ดู All-in-One PC ทั้งหมด", path: "/aio" },
+    ],
   },
   {
     id: "construction-rugged-notebook",
@@ -113,8 +160,16 @@ export const caseStudies: CaseStudy[] = [
       "ทำงานกลางแดดได้ชัดเจน เพิ่มประสิทธิภาพทีมภาคสนาม",
       "อุปกรณ์ใช้งานได้ต่อเนื่อง 3 ปีโดยไม่มีปัญหา Hardware",
     ],
-    products: ["Rugged Notebook MIL-STD-810H"],
+    products: [
+      { name: "Rugged Notebook MIL-STD-810H", path: "/rugged-notebook" },
+    ],
     image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
+    internalLinks: [
+      { label: "ดู Rugged Notebook ทั้งหมด", path: "/rugged-notebook" },
+    ],
+    externalLinks: [
+      { label: "ดูข้อมูล Rugged Devices เพิ่มเติม", url: "https://entgroup-rugged.com/" },
+    ],
   },
   {
     id: "ai-classroom-nvidia-jetson",
@@ -129,13 +184,19 @@ export const caseStudies: CaseStudy[] = [
       "รองรับหลักสูตร AI ตั้งแต่พื้นฐานจนถึง Edge AI Deployment",
       "สร้างโปรเจกต์จริง เช่น ระบบนับคน, ตรวจจับวัตถุ, หุ่นยนต์อัตโนมัติ",
     ],
-    products: ["NVIDIA Jetson Orin Nano", "NVIDIA Jetson Orin NX", "iBox Edge AI Computer"],
+    products: [
+      { name: "NVIDIA Jetson Orin Nano" },
+      { name: "NVIDIA Jetson Orin NX" },
+      { name: "iBox Edge AI Computer", path: "/ibox-series" },
+    ],
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80",
     testimonial: "นักศึกษาได้ลงมือทำจริงกับ Hardware AI ระดับอุตสาหกรรม ไม่ใช่แค่เรียนทฤษฎี ผลงานโปรเจกต์จบปีนี้ก้าวกระโดดมาก",
     testimonialAuthor: "หัวหน้าภาควิชาวิศวกรรมคอมพิวเตอร์",
     testimonialRole: "มหาวิทยาลัยเทคโนโลยี กรุงเทพฯ",
     externalLinks: [
-      { label: "ดูสินค้า NVIDIA Jetson ทั้งหมด", url: "https://nvidia-jetson.com/" },
+      { label: "🌐 ดูสินค้า NVIDIA Jetson ทั้งหมด", url: "https://nvidia-jetson.com/" },
+      { label: "🎬 ดูวิดีโอสาธิต NVIDIA Jetson", url: "https://nvidia-jetson.com/products" },
+      { label: "📦 ติดตามความเคลื่อนไหว ENT Group", url: "https://www.facebook.com/entgroup.th/" },
     ],
     internalLinks: [
       { label: "ดู iBox Series — Edge AI Computer", path: "/ibox-series" },
