@@ -9,6 +9,7 @@ import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, F
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Checkbox } from "@/components/ui/checkbox";
 import QuoteDialog from "@/components/QuoteDialog";
+import AddToQuoteButton from "@/components/AddToQuoteButton";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import { LineQRDialog } from "@/components/LineQRDialog";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -676,7 +677,7 @@ const GTSeries = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background">
       <SEOHead title="GT Series — Industrial Fanless Mini PC 12 รุ่น" description="GT Series คอมพิวเตอร์อุตสาหกรรม Fanless ทนร้อน ทนฝุ่น 12 รุ่น รองรับ Intel N100 ถึง Core i7 สำหรับโรงงาน IoT Edge Computing ประเทศไทย" path="/gt-series" />
       <ProductJsonLd
         collectionName="GT Series Industrial Fanless Mini PC"
@@ -1125,9 +1126,7 @@ const GTSeries = () => {
                   </table>
                 </div>
                 <div className="p-4 border-t border-border text-center">
-                  <button onClick={() => setQuoteProduct("GT1000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                    <FileText size={16} /> ขอใบเสนอราคา GT1000
-                  </button>
+                  <AddToQuoteButton model="GT1000" category="GT Series — Mini PC" productName="GT1000 Mini PC" />
                 </div>
               </div>
 
@@ -1589,9 +1588,7 @@ const GTSeries = () => {
                    </table>
                 </div>
                 <div className="p-4 border-t border-border text-center">
-                  <button onClick={() => setQuoteProduct("GT2000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                    <FileText size={16} /> ขอใบเสนอราคา GT2000
-                  </button>
+                  <AddToQuoteButton model="GT2000" category="GT Series — Mini PC" productName="GT2000 Mini PC" />
                 </div>
               </div>
 
@@ -2152,9 +2149,7 @@ const GTSeries = () => {
                       <AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup
                     </div>
                     <div className="p-4 border-t border-border text-center">
-                      <button onClick={() => setQuoteProduct("GT3000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg">
-                        <FileText size={16} /> ขอใบเสนอราคา GT3000
-                      </button>
+                      <AddToQuoteButton model="GT3000" category="GT Series — Mini PC" productName="GT3000 Mini PC" />
                     </div>
                   </div>
                 );
@@ -2410,9 +2405,7 @@ const GTSeries = () => {
                    </table>
                 </div>
                 <div className="p-4 border-t border-border text-center">
-                  <button onClick={() => setQuoteProduct("GT4000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                    <FileText size={16} /> ขอใบเสนอราคา GT4000
-                  </button>
+                  <AddToQuoteButton model="GT4000" category="GT Series — Mini PC" productName="GT4000 Mini PC" />
                 </div>
               </div>
 
@@ -2967,9 +2960,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                    </table>
                 </div>
                 <div className="p-4 border-t border-border text-center">
-                  <button onClick={() => setQuoteProduct("GT5000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                    <FileText size={16} /> ขอใบเสนอราคา GT5000
-                  </button>
+                  <AddToQuoteButton model="GT5000" category="GT Series — Mini PC" productName="GT5000 Mini PC" />
                 </div>
               </div>
 

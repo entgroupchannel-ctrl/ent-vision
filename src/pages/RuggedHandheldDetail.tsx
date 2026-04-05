@@ -15,6 +15,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import AddToQuoteButton from "@/components/AddToQuoteButton";
 import WishlistHeart from "@/components/WishlistHeart";
 import ProductGallery from "@/components/ProductGallery";
 import { getHandheldProduct, getRelatedHandhelds } from "@/data/rugged-handheld-products";
@@ -71,11 +72,12 @@ const RuggedHandheldDetail = () => {
   const product = id ? getHandheldProduct(id) : undefined;
   const related = id ? getRelatedHandhelds(id) : [];
 
+  // ── Engagement Tracking: product view ──
   useEffect(() => {
     if (product) {
       trackEvent({
         eventType: "product_view",
-        productId: product.id,
+        productSlug: product.id,
         productCategory: "Rugged Handheld",
         productName: product.model,
       });
@@ -94,7 +96,7 @@ const RuggedHandheldDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background">
       <SEOHead
         title={`${product.model} — ${product.name}`}
         description={`${product.nameTH} | ${product.specs.cpu} | ${product.specs.protection}`}
@@ -230,8 +232,13 @@ const RuggedHandheldDetail = () => {
 
             {/* CTA */}
             <div className="flex flex-wrap gap-3 pt-4 border-t border-border">
-              <Button size="lg" className="flex-1" onClick={() => setQuoteProduct(product.model)}>
-                <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
+              <AddToQuoteButton
+                model={product.model}
+                category="Rugged Handheld"
+                productName={product.model}
+              />
+              <Button size="lg" variant="outline" onClick={() => setQuoteProduct(product.model)}>
+                <FileText className="w-5 h-5 mr-2" /> ขอราคาด่วน
               </Button>
               <LineQRButton className="flex-1 h-11 text-base">
                 <MessageSquare className="w-4 h-4" /> สอบถามราคาพิเศษ

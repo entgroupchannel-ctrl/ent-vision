@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { useEngagementTracker } from "@/hooks/useEngagementTracker";
+import { useQuoteCart } from "@/hooks/useQuoteCart";
 
 // ─── Types ───
 interface CatalogProduct {
@@ -64,11 +65,12 @@ const TUTORIAL_KEY = "ent_quote_tutorial_done";
 const inputClass =
   "w-full px-3 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
 
-const UserQuoteCreate = ({ onNavigate }: { onNavigate?: (tab: string) => void }) => {
+const UserQuoteCreate = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { trackEvent } = useEngagementTracker();
+  const globalCart = useQuoteCart();
 
   // Tutorial
   const [showTutorial, setShowTutorial] = useState(false);
@@ -85,6 +87,30 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: (tab: string) => void })
   const [cart, setCart] = useState<CartItem[]>([]);
   const [generalNotes, setGeneralNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  // Pre-fill cart from global QuoteCart (items added from product pages)
+  useEffect(() => {
+    if (globalCart.items.length > 0 && cart.length === 0) {
+      const prefilled: CartItem[] = globalCart.items.map((item) => ({
+        product: item.catalogProductId ? {
+          id: item.catalogProductId,
+          model: item.model,
+          name_th: item.productName,
+          category: item.category,
+          base_price: item.unitPrice,
+          specs: item.specs,
+          min_qty: 1,
+          lead_days: 7,
+        } : null,
+        customModel: item.model,
+        customCategory: item.category,
+        qty: item.qty,
+        unitPrice: item.unitPrice,
+        notes: "",
+      }));
+      setCart(prefilled);
+    }
+  }, [globalCart.items]);
 
   // Check if first time
   useEffect(() => {
@@ -230,14 +256,15 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: (tab: string) => void })
       cart.forEach((item) => {
         trackEvent({
           eventType: "quote_request",
-          productName: item.customModel,
+          productSlug: item.customModel,
           productCategory: item.customCategory,
           metadata: { qty: item.qty, price: item.unitPrice },
         });
       });
 
       toast({ title: "ส่งคำขอใบเสนอราคาเรียบร้อย!", description: "ทีมขายจะตรวจสอบและอนุมัติให้" });
-      if (onNavigate) { onNavigate("quotes"); } else { navigate("/my-account/quotes"); }
+      globalCart.clearCart();
+      navigate("/my-account/quotes");
     } catch (err: any) {
       toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
     } finally {

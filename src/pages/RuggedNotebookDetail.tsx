@@ -15,6 +15,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import AddToQuoteButton from "@/components/AddToQuoteButton";
 import WishlistHeart from "@/components/WishlistHeart";
 import ProductGallery from "@/components/ProductGallery";
 import QuoteButton from "@/components/QuoteButton";
@@ -52,11 +53,12 @@ const RuggedNotebookDetail = () => {
   const nb = id ? getNotebook(id) : undefined;
   const related = id ? getRelatedNotebooks(id) : [];
 
+  // ── Engagement Tracking: product view ──
   useEffect(() => {
     if (nb) {
       trackEvent({
         eventType: "product_view",
-        productId: nb.id,
+        productSlug: nb.id,
         productCategory: "Rugged Notebook",
         productName: nb.model,
       });
@@ -75,7 +77,7 @@ const RuggedNotebookDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background">
       <SEOHead
         title={`${nb.model} — ${nb.title}`}
         description={`${nb.titleTH} | ${nb.cpu} | ${nb.protection}`}
@@ -177,8 +179,13 @@ const RuggedNotebookDetail = () => {
 
             {/* CTA */}
             <div className="flex flex-wrap gap-3 pt-4 border-t border-border">
-              <Button size="lg" className="flex-1" onClick={() => setQuoteOpen(true)}>
-                <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
+              <AddToQuoteButton
+                model={nb.model}
+                category="Rugged Notebook"
+                productName={nb.model}
+              />
+              <Button size="lg" variant="outline" onClick={() => setQuoteOpen(true)}>
+                <FileText className="w-5 h-5 mr-2" /> ขอราคาด่วน
               </Button>
               <LineQRButton className="flex-1 h-11 text-base">
                 <MessageSquare className="w-4 h-4" /> สอบถามทาง LINE
