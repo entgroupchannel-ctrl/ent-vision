@@ -378,7 +378,6 @@ const ProductSelectionTable = ({ products }: { products: typeof productSelection
     <table className="w-full text-sm">
       <thead>
         <tr className="bg-primary/10 border-b border-border">
-          <th className="text-left px-4 py-3 font-semibold text-foreground w-12">No.</th>
           <th className="text-left px-4 py-3 font-semibold text-foreground">Model</th>
           <th className="text-left px-4 py-3 font-semibold text-foreground">CPU</th>
           <th className="text-left px-4 py-3 font-semibold text-foreground">Memory</th>
@@ -388,7 +387,6 @@ const ProductSelectionTable = ({ products }: { products: typeof productSelection
       <tbody className="divide-y divide-border">
         {products.map((p) => (
           <tr key={`${p.model}-${p.partNo}`} className="hover:bg-muted/30 transition-colors">
-            <td className="px-4 py-3 text-muted-foreground">{p.no}</td>
             <td className="px-4 py-3 font-medium text-primary">{p.model}</td>
             <td className="px-4 py-3 text-foreground">{p.cpu}</td>
             <td className="px-4 py-3 text-muted-foreground">{p.memory}</td>
