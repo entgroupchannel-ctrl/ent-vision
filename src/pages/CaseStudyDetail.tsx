@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { ArrowLeft, Factory, CheckCircle, Quote, FileText, ExternalLink, ArrowRight } from "lucide-react";
+import { ArrowLeft, Factory, CheckCircle, Quote, FileText, ExternalLink, ArrowRight, Play } from "lucide-react";
 import { caseStudies } from "@/data/case-studies";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -98,6 +98,40 @@ const CaseStudyDetail = () => {
                 </CardContent>
               </Card>
             )}
+
+            {/* YouTube Videos */}
+            {cs.youtubeVideos && cs.youtubeVideos.length > 0 && (
+              <section>
+                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <Play className="w-5 h-5 text-destructive" /> วิดีโอที่เกี่ยวข้อง
+                </h2>
+                <div className="grid gap-4">
+                  {cs.youtubeVideos.map((v) => (
+                    <div key={v.videoId} className="rounded-lg overflow-hidden border border-border/60">
+                      <div className="aspect-video">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${v.videoId}`}
+                          title={v.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                          loading="lazy"
+                        />
+                      </div>
+                      <p className="text-sm font-medium text-foreground p-3">{v.title}</p>
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href="https://www.youtube.com/@ENTGROUP-TH"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-primary font-medium mt-3 hover:underline"
+                >
+                  <Play className="w-4 h-4" /> ดูวิดีโอทั้งหมดบน YouTube Channel
+                </a>
+              </section>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -106,9 +140,15 @@ const CaseStudyDetail = () => {
               <CardContent className="p-5 space-y-4">
                 <h3 className="font-bold text-foreground">สินค้าที่ใช้</h3>
                 <div className="flex flex-wrap gap-2">
-                  {cs.products.map((p) => (
-                    <Badge key={p} variant="secondary">{p}</Badge>
-                  ))}
+                  {cs.products.map((p) =>
+                    p.path ? (
+                      <Link key={p.name} to={p.path}>
+                        <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">{p.name}</Badge>
+                      </Link>
+                    ) : (
+                      <Badge key={p.name} variant="secondary">{p.name}</Badge>
+                    )
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -155,7 +195,7 @@ const CaseStudyDetail = () => {
         open={showQuote}
         onClose={() => setShowQuote(false)}
         productCategory={cs.industry}
-        initialProducts={cs.products.map((p) => ({ category: cs.industry, model: p, qty: 1 }))}
+        initialProducts={cs.products.map((p) => ({ category: cs.industry, model: p.name, qty: 1 }))}
       />
 
       <Footer />
