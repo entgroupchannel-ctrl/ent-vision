@@ -24,13 +24,13 @@ const highlights = [
 
 const SoftwareSection = () => {
   return (
-    <section className="section-padding relative overflow-hidden" id="services">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary/5 blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/4" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-accent/5 blur-3xl pointer-events-none translate-y-1/2 -translate-x-1/4" />
+    <section className="section-padding relative isolate overflow-hidden" id="services">
+      {/* Background decoration — z-0 so they stay behind all content */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 via-background to-accent/5 pointer-events-none" />
+      <div className="absolute top-0 right-0 -z-10 w-[500px] h-[500px] rounded-full bg-primary/5 blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/4" />
+      <div className="absolute bottom-0 left-0 -z-10 w-[400px] h-[400px] rounded-full bg-accent/5 blur-3xl pointer-events-none translate-y-1/2 -translate-x-1/4" />
 
-      <div className="container max-w-7xl mx-auto relative z-10">
+      <div className="container max-w-7xl mx-auto relative">
         {/* Header */}
         <div className="text-center mb-12 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-4">
