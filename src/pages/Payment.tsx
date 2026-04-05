@@ -37,8 +37,12 @@ const Payment = () => {
       {/* Compact Header */}
       <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-background border-b border-border">
         <div className="container max-w-5xl mx-auto px-4 py-4">
-          <Link to="/" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors mb-3">
-            <ArrowLeft size={14} /> หน้าแรก
+          <div className="flex items-center justify-between mb-3">
+            <Link to="/" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
+              <ArrowLeft size={14} /> หน้าแรก
+            </Link>
+            <ThemeToggle />
+          </div>
           </Link>
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
