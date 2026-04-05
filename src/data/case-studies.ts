@@ -116,7 +116,7 @@ export const caseStudies: CaseStudy[] = [
       { name: "GT Series Panel PC", path: "/gt-series" },
       { name: "Volktek Network Switch", path: "/volktek" },
     ],
-    image: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=800&q=80",
+    image: "/src/assets/case-shoe-factory-hero.jpg",
     facebookVideoId: "996005083891871",
     externalLinks: [
       { label: "📺 ดูวิดีโอ (Facebook)", url: "https://www.facebook.com/entgroup.th/videos/996005083891871/" },
