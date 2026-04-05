@@ -4,7 +4,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { useState, useCallback } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText, Headphones, ChevronDown, Code, Phone, Star, Quote } from "lucide-react";
+import { ArrowLeft, ExternalLink, Cpu, Thermometer, Wind, Shield, Zap, Server, Factory, Building, Home, Monitor, Download, Play, Filter, X, Search, FileText, Headphones, ChevronDown, Code, Phone, Star, Quote, Target, Palette, Plug, AlertTriangle, Ruler, DollarSign, Wrench, Package, Flame, Fan, Lightbulb, BarChart3, Battery, Bot, Radio, ThermometerSun, Laptop, CircuitBoard } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Checkbox } from "@/components/ui/checkbox";
 import QuoteDialog from "@/components/QuoteDialog";
@@ -519,7 +519,7 @@ const ComparisonTable = ({ handleTabChange }: { handleTabChange: (tab: string) =
                         </span>
                       ) : (
                         <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 text-[10px] font-bold border border-amber-500/30">
-                          🌀 มีพัดลม
+                          <Fan size={12} className="inline mr-0.5" />มีพัดลม
                         </span>
                       )}
                     </td>
@@ -573,7 +573,7 @@ const ComparisonTable = ({ handleTabChange }: { handleTabChange: (tab: string) =
 
         {/* Decision Helper */}
         <div className="p-6 bg-muted/30 border-t border-border">
-          <h4 className="font-bold text-foreground mb-4 text-sm">🎯 เลือกรุ่นไหนดี?</h4>
+          <h4 className="font-bold text-foreground mb-4 text-sm"><Target size={16} className="inline mr-1.5 text-primary" />เลือกรุ่นไหนดี?</h4>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="space-y-2">
               <div className="text-xs font-bold text-emerald-600 dark:text-emerald-400">งบจำกัด / งานเบา</div>
@@ -596,7 +596,7 @@ const ComparisonTable = ({ handleTabChange }: { handleTabChange: (tab: string) =
       </div>
 
       <p className="text-center text-xs text-muted-foreground mt-4">
-        ⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup
+        <AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup
       </p>
     </div>
   );
@@ -619,7 +619,7 @@ const GTSeries = () => {
       {/* Custom Branding Section */}
       <div className="card-surface rounded-xl overflow-hidden">
         <div className="p-6 border-b border-border">
-          <h3 className="text-xl font-display font-bold text-foreground mb-2">🎨 เพิ่มสีสันสดใส ด้วยการทำสีใหม่ให้กับสินค้าของคุณ</h3>
+          <h3 className="text-xl font-display font-bold text-foreground mb-2"><Palette size={18} className="inline mr-1.5 text-primary" />เพิ่มสีสันสดใส ด้วยการทำสีใหม่ให้กับสินค้าของคุณ</h3>
           <p className="text-muted-foreground">สร้างภาพลักษณ์องค์กร — พนักงานภูมิใจที่ได้ใช้ผลิตภัณฑ์ระดับโลก ออกแบบเครื่องให้เข้ากับแบรนด์ของคุณได้อย่างลงตัว</p>
         </div>
         <div className="p-4">
@@ -636,7 +636,7 @@ const GTSeries = () => {
       {/* Use Cases Section */}
       <div className="card-surface rounded-xl overflow-hidden">
         <div className="p-6 border-b border-border">
-          <h3 className="text-xl font-display font-bold text-foreground mb-2">💼 ตัวอย่าง<span className="text-primary">การใช้งาน</span></h3>
+          <h3 className="text-xl font-display font-bold text-foreground mb-2"><Factory size={18} className="inline mr-1.5 text-primary" />ตัวอย่าง<span className="text-primary">การใช้งาน</span></h3>
           <p className="text-muted-foreground">รองรับได้หลากหลายกิจกรรม — โรงงานอุตสาหกรรม, Factory Automation, IOT, KIOSK, HMI, Digital Signage, Queue System, รถโดยสาร, รถไฟฟ้า, ตู้คอนโทรล</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0 divide-x divide-y divide-border">
@@ -728,16 +728,16 @@ const GTSeries = () => {
               {/* Tagline keywords — bold industrial style */}
               <div className="flex flex-wrap gap-3">
                 {[
-                  { word: "ถึก", icon: "🛡️" },
-                  { word: "ทน", icon: "🔥" },
-                  { word: "แกร่ง", icon: "⚙️" },
-                  { word: "แข็งแรง", icon: "💪" },
+                  { word: "ถึก", Icon: Shield },
+                  { word: "ทน", Icon: Flame },
+                  { word: "แกร่ง", Icon: Wrench },
+                  { word: "แข็งแรง", Icon: Zap },
                 ].map((item) => (
                   <span
                     key={item.word}
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary/10 border border-primary/20 text-foreground font-bold text-base tracking-wide"
                   >
-                    <span className="text-lg">{item.icon}</span>
+                    <item.Icon size={18} className="text-primary" />
                     {item.word}
                   </span>
                 ))}
@@ -1123,7 +1123,7 @@ const GTSeries = () => {
               <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border">
                   <h3 className="text-lg font-display font-bold text-foreground">GT1000 Price List</h3>
-                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
+                  <p className="text-xs text-muted-foreground mt-1"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -1166,11 +1166,11 @@ const GTSeries = () => {
               {/* Product Gallery — จากโรงงาน */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
-                  <h4 className="font-bold text-foreground mb-3 text-sm">🖥️ Mainboard และการติดตั้ง</h4>
+                  <h4 className="font-bold text-foreground mb-3 text-sm"><CircuitBoard size={16} className="inline mr-1 text-primary" />Mainboard และการติดตั้ง</h4>
                   <img src="/images/gt1000/ports-front.jpg" alt="GT1000 Mainboard และการติดตั้ง" className="w-full rounded-lg" loading="lazy" />
                 </div>
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
-                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหลัง</h4>
+                  <h4 className="font-bold text-foreground mb-3 text-sm"><Plug size={16} className="inline mr-1 text-primary" />Ports — ด้านหลัง</h4>
                   <img src="/images/gt1000/ports-rear.jpg" alt="GT1000 Ports ด้านหลัง" className="w-full rounded-lg" loading="lazy" />
                 </div>
               </div>
@@ -1428,7 +1428,7 @@ const GTSeries = () => {
               {/* Chassis Cooling Technology */}
               <div className="card-surface p-6 md:p-8">
                 <h4 className="text-xl font-display font-bold text-foreground mb-4">
-                  🌡️ Chassis Cooling Technology
+                  <ThermometerSun size={18} className="inline mr-1 text-primary" />Chassis Cooling Technology
                 </h4>
                 <div className="grid md:grid-cols-2 gap-6 items-center">
                   <div>
@@ -1458,7 +1458,7 @@ const GTSeries = () => {
               {/* CPU Detail */}
               <div className="card-surface p-6 md:p-8">
                 <h4 className="text-xl font-display font-bold text-foreground mb-4">
-                  ⚡ CPU — Intel Celeron 1037U
+                  <Cpu size={18} className="inline mr-1 text-primary" />CPU — Intel Celeron 1037U
                 </h4>
                 <div className="grid md:grid-cols-2 gap-6 items-center">
                   <div className="overflow-hidden rounded-lg">
@@ -1485,7 +1485,7 @@ const GTSeries = () => {
               {/* I/O Port Diagram */}
               <div className="card-surface p-6 md:p-8">
                 <h4 className="text-xl font-display font-bold text-foreground mb-4">
-                  🔌 I/O Port — ครบครันสำหรับงานอุตสาหกรรม
+                  <Plug size={18} className="inline mr-1 text-primary" />I/O Port — ครบครันสำหรับงานอุตสาหกรรม
                 </h4>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
@@ -1535,7 +1535,7 @@ const GTSeries = () => {
               {/* OS Support */}
               <div className="card-surface p-6 md:p-8">
                 <h4 className="text-xl font-display font-bold text-foreground mb-4">
-                  💻 รองรับ OS หลากหลาย — รวมถึง Windows XP!
+                  <Laptop size={18} className="inline mr-1 text-primary" />รองรับ OS หลากหลาย — รวมถึง Windows XP!
                 </h4>
                 <div className="grid md:grid-cols-2 gap-6 items-center">
                   <div>
@@ -1561,7 +1561,7 @@ const GTSeries = () => {
 
               {/* Dimension */}
               <div className="card-surface p-6 text-center">
-                <h4 className="text-lg font-display font-bold text-foreground mb-4">📐 ขนาดกะทัดรัด</h4>
+                <h4 className="text-lg font-display font-bold text-foreground mb-4"><Ruler size={18} className="inline mr-1 text-primary" />ขนาดกะทัดรัด</h4>
                 <p className="text-muted-foreground mb-4">
                   เพียง 23.4 × 15 × 4.8 cm น้ำหนัก 1.5 kg — ประมาณขนาดหนังสือเล่มใหญ่ ประหยัดพื้นที่ติดตั้ง wall mount ได้ เคลื่อนย้ายสะดวก
                 </p>
@@ -1588,8 +1588,8 @@ const GTSeries = () => {
               {/* GT2000 Price Table */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT2000 Price List</h3>
-                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
+                  <h3 className="text-lg font-display font-bold text-foreground"><DollarSign size={18} className="inline mr-1 text-primary" />GT2000 Price List</h3>
+                  <p className="text-xs text-muted-foreground mt-1"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -1799,7 +1799,7 @@ const GTSeries = () => {
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-2">🔧 เลือก CPU ได้หลากหลายรุ่น</h4>
+                    <h4 className="font-bold text-foreground mb-2"><Cpu size={16} className="inline mr-1 text-primary" />เลือก CPU ได้หลากหลายรุ่น</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       รองรับตั้งแต่ Celeron สำหรับงานเบา ไปจนถึง Core i3/i5/i7 สำหรับงานหนัก —
                       เลือก CPU ให้สอดคล้องกับกิจกรรมเพื่อเสถียรภาพสูงสุด
@@ -1959,7 +1959,7 @@ const GTSeries = () => {
               {/* Heatsink Design */}
               <div className="card-surface p-6 md:p-8 rounded-2xl">
                 <h4 className="text-xl font-display font-bold text-foreground mb-4">
-                  🌡️ Heatsink = ตัวเครื่อง — ออกแบบมาเพื่อโรงงาน
+                  <ThermometerSun size={18} className="inline mr-1 text-primary" />Heatsink = ตัวเครื่อง — ออกแบบมาเพื่อโรงงาน
                 </h4>
                 <div className="grid md:grid-cols-2 gap-6 items-center">
                   <div>
@@ -2138,7 +2138,7 @@ const GTSeries = () => {
                 return (
                   <div className="card-surface rounded-2xl overflow-hidden">
                     <div className="p-4 border-b border-border bg-primary/5">
-                      <h3 className="text-lg font-display font-bold text-foreground">💰 GT3000 Industrial PC Price List</h3>
+                      <h3 className="text-lg font-display font-bold text-foreground"><DollarSign size={18} className="inline mr-1 text-primary" />GT3000 Industrial PC Price List</h3>
                     </div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
@@ -2181,7 +2181,7 @@ const GTSeries = () => {
                       </div>
                     </div>
                     <div className="p-3 text-xs text-muted-foreground bg-muted/10 border-t border-border">
-                      ⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup
+                      <AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup
                     </div>
                     <div className="p-4 border-t border-border text-center">
                       <button onClick={() => setQuoteProduct("GT3000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg">
@@ -2247,7 +2247,7 @@ const GTSeries = () => {
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-2">🏭 ออกแบบมาเพื่อโรงงานโดยเฉพาะ</h4>
+                    <h4 className="font-bold text-foreground mb-2"><Factory size={16} className="inline mr-1 text-primary" />ออกแบบมาเพื่อโรงงานโดยเฉพาะ</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       ทนทานต่อสภาพแวดล้อมที่เต็มไปด้วยน้ำมัน ฝุ่นละออง และความร้อน รองรับ VESA Mounting
                       บนรถกอล์ฟ โฟคลิฟท์ หรือตู้คอนเทนเนอร์ — สมบูรณ์แบบสำหรับขยายไลน์ผลิต
@@ -2408,7 +2408,7 @@ const GTSeries = () => {
               <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border">
                   <h3 className="text-lg font-display font-bold text-foreground">GT4000 Price List</h3>
-                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
+                  <p className="text-xs text-muted-foreground mt-1"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -2606,7 +2606,7 @@ const GTSeries = () => {
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-secondary">
-                    <h4 className="font-bold text-foreground mb-2">⚡ GPIO คืออะไร?</h4>
+                    <h4 className="font-bold text-foreground mb-2"><Zap size={16} className="inline mr-1 text-primary" />GPIO คืออะไร?</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       GPIO (General Purpose Input/Output) คือพอร์ตเอนกประสงค์ที่สามารถควบคุมให้เป็น "1" หรือ "0" ได้ตามใจชอบ
                       โดยควบคุมแต่ละ PIN เหมือนไมโครคอนโทรลเลอร์ นำไปต่อยอดได้หลากหลาย เช่น ควบคุมการเปิด/ปิดอุปกรณ์
@@ -2682,7 +2682,7 @@ const GTSeries = () => {
               <div className="grid lg:grid-cols-2 gap-6">
                 <div className="card-surface rounded-2xl overflow-hidden">
                   <div className="p-4 border-b border-border bg-primary/5">
-                    <h3 className="text-lg font-display font-bold text-foreground">📋 GT5000 Specifications</h3>
+                    <h3 className="text-lg font-display font-bold text-foreground"><FileText size={18} className="inline mr-1 text-primary" />GT5000 Specifications</h3>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
@@ -2721,7 +2721,7 @@ const GTSeries = () => {
 
                 <div className="card-surface rounded-2xl overflow-hidden">
                   <div className="p-4 border-b border-border bg-primary/5">
-                    <h3 className="text-lg font-display font-bold text-foreground">⚡ Power & Dimensions</h3>
+                    <h3 className="text-lg font-display font-bold text-foreground"><Zap size={18} className="inline mr-1 text-primary" />Power & Dimensions</h3>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
@@ -2786,19 +2786,19 @@ const GTSeries = () => {
                 {/* GPIO Use Cases */}
                 <div className="card-surface rounded-2xl overflow-hidden">
                   <div className="p-5 border-b border-border bg-primary/5">
-                    <h3 className="text-lg font-display font-bold text-foreground">🔌 GPIO นำไปใช้ทำอะไรได้บ้าง?</h3>
+                    <h3 className="text-lg font-display font-bold text-foreground"><Plug size={18} className="inline mr-1 text-primary" />GPIO นำไปใช้ทำอะไรได้บ้าง?</h3>
                     <p className="text-xs text-muted-foreground mt-1">8 ช่องสัญญาณ Digital I/O สำหรับงานอุตสาหกรรมและ IoT</p>
                   </div>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5">
                     {[
-                      { icon: "🏭", title: "ควบคุมเครื่องจักร", desc: "สั่งเปิด/ปิด Relay, Solenoid Valve, Motor Driver ผ่าน Digital Output โดยตรง" },
+                      { icon: Factory, title: "ควบคุมเครื่องจักร", desc: "สั่งเปิด/ปิด Relay, Solenoid Valve, Motor Driver ผ่าน Digital Output โดยตรง" },
                       { icon: "🚨", title: "ระบบแจ้งเตือน", desc: "ต่อ Tower Light, Buzzer, LED Indicator แสดงสถานะเครื่องจักรแบบ Real-time" },
-                      { icon: "📡", title: "อ่านค่า Sensor", desc: "รับสัญญาณ Digital จาก Proximity Sensor, Limit Switch, Photo Electric" },
+                      { icon: Radio, title: "อ่านค่า Sensor", desc: "รับสัญญาณ Digital จาก Proximity Sensor, Limit Switch, Photo Electric" },
                       { icon: "🚪", title: "Access Control", desc: "ควบคุม Magnetic Lock, อ่าน Door Sensor, Emergency Button" },
-                      { icon: "🌡️", title: "Smart Farm / IoT", desc: "เปิด/ปิดปั๊มน้ำ พัดลม ระบบรดน้ำอัตโนมัติ ตามค่า Sensor" },
-                      { icon: "📊", title: "Production Counter", desc: "นับจำนวนชิ้นงานจาก Sensor แล้วส่งข้อมูลเข้าระบบ MES/ERP" },
-                      { icon: "🔋", title: "UPS / Power Monitor", desc: "ตรวจจับสถานะไฟฟ้า สั่ง Shutdown อัตโนมัติเมื่อไฟดับ" },
-                      { icon: "🤖", title: "Robot & Automation", desc: "Handshake กับ PLC, Robot Controller ผ่าน Digital I/O ไม่ต้องใช้ fieldbus ราคาแพง" },
+                      { icon: ThermometerSun, title: "Smart Farm / IoT", desc: "เปิด/ปิดปั๊มน้ำ พัดลม ระบบรดน้ำอัตโนมัติ ตามค่า Sensor" },
+                      { icon: BarChart3, title: "Production Counter", desc: "นับจำนวนชิ้นงานจาก Sensor แล้วส่งข้อมูลเข้าระบบ MES/ERP" },
+                      { icon: Battery, title: "UPS / Power Monitor", desc: "ตรวจจับสถานะไฟฟ้า สั่ง Shutdown อัตโนมัติเมื่อไฟดับ" },
+                      { icon: Bot, title: "Robot & Automation", desc: "Handshake กับ PLC, Robot Controller ผ่าน Digital I/O ไม่ต้องใช้ fieldbus ราคาแพง" },
                     ].map((item, i) => (
                       <div key={i} className="p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors border border-border/50">
                         <span className="text-2xl">{item.icon}</span>
@@ -2814,7 +2814,7 @@ const GTSeries = () => {
                   <div className="p-5 border-b border-border bg-primary/5">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-lg font-display font-bold text-foreground">📋 GPIO Register Map</h3>
+                        <h3 className="text-lg font-display font-bold text-foreground"><FileText size={18} className="inline mr-1 text-primary" />GPIO Register Map</h3>
                         <p className="text-xs text-muted-foreground mt-1">INDUSTRIAL IPC — LINUX EDITION</p>
                       </div>
                       <div className="text-right">
@@ -2899,7 +2899,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   </div>
                   <div className="p-4 bg-muted/30 border-t border-border">
                     <p className="text-xs text-muted-foreground">
-                      💡 <strong>หมายเหตุ:</strong> ต้องรันด้วย <code className="bg-muted px-1 rounded">sudo</code> หรือตั้งค่า capabilities —
+                      <Lightbulb size={14} className="inline mr-1 text-amber-500" /> <strong>หมายเหตุ:</strong> ต้องรันด้วย <code className="bg-muted px-1 rounded">sudo</code> หรือตั้งค่า capabilities —
                       SDK เต็มรูปแบบมีให้จากโรงงาน สนใจติดต่อทีมขายเพื่อรับไฟล์ SDK
                     </p>
                   </div>
@@ -2908,7 +2908,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 {/* Signal Visualizer */}
                 <div className="card-surface rounded-2xl overflow-hidden">
                   <div className="p-5 border-b border-border bg-primary/5">
-                    <h3 className="text-lg font-display font-bold text-foreground">📊 GPIO Signal Overview</h3>
+                    <h3 className="text-lg font-display font-bold text-foreground"><BarChart3 size={18} className="inline mr-1 text-primary" />GPIO Signal Overview</h3>
                     <p className="text-xs text-muted-foreground mt-1">แผนผังสถานะสัญญาณ GPIO ทั้ง 8 ช่อง</p>
                   </div>
                   <div className="p-5 space-y-3">
@@ -2959,8 +2959,8 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
 
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT5000 Price List</h3>
-                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
+                  <h3 className="text-lg font-display font-bold text-foreground"><DollarSign size={18} className="inline mr-1 text-primary" />GT5000 Price List</h3>
+                  <p className="text-xs text-muted-foreground mt-1"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -3131,7 +3131,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-2">🏭 ออกแบบมาเพื่อโรงงานโดยเฉพาะ</h4>
+                    <h4 className="font-bold text-foreground mb-2"><Factory size={16} className="inline mr-1 text-primary" />ออกแบบมาเพื่อโรงงานโดยเฉพาะ</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       ทนทานต่อสภาพแวดล้อมที่เต็มไปด้วยน้ำมัน ฝุ่นละออง และความร้อน
                       รองรับ VESA Mounting บนรถกอล์ฟ โฟคลิฟท์ หรือตู้คอนเทนเนอร์ — สมบูรณ์แบบสำหรับขยายไลน์ผลิต
@@ -3193,7 +3193,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Port Connectivity — Factory Images */}
               <div className="card-surface p-6 md:p-8">
                 <h4 className="text-xl font-display font-bold text-foreground mb-4">
-                  🔌 Port Connectivity — ครบจบในเครื่องเดียว
+                  <Plug size={18} className="inline mr-1 text-primary" />Port Connectivity — ครบจบในเครื่องเดียว
                 </h4>
                 <div className="grid md:grid-cols-2 gap-4 mb-6">
                   <img src="/images/gt6000/ports1.jpg" alt="GT6000 พอร์ตด้านหน้า" className="w-full rounded-lg" loading="lazy" />
@@ -3314,8 +3314,8 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 return (
                   <div className="card-surface overflow-hidden">
                     <div className="p-5 border-b border-border">
-                      <h3 className="text-lg font-display font-bold text-foreground">💰 GT6000 Price List</h3>
-                      <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
+                      <h3 className="text-lg font-display font-bold text-foreground"><DollarSign size={18} className="inline mr-1 text-primary" />GT6000 Price List</h3>
+                      <p className="text-xs text-muted-foreground mt-1"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                     </div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
@@ -3491,7 +3491,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-2">💰 ประหยัดต้นทุนระยะยาว</h4>
+                    <h4 className="font-bold text-foreground mb-2"><DollarSign size={16} className="inline mr-1 text-primary" />ประหยัดต้นทุนระยะยาว</h4>
                     <ul className="text-sm text-muted-foreground space-y-1">
                       <li>• ประหยัดไฟด้วยการกินไฟเพียง 15W</li>
                       <li>• ระบบ Watch dog ป้องกันการค้าง</li>
@@ -3500,7 +3500,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-secondary">
-                    <h4 className="font-bold text-foreground mb-2">🔧 พร้อมใช้งานอุตสาหกรรม</h4>
+                    <h4 className="font-bold text-foreground mb-2"><Wrench size={16} className="inline mr-1 text-primary" />พร้อมใช้งานอุตสาหกรรม</h4>
                     <ul className="text-sm text-muted-foreground space-y-1">
                       <li>• 6 COM Port รองรับ RS232/422/485</li>
                       <li>• Micro SIM รองรับ 3G/4G Module</li>
@@ -3572,7 +3572,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Compact + Heatsink — 2 คอลัมน์ */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="card-surface overflow-hidden rounded-xl p-4">
-                  <h4 className="font-bold text-foreground mb-3 text-sm">📦 กะทัดรัด แต่แกร่ง</h4>
+                  <h4 className="font-bold text-foreground mb-3 text-sm"><Package size={16} className="inline mr-1 text-primary" />กะทัดรัด แต่แกร่ง</h4>
                   <img src="/images/gt7000-wix/compact-design.png" alt="GT7000 Compact Design" className="w-full rounded-lg" loading="lazy" />
                   <ul className="text-xs text-muted-foreground mt-3 space-y-1">
                     <li>• ขนาดเล็กเท่ากล่องรองเท้า 23×17.5×5 ซม.</li>
@@ -3581,7 +3581,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   </ul>
                 </div>
                 <div className="card-surface overflow-hidden rounded-xl p-4">
-                  <h4 className="font-bold text-foreground mb-3 text-sm">🔥 ครีบระบายความร้อนพิเศษ</h4>
+                  <h4 className="font-bold text-foreground mb-3 text-sm"><Flame size={16} className="inline mr-1 text-primary" />ครีบระบายความร้อนพิเศษ</h4>
                   <img src="/images/gt7000-wix/heatsink.png" alt="GT7000 Heatsink Design" className="w-full rounded-lg" loading="lazy" />
                   <ul className="text-xs text-muted-foreground mt-3 space-y-1">
                     <li>• ไม่ต้องใช้พัดลม — เงียบสนิท 0 dB</li>
@@ -3609,7 +3609,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Port Connectivity */}
               <div className="card-surface p-6 md:p-8">
                 <h4 className="text-xl font-display font-bold text-foreground mb-4">
-                  🔌 Port Connectivity — ครบจบในเครื่องเดียว
+                  <Plug size={18} className="inline mr-1 text-primary" />Port Connectivity — ครบจบในเครื่องเดียว
                 </h4>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
                   {[
@@ -3649,7 +3649,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     <img src="/images/gt7000-wix/install4.jpg" alt="GT7000 Installation 4" className="w-full h-24 object-cover" loading="lazy" />
                   </div>
                   <div className="p-5">
-                    <h4 className="font-bold text-foreground mb-3">🏭 ระบบโรงงานอัตโนมัติ</h4>
+                    <h4 className="font-bold text-foreground mb-3"><Factory size={16} className="inline mr-1 text-primary" />ระบบโรงงานอัตโนมัติ</h4>
                     <ul className="text-sm text-muted-foreground space-y-2">
                       <li>• ควบคุมแขนกลและระบบผลิตอัตโนมัติ</li>
                       <li>• เก็บข้อมูลการผลิตแบบเรียลไทม์</li>
@@ -3662,7 +3662,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Spec Table — 2 คอลัมน์ */}
               <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">📋 GT7000 Specifications</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground"><FileText size={18} className="inline mr-1 text-primary" />GT7000 Specifications</h3>
                 </div>
                 <div className="grid md:grid-cols-2 md:divide-x divide-border">
                   <div className="divide-y divide-border">
@@ -3703,8 +3703,8 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* GT7000 Price List */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT7000 Price List</h3>
-                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
+                  <h3 className="text-lg font-display font-bold text-foreground"><DollarSign size={18} className="inline mr-1 text-primary" />GT7000 Price List</h3>
+                  <p className="text-xs text-muted-foreground mt-1"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -3747,7 +3747,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     </tbody>
                   </table>
                 </div>
-                <p className="text-xs text-muted-foreground text-center py-3 border-t border-border">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
+                <p className="text-xs text-muted-foreground text-center py-3 border-t border-border"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
                 <div className="p-4 border-t border-border text-center">
                   <button onClick={() => setQuoteProduct("GT7000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
                     <FileText size={16} /> ขอใบเสนอราคา GT7000
@@ -3856,7 +3856,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
                 <div className="relative z-10 p-8 md:p-12">
                    <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold tracking-widest uppercase mb-3 backdrop-blur-sm border border-amber-500/30">
-                    Intel Ice Lake Gen 10 · Active Cooling · 🌀 มีพัดลม
+                    Intel Ice Lake Gen 10 · Active Cooling · <Fan size={12} className="inline mr-0.5" />มีพัดลม
                   </span>
                   <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-2">
                     GT<span className="text-primary">8000</span>
@@ -3887,7 +3887,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   {/* Fan Notice */}
                   <div className="rounded-xl p-5 border-2 border-amber-500/30 bg-amber-500/5">
                     <div className="flex items-start gap-3">
-                      <span className="text-2xl">🌀</span>
+                      <Fan size={24} className="text-amber-500" />
                       <div>
                         <h4 className="font-bold text-foreground mb-1 flex items-center gap-2">
                           รุ่นเดียวใน GT Series ที่ใช้ระบบพัดลม
@@ -3908,7 +3908,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-2">⚡ ทำไมต้องมีพัดลม?</h4>
+                    <h4 className="font-bold text-foreground mb-2"><Fan size={16} className="inline mr-1 text-primary" />ทำไมต้องมีพัดลม?</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       CPU Intel Gen 10 ให้ประสิทธิภาพสูงกว่ารุ่น Celeron/Gen 4 หลายเท่า แต่แลกมาด้วยความร้อนที่มากขึ้น 
                       GT8000 จึงใช้พัดลมขนาดเล็กที่ทำงานเงียบ เพื่อรองรับงาน SCADA, AI Edge, Multi-tasking หนักๆ ได้อย่างเสถียร
@@ -3936,7 +3936,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     </div>
                     <div className="card-surface p-4 text-center border-2 border-amber-500/30">
                       <Wind className="mx-auto text-amber-500 mb-2" size={24} />
-                      <div className="font-bold text-foreground text-sm">Active Cooling 🌀</div>
+                      <div className="font-bold text-foreground text-sm">Active Cooling</div>
                       <div className="text-xs text-amber-600 dark:text-amber-400 mt-1 font-semibold">มีพัดลม (TDP 15–25W)</div>
                       <div className="text-xs text-muted-foreground">รุ่นเดียวที่ไม่ใช่ Fanless</div>
                     </div>
@@ -3978,7 +3978,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Port Connectivity */}
               <div className="card-surface p-6 md:p-8">
                 <h4 className="text-xl font-display font-bold text-foreground mb-4">
-                  🔌 Port Connectivity — ครบจบในเครื่องเดียว
+                  <Plug size={18} className="inline mr-1 text-primary" />Port Connectivity — ครบจบในเครื่องเดียว
                 </h4>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
                   {[
@@ -4040,8 +4040,8 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* GT8000 Price List */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT8000 Price List</h3>
-                  <p className="text-xs text-muted-foreground mt-1">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
+                  <h3 className="text-lg font-display font-bold text-foreground"><DollarSign size={18} className="inline mr-1 text-primary" />GT8000 Price List</h3>
+                  <p className="text-xs text-muted-foreground mt-1"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา โทร. 095-739-1053 · Line: @entgroup</p>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
@@ -4085,7 +4085,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     <li>CPU i7-1065 G7 ให้ประสิทธิภาพสูงกว่า i5 ถึง 20%</li>
                   </ul>
                 </div>
-                <p className="text-xs text-muted-foreground text-center py-3 border-t border-border">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
+                <p className="text-xs text-muted-foreground text-center py-3 border-t border-border"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
                 <div className="p-4 border-t border-border text-center">
                   <button onClick={() => setQuoteProduct("GT8000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
                     <FileText size={16} /> ขอใบเสนอราคา GT8000
@@ -4399,8 +4399,8 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     <div className="card-surface overflow-hidden">
                       <CollapsibleTrigger className="w-full p-5 border-b border-border flex items-center justify-between hover:bg-secondary/30 transition-colors">
                         <div>
-                          <h3 className="text-lg font-display font-bold text-foreground text-left">💰 GT9000 Price List</h3>
-                          <p className="text-xs text-muted-foreground mt-1 text-left">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา · {gt9000Prices.length} รายการ</p>
+                          <h3 className="text-lg font-display font-bold text-foreground text-left"><DollarSign size={18} className="inline mr-1 text-primary" />GT9000 Price List</h3>
+                          <p className="text-xs text-muted-foreground mt-1 text-left"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา · {gt9000Prices.length} รายการ</p>
                         </div>
                         <ChevronDown size={20} className="text-muted-foreground transition-transform duration-200 [[data-state=open]>&]:rotate-180" />
                       </CollapsibleTrigger>
@@ -4758,7 +4758,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
 
               {/* Dimension */}
               <div className="card-surface p-6 text-center">
-                <h4 className="text-lg font-display font-bold text-foreground mb-4">📐 ขนาดกะทัดรัด เล็กกว่า IPC ทั่วไป 40%</h4>
+                <h4 className="text-lg font-display font-bold text-foreground mb-4"><Ruler size={18} className="inline mr-1 text-primary" />ขนาดกะทัดรัด เล็กกว่า IPC ทั่วไป 40%</h4>
                 <p className="text-muted-foreground mb-4">
                   เพียง 21.2 × 15.5 × 4.5 cm น้ำหนัก 2.5 kg — ติดตั้งในตู้ควบคุม บนแขนยึด หรือใน AGV/โฟล์คลิฟท์ได้สะดวก
                 </p>
@@ -4816,7 +4816,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 </div>
                 <div className="px-5 py-3 border-t border-border bg-muted/30">
                   <p className="text-xs text-muted-foreground">
-                    ⚠️ ราคาอาจมีการเปลี่ยนแปลงได้โดยไม่ต้องแจ้งล่วงหน้า กรุณาติดต่อฝ่ายขายเพื่อยืนยันราคาและโปรโมชันล่าสุด
+                    <AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลงได้โดยไม่ต้องแจ้งล่วงหน้า กรุณาติดต่อฝ่ายขายเพื่อยืนยันราคาและโปรโมชันล่าสุด
                   </p>
                 </div>
               </div>
@@ -5121,7 +5121,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                       <CollapsibleTrigger className="w-full p-5 border-b border-border flex items-center justify-between hover:bg-secondary/30 transition-colors">
                         <div>
                           <h3 className="text-lg font-display font-bold text-foreground text-left">💰 GT1400 Price List</h3>
-                          <p className="text-xs text-muted-foreground mt-1 text-left">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา · {gt1400Prices.length} รายการ</p>
+                          <p className="text-xs text-muted-foreground mt-1 text-left"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา · {gt1400Prices.length} รายการ</p>
                         </div>
                         <ChevronDown size={20} className="text-muted-foreground transition-transform duration-200 [[data-state=open]>&]:rotate-180" />
                       </CollapsibleTrigger>
@@ -5157,7 +5157,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                             <button onClick={() => setGt1400PricePage(Math.min(totalPages - 1, gt1400PricePage + 1))} disabled={gt1400PricePage === totalPages - 1} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-border hover:bg-secondary/50 disabled:opacity-40 transition-colors">ถัดไป</button>
                           </div>
                         )}
-                        <p className="text-xs text-muted-foreground text-center py-3 border-t border-border">⚠️ ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
+                        <p className="text-xs text-muted-foreground text-center py-3 border-t border-border"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
                       </CollapsibleContent>
                     </div>
                   </Collapsible>
@@ -5365,7 +5365,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   <img src="/images/gt1300/ports-detail1.jpg" alt="GT1300 Ports ด้านหน้า" className="w-full rounded-lg" loading="lazy" />
                 </div>
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
-                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหลัง</h4>
+                  <h4 className="font-bold text-foreground mb-3 text-sm"><Plug size={16} className="inline mr-1 text-primary" />Ports — ด้านหลัง</h4>
                   <img src="/images/gt1300/ports-detail2.jpg" alt="GT1300 Ports ด้านหลัง" className="w-full rounded-lg" loading="lazy" />
                 </div>
               </div>
@@ -5588,7 +5588,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   <img src="/images/gt1200/ports-front.jpg" alt="GT1200 Ports ด้านหน้า" className="w-full rounded-lg" loading="lazy" />
                 </div>
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
-                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหลัง</h4>
+                  <h4 className="font-bold text-foreground mb-3 text-sm"><Plug size={16} className="inline mr-1 text-primary" />Ports — ด้านหลัง</h4>
                   <img src="/images/gt1200/ports-rear.jpg" alt="GT1200 Ports ด้านหลัง" className="w-full rounded-lg" loading="lazy" />
                 </div>
               </div>
@@ -5726,7 +5726,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     </div>
                     <div className="px-5 py-3 border-t border-border bg-muted/30">
                       <p className="text-xs text-muted-foreground">
-                        ⚠️ ราคาอาจมีการเปลี่ยนแปลงได้โดยไม่ต้องแจ้งล่วงหน้า กรุณาติดต่อฝ่ายขายเพื่อยืนยันราคาและโปรโมชันล่าสุด
+                        <AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลงได้โดยไม่ต้องแจ้งล่วงหน้า กรุณาติดต่อฝ่ายขายเพื่อยืนยันราคาและโปรโมชันล่าสุด
                       </p>
                     </div>
                   </div>
