@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, Menu, X, ChevronDown, UserPlus, LogOut, User, LogIn, FileText, Heart, Shield } from "lucide-react";
+import { Search, Menu, X, ChevronDown, UserPlus, LogOut, User, LogIn, FileText, Heart, Shield, FolderOpen, Bell } from "lucide-react";
 import { toast } from "sonner";
 import ThemeToggle from "@/components/ThemeToggle";
 import MegaMenu, { MobileMegaMenu } from "@/components/MegaMenu";
@@ -197,11 +197,25 @@ const HeroSection = () => {
                       </Link>
                     )}
                     <Link
-                      to="/my-quotes"
+                      to="/my-account"
                       onClick={() => setUserMenuOpen(false)}
                       className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
                     >
-                      <FileText size={14} /> ใบเสนอราคาของฉัน
+                      <User size={14} /> บัญชีของฉัน
+                    </Link>
+                    <Link
+                      to="/my-account/quotes"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                    >
+                      <FileText size={14} /> ใบเสนอราคา
+                    </Link>
+                    <Link
+                      to="/my-account/documents"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
+                    >
+                      <FolderOpen size={14} /> ศูนย์เอกสาร
                     </Link>
                     <button
                       onClick={async () => { setUserMenuOpen(false); await signOut(); }}
@@ -263,7 +277,14 @@ const HeroSection = () => {
                 )}
                 <div className="flex gap-2">
                   <Link
-                    to="/my-quotes"
+                    to="/my-account"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg border border-border text-foreground text-sm font-semibold hover:bg-muted transition-colors"
+                  >
+                    <User size={14} /> บัญชีของฉัน
+                  </Link>
+                  <Link
+                    to="/my-account/quotes"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg border border-border text-foreground text-sm font-semibold hover:bg-muted transition-colors"
                   >
