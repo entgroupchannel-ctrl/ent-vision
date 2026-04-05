@@ -120,7 +120,7 @@ const lineupCategories = [
     subtitle: "Network Security Appliance",
     icon: Shield,
     href: "/minipc-firewall",
-    image: "https://static.wixstatic.com/media/005637_66d7a552b93d47268ddd328a5c8d9484~mv2.png/v1/fill/w_640,h_360,al_c,q_85,enc_avif,quality_auto/firewall.png",
+    image: imgFirewall,
     models: [
       { name: "GT194L", href: "/minipc-firewall" },
       { name: "GT196L", href: "/minipc-firewall" },
