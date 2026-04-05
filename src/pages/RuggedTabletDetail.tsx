@@ -14,6 +14,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import AddToQuoteButton from "@/components/AddToQuoteButton";
 import LineQRButton from "@/components/LineQRButton";
 import WishlistHeart from "@/components/WishlistHeart";
 import ProductGallery from "@/components/ProductGallery";
@@ -51,6 +52,7 @@ const RuggedTabletDetail = () => {
   const product = getTabletProduct(id || "");
   const related = getRelatedTablets(id || "");
 
+  // ── Engagement Tracking: product view ──
   useEffect(() => {
     if (product) {
       trackEvent({
@@ -74,7 +76,7 @@ const RuggedTabletDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background">
       <SEOHead title={`${product.model} — ${product.name}`} description={`${product.nameTH} — ${product.keyFeatures.slice(0, 3).join(", ")}`} path={`/rugged-tablet/${product.id}`} />
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/" }, { name: "Rugged Tablet", path: "/rugged-tablet" }, { name: product.model, path: `/rugged-tablet/${product.id}` }]} />
       <ProductJsonLd collectionName={product.name} collectionDescription={product.nameTH} collectionUrl={`/rugged-tablet/${product.id}`} products={[{ name: product.name, price: product.price, category: "Rugged Tablet" }]} />
@@ -177,8 +179,13 @@ const RuggedTabletDetail = () => {
 
             {/* CTA */}
             <div className="flex flex-wrap gap-3 pt-4 border-t border-border">
-              <Button size="lg" className="flex-1" onClick={() => setQuoteOpen(true)}>
-                <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
+              <AddToQuoteButton
+                model={product.model}
+                category="Rugged Tablet"
+                productName={product.model}
+              />
+              <Button size="lg" variant="outline" onClick={() => setQuoteOpen(true)}>
+                <FileText className="w-5 h-5 mr-2" /> ขอราคาด่วน
               </Button>
               <LineQRButton className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-input bg-background text-foreground font-medium text-sm hover:bg-accent hover:text-accent-foreground transition-colors">
                 <MessageSquare className="w-4 h-4" /> สอบถามทาง LINE

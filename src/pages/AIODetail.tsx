@@ -16,6 +16,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
+import AddToQuoteButton from "@/components/AddToQuoteButton";
 import WishlistHeart from "@/components/WishlistHeart";
 import ProductGallery from "@/components/ProductGallery";
 import { getAIOProduct, getRelatedAIO, categoryLabels, type AIOProduct } from "@/data/aio-products";
@@ -55,12 +56,13 @@ const AIODetail = () => {
   const product = id ? getAIOProduct(id) : undefined;
   const related = id ? getRelatedAIO(id) : [];
 
+  // ── Engagement Tracking: product view ──
   useEffect(() => {
     if (product) {
       trackEvent({
         eventType: "product_view",
         productId: product.id,
-        productCategory: product.category || "AIO",
+        productCategory: "All-in-One PC",
         productName: product.model,
       });
     }
@@ -78,7 +80,7 @@ const AIODetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background">
       <SEOHead
         title={`${product.model} — ${product.title}`}
         description={`${product.titleTH} | ${product.cpu} | ${product.screenSize}`}
@@ -180,8 +182,13 @@ const AIODetail = () => {
 
             {/* CTA */}
             <div className="flex flex-wrap gap-3 pt-4 border-t border-border">
-              <Button size="lg" className="flex-1" onClick={() => setQuoteOpen(true)}>
-                <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
+              <AddToQuoteButton
+                model={product.model}
+                category="All-in-One PC"
+                productName={product.model}
+              />
+              <Button size="lg" variant="outline" onClick={() => setQuoteOpen(true)}>
+                <FileText className="w-5 h-5 mr-2" /> ขอราคาด่วน
               </Button>
               <LineQRButton className="flex-1 h-11 text-base">
                 <MessageSquare className="w-4 h-4" /> สอบถามทาง LINE

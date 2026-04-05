@@ -37,7 +37,19 @@ const MyAccount = () => {
     return "profile";
   };
 
-  const [tab, setTab] = useState<Tab>(getTabFromPath(location.pathname));
+  // Check sessionStorage for tab override (from FloatingQuoteBar)
+  const getInitialTab = (): Tab => {
+    try {
+      const override = sessionStorage.getItem("ent_myaccount_tab");
+      if (override) {
+        sessionStorage.removeItem("ent_myaccount_tab");
+        return override as Tab;
+      }
+    } catch { /* silent */ }
+    return getTabFromPath(location.pathname);
+  };
+
+  const [tab, setTab] = useState<Tab>(getInitialTab());
   const [sidebarMode, setSidebarMode] = useState<"full" | "icon" | "hidden">("full");
   const [unreadCount, setUnreadCount] = useState(0);
 
@@ -83,7 +95,7 @@ const MyAccount = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background">
       <SEOHead title="บัญชีของฉัน — ENT Group" description="จัดการบัญชี โปรไฟล์ ใบเสนอราคา และเอกสาร" path="/my-account" />
 
       {/* Header */}
@@ -214,8 +226,8 @@ const MyAccount = () => {
 
             {/* Render active tab */}
             {tab === "profile" && <MyProfile />}
-            {tab === "quotes" && <MyAccountQuotes onNavigate={(t: string) => setTab(t as Tab)} />}
-            {tab === "quote_create" && <UserQuoteCreate onNavigate={(t: string) => setTab(t as Tab)} />}
+            {tab === "quotes" && <MyAccountQuotes />}
+            {tab === "quote_create" && <UserQuoteCreate />}
             {tab === "wishlist" && <MyAccountWishlist />}
             {tab === "documents" && <MyDocuments />}
             {tab === "notifications" && <MyNotifications />}
