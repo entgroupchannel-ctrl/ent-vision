@@ -107,7 +107,7 @@ const AdminLogin = () => {
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <a href="/" className="inline-block mb-4">
-            <img src="https://ent-group.entgroup.co/logo.png" alt="ENT Group" className="h-10 mx-auto" />
+            <img src={logo} alt="ENT GROUP" className="h-10 mx-auto" />
           </a>
           <h1 className="text-2xl font-display font-bold text-foreground mb-1">เข้าสู่ระบบ</h1>
           <p className="text-sm text-muted-foreground">เข้าสู่ระบบสำหรับสมาชิกและผู้ดูแลระบบ</p>
