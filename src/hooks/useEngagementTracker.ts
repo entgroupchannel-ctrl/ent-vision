@@ -67,7 +67,7 @@ export function useEngagementTracker() {
               data: { session },
             } = await supabase.auth.getSession();
 
-            await supabase.from("engagement_events").insert({
+            await supabase.from("engagement_events").insert([{
               user_id: session?.user?.id || null,
               session_id: sessionId,
               event_type: eventType,
@@ -77,7 +77,7 @@ export function useEngagementTracker() {
               channel: channel || null,
               page_url: window.location.pathname,
               metadata,
-            });
+            }]);
           } catch (err) {
             // Silent — never block UI
             console.warn("[engagement-tracker]", err);
