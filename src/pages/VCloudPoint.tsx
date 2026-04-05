@@ -196,7 +196,7 @@ const DemoCTA = ({ variant = "primary" }: { variant?: "primary" | "secondary" })
       <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-primary" /> ฟรี 30 วัน</span>
       <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-primary" /> ติดตั้งฟรี</span>
       <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-primary" /> Training ฟรี</span>
-      <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-primary" /> รับประกัน 3 ปี</span>
+      <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-primary" /> รับประกัน 1 ปี</span>
     </div>
   </div>
 );
