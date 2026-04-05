@@ -23,6 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import FooterCompact from "@/components/FooterCompact";
+import B2BCTABanner from "@/components/B2BCTABanner";
 import ShareButtons from "@/components/ShareButtons";
 import QuoteDialog from "@/components/QuoteDialog";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
@@ -587,6 +588,7 @@ const IBoxSeries = () => {
         </div>
       </section>
 
+      <B2BCTABanner variant="compact" />
       <FooterCompact />
     </div>
   );

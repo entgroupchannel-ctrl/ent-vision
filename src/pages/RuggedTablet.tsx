@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import FooterCompact from "@/components/FooterCompact";
+import B2BCTABanner from "@/components/B2BCTABanner";
 import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteDialog from "@/components/QuoteDialog";
 import TabletProductFilter, {
@@ -713,6 +714,7 @@ const RuggedTablet = () => {
         productCategory="Rugged Tablet"
         initialProducts={Array.from(selectedProducts).map((model) => ({ category: "Rugged Tablet", model, qty: 1 }))}
       />
+      <B2BCTABanner variant="compact" />
       <FooterCompact />
     </div>
   );

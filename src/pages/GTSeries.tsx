@@ -1,4 +1,5 @@
 import SEOHead from "@/components/SEOHead";
+import B2BCTABanner from "@/components/B2BCTABanner";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
@@ -5965,6 +5966,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
         </div>
       </section>
 
+      <B2BCTABanner variant="compact" />
       <FooterCompact />
 
       <QuoteDialog
