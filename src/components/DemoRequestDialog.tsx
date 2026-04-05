@@ -176,11 +176,11 @@ const DemoRequestDialog = ({ children }: DemoRequestDialogProps) => {
 
           {user ? (
             <p className="text-xs text-muted-foreground text-center">
-              ✅ ล็อกอินแล้ว — คุณสามารถตรวจสอบสถานะคำขอได้ที่เมนู "คำขอของฉัน"
+              <CheckCircle className="inline w-3.5 h-3.5 text-green-500 mr-1" /> ล็อกอินแล้ว — คุณสามารถตรวจสอบสถานะคำขอได้ที่เมนู "คำขอของฉัน"
             </p>
           ) : (
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-              <span>💡 ยังไม่ได้เป็นสมาชิก?</span>
+              <span><Lightbulb className="inline w-3.5 h-3.5 text-amber-500 mr-1" /> ยังไม่ได้เป็นสมาชิก?</span>
               <Link
                 to="/member-register"
                 className="text-primary font-semibold hover:underline"

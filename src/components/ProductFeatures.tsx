@@ -53,7 +53,7 @@ interface ProductFeaturesProps {
   columns?: 1 | 2;
 }
 
-const ProductFeatures = ({ title = "🏭 Products Features", features, columns = 2 }: ProductFeaturesProps) => {
+const ProductFeatures = ({ title = "Products Features", features, columns = 2 }: ProductFeaturesProps) => {
   const resolved: FeatureItem[] =
     typeof features[0] === "string"
       ? autoFeatures(features as string[])

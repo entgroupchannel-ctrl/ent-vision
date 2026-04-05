@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MessageCircle, ChevronDown, Phone, Mail, MapPin, Facebook, Instagram, Youtube, CheckCircle, Loader2 } from "lucide-react";
+import { MessageCircle, ChevronDown, Phone, Mail, MapPin, Facebook, Instagram, Youtube, CheckCircle, Loader2, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -267,7 +267,7 @@ const Footer = () => {
               onClick={() => document.getElementById('pdpa-content')?.classList.toggle('hidden')}
               className="flex items-center gap-2 text-xs font-bold text-foreground hover:text-primary transition-colors"
             >
-              <span>🔒</span>
+              <Lock size={14} className="text-primary" />
               การคุ้มครองข้อมูลส่วนบุคคล (PDPA)
               <ChevronDown size={14} className="text-muted-foreground" />
             </button>
