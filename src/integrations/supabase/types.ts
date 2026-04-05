@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_permissions: {
+        Row: {
+          access_level: string
+          created_at: string
+          id: string
+          permission_key: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          access_level?: string
+          created_at?: string
+          id?: string
+          permission_key: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          access_level?: string
+          created_at?: string
+          id?: string
+          permission_key?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       business_cards: {
         Row: {
           address: string | null
@@ -739,6 +766,10 @@ export type Database = {
       }
     }
     Functions: {
+      get_permission: {
+        Args: { _permission_key: string; _user_id: string }
+        Returns: string
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
