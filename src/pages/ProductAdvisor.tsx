@@ -6,7 +6,7 @@ import {
   ArrowRight, ArrowLeft, RotateCcw, CheckCircle2, Sparkles,
   Thermometer, HardDrive, Tv, Box, Zap, ChevronRight,
   Building2, Truck, Stethoscope, ShoppingCart, GraduationCap,
-  Wrench, DollarSign, Layers, ExternalLink
+  Wrench, DollarSign, Layers, ExternalLink, Crosshair
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";

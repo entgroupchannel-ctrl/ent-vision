@@ -11,7 +11,7 @@ import {
   ArrowLeft, Shield, Wifi, Network, Cpu, Wind, Zap, Server,
   ChevronDown, Download, ExternalLink, Factory, Building2,
   Stethoscope, Building, Globe, Landmark, MonitorSmartphone,
-  Filter, X, Search, FileText
+  Filter, X, Search, FileText, Crosshair
 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import ThemeToggle from "@/components/ThemeToggle";
