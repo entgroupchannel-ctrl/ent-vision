@@ -34,7 +34,7 @@ const entryModels = [
     id: "k6-f1",
     name: "K6-F1",
     tagline: "เงียบสนิท ประหยัดไฟ 6W Fanless",
-    image: "https://static.wixstatic.com/media/0597a3_6300a3994d554da8bd26cf2a234b0e34~mv2.png/v1/fill/w_436,h_302,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_6300a3994d554da8bd26cf2a234b0e34~mv2.png",
+    image: "/images/wix/0597a3_6300a3994d554da8bd26cf2a234b0e34_f091f5dc.png",
     datasheet: "/datasheets/0597a3_d277dec046804dc694ac329fa7204cc2.pdf",
     highlights: [
       "เงียบสนิท — ไม่มีพัดลม ไม่มีเสียงรบกวน",
@@ -60,7 +60,7 @@ const entryModels = [
     id: "k6-f17h",
     name: "K6-F17H",
     tagline: "Intel N150 4-Core, Fanless 6W, Industrial",
-    image: "https://static.wixstatic.com/media/0597a3_33167f5f1c224ae4a281dc30d836d9b6~mv2.png/v1/fill/w_392,h_232,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-22%20at%2010_41_58.png",
+    image: "/images/wix/0597a3_33167f5f1c224ae4a281dc30d836d9b6_87689e10.png",
     datasheet: null,
     highlights: [
       "Intel N150 4-Core สูงสุด 3.6GHz, Cache 6MB",
@@ -86,7 +86,7 @@ const entryModels = [
     id: "k3-f18-6006",
     name: "K3-F18-6006",
     tagline: "Core i3-6006U, 6× COM Ports, Industrial Grade",
-    image: "https://static.wixstatic.com/media/0597a3_74a5ab1d3b5b4f4b93ba96a0096e16de~mv2.png/v1/fill/w_351,h_170,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_74a5ab1d3b5b4f4b93ba96a0096e16de~mv2.png",
+    image: "/images/wix/0597a3_74a5ab1d3b5b4f4b93ba96a0096e16de_4f98cb32.png",
     datasheet: "/datasheets/0597a3_31fb9b826f644de3a16ad9bbb78cbf76.pdf",
     highlights: [
       "Industrial-Grade ทำงาน -20°C ถึง 50°C",
@@ -114,7 +114,7 @@ const entryModels = [
     id: "k3-f17h",
     name: "K3-F17H",
     tagline: "Core i3-5005U, Dual GbE LAN, 4× COM, WiFi6 + 4G",
-    image: "https://static.wixstatic.com/media/0597a3_fb38b6b4f7db40b2be215ba7ba711cb9~mv2.png/v1/fill/w_409,h_263,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2015_25_21.png",
+    image: "/images/wix/0597a3_fb38b6b4f7db40b2be215ba7ba711cb9_1df6c159.png",
     datasheet: "/datasheets/0597a3_60bf722fa4d245beae9a5b3047a29f34.pdf",
     highlights: [
       "Dual Gigabit LAN — หายากใน Mini PC ทั่วไป",
@@ -146,7 +146,7 @@ const highModels = [
     id: "k8-f18-4405",
     name: "K8-F18-4405",
     tagline: "Pentium 4405U, 6× COM, Dual HDMI 4K, Fanless",
-    image: "https://static.wixstatic.com/media/0597a3_20f2fab2255a443db57fe7128d67d6e2~mv2.png/v1/fill/w_372,h_254,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2016_29_09.png",
+    image: "/images/wix/0597a3_20f2fab2255a443db57fe7128d67d6e2_eb4b5d97.png",
     datasheet: "/datasheets/0597a3_789e5ed0d54a486aa137e849c6fe15f0.pdf",
     highlights: [
       "Intel Pentium 4405U Skylake 2.10GHz",
@@ -173,7 +173,7 @@ const highModels = [
     id: "k3-f17hi",
     name: "K3-F17HI",
     tagline: "Core i3, Dual GbE, 4× COM, WiFi6 + 4G, 20+ Pins",
-    image: "https://static.wixstatic.com/media/0597a3_fb38b6b4f7db40b2be215ba7ba711cb9~mv2.png/v1/fill/w_409,h_263,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2015_25_21.png",
+    image: "/images/wix/0597a3_fb38b6b4f7db40b2be215ba7ba711cb9_1df6c159.png",
     datasheet: null,
     highlights: [
       "Dual Gigabit LAN + 4× COM Voltage Switching",
@@ -195,7 +195,7 @@ const highModels = [
     id: "k8-f17hi-3710",
     name: "K8-F17HI-3710",
     tagline: "Pentium 3710, Fanless 6W, -10°C~65°C",
-    image: "https://static.wixstatic.com/media/0597a3_06a8fad9316b4c848ea8c185f1421ffb~mv2.png/v1/fill/w_409,h_254,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2016_20_38.png",
+    image: "/images/wix/0597a3_06a8fad9316b4c848ea8c185f1421ffb_44eaf262.png",
     datasheet: "/datasheets/0597a3_4dfde2ac9b0244a39be6002e88614959.pdf",
     highlights: [
       "Intel Pentium 3710, 4C/4T, TDP 6W",
@@ -223,7 +223,7 @@ const highModels = [
     id: "k5-f17h",
     name: "K5-F17H",
     tagline: "Core i5-5300U, 2.3-2.9GHz Turbo, Dual GbE",
-    image: "https://static.wixstatic.com/media/0597a3_fb38b6b4f7db40b2be215ba7ba711cb9~mv2.png/v1/fill/w_409,h_263,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2015_25_21.png",
+    image: "/images/wix/0597a3_fb38b6b4f7db40b2be215ba7ba711cb9_1df6c159.png",
     datasheet: "/datasheets/0597a3_c79cb4ba2db3485abf44477aeb2f817c.pdf",
     highlights: [
       "Core i5-5300U, 2.3-2.9GHz Turbo Boost",
@@ -251,7 +251,7 @@ const highModels = [
     id: "k7-f17h",
     name: "K7-F17H",
     tagline: "Core i7-5500U, 2.4-3.0GHz Turbo, Workstation Level",
-    image: "https://static.wixstatic.com/media/0597a3_fb38b6b4f7db40b2be215ba7ba711cb9~mv2.png/v1/fill/w_409,h_263,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2015_25_21.png",
+    image: "/images/wix/0597a3_fb38b6b4f7db40b2be215ba7ba711cb9_1df6c159.png",
     datasheet: "/datasheets/0597a3_0f5e2b5c07ae4cd69726416340ec7210.pdf",
     highlights: [
       "Core i7-5500U, 2.4-3.0GHz Turbo",
@@ -277,7 +277,7 @@ const highModels = [
     id: "k5-f17f",
     name: "K5-F17F",
     tagline: "Core i5-1155G7 Tiger Lake Gen11, 4C/8T, 4.5GHz",
-    image: "https://static.wixstatic.com/media/0597a3_3ba05883e1c342bb99e35d0436424602~mv2.png/v1/fill/w_409,h_307,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2015_54_29.png",
+    image: "/images/wix/0597a3_3ba05883e1c342bb99e35d0436424602_aa7730de.png",
     datasheet: "/datasheets/0597a3_6c3dc8e3c4b3416489327d62c7fd5f8d.pdf",
     badge: "Tiger Lake",
     highlights: [
@@ -305,7 +305,7 @@ const highModels = [
     id: "k7-f17f",
     name: "K7-F17F",
     tagline: "Core i7-1195G7 Flagship, 5.0GHz, 8K DisplayPort!",
-    image: "https://static.wixstatic.com/media/0597a3_6ba1d01e29c34aefa206f89999813443~mv2.png/v1/fill/w_456,h_263,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2016_09_06.png",
+    image: "/images/wix/0597a3_6ba1d01e29c34aefa206f89999813443_465ad83d.png",
     datasheet: "/datasheets/0597a3_664a2b2f1d5f46438439d522687faa2c.pdf",
     badge: "Flagship",
     highlights: [
@@ -338,7 +338,7 @@ const educationModels = [
     id: "g5",
     name: "G5 Nano Mini PC",
     tagline: "ขนาด 6×6 ซม. น้ำหนัก 150g กินไฟ 10W",
-    image: "https://static.wixstatic.com/media/0597a3_039ae2b8d04549279975647939a97044~mv2.png/v1/fill/w_282,h_233,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2014_36_29.png",
+    image: "/images/wix/0597a3_039ae2b8d04549279975647939a97044_b5d9a864.png",
     datasheet: "/datasheets/0597a3_50922cf5dd954a769a7e5d9eacce5db0.pdf",
     highlights: [
       "ขนาดเพียง 61.6×61.6×42mm น้ำหนัก 0.15kg!",
@@ -368,7 +368,7 @@ const educationModels = [
     id: "k3-c7",
     name: "K3-C7",
     tagline: "Core i3-6157U, Iris Plus 650, 4K Dual Display",
-    image: "https://static.wixstatic.com/media/0597a3_e9ef885f05854a988704e1b2e8c1521b~mv2.png/v1/fill/w_235,h_346,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2014_47_48.png",
+    image: "/images/wix/0597a3_e9ef885f05854a988704e1b2e8c1521b_938d404c.png",
     datasheet: "/datasheets/0597a3_860b680d7b2847ff9e7f5730e5a52751.pdf",
     highlights: [
       "Intel Core i3-6157U, Iris Plus Graphics 650",
@@ -396,7 +396,7 @@ const educationModels = [
     id: "k5-n12",
     name: "K5-N12",
     tagline: "Core i5-8300H, 4C/8T, Gaming-Level Performance",
-    image: "https://static.wixstatic.com/media/0597a3_9d19c68e9bce4cec92136118203f2b40~mv2.png/v1/fill/w_433,h_291,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2014_59_06.png",
+    image: "/images/wix/0597a3_9d19c68e9bce4cec92136118203f2b40_c4f8c92c.png",
     datasheet: "/datasheets/0597a3_e9f354d5f1d14052a008f339b458ad19.pdf",
     highlights: [
       "Intel Core i5-8300H, 4C/8T, สูงสุด 4.0GHz",
@@ -424,7 +424,7 @@ const educationModels = [
     id: "k7-n12",
     name: "K7-N12",
     tagline: "Core i7-8750H, 6C/12T, Workstation Class!",
-    image: "https://static.wixstatic.com/media/0597a3_9d19c68e9bce4cec92136118203f2b40~mv2.png/v1/fill/w_433,h_291,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2014_59_06.png",
+    image: "/images/wix/0597a3_9d19c68e9bce4cec92136118203f2b40_c4f8c92c.png",
     datasheet: "/datasheets/0597a3_af7994bd251345b4bf89bc8864115f41.pdf",
     badge: "Most Powerful",
     highlights: [
@@ -457,7 +457,7 @@ const nanoModels = [
     id: "k1-f6-6400t",
     name: "K1-F6-6400T",
     tagline: "AMD A4, TDP 4.5W, ประหยัดพลังงานที่สุด!",
-    image: "https://static.wixstatic.com/media/0597a3_53b1567a8a3e4825b92766a16e30a281~mv2.png/v1/fill/w_415,h_210,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2015_13_56.png",
+    image: "/images/wix/0597a3_53b1567a8a3e4825b92766a16e30a281_78a64ffd.png",
     datasheet: "/datasheets/0597a3_ad25ce5ea3f74504839c7ee7ca649943.pdf",
     highlights: [
       "AMD A4 Micro-6400T, 4 Core, TDP เพียง 4.5W!",
@@ -489,7 +489,7 @@ const firewallModels = [
     id: "k8-f12",
     name: "K8-F12-N3700 (4 LAN)",
     tagline: "4× Gigabit LAN, Fanless 6W, Firewall/Router",
-    image: "https://static.wixstatic.com/media/0597a3_ad7f2747d32c4f78b9f2fa33ffdc03c2~mv2.png/v1/fill/w_426,h_277,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2019_57_54.png",
+    image: "/images/wix/0597a3_ad7f2747d32c4f78b9f2fa33ffdc03c2_830d3a7c.png",
     datasheet: "/datasheets/0597a3_b97ed68def1a4060a1fd87cd21f45bb6.pdf",
     highlights: [
       "4 × RJ45 Gigabit LAN ports",
@@ -513,7 +513,7 @@ const firewallModels = [
     id: "k8-f12c",
     name: "K8-F12C-N3700 (6 LAN)",
     tagline: "6× Gigabit LAN, Fanless 6W, Enterprise Router",
-    image: "https://static.wixstatic.com/media/0597a3_a526198c6088458f9fcf2c7b4fb93994~mv2.png/v1/fill/w_377,h_286,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-30%20at%2019_51_47.png",
+    image: "/images/wix/0597a3_a526198c6088458f9fcf2c7b4fb93994_ec13566c.png",
     datasheet: "/datasheets/0597a3_9fe53a205d694b24b3d9790a580ce737.pdf",
     highlights: [
       "6 × RJ45 Gigabit LAN ports",
@@ -541,7 +541,7 @@ const signageModels = [
     id: "r9",
     name: "R9 Digital Signage Player",
     tagline: "Android, Dual LVDS, Dual HDMI 4K, IR Remote",
-    image: "https://static.wixstatic.com/media/0597a3_42d62d54f19545129af65186b0a93cba~mv2.png/v1/fill/w_486,h_438,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/R9%20(2).png",
+    image: "/images/wix/0597a3_42d62d54f19545129af65186b0a93cba_98438629.png",
     datasheet: "/datasheets/0597a3_ff0ba2e724c44d79ae076bb9a5e71e18.pdf",
     highlights: [
       "Dual LVDS 6/8 บิต แสดงผล 2 หน้าจอ",
@@ -560,17 +560,17 @@ const signageModels = [
       OS: "Android 7-10",
     },
     gallery: [
-      "https://static.wixstatic.com/media/0597a3_789647ea8e3e491ea997ff3a263c5da9~mv2.png/v1/fill/w_376,h_376,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/R9%20Digital%20signage.png",
-      "https://static.wixstatic.com/media/0597a3_1155bccf1be749bea87d526d72cfd120~mv2.png/v1/fill/w_376,h_376,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/R9%20Digital%20signage%20(4).png",
-      "https://static.wixstatic.com/media/0597a3_9343a5429b1848da99e6d1dc07c1d001~mv2.png/v1/fill/w_376,h_376,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/R9%20Digital%20signage%20(3).png",
-      "https://static.wixstatic.com/media/0597a3_6909454cbcfa4b26a99be861183368d2~mv2.png/v1/fill/w_376,h_376,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/R9%20Digital%20signage%20(2).png",
+      "/images/wix/0597a3_789647ea8e3e491ea997ff3a263c5da9_87364db6.png",
+      "/images/wix/0597a3_1155bccf1be749bea87d526d72cfd120_b316a753.png",
+      "/images/wix/0597a3_9343a5429b1848da99e6d1dc07c1d001_5039bd2a.png",
+      "/images/wix/0597a3_6909454cbcfa4b26a99be861183368d2_336a21c5.png",
     ],
   },
   {
     id: "x7",
     name: "X7 Digital Signage Player",
     tagline: "RK3288 Quad-Core, Dual LVDS 2K, 4K HDMI",
-    image: "https://static.wixstatic.com/media/005637_1a239b98b4f940c28220e5c71d0702ef~mv2.png/v1/crop/x_250,y_153,w_1392,h_719/fill/w_486,h_255,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1.png",
+    image: "/images/wix/005637_1a239b98b4f940c28220e5c71d0702ef_770202a3.png",
     datasheet: "/datasheets/0597a3_7275cc99c2504a12a02a3d098ea8ac8a.pdf",
     highlights: [
       "Rockchip RK3288 Quad-Core",
@@ -598,7 +598,7 @@ const legacyModels = [
     id: "k6-f13a",
     name: "K6-F13A",
     tagline: "N2840 Quad Core, RAM 4GB, SSD 64GB, WiFi พร้อมใช้",
-    image: "https://static.wixstatic.com/media/005637_7660fefadbf44ce595c021bbb10bc142~mv2.jpg/v1/crop/x_0,y_1,w_1040,h_1038/fill/w_640,h_639,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/f13aNew2023.jpg",
+    image: "/images/wix/005637_7660fefadbf44ce595c021bbb10bc142_c72362f1.jpg",
     datasheet: "/datasheets/005637_f0d6b09fb3b748039badafd362ea6689.pdf",
     highlights: [
       "N2840 Quad Core 1.83-2.2GHz",
@@ -624,7 +624,7 @@ const legacyModels = [
     id: "k6-f13d",
     name: "K6-F13D",
     tagline: "N3710 Quad Core, RAM 2GB, SSD 64GB, WiFi",
-    image: "https://static.wixstatic.com/media/005637_e1ed3b88204f40ffbe98269b03df27af~mv2.jpg/v1/crop/x_0,y_2,w_1040,h_1035/fill/w_640,h_637,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/f13DNew2023.jpg",
+    image: "/images/wix/005637_e1ed3b88204f40ffbe98269b03df27af_4fc137ab.jpg",
     datasheet: "/datasheets/3e5003_c865b0cfae29409eadb38ef072d102ae.pdf",
     highlights: [
       "N3710 Quad Core 1.6-2.5GHz",

@@ -283,7 +283,7 @@ const UTCSeries = () => {
             <div className="relative flex items-center justify-center">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-3xl" />
               <img
-                src="https://static.wixstatic.com/media/0597a3_1045620b437c41d6ae8a1f76c791ca01~mv2.png/v1/fill/w_1201,h_479,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_1045620b437c41d6ae8a1f76c791ca01~mv2.png"
+                src="/images/wix/0597a3_1045620b437c41d6ae8a1f76c791ca01_782dc747.png"
                 alt="UTC Series Industrial Panel PC"
                 className="relative w-full max-w-lg mx-auto drop-shadow-xl"
                 loading="eager"
@@ -346,11 +346,11 @@ const UTCSeries = () => {
                     </div>
                   </div>
                   <WishlistHeart
-                    item={{ id: "utc-square", name: "UTC Square Screen", category: "UTC Series", image: "https://static.wixstatic.com/media/0597a3_48b4b6dd4b0844f1996977be9733e597~mv2.png", href: "/utc-series", specs: "4:3 / 5:4 Touch Monitor" }}
+                    item={{ id: "utc-square", name: "UTC Square Screen", category: "UTC Series", image: "/images/wix/0597a3_48b4b6dd4b0844f1996977be9733e597_baf8b2cc.png", href: "/utc-series", specs: "4:3 / 5:4 Touch Monitor" }}
                   />
                 </div>
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_48b4b6dd4b0844f1996977be9733e597~mv2.png/v1/crop/x_1,y_7,w_1775,h_891/fill/w_1330,h_668,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_48b4b6dd4b0844f1996977be9733e597~mv2.png"
+                  src="/images/wix/0597a3_48b4b6dd4b0844f1996977be9733e597_a37ce2a5.png"
                   alt="UTC Square Screen Models"
                   className="w-full rounded-lg mb-4"
                   loading="lazy"
@@ -378,11 +378,11 @@ const UTCSeries = () => {
                     </div>
                   </div>
                   <WishlistHeart
-                    item={{ id: "utc-wide", name: "UTC Wide Screen", category: "UTC Series", image: "https://static.wixstatic.com/media/0597a3_52951cbca38c439f8abc10f9e94fa03f~mv2.png", href: "/utc-series", specs: "16:9 Touch Monitor" }}
+                    item={{ id: "utc-wide", name: "UTC Wide Screen", category: "UTC Series", image: "/images/wix/0597a3_52951cbca38c439f8abc10f9e94fa03f_69408504.png", href: "/utc-series", specs: "16:9 Touch Monitor" }}
                   />
                 </div>
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_52951cbca38c439f8abc10f9e94fa03f~mv2.png/v1/crop/x_0,y_112,w_2032,h_1008/fill/w_1292,h_641,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Wide%20Screen%20Banner01.png"
+                  src="/images/wix/0597a3_52951cbca38c439f8abc10f9e94fa03f_b157e1d3.png"
                   alt="UTC Wide Screen Models"
                   className="w-full rounded-lg mb-4"
                   loading="lazy"
@@ -407,7 +407,7 @@ const UTCSeries = () => {
               </div>
             </div>
             <img
-              src="https://static.wixstatic.com/media/0597a3_48fd1fb952d44775b7bbc10381cd8233~mv2.png/v1/crop/x_12,y_2,w_2072,h_1056/fill/w_1264,h_643,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_48fd1fb952d44775b7bbc10381cd8233~mv2.png"
+              src="/images/wix/0597a3_48fd1fb952d44775b7bbc10381cd8233_354919d7.png"
               alt="UTC Multi-Display Setup"
               className="w-full rounded-lg"
               loading="lazy"
@@ -544,10 +544,10 @@ const UTCSeries = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              "https://static.wixstatic.com/media/0597a3_98785635fe784fe19c00ad392cf400ae~mv2.png/v1/fill/w_287,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7.png",
-              "https://static.wixstatic.com/media/0597a3_31959a006ae24444b3586333342351a0~mv2.png/v1/fill/w_287,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6.png",
-              "https://static.wixstatic.com/media/0597a3_93fd8e4c6cb946f19e12c55129b5bdac~mv2.png/v1/fill/w_287,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5.png",
-              "https://static.wixstatic.com/media/0597a3_5a42fd39caf242459aba8cca293d0946~mv2.png/v1/fill/w_287,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.png",
+              "/images/wix/0597a3_98785635fe784fe19c00ad392cf400ae_f8a92212.png",
+              "/images/wix/0597a3_31959a006ae24444b3586333342351a0_2ce47a9b.png",
+              "/images/wix/0597a3_93fd8e4c6cb946f19e12c55129b5bdac_b0080fff.png",
+              "/images/wix/0597a3_5a42fd39caf242459aba8cca293d0946_c83115bc.png",
             ].map((src, i) => (
               <div key={i} className="rounded-xl overflow-hidden card-surface">
                 <img src={src} alt={`UTC Installation ${i + 1}`} className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
@@ -557,9 +557,9 @@ const UTCSeries = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             {[
-              "https://static.wixstatic.com/media/005637_58cf41453af344fc81b03346959943d4~mv2.jpg/v1/crop/x_0,y_0,w_6000,h_3510/fill/w_599,h_348,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/re_IMG_6752.jpg",
-              "https://static.wixstatic.com/media/005637_c321f3ef6f554ba39151d5416e6ae1bd~mv2.jpg/v1/fill/w_329,h_219,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/re_IMG_6751.jpg",
-              "https://static.wixstatic.com/media/005637_3f34740280de4be0ae521c5e00a002a9~mv2.jpg/v1/fill/w_329,h_219,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/re_IMG_6749.jpg",
+              "/images/wix/005637_58cf41453af344fc81b03346959943d4_c745bf12.jpg",
+              "/images/wix/005637_c321f3ef6f554ba39151d5416e6ae1bd_6e02619b.jpg",
+              "/images/wix/005637_3f34740280de4be0ae521c5e00a002a9_3e45e999.jpg",
             ].map((src, i) => (
               <div key={i} className="rounded-xl overflow-hidden card-surface">
                 <img src={src} alt={`UTC Factory ${i + 1}`} className="w-full h-44 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />

@@ -324,14 +324,14 @@ const VCloudPoint = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-3xl" />
               <img
-                src="https://static.wixstatic.com/media/0597a3_2ecc578ac2fa4e14b33ded599f607670~mv2.png/v1/fill/w_610,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_2ecc578ac2fa4e14b33ded599f607670~mv2.png"
+                src="/images/wix/0597a3_2ecc578ac2fa4e14b33ded599f607670_de783198.png"
                 alt="vCloudPoint Zero Client"
                 className="relative w-full rounded-2xl"
                 loading="eager"
               />
               <div className="mt-4">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_cbb51860864645c59b77aaa661958cdc~mv2.png/v1/fill/w_620,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_cbb51860864645c59b77aaa661958cdc~mv2.png"
+                  src="/images/wix/0597a3_cbb51860864645c59b77aaa661958cdc_8fbba592.png"
                   alt="vCloudPoint System Diagram"
                   className="w-full rounded-2xl"
                   loading="eager"
@@ -505,7 +505,7 @@ const VCloudPoint = () => {
           <div className="grid sm:grid-cols-2 gap-4 mb-8 max-w-4xl mx-auto">
             <div className="rounded-xl overflow-hidden border border-border bg-secondary/30">
               <img
-                src="https://static.wixstatic.com/media/0597a3_4370580a88c646c88a88dcdf9e7b6dd7~mv2.jpg/v1/fill/w_600,h_598,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_4370580a88c646c88a88dcdf9e7b6dd7~mv2.jpg"
+                src="/images/wix/0597a3_4370580a88c646c88a88dcdf9e7b6dd7_cfa390fb.jpg"
                 alt="vMatrix Server Software"
                 className="w-full h-56 md:h-64 object-cover object-top"
                 loading="lazy"
@@ -513,7 +513,7 @@ const VCloudPoint = () => {
             </div>
             <div className="rounded-xl overflow-hidden border border-border bg-secondary/30">
               <img
-                src="https://static.wixstatic.com/media/0597a3_f4c88e348b9e4916a08c834a965cc703~mv2.jpg/v1/fill/w_598,h_598,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/contral.jpg"
+                src="/images/wix/0597a3_f4c88e348b9e4916a08c834a965cc703_70b9fc48.jpg"
                 alt="vMatrix Control Panel"
                 className="w-full h-56 md:h-64 object-cover object-top"
                 loading="lazy"

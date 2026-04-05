@@ -40,7 +40,7 @@ const promotions: Promo[] = [
     description: "Industrial Panel PC แบบกันน้ำ วัสดุสแตนเลส SUS304 พร้อม Core i5, 15.6/17\" LED, 10-point PCAP ทำความสะอาดง่าย เหมาะสำหรับโรงงานอาหาร",
     status: "ended",
     period: "ก.ค. — ก.ย. 2567",
-    image: "https://static.wixstatic.com/media/0597a3_7b6521bd482145efb111e6b876b3724a~mv2.png/v1/fill/w_437,h_437,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GA-IPC3568.png",
+    image: "/images/wix/0597a3_7b6521bd482145efb111e6b876b3724a_9fec0c05.png",
     highlights: [
       "Stainless Steel SUS304",
       "กันน้ำรอบทิศทาง",
@@ -59,7 +59,7 @@ const promotions: Promo[] = [
     description: "ซื้อ GT5000 Industrial PC ในราคาปกติ รับส่วนลด Windows 10/11 Pro OEM ทันที 50%! ทนทาน พอร์ตครบ RS232/RS485/RS422 + GPIO",
     status: "ended",
     period: "ก.ย. — 31 ต.ค. 2567",
-    image: "https://static.wixstatic.com/media/0597a3_805b3ce1b9bb473783490aefbcaff690~mv2.png/v1/fill/w_351,h_316,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Mini%20PC%20-%20Toyy001%20(5).png",
+    image: "/images/wix/0597a3_805b3ce1b9bb473783490aefbcaff690_9f1d49c9.png",
     highlights: [
       "Windows Pro OEM ลด 50%",
       "GT5000 Industrial Grade",
@@ -77,7 +77,7 @@ const promotions: Promo[] = [
     description: "มินิคอมพิวเตอร์สเปคดี ราคาเข้าถึงง่าย i3 Gen10 8GB 256GB WiFi เพียง 11,900 บาท หรือ i3 Gen13 เพียง 12,900 บาท + ส่วนลด 50% Windows OEM",
     status: "ended",
     period: "ต.ค. — ธ.ค. 2567",
-    image: "https://static.wixstatic.com/media/0597a3_36c3b6f976464c92a2638e03febec078~mv2.png/v1/fill/w_351,h_316,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Mini%20PC%20-%20Toyy001%20(4).png",
+    image: "/images/wix/0597a3_36c3b6f976464c92a2638e03febec078_ff7afdb2.png",
     highlights: [
       "i3 Gen10 8GB 256GB — 11,900 บาท",
       "i3 Gen13 8GB 256GB — 12,900 บาท",
@@ -96,7 +96,7 @@ const promotions: Promo[] = [
     status: "ended",
     period: "โครงการพิเศษ 2567",
     badge: "CSR",
-    image: "https://static.wixstatic.com/media/0597a3_4a0a3cd6b903466aa7a6be2c574f9f17~mv2.png/v1/fill/w_399,h_399,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_4a0a3cd6b903466aa7a6be2c574f9f17~mv2.png",
+    image: "/images/wix/0597a3_4a0a3cd6b903466aa7a6be2c574f9f17_79537af4.png",
     highlights: [
       "ลด 30% สำหรับโรงเรียนประสบภัย",
       "ฟรีติดตั้ง + อบรม + ซอฟต์แวร์",
@@ -136,7 +136,7 @@ const promotions: Promo[] = [
     period: "จนถึง 31 ธ.ค. 2568",
     endDate: "2568-12-31",
     badge: "คุ้มสุด",
-    image: "https://static.wixstatic.com/media/0597a3_edb77d9f4150436f837edf75bf00a6e6~mv2.png/v1/fill/w_587,h_587,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IPC110%20(1).png",
+    image: "/images/wix/0597a3_edb77d9f4150436f837edf75bf00a6e6_55c2b56b.png",
     highlights: [
       "RAM 4GB → อัพฟรี 8GB",
       "SSD 128GB → อัพฟรี 256GB",
@@ -157,7 +157,7 @@ const promotions: Promo[] = [
     period: "จนถึง 31 ธ.ค. 2568",
     endDate: "2568-12-31",
     badge: "HOT",
-    image: "https://static.wixstatic.com/media/0597a3_db1433a3bf0c4657a1f5d99352280129~mv2.png/v1/fill/w_487,h_487,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
+    image: "/images/wix/0597a3_db1433a3bf0c4657a1f5d99352280129_8b3388da.png",
     highlights: [
       "แถมฟรี Windows 10/11 Pro OEM",
       "หรือ Windows 10/11 IOT",
@@ -177,7 +177,7 @@ const promotions: Promo[] = [
     status: "active",
     period: "จนถึง 31 ธ.ค. 2568",
     endDate: "2568-12-31",
-    image: "https://static.wixstatic.com/media/0597a3_dc716eff20664aae8238509cca867668~mv2.png/v1/fill/w_487,h_487,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT1200.png",
+    image: "/images/wix/0597a3_dc716eff20664aae8238509cca867668_0f736af8.png",
     highlights: [
       "ฟรี WiFi 6 Module มูลค่า 3,900 บาท",
       "เชื่อมต่อเร็วกว่าด้วย WiFi 6",
@@ -197,7 +197,7 @@ const promotions: Promo[] = [
     status: "recurring",
     period: "ทุกวันจันทร์",
     badge: "Weekly",
-    image: "https://static.wixstatic.com/media/0597a3_e37368a316ff4090b336d904f95bf018~mv2.png/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/UTC%20Series.png",
+    image: "/images/wix/0597a3_e37368a316ff4090b336d904f95bf018_37b04f66.png",
     highlights: [
       "ดีลพิเศษเปลี่ยนทุกสัปดาห์",
       "ราคาเฉพาะวันจันทร์เท่านั้น",

@@ -17,52 +17,52 @@ const productCategories = [
     id: "managed",
     title: "Managed Switches",
     desc: "สวิตช์อัจฉริยะควบคุมผ่าน SNMP, VLAN, QoS, Ring Protocol",
-    image: "https://static.wixstatic.com/media/0597a3_48bf9c799b124b9a9da5ef1e5a0681d9~mv2.png/v1/fill/w_1080,h_585,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_06_34.png",
-    modelImage: "https://static.wixstatic.com/media/0597a3_e4054080649041dabe0efc39aa2951c7~mv2.png/v1/fill/w_1084,h_256,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_24_32.png",
+    image: "/images/wix/0597a3_48bf9c799b124b9a9da5ef1e5a0681d9_d0c037c4.png",
+    modelImage: "/images/wix/0597a3_e4054080649041dabe0efc39aa2951c7_eb098d81.png",
   },
   {
     id: "unmanaged",
     title: "Unmanaged Switches",
     desc: "สวิตช์ Plug & Play ติดตั้งง่าย ใช้งานทันที เหมาะงานทั่วไป",
-    image: "https://static.wixstatic.com/media/0597a3_9cbf5fb4839349cf93e849292e728cd8~mv2.png/v1/fill/w_1080,h_545,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_09_14.png",
-    modelImage: "https://static.wixstatic.com/media/0597a3_d9937cea9cb147feaf1fe73f1e9d959b~mv2.png/v1/fill/w_1099,h_266,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_22_46.png",
+    image: "/images/wix/0597a3_9cbf5fb4839349cf93e849292e728cd8_2ebdabea.png",
+    modelImage: "/images/wix/0597a3_d9937cea9cb147feaf1fe73f1e9d959b_38b90c50.png",
   },
   {
     id: "standard",
     title: "Standard Switches",
     desc: "สวิตช์มาตรฐานสำหรับเครือข่ายพื้นฐาน",
-    image: "https://static.wixstatic.com/media/0597a3_05c7f13bef77470f9deea1d2615dbeac~mv2.png/v1/fill/w_1084,h_359,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_11_20.png",
+    image: "/images/wix/0597a3_05c7f13bef77470f9deea1d2615dbeac_2fee225f.png",
   },
   {
     id: "substation",
     title: "Substation Certified Switches",
     desc: "สวิตช์ที่ผ่านการรับรองสำหรับสถานีไฟฟ้า",
-    image: "https://static.wixstatic.com/media/0597a3_b83747428b3c4d8cabc421f12481a73b~mv2.png/v1/fill/w_1107,h_209,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_13_24.png",
-    modelImage: "https://static.wixstatic.com/media/0597a3_19127454a9974f01bb23f7c61e860a89~mv2.png/v1/fill/w_1131,h_260,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_25_43.png",
+    image: "/images/wix/0597a3_b83747428b3c4d8cabc421f12481a73b_410095fc.png",
+    modelImage: "/images/wix/0597a3_19127454a9974f01bb23f7c61e860a89_3c96d9ae.png",
   },
   {
     id: "railway",
     title: "Railway Certified Switches",
     desc: "สวิตช์ที่ผ่านมาตรฐานสำหรับระบบราง",
-    image: "https://static.wixstatic.com/media/0597a3_1de8b4b957214fb491d35bbfc6151c43~mv2.png/v1/fill/w_1082,h_222,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_14_16.png",
+    image: "/images/wix/0597a3_1de8b4b957214fb491d35bbfc6151c43_2f1323c5.png",
   },
   {
     id: "dnv",
     title: "DNV Certified Switches",
     desc: "สวิตช์ที่ผ่านมาตรฐาน DNV สำหรับงานทางทะเล",
-    image: "https://static.wixstatic.com/media/0597a3_18695496fbc24aa8b5a965d98a37ed8f~mv2.png/v1/fill/w_1072,h_368,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_15_00.png",
+    image: "/images/wix/0597a3_18695496fbc24aa8b5a965d98a37ed8f_854a2b39.png",
   },
   {
     id: "profinet",
     title: "Profinet Certified Switches",
     desc: "สวิตช์ Profinet สำหรับระบบอัตโนมัติอุตสาหกรรม",
-    image: "https://static.wixstatic.com/media/0597a3_36b9080d86624aae8c54f11bf0603b16~mv2.png/v1/fill/w_1072,h_193,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_19_52.png",
+    image: "/images/wix/0597a3_36b9080d86624aae8c54f11bf0603b16_95fc33af.png",
   },
   {
     id: "ethernetip",
     title: "EtherNet/IP Certified Switches",
     desc: "สวิตช์ EtherNet/IP สำหรับ Industrial Protocol",
-    image: "https://static.wixstatic.com/media/0597a3_a12ee0f5c79f4d74a17f41fd57aacb30~mv2.png/v1/fill/w_1061,h_248,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_29_08.png",
+    image: "/images/wix/0597a3_a12ee0f5c79f4d74a17f41fd57aacb30_bf7444aa.png",
   },
 ];
 
@@ -100,23 +100,23 @@ const features = [
 ];
 
 const productGallery = [
-  "https://static.wixstatic.com/media/0597a3_6ca4cc5c13dd494cae13b9496d742c13~mv2.png/v1/fill/w_358,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6.png",
-  "https://static.wixstatic.com/media/0597a3_bacbf34c36704fce95f1e0dd7c47a148~mv2.png/v1/fill/w_358,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_bacbf34c36704fce95f1e0dd7c47a148~mv2.png",
-  "https://static.wixstatic.com/media/0597a3_9fa5509272ea4cd0af1809c12c3a6267~mv2.png/v1/fill/w_358,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3.png",
-  "https://static.wixstatic.com/media/0597a3_f82fea86a23a4d368ac4dfe9530a8094~mv2.png/v1/fill/w_358,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png",
-  "https://static.wixstatic.com/media/0597a3_2d85bf5136fc48debd9e6b4bee94ccdc~mv2.png/v1/fill/w_358,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.png",
-  "https://static.wixstatic.com/media/0597a3_f1c99ab866a440538221428b13ba0903~mv2.png/v1/fill/w_358,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1.png",
+  "/images/wix/0597a3_6ca4cc5c13dd494cae13b9496d742c13_5d6812aa.png",
+  "/images/wix/0597a3_bacbf34c36704fce95f1e0dd7c47a148_c5be366e.png",
+  "/images/wix/0597a3_9fa5509272ea4cd0af1809c12c3a6267_9f6b64cc.png",
+  "/images/wix/0597a3_f82fea86a23a4d368ac4dfe9530a8094_5c647f49.png",
+  "/images/wix/0597a3_2d85bf5136fc48debd9e6b4bee94ccdc_bc1ae1b9.png",
+  "/images/wix/0597a3_f1c99ab866a440538221428b13ba0903_20897a65.png",
 ];
 
 const applicationGallery = [
-  "https://static.wixstatic.com/media/0597a3_4493b0eb74f24944ad49b9e2545e739b~mv2.png/v1/fill/w_377,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/9.png",
-  "https://static.wixstatic.com/media/0597a3_fe5e0b8b405145dc90e4fa4fa3b9adc0~mv2.png/v1/fill/w_377,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_fe5e0b8b405145dc90e4fa4fa3b9adc0~mv2.png",
-  "https://static.wixstatic.com/media/0597a3_067c41cc6f614e9a9787d4437cacafa3~mv2.png/v1/fill/w_377,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_067c41cc6f614e9a9787d4437cacafa3~mv2.png",
-  "https://static.wixstatic.com/media/0597a3_ed37ee94be24498fb50ded257ef0443e~mv2.png/v1/fill/w_377,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8.png",
-  "https://static.wixstatic.com/media/0597a3_ade08d50e1164d7bbcc2d37dc18e2387~mv2.png/v1/fill/w_383,h_345,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_ade08d50e1164d7bbcc2d37dc18e2387~mv2.png",
-  "https://static.wixstatic.com/media/0597a3_4968fd66fa9a4ecf9d5090fd6151c434~mv2.png/v1/fill/w_383,h_345,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_4968fd66fa9a4ecf9d5090fd6151c434~mv2.png",
-  "https://static.wixstatic.com/media/0597a3_cfd98f82e82845adbdbd09a0a8834698~mv2.png/v1/fill/w_377,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_cfd98f82e82845adbdbd09a0a8834698~mv2.png",
-  "https://static.wixstatic.com/media/0597a3_804332b8a4774899a1a14df53907b7c9~mv2.png/v1/fill/w_377,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5.png",
+  "/images/wix/0597a3_4493b0eb74f24944ad49b9e2545e739b_a3fde505.png",
+  "/images/wix/0597a3_fe5e0b8b405145dc90e4fa4fa3b9adc0_fa0b4cc9.png",
+  "/images/wix/0597a3_067c41cc6f614e9a9787d4437cacafa3_774107fe.png",
+  "/images/wix/0597a3_ed37ee94be24498fb50ded257ef0443e_a44b8b8d.png",
+  "/images/wix/0597a3_ade08d50e1164d7bbcc2d37dc18e2387_02b5eb73.png",
+  "/images/wix/0597a3_4968fd66fa9a4ecf9d5090fd6151c434_0750959b.png",
+  "/images/wix/0597a3_cfd98f82e82845adbdbd09a0a8834698_f985bf04.png",
+  "/images/wix/0597a3_804332b8a4774899a1a14df53907b7c9_eb85a68c.png",
 ];
 
 const Volktek = () => {
@@ -141,7 +141,7 @@ const Volktek = () => {
           </Link>
           <div className="card-surface overflow-hidden mb-8">
             <img
-              src="https://static.wixstatic.com/media/0597a3_acc5fb9c15d549868644c80cf3d94d4f~mv2.png/v1/fill/w_1296,h_479,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2012_39_50.png"
+              src="/images/wix/0597a3_acc5fb9c15d549868644c80cf3d94d4f_1179ee4b.png"
               alt="Volktek Industrial Ethernet"
               className="w-full h-auto"
             />
@@ -176,17 +176,17 @@ const Volktek = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               {
-                image: "https://static.wixstatic.com/media/0597a3_0b5ba123241440f18f3216c8e81f0d16~mv2.jpg/v1/fill/w_286,h_335,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Solution%20of%20industrial%20grade%20networking_.jpg",
+                image: "/images/wix/0597a3_0b5ba123241440f18f3216c8e81f0d16_20836036.jpg",
                 title: "Volktek Solutions",
                 desc: "โซลูชั่นที่ได้รับการพิสูจน์จากการใช้งานจริงทั่วโลก",
               },
               {
-                image: "https://static.wixstatic.com/media/0597a3_5a253786558044848ea83dbb340e88d1~mv2.jpg/v1/crop/x_75,y_0,w_874,h_1024/fill/w_286,h_335,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Ethernet%20Next%20Generation.jpg",
+                image: "/images/wix/0597a3_5a253786558044848ea83dbb340e88d1_7d83083b.jpg",
                 title: "Next Generation",
                 desc: "รองรับทั้ง Ethernet ปัจจุบันและ Next Generation Platform",
               },
               {
-                image: "https://static.wixstatic.com/media/0597a3_300d948b2d424bacafe7adbda7ed890e~mv2.jpg/v1/crop/x_75,y_0,w_874,h_1024/fill/w_286,h_335,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Industrial%20grade%20networking%20switch.jpg",
+                image: "/images/wix/0597a3_300d948b2d424bacafe7adbda7ed890e_43333d21.jpg",
                 title: "Certified Quality",
                 desc: "ได้รับการรับรอง DNV/GL, ISO, FCC, CE, VCCI ระดับสากล",
               },
@@ -242,7 +242,7 @@ const Volktek = () => {
             </div>
             <div className="md:w-1/2">
               <img
-                src="https://static.wixstatic.com/media/0597a3_d5a5792c655647a392507ede27ec62a6~mv2.png/v1/fill/w_1019,h_572,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-15%20at%2013_04_13.png"
+                src="/images/wix/0597a3_d5a5792c655647a392507ede27ec62a6_63339b10.png"
                 alt="Factory Automation Diagram"
                 className="w-full h-auto rounded-lg"
                 loading="lazy"

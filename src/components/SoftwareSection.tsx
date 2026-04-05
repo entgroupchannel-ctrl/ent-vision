@@ -71,7 +71,7 @@ const SoftwareSection = () => {
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative card-surface p-2 overflow-hidden">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_9e1fa56a9a7c40f9813a78e9e8b4edce~mv2.jpg/v1/fill/w_600,h_450,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/about-team-collaboration-BHxS3QL6.jpg"
+                  src="/images/wix/0597a3_9e1fa56a9a7c40f9813a78e9e8b4edce_18a08837.jpg"
                   alt="ทีมพัฒนาซอฟต์แวร์"
                   className="w-full rounded-lg transition-transform duration-500 group-hover:scale-[1.02]"
                   loading="lazy"
