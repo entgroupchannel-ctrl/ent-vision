@@ -68,6 +68,7 @@ const MyDocuments = lazy(() => import("./pages/MyDocuments.tsx"));
 const MyNotifications = lazy(() => import("./pages/MyNotifications.tsx"));
 const MyDemos = lazy(() => import("./pages/MyDemos.tsx"));
 const QuoteBuilder = lazy(() => import("./pages/QuoteBuilder.tsx"));
+const UserQuoteCreate = lazy(() => import("./pages/UserQuoteCreate.tsx"));
 
 /* ── Loading fallback ── */
 const PageLoader = () => (
@@ -144,6 +145,7 @@ const App = () => (
                 <Route path="/my-account" element={<MyAccount />}>
                   <Route index element={<MyProfile />} />
                   <Route path="quotes" element={<MyAccountQuotes />} />
+                  <Route path="quotes/create" element={<UserQuoteCreate />} />
                   <Route path="wishlist" element={<MyAccountWishlist />} />
                   <Route path="documents" element={<MyDocuments />} />
                   <Route path="notifications" element={<MyNotifications />} />
