@@ -33,7 +33,6 @@ const Delivery = () => {
             </Link>
             <ThemeToggle />
           </div>
-          </Link>
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
               <Truck size={18} className="text-primary" />
