@@ -61,14 +61,7 @@ const Blog = lazy(() => import("./pages/Blog.tsx"));
 const BlogDetail = lazy(() => import("./pages/BlogDetail.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const MyAccount = lazy(() => import("./pages/MyAccount.tsx"));
-const MyProfile = lazy(() => import("./pages/MyProfile.tsx"));
-const MyAccountQuotes = lazy(() => import("./pages/MyAccountQuotes.tsx"));
-const MyAccountWishlist = lazy(() => import("./pages/MyAccountWishlist.tsx"));
-const MyDocuments = lazy(() => import("./pages/MyDocuments.tsx"));
-const MyNotifications = lazy(() => import("./pages/MyNotifications.tsx"));
-const MyDemos = lazy(() => import("./pages/MyDemos.tsx"));
 const QuoteBuilder = lazy(() => import("./pages/QuoteBuilder.tsx"));
-const UserQuoteCreate = lazy(() => import("./pages/UserQuoteCreate.tsx"));
 
 /* ── Loading fallback ── */
 const PageLoader = () => (
