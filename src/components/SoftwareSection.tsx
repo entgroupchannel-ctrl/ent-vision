@@ -55,14 +55,26 @@ const SoftwareSection = () => {
           {highlights.map((h, i) => (
             <div
               key={h.label}
-              className="group card-surface p-5 text-center hover:border-primary/30 transition-all duration-300 hover:-translate-y-1"
+              className="group card-surface overflow-hidden hover:border-primary/30 transition-all duration-300 hover:-translate-y-1"
               style={{ animationDelay: `${i * 100}ms` }}
             >
-              <div className="w-11 h-11 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <h.icon size={20} className="text-primary" />
+              <div className="h-28 overflow-hidden">
+                <img
+                  src={h.img}
+                  alt={h.label}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  width={640}
+                  height={512}
+                />
               </div>
-              <p className="text-sm font-bold text-foreground">{h.label}</p>
-              <p className="text-xs text-muted-foreground mt-0.5">{h.desc}</p>
+              <div className="p-4 text-center">
+                <div className="w-9 h-9 mx-auto mb-2 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <h.icon size={18} className="text-primary" />
+                </div>
+                <p className="text-sm font-bold text-foreground">{h.label}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{h.desc}</p>
+              </div>
             </div>
           ))}
         </div>
