@@ -28,7 +28,7 @@ const quickLinks = [
 
 const FooterCompact = () => {
   return (
-    <footer className="bg-[hsl(220,20%,10%)] text-[hsl(210,20%,85%)] border-t border-border">
+    <footer className="mt-auto bg-[hsl(220,20%,10%)] text-[hsl(210,20%,85%)] border-t border-border">
       <div className="container max-w-7xl mx-auto px-6 py-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           {/* Logo + Contact */}
