@@ -132,6 +132,7 @@ const caseStudies = [
     highlights: ["Data Entry ในไลน์ผลิต", "ระบบตรวจสอบคุณภาพ QC", "ทนฝุ่น ทนร้อน ไม่มี Moving Part", "ROI คืนทุนภายใน 6 เดือน"],
     videos: [
       { id: "sSfAl0l8wHs", label: "Case Study — โรงงานอุตสาหกรรม" },
+      { id: "ZOZlBp1qHqU", label: "vCloudPoint ในโรงงานผลิตชิ้นส่วน" },
     ],
     color: "from-emerald-500/10 to-emerald-500/5",
     borderColor: "border-emerald-500/20",
