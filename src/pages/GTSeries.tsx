@@ -2598,7 +2598,7 @@ const GTSeries = () => {
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-2">📡 GPIO + SIM + RS485/RS422 — IoT Ready</h4>
+                    <h4 className="font-bold text-foreground mb-2"><Radio size={16} className="inline mr-1 text-primary" />GPIO + SIM + RS485/RS422 — IoT Ready</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       GT5000 มีพอร์ต GPIO และ RS232 × 6 ช่อง พิเศษยิ่งกว่านั้น COM1 + COM2 สามารถตั้งค่าเป็น RS485/RS422 ได้
                       พร้อมช่อง Micro SIM with PUSH function สำหรับเชื่อมต่อ 4G/5G ทำให้พร้อมสำหรับงาน IoT ทันที
@@ -4283,7 +4283,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Spec 2 คอลัมน์ */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">📋 GT9000 Specifications</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground"><FileText size={18} className="inline mr-1 text-primary" />GT9000 Specifications</h3>
                 </div>
                 <div className="grid md:grid-cols-2 md:divide-x divide-border">
                   <div className="divide-y divide-border">
@@ -4601,7 +4601,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   </div>
 
                   <div className="card-surface p-5 border-l-4 border-primary">
-                    <h4 className="font-bold text-foreground mb-2">🌡️ ทนทานเหนือระดับ -20° ถึง +75°C</h4>
+                    <h4 className="font-bold text-foreground mb-2"><ThermometerSun size={16} className="inline mr-1 text-primary" />ทนทานเหนือระดับ -20° ถึง +75°C</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       ทำงานได้ในอุณหภูมิ -20° ถึง +75°C และความชื้นสูงถึง 90% ด้วยครีบระบายความร้อนอลูมิเนียมขนาดใหญ่
                       ระบบ Passive Cooling ไม่ใช้พัดลม เงียบ 0 dB ทำงานต่อเนื่อง 24 ชั่วโมงไม่มีปัญหาความร้อนสะสม
@@ -4657,7 +4657,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Why GT4500 */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="card-surface p-6">
-                  <h4 className="text-lg font-display font-bold text-foreground mb-4">⚡ ประหยัดต้นทุนค่าไฟ</h4>
+                  <h4 className="text-lg font-display font-bold text-foreground mb-4"><Zap size={18} className="inline mr-1 text-primary" />ประหยัดต้นทุนค่าไฟ</h4>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li>• กินไฟเพียง <strong className="text-foreground">15W</strong> แม้ทำงาน 24 ชั่วโมง</li>
                     <li>• คิดเป็นค่าไฟเพียง <strong className="text-foreground">2.5 บาทต่อวัน</strong> (75 บาท/เดือน)</li>
@@ -4666,7 +4666,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   </ul>
                 </div>
                 <div className="card-surface p-6">
-                  <h4 className="text-lg font-display font-bold text-foreground mb-4">🔧 ดูแลง่าย ลดภาระ IT</h4>
+                  <h4 className="text-lg font-display font-bold text-foreground mb-4"><Wrench size={18} className="inline mr-1 text-primary" />ดูแลง่าย ลดภาระ IT</h4>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li>• <strong className="text-foreground">Auto Power On</strong> — กลับมาทำงานอัตโนมัติหลังไฟดับ</li>
                     <li>• <strong className="text-foreground">Watchdog Timer</strong> — ตรวจจับและแก้ไขระบบค้างอัตโนมัติ</li>
@@ -4678,7 +4678,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
 
               {/* CPU Options Visual */}
               <div className="card-surface p-4 overflow-hidden">
-                <h4 className="text-lg font-display font-bold text-foreground mb-4 px-2">🔧 เลือก CPU ได้ถึง 4 รุ่น — จ่ายตามความต้องการ</h4>
+                <h4 className="text-lg font-display font-bold text-foreground mb-4 px-2"><Cpu size={18} className="inline mr-1 text-primary" />เลือก CPU ได้ถึง 4 รุ่น — จ่ายตามความต้องการ</h4>
                 <img
                   src={gt4500CpuOptions}
                   alt="GT4500 CPU Options"
@@ -4690,7 +4690,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Software Compatibility */}
               <div className="card-surface p-6 md:p-8">
                 <h4 className="text-xl font-display font-bold text-foreground mb-4">
-                  💻 รองรับซอฟต์แวร์หลากหลาย
+                  <Laptop size={18} className="inline mr-1 text-primary" />รองรับซอฟต์แวร์หลากหลาย
                 </h4>
                 <div className="grid md:grid-cols-2 gap-6 items-center">
                   <div>
@@ -4733,7 +4733,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
 
               {/* Port Diagram */}
               <div className="card-surface p-4 overflow-hidden">
-                <h4 className="text-lg font-display font-bold text-foreground mb-4 px-2">🔌 พอร์ตเชื่อมต่อครบครัน</h4>
+                <h4 className="text-lg font-display font-bold text-foreground mb-4 px-2"><Plug size={18} className="inline mr-1 text-primary" />พอร์ตเชื่อมต่อครบครัน</h4>
                 <img
                   src="https://static.wixstatic.com/media/3e5003_fa1b7c0241e1439796bca055fb8c927d~mv2.jpg/v1/fill/w_1310,h_418,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7.jpg"
                   alt="GT4500 Port Layout"
@@ -4781,7 +4781,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* GT4500 Price Table */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">💰 GT4500 Price List</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground"><DollarSign size={18} className="inline mr-1 text-primary" />GT4500 Price List</h3>
                   <p className="text-sm text-muted-foreground mt-1">ทุกรุ่นมาพร้อม RAM 8GB + SSD 256GB มาตรฐาน</p>
                 </div>
                 <div className="overflow-x-auto">
@@ -5043,11 +5043,11 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Ports & Dimension — 2 คอลัมน์ */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="card-surface p-4 overflow-hidden">
-                  <h4 className="font-bold text-foreground mb-3 px-2 text-sm">🔌 Ports & Connectivity</h4>
+                  <h4 className="font-bold text-foreground mb-3 px-2 text-sm"><Plug size={16} className="inline mr-1 text-primary" />Ports & Connectivity</h4>
                   <img src="/images/gt1400/ports.png" alt="GT1400 Ports Layout" className="w-full rounded-lg" loading="lazy" />
                 </div>
                 <div className="card-surface p-4 overflow-hidden">
-                  <h4 className="font-bold text-foreground mb-3 px-2 text-sm">📐 Dimension Drawing</h4>
+                  <h4 className="font-bold text-foreground mb-3 px-2 text-sm"><Ruler size={16} className="inline mr-1 text-primary" />Dimension Drawing</h4>
                   <img src="/images/gt1400/dimension.png" alt="GT1400 Dimension" className="w-full rounded-lg" loading="lazy" />
                 </div>
               </div>
@@ -5055,7 +5055,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Spec 2 คอลัมน์ */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">📋 GT1400 Specifications</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground"><FileText size={18} className="inline mr-1 text-primary" />GT1400 Specifications</h3>
                 </div>
                 <div className="grid md:grid-cols-2 md:divide-x divide-border">
                   <div className="divide-y divide-border">
@@ -5120,7 +5120,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     <div className="card-surface overflow-hidden">
                       <CollapsibleTrigger className="w-full p-5 border-b border-border flex items-center justify-between hover:bg-secondary/30 transition-colors">
                         <div>
-                          <h3 className="text-lg font-display font-bold text-foreground text-left">💰 GT1400 Price List</h3>
+                          <h3 className="text-lg font-display font-bold text-foreground text-left"><DollarSign size={18} className="inline mr-1 text-primary" />GT1400 Price List</h3>
                           <p className="text-xs text-muted-foreground mt-1 text-left"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายเพื่อยืนยันราคา · {gt1400Prices.length} รายการ</p>
                         </div>
                         <ChevronDown size={20} className="text-muted-foreground transition-transform duration-200 [[data-state=open]>&]:rotate-180" />
@@ -5361,7 +5361,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Ports Detail — 2 คอลัมน์ */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
-                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหน้า</h4>
+                  <h4 className="font-bold text-foreground mb-3 text-sm"><Plug size={16} className="inline mr-1 text-primary" />Ports — ด้านหน้า</h4>
                   <img src="/images/gt1300/ports-detail1.jpg" alt="GT1300 Ports ด้านหน้า" className="w-full rounded-lg" loading="lazy" />
                 </div>
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
@@ -5373,7 +5373,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Dimension Drawing */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
-                  <h4 className="font-bold text-foreground mb-3 text-sm">📐 Dimension Drawing</h4>
+                  <h4 className="font-bold text-foreground mb-3 text-sm"><Ruler size={16} className="inline mr-1 text-primary" />Dimension Drawing</h4>
                   <img src="/images/gt1300/dimension.jpg" alt="GT1300 Dimension" className="w-full rounded-lg" loading="lazy" />
                 </div>
               </div>
@@ -5381,7 +5381,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Spec 2 คอลัมน์ */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">📋 GT1300 Specifications</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground"><FileText size={18} className="inline mr-1 text-primary" />GT1300 Specifications</h3>
                 </div>
                 <div className="grid md:grid-cols-2 md:divide-x divide-border">
                   <div className="divide-y divide-border">
@@ -5584,7 +5584,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Ports & Dimension — 2 คอลัมน์ */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
-                  <h4 className="font-bold text-foreground mb-3 text-sm">🔌 Ports — ด้านหน้า</h4>
+                  <h4 className="font-bold text-foreground mb-3 text-sm"><Plug size={16} className="inline mr-1 text-primary" />Ports — ด้านหน้า</h4>
                   <img src="/images/gt1200/ports-front.jpg" alt="GT1200 Ports ด้านหน้า" className="w-full rounded-lg" loading="lazy" />
                 </div>
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
@@ -5596,7 +5596,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Spec 2 คอลัมน์ */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">📋 GT1200 Specifications</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground"><FileText size={18} className="inline mr-1 text-primary" />GT1200 Specifications</h3>
                 </div>
                 <div className="grid md:grid-cols-2 md:divide-x divide-border">
                   <div className="divide-y divide-border">
@@ -5678,7 +5678,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 return (
                   <div className="card-surface overflow-hidden">
                     <div className="p-5 border-b border-border">
-                      <h3 className="text-lg font-display font-bold text-foreground">💰 GT1200 Price List</h3>
+                      <h3 className="text-lg font-display font-bold text-foreground"><DollarSign size={18} className="inline mr-1 text-primary" />GT1200 Price List</h3>
                       <p className="text-sm text-muted-foreground mt-1">เลือก CPU / RAM / SSD ที่เหมาะกับงาน — ทุกรุ่นพร้อม WiFi ({gt1200Prices.length} รายการ)</p>
                     </div>
                     <div className="overflow-x-auto">
@@ -5841,7 +5841,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
             {/* Windows License */}
             <div className="card-surface overflow-hidden">
               <div className="p-3 border-b border-border bg-primary/5">
-                <h3 className="text-sm font-display font-bold text-foreground">💻 Windows License</h3>
+                <h3 className="text-sm font-display font-bold text-foreground"><Laptop size={16} className="inline mr-1 text-primary" />Windows License</h3>
               </div>
               <div className="divide-y divide-border">
                 {[
@@ -5860,7 +5860,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
             {/* Hardware Options */}
             <div className="card-surface overflow-hidden">
               <div className="p-3 border-b border-border bg-primary/5">
-                <h3 className="text-sm font-display font-bold text-foreground">🔧 Hardware Options</h3>
+                <h3 className="text-sm font-display font-bold text-foreground"><Wrench size={16} className="inline mr-1 text-primary" />Hardware Options</h3>
               </div>
               <div className="divide-y divide-border">
                 {[
@@ -5991,7 +5991,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
           {/* PDPA Disclaimer */}
           <div className="mt-8 p-5 rounded-xl border border-primary/20 bg-primary/5 text-center">
             <p className="text-sm text-muted-foreground leading-relaxed">
-              <span className="font-semibold text-foreground">📋 หมายเหตุ:</span> ด้วยข้อบังคับตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) เราไม่สามารถเปิดเผยชื่อ-นามสกุล หรือข้อมูลที่ระบุตัวตนของลูกค้าได้
+              <span className="font-semibold text-foreground"><FileText size={14} className="inline mr-1 text-primary" />หมายเหตุ:</span> ด้วยข้อบังคับตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) เราไม่สามารถเปิดเผยชื่อ-นามสกุล หรือข้อมูลที่ระบุตัวตนของลูกค้าได้
               คำชมเหล่านี้เป็น <span className="font-semibold text-foreground">คำรีวิวจริง</span> ที่ได้รับจากลูกค้าผู้ใช้งานจริง ผ่านการทำงานหนักและบริการอย่างจริงใจของทีมเรา
             </p>
           </div>
