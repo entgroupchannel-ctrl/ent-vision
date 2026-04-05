@@ -132,6 +132,36 @@ const CaseStudyDetail = () => {
                 </a>
               </section>
             )}
+            {/* Facebook Video */}
+            {cs.facebookVideoId && (
+              <section>
+                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <Play className="w-5 h-5 text-blue-500" /> วิดีโอจากลูกค้าจริง
+                </h2>
+                <div className="rounded-lg overflow-hidden border border-border/60">
+                  <div className="aspect-video">
+                    <iframe
+                      src={`https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fentgroup.th%2Fvideos%2F${cs.facebookVideoId}%2F&show_text=0&width=560`}
+                      width="100%"
+                      height="100%"
+                      style={{ border: "none", overflow: "hidden" }}
+                      scrolling="no"
+                      allowFullScreen
+                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                      title="Facebook Video"
+                    />
+                  </div>
+                </div>
+                <a
+                  href="https://www.facebook.com/entgroup.th/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-primary font-medium mt-3 hover:underline"
+                >
+                  ดูวิดีโอทั้งหมดบน Facebook →
+                </a>
+              </section>
+            )}
           </div>
 
           {/* Sidebar */}
