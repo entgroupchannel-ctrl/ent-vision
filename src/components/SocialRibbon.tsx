@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
 import { useAutoHideWidget } from "@/hooks/useAutoHideWidget";
 import LineQRButton from "@/components/LineQRButton";
@@ -17,6 +18,9 @@ const socials = [
 ];
 
 const SocialRibbon = () => {
+  const location = useLocation();
+  const isPortalPage = location.pathname.startsWith("/my-account") || location.pathname.startsWith("/admin");
+
   const { visible, onInteraction, forceShow, forceHide } = useAutoHideWidget({
     initialDelay: 1000,
     hideAfter: 10000,
@@ -38,6 +42,8 @@ const SocialRibbon = () => {
     // Reset manual override after a while
     setTimeout(() => setManualExpanded(null), 15000);
   };
+
+  if (isPortalPage) return null;
 
   return (
     <div
