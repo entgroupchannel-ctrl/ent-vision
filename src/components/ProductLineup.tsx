@@ -19,7 +19,7 @@ const lineupCategories = [
     subtitle: "Fanless Industrial Computer",
     icon: Cpu,
     href: "/gt-series",
-    image: "https://static.wixstatic.com/media/3e5003_9a0970ee1f4f4d9aa2f4f3fef18faeb5~mv2.jpg/v1/fill/w_640,h_360,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%A3%E0%B8%A7%E0%B8%A1%20gt.jpg",
+    image: imgGT,
     models: [
       { name: "GT1000", href: "/gt-series" },
       { name: "GT1200 / GT1400", href: "/gt-series", badge: "ราคาใหม่!" },
@@ -39,7 +39,7 @@ const lineupCategories = [
     subtitle: "Industrial Touch Panel",
     icon: Monitor,
     href: "/panel-pc-gtg",
-    image: "https://static.wixstatic.com/media/005637_ce8c0dbc2e5d4e2aa93e465ddb8d4dbe~mv2.jpg/v1/crop/x_0,y_3,w_1997,h_710/fill/w_640,h_360,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%A3%E0%B8%A7%E0%B8%A1%20Panel%20PC.jpg",
+    image: imgPanel,
     models: [
       { name: "FPM Touch Monitor", href: "/panel-pc-gtg" },
       { name: "UTC Series", href: "/utc-series" },
@@ -58,7 +58,7 @@ const lineupCategories = [
     subtitle: "Embedded Fanless Box PC",
     icon: Server,
     href: "/ibox-series",
-    image: "https://static.wixstatic.com/media/0597a3_f038b57570074d0ab2559ba322f4bc66~mv2.png/v1/fill/w_640,h_360,al_c,q_85,enc_avif,quality_auto/6.png",
+    image: imgIBox,
     models: [
       { name: "AI Edge / GPU", href: "/ibox-series" },
       { name: "Embedded Box", href: "/ibox-series" },
@@ -74,7 +74,7 @@ const lineupCategories = [
     subtitle: "Compact Industrial PC",
     icon: Box,
     href: "/epc-box-series",
-    image: "https://static.wixstatic.com/media/3e5003_c865b0cfae29409eadb38ef072d102ae~mv2.png/v1/fill/w_640,h_360,al_c,q_85,enc_avif,quality_auto/EPC-30XA.png",
+    image: imgEPC,
     models: [
       { name: "EPC-30XA", href: "/epc-box-series" },
       { name: "EPC-T40XX", href: "/epc-box-series" },
@@ -89,7 +89,7 @@ const lineupCategories = [
     subtitle: "Tablet · Notebook · Handheld",
     icon: TabletSmartphone,
     href: "/rugged-tablet",
-    image: "https://static.wixstatic.com/media/005637_2e25c9d6f2974be5bcfbcf356f82f568~mv2.png/v1/fill/w_640,h_360,al_c,q_85,enc_avif,quality_auto/rugged.png",
+    image: imgRugged,
     models: [
       { name: "Rugged Tablet", href: "/rugged-tablet" },
       { name: "Rugged Notebook", href: "/rugged-notebook" },
@@ -105,7 +105,7 @@ const lineupCategories = [
     subtitle: "Digital Signage · Outdoor",
     icon: Tv,
     href: "/smart-display",
-    image: "https://static.wixstatic.com/media/005637_5d760f5082bb435aaa29a55ab6298a02~mv2.jpg/v1/fill/w_640,h_360,al_c,q_80,enc_avif,quality_auto/smart-display.jpg",
+    image: imgSmart,
     models: [
       { name: "Indoor", href: "/smart-display" },
       { name: "Outdoor", href: "/smart-display?tab=outdoor" },
