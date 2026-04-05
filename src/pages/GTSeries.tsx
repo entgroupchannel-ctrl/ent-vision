@@ -957,7 +957,7 @@ const GTSeries = () => {
                 <div className="lg:col-span-2 space-y-4">
                   <div className="card-surface overflow-hidden rounded-xl bg-muted/30">
                     <img
-                      src="https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874413.jpg"
+                      src="/images/wezhan/5874413.jpg"
                       alt="GT1000 ด้านหน้า — 2 LAN, HDMI, VGA, MIC, SPK"
                       className="w-full object-contain p-2"
                       loading="lazy"
@@ -965,10 +965,10 @@ const GTSeries = () => {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874414.jpg", alt: "GT1000 ด้านหลัง — USB, COM ports" },
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874418.jpg", alt: "GT1000 ด้านข้าง — ครีบระบายความร้อน" },
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874416.jpg", alt: "GT1000 ด้านล่าง — VESA Mount" },
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874419.jpg", alt: "GT1000 ภายใน — Mainboard + WiFi" },
+                      { src: "/images/wezhan/5874414.jpg", alt: "GT1000 ด้านหลัง — USB, COM ports" },
+                      { src: "/images/wezhan/5874418.jpg", alt: "GT1000 ด้านข้าง — ครีบระบายความร้อน" },
+                      { src: "/images/wezhan/5874416.jpg", alt: "GT1000 ด้านล่าง — VESA Mount" },
+                      { src: "/images/wezhan/5874419.jpg", alt: "GT1000 ภายใน — Mainboard + WiFi" },
                     ].map((img, i) => (
                       <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
                         <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
@@ -1810,7 +1810,7 @@ const GTSeries = () => {
                 <div className="lg:col-span-2 space-y-4">
                   <div className="card-surface overflow-hidden rounded-xl bg-muted/30">
                     <img
-                      src="https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874079.jpg"
+                      src="/images/wezhan/5874079.jpg"
                       alt="GT3000 ด้านหน้า — USB3.0, LAN, VGA, HDMI, COM"
                       className="w-full object-contain p-2"
                       loading="lazy"
@@ -1818,10 +1818,10 @@ const GTSeries = () => {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874078.jpg", alt: "GT3000 ด้านหลัง — USB, COM ports" },
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874077.jpg", alt: "GT3000 ด้านข้าง — ครีบระบายความร้อน" },
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874075.jpg", alt: "GT3000 มุมบน — Heatsink" },
-                      { src: "https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874080.jpg", alt: "GT3000 ภายใน — Mainboard" },
+                      { src: "/images/wezhan/5874078.jpg", alt: "GT3000 ด้านหลัง — USB, COM ports" },
+                      { src: "/images/wezhan/5874077.jpg", alt: "GT3000 ด้านข้าง — ครีบระบายความร้อน" },
+                      { src: "/images/wezhan/5874075.jpg", alt: "GT3000 มุมบน — Heatsink" },
+                      { src: "/images/wezhan/5874080.jpg", alt: "GT3000 ภายใน — Mainboard" },
                     ].map((img, i) => (
                       <div key={i} className="card-surface overflow-hidden rounded-lg bg-muted/30">
                         <img src={img.src} alt={img.alt} className="w-full object-cover aspect-[4/3] hover:scale-105 transition-transform duration-300 p-1" loading="lazy" />
@@ -1944,7 +1944,7 @@ const GTSeries = () => {
                   </div>
                   <div className="overflow-hidden rounded-lg bg-muted/30">
                     <img
-                      src="https://nwzimg.wezhan.net/contents/sitefiles3606/18032321/images/5874076.jpg"
+                      src="/images/wezhan/5874076.jpg"
                       alt="GT3000 Heatsink Side View"
                       className="w-full"
                       loading="lazy"
