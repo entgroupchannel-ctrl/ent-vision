@@ -168,51 +168,125 @@ const AdminDashboard = () => {
       </div>
 
       <div className="container max-w-7xl mx-auto px-6 py-6">
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
-          {[
-            { label: "ติดต่อเข้ามา", value: stats.totalContacts, icon: MessageSquare, color: "text-blue-400" },
-            { label: "ขอใบเสนอราคา", value: stats.totalQuotes, icon: FileText, color: "text-purple-400" },
-            { label: "สมาชิก", value: stats.totalSubscribers, icon: Mail, color: "text-green-400" },
-            { label: "Lead ใหม่", value: stats.newLeads, icon: Users, color: "text-yellow-400" },
-            { label: "Lead คุณภาพสูง", value: stats.highScoreLeads, icon: TrendingUp, color: "text-primary" },
-          ].map((s) => (
-            <div key={s.label} className="card-surface rounded-xl p-4">
-              <div className="flex items-center gap-2 mb-1">
-                <s.icon size={14} className={s.color} />
-                <span className="text-[11px] text-muted-foreground">{s.label}</span>
-              </div>
-              <span className="text-2xl font-bold text-foreground">{s.value}</span>
-            </div>
-          ))}
-        </div>
+        <div className="flex gap-6">
+          {/* ═══ Sidebar ═══ */}
+          <aside className="w-52 shrink-0 hidden md:block">
+            <nav className="card-surface rounded-xl p-2 space-y-0.5 sticky top-20">
+              {/* งานขาย */}
+              <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 px-3 pt-2 pb-1">งานขาย</p>
+              {([
+                { id: "contacts" as Tab, label: "ติดต่อเข้ามา", icon: MessageSquare, count: contacts.filter(c => c.status === "new").length },
+                { id: "quotes" as Tab, label: "ใบเสนอราคา", icon: FileText, count: quotes.filter(q => q.status === "new").length },
+                { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
+                { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
+                { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
+              ]).map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
+                  className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                    tab === item.id
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                  }`}
+                >
+                  <item.icon size={14} />
+                  <span className="flex-1 text-left">{item.label}</span>
+                  {item.count > 0 && (
+                    <span className="px-1.5 py-0.5 rounded-full bg-destructive text-destructive-foreground text-[9px] font-bold">{item.count}</span>
+                  )}
+                </button>
+              ))}
+              {/* สินค้า */}
+              <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 px-3 pt-3 pb-1">สินค้า</p>
+              {([
+                { id: "catalog" as Tab, label: "สินค้า + ราคา", icon: FileText },
+                { id: "documents" as Tab, label: "คลังเอกสาร", icon: FileText },
+              ]).map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
+                  className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                    tab === item.id
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                  }`}
+                >
+                  <item.icon size={14} />
+                  <span className="flex-1 text-left">{item.label}</span>
+                </button>
+              ))}
+              {/* การตลาด */}
+              <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 px-3 pt-3 pb-1">การตลาด</p>
+              {([
+                { id: "engagement" as Tab, label: "Engagement", icon: TrendingUp },
+                { id: "subscribers" as Tab, label: "สมาชิก", icon: Mail, count: subscribers.length },
+              ]).map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
+                  className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                    tab === item.id
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                  }`}
+                >
+                  <item.icon size={14} />
+                  <span className="flex-1 text-left">{item.label}</span>
+                  {"count" in item && item.count > 0 && (
+                    <span className="text-[10px] text-muted-foreground/60">{item.count}</span>
+                  )}
+                </button>
+              ))}
+            </nav>
+          </aside>
 
-        {/* Tabs */}
-        <div className="flex items-center gap-1 mb-4 border-b border-border overflow-x-auto">
-          {([
-            { id: "contacts" as Tab, label: "ติดต่อเข้ามา", count: contacts.length },
-            { id: "quotes" as Tab, label: "ใบเสนอราคา", count: quotes.length },
-            { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", count: softwareInquiries.length },
-            { id: "chatleads" as Tab, label: "AI Chat Leads", count: chatLeads.length },
-            { id: "subscribers" as Tab, label: "สมาชิก", count: subscribers.length },
-            { id: "engagement" as Tab, label: "📊 Engagement", count: null },
-            { id: "documents" as Tab, label: "📄 เอกสาร", count: null },
-            { id: "catalog" as Tab, label: "📦 สินค้า+ราคา", count: null },
-            { id: "quote_review" as Tab, label: "💰 จัดการ Quote", count: null },
-          ]).map((t) => (
-            <button
-              key={t.id}
-              onClick={() => { setTab(t.id); setStatusFilter("all"); setSelectedItem(null); }}
-              className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                tab === t.id
-                  ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {t.label} {t.count !== null && <span className="text-xs opacity-60">({t.count})</span>}
-            </button>
-          ))}
-        </div>
+          {/* ═══ Mobile tab bar (visible only on small screens) ═══ */}
+          <div className="md:hidden w-full mb-4 overflow-x-auto flex gap-1 border-b border-border pb-2">
+            {([
+              { id: "contacts" as Tab, label: "ติดต่อ" },
+              { id: "quotes" as Tab, label: "ใบเสนอราคา" },
+              { id: "quote_review" as Tab, label: "จัดการ Quote" },
+              { id: "catalog" as Tab, label: "สินค้า" },
+              { id: "engagement" as Tab, label: "Engagement" },
+              { id: "documents" as Tab, label: "เอกสาร" },
+              { id: "chatleads" as Tab, label: "Chat Leads" },
+              { id: "subscribers" as Tab, label: "สมาชิก" },
+              { id: "software" as Tab, label: "ซอฟต์แวร์" },
+            ]).map((t) => (
+              <button
+                key={t.id}
+                onClick={() => { setTab(t.id); setStatusFilter("all"); setSelectedItem(null); }}
+                className={`px-3 py-1.5 text-xs font-medium rounded-lg whitespace-nowrap transition-colors ${
+                  tab === t.id
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-secondary/60"
+                }`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          {/* ═══ Main Content ═══ */}
+          <main className="flex-1 min-w-0">
+            {/* Stats row */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+              {[
+                { label: "ติดต่อเข้ามา", value: stats.totalContacts, icon: MessageSquare, color: "text-blue-400" },
+                { label: "ขอใบเสนอราคา", value: stats.totalQuotes, icon: FileText, color: "text-purple-400" },
+                { label: "Lead ใหม่", value: stats.newLeads, icon: Users, color: "text-yellow-400" },
+                { label: "Lead คุณภาพสูง", value: stats.highScoreLeads, icon: TrendingUp, color: "text-primary" },
+              ].map((s) => (
+                <div key={s.label} className="card-surface rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <s.icon size={14} className={s.color} />
+                    <span className="text-[11px] text-muted-foreground">{s.label}</span>
+                  </div>
+                  <span className="text-2xl font-bold text-foreground">{s.value}</span>
+                </div>
+              ))}
+            </div>
 
         {/* Engagement Analytics Tab — full width, no filter/export */}
         {tab === "engagement" ? (
@@ -733,6 +807,8 @@ const AdminDashboard = () => {
         </div>
         </>
         )}
+          </main>
+        </div>
       </div>
     </div>
   );
