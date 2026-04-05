@@ -834,6 +834,19 @@ const MiniPC = () => {
         ]}      />
 
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/products" }, { name: "Mini PC", path: "/mini-pc" }]} />
+      {/* Sticky Breadcrumb */}
+      <div className="sticky top-0 z-30 bg-background/90 backdrop-blur-md py-3 border-b border-border">
+        <div className="container max-w-7xl mx-auto px-4">
+          <nav className="flex items-center gap-2 text-sm">
+            <Link to="/" className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5">
+              <ArrowLeft className="w-3.5 h-3.5" /> หน้าหลัก
+            </Link>
+            <ChevronRight className="w-3 h-3 text-muted-foreground" />
+            <span className="text-foreground font-medium">Mini PC</span>
+          </nav>
+        </div>
+      </div>
+
       {/* ── Hero Section ── */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
@@ -841,9 +854,6 @@ const MiniPC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
         </div>
         <div className="relative container max-w-7xl mx-auto px-4 py-16 md:py-24">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-6">
-            <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
-          </Link>
           <Badge className="bg-primary/10 text-primary border-primary/20 mb-4">Mini PC Factory Outlet</Badge>
           <h1 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-4 max-w-2xl">
             Mini PC <span className="text-gradient">Series</span>
