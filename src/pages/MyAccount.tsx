@@ -236,7 +236,7 @@ const MyAccount = () => {
         </div>
       </div>
 
-      <FooterCompact className="mt-auto" />
+      <FooterCompact />
     </div>
   );
 };
