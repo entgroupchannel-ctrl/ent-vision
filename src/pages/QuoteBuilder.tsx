@@ -175,7 +175,7 @@ const QuoteBuilder = () => {
       cart.forEach((item) => {
         trackEvent({
           eventType: "quote_request",
-          productSlug: item.product.model,
+          productId: item.product.model,
           productCategory: item.product.category,
           productName: item.product.name_th || item.product.model,
           metadata: { qty: item.qty, price: item.product.base_price },
