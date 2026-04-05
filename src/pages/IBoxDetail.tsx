@@ -3,7 +3,7 @@ import {
   ArrowLeft, Download, Check, FileText, Thermometer, Cpu, HardDrive,
   Monitor, Usb, Network, Zap, Shield, Mail, ChevronRight, Phone,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -19,6 +19,7 @@ import ProductImageGallery from "@/components/ibox/ProductImageGallery";
 import IBoxProductCard from "@/components/ibox/IBoxProductCard";
 import { getIBoxProduct, getRelatedProducts } from "@/data/ibox-products";
 import { useMultiSelect } from "@/components/MultiSelectQuoteBar";
+import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 
 const specItems = [
   { key: "cpu", label: "Processor", icon: Cpu },
