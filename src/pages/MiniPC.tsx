@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import FooterCompact from "@/components/FooterCompact";
+import B2BCTABanner from "@/components/B2BCTABanner";
 import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteDialog from "@/components/QuoteDialog";
 import LineQRButton from "@/components/LineQRButton";

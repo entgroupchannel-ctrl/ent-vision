@@ -5,6 +5,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight, FileText, Play, Headphones, Youtube, Star, Zap, Clock, Volume2, Thermometer, Wrench, Sun } from "lucide-react";
+import B2BCTABanner from "@/components/B2BCTABanner";
 import { Checkbox } from "@/components/ui/checkbox";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import badgeMotherboard from "@/assets/epc-badge-motherboard.png";

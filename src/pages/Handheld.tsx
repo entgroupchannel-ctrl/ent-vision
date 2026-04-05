@@ -16,6 +16,7 @@ import SEOHead from "@/components/SEOHead";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
+import B2BCTABanner from "@/components/B2BCTABanner";
 import QuoteDialog from "@/components/QuoteDialog";
 import WishlistHeart from "@/components/WishlistHeart";
 import ShareButtons from "@/components/ShareButtons";

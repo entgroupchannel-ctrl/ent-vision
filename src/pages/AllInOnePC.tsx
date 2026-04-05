@@ -9,6 +9,7 @@ import SEOHead from "@/components/SEOHead";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import FooterCompact from "@/components/FooterCompact";
+import B2BCTABanner from "@/components/B2BCTABanner";
 import QuoteDialog from "@/components/QuoteDialog";
 import PriceDisclaimer from "@/components/PriceDisclaimer";
 import { Badge } from "@/components/ui/badge";
