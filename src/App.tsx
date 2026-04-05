@@ -145,10 +145,11 @@ const App = () => (
             </Suspense>
             
             <SocialRibbon />
+            <FloatingQuoteBar />
             <AIChatWidget />
           </BrowserRouter>
         </TooltipProvider>
-      </AuthProvider>
+        </QuoteCartProvider>
     </ThemeProvider>
   </QueryClientProvider>
   </HelmetProvider>
