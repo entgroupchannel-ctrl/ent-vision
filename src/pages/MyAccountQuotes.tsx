@@ -135,7 +135,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors"
           >
             <Plus size={14} /> สร้างใบเสนอราคา
-          </Link>
+          </button>
         </div>
       </div>
 
