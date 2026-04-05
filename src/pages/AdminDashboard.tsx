@@ -192,7 +192,8 @@ const AdminDashboard = () => {
             { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", count: softwareInquiries.length },
             { id: "chatleads" as Tab, label: "AI Chat Leads", count: chatLeads.length },
             { id: "subscribers" as Tab, label: "สมาชิก", count: subscribers.length },
-          ] as const).map((t) => (
+            { id: "engagement" as Tab, label: "📊 Engagement", count: null },
+          ]).map((t) => (
             <button
               key={t.id}
               onClick={() => { setTab(t.id); setStatusFilter("all"); setSelectedItem(null); }}
