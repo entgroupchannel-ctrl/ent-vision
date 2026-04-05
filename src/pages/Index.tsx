@@ -7,6 +7,7 @@ import ProductSections from "@/components/ProductSections";
 import ProductLineup from "@/components/ProductLineup";
 import PromoBanners from "@/components/PromoBanners";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
+import B2BCTABanner from "@/components/B2BCTABanner";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 
@@ -26,6 +27,7 @@ const Index = () => {
       <ProductLineup />
       <SoftwareSection />
       <CaseStudiesSection />
+      <B2BCTABanner />
       <PromoBanners />
       <Footer />
     </div>
