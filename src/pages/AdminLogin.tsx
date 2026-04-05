@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Lock, LogIn, Eye, EyeOff } from "lucide-react";
+import logo from "@/assets/logo-entgroup.avif";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -105,6 +106,9 @@ const AdminLogin = () => {
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
+          <a href="/" className="inline-block mb-4">
+            <img src={logo} alt="ENT GROUP" className="h-10 mx-auto" />
+          </a>
           <h1 className="text-2xl font-display font-bold text-foreground mb-1">เข้าสู่ระบบ</h1>
           <p className="text-sm text-muted-foreground">เข้าสู่ระบบสำหรับสมาชิกและผู้ดูแลระบบ</p>
         </div>
