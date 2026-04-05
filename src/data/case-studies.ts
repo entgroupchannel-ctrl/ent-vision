@@ -12,6 +12,8 @@ export interface CaseStudy {
   testimonial?: string;
   testimonialAuthor?: string;
   testimonialRole?: string;
+  externalLinks?: { label: string; url: string }[];
+  internalLinks?: { label: string; path: string }[];
 }
 
 export const caseStudies: CaseStudy[] = [
@@ -113,5 +115,30 @@ export const caseStudies: CaseStudy[] = [
     ],
     products: ["Rugged Notebook MIL-STD-810H"],
     image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
+  },
+  {
+    id: "ai-classroom-nvidia-jetson",
+    title: "ห้องเรียน AI สำหรับสถาบันการศึกษาด้วย NVIDIA Jetson",
+    client: "มหาวิทยาลัยเทคโนโลยีชั้นนำ กรุงเทพฯ",
+    industry: "การศึกษา / AI & Deep Learning",
+    challenge: "สถาบันการศึกษาต้องการจัดตั้งห้องปฏิบัติการ AI ที่นักศึกษาสามารถเรียนรู้และฝึกฝน Deep Learning, Computer Vision และ Natural Language Processing ได้จริง แต่การใช้ GPU Server ราคาสูงเกินงบประมาณ และ Cloud Computing มีค่าใช้จ่ายต่อเนื่องที่ไม่แน่นอน",
+    solution: "ติดตั้งห้องเรียน AI จำนวน 30 ชุด โดยใช้ NVIDIA Jetson Orin Nano และ Jetson Orin NX ติดตั้งบน iBox Edge AI Computer จาก ENT Group พร้อม JetPack SDK สำหรับ TensorRT, PyTorch และ TensorFlow นักศึกษาแต่ละคนมีเครื่องเฉพาะตัวสำหรับฝึก Model AI แบบ Hands-on พร้อมกล้อง USB และเซ็นเซอร์สำหรับโปรเจกต์ Computer Vision",
+    results: [
+      "นักศึกษา 120 คน/เทอม เข้าถึง Hardware AI ได้ทุกคน",
+      "ประหยัดงบ 60% เทียบกับการใช้ GPU Server หรือ Cloud",
+      "รองรับหลักสูตร AI ตั้งแต่พื้นฐานจนถึง Edge AI Deployment",
+      "สร้างโปรเจกต์จริง เช่น ระบบนับคน, ตรวจจับวัตถุ, หุ่นยนต์อัตโนมัติ",
+    ],
+    products: ["NVIDIA Jetson Orin Nano", "NVIDIA Jetson Orin NX", "iBox Edge AI Computer"],
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80",
+    testimonial: "นักศึกษาได้ลงมือทำจริงกับ Hardware AI ระดับอุตสาหกรรม ไม่ใช่แค่เรียนทฤษฎี ผลงานโปรเจกต์จบปีนี้ก้าวกระโดดมาก",
+    testimonialAuthor: "หัวหน้าภาควิชาวิศวกรรมคอมพิวเตอร์",
+    testimonialRole: "มหาวิทยาลัยเทคโนโลยี กรุงเทพฯ",
+    externalLinks: [
+      { label: "ดูสินค้า NVIDIA Jetson ทั้งหมด", url: "https://nvidia-jetson.com/" },
+    ],
+    internalLinks: [
+      { label: "ดู iBox Series — Edge AI Computer", path: "/ibox-series" },
+    ],
   },
 ];
