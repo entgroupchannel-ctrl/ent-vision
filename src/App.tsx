@@ -135,15 +135,7 @@ const App = () => (
                 <Route path="/corporate-pricing" element={<CorporatePricing />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogDetail />} />
-                <Route path="/my-account" element={<MyAccount />}>
-                  <Route index element={<MyProfile />} />
-                  <Route path="quotes" element={<MyAccountQuotes />} />
-                  <Route path="quotes/create" element={<UserQuoteCreate />} />
-                  <Route path="wishlist" element={<MyAccountWishlist />} />
-                  <Route path="documents" element={<MyDocuments />} />
-                  <Route path="notifications" element={<MyNotifications />} />
-                  <Route path="demos" element={<MyDemos />} />
-                </Route>
+                <Route path="/my-account/*" element={<MyAccount />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
