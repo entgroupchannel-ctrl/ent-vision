@@ -82,10 +82,6 @@ const ClientTrustSection = () => {
           </div>
         )}
 
-        {/* LINE CTA */}
-        <div className="flex justify-center mt-5">
-          <LineQRButton>เพิ่มเพื่อน @entgroup — สอบถามได้สะดวกขึ้น</LineQRButton>
-        </div>
       </div>
     </section>
   );
