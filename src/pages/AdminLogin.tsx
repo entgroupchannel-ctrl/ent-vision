@@ -179,6 +179,9 @@ const AdminLogin = () => {
           สำหรับสมาชิก ENT Group เท่านั้น ·{" "}
           <a href="/member-register" className="text-primary hover:underline font-medium">สมัครสมาชิก</a>
         </p>
+        <p className="text-center mt-3">
+          <a href="/" className="text-xs text-muted-foreground hover:text-primary hover:underline transition-colors">← กลับหน้าแรก</a>
+        </p>
       </div>
     </div>
   );
