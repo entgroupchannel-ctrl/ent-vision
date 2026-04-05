@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import {
-  Check, ChevronRight, Cpu, FileText, Mail, Shield, Zap,
+  Check, ChevronRight, Cpu, FileText, Mail, Shield, Zap, Phone, MessageSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -157,7 +157,7 @@ const RuggedTabletDetail = () => {
                   <Mail className="w-4 h-4" /> sales@entgroup.co.th
                 </button>
                 <a href="tel:020456104" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary hover:bg-secondary/80 transition-colors text-sm">
-                  📞 02-045-6104
+                  <Phone className="w-3.5 h-3.5" /> 02-045-6104
                 </a>
               </div>
             </div>
@@ -168,7 +168,7 @@ const RuggedTabletDetail = () => {
                 <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
               </Button>
               <LineQRButton className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-input bg-background text-foreground font-medium text-sm hover:bg-accent hover:text-accent-foreground transition-colors">
-                💬 สอบถามทาง LINE
+                <MessageSquare className="w-4 h-4" /> สอบถามทาง LINE
               </LineQRButton>
             </div>
           </div>
@@ -367,7 +367,7 @@ const RuggedTabletDetail = () => {
                     <FileText className="w-4 h-4 mr-2" /> ขอใบเสนอราคา
                   </Button>
                   <LineQRButton className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-input bg-background text-foreground font-medium text-sm hover:bg-accent hover:text-accent-foreground transition-colors">
-                    💬 ติดต่อ LINE @entgroup
+                    <MessageSquare className="w-4 h-4" /> ติดต่อ LINE @entgroup
                   </LineQRButton>
                 </div>
               </div>
