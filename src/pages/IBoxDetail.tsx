@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, Download, Check, FileText, Thermometer, Cpu, HardDrive,
-  Monitor, Usb, Network, Zap, Shield, Mail, ChevronRight,
+  Monitor, Usb, Network, Zap, Shield, Mail, ChevronRight, Phone,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";

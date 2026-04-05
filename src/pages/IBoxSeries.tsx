@@ -323,7 +323,7 @@ const IBoxSeries = () => {
           <div className="flex-1 min-w-0 space-y-6">
             {/* Quick Filters */}
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs text-muted-foreground shrink-0">⚡ Quick:</span>
+              <span className="text-xs text-muted-foreground shrink-0 inline-flex items-center gap-1"><Zap size={12} className="text-primary" /> Quick:</span>
               {[
                 { label: "PoE", active: filters.poe === true, toggle: () => setFilters({ ...filters, poe: filters.poe === true ? null : true }) },
                 { label: "PCIe", active: filters.pcie === true, toggle: () => setFilters({ ...filters, pcie: filters.pcie === true ? null : true }) },
