@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
 import { useAutoHideWidget } from "@/hooks/useAutoHideWidget";
+import LineQRButton from "@/components/LineQRButton";
 
 const TiktokIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
