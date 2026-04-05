@@ -766,6 +766,16 @@ export type Database = {
       }
     }
     Functions: {
+      get_admin_users: {
+        Args: never
+        Returns: {
+          email: string
+          role: string
+          role_created_at: string
+          user_created_at: string
+          user_id: string
+        }[]
+      }
       get_permission: {
         Args: { _permission_key: string; _user_id: string }
         Returns: string
@@ -778,6 +788,15 @@ export type Database = {
         Returns: boolean
       }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
+      lookup_user_by_email: {
+        Args: { _email: string }
+        Returns: {
+          created_at: string
+          email: string
+          user_id: string
+        }[]
+      }
+      remove_admin_user: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "super_admin" | "admin" | "moderator" | "user"
