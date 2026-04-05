@@ -10,74 +10,82 @@ import Footer from "@/components/Footer";
 import PageBanner from "@/components/PageBanner";
 import LineQRButton from "@/components/LineQRButton";
 
-/* ── Client Trust — Collapsible ── */
+/* ── Client Trust — Stats + Marquee ── */
+const trustStats = [
+  { val: "8,000+", label: "รายชื่อลูกค้าในระบบ", icon: Users },
+  { val: "10+", label: "ปีที่ให้บริการ", icon: Factory },
+  { val: "500+", label: "โครงการที่ส่งมอบ", icon: Building2 },
+];
+
 const ClientTrustSection = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const companies = clientList.filter((n) => n.startsWith("บริษัท") || n.includes("Limited"));
-  const schools = clientList.filter((n) => n.startsWith("โรงเรียน"));
 
   return (
-    <section className="bg-muted/20 border-y border-border/50">
-      <div className="container mx-auto px-4 py-6">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-full flex items-center justify-between group"
-        >
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-lg bg-primary/10">
-              <Users className="w-4 h-4 text-primary" />
+    <section className="bg-muted/20 border-y border-border/50 overflow-hidden">
+      <div className="container mx-auto px-4 py-8">
+        {/* Header + Stats */}
+        <div className="text-center mb-6">
+          <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-1">Trusted by Enterprises</p>
+          <h2 className="text-lg font-bold text-foreground">ลูกค้าที่ไว้วางใจ ENT Group</h2>
+        </div>
+
+        <div className="grid grid-cols-3 gap-3 max-w-md mx-auto mb-6">
+          {trustStats.map((s) => (
+            <div key={s.label} className="text-center">
+              <s.icon className="w-5 h-5 mx-auto mb-1.5 text-primary" />
+              <p className="text-xl font-bold text-foreground">{s.val}</p>
+              <p className="text-[10px] text-muted-foreground leading-tight">{s.label}</p>
             </div>
-            <div className="text-left">
-              <h2 className="text-base font-bold text-foreground">ลูกค้าบางส่วนที่ไว้วางใจ</h2>
-              <p className="text-xs text-muted-foreground">{clientList.length} องค์กรทั่วประเทศ — คลิกเพื่อดูรายชื่อ</p>
-            </div>
+          ))}
+        </div>
+
+        {/* Marquee — auto-scrolling client names */}
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-muted/20 to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-muted/20 to-transparent z-10" />
+          <div className="flex gap-3 animate-marquee">
+            {[...clientList, ...clientList].map((name, i) => (
+              <span
+                key={`${name}-${i}`}
+                className="shrink-0 px-3 py-1.5 rounded-full bg-card border border-border/50 text-[11px] text-foreground/80 whitespace-nowrap"
+              >
+                {name}
+              </span>
+            ))}
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-[10px] hidden sm:inline-flex">{clientList.length} องค์กร</Badge>
-            {isOpen ? (
-              <ChevronUp className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            )}
-          </div>
-        </button>
+        </div>
+
+        {/* Toggle detail */}
+        <div className="text-center mt-5">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="inline-flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 transition-colors font-medium"
+          >
+            {isOpen ? "ซ่อนรายชื่อ" : "ดูรายชื่อบางส่วน"}
+            {isOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+          </button>
+        </div>
 
         {isOpen && (
-          <div className="mt-5 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
-            <div>
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                <Building2 className="w-3.5 h-3.5" /> บริษัท & องค์กร
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
-                {companies.map((name) => (
-                  <div key={name} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border/50 text-xs text-foreground">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary/50 shrink-0" />
-                    {name}
-                  </div>
-                ))}
-              </div>
-            </div>
-            {schools.length > 0 && (
-              <div>
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                  <Building2 className="w-3.5 h-3.5" /> สถานศึกษา
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
-                  {schools.map((name) => (
-                    <div key={name} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border/50 text-xs text-foreground">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary/50 shrink-0" />
-                      {name}
-                    </div>
-                  ))}
+          <div className="mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 max-w-4xl mx-auto">
+              {clientList.map((name) => (
+                <div key={name} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border/50 text-xs text-foreground">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary/50 shrink-0" />
+                  {name}
                 </div>
-              </div>
-            )}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-2 border-t border-border/30">
-              <p className="text-xs text-muted-foreground">ใกล้ชิดกับเราได้มากขึ้น สอบถามได้สะดวกขึ้น</p>
-              <LineQRButton>เพิ่มเพื่อน @entgroup</LineQRButton>
+              ))}
             </div>
+            <p className="text-[10px] text-muted-foreground text-center mt-3">
+              * แสดงเพียงบางส่วน — ฐานข้อมูลลูกค้าจริงกว่า 8,000 รายชื่อ
+            </p>
           </div>
         )}
+
+        {/* LINE CTA */}
+        <div className="flex justify-center mt-5">
+          <LineQRButton>เพิ่มเพื่อน @entgroup — สอบถามได้สะดวกขึ้น</LineQRButton>
+        </div>
       </div>
     </section>
   );
