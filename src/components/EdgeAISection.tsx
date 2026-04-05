@@ -77,11 +77,19 @@ const EdgeAISection = () => {
 
           {/* Image Carousel */}
           <div
-            className="relative group"
+80:             className="relative group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div className="card-surface rounded-2xl overflow-hidden relative aspect-[4/3]">
+            <div
+              className="card-surface rounded-2xl overflow-hidden relative aspect-[4/3]"
+              onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+              onTouchMove={(e) => { touchEndX.current = e.touches[0].clientX; }}
+              onTouchEnd={() => {
+                const diff = touchStartX.current - touchEndX.current;
+                if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); }
+              }}
+            >
               {slides.map((slide, i) => (
                 <div
                   key={i}
@@ -106,16 +114,16 @@ const EdgeAISection = () => {
                 </div>
               ))}
 
-              {/* Navigation arrows */}
+              {/* Navigation arrows — always visible on mobile */}
               <button
                 onClick={prev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/70 border border-border/50 flex items-center justify-center text-foreground opacity-0 group-hover:opacity-100 transition-opacity hover:bg-background"
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/70 border border-border/50 flex items-center justify-center text-foreground opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:bg-background"
               >
                 <ChevronLeft size={18} />
               </button>
               <button
                 onClick={next}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/70 border border-border/50 flex items-center justify-center text-foreground opacity-0 group-hover:opacity-100 transition-opacity hover:bg-background"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/70 border border-border/50 flex items-center justify-center text-foreground opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity hover:bg-background"
               >
                 <ChevronRight size={18} />
               </button>
