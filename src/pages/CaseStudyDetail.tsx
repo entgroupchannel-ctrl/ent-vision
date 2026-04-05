@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { ArrowLeft, Factory, CheckCircle, Quote, FileText } from "lucide-react";
+import { ArrowLeft, Factory, CheckCircle, Quote, FileText, ExternalLink, ArrowRight } from "lucide-react";
 import { caseStudies } from "@/data/case-studies";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -112,6 +112,31 @@ const CaseStudyDetail = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* External & Internal Links */}
+            {(cs.externalLinks?.length || cs.internalLinks?.length) && (
+              <Card>
+                <CardContent className="p-5 space-y-3">
+                  <h3 className="font-bold text-foreground">ลิงก์ที่เกี่ยวข้อง</h3>
+                  <div className="space-y-2">
+                    {cs.internalLinks?.map((link) => (
+                      <Link key={link.path} to={link.path}>
+                        <Button variant="outline" size="sm" className="w-full justify-start">
+                          <ArrowRight className="w-4 h-4 mr-2" /> {link.label}
+                        </Button>
+                      </Link>
+                    ))}
+                    {cs.externalLinks?.map((link) => (
+                      <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
+                        <Button variant="outline" size="sm" className="w-full justify-start">
+                          <ExternalLink className="w-4 h-4 mr-2" /> {link.label}
+                        </Button>
+                      </a>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
             <Card>
               <CardContent className="p-5 space-y-4">
