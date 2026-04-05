@@ -160,6 +160,7 @@ const t = {
 
 const ContactUs = () => {
   const { user } = useAuth();
+  const { trackEvent } = useEngagementTracker();
   const [lang, setLang] = useState<Lang>("th");
   const i = t[lang];
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -253,6 +254,12 @@ const ContactUs = () => {
 
       setSubmitted(true);
       toast({ title: i.submitSuccess, description: i.submitSuccessDesc });
+
+      trackEvent({
+        eventType: "contact_submit",
+        productCategory: form.category || undefined,
+        metadata: { company: form.company, category: form.category },
+      });
     } catch (err: any) {
       toast({ title: i.submitError, description: err.message, variant: "destructive" });
     } finally {
