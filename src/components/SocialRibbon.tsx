@@ -56,8 +56,8 @@ const SocialRibbon = () => {
       {/* Pull tab — always visible, attached to right edge of ribbon */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="absolute top-1/2 -translate-y-1/2 -right-6 w-6 h-12 rounded-r-md bg-foreground/80 text-background flex items-center justify-center shadow-md hover:bg-foreground transition-colors"
-        style={{ right: "-24px" }}
+        className="absolute top-1/2 -translate-y-1/2 w-7 h-14 rounded-r-lg bg-[#1a1a2e] text-white flex items-center justify-center shadow-lg border border-white/10 hover:bg-[#16213e] transition-colors"
+        style={{ right: "-28px" }}
         aria-label={expanded ? "ซ่อน" : "แสดง Social"}
       >
         <svg
