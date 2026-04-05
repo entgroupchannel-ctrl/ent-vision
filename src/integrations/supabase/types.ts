@@ -401,6 +401,7 @@ export type Database = {
           category: string
           configurable_options: Json | null
           created_at: string
+          description: string | null
           id: string
           image_url: string | null
           is_active: boolean
@@ -418,6 +419,7 @@ export type Database = {
           category: string
           configurable_options?: Json | null
           created_at?: string
+          description?: string | null
           id?: string
           image_url?: string | null
           is_active?: boolean
@@ -435,6 +437,7 @@ export type Database = {
           category?: string
           configurable_options?: Json | null
           created_at?: string
+          description?: string | null
           id?: string
           image_url?: string | null
           is_active?: boolean
