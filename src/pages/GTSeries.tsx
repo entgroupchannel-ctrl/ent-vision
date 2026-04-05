@@ -2792,9 +2792,9 @@ const GTSeries = () => {
                   <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5">
                     {[
                       { icon: Factory, title: "ควบคุมเครื่องจักร", desc: "สั่งเปิด/ปิด Relay, Solenoid Valve, Motor Driver ผ่าน Digital Output โดยตรง" },
-                      { icon: "🚨", title: "ระบบแจ้งเตือน", desc: "ต่อ Tower Light, Buzzer, LED Indicator แสดงสถานะเครื่องจักรแบบ Real-time" },
+                      { icon: AlertTriangle, title: "ระบบแจ้งเตือน", desc: "ต่อ Tower Light, Buzzer, LED Indicator แสดงสถานะเครื่องจักรแบบ Real-time" },
                       { icon: Radio, title: "อ่านค่า Sensor", desc: "รับสัญญาณ Digital จาก Proximity Sensor, Limit Switch, Photo Electric" },
-                      { icon: "🚪", title: "Access Control", desc: "ควบคุม Magnetic Lock, อ่าน Door Sensor, Emergency Button" },
+                      { icon: Shield, title: "Access Control", desc: "ควบคุม Magnetic Lock, อ่าน Door Sensor, Emergency Button" },
                       { icon: ThermometerSun, title: "Smart Farm / IoT", desc: "เปิด/ปิดปั๊มน้ำ พัดลม ระบบรดน้ำอัตโนมัติ ตามค่า Sensor" },
                       { icon: BarChart3, title: "Production Counter", desc: "นับจำนวนชิ้นงานจาก Sensor แล้วส่งข้อมูลเข้าระบบ MES/ERP" },
                       { icon: Battery, title: "UPS / Power Monitor", desc: "ตรวจจับสถานะไฟฟ้า สั่ง Shutdown อัตโนมัติเมื่อไฟดับ" },
