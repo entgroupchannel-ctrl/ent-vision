@@ -341,20 +341,20 @@ export const clientList: string[] = [
   "บริษัท บางกอก บาร์จ เทอร์มินอล จำกัด",
 ];
 
-/** ภาพ Site References จาก Wix */
+/** ภาพ Site References (Local Assets) */
 export const siteReferenceImages: { src: string; alt: string }[] = [
-  { src: "https://static.wixstatic.com/media/0597a3_e23a04de1c5d4cae8d3a118ac9e3db9a~mv2.png/v1/fill/w_397,h_358,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Site%20references.png", alt: "Site Reference — โครงการลูกค้า" },
-  { src: "https://static.wixstatic.com/media/0597a3_db9f75a4132046e8a8ae483277fd300f~mv2.png/v1/fill/w_397,h_358,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Site%20references%20(6).png", alt: "Site Reference — โครงการโรงงาน" },
-  { src: "https://static.wixstatic.com/media/0597a3_9e75366e9f4d4abcb665625a0bff0dd3~mv2.png/v1/fill/w_397,h_358,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Site%20references%20(4).png", alt: "Site Reference — ห้องเรียน" },
-  { src: "https://static.wixstatic.com/media/0597a3_f0f4e848d70c4730842bc6669b9ca482~mv2.png/v1/fill/w_397,h_358,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Site%20references%20(3).png", alt: "Site Reference — ระบบ IT" },
-  { src: "https://static.wixstatic.com/media/0597a3_53148537290c4842ade474d5005835c9~mv2.png/v1/fill/w_402,h_363,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Site%20references%20(2).png", alt: "Site Reference — Industrial PC" },
-  { src: "https://static.wixstatic.com/media/0597a3_3e49939d636e4248ac58c2fbd07b89b0~mv2.png/v1/fill/w_397,h_358,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Site%20references%20(5).png", alt: "Site Reference — การติดตั้ง" },
+  { src: "/images/case-studies/site-ref-1.png", alt: "Site Reference — โครงการลูกค้า" },
+  { src: "/images/case-studies/site-ref-2.png", alt: "Site Reference — โครงการโรงงาน" },
+  { src: "/images/case-studies/site-ref-3.png", alt: "Site Reference — ห้องเรียน" },
+  { src: "/images/case-studies/site-ref-4.png", alt: "Site Reference — ระบบ IT" },
+  { src: "/images/case-studies/site-ref-5.png", alt: "Site Reference — Industrial PC" },
+  { src: "/images/case-studies/site-ref-6.png", alt: "Site Reference — การติดตั้ง" },
 ];
 
-/** ภาพงานติดตั้ง Panel PC */
+/** ภาพงานติดตั้ง Panel PC (Local Assets) */
 export const installationImages: { src: string; alt: string }[] = [
-  { src: "https://static.wixstatic.com/media/0597a3_5a42fd39caf242459aba8cca293d0946~mv2.png/v1/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.png", alt: "งานติดตั้ง Panel PC 1" },
-  { src: "https://static.wixstatic.com/media/0597a3_98785635fe784fe19c00ad392cf400ae~mv2.png/v1/crop/x_76,y_0,w_888,h_1040/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7.png", alt: "งานติดตั้ง Panel PC 2" },
-  { src: "https://static.wixstatic.com/media/0597a3_93fd8e4c6cb946f19e12c55129b5bdac~mv2.png/v1/crop/x_76,y_0,w_888,h_1040/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5.png", alt: "งานติดตั้ง Panel PC 3" },
-  { src: "https://static.wixstatic.com/media/0597a3_31959a006ae24444b3586333342351a0~mv2.png/v1/crop/x_76,y_0,w_888,h_1040/fill/w_286,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6.png", alt: "งานติดตั้ง Panel PC 4" },
+  { src: "/images/case-studies/install-1.png", alt: "งานติดตั้ง Panel PC 1" },
+  { src: "/images/case-studies/install-2.png", alt: "งานติดตั้ง Panel PC 2" },
+  { src: "/images/case-studies/install-3.png", alt: "งานติดตั้ง Panel PC 3" },
+  { src: "/images/case-studies/install-4.png", alt: "งานติดตั้ง Panel PC 4" },
 ];
