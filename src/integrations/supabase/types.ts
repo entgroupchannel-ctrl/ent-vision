@@ -215,6 +215,48 @@ export type Database = {
         }
         Relationships: []
       }
+      document_requests: {
+        Row: {
+          admin_notes: string | null
+          created_at: string
+          document_type: string
+          file_url: string | null
+          id: string
+          notes: string | null
+          product_model: string | null
+          serial_number: string | null
+          status: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          created_at?: string
+          document_type: string
+          file_url?: string | null
+          id?: string
+          notes?: string | null
+          product_model?: string | null
+          serial_number?: string | null
+          status?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          admin_notes?: string | null
+          created_at?: string
+          document_type?: string
+          file_url?: string | null
+          id?: string
+          notes?: string | null
+          product_model?: string | null
+          serial_number?: string | null
+          status?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       engagement_events: {
         Row: {
           channel: string | null
@@ -254,6 +296,81 @@ export type Database = {
           product_name?: string | null
           session_id?: string
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          link: string | null
+          message: string
+          read: boolean
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          link?: string | null
+          message: string
+          read?: boolean
+          title: string
+          type?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          link?: string | null
+          message?: string
+          read?: boolean
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          company_address: string | null
+          company_name: string | null
+          company_position: string | null
+          full_name: string | null
+          id: string
+          line_id: string | null
+          logo_url: string | null
+          phone: string | null
+          tax_id: string | null
+          updated_at: string | null
+          whatsapp: string | null
+        }
+        Insert: {
+          company_address?: string | null
+          company_name?: string | null
+          company_position?: string | null
+          full_name?: string | null
+          id: string
+          line_id?: string | null
+          logo_url?: string | null
+          phone?: string | null
+          tax_id?: string | null
+          updated_at?: string | null
+          whatsapp?: string | null
+        }
+        Update: {
+          company_address?: string | null
+          company_name?: string | null
+          company_position?: string | null
+          full_name?: string | null
+          id?: string
+          line_id?: string | null
+          logo_url?: string | null
+          phone?: string | null
+          tax_id?: string | null
+          updated_at?: string | null
+          whatsapp?: string | null
         }
         Relationships: []
       }
