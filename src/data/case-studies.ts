@@ -1,4 +1,5 @@
 import caseShoeFactoryHero from "@/assets/case-shoe-factory-hero.jpg";
+import caseFoodWaterproofHero from "@/assets/case-food-waterproof-hero.jpg";
 
 export interface CaseStudy {
   id: string;
@@ -276,7 +277,7 @@ export const caseStudies: CaseStudy[] = [
     products: [
       { name: "Waterproof Panel PC IP69K", path: "/waterproof-pc" },
     ],
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
+    image: caseFoodWaterproofHero,
     internalLinks: [
       { label: "ดู Waterproof PC ทั้งหมด", path: "/waterproof-pc" },
     ],
