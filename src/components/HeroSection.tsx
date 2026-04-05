@@ -411,7 +411,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right: Search Tags — collapsible, fixed to right edge */}
-          <div className={`hidden lg:flex fixed right-0 top-[62%] z-30 transition-all duration-500 ease-in-out ${tagsExpanded ? "translate-x-0" : "translate-x-[calc(100%-28px)]"}`}>
+          <div className={`hidden lg:flex fixed right-0 top-1/2 -translate-y-1/2 z-30 transition-all duration-500 ease-in-out ${tagsExpanded ? "translate-x-0" : "translate-x-[calc(100%-28px)]"}`}>
             <button
               onClick={() => setTagsExpanded(!tagsExpanded)}
               className="flex items-center justify-center w-7 shrink-0 rounded-l-xl bg-white/10 backdrop-blur-md border border-r-0 border-white/15 text-white/50 hover:text-white hover:bg-white/20 transition-colors"
