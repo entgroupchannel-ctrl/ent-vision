@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   FileText, Clock, CheckCircle, Phone, Building2,
   ChevronDown, ChevronUp, Loader2, CalendarClock, Hash, Wallet, RefreshCw,
-  Download, ThumbsUp, MessageSquare, DollarSign, Package,
+  Download, ThumbsUp, MessageSquare, DollarSign, Package, Plus,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -126,9 +126,17 @@ const MyAccountQuotes = () => {
         <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
           <FileText size={20} className="text-primary" /> ใบเสนอราคาของฉัน
         </h2>
-        <button onClick={fetchQuotes} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-          <RefreshCw size={12} className={loading ? "animate-spin" : ""} /> รีเฟรช
-        </button>
+        <div className="flex items-center gap-2">
+          <button onClick={fetchQuotes} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <RefreshCw size={12} className={loading ? "animate-spin" : ""} /> รีเฟรช
+          </button>
+          <Link
+            to="/my-account/quotes/create"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors"
+          >
+            <Plus size={14} /> สร้างใบเสนอราคา
+          </Link>
+        </div>
       </div>
 
       <div className="card-surface rounded-xl p-5">
