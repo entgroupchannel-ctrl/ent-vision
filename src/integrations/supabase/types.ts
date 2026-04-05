@@ -215,6 +215,48 @@ export type Database = {
         }
         Relationships: []
       }
+      engagement_events: {
+        Row: {
+          channel: string | null
+          created_at: string
+          event_type: string
+          id: string
+          metadata: Json | null
+          page_url: string | null
+          product_category: string | null
+          product_id: string | null
+          product_name: string | null
+          session_id: string
+          user_id: string | null
+        }
+        Insert: {
+          channel?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          metadata?: Json | null
+          page_url?: string | null
+          product_category?: string | null
+          product_id?: string | null
+          product_name?: string | null
+          session_id: string
+          user_id?: string | null
+        }
+        Update: {
+          channel?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          metadata?: Json | null
+          page_url?: string | null
+          product_category?: string | null
+          product_id?: string | null
+          product_name?: string | null
+          session_id?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       quote_requests: {
         Row: {
           callback_time: string | null
@@ -379,7 +421,19 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      engagement_lead_scores: {
+        Row: {
+          categories: string[] | null
+          first_activity: string | null
+          last_activity: string | null
+          session_id: string | null
+          total_events: number | null
+          total_score: number | null
+          unique_products: number | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       has_role: {
