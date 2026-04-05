@@ -5,6 +5,14 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import imgGT from "@/assets/product-gt-series.jpg";
+import imgPanel from "@/assets/product-panel-pc.jpg";
+import imgIBox from "@/assets/product-ibox-series.jpg";
+import imgEPC from "@/assets/product-epc.jpg";
+import imgRugged from "@/assets/product-rugged.jpg";
+import imgSmart from "@/assets/product-smart-display.jpg";
+import imgFirewall from "@/assets/product-firewall.jpg";
+
 const lineupCategories = [
   {
     title: "GT Series — Mini PC",
