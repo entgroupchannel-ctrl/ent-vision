@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Zap, Bell, ArrowRight, Calendar, Sparkles } from "lucide-react";
+import { Zap, Bell, ArrowRight, Calendar, Sparkles, Flame } from "lucide-react";
 
 /* ───── Shared promo data (active + recurring only) ───── */
 const activePromos = [
