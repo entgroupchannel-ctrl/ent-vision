@@ -56,6 +56,9 @@ const AllInOnePC = lazy(() => import("./pages/AllInOnePC.tsx"));
 const AIODetail = lazy(() => import("./pages/AIODetail.tsx"));
 const CaseStudies = lazy(() => import("./pages/CaseStudies.tsx"));
 const CaseStudyDetail = lazy(() => import("./pages/CaseStudyDetail.tsx"));
+const CorporatePricing = lazy(() => import("./pages/CorporatePricing.tsx"));
+const Blog = lazy(() => import("./pages/Blog.tsx"));
+const BlogDetail = lazy(() => import("./pages/BlogDetail.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 /* ── Loading fallback ── */
