@@ -15,6 +15,7 @@ import ShareButtons from "@/components/ShareButtons";
 import logo from "@/assets/logo-entgroup.avif";
 import gt4500CpuOptions from "@/assets/gt4500-cpu-options.png";
 import gtSeriesHero from "@/assets/gt-series-hero-lineup.jpg";
+import gtSeriesHeroBg from "@/assets/gt-series-hero-bg.jpg";
 import gt1000Banner from "@/assets/gt1000-banner.jpg";
 import gt2000Banner from "@/assets/gt2000-banner.jpg";
 import gt3000Banner from "@/assets/gt3000-banner.jpg";
