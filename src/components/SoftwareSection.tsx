@@ -20,10 +20,10 @@ const softwareExamples = [
 ];
 
 const highlights = [
-  { icon: Rocket, label: "พัฒนาเร็ว", desc: "เห็นผลภายใน 2 สัปดาห์" },
-  { icon: Shield, label: "ปลอดภัย", desc: "ระบบ Cloud ระดับสากล" },
-  { icon: Palette, label: "ออกแบบสวย", desc: "UX/UI มืออาชีพ" },
-  { icon: BarChart3, label: "วัดผลได้", desc: "Dashboard & Analytics" },
+  { icon: Rocket, label: "พัฒนาเร็ว", desc: "เห็นผลภายใน 2 สัปดาห์", img: softwareFastImg },
+  { icon: Shield, label: "ปลอดภัย", desc: "ระบบ Cloud ระดับสากล", img: softwareSecureImg },
+  { icon: Palette, label: "ออกแบบสวย", desc: "UX/UI มืออาชีพ", img: softwareDesignImg },
+  { icon: BarChart3, label: "วัดผลได้", desc: "Dashboard & Analytics", img: softwareAnalyticsImg },
 ];
 
 const SoftwareSection = () => {
