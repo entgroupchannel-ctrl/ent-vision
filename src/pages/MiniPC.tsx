@@ -1114,6 +1114,7 @@ const MiniPC = () => {
         productName={quoteProduct || ""}
         productCategory="GT Series — Mini PC"
       />
+      <B2BCTABanner variant="compact" />
       <FooterCompact />
     </div>
   );

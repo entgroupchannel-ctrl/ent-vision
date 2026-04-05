@@ -901,6 +901,7 @@ const EPCSeries = () => {
         productCategory="EPC Series"
       />
       <MultiSelectQuoteBar selectedProducts={selectedProducts} onClear={clearSelection} productCategory="EPC Series" />
+      <B2BCTABanner variant="compact" />
       <FooterCompact />
     </div>
   );

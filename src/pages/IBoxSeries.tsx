@@ -588,6 +588,7 @@ const IBoxSeries = () => {
         </div>
       </section>
 
+      <B2BCTABanner variant="compact" />
       <FooterCompact />
     </div>
   );

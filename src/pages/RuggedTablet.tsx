@@ -714,6 +714,7 @@ const RuggedTablet = () => {
         productCategory="Rugged Tablet"
         initialProducts={Array.from(selectedProducts).map((model) => ({ category: "Rugged Tablet", model, qty: 1 }))}
       />
+      <B2BCTABanner variant="compact" />
       <FooterCompact />
     </div>
   );

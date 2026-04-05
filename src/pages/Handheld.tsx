@@ -356,6 +356,7 @@ const Handheld = () => {
         ))}
       </section>
 
+      <B2BCTABanner variant="compact" />
       <FooterCompact />
     </div>
   );

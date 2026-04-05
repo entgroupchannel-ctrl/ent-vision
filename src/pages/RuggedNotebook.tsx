@@ -406,6 +406,7 @@ const RuggedNotebookPage = () => {
         ))}
       </section>
 
+      <B2BCTABanner variant="compact" />
       <FooterCompact />
     </div>
   );
