@@ -8,7 +8,7 @@ import {
   ArrowLeft, Cpu, Thermometer, Shield, Usb, Wifi, Download, Search,
   FileText, ChevronRight, Layers, HardDrive, Monitor, Zap, Box,
   Factory, Stethoscope, Truck, ScanLine, Tv, Warehouse, Sparkles,
-  SlidersHorizontal, ArrowUpDown, LayoutGrid, Flame, Globe, Radio, Car, Eye,
+  SlidersHorizontal, ArrowUpDown, LayoutGrid, Flame, Globe, Radio, Car, Eye, Pointer,
   Play, ThumbsUp, ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";

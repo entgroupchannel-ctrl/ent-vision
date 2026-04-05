@@ -120,7 +120,7 @@ const WishlistPage = () => {
           <div className="text-center py-20 space-y-4">
             <Heart size={48} className="mx-auto text-muted-foreground/30" />
             <p className="text-muted-foreground">
-              ยังไม่มีสินค้าที่ถูกใจ กดไอคอนหัวใจ ❤️ ที่สินค้าเพื่อบันทึกไว้ที่นี่
+              ยังไม่มีสินค้าที่ถูกใจ กดไอคอนหัวใจที่สินค้าเพื่อบันทึกไว้ที่นี่
             </p>
             <Link
               to="/"

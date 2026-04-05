@@ -426,7 +426,7 @@ const RuggedTablet = () => {
           </div>
           {/* Quick Filters row */}
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide py-2">
-            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">👆 เลือก:</span>
+            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">เลือก:</span>
             {[
               { id: "all", label: `ทั้งหมด` },
               { id: "Windows", label: `Windows` },

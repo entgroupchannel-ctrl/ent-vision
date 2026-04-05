@@ -187,7 +187,7 @@ const RuggedNotebookPage = () => {
             <span className="text-[10px] text-muted-foreground">Rugged Notebook — {ruggedNotebooks.length} รุ่น</span>
           </div>
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide py-2">
-            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">👆 เลือก:</span>
+            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">เลือก:</span>
             {[
               { id: "all", label: "ทั้งหมด" },
               { id: "Windows", label: "Windows" },

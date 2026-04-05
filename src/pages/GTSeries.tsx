@@ -1224,7 +1224,7 @@ const GTSeries = () => {
                 <div className="p-5 space-y-6">
                   {/* Intro Video — Hero */}
                   <div>
-                    <h4 className="text-sm font-bold text-foreground mb-2">📌 GT1000 Intro</h4>
+                    <h4 className="text-sm font-bold text-foreground mb-2">GT1000 Intro</h4>
                     <div className="relative w-full aspect-video rounded-xl overflow-hidden">
                       <iframe
                         src="https://www.youtube.com/embed/7wE6fxMpJB4"
@@ -1669,7 +1669,7 @@ const GTSeries = () => {
                 <div className="p-5 space-y-6">
                   {/* Intro Video — Hero */}
                   <div>
-                    <h4 className="text-sm font-bold text-foreground mb-2">📌 GT2000 Intro</h4>
+                    <h4 className="text-sm font-bold text-foreground mb-2">GT2000 Intro</h4>
                     <div className="relative w-full aspect-video rounded-xl overflow-hidden">
                       <iframe
                         src="https://www.youtube.com/embed/XLhFAF_8Da4"
@@ -2043,7 +2043,7 @@ const GTSeries = () => {
                 <div className="p-5 space-y-6">
                   {/* Intro Video — Hero */}
                   <div>
-                    <h4 className="text-sm font-bold text-foreground mb-2">📌 GT3000 Intro</h4>
+                    <h4 className="text-sm font-bold text-foreground mb-2">GT3000 Intro</h4>
                     <div className="relative w-full aspect-video rounded-xl overflow-hidden">
                       <iframe
                         src="https://www.youtube.com/embed/31SEStppvKw"
@@ -4824,7 +4824,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Options Table */}
               <div className="card-surface overflow-hidden">
                 <div className="p-5 border-b border-border">
-                  <h3 className="text-lg font-display font-bold text-foreground">🛒 Windows License / Options</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground">Windows License / Options</h3>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
