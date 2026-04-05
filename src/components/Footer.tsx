@@ -76,7 +76,7 @@ const footerSections = [
       { label: "GK Series — Panel PC", href: "/gk-series" },
       { label: "Panel PC GTG — Stainless", href: "/panel-pc-gtg" },
       { label: "Smart Display / KIOSK", href: "/smart-display" },
-      { label: "UTG Series", href: "/utc-series" },
+      { label: "UTC Series", href: "/utc-series" },
     ],
   },
   {
