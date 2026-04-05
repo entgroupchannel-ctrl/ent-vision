@@ -74,7 +74,7 @@ const ClientTrustSection = () => {
             )}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-2 border-t border-border/30">
               <p className="text-xs text-muted-foreground">ใกล้ชิดกับเราได้มากขึ้น สอบถามได้สะดวกขึ้น</p>
-              <LineQRButton />
+              <LineQRButton>เพิ่มเพื่อน @entgroup</LineQRButton>
             </div>
           </div>
         )}
