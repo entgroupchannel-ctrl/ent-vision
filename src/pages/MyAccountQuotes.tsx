@@ -274,7 +274,7 @@ const MyAccountQuotes = () => {
                       </td>
 
                       {/* Action menu */}
-                      <td className="px-2 py-3 text-center relative" ref={menuOpenId === q.id ? menuRef : undefined}>
+                      <td className="px-2 py-3 text-center relative" ref={menuOpenId === q.id ? menuRef as any : undefined}>
                         <button
                           onClick={(e) => { e.stopPropagation(); setMenuOpenId(menuOpenId === q.id ? null : q.id); }}
                           className="p-1.5 rounded-lg hover:bg-secondary/60 text-muted-foreground hover:text-foreground transition-colors"
