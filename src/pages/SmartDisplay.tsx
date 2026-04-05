@@ -57,37 +57,37 @@ const indoorProducts = [
     model: "BD-3501",
     size: '35"',
     type: "Stretched Bar",
-    image: "https://static.wixstatic.com/media/0597a3_313720b25f424d3db0e3e72bb247409d~mv2.png/v1/fill/w_289,h_315,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-07-12%20at%2017_19_39.png",
+    image: "/images/wix/0597a3_313720b25f424d3db0e3e72bb247409d_5584058a.png",
   },
   {
     model: "BD-4380",
     size: '43"',
     type: "Standing Kiosk",
-    image: "https://static.wixstatic.com/media/0597a3_89ddd2e3de8b4610bd0e08f02dbf25d6~mv2.png/v1/fill/w_378,h_315,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-07-12%20at%2017_18_04.png",
+    image: "/images/wix/0597a3_89ddd2e3de8b4610bd0e08f02dbf25d6_e76ae3d8.png",
   },
   {
     model: "BD-4950",
     size: '49"',
     type: "Standing Display",
-    image: "https://static.wixstatic.com/media/0597a3_7e5919f1202f4f68b8f09e8748a01268~mv2.png/v1/fill/w_316,h_315,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-07-12%20at%2017_16_46.png",
+    image: "/images/wix/0597a3_7e5919f1202f4f68b8f09e8748a01268_04d68d10.png",
   },
   {
     model: "BD-5840",
     size: '58"',
     type: "Wall Mount",
-    image: "https://static.wixstatic.com/media/0597a3_95ac9a51630d4527b072e7c6d119d91f~mv2.png/v1/fill/w_330,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_95ac9a51630d4527b072e7c6d119d91f~mv2.png",
+    image: "/images/wix/0597a3_95ac9a51630d4527b072e7c6d119d91f_27fbd50a.png",
   },
   {
     model: "BD-6500",
     size: '65"',
     type: "Standing Kiosk",
-    image: "https://static.wixstatic.com/media/0597a3_fb0e2421e09647fc82601aeea6e6da06~mv2.png/v1/fill/w_398,h_335,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_fb0e2421e09647fc82601aeea6e6da06~mv2.png",
+    image: "/images/wix/0597a3_fb0e2421e09647fc82601aeea6e6da06_3c23ea2e.png",
   },
   {
     model: "BD-7500",
     size: '75"',
     type: "Premium Display",
-    image: "https://static.wixstatic.com/media/0597a3_3799af0b54e6400f88264f0f184dd65b~mv2.png/v1/fill/w_298,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_3799af0b54e6400f88264f0f184dd65b~mv2.png",
+    image: "/images/wix/0597a3_3799af0b54e6400f88264f0f184dd65b_ff6d12d5.png",
   },
 ];
 
@@ -285,10 +285,10 @@ const SmartDisplay = () => {
               {/* Indoor gallery */}
               <div className="mt-10 grid md:grid-cols-2 gap-6">
                 <div className="card-surface overflow-hidden">
-                  <img src="https://static.wixstatic.com/media/0597a3_9b7b3b7aebd74c67b4ba73ce8cd35d2f~mv2.png/v1/fill/w_1223,h_749,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-08%20at%2013_46_35.png" alt="Indoor signage installation" className="w-full object-cover" loading="lazy" />
+                  <img src="/images/wix/0597a3_9b7b3b7aebd74c67b4ba73ce8cd35d2f_f62f3e54.png" alt="Indoor signage installation" className="w-full object-cover" loading="lazy" />
                 </div>
                 <div className="card-surface overflow-hidden">
-                  <img src="https://static.wixstatic.com/media/0597a3_57760701aff84e30b2efd1cdda15df62~mv2.png/v1/crop/x_0,y_0,w_1836,h_1127/fill/w_1223,h_751,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-09%20at%2013_20_59.png" alt="Display showcase" className="w-full object-cover" loading="lazy" />
+                  <img src="/images/wix/0597a3_57760701aff84e30b2efd1cdda15df62_45ac4be2.png" alt="Display showcase" className="w-full object-cover" loading="lazy" />
                 </div>
               </div>
 
@@ -316,7 +316,7 @@ const SmartDisplay = () => {
                 {/* Product hero image */}
                 <div className="card-surface overflow-hidden rounded-xl mb-6">
                   <img
-                    src="https://static.wixstatic.com/media/0597a3_7ae90fd5a4fd425d9cc9efad0a31c636~mv2.png/v1/fill/w_1317,h_485,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_7ae90fd5a4fd425d9cc9efad0a31c636~mv2.png"
+                    src="/images/wix/0597a3_7ae90fd5a4fd425d9cc9efad0a31c636_44990981.png"
                     alt="FPM Series Industrial Touch Monitor"
                     className="w-full object-contain"
                     loading="lazy"
@@ -327,7 +327,7 @@ const SmartDisplay = () => {
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                   <div className="card-surface overflow-hidden rounded-xl">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_171a07409e364dd4b23631e28628341f~mv2.png/v1/fill/w_1112,h_332,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_171a07409e364dd4b23631e28628341f~mv2.png"
+                      src="/images/wix/0597a3_171a07409e364dd4b23631e28628341f_839b524c.png"
                       alt="Wide Screen & Square Screen options"
                       className="w-full object-contain"
                       loading="lazy"
@@ -335,7 +335,7 @@ const SmartDisplay = () => {
                   </div>
                   <div className="card-surface overflow-hidden rounded-xl">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_2b37f8b836bf40e983200b7d2c7eec55~mv2.png/v1/fill/w_1306,h_481,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_2b37f8b836bf40e983200b7d2c7eec55~mv2.png"
+                      src="/images/wix/0597a3_2b37f8b836bf40e983200b7d2c7eec55_d29d91f9.png"
                       alt="FPM size options 8-24 inch"
                       className="w-full object-contain"
                       loading="lazy"
@@ -347,7 +347,7 @@ const SmartDisplay = () => {
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                   <div className="card-surface p-6 rounded-xl">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_bd712d6f658443bbb2190fda091ee8b1~mv2.png/v1/fill/w_1312,h_482,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_bd712d6f658443bbb2190fda091ee8b1~mv2.png"
+                      src="/images/wix/0597a3_bd712d6f658443bbb2190fda091ee8b1_de7fec1c.png"
                       alt="Industrial Grade Computer + Touch Screen"
                       className="w-full object-contain rounded-lg mb-4"
                       loading="lazy"
@@ -356,7 +356,7 @@ const SmartDisplay = () => {
                   </div>
                   <div className="card-surface p-6 rounded-xl">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_099390617863452cb42bc0e2eeca3ab2~mv2.png/v1/fill/w_1297,h_476,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_099390617863452cb42bc0e2eeca3ab2~mv2.png"
+                      src="/images/wix/0597a3_099390617863452cb42bc0e2eeca3ab2_45701297.png"
                       alt="Easy connection USB + HDMI"
                       className="w-full object-contain rounded-lg mb-4"
                       loading="lazy"
@@ -368,7 +368,7 @@ const SmartDisplay = () => {
                 {/* FPM17 Special Edition */}
                 <div className="card-surface overflow-hidden rounded-xl mb-6">
                   <img
-                    src="https://static.wixstatic.com/media/0597a3_c6e92eb018a04ed78ef653433323ccc4~mv2.png/v1/crop/x_0,y_19,w_1958,h_1084/fill/w_1327,h_735,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/FPM17%20Special%20Edition.png"
+                    src="/images/wix/0597a3_c6e92eb018a04ed78ef653433323ccc4_23264789.png"
                     alt="FPM17 Special Edition"
                     className="w-full object-contain"
                     loading="lazy"
@@ -378,7 +378,7 @@ const SmartDisplay = () => {
                 {/* Mounting options */}
                 <div className="card-surface overflow-hidden rounded-xl mb-8">
                   <img
-                    src="https://static.wixstatic.com/media/0597a3_5bbc918177214812816fca9cac808de6~mv2.png/v1/fill/w_1319,h_484,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_5bbc918177214812816fca9cac808de6~mv2.png"
+                    src="/images/wix/0597a3_5bbc918177214812816fca9cac808de6_3497905f.png"
                     alt="VESA Mounting options"
                     className="w-full object-contain"
                     loading="lazy"
@@ -445,14 +445,14 @@ const SmartDisplay = () => {
                 {/* Gallery — all images from original page */}
                 <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    "https://static.wixstatic.com/media/0597a3_bcb05795214544aaaa6de89e36e1240d~mv2.jpg/v1/fill/w_400,h_267,q_90,enc_avif,quality_auto/0597a3_bcb05795214544aaaa6de89e36e1240d~mv2.jpg",
-                    "https://static.wixstatic.com/media/0597a3_5296e6c18d9c46eda07b3c9a4747484d~mv2.jpg/v1/fill/w_400,h_267,q_90,enc_avif,quality_auto/0597a3_5296e6c18d9c46eda07b3c9a4747484d~mv2.jpg",
-                    "https://static.wixstatic.com/media/0597a3_772cb29089e6441683f42be27f12dd10~mv2.jpg/v1/fill/w_489,h_327,q_90,enc_avif,quality_auto/0597a3_772cb29089e6441683f42be27f12dd10~mv2.jpg",
-                    "https://static.wixstatic.com/media/0597a3_c12a57b72528451194c0e554b3a7876e~mv2.jpg/v1/fill/w_366,h_244,q_90,enc_avif,quality_auto/0597a3_c12a57b72528451194c0e554b3a7876e~mv2.jpg",
-                    "https://static.wixstatic.com/media/0597a3_8d732a24969b4605a70e4c8b1f199a4d~mv2.jpg/v1/fill/w_366,h_244,q_90,enc_avif,quality_auto/0597a3_8d732a24969b4605a70e4c8b1f199a4d~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_c40ca1d586a44b1ca9fc90cf2c49af6a~mv2.jpg/v1/fill/w_400,h_368,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0148.jpg",
-                    "https://static.wixstatic.com/media/005637_6ba3b2af125d4948b5d9d6c626135c1f~mv2.jpg/v1/fill/w_400,h_366,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0140.jpg",
-                    "https://static.wixstatic.com/media/005637_54259d2f8cf04757bfbf7bbabb983500~mv2.jpg/v1/fill/w_400,h_366,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/reIMG_0145.jpg",
+                    "/images/wix/0597a3_bcb05795214544aaaa6de89e36e1240d_1e304dda.jpg",
+                    "/images/wix/0597a3_5296e6c18d9c46eda07b3c9a4747484d_d08efd28.jpg",
+                    "/images/wix/0597a3_772cb29089e6441683f42be27f12dd10_b821819c.jpg",
+                    "/images/wix/0597a3_c12a57b72528451194c0e554b3a7876e_95272f86.jpg",
+                    "/images/wix/0597a3_8d732a24969b4605a70e4c8b1f199a4d_b06ddd94.jpg",
+                    "/images/wix/005637_c40ca1d586a44b1ca9fc90cf2c49af6a_b4610452.jpg",
+                    "/images/wix/005637_6ba3b2af125d4948b5d9d6c626135c1f_ddf0f886.jpg",
+                    "/images/wix/005637_54259d2f8cf04757bfbf7bbabb983500_8e5061a6.jpg",
                   ].map((src, i) => (
                     <div key={i} className="card-surface overflow-hidden rounded-xl">
                       <img src={src} alt={`FPM installation ${i + 1}`} className="w-full h-44 object-cover" loading="lazy" />
@@ -481,7 +481,7 @@ const SmartDisplay = () => {
                 </div>
                 <div className="flex justify-center">
                   <img
-                    src="https://static.wixstatic.com/media/0597a3_4b83ca4062e04f0285200f3eba338ebc~mv2.png/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/vSmart%20Display%20-%201600nits.png"
+                    src="/images/wix/0597a3_4b83ca4062e04f0285200f3eba338ebc_8fa8824b.png"
                     alt="Outdoor Monitor 1600 Nits"
                     className="max-h-[380px] object-contain drop-shadow-xl"
                     loading="lazy"
@@ -522,11 +522,11 @@ const SmartDisplay = () => {
               {/* Outdoor gallery */}
               <div className="mt-10 grid grid-cols-2 md:grid-cols-5 gap-4">
                 {[
-                  "https://static.wixstatic.com/media/0597a3_09107d93b37144b597c62754cfe22bac~mv2.png/v1/fill/w_439,h_396,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_09107d93b37144b597c62754cfe22bac~mv2.png",
-                  "https://static.wixstatic.com/media/0597a3_cbd05c66b29942b393b882bb251d7fed~mv2.png/v1/fill/w_439,h_396,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_cbd05c66b29942b393b882bb251d7fed~mv2.png",
-                  "https://static.wixstatic.com/media/0597a3_95b559fdaf034da198a13c529db0f19c~mv2.png/v1/fill/w_396,h_396,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_95b559fdaf034da198a13c529db0f19c~mv2.png",
-                  "https://static.wixstatic.com/media/0597a3_188fc06bcf174134abd6ddfa24735bae~mv2.png/v1/fill/w_439,h_396,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_188fc06bcf174134abd6ddfa24735bae~mv2.png",
-                  "https://static.wixstatic.com/media/0597a3_940c7a65cd59495980fe0a7d6fce64da~mv2.png/v1/fill/w_439,h_396,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_940c7a65cd59495980fe0a7d6fce64da~mv2.png",
+                  "/images/wix/0597a3_09107d93b37144b597c62754cfe22bac_349ed40f.png",
+                  "/images/wix/0597a3_cbd05c66b29942b393b882bb251d7fed_061a04c5.png",
+                  "/images/wix/0597a3_95b559fdaf034da198a13c529db0f19c_1fb10246.png",
+                  "/images/wix/0597a3_188fc06bcf174134abd6ddfa24735bae_e3cf114d.png",
+                  "/images/wix/0597a3_940c7a65cd59495980fe0a7d6fce64da_16e24e8a.png",
                 ].map((src, i) => (
                   <div key={i} className="card-surface overflow-hidden rounded-xl">
                     <img src={src} alt={`Outdoor installation ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
@@ -582,7 +582,7 @@ const SmartDisplay = () => {
                   </div>
                   <div className="flex justify-center">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_f8734b5a7dd9417bb93b82c09df3eccd~mv2.png/v1/fill/w_600,h_541,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk.png"
+                      src="/images/wix/0597a3_f8734b5a7dd9417bb93b82c09df3eccd_307dc478.png"
                       alt="KIOSK สำเร็จรูป"
                       className="max-h-[400px] object-contain drop-shadow-2xl"
                       loading="lazy"
@@ -623,10 +623,10 @@ const SmartDisplay = () => {
                 <p className="text-muted-foreground text-center text-sm mb-6">ตู้ KIOSK ที่ออกแบบและผลิตให้ลูกค้าในหลากหลายอุตสาหกรรม</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {[
-                    "https://static.wixstatic.com/media/005637_92bc43868f714520858954cac48e4dab~mv2.jpg/v1/fill/w_576,h_300,al_t,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_92bc43868f714520858954cac48e4dab~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_b26918d72c2b4ef0a47a5b77d05407e1~mv2.jpg/v1/crop/x_548,y_405,w_384,h_300,q_80,enc_avif,quality_auto/005637_b26918d72c2b4ef0a47a5b77d05407e1~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_3273fb00d2994fb8b60e033e95139fd4~mv2.jpg/v1/fill/w_384,h_300,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_3273fb00d2994fb8b60e033e95139fd4~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_795624203e2d469282900aab60a78bc3~mv2.jpg/v1/fill/w_576,h_300,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_795624203e2d469282900aab60a78bc3~mv2.jpg",
+                    "/images/wix/005637_92bc43868f714520858954cac48e4dab_1181fa53.jpg",
+                    "/images/wix/005637_b26918d72c2b4ef0a47a5b77d05407e1_61fcc6f8.jpg",
+                    "/images/wix/005637_3273fb00d2994fb8b60e033e95139fd4_4d050247.jpg",
+                    "/images/wix/005637_795624203e2d469282900aab60a78bc3_31040573.jpg",
                   ].map((img, i) => (
                     <div key={i} className="rounded-xl overflow-hidden bg-secondary/30 border border-border aspect-[4/3]">
                       <img src={img} alt={`KIOSK ผลงานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
@@ -641,12 +641,12 @@ const SmartDisplay = () => {
                 <p className="text-muted-foreground text-center text-sm mb-6">KIOSK ถูกนำไปใช้งานจริงในหลากหลายสถานที่</p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    { image: "https://static.wixstatic.com/media/005637_e66f056de7634648bb47150eec24ea4c~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/new-normal-after-covid-epidemic-asian-female-searching-information-with-digital-touch-scre.jpg", title: "Visitor Management", desc: "ระบบลงทะเบียนผู้มาติดต่อ ถ่ายภาพ พิมพ์บัตร" },
-                    { image: "https://static.wixstatic.com/media/005637_c1f3742fc7e04f11aa6d39170e38dee1~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/well-dressed-executives-movement.jpg", title: "Queue Management", desc: "ระบบจัดคิวอัจฉริยะ โรงพยาบาล ธนาคาร สำนักงาน" },
-                    { image: "https://static.wixstatic.com/media/005637_ea5bf2db35064644ac58160f3b84a6d0~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/young-woman-consulting-station-map-city.jpg", title: "Wayfinding & Directory", desc: "แผนที่นำทาง ค้นหาข้อมูลสถานที่" },
-                    { image: "https://static.wixstatic.com/media/005637_c9a89ea001f5437aa6c52df854db3ba7~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/buying-food-supermarket-during-corona-virus-global-pandemic.jpg", title: "Self-Order & Payment", desc: "สั่งอาหาร เลือกเมนู ชำระเงิน" },
-                    { image: "https://static.wixstatic.com/media/005637_7a76d52860b5470ea47dfc44ff6606a6~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/M_S-New-03_516_516_0_0_800_800.jpg", title: "Brand & Promotion", desc: "จอโฆษณาแบบอินเทอร์แอคทีฟ งานอีเวนต์" },
-                    { image: "https://static.wixstatic.com/media/005637_fcb8f39e5ea542a0969d58555633398a~mv2.jpg/v1/fill/w_400,h_267,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/eBOL-driver-kiosk.jpg", title: "Document Check-in", desc: "เช็คอิน ลงทะเบียน กรอกเอกสาร" },
+                    { image: "/images/wix/005637_e66f056de7634648bb47150eec24ea4c_d9a4434c.jpg", title: "Visitor Management", desc: "ระบบลงทะเบียนผู้มาติดต่อ ถ่ายภาพ พิมพ์บัตร" },
+                    { image: "/images/wix/005637_c1f3742fc7e04f11aa6d39170e38dee1_678b50e1.jpg", title: "Queue Management", desc: "ระบบจัดคิวอัจฉริยะ โรงพยาบาล ธนาคาร สำนักงาน" },
+                    { image: "/images/wix/005637_ea5bf2db35064644ac58160f3b84a6d0_000e8ad0.jpg", title: "Wayfinding & Directory", desc: "แผนที่นำทาง ค้นหาข้อมูลสถานที่" },
+                    { image: "/images/wix/005637_c9a89ea001f5437aa6c52df854db3ba7_255f173b.jpg", title: "Self-Order & Payment", desc: "สั่งอาหาร เลือกเมนู ชำระเงิน" },
+                    { image: "/images/wix/005637_7a76d52860b5470ea47dfc44ff6606a6_75c4c7b3.jpg", title: "Brand & Promotion", desc: "จอโฆษณาแบบอินเทอร์แอคทีฟ งานอีเวนต์" },
+                    { image: "/images/wix/005637_fcb8f39e5ea542a0969d58555633398a_cae31891.jpg", title: "Document Check-in", desc: "เช็คอิน ลงทะเบียน กรอกเอกสาร" },
                   ].map((uc) => (
                     <div key={uc.title} className="card-surface overflow-hidden hover:border-primary/30 transition-all group">
                       <div className="aspect-[3/2] overflow-hidden">
@@ -664,10 +664,10 @@ const SmartDisplay = () => {
               {/* Kiosk models grid */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
                 {[
-                  { image: "https://static.wixstatic.com/media/0597a3_4295297952794823a3e94770fb57311e~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk%20(3).png", title: "KIOSK แบบตั้งพื้น", desc: "สั่งอาหาร / ระบบคิว / เช็คอิน" },
-                  { image: "https://static.wixstatic.com/media/0597a3_368c91b7891d4e4980b92344c420a299~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk.png", title: "KIOSK ขนาดกะทัดรัด", desc: "Counter Top / ตู้ข้อมูล" },
-                  { image: "https://static.wixstatic.com/media/0597a3_9fe176a2fb7f4d809a385fe9d650a8a3~mv2.png/v1/fill/w_391,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk%20(4).png", title: "KIOSK Premium", desc: "จอใหญ่ / ดีไซน์หรู / สองหน้า" },
-                  { image: "https://static.wixstatic.com/media/0597a3_923cc29817714f80b57ba97aba096dac~mv2.png/v1/fill/w_388,h_350,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk%20(2).png", title: "KIOSK แบบติดผนัง", desc: "ประหยัดพื้นที่ / Self-service" },
+                  { image: "/images/wix/0597a3_4295297952794823a3e94770fb57311e_f87bca04.png", title: "KIOSK แบบตั้งพื้น", desc: "สั่งอาหาร / ระบบคิว / เช็คอิน" },
+                  { image: "/images/wix/0597a3_368c91b7891d4e4980b92344c420a299_a2e025e6.png", title: "KIOSK ขนาดกะทัดรัด", desc: "Counter Top / ตู้ข้อมูล" },
+                  { image: "/images/wix/0597a3_9fe176a2fb7f4d809a385fe9d650a8a3_ed6826fb.png", title: "KIOSK Premium", desc: "จอใหญ่ / ดีไซน์หรู / สองหน้า" },
+                  { image: "/images/wix/0597a3_923cc29817714f80b57ba97aba096dac_40bc8e7b.png", title: "KIOSK แบบติดผนัง", desc: "ประหยัดพื้นที่ / Self-service" },
                 ].map((k) => (
                   <div key={k.title} className="card-surface p-5 hover:border-primary/30 transition-all hover:-translate-y-1 group">
                     <div className="relative bg-secondary/30 rounded-xl p-4 mb-4 flex items-center justify-center h-52 overflow-hidden">
@@ -778,13 +778,13 @@ const SmartDisplay = () => {
                   </div>
                   <div className="flex gap-4 justify-center">
                     <img
-                      src="https://static.wixstatic.com/media/005637_bf1ac53c95244bfc9806b0757ab39272~mv2.png/v1/crop/x_425,y_110,w_626,h_999/fill/w_280,h_450,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2.png"
+                      src="/images/wix/005637_bf1ac53c95244bfc9806b0757ab39272_604a8d91.png"
                       alt="KIOSK-GK2101 ด้านหน้า"
                       className="max-h-[400px] object-contain drop-shadow-xl"
                       loading="lazy"
                     />
                     <img
-                      src="https://static.wixstatic.com/media/005637_b48ec7c382e549ad853ae993207d740e~mv2.png/v1/crop/x_407,y_68,w_666,h_1041/fill/w_280,h_450,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%87.png"
+                      src="/images/wix/005637_b48ec7c382e549ad853ae993207d740e_4c97c30b.png"
                       alt="KIOSK-GK2101 ด้านหลัง"
                       className="max-h-[400px] object-contain drop-shadow-xl"
                       loading="lazy"
@@ -799,9 +799,9 @@ const SmartDisplay = () => {
                 <p className="text-muted-foreground text-center text-sm mb-6">เลือกขนาดและสไตล์ที่เหมาะกับธุรกิจของคุณ</p>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    { image: "https://static.wixstatic.com/media/005637_5e95b495af4c440f9b14b562ea433c3f~mv2.jpg/v1/crop/x_52,y_49,w_689,h_1376/fill/w_200,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/kio215vrt-visitor-management-kiosk.jpg", title: "KIO-215VRT", desc: "Visitor Management Kiosk — จอ 21.5\" ตั้งพื้น" },
-                    { image: "https://static.wixstatic.com/media/005637_8df769ac52f944c3a1670d2abe60f468~mv2.jpg/v1/fill/w_150,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/KIO190-modelpic.jpg", title: "KIO-190", desc: "Queue & Self-Service Kiosk — จอ 19\" สไตล์บาง" },
-                    { image: "https://static.wixstatic.com/media/005637_3a8d730e167e49768b023123fd3984bd~mv2.jpg/v1/fill/w_400,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ad1KIOSK.jpg", title: "KIOSK Custom", desc: "สั่งผลิตตามความต้องการ — ทุกขนาด ทุกสไตล์" },
+                    { image: "/images/wix/005637_5e95b495af4c440f9b14b562ea433c3f_357f0b6a.jpg", title: "KIO-215VRT", desc: "Visitor Management Kiosk — จอ 21.5\" ตั้งพื้น" },
+                    { image: "/images/wix/005637_8df769ac52f944c3a1670d2abe60f468_0ca8a233.jpg", title: "KIO-190", desc: "Queue & Self-Service Kiosk — จอ 19\" สไตล์บาง" },
+                    { image: "/images/wix/005637_3a8d730e167e49768b023123fd3984bd_6e4a2f47.jpg", title: "KIOSK Custom", desc: "สั่งผลิตตามความต้องการ — ทุกขนาด ทุกสไตล์" },
                   ].map((k) => (
                     <div key={k.title} className="card-surface overflow-hidden group hover:border-primary/30 transition-all">
                       <div className="bg-secondary/30 flex items-center justify-center h-72 overflow-hidden">
@@ -847,7 +847,7 @@ const SmartDisplay = () => {
                   </div>
                   <div className="flex justify-center">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_841bc593914c47cfa538b4dd7b57a27e~mv2.png/v1/fill/w_506,h_506,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kiosk%20(2).png"
+                      src="/images/wix/0597a3_841bc593914c47cfa538b4dd7b57a27e_dad76eaa.png"
                       alt="Kiosk enclosures"
                       className="max-h-[350px] object-contain"
                       loading="lazy"
@@ -877,8 +877,8 @@ const SmartDisplay = () => {
                 <h3 className="text-xl font-display font-bold text-foreground mb-4 text-center">ภาพตัวอย่างการติดตั้ง</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    "https://static.wixstatic.com/media/005637_d6d438173a884b35819d4af4c11b8eab~mv2.jpg/v1/fill/w_732,h_274,q_90,enc_avif,quality_auto/005637_d6d438173a884b35819d4af4c11b8eab~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_b94be3cae5d74c24bf620dfd192c2738~mv2.jpg/v1/fill/w_732,h_274,q_90,enc_avif,quality_auto/005637_b94be3cae5d74c24bf620dfd192c2738~mv2.jpg",
+                    "/images/wix/005637_d6d438173a884b35819d4af4c11b8eab_3e876f9d.jpg",
+                    "/images/wix/005637_b94be3cae5d74c24bf620dfd192c2738_d7874fbe.jpg",
                   ].map((img, i) => (
                     <div key={i} className="rounded-xl overflow-hidden border border-border">
                       <img src={img} alt={`ตัวอย่างการติดตั้ง ${i + 1}`} className="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
@@ -970,7 +970,7 @@ const SmartDisplay = () => {
                   </div>
                   <div className="bg-secondary/30 p-6 flex items-center justify-center">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_25107590998d467abb1b5b0f603701f3~mv2.png/v1/fill/w_600,h_541,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IPC%20-%20119%20(1040%20x%201040%20px)%20(1332%20x%201200%20px).png"
+                      src="/images/wix/0597a3_25107590998d467abb1b5b0f603701f3_2f9ce164.png"
                       alt="Window Display"
                       className="max-h-[350px] object-contain"
                       loading="lazy"
@@ -982,17 +982,17 @@ const SmartDisplay = () => {
               {/* Window product images */}
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="card-surface overflow-hidden">
-                  <img src="https://static.wixstatic.com/media/0597a3_ed1ec55afde14b989d99ef11c84769a1~mv2.png/v1/fill/w_328,h_328,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_ed1ec55afde14b989d99ef11c84769a1~mv2.png" alt="Window display 1" className="w-full object-contain p-4" loading="lazy" />
+                  <img src="/images/wix/0597a3_ed1ec55afde14b989d99ef11c84769a1_7823dc4c.png" alt="Window display 1" className="w-full object-contain p-4" loading="lazy" />
                 </div>
                 <div className="card-surface overflow-hidden">
-                  <img src="https://static.wixstatic.com/media/0597a3_e63651de999c48969d065ffa5606abab~mv2.png/v1/fill/w_328,h_328,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_e63651de999c48969d065ffa5606abab~mv2.png" alt="Window display 2" className="w-full object-contain p-4" loading="lazy" />
+                  <img src="/images/wix/0597a3_e63651de999c48969d065ffa5606abab_89cf81f3.png" alt="Window display 2" className="w-full object-contain p-4" loading="lazy" />
                 </div>
               </div>
 
               {/* Stretched bar gallery */}
               <div className="mt-8 card-surface overflow-hidden">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_394e2528ac014a72a46412c83b1d9acb~mv2.png/v1/fill/w_1179,h_738,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_394e2528ac014a72a46412c83b1d9acb~mv2.png"
+                  src="/images/wix/0597a3_394e2528ac014a72a46412c83b1d9acb_e7c706ab.png"
                   alt="Stretched bar display range"
                   className="w-full object-cover"
                   loading="lazy"
@@ -1023,7 +1023,7 @@ const SmartDisplay = () => {
               </div>
               <div className="flex justify-center">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_75d6d2e9ade74554add617fef3ccca16~mv2.png/v1/fill/w_718,h_407,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-08%20at%2022_04_18.png"
+                  src="/images/wix/0597a3_75d6d2e9ade74554add617fef3ccca16_387324f9.png"
                   alt="Windows 10 Pro option"
                   className="max-h-[260px] object-contain rounded-lg"
                   loading="lazy"
@@ -1060,14 +1060,14 @@ const SmartDisplay = () => {
           {/* Software screenshots */}
           <div className="grid md:grid-cols-3 gap-4">
             <div className="card-surface overflow-hidden md:col-span-2">
-              <img src="https://static.wixstatic.com/media/0597a3_4231366e9f4b4e59bc95d622fcf5e76c~mv2.png/v1/fill/w_1179,h_664,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png" alt="Digital Signage System" className="w-full object-cover" loading="lazy" />
+              <img src="/images/wix/0597a3_4231366e9f4b4e59bc95d622fcf5e76c_810ad320.png" alt="Digital Signage System" className="w-full object-cover" loading="lazy" />
             </div>
             <div className="space-y-4">
               <div className="card-surface overflow-hidden">
-                <img src="https://static.wixstatic.com/media/0597a3_78e2fe344d5b46a4a0484f6c52ab9df7~mv2.png/v1/fill/w_826,h_558,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-08%20at%2014_02_42.png" alt="Software dashboard" className="w-full object-cover" loading="lazy" />
+                <img src="/images/wix/0597a3_78e2fe344d5b46a4a0484f6c52ab9df7_fb969f91.png" alt="Software dashboard" className="w-full object-cover" loading="lazy" />
               </div>
               <div className="card-surface overflow-hidden">
-                <img src="https://static.wixstatic.com/media/0597a3_ef72e14aac964a4591a8217c825dc8f2~mv2.png/v1/crop/x_0,y_0,w_1375,h_795/fill/w_419,h_242,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202567-08-08%20at%2014_02_11.png" alt="Software device management" className="w-full object-cover" loading="lazy" />
+                <img src="/images/wix/0597a3_ef72e14aac964a4591a8217c825dc8f2_d797cdb4.png" alt="Software device management" className="w-full object-cover" loading="lazy" />
               </div>
             </div>
           </div>

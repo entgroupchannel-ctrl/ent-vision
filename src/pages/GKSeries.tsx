@@ -88,8 +88,8 @@ const gkModels: GKModel[] = [
     resolution: "1024×768",
     tagline: "Compact & Versatile",
     desc: "คอมพิวเตอร์แผงควบคุมสมรรถนะสูง มาตรฐาน IP65 หน้าจอสัมผัส 10 นิ้ว เลือกได้ทั้ง Windows/Linux (Intel/AMD) และ Android (ARM) — เล็กที่สุด แต่ฟีเจอร์ครบที่สุด",
-    image: "https://static.wixstatic.com/media/005637_63354c2396e945468024a1170057f661~mv2.png/v1/crop/x_499,y_265,w_870,h_738/fill/w_453,h_385,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%871.png",
-    bannerImage: "https://static.wixstatic.com/media/005637_e086c00fa8d945c4abf7defd3a9d838d~mv2.jpg/v1/crop/x_63,y_0,w_1937,h_328/fill/w_1245,h_224,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2%E0%B8%9B%E0%B8%81.jpg",
+    image: "/images/wix/005637_63354c2396e945468024a1170057f661_d39cca82.png",
+    bannerImage: "/images/wix/005637_e086c00fa8d945c4abf7defd3a9d838d_8948d37f.jpg",
     datasheetUrls: [
       { label: "GK1004 Core i3/i5/i7", url: "/datasheets/0597a3_494ff783ace94e86b75a19186e846b4c.pdf" },
       { label: "GK1004 AMD A6", url: "/datasheets/0597a3_6f2939c704d64ad9815751e73437e63d.pdf" },
@@ -345,7 +345,7 @@ const gkModels: GKModel[] = [
     resolution: "1280×1024",
     tagline: "Large Display",
     desc: "Panel PC อุตสาหกรรม 19 นิ้ว จอสัมผัส Capacitive 10 จุด IP65 กันฝุ่นกันน้ำ พื้นที่แสดงผลกว้าง รองรับ CPU Core i5 Gen4/Gen8 และ Core i7 Gen3/Gen6 — เหมาะกับ Control Room, SCADA และ Production Monitoring",
-    image: "https://static.wixstatic.com/media/3e5003_90384e2e610a43438fe307816e83b2d2~mv2.jpg/v1/fill/w_215,h_161,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/222.jpg",
+    image: "/images/wix/3e5003_90384e2e610a43438fe307816e83b2d2_513fd415.jpg",
     datasheetUrls: [
       { label: "GK1901 Core i5 Gen4 (PDF)", url: "/datasheets/GK1901_i5_Gen4.pdf" },
       { label: "GK1901 Core i5 Gen8 (PDF)", url: "/datasheets/GK1901_i5_Gen8.pdf" },
@@ -1271,14 +1271,14 @@ const GKSeries = () => {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              "https://static.wixstatic.com/media/0597a3_7de2c07f966b4371b16dde472b035298~mv2.jpg/v1/fill/w_237,h_238,q_90,enc_avif,quality_auto/0597a3_7de2c07f966b4371b16dde472b035298~mv2.jpg",
-              "https://static.wixstatic.com/media/0597a3_0660fba37ffe49a2a004047745c69797~mv2.jpg/v1/fill/w_237,h_237,fp_0.71_0.21,q_90,enc_avif,quality_auto/0597a3_0660fba37ffe49a2a004047745c69797~mv2.jpg",
-              "https://static.wixstatic.com/media/0597a3_9b8e671a00504f9784c84c5aa6a03134~mv2.jpg/v1/fill/w_237,h_238,fp_0.79_0.37,q_90,enc_avif,quality_auto/0597a3_9b8e671a00504f9784c84c5aa6a03134~mv2.jpg",
-              "https://static.wixstatic.com/media/0597a3_61a977e88e8d4c12ad37c88712ee9cef~mv2.jpg/v1/fill/w_237,h_237,fp_0.8_0.28,q_90,enc_avif,quality_auto/0597a3_61a977e88e8d4c12ad37c88712ee9cef~mv2.jpg",
-              "https://static.wixstatic.com/media/0597a3_0774793f619b458d87404f6058b4d179~mv2.jpg/v1/fill/w_237,h_238,q_90,enc_avif,quality_auto/0597a3_0774793f619b458d87404f6058b4d179~mv2.jpg",
-              "https://static.wixstatic.com/media/0597a3_3ad6e6ac09f04cc08bb72b10ef484871~mv2.jpg/v1/fill/w_237,h_237,q_90,enc_avif,quality_auto/0597a3_3ad6e6ac09f04cc08bb72b10ef484871~mv2.jpg",
-              "https://static.wixstatic.com/media/0597a3_1e39ed0fe74245629b16b5e5ea5d0a6c~mv2.jpg/v1/fill/w_237,h_238,fp_0.76_0.21,q_90,enc_avif,quality_auto/0597a3_1e39ed0fe74245629b16b5e5ea5d0a6c~mv2.jpg",
-              "https://static.wixstatic.com/media/0597a3_27159c0c9ec54624b72408d7a94b8065~mv2.jpg/v1/fill/w_237,h_237,q_90,enc_avif,quality_auto/0597a3_27159c0c9ec54624b72408d7a94b8065~mv2.jpg",
+              "/images/wix/0597a3_7de2c07f966b4371b16dde472b035298_ddc8290f.jpg",
+              "/images/wix/0597a3_0660fba37ffe49a2a004047745c69797_97306e95.jpg",
+              "/images/wix/0597a3_9b8e671a00504f9784c84c5aa6a03134_03ed6c18.jpg",
+              "/images/wix/0597a3_61a977e88e8d4c12ad37c88712ee9cef_e8cf6990.jpg",
+              "/images/wix/0597a3_0774793f619b458d87404f6058b4d179_977903bf.jpg",
+              "/images/wix/0597a3_3ad6e6ac09f04cc08bb72b10ef484871_e0d0ed03.jpg",
+              "/images/wix/0597a3_1e39ed0fe74245629b16b5e5ea5d0a6c_573b67b0.jpg",
+              "/images/wix/0597a3_27159c0c9ec54624b72408d7a94b8065_faf2eb07.jpg",
             ].map((img, i) => (
               <img key={i} src={img} alt="GK Series installation" className="w-full aspect-square object-cover rounded-xl" loading="lazy" />
             ))}
@@ -1446,7 +1446,7 @@ const GKSeries = () => {
               </div>
               <div className="flex justify-center">
                 <img
-                  src="https://static.wixstatic.com/media/005637_9307d91084e2433eb766e611c65c7518~mv2.jpg/v1/crop/x_127,y_51,w_4147,h_1557/fill/w_983,h_369,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GK_Series1.jpg"
+                  src="/images/wix/005637_9307d91084e2433eb766e611c65c7518_d90cd4b5.jpg"
                   alt="GK Series SIM slot"
                   className="rounded-xl max-w-full"
                   loading="lazy"

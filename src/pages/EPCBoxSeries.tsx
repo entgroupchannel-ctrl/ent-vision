@@ -117,16 +117,16 @@ const epcSeries: SeriesData[] = [
     tagline: "Compact & Affordable",
     taglineEn: "Entry-Level Industrial PC",
     desc: "คอมพิวเตอร์อุตสาหกรรมระดับเริ่มต้นที่ไม่ธรรมดา เงียบจริง ทนจริง ด้วยเทคโนโลยี Fanless — ยืดหยุ่นสุดขีดด้วยระบบ LEGO MODE โครงสร้างอลูมิเนียม 200mm แกร่งกว่าที่คิด",
-    image: "https://static.wixstatic.com/media/0597a3_e66a5a6616b64254a920d2c6f05b93f8~mv2.png/v1/fill/w_258,h_261,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-28%20at%2021_24_48.png",
+    image: "/images/wix/0597a3_e66a5a6616b64254a920d2c6f05b93f8_48ed79f4.png",
     datasheetUrl: "/datasheets/0597a3_7c5d5ac786764ef2b4fd3910060c41b6.pdf",
     comPorts: "2×RS232 + 1×RS485 DB9",
     usbPorts: { usb2: "5×USB2.0 / 2×USB2.0", usb3: "1×USB3.0 / 4×USB3.0" },
     dimensions: "200mm compact",
     highlight: "เริ่มต้น",
     gallery: [
-      "https://static.wixstatic.com/media/0597a3_4681e86fee384a13953cfc1477fe4eeb~mv2.png/v1/fill/w_335,h_303,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3.png",
-      "https://static.wixstatic.com/media/0597a3_7043dbbbf77841f599d56ca8bd1c8eeb~mv2.png/v1/fill/w_335,h_303,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4.png",
-      "https://static.wixstatic.com/media/0597a3_a33086dc821449789942597ff318195f~mv2.png/v1/fill/w_335,h_303,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_a33086dc821449789942597ff318195f~mv2.png",
+      "/images/wix/0597a3_4681e86fee384a13953cfc1477fe4eeb_5458d060.png",
+      "/images/wix/0597a3_7043dbbbf77841f599d56ca8bd1c8eeb_bcb7f419.png",
+      "/images/wix/0597a3_a33086dc821449789942597ff318195f_62e6f2fd.png",
     ],
     features: [
       {
@@ -159,7 +159,7 @@ const epcSeries: SeriesData[] = [
     tagline: "Enhanced Expansion",
     taglineEn: "Enhanced Expansion Design",
     desc: "ความสูงเพิ่มจาก 47mm เป็น 79mm (+68% พื้นที่) พื้นที่ภายในมากขึ้นรองรับการขยายและระบายความร้อนดีขึ้น เหมาะกับ CPU ประสิทธิภาพสูง ทำงาน 24/7 ในโรงงานได้มั่นใจ",
-    image: "https://static.wixstatic.com/media/0597a3_373c66cd76674aafb9d631325e3e3a26~mv2.png/v1/fill/w_347,h_240,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-28%20at%2021_57_50.png",
+    image: "/images/wix/0597a3_373c66cd76674aafb9d631325e3e3a26_258223ef.png",
     datasheetUrl: "/datasheets/0597a3_88901736999d4c28bf68d683143988c3.pdf",
     comPorts: "2×RS232 + 1×RS485 DB9",
     usbPorts: { usb2: "5×USB2.0 / 2×USB2.0", usb3: "1×USB3.0 / 4×USB3.0" },
@@ -191,16 +191,16 @@ const epcSeries: SeriesData[] = [
     tagline: "Wider Form Factor",
     taglineEn: "Wider Form Factor Design",
     desc: "กว้าง 337mm (+47% จาก EPC-20XA) ความสูงเพียง 47.5mm (บางกว่า EPC-20XA) — ครีบระบายความร้อนขนาดใหญ่พิเศษ เหมาะกับ Rack Mount และ Panel Mount",
-    image: "https://static.wixstatic.com/media/0597a3_66f688e771804493b4e10e4daf7dd19a~mv2.png/v1/fill/w_410,h_247,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-28%20at%2022_19_47.png",
+    image: "/images/wix/0597a3_66f688e771804493b4e10e4daf7dd19a_e2ade35a.png",
     datasheetUrl: "/datasheets/0597a3_95fc75ebfd0641c6be57dc1491e93f43.pdf",
     comPorts: "4×RS232 + 2×RS485 DB9",
     usbPorts: { usb2: "5×USB2.0 / 2×USB2.0", usb3: "1×USB3.0 / 4×USB3.0" },
     dimensions: "337mm wide, Low Profile 47.5mm",
     highlight: "Rack Mount",
     gallery: [
-      "https://static.wixstatic.com/media/0597a3_58406a7c4f4f4150ae07b2d6376366b0~mv2.png/v1/fill/w_335,h_303,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_58406a7c4f4f4150ae07b2d6376366b0~mv2.png",
-      "https://static.wixstatic.com/media/0597a3_0367da74dfe34d24971aeda0f990b9a2~mv2.png/v1/fill/w_335,h_303,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_0367da74dfe34d24971aeda0f990b9a2~mv2.png",
-      "https://static.wixstatic.com/media/0597a3_722adc2902d94e0aa1c6d285e63a01b5~mv2.png/v1/fill/w_335,h_303,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_722adc2902d94e0aa1c6d285e63a01b5~mv2.png",
+      "/images/wix/0597a3_58406a7c4f4f4150ae07b2d6376366b0_04bc328f.png",
+      "/images/wix/0597a3_0367da74dfe34d24971aeda0f990b9a2_cf347c22.png",
+      "/images/wix/0597a3_722adc2902d94e0aa1c6d285e63a01b5_3456525d.png",
     ],
     features: [
       {
@@ -233,7 +233,7 @@ const epcSeries: SeriesData[] = [
     tagline: "Flagship Model",
     taglineEn: "รุ่นเรือธงของซีรีส์",
     desc: "Maximum Form Factor: 337×160×79.5mm (ใหญ่ที่สุดในซีรีส์) รวมจุดเด่นของ EPC-20XA (สูง) + EPC-30XA (กว้าง) — พื้นผิวระบายความร้อน +168% จาก EPC-10XA พร้อมสำหรับงานวิกฤต",
-    image: "https://static.wixstatic.com/media/0597a3_97f200930e3047dc887b96a9e8c48203~mv2.png/v1/fill/w_398,h_225,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-28%20at%2022_28_06.png",
+    image: "/images/wix/0597a3_97f200930e3047dc887b96a9e8c48203_bc6a9156.png",
     datasheetUrl: "/datasheets/0597a3_d306bb34abe6432eba8b356ecbe755e1.pdf",
     comPorts: "4×RS232 + 2×RS485 DB9",
     usbPorts: { usb2: "5×USB2.0 / 2×USB2.0", usb3: "1×USB3.0 / 4×USB3.0" },
@@ -825,7 +825,7 @@ const EPCBoxSeries = () => {
             </div>
             <div className="card-surface p-6 flex items-center justify-center">
               <img
-                src="https://static.wixstatic.com/media/0597a3_390ed059c959423d9c40be95b414b68f~mv2.png/v1/fill/w_403,h_293,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-28%20at%2021_03_54.png"
+                src="/images/wix/0597a3_390ed059c959423d9c40be95b414b68f_fc93c220.png"
                 alt="EPC Box Series"
                 className="max-w-full"
               />
@@ -838,7 +838,7 @@ const EPCBoxSeries = () => {
       <section className="py-8 border-y border-border">
         <div className="container max-w-7xl mx-auto px-6">
           <img
-            src="https://static.wixstatic.com/media/0597a3_7c3f2bd701f340ee993f725c168c1bec~mv2.png/v1/fill/w_757,h_143,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2008_10_03.png"
+            src="/images/wix/0597a3_7c3f2bd701f340ee993f725c168c1bec_e05257e7.png"
             alt="Trusted by global industries"
             className="w-full max-w-3xl mx-auto h-auto opacity-70"
             loading="lazy"

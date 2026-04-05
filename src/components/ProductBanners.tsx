@@ -6,7 +6,7 @@ const productBanners = [
   {
     title: "Panel PC จอสัมผัสอุตสาหกรรม",
     description: "จอสัมผัส Capacitive สำหรับโรงงาน POS และงานบริการ",
-    productImage: "https://static.wixstatic.com/media/0597a3_f2ee4bdde8a64cbc970eb9f33c141b3d~mv2.png/v1/fill/w_413,h_449,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GTY150%20(4).png",
+    productImage: "/images/wix/0597a3_f2ee4bdde8a64cbc970eb9f33c141b3d_168e09fa.png",
     links: [
       { label: "ดูราคาสินค้า", href: "/panel-pc-gtg" },
       { label: "GK Series", href: "/gk-series" },

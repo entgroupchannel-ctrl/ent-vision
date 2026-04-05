@@ -40,7 +40,7 @@ const squareModels = [
     name: "EPC-S10X2A",
     size: '10"',
     ratio: "4:3",
-    image: "https://static.wixstatic.com/media/0597a3_8989217128734f62bd47299daa9ad880~mv2.png/v1/fill/w_287,h_242,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_31_48.png",
+    image: "/images/wix/0597a3_8989217128734f62bd47299daa9ad880_6f9ecf34.png",
     datasheet: "/datasheets/0597a3_ad14d113fe1e48bdb0fb90684f6a347e.pdf",
     com: "2×RS232 + 1×RS485 DB9",
   },
@@ -49,7 +49,7 @@ const squareModels = [
     name: "EPC-S12X2A",
     size: '12"',
     ratio: "4:3",
-    image: "https://static.wixstatic.com/media/0597a3_8d0b05f5ca794468b05502a273c955f3~mv2.png/v1/crop/x_0,y_14,w_910,h_767/fill/w_287,h_242,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_33_48.png",
+    image: "/images/wix/0597a3_8d0b05f5ca794468b05502a273c955f3_d6be5c17.png",
     datasheet: "/datasheets/0597a3_5bed0468c86a4b44867336905051e6fb.pdf",
     com: "2×RS232 + 1×RS485 DB9",
   },
@@ -58,7 +58,7 @@ const squareModels = [
     name: "EPC-S15X2A",
     size: '15"',
     ratio: "4:3",
-    image: "https://static.wixstatic.com/media/0597a3_1044f895f5d842f7a7c68fcc6caf36c9~mv2.png/v1/crop/x_11,y_0,w_908,h_766/fill/w_287,h_242,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_35_15.png",
+    image: "/images/wix/0597a3_1044f895f5d842f7a7c68fcc6caf36c9_5dffe446.png",
     datasheet: "/datasheets/0597a3_7c51ca4ca1d4424f976232df9557f7e4.pdf",
     com: "4×RS232 + 2×RS485 DB9",
   },
@@ -67,7 +67,7 @@ const squareModels = [
     name: "EPC-S19X2A",
     size: '19"',
     ratio: "4:3",
-    image: "https://static.wixstatic.com/media/0597a3_74801b56e37c4badb8f6ab099f0b5651~mv2.png/v1/crop/x_5,y_0,w_892,h_752/fill/w_287,h_242,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_36_07.png",
+    image: "/images/wix/0597a3_74801b56e37c4badb8f6ab099f0b5651_ee87eb35.png",
     datasheet: "/datasheets/0597a3_8425d3dbc3034586ac78ec28d4b12811.pdf",
     com: "4×RS232 + 2×RS485 DB9",
   },
@@ -79,7 +79,7 @@ const wideModels = [
     name: "EPC-W13X2A",
     size: '13.3"',
     ratio: "16:9",
-    image: "https://static.wixstatic.com/media/0597a3_a24a2701c3274227be9a623a39fcad77~mv2.png/v1/crop/x_0,y_13,w_950,h_801/fill/w_279,h_231,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_41_32.png",
+    image: "/images/wix/0597a3_a24a2701c3274227be9a623a39fcad77_c5875973.png",
     datasheet: "/datasheets/0597a3_a40c0b0f82054de78ad202b3a6bce9c1.pdf",
     com: "2×RS232 + 1×RS485 DB9",
   },
@@ -88,7 +88,7 @@ const wideModels = [
     name: "EPC-W15X2A",
     size: '15.6"',
     ratio: "16:9",
-    image: "https://static.wixstatic.com/media/0597a3_f72a672e77bc413a90eaa099e8bcfe0e~mv2.png/v1/crop/x_15,y_0,w_904,h_762/fill/w_279,h_231,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_42_24.png",
+    image: "/images/wix/0597a3_f72a672e77bc413a90eaa099e8bcfe0e_679aa82e.png",
     datasheet: "/datasheets/0597a3_b6d3208d5bfb494bb029a23ff133f57e.pdf",
     com: "2×RS232 + 1×RS485 DB9",
   },
@@ -97,7 +97,7 @@ const wideModels = [
     name: "EPC-W18X2A",
     size: '18.5"',
     ratio: "16:9",
-    image: "https://static.wixstatic.com/media/0597a3_1afba5b0dac84a259a2dd29c1fda6909~mv2.png/v1/crop/x_0,y_3,w_910,h_757/fill/w_279,h_231,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_45_41.png",
+    image: "/images/wix/0597a3_1afba5b0dac84a259a2dd29c1fda6909_57745515.png",
     datasheet: "/datasheets/0597a3_7018ff96f96e4a97bbd0ecdce6e4805f.pdf",
     com: "4×RS232 + 2×RS485 DB9",
   },
@@ -106,7 +106,7 @@ const wideModels = [
     name: "EPC-W21X2A",
     size: '21.5"',
     ratio: "16:9",
-    image: "https://static.wixstatic.com/media/0597a3_cfe6c90e6ba44ef3ba3a0aa5a698f32d~mv2.png/v1/crop/x_0,y_5,w_906,h_753/fill/w_279,h_231,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_46_24.png",
+    image: "/images/wix/0597a3_cfe6c90e6ba44ef3ba3a0aa5a698f32d_2b0c00e1.png",
     datasheet: "/datasheets/0597a3_bc28e143cffa491a9a38bcf5098a87d8.pdf",
     com: "4×RS232 + 2×RS485 DB9",
   },
@@ -115,7 +115,7 @@ const wideModels = [
     name: "EPC-W24X2A",
     size: '23.6"',
     ratio: "16:9",
-    image: "https://static.wixstatic.com/media/0597a3_67653d20f0ad4119b45a29a2927e5a2f~mv2.png/v1/crop/x_0,y_1,w_902,h_750/fill/w_279,h_231,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2011_47_19.png",
+    image: "/images/wix/0597a3_67653d20f0ad4119b45a29a2927e5a2f_ada6fffb.png",
     datasheet: "/datasheets/0597a3_899307542dca4df6b763b3a52e2af574.pdf",
     com: "4×RS232 + 2×RS485 DB9",
   },
@@ -479,7 +479,7 @@ const EPCSeries = () => {
         <section id="overview">
           <div className="card-surface overflow-hidden">
             <img
-              src="https://static.wixstatic.com/media/0597a3_7c3f2bd701f340ee993f725c168c1bec~mv2.png/v1/fill/w_757,h_143,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-06-23%20at%2008_10_03.png"
+              src="/images/wix/0597a3_7c3f2bd701f340ee993f725c168c1bec_e05257e7.png"
               alt="CESIPC Certifications"
               className="w-full h-auto p-6"
               loading="lazy"

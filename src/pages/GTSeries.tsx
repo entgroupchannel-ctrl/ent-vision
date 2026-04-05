@@ -244,11 +244,11 @@ const gtModels = [
 ];
 
 const galleryImages = [
-  "https://static.wixstatic.com/media/005637_a5ffaad568e84e3daa9498a03f79410a~mv2.jpg/v1/fill/w_347,h_347,q_90,enc_avif,quality_auto/005637_a5ffaad568e84e3daa9498a03f79410a~mv2.jpg",
-  "https://static.wixstatic.com/media/005637_138dfbf84a364703b08266d6f7726ee3~mv2.jpg/v1/fill/w_348,h_347,q_90,enc_avif,quality_auto/005637_138dfbf84a364703b08266d6f7726ee3~mv2.jpg",
-  "https://static.wixstatic.com/media/005637_3873554c607047d7baa9d4ab166ebf16~mv2.jpg/v1/fill/w_347,h_347,q_90,enc_avif,quality_auto/005637_3873554c607047d7baa9d4ab166ebf16~mv2.jpg",
-  "https://static.wixstatic.com/media/005637_3ecd1c202310457a9ae75096734cec22~mv2.jpg/v1/fill/w_347,h_347,q_90,enc_avif,quality_auto/005637_3ecd1c202310457a9ae75096734cec22~mv2.jpg",
-  "https://static.wixstatic.com/media/005637_46e268297fcb4d51bf53ff1995af7bda~mv2.jpg/v1/fill/w_348,h_347,q_90,enc_avif,quality_auto/005637_46e268297fcb4d51bf53ff1995af7bda~mv2.jpg",
+  "/images/wix/005637_a5ffaad568e84e3daa9498a03f79410a_b932b160.jpg",
+  "/images/wix/005637_138dfbf84a364703b08266d6f7726ee3_49a10f60.jpg",
+  "/images/wix/005637_3873554c607047d7baa9d4ab166ebf16_02ba9a48.jpg",
+  "/images/wix/005637_3ecd1c202310457a9ae75096734cec22_3c989195.jpg",
+  "/images/wix/005637_46e268297fcb4d51bf53ff1995af7bda_6a011393.jpg",
 ];
 
 const modelTabs = [
@@ -1071,7 +1071,7 @@ const GTSeries = () => {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
                   <img
-                    src="https://static.wixstatic.com/media/3e5003_d438441c66734588bf92c3cb77e08aae~mv2.jpg/v1/crop/x_0,y_0,w_1998,h_571/fill/w_1218,h_348,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3.jpg"
+                    src="/images/wix/3e5003_d438441c66734588bf92c3cb77e08aae_c34db0a8.jpg"
                     alt="GT1000 Connectivity Diagram"
                     className="w-full rounded-lg"
                     loading="lazy"
@@ -1079,7 +1079,7 @@ const GTSeries = () => {
                 </div>
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
                   <img
-                    src="https://static.wixstatic.com/media/0597a3_813ed70f44da4e72b1f8d881cd8b30d9~mv2.png/v1/fill/w_1313,h_466,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_813ed70f44da4e72b1f8d881cd8b30d9~mv2.png"
+                    src="/images/wix/0597a3_813ed70f44da4e72b1f8d881cd8b30d9_e508c44a.png"
                     alt="GT1000 Port Layout"
                     className="w-full rounded-lg"
                     loading="lazy"
@@ -1371,9 +1371,9 @@ const GTSeries = () => {
                   </div>
                   <div className="grid grid-cols-3 gap-3">
                     {[
-                      "https://static.wixstatic.com/media/005637_58feaede6057451aa5fd7afe6ec6f880~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_58feaede6057451aa5fd7afe6ec6f880~mv2.jpg",
-                      "https://static.wixstatic.com/media/005637_ab944bafb9764a7c9fec363c2e2c8ef5~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_ab944bafb9764a7c9fec363c2e2c8ef5~mv2.jpg",
-                      "https://static.wixstatic.com/media/005637_bade0d66426d44dea1328e1b2eb149b1~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_bade0d66426d44dea1328e1b2eb149b1~mv2.jpg",
+                      "/images/wix/005637_58feaede6057451aa5fd7afe6ec6f880_87e3b32b.jpg",
+                      "/images/wix/005637_ab944bafb9764a7c9fec363c2e2c8ef5_2db86367.jpg",
+                      "/images/wix/005637_bade0d66426d44dea1328e1b2eb149b1_eef91dfa.jpg",
                     ].map((img, i) => (
                       <div key={i} className="card-surface overflow-hidden">
                         <img src={img} alt={`GT2000 มุมมอง ${i + 2}`} className="w-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
@@ -1382,8 +1382,8 @@ const GTSeries = () => {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      "https://static.wixstatic.com/media/005637_9a8e5e98c73b46a8981bfbd6ef8f682c~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_9a8e5e98c73b46a8981bfbd6ef8f682c~mv2.jpg",
-                      "https://static.wixstatic.com/media/005637_78842837709848ea983945436f0822ee~mv2.jpg/v1/fill/w_294,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_78842837709848ea983945436f0822ee~mv2.jpg",
+                      "/images/wix/005637_9a8e5e98c73b46a8981bfbd6ef8f682c_b918e0a4.jpg",
+                      "/images/wix/005637_78842837709848ea983945436f0822ee_591fff34.jpg",
                     ].map((img, i) => (
                       <div key={i} className="card-surface overflow-hidden">
                         <img src={img} alt={`GT2000 ติดตั้งจริง ${i + 1}`} className="w-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
@@ -1414,7 +1414,7 @@ const GTSeries = () => {
                   </div>
                   <div className="card-surface overflow-hidden">
                     <img
-                      src="https://static.wixstatic.com/media/3e5003_6bf58ba61ae245ea82f96cb2171fb9b7~mv2.jpg/v1/fill/w_732,h_264,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/8.jpg"
+                      src="/images/wix/3e5003_6bf58ba61ae245ea82f96cb2171fb9b7_16926587.jpg"
                       alt="GT2000 Chassis Cooling"
                       className="w-full rounded-lg"
                       loading="lazy"
@@ -1431,7 +1431,7 @@ const GTSeries = () => {
                 <div className="grid md:grid-cols-2 gap-6 items-center">
                   <div className="overflow-hidden rounded-lg">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_2f4f2a02ac1542fb8ce44f6b78f5c5f9~mv2.png/v1/fill/w_657,h_346,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_52_19.png"
+                      src="/images/wix/0597a3_2f4f2a02ac1542fb8ce44f6b78f5c5f9_98c59f5e.png"
                       alt="GT2000 CPU Detail"
                       className="w-full"
                       loading="lazy"
@@ -1458,7 +1458,7 @@ const GTSeries = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_126df8ab2d554a9a8b4a6074fe4f7647~mv2.png/v1/crop/x_0,y_0,w_2136,h_669/fill/w_1235,h_387,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_59_44.png"
+                      src="/images/wix/0597a3_126df8ab2d554a9a8b4a6074fe4f7647_c1e10423.png"
                       alt="GT2000 I/O Ports Front"
                       className="w-full rounded-lg"
                       loading="lazy"
@@ -1466,7 +1466,7 @@ const GTSeries = () => {
                   </div>
                   <div>
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_dac94b90d7444622918e2fe4f69de597~mv2.png/v1/fill/w_600,h_244,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_55_25.png"
+                      src="/images/wix/0597a3_dac94b90d7444622918e2fe4f69de597_c78e860e.png"
                       alt="GT2000 I/O Ports Rear"
                       className="w-full rounded-lg"
                       loading="lazy"
@@ -1493,7 +1493,7 @@ const GTSeries = () => {
               {/* Port Diagram Full */}
               <div className="card-surface p-4 overflow-hidden">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_4843a18b6dfe4330bd22479aadd69b1d~mv2.png/v1/fill/w_1058,h_1208,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2013_21_27.png"
+                  src="/images/wix/0597a3_4843a18b6dfe4330bd22479aadd69b1d_771d3c49.png"
                   alt="GT2000 Full Port Diagram"
                   className="w-full max-w-2xl mx-auto rounded-lg"
                   loading="lazy"
@@ -1518,7 +1518,7 @@ const GTSeries = () => {
                   </div>
                   <div className="overflow-hidden rounded-lg">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_b5efadfa0e7b40619c90fec704966b11~mv2.png/v1/fill/w_663,h_422,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2012_45_39.png"
+                      src="/images/wix/0597a3_b5efadfa0e7b40619c90fec704966b11_8fec62ed.png"
                       alt="GT2000 OS Support"
                       className="w-full"
                       loading="lazy"
@@ -1534,7 +1534,7 @@ const GTSeries = () => {
                   เพียง 23.4 × 15 × 4.8 cm น้ำหนัก 1.5 kg — ประมาณขนาดหนังสือเล่มใหญ่ ประหยัดพื้นที่ติดตั้ง wall mount ได้ เคลื่อนย้ายสะดวก
                 </p>
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_46573ca6a9a644e29b30118c4f839098~mv2.png/v1/fill/w_436,h_406,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2013_36_44.png"
+                  src="/images/wix/0597a3_46573ca6a9a644e29b30118c4f839098_da7c5153.png"
                   alt="GT2000 Dimensions"
                   className="max-w-sm mx-auto rounded-lg"
                   loading="lazy"
@@ -1545,7 +1545,7 @@ const GTSeries = () => {
               <div className="card-surface overflow-hidden">
                 <div className="p-4 overflow-hidden">
                   <img
-                    src="https://static.wixstatic.com/media/0597a3_8cc69bc674294dc9907277ccf8235ad1~mv2.png/v1/fill/w_1036,h_700,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-11%20at%2013_34_30.png"
+                    src="/images/wix/0597a3_8cc69bc674294dc9907277ccf8235ad1_e11caf5f.png"
                     alt="GT2000 Spec Summary"
                     className="w-full max-w-xl mx-auto rounded-lg"
                     loading="lazy"
@@ -1916,7 +1916,7 @@ const GTSeries = () => {
                 </div>
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
                   <img
-                    src="https://static.wixstatic.com/media/3e5003_fadd401364de4b7d9e31669c96695798~mv2.jpg/v1/crop/x_6,y_15,w_1988,h_718/fill/w_1277,h_460,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7.jpg"
+                    src="/images/wix/3e5003_fadd401364de4b7d9e31669c96695798_a2019e77.jpg"
                     alt="GT3000 Connectivity"
                     className="w-full rounded-lg"
                     loading="lazy"
@@ -1958,10 +1958,10 @@ const GTSeries = () => {
                 <h3 className="text-lg font-display font-bold text-foreground mb-4">ภาพการติดตั้งจริง</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    "https://static.wixstatic.com/media/005637_e654106986614352bf4e71dcddee89f6~mv2.jpg/v1/fill/w_420,h_280,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_e654106986614352bf4e71dcddee89f6~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_df6c79b56ee140a58a0eac288558f5b8~mv2.jpg/v1/fill/w_420,h_280,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_df6c79b56ee140a58a0eac288558f5b8~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_1174e23efc0b4aa6953f47d889694eca~mv2.jpg/v1/fill/w_420,h_280,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_1174e23efc0b4aa6953f47d889694eca~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_60e2fe696a194526af7db7f90b6ac4bd~mv2.jpg/v1/fill/w_420,h_420,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/S__12394925.jpg",
+                    "/images/wix/005637_e654106986614352bf4e71dcddee89f6_c57ab580.jpg",
+                    "/images/wix/005637_df6c79b56ee140a58a0eac288558f5b8_29f99a33.jpg",
+                    "/images/wix/005637_1174e23efc0b4aa6953f47d889694eca_3bb1b5fe.jpg",
+                    "/images/wix/005637_60e2fe696a194526af7db7f90b6ac4bd_a0b45c95.jpg",
                   ].map((img, i) => (
                     <div key={i} className="card-surface overflow-hidden aspect-square rounded-xl">
                       <img src={img} alt={`GT3000 ติดตั้งจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
@@ -2356,7 +2356,7 @@ const GTSeries = () => {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
                   <img
-                    src="https://static.wixstatic.com/media/3e5003_a4726520b0df4492b73e8646990df9ce~mv2.jpg/v1/fill/w_1412,h_562,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/gt4000_1.jpg"
+                    src="/images/wix/3e5003_a4726520b0df4492b73e8646990df9ce_c6843bc4.jpg"
                     alt="GT4000 Port Overview"
                     className="w-full rounded-lg"
                     loading="lazy"
@@ -2364,7 +2364,7 @@ const GTSeries = () => {
                 </div>
                 <div className="card-surface p-4 overflow-hidden rounded-xl">
                   <img
-                    src="https://static.wixstatic.com/media/3e5003_91111c3b2ffb41c39bb2978c36ccd01c~mv2.jpg/v1/fill/w_1262,h_683,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.jpg"
+                    src="/images/wix/3e5003_91111c3b2ffb41c39bb2978c36ccd01c_4c9424b9.jpg"
                     alt="GT4000 Port Detail"
                     className="w-full rounded-lg"
                     loading="lazy"
@@ -2421,9 +2421,9 @@ const GTSeries = () => {
                 <h3 className="text-lg font-display font-bold text-foreground mb-4">ภาพการติดตั้งจริง</h3>
                 <div className="grid grid-cols-3 gap-4">
                   {[
-                    "https://static.wixstatic.com/media/0597a3_4ac1380d49e3423594426528de05c9e6~mv2_d_2048_1596_s_2.jpg/v1/fit/w_565,h_440,q_90,enc_avif,quality_auto/0597a3_4ac1380d49e3423594426528de05c9e6~mv2_d_2048_1596_s_2.jpg",
-                    "https://static.wixstatic.com/media/0597a3_d40df020f64b4972bea62c0df74acb6f~mv2_d_2048_1596_s_2.jpg/v1/fit/w_565,h_440,q_90,enc_avif,quality_auto/0597a3_d40df020f64b4972bea62c0df74acb6f~mv2_d_2048_1596_s_2.jpg",
-                    "https://static.wixstatic.com/media/3e5003_b5289681b81a4e0dbb4e6bd6e3668f69~mv2.jpg/v1/fill/w_1034,h_533,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/111.jpg",
+                    "/images/wix/0597a3_4ac1380d49e3423594426528de05c9e6_2e5889bb.jpg",
+                    "/images/wix/0597a3_d40df020f64b4972bea62c0df74acb6f_2ec36557.jpg",
+                    "/images/wix/3e5003_b5289681b81a4e0dbb4e6bd6e3668f69_e45727bb.jpg",
                   ].map((img, i) => (
                     <div key={i} className="card-surface overflow-hidden rounded-xl aspect-video">
                       <img src={img} alt={`GT4000 ติดตั้งจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
@@ -4296,7 +4296,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Wix Detail Images — Overview & Spec Diagrams */}
               <div className="card-surface p-4 overflow-hidden">
                 <img
-                  src="https://static.wixstatic.com/media/0597a3_b68e0174e2b54d39b0bdf80ae71118e5~mv2.png/v1/crop/x_0,y_0,w_2752,h_1496/fill/w_712,h_387,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT9000%20PR.png"
+                  src="/images/wix/0597a3_b68e0174e2b54d39b0bdf80ae71118e5_dbbc6602.png"
                   alt="GT9000 Product Overview"
                   className="w-full rounded-lg"
                   loading="lazy"
@@ -4305,17 +4305,17 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
 
               <div className="grid md:grid-cols-2 gap-4">
                 {[
-                  "https://static.wixstatic.com/media/0597a3_ecdc35b7d41e4cfba1afa5d11300df17~mv2.png/v1/crop/x_15,y_217,w_2352,h_655/fill/w_1095,h_305,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2012_51_54.png",
-                  "https://static.wixstatic.com/media/0597a3_77a9c0395f984fde811028a4f0fbc5e4~mv2.png/v1/fill/w_1084,h_395,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2013_52_21.png",
-                  "https://static.wixstatic.com/media/0597a3_c5d446300d3a4d9caabc33cad2911b4b~mv2.png/v1/fill/w_1084,h_402,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_09_11.png",
-                  "https://static.wixstatic.com/media/0597a3_ffb33e04d1384bdab5c17647bd479b85~mv2.png/v1/fill/w_1084,h_401,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_09_57.png",
-                  "https://static.wixstatic.com/media/0597a3_d3041b42178d4c10bece0b7ffb8f31e3~mv2.png/v1/fill/w_1083,h_401,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_30_29.png",
-                  "https://static.wixstatic.com/media/0597a3_2c101c21f03f4d63b1df69669f310210~mv2.png/v1/fill/w_1083,h_401,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_01_45.png",
-                  "https://static.wixstatic.com/media/0597a3_ee8b5d5430dd45118bfc9310fb269418~mv2.png/v1/fill/w_1083,h_407,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_43_57.png",
-                  "https://static.wixstatic.com/media/0597a3_06cf1a8db43c4bc9b3e45e421c5f38ca~mv2.png/v1/fill/w_1083,h_395,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-18%20at%2014_28_18.png",
-                  "https://static.wixstatic.com/media/0597a3_e8bf65042cdb49c7badf9b1dc833e3a2~mv2.png/v1/fill/w_1095,h_393,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2013_39_08.png",
-                  "https://static.wixstatic.com/media/0597a3_901ca65b5c4149a1b6037ff17888889b~mv2.png/v1/fill/w_1095,h_388,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2014_00_07.png",
-                  "https://static.wixstatic.com/media/0597a3_d89ddcc7673d4492ad64911fb4825364~mv2.png/v1/crop/x_0,y_264,w_2433,h_616/fill/w_1095,h_278,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-08-16%20at%2012_58_44.png",
+                  "/images/wix/0597a3_ecdc35b7d41e4cfba1afa5d11300df17_1c556fc5.png",
+                  "/images/wix/0597a3_77a9c0395f984fde811028a4f0fbc5e4_64748b8e.png",
+                  "/images/wix/0597a3_c5d446300d3a4d9caabc33cad2911b4b_5ecb9f30.png",
+                  "/images/wix/0597a3_ffb33e04d1384bdab5c17647bd479b85_26d908b0.png",
+                  "/images/wix/0597a3_d3041b42178d4c10bece0b7ffb8f31e3_127d8428.png",
+                  "/images/wix/0597a3_2c101c21f03f4d63b1df69669f310210_55ddd23b.png",
+                  "/images/wix/0597a3_ee8b5d5430dd45118bfc9310fb269418_4aa5d391.png",
+                  "/images/wix/0597a3_06cf1a8db43c4bc9b3e45e421c5f38ca_5e6a02a5.png",
+                  "/images/wix/0597a3_e8bf65042cdb49c7badf9b1dc833e3a2_8e4d6d12.png",
+                  "/images/wix/0597a3_901ca65b5c4149a1b6037ff17888889b_cec5e6be.png",
+                  "/images/wix/0597a3_d89ddcc7673d4492ad64911fb4825364_6535d1f1.png",
                 ].map((img, i) => (
                   <div key={i} className="card-surface p-3 overflow-hidden">
                     <img src={img} alt={`GT9000 Detail ${i + 1}`} className="w-full rounded-lg" loading="lazy" />
@@ -4326,10 +4326,10 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               {/* Real-world Photos */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
-                  "https://static.wixstatic.com/media/005637_11c4dd2fbe1048448d0663de7ae71804~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_11c4dd2fbe1048448d0663de7ae71804~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_a31039453194460c8956f5a8e49a635c~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_a31039453194460c8956f5a8e49a635c~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_a643b2c6b5c14278bff7f4af495805a3~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_a643b2c6b5c14278bff7f4af495805a3~mv2.jpg",
-                  "https://static.wixstatic.com/media/005637_bf02ab6305244e028d18bbb27984eb3c~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/005637_bf02ab6305244e028d18bbb27984eb3c~mv2.jpg",
+                  "/images/wix/005637_11c4dd2fbe1048448d0663de7ae71804_852cd386.jpg",
+                  "/images/wix/005637_a31039453194460c8956f5a8e49a635c_a1bef204.jpg",
+                  "/images/wix/005637_a643b2c6b5c14278bff7f4af495805a3_f8e08654.jpg",
+                  "/images/wix/005637_bf02ab6305244e028d18bbb27984eb3c_fbcfe5d0.jpg",
                 ].map((img, i) => (
                   <div key={i} className="card-surface overflow-hidden">
                     <img src={img} alt={`GT9000 ใช้งานจริง ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
@@ -4605,7 +4605,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 <div className="lg:col-span-2 space-y-4">
                   <div className="card-surface overflow-hidden">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_aea4cee9a1cb431b90886aa5b64e1f96~mv2.png/v1/fill/w_600,h_352,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT4500-004.png"
+                      src="/images/wix/0597a3_aea4cee9a1cb431b90886aa5b64e1f96_60f4ae42.png"
                       alt="GT4500 Front"
                       className="w-full object-contain p-4"
                       loading="lazy"
@@ -4613,7 +4613,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   </div>
                   <div className="card-surface overflow-hidden">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_2901e68aa51b482697a1d4c4fa9fc320~mv2.png/v1/crop/x_0,y_213,w_1660,h_845/fill/w_600,h_305,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT4500-003.png"
+                      src="/images/wix/0597a3_2901e68aa51b482697a1d4c4fa9fc320_8f38391a.png"
                       alt="GT4500 Rear Ports"
                       className="w-full object-contain p-4"
                       loading="lazy"
@@ -4675,7 +4675,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   </div>
                   <div className="overflow-hidden rounded-lg">
                     <img
-                      src="https://static.wixstatic.com/media/0597a3_840c03acd28147a89285de218f3a0a25~mv2.png/v1/fill/w_600,h_448,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT4500-001.png"
+                      src="/images/wix/0597a3_840c03acd28147a89285de218f3a0a25_25c7410d.png"
                       alt="GT4500 Software"
                       className="w-full"
                       loading="lazy"
@@ -4692,7 +4692,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                   ไม่ใช้พัดลม ไม่มีเสียงรบกวน ป้องกันฝุ่นเข้าตัวเครื่อง
                 </p>
                 <img
-                  src="https://static.wixstatic.com/media/3e5003_5146d29438c1469084384085311877b6~mv2.jpg/v1/fill/w_1309,h_202,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/6.jpg"
+                  src="/images/wix/3e5003_5146d29438c1469084384085311877b6_98f6e0e9.jpg"
                   alt="GT4500 Heatsink"
                   className="w-full rounded-lg"
                   loading="lazy"
@@ -4703,7 +4703,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
               <div className="card-surface p-4 overflow-hidden">
                 <h4 className="text-lg font-display font-bold text-foreground mb-4 px-2"><Plug size={18} className="inline mr-1 text-primary" />พอร์ตเชื่อมต่อครบครัน</h4>
                 <img
-                  src="https://static.wixstatic.com/media/3e5003_fa1b7c0241e1439796bca055fb8c927d~mv2.jpg/v1/fill/w_1310,h_418,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7.jpg"
+                  src="/images/wix/3e5003_fa1b7c0241e1439796bca055fb8c927d_880a3b61.jpg"
                   alt="GT4500 Port Layout"
                   className="w-full rounded-lg mb-4"
                   loading="lazy"
@@ -4732,13 +4732,13 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 </p>
                 <div className="grid md:grid-cols-2 gap-4 items-center">
                   <img
-                    src="https://static.wixstatic.com/media/3e5003_b7535d8168ab4f7d8d657a3eef999b12~mv2.jpg/v1/fill/w_1210,h_390,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/10.jpg"
+                    src="/images/wix/3e5003_b7535d8168ab4f7d8d657a3eef999b12_d9722688.jpg"
                     alt="GT4500 Dimensions"
                     className="rounded-lg w-full"
                     loading="lazy"
                   />
                   <img
-                    src="https://static.wixstatic.com/media/0597a3_c6c89af9190c48b992640615c77efcee~mv2.png/v1/fill/w_655,h_584,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/GT4500-002.png"
+                    src="/images/wix/0597a3_c6c89af9190c48b992640615c77efcee_341c4637.png"
                     alt="GT4500 VESA Mount"
                     className="rounded-lg w-full"
                     loading="lazy"
@@ -4819,14 +4819,14 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 <h4 className="text-lg font-display font-bold text-foreground mb-4">📸 ภาพตัวอย่างการใช้งานจริง</h4>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {[
-                    "https://static.wixstatic.com/media/005637_af317d79eacd469f9157d4820cb459cc~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_af317d79eacd469f9157d4820cb459cc~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_e650889eede347d0a8d30c6a7e32287e~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_e650889eede347d0a8d30c6a7e32287e~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_37d8da415dab4f7494a6b4801687e3e1~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_37d8da415dab4f7494a6b4801687e3e1~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_5734e20385dd4e4db9c42a9ab159a87c~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_5734e20385dd4e4db9c42a9ab159a87c~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_e1b5f354431c46b58dc7d1e0e0c6ee53~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_e1b5f354431c46b58dc7d1e0e0c6ee53~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_d766ad09992e48559be58df3a9bc4ab7~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_d766ad09992e48559be58df3a9bc4ab7~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_37a9f940aea64c389e66a1e46f2cd2e3~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_37a9f940aea64c389e66a1e46f2cd2e3~mv2.jpg",
-                    "https://static.wixstatic.com/media/005637_6c42aac9d6d747d08022f03a3979e64c~mv2.jpg/v1/fill/w_279,h_144,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/005637_6c42aac9d6d747d08022f03a3979e64c~mv2.jpg",
+                    "/images/wix/005637_af317d79eacd469f9157d4820cb459cc_c3405b78.jpg",
+                    "/images/wix/005637_e650889eede347d0a8d30c6a7e32287e_9e1760d8.jpg",
+                    "/images/wix/005637_37d8da415dab4f7494a6b4801687e3e1_96815db5.jpg",
+                    "/images/wix/005637_5734e20385dd4e4db9c42a9ab159a87c_0162feec.jpg",
+                    "/images/wix/005637_e1b5f354431c46b58dc7d1e0e0c6ee53_c427c674.jpg",
+                    "/images/wix/005637_d766ad09992e48559be58df3a9bc4ab7_8e0f74de.jpg",
+                    "/images/wix/005637_37a9f940aea64c389e66a1e46f2cd2e3_0d2d74e1.jpg",
+                    "/images/wix/005637_6c42aac9d6d747d08022f03a3979e64c_b8b5eee1.jpg",
                   ].map((src, idx) => (
                     <img
                       key={idx}
@@ -5856,7 +5856,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
         <div className="container max-w-7xl mx-auto">
           <div className="card-surface overflow-hidden">
             <img
-              src="https://static.wixstatic.com/media/3e5003_9a0970ee1f4f4d9aa2f4f3fef18faeb5~mv2.jpg/v1/fill/w_1261,h_459,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%A3%E0%B8%A7%E0%B8%A1%20gt.jpg"
+              src="/images/wix/3e5003_9a0970ee1f4f4d9aa2f4f3fef18faeb5_b40f0eb8.jpg"
               alt="GT Series รวม"
               className="w-full h-auto"
               loading="lazy"

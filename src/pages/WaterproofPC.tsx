@@ -16,7 +16,7 @@ const models = [
     id: "wp-10",
     name: "Water Proof — 10 inch",
     model: "UTC-S1061G (KLD-1061D)",
-    image: "https://static.wixstatic.com/media/0597a3_af7e5b509d7746fc92da5800de490b80~mv2.png/v1/fill/w_284,h_195,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Wp-004.png",
+    image: "/images/wix/0597a3_af7e5b509d7746fc92da5800de490b80_767004bb.png",
     datasheet: "/datasheets/0597a3_21f4cb97b2764af98b370fcc99f58592.pdf",
     specs: {
       "Screen Size": "10 inch LED",
@@ -31,7 +31,7 @@ const models = [
     id: "wp-15",
     name: "Water Proof — 15 inch",
     model: "Touch Panel PC",
-    image: "https://static.wixstatic.com/media/0597a3_bc6d3986e2d142f693bc7447618a1d3e~mv2.png/v1/fill/w_600,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IP67%20Standless%20(6).png",
+    image: "/images/wix/0597a3_bc6d3986e2d142f693bc7447618a1d3e_400ae4d0.png",
     datasheet: "/datasheets/0597a3_844456de2ee747ed9114dee707ae3788.pdf",
     specs: {
       "Screen Size": "15 inch LED",
@@ -49,7 +49,7 @@ const models = [
     id: "wp-15-6",
     name: "Water Proof — 15.6 inch",
     model: "UTC-W1592G (KLD-1592GA)",
-    image: "https://static.wixstatic.com/media/0597a3_c0a00a648d2143068e676c50a6d077df~mv2.jpg/v1/crop/x_0,y_39,w_718,h_493/fill/w_284,h_195,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WP15_edited.jpg",
+    image: "/images/wix/0597a3_c0a00a648d2143068e676c50a6d077df_23a50b3c.jpg",
     datasheet: "/datasheets/0597a3_1459a6f9ce304306b4b973312f920066.pdf",
     specs: {
       "Screen Size": "15.6 inch LED",
@@ -65,7 +65,7 @@ const models = [
     name: "Water Proof — 17 inch",
     model: "Stainless Steel Touch Panel PC",
     badge: "Best Seller",
-    image: "https://static.wixstatic.com/media/0597a3_89215803eae94d8b8dfbd8bb1cb629b1~mv2.png/v1/fill/w_600,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_89215803eae94d8b8dfbd8bb1cb629b1~mv2.png",
+    image: "/images/wix/0597a3_89215803eae94d8b8dfbd8bb1cb629b1_cb11085d.png",
     datasheet: "/datasheets/0597a3_52b921b945d54d72a95465a7309152bc.pdf",
     specs: {
       "Screen Size": "17 inch LED",
@@ -83,7 +83,7 @@ const models = [
     id: "wp-21",
     name: "Water Proof — 21.5 inch (KLD)",
     model: "UTC-W2192G (KLD-2192GA)",
-    image: "https://static.wixstatic.com/media/0597a3_265560fdc2694b42bfee0a5cfa89658f~mv2.png/v1/fill/w_284,h_195,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/WP%2021_5.png",
+    image: "/images/wix/0597a3_265560fdc2694b42bfee0a5cfa89658f_bc699fcb.png",
     datasheet: "/datasheets/0597a3_8f9c5bb648384ba5b471eb4d369fa7b8.pdf",
     specs: {
       "Screen Size": "21.5 inch LED",
@@ -98,7 +98,7 @@ const models = [
     id: "wp-21-ctn",
     name: "Water Proof — 21.5 inch (CTN)",
     model: "CTN-W21X2B",
-    image: "https://static.wixstatic.com/media/0597a3_85962bd2b6c34f2eb110cfa091cb4ef4~mv2.png/v1/fill/w_284,h_195,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Screenshot%202568-07-30%20at%2018_14_33.png",
+    image: "/images/wix/0597a3_85962bd2b6c34f2eb110cfa091cb4ef4_601eb5cc.png",
     datasheet: "/datasheets/0597a3_5aaca9bb9d554fdda93138cabb9582aa.pdf",
     specs: {
       "Screen Size": "21.5 inch LED",
@@ -140,13 +140,13 @@ const features = [
 ];
 
 const gallery = [
-  "https://static.wixstatic.com/media/0597a3_4c1c8d61641743aabf446588dba6bb76~mv2.png/v1/fill/w_405,h_365,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IP67%20Standless%20(5).png",
-  "https://static.wixstatic.com/media/0597a3_349f3590742946d59757e82db9058351~mv2.png/v1/fill/w_405,h_365,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IP67%20Standless%20(4).png",
-  "https://static.wixstatic.com/media/0597a3_2572d551426a494fb15f36a62888af4f~mv2.png/v1/fill/w_400,h_365,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/IP67%20Standless%20(3).png",
-  "https://static.wixstatic.com/media/0597a3_8a82f1f1b9834e13adfcb0d5b60392f6~mv2.png/v1/fill/w_358,h_360,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/WP%20PC%20(3).png",
-  "https://static.wixstatic.com/media/0597a3_395098f7c1a249cdbe9eacd4db009eb5~mv2.png/v1/fill/w_396,h_360,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_395098f7c1a249cdbe9eacd4db009eb5~mv2.png",
-  "https://static.wixstatic.com/media/0597a3_0e8e591a5b0b47348effb95ee8e90cba~mv2.png/v1/fill/w_401,h_360,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_0e8e591a5b0b47348effb95ee8e90cba~mv2.png",
-  "https://static.wixstatic.com/media/0597a3_09cd9c375cb741aa96abd2e2a32eded7~mv2.png/v1/fill/w_401,h_360,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E0%B8%88%E0%B8%AD%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B9%89%E0%B8%B3%20(2).png",
+  "/images/wix/0597a3_4c1c8d61641743aabf446588dba6bb76_bb972213.png",
+  "/images/wix/0597a3_349f3590742946d59757e82db9058351_729a230a.png",
+  "/images/wix/0597a3_2572d551426a494fb15f36a62888af4f_200c32e7.png",
+  "/images/wix/0597a3_8a82f1f1b9834e13adfcb0d5b60392f6_84bb86ef.png",
+  "/images/wix/0597a3_395098f7c1a249cdbe9eacd4db009eb5_0df4ec1e.png",
+  "/images/wix/0597a3_0e8e591a5b0b47348effb95ee8e90cba_bd779c5b.png",
+  "/images/wix/0597a3_09cd9c375cb741aa96abd2e2a32eded7_885d9020.png",
 ];
 
 const useCases = [
@@ -200,7 +200,7 @@ const WaterproofPC = () => {
             </div>
             <div className="md:w-1/2">
               <img
-                src="https://static.wixstatic.com/media/0597a3_af08675d14124a59a86c4be31805907a~mv2.png/v1/fill/w_1314,h_604,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/WP%20Banner02.png"
+                src="/images/wix/0597a3_af08675d14124a59a86c4be31805907a_2f9d6714.png"
                 alt="Waterproof Panel PC Banner"
                 className="w-full h-auto rounded-xl"
               />
@@ -231,7 +231,7 @@ const WaterproofPC = () => {
           <div className="flex flex-col md:flex-row gap-6">
             <div className="md:w-1/2">
               <img
-                src="https://static.wixstatic.com/media/0597a3_0ad34056abce4284bb55ec5a2fb4ea1b~mv2.png/v1/fill/w_1233,h_646,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/WP-003.png"
+                src="/images/wix/0597a3_0ad34056abce4284bb55ec5a2fb4ea1b_f03de733.png"
                 alt="IP67 Protection"
                 className="w-full h-auto rounded-lg"
                 loading="lazy"
@@ -360,7 +360,7 @@ const WaterproofPC = () => {
         {/* Application Images */}
         <section className="card-surface overflow-hidden">
           <img
-            src="https://static.wixstatic.com/media/0597a3_ffe271d4f86b4f699e9760cb18da5733~mv2.png/v1/fill/w_1218,h_658,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/0597a3_ffe271d4f86b4f699e9760cb18da5733~mv2.png"
+            src="/images/wix/0597a3_ffe271d4f86b4f699e9760cb18da5733_29923812.png"
             alt="Waterproof PC Applications"
             className="w-full h-auto"
             loading="lazy"
