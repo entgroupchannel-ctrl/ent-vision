@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Factory, Building2, Quote, ArrowRight } from "lucide-react";
+import { ArrowLeft, Factory, Quote, ArrowRight } from "lucide-react";
 import { caseStudies } from "@/data/case-studies";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,7 +20,7 @@ const CaseStudies = () => {
       <PageBanner
         title="กรณีศึกษา"
         subtitle="ตัวอย่างการใช้งานจริงจากลูกค้าในหลากหลายอุตสาหกรรม"
-        icon={<Building2 className="w-8 h-8" />}
+        image="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80"
       />
 
       <div className="container mx-auto px-4 py-4">

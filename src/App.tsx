@@ -54,6 +54,8 @@ const RuggedNotebook = lazy(() => import("./pages/RuggedNotebook.tsx"));
 const RuggedNotebookDetail = lazy(() => import("./pages/RuggedNotebookDetail.tsx"));
 const AllInOnePC = lazy(() => import("./pages/AllInOnePC.tsx"));
 const AIODetail = lazy(() => import("./pages/AIODetail.tsx"));
+const CaseStudies = lazy(() => import("./pages/CaseStudies.tsx"));
+const CaseStudyDetail = lazy(() => import("./pages/CaseStudyDetail.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 /* ── Loading fallback ── */
@@ -122,6 +124,8 @@ const App = () => (
                 <Route path="/rugged-notebook/:id" element={<RuggedNotebookDetail />} />
                 <Route path="/aio" element={<AllInOnePC />} />
                 <Route path="/aio/:id" element={<AIODetail />} />
+                <Route path="/case-studies" element={<CaseStudies />} />
+                <Route path="/case-studies/:id" element={<CaseStudyDetail />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
