@@ -160,25 +160,8 @@ const CaseStudies = () => {
         </div>
       </section>
 
-      {/* Client Trust Section */}
-      <section className="bg-muted/20 border-y border-border/50">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex items-center gap-2 mb-4">
-            <Users className="w-5 h-5 text-primary" />
-            <h2 className="text-lg font-bold text-foreground">ลูกค้าบางส่วนที่ไว้วางใจ</h2>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {clientList.map((name) => (
-              <Badge key={name} variant="secondary" className="text-xs py-1 px-2.5">
-                {name}
-              </Badge>
-            ))}
-          </div>
-          <p className="text-xs text-muted-foreground mt-4">
-            ใกล้ชิดกับเราได้มากขึ้น สอบถามได้สะดวกขึ้น — เพิ่มเพื่อนได้ที่ Line: @entgroup
-          </p>
-        </div>
-      </section>
+      {/* Client Trust Section — Collapsible */}
+      <ClientTrustSection />
 
       {/* CTA */}
       <section className="container mx-auto px-4 py-10 text-center">
