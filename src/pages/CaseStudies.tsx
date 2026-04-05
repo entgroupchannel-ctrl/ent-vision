@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Factory, Quote, ArrowRight, Play, Building2, Users, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Factory, Quote, ArrowRight, Play, Building2, Users, Image as ImageIcon, ChevronDown, ChevronUp } from "lucide-react";
 import { caseStudies, clientList, siteReferenceImages, installationImages } from "@/data/case-studies";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
 import Footer from "@/components/Footer";
 import PageBanner from "@/components/PageBanner";
+import LineQRButton from "@/components/LineQRButton";
 
 const facebookVideos = [
   { title: "ทวีผล 1976 กับการใช้งาน vCloudPoint", videoId: "324284324837607" },
