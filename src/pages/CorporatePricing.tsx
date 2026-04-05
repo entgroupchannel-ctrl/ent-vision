@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Building2, Users, FileText, Phone, CheckCircle, TrendingDown, ShieldCheck, Headphones, Layers, Truck, Award, Star, Quote } from "lucide-react";
+import { ArrowLeft, Building2, FileText, Phone, TrendingDown, ShieldCheck, Headphones, Layers, Truck, Award } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -31,31 +31,6 @@ const steps = [
   { step: 4, title: "จัดส่งและติดตั้ง", desc: "จัดส่งพร้อมทีมวิศวกรติดตั้ง On-site (ถ้าต้องการ)" },
 ];
 
-const testimonials = [
-  {
-    quote: "ENT Group ช่วยให้โรงงานของเราอัพเกรดระบบ Panel PC กว่า 120 เครื่อง ได้อย่างราบรื่น ส่วนลดดี บริการ On-site ตอบโจทย์มาก",
-    name: "คุณสมชาย วิศวกรรม",
-    role: "ผู้จัดการฝ่าย IT — โรงงานผลิตชิ้นส่วนยานยนต์",
-    stars: 5,
-  },
-  {
-    quote: "สั่ง Rugged Tablet 50 เครื่อง สำหรับทีมสำรวจภาคสนาม ได้ราคาโปรเจกต์พิเศษ มี Account Manager ดูแลตลอด",
-    name: "คุณวิภา ศรีสุข",
-    role: "ผู้อำนวยการฝ่ายจัดซื้อ — บริษัทสำรวจพลังงาน",
-    stars: 5,
-  },
-  {
-    quote: "ใช้บริการ ENT Group มากว่า 5 ปี ทั้ง Mini PC และ Firewall ราคาองค์กรคุ้มค่า เอกสารครบ ส่งตรงเวลา",
-    name: "คุณพิชิต รัตนา",
-    role: "CTO — บริษัทพัฒนาซอฟต์แวร์",
-    stars: 5,
-  },
-];
-
-const clientLogos = [
-  "การไฟฟ้าส่วนภูมิภาค", "ปตท.", "SCG", "CP ALL", "กรมชลประทาน",
-  "Toyota", "Honda", "Samsung", "Delta Electronics", "Mitsubishi",
-];
 
 const stats = [
   { value: "8,000+", label: "ลูกค้าองค์กร" },
@@ -296,57 +271,7 @@ const CorporatePricing = () => {
         </div>
       </section>
 
-      {/* ─── TESTIMONIALS ─── */}
-      <section className="bg-muted/30 py-16">
-        <div className="container mx-auto px-4">
-          <AnimatedSection>
-            <div className="text-center mb-10">
-              <Badge variant="secondary" className="mb-3">Testimonials</Badge>
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground">ลูกค้าองค์กรพูดถึงเรา</h2>
-            </div>
-          </AnimatedSection>
-          <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
-            {testimonials.map((t, i) => (
-              <AnimatedSection key={t.name} delay={i * 120}>
-                <Card className="border-border/60 h-full hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6 space-y-4">
-                    <Quote className="w-8 h-8 text-primary/30" />
-                    <p className="text-sm text-foreground leading-relaxed italic">"{t.quote}"</p>
-                    <div className="flex gap-0.5">
-                      {Array.from({ length: t.stars }).map((_, si) => (
-                        <Star key={si} className="w-4 h-4 fill-primary text-primary" />
-                      ))}
-                    </div>
-                    <div className="pt-2 border-t border-border">
-                      <div className="font-bold text-sm text-foreground">{t.name}</div>
-                      <div className="text-xs text-muted-foreground">{t.role}</div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ─── CLIENT LOGOS ─── */}
-      <section className="container mx-auto px-4 py-16">
-        <AnimatedSection>
-          <div className="text-center mb-8">
-            <h3 className="text-lg font-bold text-muted-foreground">ลูกค้าองค์กรที่ไว้วางใจ</h3>
-          </div>
-          <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-            {clientLogos.map((name) => (
-              <div
-                key={name}
-                className="px-5 py-3 rounded-lg bg-muted/50 border border-border/50 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-primary/30 hover:bg-primary/5 transition-all duration-200"
-              >
-                {name}
-              </div>
-            ))}
-          </div>
-        </AnimatedSection>
-      </section>
 
       {/* ─── FINAL CTA ─── */}
       <section className="bg-foreground text-background py-16">
