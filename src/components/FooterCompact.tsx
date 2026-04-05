@@ -17,13 +17,13 @@ const socials = [
 ];
 
 const quickLinks = [
-  { label: "GT Series", href: "/gt-series" },
-  { label: "Mini PC Firewall", href: "/minipc-firewall" },
-  { label: "Panel PC", href: "/panel-pc-gtg" },
-  { label: "Rugged Tablet", href: "/rugged-tablet" },
-  { label: "vCloudPoint", href: "/vcloudpoint" },
-  { label: "Smart Display", href: "/smart-display" },
-  { label: "🎯 ช่วยเลือกสินค้า", href: "/product-advisor" },
+  { label: "GT Series", href: "/gt-series", icon: Server },
+  { label: "Mini PC Firewall", href: "/minipc-firewall", icon: ShieldCheck },
+  { label: "Panel PC", href: "/panel-pc-gtg", icon: Monitor },
+  { label: "Rugged Tablet", href: "/rugged-tablet", icon: Tablet },
+  { label: "vCloudPoint", href: "/vcloudpoint", icon: Cloud },
+  { label: "Smart Display", href: "/smart-display", icon: Tv },
+  { label: "ช่วยเลือกสินค้า", href: "/product-advisor", icon: Crosshair },
 ];
 
 const FooterCompact = () => {
