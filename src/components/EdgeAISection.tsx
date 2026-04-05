@@ -1,5 +1,5 @@
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import thaiPattern from "@/assets/thai-suphannahong-pattern.png";
 import edgeAi1 from "@/assets/edge-ai-hero-1.jpg";
 import edgeAi2 from "@/assets/edge-ai-hero-2.jpg";
