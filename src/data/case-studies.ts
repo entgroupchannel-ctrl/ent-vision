@@ -1,3 +1,5 @@
+import caseShoeFactoryHero from "@/assets/case-shoe-factory-hero.jpg";
+
 export interface CaseStudy {
   id: string;
   title: string;
@@ -116,7 +118,7 @@ export const caseStudies: CaseStudy[] = [
       { name: "GT Series Panel PC", path: "/gt-series" },
       { name: "Volktek Network Switch", path: "/volktek" },
     ],
-    image: "/src/assets/case-shoe-factory-hero.jpg",
+    image: caseShoeFactoryHero,
     facebookVideoId: "996005083891871",
     externalLinks: [
       { label: "📺 ดูวิดีโอ (Facebook)", url: "https://www.facebook.com/entgroup.th/videos/996005083891871/" },
