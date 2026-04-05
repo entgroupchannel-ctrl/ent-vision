@@ -142,9 +142,8 @@ const CorporatePricing = () => {
                 </Button>
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="text-base px-8 border-white/40 text-white bg-white/10 hover:bg-white/20 hover:text-white backdrop-blur-sm"
                   asChild
+                  className="text-base px-8 bg-foreground text-background hover:bg-foreground/90 font-bold shadow-lg border-0"
                 >
                   <Link to="/contact">
                     <Phone className="w-5 h-5 mr-2" /> ติดต่อทีมขาย
@@ -171,7 +170,7 @@ const CorporatePricing = () => {
 
       {/* ─── STATS BAR ─── */}
       <section className="bg-foreground text-background">
-        <div className="container max-w-5xl mx-auto px-6 py-6">
+        <div className="container max-w-7xl mx-auto px-6 py-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s, i) => (
               <AnimatedSection key={s.label} delay={i * 100}>
