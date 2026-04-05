@@ -1,6 +1,10 @@
 import { ExternalLink, Code2, Rocket, Shield, Cpu, Palette, BarChart3 } from "lucide-react";
 import LineQRButton from "@/components/LineQRButton";
 import SoftwareInquiryDialog from "@/components/SoftwareInquiryDialog";
+import softwareFastImg from "@/assets/software-fast.jpg";
+import softwareSecureImg from "@/assets/software-secure.jpg";
+import softwareDesignImg from "@/assets/software-design.jpg";
+import softwareAnalyticsImg from "@/assets/software-analytics.jpg";
 
 const softwareExamples = [
   { label: "HRM", href: "https://entgroup-job.lovable.app/" },
@@ -16,10 +20,10 @@ const softwareExamples = [
 ];
 
 const highlights = [
-  { icon: Rocket, label: "พัฒนาเร็ว", desc: "เห็นผลภายใน 2 สัปดาห์" },
-  { icon: Shield, label: "ปลอดภัย", desc: "ระบบ Cloud ระดับสากล" },
-  { icon: Palette, label: "ออกแบบสวย", desc: "UX/UI มืออาชีพ" },
-  { icon: BarChart3, label: "วัดผลได้", desc: "Dashboard & Analytics" },
+  { icon: Rocket, label: "พัฒนาเร็ว", desc: "เห็นผลภายใน 2 สัปดาห์", img: softwareFastImg },
+  { icon: Shield, label: "ปลอดภัย", desc: "ระบบ Cloud ระดับสากล", img: softwareSecureImg },
+  { icon: Palette, label: "ออกแบบสวย", desc: "UX/UI มืออาชีพ", img: softwareDesignImg },
+  { icon: BarChart3, label: "วัดผลได้", desc: "Dashboard & Analytics", img: softwareAnalyticsImg },
 ];
 
 const SoftwareSection = () => {
@@ -51,14 +55,26 @@ const SoftwareSection = () => {
           {highlights.map((h, i) => (
             <div
               key={h.label}
-              className="group card-surface p-5 text-center hover:border-primary/30 transition-all duration-300 hover:-translate-y-1"
+              className="group card-surface overflow-hidden hover:border-primary/30 transition-all duration-300 hover:-translate-y-1"
               style={{ animationDelay: `${i * 100}ms` }}
             >
-              <div className="w-11 h-11 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <h.icon size={20} className="text-primary" />
+              <div className="h-28 overflow-hidden">
+                <img
+                  src={h.img}
+                  alt={h.label}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  width={640}
+                  height={512}
+                />
               </div>
-              <p className="text-sm font-bold text-foreground">{h.label}</p>
-              <p className="text-xs text-muted-foreground mt-0.5">{h.desc}</p>
+              <div className="p-4 text-center">
+                <div className="w-9 h-9 mx-auto mb-2 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <h.icon size={18} className="text-primary" />
+                </div>
+                <p className="text-sm font-bold text-foreground">{h.label}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{h.desc}</p>
+              </div>
             </div>
           ))}
         </div>
