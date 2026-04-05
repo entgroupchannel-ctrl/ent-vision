@@ -507,10 +507,10 @@ const ResultCard = ({
   rank: number;
 }) => {
   const priceLabels: Record<string, string> = {
-    budget: "💰 ประหยัด",
-    mid: "💰💰 ปานกลาง",
-    high: "💰💰💰 สูง",
-    premium: "💎 พรีเมียม",
+    budget: "ประหยัด",
+    mid: "ปานกลาง",
+    high: "สูง",
+    premium: "พรีเมียม",
   };
   
   return (
@@ -519,7 +519,7 @@ const ResultCard = ({
       {rank <= 3 && (
         <div className={`absolute -top-3 left-4 px-3 py-1 rounded-full text-xs font-bold
           ${rank === 1 ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}>
-          {rank === 1 ? "🏆 แนะนำอันดับ 1" : `#${rank}`}
+          {rank === 1 ? "แนะนำอันดับ 1" : `#${rank}`}
         </div>
       )}
       <div className="mt-2">
@@ -688,7 +688,7 @@ const ProductAdvisor = () => {
                 {/* Results */}
                 <div className="text-center mb-8">
                   <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-                    🎯 สินค้าที่เหมาะกับคุณ
+                    <Crosshair className="inline w-5 h-5 mr-1 text-primary" /> สินค้าที่เหมาะกับคุณ
                   </h2>
                   <p className="text-sm text-muted-foreground">
                     พบ {results.length} รุ่นที่ตรงกับความต้องการ เรียงตามความเหมาะสม
@@ -704,7 +704,7 @@ const ProductAdvisor = () => {
                       </div>
                       <div className="flex-1">
                         <h3 className="font-bold text-foreground text-base mb-1">
-                          🚀 สนใจ Edge AI / Deep Learning?
+                          <Zap className="inline w-4 h-4 mr-1" /> สนใจ Edge AI / Deep Learning?
                         </h3>
                         <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
                           นอกจากสินค้าด้านล่างแล้ว เรายังมี <strong className="text-foreground">NVIDIA Jetson Platform</strong> — 

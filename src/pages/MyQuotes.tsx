@@ -242,8 +242,8 @@ const MyQuotes = () => {
                         )}
 
                         <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
-                          {q.company && <span>🏢 {q.company}</span>}
-                          {q.phone && <span>📞 {q.phone}</span>}
+                          {q.company && <span><Building2 className="inline w-3 h-3 mr-0.5" /> {q.company}</span>}
+                          {q.phone && <span><Phone className="inline w-3 h-3 mr-0.5" /> {q.phone}</span>}
                         </div>
                       </div>
                     )}

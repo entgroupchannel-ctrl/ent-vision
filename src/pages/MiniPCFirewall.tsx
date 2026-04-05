@@ -723,7 +723,7 @@ const FirewallComparisonTable = () => {
 
         {/* Decision Helper */}
         <div className="p-6 bg-muted/30 border-t border-border">
-          <h4 className="font-bold text-foreground mb-4 text-sm">🎯 เลือกรุ่นไหนดี?</h4>
+          <h4 className="font-bold text-foreground mb-4 text-sm flex items-center gap-1.5"><Crosshair size={14} className="text-primary" /> เลือกรุ่นไหนดี?</h4>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {decisionHelper.slice(0, 4).map((d) => {
               const t = tierMeta[d.tier];
@@ -944,7 +944,7 @@ const MiniPCFirewall = () => {
       {/* ── IPC090 Xeon Comparison ── */}
       <section className="py-16">
         <div className="container max-w-7xl mx-auto px-6">
-          <CollapsibleSection title="📊 IPC090 Xeon — เปรียบเทียบ 4 รุ่นย่อย" defaultOpen={false}>
+          <CollapsibleSection title="IPC090 Xeon — เปรียบเทียบ 4 รุ่นย่อย" defaultOpen={false}>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
