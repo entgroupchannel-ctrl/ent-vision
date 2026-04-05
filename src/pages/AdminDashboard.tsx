@@ -14,8 +14,10 @@ import EngagementAnalytics from "@/components/EngagementAnalytics";
 import AdminDocumentManager from "@/components/AdminDocumentManager";
 import AdminProductCatalog from "@/components/AdminProductCatalog";
 import AdminQuoteReview from "@/components/AdminQuoteReview";
+import AdminUserManagement from "@/components/AdminUserManagement";
+import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
 
-type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review";
+type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -74,6 +76,24 @@ const AdminDashboard = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [sidebarMode, setSidebarMode] = useState<"full" | "icon" | "hidden">("full");
+  const { can, getLevel } = usePermissions();
+
+  // Map tab → permission key
+  const tabPermission: Record<Tab, PermissionKey> = {
+    contacts: "sales.contacts",
+    quotes: "sales.quotes",
+    quote_review: "sales.quote_review",
+    chatleads: "sales.chatleads",
+    software: "sales.software",
+    catalog: "product.catalog",
+    documents: "product.documents",
+    engagement: "marketing.engagement",
+    subscribers: "marketing.subscribers",
+    users: "system.users",
+  };
+
+  // Check if current tab allows edit
+  const canEditCurrentTab = can(tabPermission[tab], "edit");
 
   const fetchData = async () => {
     setLoading(true);
@@ -199,7 +219,7 @@ const AdminDashboard = () => {
                   { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
                   { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
                   { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
-                ]).map((item) => (
+                ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
                     onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
@@ -229,7 +249,7 @@ const AdminDashboard = () => {
                 {([
                   { id: "catalog" as Tab, label: "สินค้า + ราคา", icon: Package },
                   { id: "documents" as Tab, label: "คลังเอกสาร", icon: FolderOpen },
-                ]).map((item) => (
+                ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
                     onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
@@ -253,7 +273,7 @@ const AdminDashboard = () => {
                 {([
                   { id: "engagement" as Tab, label: "Engagement", icon: BarChart3 },
                   { id: "subscribers" as Tab, label: "สมาชิก", icon: Mail },
-                ]).map((item) => (
+                ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
                     onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
@@ -268,6 +288,28 @@ const AdminDashboard = () => {
                     {sidebarMode === "full" && <span className="flex-1 text-left truncate">{item.label}</span>}
                   </button>
                 ))}
+
+                {/* ระบบ */}
+                {can("system.users", "view") && (
+                  <>
+                    {sidebarMode === "full" && (
+                      <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">ระบบ</p>
+                    )}
+                    {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
+                    <button
+                      onClick={() => { setTab("users"); setStatusFilter("all"); setSelectedItem(null); }}
+                      className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                        tab === "users"
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                      } ${sidebarMode === "icon" ? "justify-center" : ""}`}
+                      title={sidebarMode === "icon" ? "จัดการผู้ใช้" : undefined}
+                    >
+                      <Shield size={16} className="shrink-0" />
+                      {sidebarMode === "full" && <span className="flex-1 text-left truncate">จัดการผู้ใช้</span>}
+                    </button>
+                  </>
+                )}
 
                 {/* Hide sidebar completely */}
                 <div className="border-t border-border/50 mt-2 pt-1">
@@ -350,6 +392,8 @@ const AdminDashboard = () => {
           <AdminProductCatalog />
         ) : tab === "quote_review" ? (
           <AdminQuoteReview />
+        ) : tab === "users" ? (
+          <AdminUserManagement />
         ) : (
         <>
         {/* Filter & Export */}
