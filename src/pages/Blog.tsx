@@ -23,11 +23,8 @@ const Blog = () => {
         image="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&q=80"
       />
 
-      <div className="container mx-auto px-4 py-4">
-        <Link to="/" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors">
-          <ArrowLeft className="w-4 h-4" /> กลับหน้าหลัก
-        </Link>
-      </div>
+
+
 
       <section className="container mx-auto px-4 pb-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
