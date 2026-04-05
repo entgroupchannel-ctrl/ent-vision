@@ -280,7 +280,7 @@ const IBoxSeries = () => {
       <div className="sticky top-0 z-30 bg-background/90 backdrop-blur-md border-b border-border shadow-sm">
         <div className="container max-w-7xl mx-auto px-4 py-2">
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
-            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0">👆 เลือกหมวดสินค้า:</span>
+            <span className="text-xs text-muted-foreground whitespace-nowrap shrink-0 inline-flex items-center gap-1"><Pointer size={12} /> เลือกหมวดสินค้า:</span>
             {[
               { id: "all", name: "ทั้งหมด", icon: LayoutGrid },
               { id: "AI Edge Computing", name: "AI Edge / GPU", icon: Flame },
