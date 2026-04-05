@@ -2,6 +2,7 @@ import { Truck, Package, ClipboardCheck, MapPin, Phone, Clock, ShieldCheck, Chec
 import { Link } from "react-router-dom";
 import FooterCompact from "@/components/FooterCompact";
 import SEOHead from "@/components/SEOHead";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const deliverySteps = [
   { step: 1, title: "ยืนยันคำสั่งซื้อ", desc: "ตรวจสอบรายการสินค้าและเอกสารการชำระเงิน", icon: ClipboardCheck },

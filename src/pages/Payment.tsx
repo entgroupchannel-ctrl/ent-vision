@@ -2,6 +2,7 @@ import { CreditCard, Building2, Phone, Mail, AlertCircle, Send, Info, ArrowLeft 
 import { Link } from "react-router-dom";
 import FooterCompact from "@/components/FooterCompact";
 import SEOHead from "@/components/SEOHead";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const bankAccounts = [
   {
