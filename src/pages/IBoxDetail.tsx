@@ -127,7 +127,7 @@ const IBoxDetail = () => {
                   <Mail className="w-4 h-4" /> sales@entgroup.co.th
                 </button>
                 <a href="tel:020456104" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary hover:bg-secondary/80 transition-colors">
-                  📞 02-045-6104
+                  <Phone className="w-3.5 h-3.5" /> 02-045-6104
                 </a>
               </div>
             </div>

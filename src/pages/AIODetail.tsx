@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import LineQRButton from "@/components/LineQRButton";
 import { useState } from "react";
 import {
-  ArrowLeft, Check, ChevronRight, Cpu, FileText, Mail, Shield, Zap,
+  ArrowLeft, Check, ChevronRight, Cpu, FileText, Mail, Shield, Zap, Phone, MessageSquare, Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
