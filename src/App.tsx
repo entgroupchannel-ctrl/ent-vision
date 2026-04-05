@@ -136,7 +136,7 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
-            <FloatingContact />
+            
             <SocialRibbon />
             <AIChatWidget />
           </BrowserRouter>
