@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Lock, LogIn, Eye, EyeOff } from "lucide-react";
+import logo from "@/assets/logo-entgroup.avif";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
