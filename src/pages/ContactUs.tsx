@@ -14,6 +14,7 @@ import {
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
 import { useAuth } from "@/hooks/useAuth";
+import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 
 /* ═══════════════════════════════════════════
    i18n — TH / EN
