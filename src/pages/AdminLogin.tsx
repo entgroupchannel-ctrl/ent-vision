@@ -103,8 +103,10 @@ const AdminLogin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      <div className="w-full max-w-sm">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-[hsl(220,30%,12%)] via-[hsl(220,25%,18%)] to-[hsl(200,30%,14%)] relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(200,60%,25%,0.15),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,hsl(220,50%,30%,0.1),transparent_60%)]" />
+      <div className="w-full max-w-sm relative z-10">
         <div className="text-center mb-8">
           <a href="/" className="inline-block mb-4">
             <img src={logo} alt="ENT GROUP" className="h-10 mx-auto" />
