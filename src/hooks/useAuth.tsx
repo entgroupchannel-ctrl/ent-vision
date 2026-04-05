@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useContext, ReactNode } from "react";
+import { useState, useEffect, useRef, createContext, useContext, ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User, Session } from "@supabase/supabase-js";
 
@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const initDoneRef = useRef(false);
 
   const checkRoles = async (userId: string) => {
     try {
@@ -64,7 +65,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       } catch (e) {
         console.error("useAuth init error:", e);
       } finally {
-        if (mounted) setLoading(false);
+      if (mounted) {
+          initDoneRef.current = true;
+          setLoading(false);
+        }
       }
     };
 
@@ -72,8 +76,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (!mounted) return;
+      if (!initDoneRef.current) return;
+
       setSession(session);
       setUser(session?.user ?? null);
+      setLoading(true);
       if (session?.user) {
         await checkRoles(session.user.id);
       } else {
