@@ -171,6 +171,16 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
 
       setSubmitted(true);
       toast({ title: "ส่งคำขอเรียบร้อย!", description: "ทีมฝ่ายขายจะติดต่อกลับภายใน 24 ชม." });
+
+      // Engagement Tracking
+      products.filter((p) => p.category || p.model).forEach((p) => {
+        trackEvent({
+          eventType: "quote_request",
+          productId: p.model || undefined,
+          productCategory: p.category || undefined,
+          productName: p.model || undefined,
+        });
+      });
     } catch (err: any) {
       toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
     } finally {
