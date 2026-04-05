@@ -82,8 +82,8 @@ const PromoBanners = () => {
         >
           <div className="relative bg-secondary/20 flex items-center justify-center p-8 md:w-2/5">
             {featured.badge && (
-              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-destructive text-destructive-foreground">
-                {featured.badge}
+              <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-destructive text-destructive-foreground inline-flex items-center gap-1">
+                <Flame size={10} /> {featured.badge}
               </span>
             )}
             <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-500 text-white">
@@ -126,11 +126,12 @@ const PromoBanners = () => {
             >
               <div className="relative bg-secondary/20 flex items-center justify-center p-6 h-44">
                 {promo.badge && (
-                  <span className={`absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                  <span className={`absolute top-2 left-2 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1 ${
                     promo.status === "active"
                       ? "bg-destructive text-destructive-foreground"
                       : "bg-amber-500 text-white"
                   }`}>
+                    {(promo as any).badgeIcon === "flame" && <Flame size={8} />}
                     {promo.badge}
                   </span>
                 )}

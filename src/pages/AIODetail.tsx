@@ -159,7 +159,7 @@ const AIODetail = () => {
                   <Mail className="w-4 h-4" /> sales@entgroup.co.th
                 </button>
                 <a href="tel:020456104" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary hover:bg-secondary/80 transition-colors text-sm">
-                  📞 02-045-6104
+                  <Phone className="w-3.5 h-3.5" /> 02-045-6104
                 </a>
               </div>
             </div>
@@ -170,7 +170,7 @@ const AIODetail = () => {
                 <FileText className="w-5 h-5 mr-2" /> ขอใบเสนอราคา
               </Button>
               <LineQRButton className="flex-1 h-11 text-base">
-                💬 สอบถามทาง LINE
+                <MessageSquare className="w-4 h-4" /> สอบถามทาง LINE
               </LineQRButton>
             </div>
           </div>
@@ -284,7 +284,7 @@ const AIODetail = () => {
                             <TableCell className="text-sm whitespace-pre-line">
                               {item.value}
                               {item.note && (
-                                <span className="block text-xs text-primary mt-0.5">✨ {item.note}</span>
+                                <span className="block text-xs text-primary mt-0.5"><Sparkles className="inline w-3 h-3 mr-0.5" /> {item.note}</span>
                               )}
                             </TableCell>
                           </TableRow>
@@ -334,7 +334,7 @@ const AIODetail = () => {
                     <FileText className="w-4 h-4 mr-2" /> ขอใบเสนอราคา
                   </Button>
                   <LineQRButton>
-                    💬 ติดต่อ LINE @entgroup
+                    <MessageSquare className="w-4 h-4" /> ติดต่อ LINE @entgroup
                   </LineQRButton>
                 </div>
               </div>
