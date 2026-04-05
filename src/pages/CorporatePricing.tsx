@@ -290,7 +290,7 @@ const CorporatePricing = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="text-base px-8 border-background/30 text-background hover:bg-background/10"
+                className="text-base px-8 border-background/30 text-background hover:bg-background/10 text-slate-600"
                 asChild
               >
                 <Link to="/contact">
