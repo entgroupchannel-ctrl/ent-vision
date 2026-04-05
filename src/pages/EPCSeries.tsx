@@ -355,7 +355,7 @@ const EPCSeries = () => {
   const { selectedProducts, toggleSelect, clearSelection } = useMultiSelect();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="EPC Series — Industrial Panel PC จอสัมผัส" description="EPC Series Panel PC อุตสาหกรรม จอสัมผัส IP65 Fanless ขนาด 10-21 นิ้ว สำหรับโรงงาน POS SCADA และงานควบคุม" path="/epc-series" />
       <ProductJsonLd
         collectionName="EPC Series Industrial Panel PC"

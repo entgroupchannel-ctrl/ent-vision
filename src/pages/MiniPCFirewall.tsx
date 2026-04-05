@@ -756,7 +756,7 @@ const MiniPCFirewall = () => {
   const filtered = activeTier === "all" ? models : models.filter((m) => m.tier === activeTier);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="Mini PC Firewall — pfSense OPNsense Router" description="Mini PC Firewall สำหรับ pfSense OPNsense VPN Gateway รองรับ 2-6 LAN Ports Fanless Intel Celeron ถึง Core i7" path="/mini-pc-firewall" />
       <ProductJsonLd
         collectionName="Mini PC Firewall pfSense OPNsense"

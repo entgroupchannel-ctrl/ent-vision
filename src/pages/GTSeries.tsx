@@ -676,7 +676,7 @@ const GTSeries = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="GT Series — Industrial Fanless Mini PC 12 รุ่น" description="GT Series คอมพิวเตอร์อุตสาหกรรม Fanless ทนร้อน ทนฝุ่น 12 รุ่น รองรับ Intel N100 ถึง Core i7 สำหรับโรงงาน IoT Edge Computing ประเทศไทย" path="/gt-series" />
       <ProductJsonLd
         collectionName="GT Series Industrial Fanless Mini PC"

@@ -21,7 +21,7 @@ const deliveryNotes = [
 
 const Delivery = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="ขั้นตอนการจัดส่งสินค้า — ENT Group" description="ขั้นตอนการจัดส่งสินค้า Industrial PC จาก ENT Group พร้อมบริการเคลมเสียหายจากการขนส่ง" />
 
       {/* Compact Header */}

@@ -397,7 +397,7 @@ const QuoteRequest = () => {
   const totalQty = products.reduce((s, p) => s + p.qty, 0);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead
         title="ขอใบเสนอราคา — ENT Group"
         description="กรอกข้อมูลสินค้าและจำนวนที่ต้องการ ทีมฝ่ายขายจะจัดทำใบเสนอราคาและติดต่อกลับภายใน 24 ชม."

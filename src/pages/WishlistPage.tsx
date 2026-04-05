@@ -44,7 +44,7 @@ const WishlistPage = () => {
   const quoteProductName = displayItems.map((i) => `${i.name} (${i.category})`).join(", ");
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead
         title="สินค้าที่ถูกใจ — Wishlist"
         description="รายการสินค้า Mini PC, Panel PC, Industrial Computer ที่คุณสนใจ พร้อมขอใบเสนอราคาได้ทันที"

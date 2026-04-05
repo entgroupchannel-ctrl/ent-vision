@@ -622,7 +622,7 @@ const ProductAdvisor = () => {
         <meta name="description" content="ระบบ AI ช่วยเลือกสินค้า Industrial PC, Panel PC, Rugged Tablet ที่เหมาะกับการใช้งานและงบประมาณของคุณ" />
       </Helmet>
 
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-background flex flex-col">
         {/* Back button */}
         <div className="px-4 pt-4">
           <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">

@@ -194,7 +194,7 @@ const MemberRegister = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Hero */}
       <section className="py-12 md:py-16 px-4 bg-gradient-to-b from-primary/10 via-background to-background">
         <div className="container max-w-lg mx-auto text-center">

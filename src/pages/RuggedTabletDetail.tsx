@@ -74,7 +74,7 @@ const RuggedTabletDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title={`${product.model} — ${product.name}`} description={`${product.nameTH} — ${product.keyFeatures.slice(0, 3).join(", ")}`} path={`/rugged-tablet/${product.id}`} />
       <BreadcrumbJsonLd items={[{ name: "สินค้า", path: "/" }, { name: "Rugged Tablet", path: "/rugged-tablet" }, { name: product.model, path: `/rugged-tablet/${product.id}` }]} />
       <ProductJsonLd collectionName={product.name} collectionDescription={product.nameTH} collectionUrl={`/rugged-tablet/${product.id}`} products={[{ name: product.name, price: product.price, category: "Rugged Tablet" }]} />

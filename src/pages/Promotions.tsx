@@ -350,7 +350,7 @@ const PromoCard = ({ promo, featured = false }: { promo: Promo; featured?: boole
 /* ───── Main Page ───── */
 const Promotions = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Nav */}
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="container max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">

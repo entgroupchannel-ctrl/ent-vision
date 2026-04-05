@@ -252,7 +252,7 @@ const IBoxSeries = () => {
   }, [search, filters, sortBy]);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="iBox Series — Embedded Fanless Industrial PC" description="iBox Series คอมพิวเตอร์อุตสาหกรรมแบบ Fanless ขนาดกะทัดรัด รองรับ Intel N-Series ถึง Core i7 สำหรับ Edge Computing, IoT Gateway, Digital Signage" path="/ibox-series" />
       <ProductJsonLd
         collectionName="iBox Series Embedded Fanless Industrial PC"

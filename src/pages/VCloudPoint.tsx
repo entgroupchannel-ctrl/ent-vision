@@ -227,7 +227,7 @@ const VCloudPoint = () => {
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="vCloudPoint Zero Client — Thin Client ประหยัดต้นทุน" description="vCloudPoint Zero Client ลดต้นทุนฮาร์ดแวร์ ประหยัดไฟ 80% ใช้คอมเครื่องเดียวแชร์ได้หลายจุด สำหรับสำนักงาน โรงเรียน โรงแรม" path="/vcloudpoint" />
       <ProductJsonLd
         collectionName="vCloudPoint Zero Client"

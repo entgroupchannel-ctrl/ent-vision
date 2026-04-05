@@ -820,7 +820,7 @@ const MiniPC = () => {
   const handleFilterPrice = (v: number) => { setFilterPrice(v); setCurrentPage(1); };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="Mini PC Series — คอมพิวเตอร์ขนาดเล็กสมรรถนะสูง" description="Mini PC จากโรงงานผู้ผลิตโดยตรง ครอบคลุมทุกการใช้งานตั้งแต่ Entry-Level จนถึง Workstation Class ราคาเริ่มต้น 8,190 บาท" path="/mini-pc" />
       <ProductJsonLd
         collectionName="Mini PC Series"

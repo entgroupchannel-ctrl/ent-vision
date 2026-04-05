@@ -31,7 +31,7 @@ const taxNotes = [
 
 const Payment = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="วิธีการชำระเงิน — ENT Group" description="ช่องทางชำระเงินและข้อมูลบัญชีธนาคาร บริษัท อี เอ็นที กรุ๊ป จำกัด" />
 
       {/* Compact Header */}

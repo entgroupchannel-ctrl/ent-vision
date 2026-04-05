@@ -128,7 +128,7 @@ const Handheld = () => {
     : handheldProducts.filter((p) => p.category === filter);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead
         title="Rugged Handheld & PDA กันน้ำ สแกนบาร์โค้ด"
         description="Rugged Handheld, PDA และมือถืออุตสาหกรรม กันน้ำ กันกระแทก IP65-IP68 พร้อม 2D Scanner, NFC, 5G สำหรับคลังสินค้า โลจิสติกส์ และงานภาคสนาม"

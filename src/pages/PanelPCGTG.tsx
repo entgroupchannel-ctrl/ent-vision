@@ -257,7 +257,7 @@ const PanelPC = () => {
   const cpuPrices = priceData[activeCpu] || {};
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="GTY/GTG Panel PC — จอสัมผัสอุตสาหกรรม" description="GTY/GTG Panel PC จอสัมผัสอุตสาหกรรม 8-21 นิ้ว เลือก CPU ได้ Fanless IP65 สำหรับโรงงาน POS SCADA HMI" path="/panel-pc-gtg" />
       <ProductJsonLd
         collectionName="GTY/GTG Panel PC จอสัมผัสอุตสาหกรรม"

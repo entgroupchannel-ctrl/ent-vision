@@ -161,7 +161,7 @@ const useCases = [
 const WaterproofPC = () => {
   const [quoteProduct, setQuoteProduct] = useState<string | null>(null);
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="Waterproof Panel PC — IP67 IP69K กันน้ำ" description="Waterproof Panel PC มาตรฐาน IP67 IP69K กันน้ำ กันฝุ่น Stainless Steel SUS316 สำหรับอุตสาหกรรมอาหาร ยา และห้องคลีนรูม" path="/waterproof-pc" />
       <ProductJsonLd
         collectionName="Waterproof Panel PC IP67 IP69K"
