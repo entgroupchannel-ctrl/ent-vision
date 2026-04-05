@@ -215,7 +215,7 @@ const MyAccount = () => {
             {/* Render active tab */}
             {tab === "profile" && <MyProfile />}
             {tab === "quotes" && <MyAccountQuotes onNavigate={(t: string) => setTab(t as Tab)} />}
-            {tab === "quote_create" && <UserQuoteCreate />}
+            {tab === "quote_create" && <UserQuoteCreate onNavigate={(t: string) => setTab(t as Tab)} />}
             {tab === "wishlist" && <MyAccountWishlist />}
             {tab === "documents" && <MyDocuments />}
             {tab === "notifications" && <MyNotifications />}
