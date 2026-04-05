@@ -1,11 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ShoppingCart, ChevronRight, X } from "lucide-react";
 import { useQuoteCart } from "@/hooks/useQuoteCart";
 
 const FloatingQuoteBar = () => {
   const { items, totalItems, clearCart } = useQuoteCart();
+  const location = useLocation();
 
-  if (items.length === 0) return null;
+  // Hide on my-account and admin pages
+  const hiddenPaths = ["/my-account", "/admin", "/quote-builder"];
+  const shouldHide = hiddenPaths.some((p) => location.pathname.startsWith(p));
+
+  if (items.length === 0 || shouldHide) return null;
 
   const formatPrice = (n: number) =>
     new Intl.NumberFormat("th-TH", { minimumFractionDigits: 0 }).format(Math.round(n));
