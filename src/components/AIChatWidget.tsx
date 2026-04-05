@@ -3,6 +3,7 @@ import { MessageCircle, X, Send, Bot, User, Minimize2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { supabase } from "@/integrations/supabase/client";
 import { useAutoHideWidget } from "@/hooks/useAutoHideWidget";
+import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -27,6 +28,8 @@ const AIChatWidget = () => {
   const [leadSaved, setLeadSaved] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const { trackEvent } = useEngagementTracker();
+  const chatTrackedRef = useRef(false);
 
   // Auto-hide for the closed-state button (staggered from FloatingContact)
   const { visible: buttonVisible, onInteraction, forceShow } = useAutoHideWidget({
@@ -96,6 +99,11 @@ const AIChatWidget = () => {
     const text = input.trim();
     if (!text || isLoading) return;
 
+    // Track first chat message only
+    if (!chatTrackedRef.current) {
+      chatTrackedRef.current = true;
+      trackEvent({ eventType: "chat_inquiry", metadata: { firstMessage: text.substring(0, 200) } });
+    }
     const userMsg: Msg = { role: "user", content: text };
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
