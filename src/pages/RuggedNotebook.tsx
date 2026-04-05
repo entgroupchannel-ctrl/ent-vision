@@ -126,7 +126,7 @@ const RuggedNotebookPage = () => {
   const clearSelection = () => setSelectedProducts(new Set());
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <SEOHead
         title="Rugged Notebook — โน้ตบุ๊กมาตรฐานทหาร MIL-STD"
         description="โน้ตบุ๊คทนทานเกรดทหาร MIL-STD-810G/H กันน้ำ IP65-IP67 Intel AI, Core i5/i7 สำหรับงานภาคสนาม โรงงาน โลจิสติกส์ จำหน่ายโดย ENT Group"

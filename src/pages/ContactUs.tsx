@@ -271,7 +271,7 @@ const ContactUs = () => {
     "w-full px-4 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all";
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title={i.seoTitle} description={i.seoDesc} path="/contact" />
 
       {/* Banner */}

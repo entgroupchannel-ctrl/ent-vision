@@ -1089,7 +1089,7 @@ const GKSeries = () => {
   const [showLineQR, setShowLineQR] = useState(false);
   const [activeVideoTab, setActiveVideoTab] = useState("ทั้งหมด");
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="GK Series — Industrial Panel PC จอสัมผัสอุตสาหกรรม" description="GK Series Panel PC อุตสาหกรรม จอสัมผัส 10.4-21 นิ้ว เลือก CPU ได้ตามใจ ทนร้อน ทนฝุ่น สำหรับโรงงาน POS และงานควบคุม" path="/gk-series" />
       <ProductJsonLd
         collectionName="GK Series Industrial Panel PC"

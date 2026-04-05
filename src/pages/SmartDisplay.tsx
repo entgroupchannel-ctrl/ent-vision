@@ -169,7 +169,7 @@ const SmartDisplay = () => {
   const [podcastTab, setPodcastTab] = useState("smart-display");
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="Smart Display, KIOSK & Digital Signage" description="จอ Smart Display, ตู้ KIOSK สำเร็จรูป และ Digital Signage สำหรับร้านค้า โรงแรม โรงพยาบาล สำนักงาน พร้อมซอฟต์แวร์ครบวงจร" path="/smart-display" />
       <ProductJsonLd
         collectionName="Smart Display, KIOSK & Digital Signage"

@@ -89,7 +89,7 @@ const values = [
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* ═══════ Hero with growth image ═══════ */}
       <section className="relative min-h-[420px] flex items-center overflow-hidden">
         <img

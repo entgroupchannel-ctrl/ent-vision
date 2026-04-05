@@ -204,7 +204,7 @@ const PriceTable = ({ title, icon: Icon, models, subTitle }: {
 /* ───── Main Page ───── */
 const UTCSeries = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="UTC Series — Open Frame Touch Monitor" description="UTC Series จอสัมผัสอุตสาหกรรมแบบ Open Frame 8-19 นิ้ว สำหรับฝังใน KIOSK ตู้จำหน่ายสินค้า เครื่องจ่ายเงิน และงานอุตสาหกรรม" path="/utc-series" />
       <ProductJsonLd
         collectionName="UTC Series Open Frame Touch Monitor"

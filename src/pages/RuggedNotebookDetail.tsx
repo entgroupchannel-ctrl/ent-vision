@@ -75,7 +75,7 @@ const RuggedNotebookDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead
         title={`${nb.model} — ${nb.title}`}
         description={`${nb.titleTH} | ${nb.cpu} | ${nb.protection}`}
