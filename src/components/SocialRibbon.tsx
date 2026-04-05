@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
 import { useAutoHideWidget } from "@/hooks/useAutoHideWidget";
+import LineQRButton from "@/components/LineQRButton";
 
 const TiktokIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -58,6 +59,10 @@ const SocialRibbon = () => {
             <span className="whitespace-nowrap">{s.label}</span>
           </a>
         ))}
+        <LineQRButton className="flex items-center gap-2.5 px-3 py-2.5 bg-[#06C755] text-white rounded-r-lg shadow-md hover:pr-5 transition-all duration-200 text-xs font-medium">
+          <span className="shrink-0"><MessageCircle size={18} /></span>
+          <span className="whitespace-nowrap">LINE</span>
+        </LineQRButton>
       </div>
 
       {/* Pull tab */}
