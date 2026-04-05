@@ -691,7 +691,7 @@ import FooterCompact from "@/components/FooterCompact";
                       </td>
                       <td className="text-center p-3">
                         <span className={`text-xs px-2 py-1 rounded-full ${m.cooling === "FANLESS" ? "bg-blue-500/10 text-blue-600 dark:text-blue-400" : "bg-orange-500/10 text-orange-600 dark:text-orange-400"}`}>
-                          {m.cooling === "FANLESS" ? "FANLESS" : "🌀 FAN"}
+                          {m.cooling === "FANLESS" ? "FANLESS" : "FAN"}
                         </span>
                       </td>
                       {prices.map((p, i) => (
