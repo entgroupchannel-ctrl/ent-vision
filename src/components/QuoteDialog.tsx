@@ -54,6 +54,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { trackEvent } = useEngagementTracker();
 
   const defaultProducts = initialProducts && initialProducts.length > 0
     ? initialProducts
