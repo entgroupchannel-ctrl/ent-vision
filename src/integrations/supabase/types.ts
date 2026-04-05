@@ -368,6 +368,60 @@ export type Database = {
         }
         Relationships: []
       }
+      product_catalog: {
+        Row: {
+          base_price: number
+          category: string
+          configurable_options: Json | null
+          created_at: string
+          id: string
+          image_url: string | null
+          is_active: boolean
+          lead_days: number | null
+          min_qty: number | null
+          model: string
+          name_th: string | null
+          notes: string | null
+          specs: Json | null
+          subcategory: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          base_price?: number
+          category: string
+          configurable_options?: Json | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          lead_days?: number | null
+          min_qty?: number | null
+          model: string
+          name_th?: string | null
+          notes?: string | null
+          specs?: Json | null
+          subcategory?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          base_price?: number
+          category?: string
+          configurable_options?: Json | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          lead_days?: number | null
+          min_qty?: number | null
+          model?: string
+          name_th?: string | null
+          notes?: string | null
+          specs?: Json | null
+          subcategory?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           company_address: string | null
@@ -410,56 +464,152 @@ export type Database = {
         }
         Relationships: []
       }
+      quote_line_items: {
+        Row: {
+          admin_notes: string | null
+          category: string | null
+          created_at: string
+          custom_specs: Json | null
+          discount_percent: number | null
+          id: string
+          line_total: number | null
+          model: string
+          product_id: string | null
+          qty: number
+          quote_id: string
+          sort_order: number | null
+          unit_price: number
+        }
+        Insert: {
+          admin_notes?: string | null
+          category?: string | null
+          created_at?: string
+          custom_specs?: Json | null
+          discount_percent?: number | null
+          id?: string
+          line_total?: number | null
+          model: string
+          product_id?: string | null
+          qty?: number
+          quote_id: string
+          sort_order?: number | null
+          unit_price?: number
+        }
+        Update: {
+          admin_notes?: string | null
+          category?: string | null
+          created_at?: string
+          custom_specs?: Json | null
+          discount_percent?: number | null
+          id?: string
+          line_total?: number | null
+          model?: string
+          product_id?: string | null
+          qty?: number
+          quote_id?: string
+          sort_order?: number | null
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quote_line_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "product_catalog"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quote_line_items_quote_id_fkey"
+            columns: ["quote_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       quote_requests: {
         Row: {
+          approved_at: string | null
+          approved_by: string | null
           callback_time: string | null
           company: string | null
           created_at: string
+          customer_response: string | null
+          delivery_terms: string | null
           details: string | null
+          discount_amount: number | null
           email: string
+          grand_total: number | null
           id: string
           lead_score: number
           line_id: string | null
           name: string
           notes: string | null
+          payment_terms: string | null
+          pdf_url: string | null
           phone: string | null
           products: Json
+          quote_number: string | null
           status: string
+          subtotal: number | null
           user_id: string | null
+          valid_until: string | null
           whatsapp: string | null
         }
         Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
           callback_time?: string | null
           company?: string | null
           created_at?: string
+          customer_response?: string | null
+          delivery_terms?: string | null
           details?: string | null
+          discount_amount?: number | null
           email: string
+          grand_total?: number | null
           id?: string
           lead_score?: number
           line_id?: string | null
           name: string
           notes?: string | null
+          payment_terms?: string | null
+          pdf_url?: string | null
           phone?: string | null
           products?: Json
+          quote_number?: string | null
           status?: string
+          subtotal?: number | null
           user_id?: string | null
+          valid_until?: string | null
           whatsapp?: string | null
         }
         Update: {
+          approved_at?: string | null
+          approved_by?: string | null
           callback_time?: string | null
           company?: string | null
           created_at?: string
+          customer_response?: string | null
+          delivery_terms?: string | null
           details?: string | null
+          discount_amount?: number | null
           email?: string
+          grand_total?: number | null
           id?: string
           lead_score?: number
           line_id?: string | null
           name?: string
           notes?: string | null
+          payment_terms?: string | null
+          pdf_url?: string | null
           phone?: string | null
           products?: Json
+          quote_number?: string | null
           status?: string
+          subtotal?: number | null
           user_id?: string | null
+          valid_until?: string | null
           whatsapp?: string | null
         }
         Relationships: []
