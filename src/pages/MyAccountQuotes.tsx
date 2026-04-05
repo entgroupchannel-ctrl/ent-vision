@@ -56,7 +56,7 @@ interface LineItem {
   custom_specs: Record<string, string>;
 }
 
-const MyAccountQuotes = () => {
+const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void }) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [quotes, setQuotes] = useState<QuoteRequest[]>([]);
@@ -130,8 +130,8 @@ const MyAccountQuotes = () => {
           <button onClick={fetchQuotes} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
             <RefreshCw size={12} className={loading ? "animate-spin" : ""} /> รีเฟรช
           </button>
-          <Link
-            to="/my-account/quotes/create"
+          <button
+            onClick={() => onNavigate?.("quote_create")}
             className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors"
           >
             <Plus size={14} /> สร้างใบเสนอราคา
