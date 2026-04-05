@@ -95,7 +95,7 @@ const MyAccount = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <SEOHead title="บัญชีของฉัน — ENT Group" description="จัดการบัญชี โปรไฟล์ ใบเสนอราคา และเอกสาร" path="/my-account" />
 
       {/* Header */}
@@ -236,7 +236,7 @@ const MyAccount = () => {
         </div>
       </div>
 
-      <FooterCompact />
+      <FooterCompact className="mt-auto" />
     </div>
   );
 };
