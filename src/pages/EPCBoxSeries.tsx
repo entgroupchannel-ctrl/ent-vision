@@ -405,6 +405,15 @@ const ProductSelectionTable = ({ products }: { products: typeof productSelection
 // Series Section Component with Tabs
 const SeriesSection = ({ series, index }: { series: SeriesData; index: number }) => {
   const isReversed = index % 2 === 1;
+  const allImages = [series.image, ...(series.gallery || [])];
+  const [activeImg, setActiveImg] = useState(0);
+
+  // Auto-slide every 4s
+  useEffect(() => {
+    if (allImages.length <= 1) return;
+    const timer = setInterval(() => setActiveImg((prev) => (prev + 1) % allImages.length), 4000);
+    return () => clearInterval(timer);
+  }, [allImages.length]);
 
   return (
     <div className="card-surface overflow-hidden" id={series.id}>
@@ -426,15 +435,23 @@ const SeriesSection = ({ series, index }: { series: SeriesData; index: number })
             className="absolute top-4 right-4 z-10"
           />
           <img
-            src={series.image}
+            src={allImages[activeImg]}
             alt={series.name}
-            className="max-h-[220px] object-contain mb-4"
+            className="max-h-[220px] object-contain mb-4 transition-opacity duration-500"
             loading="lazy"
           />
-          {series.gallery && (
+          {allImages.length > 1 && (
             <div className="flex gap-2 mt-2">
-              {series.gallery.map((img, i) => (
-                <img key={i} src={img} alt="" className="w-16 h-16 object-contain rounded-lg bg-background/50 p-1" loading="lazy" />
+              {allImages.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveImg(i)}
+                  className={`w-16 h-16 object-contain rounded-lg p-1 border-2 transition-all cursor-pointer ${
+                    i === activeImg ? "border-primary bg-primary/10" : "border-transparent bg-background/50 hover:border-primary/40"
+                  }`}
+                >
+                  <img src={img} alt="" className="w-full h-full object-contain" loading="lazy" />
+                </button>
               ))}
             </div>
           )}
