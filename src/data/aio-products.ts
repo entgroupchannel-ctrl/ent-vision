@@ -926,7 +926,7 @@ export const aioProducts: AIOProduct[] = [
     ],
     applications: [
       { icon: "Monitor", titleTH: "จอแสดงผล", titleEN: "Display Monitor" },
-      { icon: "TouchpadIcon", titleTH: "ระบบสัมผัส", titleEN: "Touch Interface" },
+      { icon: "Pointer", titleTH: "ระบบสัมผัส", titleEN: "Touch Interface" },
       { icon: "Factory", titleTH: "อุตสาหกรรม", titleEN: "Industrial Use" },
       { icon: "BarChart3", titleTH: "ระบบข้อมูล", titleEN: "Data Systems" },
     ],
