@@ -54,8 +54,9 @@ const FooterCompact = () => {
               <Link
                 key={link.label}
                 to={link.href}
-                className="text-[11px] text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
+                className="inline-flex items-center gap-1 text-[11px] text-[hsl(215,15%,55%)] hover:text-primary transition-colors"
               >
+                <link.icon size={10} />
                 {link.label}
               </Link>
             ))}
