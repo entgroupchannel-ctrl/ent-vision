@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, MessageCircle } from "lucide-react";
 import { useAutoHideWidget } from "@/hooks/useAutoHideWidget";
 import LineQRButton from "@/components/LineQRButton";
