@@ -137,32 +137,32 @@ const AdminDashboard = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-10">
-        <div className="container max-w-7xl mx-auto px-6 py-4">
+        <div className="container max-w-7xl mx-auto px-6 py-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link to="/" className="text-xs text-primary hover:underline flex items-center gap-1">
-                <ArrowLeft size={12} /> กลับหน้าหลัก
+              <Link to="/" className="text-sm text-primary hover:underline flex items-center gap-1.5">
+                <ArrowLeft size={14} /> กลับหน้าหลัก
               </Link>
-              <h1 className="text-lg font-display font-bold text-foreground">Admin Dashboard</h1>
+              <h1 className="text-xl font-display font-bold text-foreground">Admin Dashboard</h1>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               {isSuperAdmin && (
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 flex items-center gap-1">
-                  <Shield size={10} /> Super Admin
+                <span className="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 flex items-center gap-1">
+                  <Shield size={12} /> Super Admin
                 </span>
               )}
-              <span className="text-xs text-muted-foreground">{user?.email}</span>
+              <span className="text-sm text-muted-foreground">{user?.email}</span>
               <button
                 onClick={fetchData}
-                className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                <RefreshCw size={14} className={loading ? "animate-spin" : ""} /> รีเฟรช
+                <RefreshCw size={16} className={loading ? "animate-spin" : ""} /> รีเฟรช
               </button>
               <button
                 onClick={signOut}
-                className="flex items-center gap-1.5 text-xs text-red-400 hover:text-red-300 transition-colors"
+                className="flex items-center gap-1.5 text-sm text-red-400 hover:text-red-300 transition-colors"
               >
-                <LogOut size={14} /> ออกจากระบบ
+                <LogOut size={16} /> ออกจากระบบ
               </button>
             </div>
           </div>
@@ -171,27 +171,27 @@ const AdminDashboard = () => {
 
       <div className="container max-w-7xl mx-auto px-6 py-6">
         <div className="flex gap-0">
-          {/* ═══ Sidebar — 3 states: full (200px) / icon (48px) / hidden (0px) ═══ */}
+          {/* ═══ Sidebar — 3 states: full (220px) / icon (52px) / hidden (0px) ═══ */}
           {sidebarMode !== "hidden" && (
             <aside
               className={`shrink-0 hidden md:block transition-all duration-200 ${
-                sidebarMode === "full" ? "w-52" : "w-12"
+                sidebarMode === "full" ? "w-56" : "w-14"
               }`}
-              style={{ marginRight: sidebarMode === "full" ? 16 : 8 }}
+              style={{ marginRight: sidebarMode === "full" ? 20 : 10 }}
             >
-              <nav className="card-surface rounded-xl p-1.5 sticky top-20">
+              <nav className="card-surface rounded-xl p-2 sticky top-20">
                 {/* Toggle button */}
                 <button
                   onClick={() => setSidebarMode(sidebarMode === "full" ? "icon" : "full")}
-                  className="w-full flex items-center justify-center py-1.5 mb-1 rounded-lg text-muted-foreground/50 hover:text-foreground hover:bg-secondary/60 transition-colors"
+                  className="w-full flex items-center justify-center py-2 mb-1 rounded-lg text-muted-foreground/50 hover:text-foreground hover:bg-secondary/60 transition-colors"
                   title={sidebarMode === "full" ? "ยุบเมนู" : "ขยายเมนู"}
                 >
-                  {sidebarMode === "full" ? <PanelLeftClose size={14} /> : <PanelLeft size={14} />}
+                  {sidebarMode === "full" ? <PanelLeftClose size={16} /> : <PanelLeft size={16} />}
                 </button>
 
                 {/* งานขาย */}
                 {sidebarMode === "full" && (
-                  <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-1 pb-0.5">งานขาย</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-2 pb-1">งานขาย</p>
                 )}
                 {([
                   { id: "contacts" as Tab, label: "ติดต่อเข้ามา", icon: MessageSquare, count: contacts.filter(c => c.status === "new").length },
@@ -203,17 +203,17 @@ const AdminDashboard = () => {
                   <button
                     key={item.id}
                     onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
-                    className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-medium transition-colors ${
+                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                       tab === item.id
                         ? "bg-primary/10 text-primary"
                         : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
                     } ${sidebarMode === "icon" ? "justify-center" : ""}`}
                     title={sidebarMode === "icon" ? item.label : undefined}
                   >
-                    <item.icon size={14} className="shrink-0" />
+                    <item.icon size={16} className="shrink-0" />
                     {sidebarMode === "full" && <span className="flex-1 text-left truncate">{item.label}</span>}
                     {sidebarMode === "full" && item.count > 0 && (
-                      <span className="px-1.5 py-0.5 rounded-full bg-destructive text-destructive-foreground text-[9px] font-bold">{item.count}</span>
+                      <span className="px-1.5 py-0.5 rounded-full bg-destructive text-destructive-foreground text-[11px] font-bold">{item.count}</span>
                     )}
                     {sidebarMode === "icon" && item.count > 0 && (
                       <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-destructive" />
@@ -223,7 +223,7 @@ const AdminDashboard = () => {
 
                 {/* สินค้า */}
                 {sidebarMode === "full" && (
-                  <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-2 pb-0.5">สินค้า</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">สินค้า</p>
                 )}
                 {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
                 {([
@@ -233,21 +233,21 @@ const AdminDashboard = () => {
                   <button
                     key={item.id}
                     onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
-                    className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-medium transition-colors ${
+                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                       tab === item.id
                         ? "bg-primary/10 text-primary"
                         : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
                     } ${sidebarMode === "icon" ? "justify-center" : ""}`}
                     title={sidebarMode === "icon" ? item.label : undefined}
                   >
-                    <item.icon size={14} className="shrink-0" />
+                    <item.icon size={16} className="shrink-0" />
                     {sidebarMode === "full" && <span className="flex-1 text-left truncate">{item.label}</span>}
                   </button>
                 ))}
 
                 {/* การตลาด */}
                 {sidebarMode === "full" && (
-                  <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-2 pb-0.5">การตลาด</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">การตลาด</p>
                 )}
                 {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
                 {([
@@ -257,14 +257,14 @@ const AdminDashboard = () => {
                   <button
                     key={item.id}
                     onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
-                    className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-medium transition-colors ${
+                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                       tab === item.id
                         ? "bg-primary/10 text-primary"
                         : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
                     } ${sidebarMode === "icon" ? "justify-center" : ""}`}
                     title={sidebarMode === "icon" ? item.label : undefined}
                   >
-                    <item.icon size={14} className="shrink-0" />
+                    <item.icon size={16} className="shrink-0" />
                     {sidebarMode === "full" && <span className="flex-1 text-left truncate">{item.label}</span>}
                   </button>
                 ))}
@@ -273,7 +273,7 @@ const AdminDashboard = () => {
                 <div className="border-t border-border/50 mt-2 pt-1">
                   <button
                     onClick={() => setSidebarMode("hidden")}
-                    className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-[10px] text-muted-foreground/40 hover:text-foreground hover:bg-secondary/60 transition-colors"
+                    className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-[11px] text-muted-foreground/40 hover:text-foreground hover:bg-secondary/60 transition-colors"
                     title="ซ่อนเมนูทั้งหมด"
                   >
                     <PanelLeftClose size={12} className="shrink-0" />
@@ -317,26 +317,26 @@ const AdminDashboard = () => {
             {sidebarMode === "hidden" && (
               <button
                 onClick={() => setSidebarMode("icon")}
-                className="hidden md:flex items-center gap-1.5 mb-3 px-2.5 py-1.5 rounded-lg text-[11px] text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors"
+                className="hidden md:flex items-center gap-1.5 mb-3 px-2.5 py-1.5 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors"
               >
                 <PanelLeft size={12} /> แสดงเมนู
               </button>
             )}
 
             {/* Stats row */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
               {[
                 { label: "ติดต่อเข้ามา", value: stats.totalContacts, icon: MessageSquare, color: "text-blue-400" },
                 { label: "ขอใบเสนอราคา", value: stats.totalQuotes, icon: FileText, color: "text-purple-400" },
                 { label: "Lead ใหม่", value: stats.newLeads, icon: Users, color: "text-yellow-400" },
                 { label: "Lead คุณภาพสูง", value: stats.highScoreLeads, icon: TrendingUp, color: "text-primary" },
               ].map((s) => (
-                <div key={s.label} className="card-surface rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-1">
-                    <s.icon size={14} className={s.color} />
-                    <span className="text-[11px] text-muted-foreground">{s.label}</span>
+                <div key={s.label} className="card-surface rounded-xl p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <s.icon size={16} className={s.color} />
+                    <span className="text-sm text-muted-foreground">{s.label}</span>
                   </div>
-                  <span className="text-2xl font-bold text-foreground">{s.value}</span>
+                  <span className="text-3xl font-bold text-foreground">{s.value}</span>
                 </div>
               ))}
             </div>
@@ -371,7 +371,7 @@ const AdminDashboard = () => {
                 a.click();
                 URL.revokeObjectURL(url);
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
             >
               <Download size={14} /> Export CSV
             </button>
@@ -393,7 +393,7 @@ const AdminDashboard = () => {
                 a.click();
                 URL.revokeObjectURL(url);
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
             >
               <Download size={14} /> Export CSV
             </button>
@@ -404,7 +404,7 @@ const AdminDashboard = () => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="text-xs px-3 py-1.5 rounded-lg border border-border bg-background text-foreground"
+              className="text-sm px-3 py-2 rounded-lg border border-border bg-background text-foreground"
             >
               <option value="all">ทั้งหมด</option>
               {(tab === "contacts"
@@ -436,25 +436,25 @@ const AdminDashboard = () => {
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <span className="text-sm font-bold text-foreground">{item.name}</span>
+                      <span className="text-base font-bold text-foreground">{item.name}</span>
                       {item.company && (
                         <span className="ml-2 text-xs text-muted-foreground flex items-center gap-1 inline-flex">
-                          <Building2 size={10} /> {item.company}
+                          <Building2 size={12} /> {item.company}
                         </span>
                       )}
                     </div>
                     <div className="flex items-center gap-2">
                       <LeadScoreBadge score={item.lead_score} />
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${statusColors[item.status]}`}>
+                      <span className={`text-[11px] px-2 py-0.5 rounded-full border ${statusColors[item.status]}`}>
                         {statusLabels[item.status]}
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground line-clamp-1 mb-1">{item.message}</p>
-                  <div className="flex items-center gap-3 text-[10px] text-muted-foreground/70">
+                  <p className="text-sm text-muted-foreground line-clamp-1 mb-1.5">{item.message}</p>
+                  <div className="flex items-center gap-3 text-[11px] text-muted-foreground/70">
                     <span>{item.email}</span>
-                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={8} /> {item.phone}</span>}
-                    <span className="flex items-center gap-0.5"><Clock size={8} /> {formatDate(item.created_at)}</span>
+                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={10} /> {item.phone}</span>}
+                    <span className="flex items-center gap-0.5"><Clock size={10} /> {formatDate(item.created_at)}</span>
                     {item.business_card_data && (
                       <span className="px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 text-[9px] font-bold">📇 นามบัตร</span>
                     )}
@@ -474,16 +474,16 @@ const AdminDashboard = () => {
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <span className="text-sm font-bold text-foreground">{item.name}</span>
+                      <span className="text-base font-bold text-foreground">{item.name}</span>
                       {item.company && (
                         <span className="ml-2 text-xs text-muted-foreground inline-flex items-center gap-1">
-                          <Building2 size={10} /> {item.company}
+                          <Building2 size={12} /> {item.company}
                         </span>
                       )}
                     </div>
                     <div className="flex items-center gap-2">
                       <LeadScoreBadge score={item.lead_score} />
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${statusColors[item.status]}`}>
+                      <span className={`text-[11px] px-2 py-0.5 rounded-full border ${statusColors[item.status]}`}>
                         {statusLabels[item.status]}
                       </span>
                     </div>
@@ -491,10 +491,10 @@ const AdminDashboard = () => {
                   <p className="text-xs text-muted-foreground mb-1">
                     สินค้า: {Array.isArray(item.products) ? item.products.filter((p: any) => p.category).map((p: any) => p.category).join(", ") || "ไม่ระบุ" : "ไม่ระบุ"}
                   </p>
-                  <div className="flex items-center gap-3 text-[10px] text-muted-foreground/70">
+                  <div className="flex items-center gap-3 text-[11px] text-muted-foreground/70">
                     <span>{item.email}</span>
-                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={8} /> {item.phone}</span>}
-                    <span className="flex items-center gap-0.5"><Clock size={8} /> {formatDate(item.created_at)}</span>
+                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={10} /> {item.phone}</span>}
+                    <span className="flex items-center gap-0.5"><Clock size={10} /> {formatDate(item.created_at)}</span>
                   </div>
                 </button>
               ))
@@ -511,31 +511,31 @@ const AdminDashboard = () => {
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <span className="text-sm font-bold text-foreground">{item.name}</span>
+                      <span className="text-base font-bold text-foreground">{item.name}</span>
                       {item.company && (
                         <span className="ml-2 text-xs text-muted-foreground inline-flex items-center gap-1">
-                          <Building2 size={10} /> {item.company}
+                          <Building2 size={12} /> {item.company}
                         </span>
                       )}
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${
+                      <span className={`text-[11px] px-2 py-0.5 rounded-full border ${
                         item.service_type === "saas" ? "bg-blue-500/10 text-blue-400 border-blue-500/20" : "bg-purple-500/10 text-purple-400 border-purple-500/20"
                       }`}>
                         {item.service_type === "saas" ? "SaaS" : "พัฒนาเฉพาะ"}
                       </span>
                       <LeadScoreBadge score={item.lead_score} />
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${statusColors[item.status] || statusColors.new}`}>
+                      <span className={`text-[11px] px-2 py-0.5 rounded-full border ${statusColors[item.status] || statusColors.new}`}>
                         {statusLabels[item.status] || item.status}
                       </span>
                     </div>
                   </div>
-                  {item.current_problems && <p className="text-xs text-muted-foreground line-clamp-1 mb-1">{item.current_problems}</p>}
-                  <div className="flex items-center gap-3 text-[10px] text-muted-foreground/70">
+                  {item.current_problems && <p className="text-sm text-muted-foreground line-clamp-1 mb-1.5">{item.current_problems}</p>}
+                  <div className="flex items-center gap-3 text-[11px] text-muted-foreground/70">
                     <span>{item.email}</span>
-                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={8} /> {item.phone}</span>}
+                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={10} /> {item.phone}</span>}
                     {item.budget_range && <span className="flex items-center gap-0.5"><Wallet size={8} /> {item.budget_range}</span>}
-                    <span className="flex items-center gap-0.5"><Clock size={8} /> {formatDate(item.created_at)}</span>
+                    <span className="flex items-center gap-0.5"><Clock size={10} /> {formatDate(item.created_at)}</span>
                   </div>
                 </button>
               ))
@@ -552,25 +552,25 @@ const AdminDashboard = () => {
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <span className="text-sm font-bold text-foreground">{item.name || "ไม่ระบุชื่อ"}</span>
+                      <span className="text-base font-bold text-foreground">{item.name || "ไม่ระบุชื่อ"}</span>
                       {item.company && (
                         <span className="ml-2 text-xs text-muted-foreground inline-flex items-center gap-1">
-                          <Building2 size={10} /> {item.company}
+                          <Building2 size={12} /> {item.company}
                         </span>
                       )}
                     </div>
                     <div className="flex items-center gap-2">
                       <LeadScoreBadge score={item.lead_score} />
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${statusColors[item.status] || statusColors.new}`}>
+                      <span className={`text-[11px] px-2 py-0.5 rounded-full border ${statusColors[item.status] || statusColors.new}`}>
                         {statusLabels[item.status] || item.status}
                       </span>
                     </div>
                   </div>
-                  {item.interest && <p className="text-xs text-muted-foreground line-clamp-1 mb-1">สนใจ: {item.interest}</p>}
-                  <div className="flex items-center gap-3 text-[10px] text-muted-foreground/70">
+                  {item.interest && <p className="text-sm text-muted-foreground line-clamp-1 mb-1.5">สนใจ: {item.interest}</p>}
+                  <div className="flex items-center gap-3 text-[11px] text-muted-foreground/70">
                     {item.email && <span>{item.email}</span>}
-                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={8} /> {item.phone}</span>}
-                    <span className="flex items-center gap-0.5"><Clock size={8} /> {formatDate(item.created_at)}</span>
+                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={10} /> {item.phone}</span>}
+                    <span className="flex items-center gap-0.5"><Clock size={10} /> {formatDate(item.created_at)}</span>
                   </div>
                 </button>
               ))
@@ -585,10 +585,10 @@ const AdminDashboard = () => {
                       {item.name && <span className="ml-2 text-xs text-muted-foreground">({item.name})</span>}
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${item.is_active ? "bg-green-500/10 text-green-400 border-green-500/20" : "bg-red-500/10 text-red-400 border-red-500/20"}`}>
+                      <span className={`text-[11px] px-2 py-0.5 rounded-full border ${item.is_active ? "bg-green-500/10 text-green-400 border-green-500/20" : "bg-red-500/10 text-red-400 border-red-500/20"}`}>
                         {item.is_active ? "Active" : "Inactive"}
                       </span>
-                      <span className="text-[10px] text-muted-foreground/70">{formatDate(item.created_at)}</span>
+                      <span className="text-[11px] text-muted-foreground/70">{formatDate(item.created_at)}</span>
                     </div>
                   </div>
                 </div>
@@ -599,12 +599,12 @@ const AdminDashboard = () => {
           {/* Detail Panel */}
           <div className="lg:col-span-1">
             {selectedItem ? (
-              <div className="card-surface rounded-xl p-5 sticky top-20">
-                <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2">
-                  <Eye size={14} /> รายละเอียด
+              <div className="card-surface rounded-xl p-6 sticky top-20">
+                <h3 className="text-base font-bold text-foreground mb-4 flex items-center gap-2">
+                  <Eye size={16} /> รายละเอียด
                 </h3>
 
-                <div className="space-y-3 text-xs">
+                <div className="space-y-3 text-sm">
                   <div>
                     <span className="text-muted-foreground">ชื่อ:</span>
                     <span className="ml-2 text-foreground font-medium">{selectedItem.name}</span>
@@ -683,7 +683,7 @@ const AdminDashboard = () => {
                             {selectedItem.business_card_data.address && (
                               <div className="text-xs"><span className="text-muted-foreground">ที่อยู่:</span> <span className="text-foreground">{selectedItem.business_card_data.address}</span></div>
                             )}
-                            <div className="text-[10px] text-muted-foreground/60 pt-1">
+                            <div className="text-[11px] text-muted-foreground/60 pt-1">
                               สแกนเมื่อ: {selectedItem.business_card_data.scanned_at ? new Date(selectedItem.business_card_data.scanned_at).toLocaleString("th-TH") : "-"}
                             </div>
                           </div>
@@ -716,22 +716,22 @@ const AdminDashboard = () => {
                                 {parsed.timeline && (
                                   <div className="rounded-lg bg-muted/40 p-2 text-center">
                                     <CalendarClock size={12} className="mx-auto mb-0.5 text-primary" />
-                                    <p className="text-[10px] text-muted-foreground">ระยะเวลา</p>
-                                    <p className="text-[11px] font-medium text-foreground">{parsed.timeline}</p>
+                                    <p className="text-[11px] text-muted-foreground">ระยะเวลา</p>
+                                    <p className="text-xs font-medium text-foreground">{parsed.timeline}</p>
                                   </div>
                                 )}
                                 {parsed.qty && (
                                   <div className="rounded-lg bg-muted/40 p-2 text-center">
                                     <Hash size={12} className="mx-auto mb-0.5 text-primary" />
-                                    <p className="text-[10px] text-muted-foreground">จำนวน</p>
-                                    <p className="text-[11px] font-medium text-foreground">{parsed.qty}</p>
+                                    <p className="text-[11px] text-muted-foreground">จำนวน</p>
+                                    <p className="text-xs font-medium text-foreground">{parsed.qty}</p>
                                   </div>
                                 )}
                                 {parsed.budget && (
                                   <div className="rounded-lg bg-muted/40 p-2 text-center">
                                     <Wallet size={12} className="mx-auto mb-0.5 text-primary" />
-                                    <p className="text-[10px] text-muted-foreground">งบประมาณ</p>
-                                    <p className="text-[11px] font-medium text-foreground">{parsed.budget}</p>
+                                    <p className="text-[11px] text-muted-foreground">งบประมาณ</p>
+                                    <p className="text-xs font-medium text-foreground">{parsed.budget}</p>
                                   </div>
                                 )}
                               </div>
@@ -811,7 +811,7 @@ const AdminDashboard = () => {
                           <div className="space-y-1.5 max-h-64 overflow-y-auto rounded-lg bg-muted/20 p-3">
                             {selectedItem.messages.map((m: any, i: number) => (
                               <div key={i} className={`flex gap-2 ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-                                <div className={`max-w-[85%] rounded-lg px-3 py-1.5 text-[11px] leading-relaxed ${
+                                <div className={`max-w-[85%] rounded-lg px-3 py-1.5 text-xs leading-relaxed ${
                                   m.role === "user"
                                     ? "bg-primary/15 text-foreground"
                                     : "bg-muted/50 text-muted-foreground"
@@ -838,7 +838,7 @@ const AdminDashboard = () => {
                           : "quote_requests";
                         updateStatus(table, selectedItem.id, e.target.value);
                       }}
-                      className="w-full px-3 py-2 rounded-lg border border-border bg-background text-xs text-foreground"
+                      className="w-full px-3 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground"
                     >
                       {(selectedItem._type === "contact"
                         ? ["new", "contacted", "qualified", "closed"]
@@ -851,7 +851,7 @@ const AdminDashboard = () => {
                 </div>
               </div>
             ) : (
-              <div className="card-surface rounded-xl p-8 text-center text-muted-foreground text-xs">
+              <div className="card-surface rounded-xl p-10 text-center text-muted-foreground text-sm">
                 <Eye size={24} className="mx-auto mb-2 opacity-30" />
                 เลือกรายการเพื่อดูรายละเอียด
               </div>

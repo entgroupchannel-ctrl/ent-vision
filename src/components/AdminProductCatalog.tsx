@@ -185,8 +185,8 @@ const AdminProductCatalog = () => {
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-2">
-        <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
-          <Package size={16} className="text-primary" /> สินค้าทั้งหมด ({products.length})
+        <h3 className="text-base font-bold text-foreground flex items-center gap-2">
+          <Package size={18} className="text-primary" /> สินค้าทั้งหมด ({products.length})
         </h3>
         <div className="flex items-center gap-2">
           <button onClick={fetchProducts} className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground">
@@ -194,7 +194,7 @@ const AdminProductCatalog = () => {
           </button>
           <button
             onClick={() => { setShowAddForm(!showAddForm); setEditingId(null); setForm(emptyProduct); }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors"
           >
             <Plus size={14} /> เพิ่มสินค้า
           </button>
@@ -230,46 +230,46 @@ const AdminProductCatalog = () => {
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-medium text-foreground mb-1">รุ่น (Model) *</label>
+              <label className="block text-sm font-medium text-foreground mb-1">รุ่น (Model) *</label>
               <input value={form.model} onChange={(e) => setForm((f) => ({ ...f, model: e.target.value }))} className={inputClass} placeholder="เช่น GT9000" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-foreground mb-1">ชื่อภาษาไทย</label>
+              <label className="block text-sm font-medium text-foreground mb-1">ชื่อภาษาไทย</label>
               <input value={form.name_th} onChange={(e) => setForm((f) => ({ ...f, name_th: e.target.value }))} className={inputClass} placeholder="มินิพีซี รุ่น..." />
             </div>
             <div>
-              <label className="block text-xs font-medium text-foreground mb-1">หมวดหมู่ *</label>
+              <label className="block text-sm font-medium text-foreground mb-1">หมวดหมู่ *</label>
               <select value={form.category} onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))} className={inputClass}>
                 <option value="">เลือกหมวดหมู่</option>
                 {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-foreground mb-1">ราคาพื้นฐาน (฿) *</label>
+              <label className="block text-sm font-medium text-foreground mb-1">ราคาพื้นฐาน (฿) *</label>
               <input type="number" value={form.base_price} onChange={(e) => setForm((f) => ({ ...f, base_price: parseFloat(e.target.value) || 0 }))} className={inputClass} placeholder="0" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-foreground mb-1">สั่งขั้นต่ำ (ชิ้น)</label>
+              <label className="block text-sm font-medium text-foreground mb-1">สั่งขั้นต่ำ (ชิ้น)</label>
               <input type="number" value={form.min_qty} onChange={(e) => setForm((f) => ({ ...f, min_qty: parseInt(e.target.value) || 1 }))} className={inputClass} />
             </div>
             <div>
-              <label className="block text-xs font-medium text-foreground mb-1">Lead time (วัน)</label>
+              <label className="block text-sm font-medium text-foreground mb-1">Lead time (วัน)</label>
               <input type="number" value={form.lead_days} onChange={(e) => setForm((f) => ({ ...f, lead_days: parseInt(e.target.value) || 7 }))} className={inputClass} />
             </div>
             <div>
-              <label className="block text-xs font-medium text-foreground mb-1">CPU</label>
+              <label className="block text-sm font-medium text-foreground mb-1">CPU</label>
               <input value={form.specs_cpu} onChange={(e) => setForm((f) => ({ ...f, specs_cpu: e.target.value }))} className={inputClass} placeholder="Intel Core i5-1235U" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-foreground mb-1">RAM</label>
+              <label className="block text-sm font-medium text-foreground mb-1">RAM</label>
               <input value={form.specs_ram} onChange={(e) => setForm((f) => ({ ...f, specs_ram: e.target.value }))} className={inputClass} placeholder="8GB DDR4" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-foreground mb-1">Storage</label>
+              <label className="block text-sm font-medium text-foreground mb-1">Storage</label>
               <input value={form.specs_storage} onChange={(e) => setForm((f) => ({ ...f, specs_storage: e.target.value }))} className={inputClass} placeholder="256GB SSD" />
             </div>
             <div className="sm:col-span-2">
-              <label className="block text-xs font-medium text-foreground mb-1">หมายเหตุ</label>
+              <label className="block text-sm font-medium text-foreground mb-1">หมายเหตุ</label>
               <input value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))} className={inputClass} placeholder="หมายเหตุเพิ่มเติม" />
             </div>
             <div className="flex items-center gap-2 pt-5">
@@ -278,7 +278,7 @@ const AdminProductCatalog = () => {
             </div>
           </div>
           <div className="flex gap-2 pt-2">
-            <button onClick={handleSave} disabled={saving} className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition-colors disabled:opacity-60">
+            <button onClick={handleSave} disabled={saving} className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60">
               {saving ? <Loader2 size={12} className="animate-spin" /> : <Save size={12} />}
               {editingId ? "อัปเดต" : "บันทึก"}
             </button>
@@ -301,12 +301,12 @@ const AdminProductCatalog = () => {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-xs">
+            <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border bg-secondary/30">
-                  <th className="text-left px-4 py-2.5 text-muted-foreground font-medium">รุ่น</th>
-                  <th className="text-left px-4 py-2.5 text-muted-foreground font-medium">หมวดหมู่</th>
-                  <th className="text-left px-4 py-2.5 text-muted-foreground font-medium">CPU</th>
+                  <th className="text-left px-4 py-3 text-muted-foreground font-medium">รุ่น</th>
+                  <th className="text-left px-4 py-3 text-muted-foreground font-medium">หมวดหมู่</th>
+                  <th className="text-left px-4 py-3 text-muted-foreground font-medium">CPU</th>
                   <th className="text-right px-4 py-2.5 text-muted-foreground font-medium">ราคาพื้นฐาน</th>
                   <th className="text-center px-4 py-2.5 text-muted-foreground font-medium">สถานะ</th>
                   <th className="text-center px-4 py-2.5 text-muted-foreground font-medium">จัดการ</th>
@@ -315,15 +315,15 @@ const AdminProductCatalog = () => {
               <tbody>
                 {filtered.map((p) => (
                   <tr key={p.id} className="border-b border-border/50 hover:bg-secondary/20 transition-colors">
-                    <td className="px-4 py-2.5">
+                    <td className="px-4 py-3">
                       <span className="font-bold text-foreground">{p.model}</span>
-                      {p.name_th && <span className="block text-[10px] text-muted-foreground">{p.name_th}</span>}
+                      {p.name_th && <span className="block text-xs text-muted-foreground">{p.name_th}</span>}
                     </td>
                     <td className="px-4 py-2.5 text-muted-foreground">{p.category}</td>
                     <td className="px-4 py-2.5 text-muted-foreground">{p.specs?.cpu || "-"}</td>
                     <td className="px-4 py-2.5 text-right font-bold text-foreground">{formatPrice(p.base_price)}</td>
                     <td className="px-4 py-2.5 text-center">
-                      <span className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded-full border font-medium ${
+                      <span className={`inline-flex items-center gap-1 text-xs px-1.5 py-0.5 rounded-full border font-medium ${
                         p.is_active ? "bg-green-500/10 text-green-500 border-green-500/20" : "bg-muted text-muted-foreground border-border"
                       }`}>
                         {p.is_active ? "เปิดขาย" : "ปิด"}
