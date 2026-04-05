@@ -44,7 +44,7 @@ const CorporatePricing = () => {
       <PageBanner
         title="ราคาองค์กร & Volume Discount"
         subtitle="เงื่อนไขพิเศษสำหรับลูกค้าองค์กร โรงงาน และโครงการภาครัฐ"
-        image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80"
+        image="/images/unsplash/1454165804606-c3d57b_w1200.jpg"
       />
 
 

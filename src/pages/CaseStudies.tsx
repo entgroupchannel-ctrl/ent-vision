@@ -106,7 +106,7 @@ const CaseStudies = () => {
       <PageBanner
         title="กรณีศึกษาและผลงาน"
         subtitle="ลูกค้าจากหลากหลายอุตสาหกรรมไว้วางใจ ENT Group — จากสนามบิน รถไฟฟ้า โรงงาน ไปจนถึงสนามกอล์ฟ"
-        image="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80"
+        image="/images/unsplash/1581091226825-a6a2a5_w1200.jpg"
       />
 
       {/* Site Reference Gallery */}
