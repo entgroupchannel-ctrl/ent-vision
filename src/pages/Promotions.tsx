@@ -247,12 +247,23 @@ const PromoCard = ({ promo, featured = false }: { promo: Promo; featured?: boole
           <span className={`absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${sc.color}`}>
             <sc.icon size={10} /> {sc.label}
           </span>
-          <img
-            src={promo.image}
-            alt={promo.title}
-            className={`object-contain ${featured ? "max-h-64" : "max-h-48"}`}
-            loading="lazy"
-          />
+          {promo.ctaHref ? (
+            <Link to={promo.ctaHref}>
+              <img
+                src={promo.image}
+                alt={promo.title}
+                className={`object-contain ${featured ? "max-h-64" : "max-h-48"} hover:scale-105 transition-transform duration-300`}
+                loading="lazy"
+              />
+            </Link>
+          ) : (
+            <img
+              src={promo.image}
+              alt={promo.title}
+              className={`object-contain ${featured ? "max-h-64" : "max-h-48"}`}
+              loading="lazy"
+            />
+          )}
         </div>
 
         {/* Content */}
