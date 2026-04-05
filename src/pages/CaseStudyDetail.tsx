@@ -98,6 +98,40 @@ const CaseStudyDetail = () => {
                 </CardContent>
               </Card>
             )}
+
+            {/* YouTube Videos */}
+            {cs.youtubeVideos && cs.youtubeVideos.length > 0 && (
+              <section>
+                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <Play className="w-5 h-5 text-destructive" /> วิดีโอที่เกี่ยวข้อง
+                </h2>
+                <div className="grid gap-4">
+                  {cs.youtubeVideos.map((v) => (
+                    <div key={v.videoId} className="rounded-lg overflow-hidden border border-border/60">
+                      <div className="aspect-video">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${v.videoId}`}
+                          title={v.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                          loading="lazy"
+                        />
+                      </div>
+                      <p className="text-sm font-medium text-foreground p-3">{v.title}</p>
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href="https://www.youtube.com/@ENTGROUP-TH"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-primary font-medium mt-3 hover:underline"
+                >
+                  <Play className="w-4 h-4" /> ดูวิดีโอทั้งหมดบน YouTube Channel
+                </a>
+              </section>
+            )}
           </div>
 
           {/* Sidebar */}
