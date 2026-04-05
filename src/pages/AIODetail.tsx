@@ -194,7 +194,6 @@ const AIODetail = () => {
                 <MessageSquare className="w-4 h-4" /> สอบถามทาง LINE
               </LineQRButton>
             </div>
-            </div>
           </div>
         </div>
 
