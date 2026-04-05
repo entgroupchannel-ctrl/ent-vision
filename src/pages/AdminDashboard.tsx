@@ -5,6 +5,7 @@ import {
   Filter, RefreshCw, Eye, Clock, CheckCircle, XCircle,
   Star, Phone, Building2, MessageSquare, LogOut, Shield, Download,
   CalendarClock, Hash, Wallet, Code2, Cloud,
+  PanelLeftClose, PanelLeft, Package, FolderOpen, BarChart3,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -72,6 +73,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [sidebarMode, setSidebarMode] = useState<"full" | "icon" | "hidden">("full");
 
   const fetchData = async () => {
     setLoading(true);
@@ -168,80 +170,121 @@ const AdminDashboard = () => {
       </div>
 
       <div className="container max-w-7xl mx-auto px-6 py-6">
-        <div className="flex gap-6">
-          {/* ═══ Sidebar ═══ */}
-          <aside className="w-52 shrink-0 hidden md:block">
-            <nav className="card-surface rounded-xl p-2 space-y-0.5 sticky top-20">
-              {/* งานขาย */}
-              <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 px-3 pt-2 pb-1">งานขาย</p>
-              {([
-                { id: "contacts" as Tab, label: "ติดต่อเข้ามา", icon: MessageSquare, count: contacts.filter(c => c.status === "new").length },
-                { id: "quotes" as Tab, label: "ใบเสนอราคา", icon: FileText, count: quotes.filter(q => q.status === "new").length },
-                { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
-                { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
-                { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
-              ]).map((item) => (
+        <div className="flex gap-0">
+          {/* ═══ Sidebar — 3 states: full (200px) / icon (48px) / hidden (0px) ═══ */}
+          {sidebarMode !== "hidden" && (
+            <aside
+              className={`shrink-0 hidden md:block transition-all duration-200 ${
+                sidebarMode === "full" ? "w-52" : "w-12"
+              }`}
+              style={{ marginRight: sidebarMode === "full" ? 16 : 8 }}
+            >
+              <nav className="card-surface rounded-xl p-1.5 sticky top-20">
+                {/* Toggle button */}
                 <button
-                  key={item.id}
-                  onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                    tab === item.id
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
-                  }`}
+                  onClick={() => setSidebarMode(sidebarMode === "full" ? "icon" : "full")}
+                  className="w-full flex items-center justify-center py-1.5 mb-1 rounded-lg text-muted-foreground/50 hover:text-foreground hover:bg-secondary/60 transition-colors"
+                  title={sidebarMode === "full" ? "ยุบเมนู" : "ขยายเมนู"}
                 >
-                  <item.icon size={14} />
-                  <span className="flex-1 text-left">{item.label}</span>
-                  {item.count > 0 && (
-                    <span className="px-1.5 py-0.5 rounded-full bg-destructive text-destructive-foreground text-[9px] font-bold">{item.count}</span>
-                  )}
+                  {sidebarMode === "full" ? <PanelLeftClose size={14} /> : <PanelLeft size={14} />}
                 </button>
-              ))}
-              {/* สินค้า */}
-              <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 px-3 pt-3 pb-1">สินค้า</p>
-              {([
-                { id: "catalog" as Tab, label: "สินค้า + ราคา", icon: FileText },
-                { id: "documents" as Tab, label: "คลังเอกสาร", icon: FileText },
-              ]).map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                    tab === item.id
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
-                  }`}
-                >
-                  <item.icon size={14} />
-                  <span className="flex-1 text-left">{item.label}</span>
-                </button>
-              ))}
-              {/* การตลาด */}
-              <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 px-3 pt-3 pb-1">การตลาด</p>
-              {([
-                { id: "engagement" as Tab, label: "Engagement", icon: TrendingUp },
-                { id: "subscribers" as Tab, label: "สมาชิก", icon: Mail, count: subscribers.length },
-              ]).map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
-                    tab === item.id
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
-                  }`}
-                >
-                  <item.icon size={14} />
-                  <span className="flex-1 text-left">{item.label}</span>
-                  {"count" in item && item.count > 0 && (
-                    <span className="text-[10px] text-muted-foreground/60">{item.count}</span>
-                  )}
-                </button>
-              ))}
-            </nav>
-          </aside>
 
-          {/* ═══ Mobile tab bar (visible only on small screens) ═══ */}
+                {/* งานขาย */}
+                {sidebarMode === "full" && (
+                  <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-1 pb-0.5">งานขาย</p>
+                )}
+                {([
+                  { id: "contacts" as Tab, label: "ติดต่อเข้ามา", icon: MessageSquare, count: contacts.filter(c => c.status === "new").length },
+                  { id: "quotes" as Tab, label: "ใบเสนอราคา", icon: FileText, count: quotes.filter(q => q.status === "new").length },
+                  { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
+                  { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
+                  { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
+                ]).map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
+                    className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-medium transition-colors ${
+                      tab === item.id
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                    } ${sidebarMode === "icon" ? "justify-center" : ""}`}
+                    title={sidebarMode === "icon" ? item.label : undefined}
+                  >
+                    <item.icon size={14} className="shrink-0" />
+                    {sidebarMode === "full" && <span className="flex-1 text-left truncate">{item.label}</span>}
+                    {sidebarMode === "full" && item.count > 0 && (
+                      <span className="px-1.5 py-0.5 rounded-full bg-destructive text-destructive-foreground text-[9px] font-bold">{item.count}</span>
+                    )}
+                    {sidebarMode === "icon" && item.count > 0 && (
+                      <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-destructive" />
+                    )}
+                  </button>
+                ))}
+
+                {/* สินค้า */}
+                {sidebarMode === "full" && (
+                  <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-2 pb-0.5">สินค้า</p>
+                )}
+                {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
+                {([
+                  { id: "catalog" as Tab, label: "สินค้า + ราคา", icon: Package },
+                  { id: "documents" as Tab, label: "คลังเอกสาร", icon: FolderOpen },
+                ]).map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
+                    className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-medium transition-colors ${
+                      tab === item.id
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                    } ${sidebarMode === "icon" ? "justify-center" : ""}`}
+                    title={sidebarMode === "icon" ? item.label : undefined}
+                  >
+                    <item.icon size={14} className="shrink-0" />
+                    {sidebarMode === "full" && <span className="flex-1 text-left truncate">{item.label}</span>}
+                  </button>
+                ))}
+
+                {/* การตลาด */}
+                {sidebarMode === "full" && (
+                  <p className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-2 pb-0.5">การตลาด</p>
+                )}
+                {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
+                {([
+                  { id: "engagement" as Tab, label: "Engagement", icon: BarChart3 },
+                  { id: "subscribers" as Tab, label: "สมาชิก", icon: Mail },
+                ]).map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => { setTab(item.id); setStatusFilter("all"); setSelectedItem(null); }}
+                    className={`w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-xs font-medium transition-colors ${
+                      tab === item.id
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                    } ${sidebarMode === "icon" ? "justify-center" : ""}`}
+                    title={sidebarMode === "icon" ? item.label : undefined}
+                  >
+                    <item.icon size={14} className="shrink-0" />
+                    {sidebarMode === "full" && <span className="flex-1 text-left truncate">{item.label}</span>}
+                  </button>
+                ))}
+
+                {/* Hide sidebar completely */}
+                <div className="border-t border-border/50 mt-2 pt-1">
+                  <button
+                    onClick={() => setSidebarMode("hidden")}
+                    className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg text-[10px] text-muted-foreground/40 hover:text-foreground hover:bg-secondary/60 transition-colors"
+                    title="ซ่อนเมนูทั้งหมด"
+                  >
+                    <PanelLeftClose size={12} className="shrink-0" />
+                    {sidebarMode === "full" && <span>ซ่อนเมนู</span>}
+                  </button>
+                </div>
+              </nav>
+            </aside>
+          )}
+
+          {/* ═══ Mobile tab bar ═══ */}
           <div className="md:hidden w-full mb-4 overflow-x-auto flex gap-1 border-b border-border pb-2">
             {([
               { id: "contacts" as Tab, label: "ติดต่อ" },
@@ -270,6 +313,16 @@ const AdminDashboard = () => {
 
           {/* ═══ Main Content ═══ */}
           <main className="flex-1 min-w-0">
+            {/* Show sidebar button when hidden */}
+            {sidebarMode === "hidden" && (
+              <button
+                onClick={() => setSidebarMode("icon")}
+                className="hidden md:flex items-center gap-1.5 mb-3 px-2.5 py-1.5 rounded-lg text-[11px] text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors"
+              >
+                <PanelLeft size={12} /> แสดงเมนู
+              </button>
+            )}
+
             {/* Stats row */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
               {[
