@@ -59,7 +59,8 @@ const LineQRDialog = ({ open, onClose }: LineQRDialogProps) => {
           เพิ่มเพื่อนใน LINE
         </a>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
