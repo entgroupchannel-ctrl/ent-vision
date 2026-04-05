@@ -15,6 +15,7 @@ import ShareButtons from "@/components/ShareButtons";
 import logo from "@/assets/logo-entgroup.avif";
 import gt4500CpuOptions from "@/assets/gt4500-cpu-options.png";
 import gtSeriesHero from "@/assets/gt-series-hero-lineup.jpg";
+import gtSeriesHeroBg from "@/assets/gt-series-hero-bg.jpg";
 import gt1000Banner from "@/assets/gt1000-banner.jpg";
 import gt2000Banner from "@/assets/gt2000-banner.jpg";
 import gt3000Banner from "@/assets/gt3000-banner.jpg";
@@ -702,122 +703,89 @@ const GTSeries = () => {
       </nav>
 
       {/* Hero — Bold Industrial */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5">
-        {/* Background texture */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(var(--primary)/0.08),transparent_60%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,hsl(var(--primary)/0.05),transparent_60%)]" />
-          {/* Diagonal grid lines for industrial feel */}
-          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, currentColor 0, currentColor 1px, transparent 0, transparent 50%)', backgroundSize: '24px 24px' }} />
+      <section className="relative overflow-hidden min-h-[480px] md:min-h-[560px] flex items-center">
+        {/* Full-bleed background image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={gtSeriesHeroBg}
+            alt="Industrial factory production line with fanless computers"
+            className="w-full h-full object-cover"
+            width={1920}
+            height={900}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-black/20" />
         </div>
 
-        <div className="relative container max-w-7xl mx-auto px-6 py-16 md:py-24">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            {/* Left — Text */}
-            <div className="space-y-8">
-              <div className="flex items-center gap-3">
-                <div className="h-px flex-1 max-w-[40px] bg-primary" />
-                <span className="text-xs font-bold tracking-[0.2em] uppercase text-primary">Industrial Fanless Computer</span>
-              </div>
+        <div className="relative z-10 container max-w-7xl mx-auto px-6 py-16 md:py-24">
+          <div className="max-w-2xl space-y-8">
+            <div className="flex items-center gap-3">
+              <div className="h-px flex-1 max-w-[40px] bg-primary" />
+              <span className="text-xs font-bold tracking-[0.2em] uppercase text-primary">Industrial Fanless Computer</span>
+            </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black tracking-tight leading-[0.9]">
-                GT<br />
-                <span className="text-gradient">SERIES</span>
-              </h1>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black tracking-tight leading-[0.9] text-white">
+              GT<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[hsl(var(--accent))]">SERIES</span>
+            </h1>
 
-              {/* Tagline keywords — bold industrial style */}
-              <div className="flex flex-wrap gap-3">
-                {[
-                  { word: "ถึก", Icon: Shield },
-                  { word: "ทน", Icon: Flame },
-                  { word: "แกร่ง", Icon: Wrench },
-                  { word: "แข็งแรง", Icon: Zap },
-                ].map((item) => (
-                  <span
-                    key={item.word}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary/10 border border-primary/20 text-foreground font-bold text-base tracking-wide"
-                  >
-                    <item.Icon size={18} className="text-primary" />
-                    {item.word}
-                  </span>
-                ))}
-              </div>
-
-              <p className="text-muted-foreground leading-relaxed max-w-lg text-sm md:text-base">
-                คอมพิวเตอร์อุตสาหกรรม Fanless ขนาดกะทัดรัด โครงอลูมิเนียมหนาทั้งตัว
-                ครีบระบายความร้อนถี่ๆ — ทนฝุ่น ทนสั่นสะเทือน ทำงาน 24/7 ไม่มีสะดุด
-              </p>
-
-              {/* Quick stats */}
-              <div className="grid grid-cols-3 gap-3 md:gap-4">
-                <div className="text-center p-2.5 md:p-3 rounded-lg bg-card border border-border">
-                  <div className="text-xl md:text-2xl font-black text-primary">13+</div>
-                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1">รุ่นให้เลือก</div>
-                </div>
-                <div className="text-center p-2.5 md:p-3 rounded-lg bg-card border border-border">
-                  <div className="text-xl md:text-2xl font-black text-primary">0°</div>
-                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1">เสียงรบกวน</div>
-                </div>
-                <div className="text-center p-2.5 md:p-3 rounded-lg bg-card border border-border">
-                  <div className="text-xl md:text-2xl font-black text-primary">24/7</div>
-                  <div className="text-[10px] md:text-xs text-muted-foreground mt-1">ทำงานต่อเนื่อง</div>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button
-                  onClick={() => handleTabChange("overview")}
-                  className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-primary/25"
+            {/* Tagline keywords */}
+            <div className="flex flex-wrap gap-3">
+              {[
+                { word: "ถึก", Icon: Shield },
+                { word: "ทน", Icon: Flame },
+                { word: "แกร่ง", Icon: Wrench },
+                { word: "แข็งแรง", Icon: Zap },
+              ].map((item) => (
+                <span
+                  key={item.word}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold text-base tracking-wide"
                 >
-                  ดูรุ่นทั้งหมด <ArrowLeft size={16} className="rotate-180" />
-                </button>
-                <button
-                  onClick={() => {
-                    const el = document.getElementById("comparison");
-                    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-                  }}
-                  className="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-3 md:py-3.5 rounded-full border-2 border-primary/40 text-primary font-bold text-sm hover:bg-primary/10 transition-all group"
-                >
-                  <Filter size={16} />
-                  <span>เปรียบเทียบสเปก</span>
-                  <span className="hidden sm:inline px-2 py-0.5 rounded-full bg-primary/15 text-[10px] font-bold tracking-wide uppercase group-hover:bg-primary/25 transition-colors">Smart Filter</span>
-                </button>
+                  <item.Icon size={18} className="text-primary" />
+                  {item.word}
+                </span>
+              ))}
+            </div>
+
+            <p className="text-white/70 leading-relaxed max-w-lg text-sm md:text-base">
+              คอมพิวเตอร์อุตสาหกรรม Fanless ขนาดกะทัดรัด โครงอลูมิเนียมหนาทั้งตัว
+              ครีบระบายความร้อนถี่ๆ — ทนฝุ่น ทนสั่นสะเทือน ทำงาน 24/7 ไม่มีสะดุด
+            </p>
+
+            {/* Quick stats */}
+            <div className="grid grid-cols-3 gap-3 md:gap-4">
+              <div className="text-center p-2.5 md:p-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/15">
+                <div className="text-xl md:text-2xl font-black text-primary">13+</div>
+                <div className="text-[10px] md:text-xs text-white/50 mt-1">รุ่นให้เลือก</div>
+              </div>
+              <div className="text-center p-2.5 md:p-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/15">
+                <div className="text-xl md:text-2xl font-black text-primary">0°</div>
+                <div className="text-[10px] md:text-xs text-white/50 mt-1">เสียงรบกวน</div>
+              </div>
+              <div className="text-center p-2.5 md:p-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/15">
+                <div className="text-xl md:text-2xl font-black text-primary">24/7</div>
+                <div className="text-[10px] md:text-xs text-white/50 mt-1">ทำงานต่อเนื่อง</div>
               </div>
             </div>
 
-            {/* Right — Product showcase */}
-            <div className="relative">
-              <div className="relative z-10 rounded-2xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/10">
-                <img
-                  src={gtSeriesHero}
-                  alt="GT Series Industrial PC Lineup"
-                  className="w-full h-auto"
-                />
-              </div>
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-primary/10 blur-2xl" />
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 rounded-full bg-primary/5 blur-3xl" />
-
-              {/* Floating badge */}
-              <div className="absolute -bottom-4 left-6 z-20 px-4 md:px-5 py-2.5 md:py-3 rounded-xl bg-card border border-border shadow-lg hidden sm:flex">
-                <div className="flex items-center gap-3">
-                  <Thermometer className="text-primary" size={20} />
-                  <div>
-                    <div className="text-xs font-bold text-foreground">ทนอุณหภูมิ 0–60°C</div>
-                    <div className="text-[10px] text-muted-foreground">Wide Temperature Range</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -top-3 right-8 z-20 px-3 md:px-4 py-2 md:py-2.5 rounded-xl bg-card border border-border shadow-lg hidden sm:flex">
-                <div className="flex items-center gap-2">
-                  <Wind className="text-primary" size={18} />
-                  <div>
-                    <div className="text-xs font-bold text-foreground">Fanless 0 dB</div>
-                    <div className="text-[10px] text-muted-foreground">เงียบสนิท</div>
-                  </div>
-                </div>
-              </div>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={() => handleTabChange("overview")}
+                className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-full bg-primary text-primary-foreground font-bold text-sm hover:opacity-90 transition-all shadow-lg shadow-primary/25"
+              >
+                ดูรุ่นทั้งหมด <ArrowLeft size={16} className="rotate-180" />
+              </button>
+              <button
+                onClick={() => {
+                  const el = document.getElementById("comparison");
+                  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
+                className="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-3 md:py-3.5 rounded-full border-2 border-white/30 text-white font-bold text-sm hover:bg-white/10 transition-all group"
+              >
+                <Filter size={16} />
+                <span>เปรียบเทียบสเปก</span>
+                <span className="hidden sm:inline px-2 py-0.5 rounded-full bg-white/15 text-[10px] font-bold tracking-wide uppercase group-hover:bg-white/25 transition-colors">Smart Filter</span>
+              </button>
             </div>
           </div>
         </div>
