@@ -2801,7 +2801,7 @@ const GTSeries = () => {
                       { icon: Bot, title: "Robot & Automation", desc: "Handshake กับ PLC, Robot Controller ผ่าน Digital I/O ไม่ต้องใช้ fieldbus ราคาแพง" },
                     ].map((item, i) => (
                       <div key={i} className="p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors border border-border/50">
-                        <span className="text-2xl">{item.icon}</span>
+                        {typeof item.icon === "string" ? <span className="text-2xl">{item.icon}</span> : <item.icon size={24} className="text-primary" />}
                         <h4 className="font-bold text-foreground text-sm mt-2">{item.title}</h4>
                         <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{item.desc}</p>
                       </div>
