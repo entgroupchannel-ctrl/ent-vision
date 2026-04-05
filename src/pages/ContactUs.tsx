@@ -246,6 +246,7 @@ const ContactUs = () => {
       }
       setSubmitted(true);
       toast({ title: i.submitSuccess, description: i.submitSuccessDesc });
+      import("@/lib/confetti").then(m => m.fireSuccessConfetti());
     } catch (err: any) {
       toast({ title: i.submitError, description: err.message, variant: "destructive" });
     } finally {

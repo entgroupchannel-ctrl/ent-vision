@@ -384,6 +384,7 @@ const QuoteRequest = () => {
       if (error) throw error;
       setSubmitted(true);
       toast({ title: "ส่งคำขอเรียบร้อย!", description: "ทีมฝ่ายขายจะติดต่อกลับภายใน 24 ชม." });
+      import("@/lib/confetti").then(m => m.fireSuccessConfetti());
     } catch (err: any) {
       toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
     } finally {

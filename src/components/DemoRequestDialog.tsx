@@ -67,6 +67,7 @@ const DemoRequestDialog = ({ children }: DemoRequestDialogProps) => {
       toast.success("ส่งคำขอทดลองใช้เรียบร้อยแล้ว!", {
         description: "ทีมงานจะติดต่อกลับภายใน 1 วันทำการ",
       });
+      import("@/lib/confetti").then(m => m.fireSuccessConfetti());
       reset();
       setTrialStart(undefined);
       setTrialEnd(undefined);

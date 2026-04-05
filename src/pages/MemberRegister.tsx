@@ -169,6 +169,7 @@ const MemberRegister = () => {
         title: "สมัครสมาชิกสำเร็จ!",
         description: "กรุณาตรวจสอบอีเมลเพื่อยืนยันบัญชี",
       });
+      import("@/lib/confetti").then(m => m.fireSuccessConfetti());
       navigate("/admin-login");
     } catch (err: any) {
       toast({
