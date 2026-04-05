@@ -1,3 +1,4 @@
+/* Phase 1 — Premium Lucide icons */
 import { useState } from "react";
 import SEOHead from "@/components/SEOHead";
 import ProductJsonLd from "@/components/ProductJsonLd";
