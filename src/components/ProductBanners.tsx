@@ -15,7 +15,7 @@ const productBanners = [
   {
     title: "Rugged Devices ทนทานทุกสภาพ",
     description: "แท็บเล็ตและโน้ตบุ๊กเกรดทหาร MIL-STD-810G",
-    productImage: "https://entgroup-rugged.com/assets/f9a-_j8J-x2I.jpg",
+    productImage: "/images/rugged/f9a-_j8J-x2I.jpg",
     links: [
       { label: "Rugged Tablet", href: "/rugged-tablet" },
       { label: "Rugged Notebook", href: "/rugged-notebook" },
