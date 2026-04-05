@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -291,6 +291,20 @@ const QuoteRequest = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+
+  // Auto-fill form from logged-in user profile
+  useEffect(() => {
+    if (!user) return;
+    const meta = user.user_metadata || {};
+    setForm((prev) => ({
+      ...prev,
+      name: prev.name || meta.full_name || meta.name || "",
+      email: prev.email || user.email || "",
+      phone: prev.phone || meta.phone || "",
+      company: prev.company || meta.company || "",
+      lineId: prev.lineId || meta.line_id || "",
+    }));
+  }, [user]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
