@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Facebook, Instagram, Youtube } from "lucide-react";
+import { useAutoHideWidget } from "@/hooks/useAutoHideWidget";
 
 const TiktokIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -15,27 +16,33 @@ const socials = [
 ];
 
 const SocialRibbon = () => {
-  const [expanded, setExpanded] = useState(true);
-  const [visible, setVisible] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { visible, onInteraction, forceShow, forceHide } = useAutoHideWidget({
+    initialDelay: 1000,
+    hideAfter: 10000,
+    showInterval: 35000,
+    showDuration: 5000,
+  });
 
-  useEffect(() => {
-    const t = setTimeout(() => setVisible(true), 1000);
-    return () => clearTimeout(t);
-  }, []);
+  const [manualExpanded, setManualExpanded] = useState<boolean | null>(null);
+  const expanded = manualExpanded ?? visible;
 
-  useEffect(() => {
-    if (!visible || !expanded) return;
-    timerRef.current = setTimeout(() => setExpanded(false), 10000);
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [visible, expanded]);
-
-  if (!visible) return null;
+  const handleToggle = () => {
+    if (expanded) {
+      setManualExpanded(false);
+      forceHide();
+    } else {
+      setManualExpanded(true);
+      forceShow();
+    }
+    // Reset manual override after a while
+    setTimeout(() => setManualExpanded(null), 15000);
+  };
 
   return (
     <div
       className="fixed left-0 top-1/2 -translate-y-1/2 z-40 transition-transform duration-500 ease-in-out"
       style={{ transform: `translateY(-50%) translateX(${expanded ? "0" : "-100%"})` }}
+      onMouseEnter={onInteraction}
     >
       {/* Ribbon */}
       <div className="flex flex-col gap-0.5">
@@ -53,9 +60,9 @@ const SocialRibbon = () => {
         ))}
       </div>
 
-      {/* Pull tab — always visible, attached to right edge of ribbon */}
+      {/* Pull tab */}
       <button
-        onClick={() => setExpanded(!expanded)}
+        onClick={handleToggle}
         className="absolute top-1/2 -translate-y-1/2 w-7 h-14 rounded-r-lg bg-[#1a1a2e] text-white flex items-center justify-center shadow-lg border border-white/10 hover:bg-[#16213e] transition-colors"
         style={{ right: "-28px" }}
         aria-label={expanded ? "ซ่อน" : "แสดง Social"}
