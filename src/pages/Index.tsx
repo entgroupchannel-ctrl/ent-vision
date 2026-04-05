@@ -19,11 +19,11 @@ const Index = () => {
       />
       <HeroSection />
       <EdgeAISection />
-      <SoftwareSection />
       <ProductHighlights />
       <ProductBanners />
       <ProductSections />
       <ProductLineup />
+      <SoftwareSection />
       <PromoBanners />
       <Footer />
     </div>
