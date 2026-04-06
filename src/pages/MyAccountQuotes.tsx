@@ -51,7 +51,7 @@ interface CatalogProduct {
   id: string; model: string; name_th: string; specs: Record<string, string>;
 }
 
-const MyAccountQuotes = () => {
+const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void }) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [quotes, setQuotes] = useState<QuoteRequest[]>([]);
