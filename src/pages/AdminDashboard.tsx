@@ -97,6 +97,7 @@ const AdminDashboard = () => {
     users: "system.users",
     livechat: "sales.contacts",
     sales_orders: "sales.quote_review",
+    invoices: "sales.quote_review",
   };
 
   // Check if current tab allows edit
