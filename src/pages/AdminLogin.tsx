@@ -41,7 +41,8 @@ const AdminLogin = () => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (!mounted) return;
-      if (event === "SIGNED_IN" && session) {
+      // Only react to explicit sign-in events, not token refreshes
+      if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session) {
         const isAdmin = await checkAdmin(session.user.id);
         if (!mounted) return;
         if (isAdmin) {
