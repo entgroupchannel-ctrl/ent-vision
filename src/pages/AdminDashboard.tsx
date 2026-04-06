@@ -1,6 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  Receipt,
   ArrowLeft, Users, FileText, Mail, TrendingUp,
   Filter, RefreshCw, Eye, Clock, CheckCircle, XCircle,
   Star, Phone, Building2, MessageSquare, LogOut, Shield, Download,
@@ -16,11 +17,12 @@ import AdminDocumentManager from "@/components/AdminDocumentManager";
 import AdminProductCatalog from "@/components/AdminProductCatalog";
 import AdminQuoteReview from "@/components/AdminQuoteReview";
 import AdminSalesOrders from "@/components/AdminSalesOrders";
+import AdminInvoiceManager from "@/components/AdminInvoiceManager";
 import AdminUserManagement from "@/components/AdminUserManagement";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
 const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
 
-type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders";
+type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders" | "invoices";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -95,6 +97,7 @@ const AdminDashboard = () => {
     users: "system.users",
     livechat: "sales.contacts",
     sales_orders: "sales.quote_review",
+    invoices: "sales.quote_review",
   };
 
   // Check if current tab allows edit
@@ -227,6 +230,7 @@ const AdminDashboard = () => {
                   { id: "quotes" as Tab, label: "ใบเสนอราคา", icon: FileText, count: quotes.filter(q => q.status === "new").length },
                   { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
                   { id: "sales_orders" as Tab, label: "ยอดขาย / Order", icon: Package, count: 0 },
+                  { id: "invoices" as Tab, label: "เอกสารขาย", icon: Receipt, count: 0 },
                   { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
@@ -350,6 +354,7 @@ const AdminDashboard = () => {
               { id: "quotes" as Tab, label: "ใบเสนอราคา" },
               { id: "quote_review" as Tab, label: "จัดการ Quote" },
               { id: "sales_orders" as Tab, label: "ยอดขาย" },
+              { id: "invoices" as Tab, label: "เอกสารขาย" },
               { id: "catalog" as Tab, label: "สินค้า" },
               { id: "engagement" as Tab, label: "Engagement" },
               { id: "documents" as Tab, label: "เอกสาร" },
@@ -413,6 +418,8 @@ const AdminDashboard = () => {
           <AdminQuoteReview />
         ) : tab === "sales_orders" ? (
           <AdminSalesOrders />
+        ) : tab === "invoices" ? (
+          <AdminInvoiceManager />
         ) : tab === "users" ? (
           <AdminUserManagement />
         ) : tab === "livechat" ? (
