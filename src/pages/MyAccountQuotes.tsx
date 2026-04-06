@@ -5,6 +5,7 @@ import {
   Printer, Share2, Copy, Trash2, RefreshCw, Info, Package,
   Upload, FileCheck, AlertCircle,
 } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
@@ -131,7 +132,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
         customer_response: response,
         status: response === "accepted" ? "won" : "negotiating",
       }).eq("id", qid);
-      toast({ title: response === "accepted" ? "ยอมรับราคาแล้ว" : "ส่งคำขอเจรจาแล้ว" });
+      toast({ title: response === "accepted" ? "ยืนยันสั่งซื้อเรียบร้อยแล้ว" : "ส่งข้อเสนอเพิ่มเติมแล้ว" });
       fetchQuotes();
     } catch {}
     setResponding(false);
@@ -320,30 +321,46 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                         <div className="flex items-center justify-center gap-2">
                           <span className={`inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full border font-medium ${status.color}`}>{status.label}</span>
                           {q.status === "quoted" && q.grand_total > 0 && (
-                            <button
-                              onClick={(e) => { e.stopPropagation(); handleCustomerResponse(q.id, "accepted"); }}
-                              disabled={responding}
-                              className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-green-500/10 text-green-600 border border-green-500/30 font-bold hover:bg-green-500/20 transition-colors whitespace-nowrap"
-                            >
-                              <ThumbsUp size={11} /> รับราคา
-                            </button>
+                            <TooltipProvider delayDuration={200}>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); handleCustomerResponse(q.id, "accepted"); }}
+                                    disabled={responding}
+                                    className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-green-500/10 text-green-600 border border-green-500/30 font-bold hover:bg-green-500/20 transition-colors whitespace-nowrap"
+                                  >
+                                    <ThumbsUp size={11} /> ยืนยันสั่งซื้อ
+                                  </button>
+                                </TooltipTrigger>
+                                <TooltipContent side="top" className="max-w-[220px] text-center">
+                                  <p className="text-xs">ยืนยันรับราคานี้และดำเนินการสั่งซื้อ ระบบจะสร้างใบ PO ให้อัตโนมัติ</p>
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
                           )}
                         </div>
                       </td>
                       <td className="px-2 py-3 relative" ref={menuOpenId === q.id ? menuRef as React.RefObject<HTMLTableCellElement> : undefined}>
-                        <button onClick={(e) => { e.stopPropagation(); setMenuOpenId(menuOpenId === q.id ? null : q.id); }} className="p-1.5 rounded-lg hover:bg-secondary/60 text-muted-foreground">
-                          <MoreHorizontal size={16} />
-                        </button>
+                        <TooltipProvider delayDuration={300}>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <button onClick={(e) => { e.stopPropagation(); setMenuOpenId(menuOpenId === q.id ? null : q.id); }} className="p-1.5 rounded-lg hover:bg-secondary/60 text-muted-foreground">
+                                <MoreHorizontal size={16} />
+                              </button>
+                            </TooltipTrigger>
+                            <TooltipContent side="left"><p className="text-xs">ตัวเลือกเพิ่มเติม</p></TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
                         {menuOpenId === q.id && (
-                          <div className="absolute right-2 top-10 z-20 bg-card border border-border rounded-xl shadow-xl py-1.5 w-44 animate-fade-in">
+                          <div className="absolute right-2 top-10 z-20 bg-card border border-border rounded-xl shadow-xl py-1.5 w-52 animate-fade-in">
                             <button onClick={() => handleExpand(q.id)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><FileText size={14} /> ดูรายละเอียด</button>
-                            <button onClick={() => { fetchLineItems(q.id); setTimeout(() => handlePrintQuote(q), 500); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Printer size={14} /> พิมพ์</button>
-                            <button onClick={() => handleShare(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Share2 size={14} /> แชร์</button>
-                            {q.pdf_url && <a href={q.pdf_url} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpenId(null)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Download size={14} /> ดาวน์โหลด</a>}
+                            <button onClick={() => { fetchLineItems(q.id); setTimeout(() => handlePrintQuote(q), 500); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Printer size={14} /> พิมพ์ใบเสนอราคา</button>
+                            <button onClick={() => handleShare(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Share2 size={14} /> แชร์ให้ผู้เกี่ยวข้อง</button>
+                            {q.pdf_url && <a href={q.pdf_url} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpenId(null)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Download size={14} /> ดาวน์โหลด PDF</a>}
                             <button onClick={() => handleCopyLink(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Copy size={14} /> คัดลอกลิงก์</button>
-                            <button onClick={() => handleDuplicate(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Plus size={14} /> สร้างซ้ำ</button>
+                            <button onClick={() => handleDuplicate(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Plus size={14} /> สร้างใบเสนอราคาใหม่จากรายการนี้</button>
                             <div className="border-t border-border my-1"></div>
-                            <button onClick={() => handleDelete(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm text-red-400 hover:bg-red-500/10"><Trash2 size={14} /> ลบ</button>
+                            <button onClick={() => handleDelete(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm text-red-400 hover:bg-red-500/10"><Trash2 size={14} /> ลบใบเสนอราคา</button>
                           </div>
                         )}
                       </td>
