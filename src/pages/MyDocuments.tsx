@@ -205,6 +205,7 @@ const MyDocuments = () => {
   };
 
   const filteredDocs = docs.filter((d) => {
+    if (!d.file_url) return false;
     if (filterCat !== "all" && d.category !== filterCat) return false;
     if (searchText && !d.title.toLowerCase().includes(searchText.toLowerCase())) return false;
     return true;
