@@ -2908,9 +2908,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     รองรับ C/C++ บน Linux — ติดต่อทีมขายเพื่อรับไฟล์
                   </p>
                   <div className="flex flex-wrap justify-center gap-3 mt-5">
-                    <button onClick={() => setQuoteProduct("GT5000 — ขอ GPIO SDK")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg">
-                      <FileText size={16} /> ขอรับ SDK ฟรี
-                    </button>
+                    <AddToQuoteButton model="GT5000" category="GT Series — Mini PC" productName="GT5000 Mini PC — GPIO SDK" variant="outline" />
                     <a href="tel:0957391053" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground font-bold text-sm hover:bg-muted transition-colors">
                       <Phone size={16} /> โทรสอบถาม
                     </a>
@@ -3319,9 +3317,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                       </div>
                     </div>
                     <div className="p-4 border-t border-border text-center">
-                      <button onClick={() => setQuoteProduct("GT6000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                        <FileText size={16} /> ขอใบเสนอราคา GT6000
-                      </button>
+                      <AddToQuoteButton model="GT6000" category="GT Series — Mini PC" productName="GT6000 Mini PC" />
                     </div>
                   </div>
                 );
@@ -3708,9 +3704,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 </div>
                 <p className="text-xs text-muted-foreground text-center py-3 border-t border-border"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
                 <div className="p-4 border-t border-border text-center">
-                  <button onClick={() => setQuoteProduct("GT7000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                    <FileText size={16} /> ขอใบเสนอราคา GT7000
-                  </button>
+                  <AddToQuoteButton model="GT7000" category="GT Series — Mini PC" productName="GT7000 Mini PC" />
                 </div>
               </div>
 
@@ -4046,9 +4040,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 </div>
                 <p className="text-xs text-muted-foreground text-center py-3 border-t border-border"><AlertTriangle size={14} className="inline mr-1 text-amber-500" /> ราคาอาจมีการเปลี่ยนแปลง กรุณาติดต่อพนักงานขายโดยตรงเพื่อยืนยันราคาที่ถูกต้อง โทร. 095-739-1053 · Line: @entgroup</p>
                 <div className="p-4 border-t border-border text-center">
-                  <button onClick={() => setQuoteProduct("GT8000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                    <FileText size={16} /> ขอใบเสนอราคา GT8000
-                  </button>
+                  <AddToQuoteButton model="GT8000" category="GT Series — Mini PC" productName="GT8000 Mini PC" />
                 </div>
               </div>
 
@@ -4409,9 +4401,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 );
               })()}
               <div className="text-center">
-                <button onClick={() => setQuoteProduct("GT9000")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                  <FileText size={16} /> ขอใบเสนอราคา GT9000
-                </button>
+                <AddToQuoteButton model="GT9000" category="GT Series — Mini PC" productName="GT9000 Mini PC" />
               </div>
 
               {useCasesGrid}
@@ -4800,9 +4790,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 </div>
               </div>
               <div className="text-center">
-                <button onClick={() => setQuoteProduct("GT4500")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                  <FileText size={16} /> ขอใบเสนอราคา GT4500
-                </button>
+                <AddToQuoteButton model="GT4500" category="GT Series — Mini PC" productName="GT4500 Mini PC" />
               </div>
 
               {/* Gallery */}
@@ -5123,9 +5111,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 );
               })()}
               <div className="text-center">
-                <button onClick={() => setQuoteProduct("GT1400")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                  <FileText size={16} /> ขอใบเสนอราคา GT1400
-                </button>
+                <AddToQuoteButton model="GT1400" category="GT Series — Mini PC" productName="GT1400 Mini PC" />
               </div>
 
 
@@ -5261,6 +5247,10 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                     "ไฟ 9–36V (3-pin Phoenix Terminal) + ATX/AT",
                     "AWAL, Wake On LAN, Watchdog, RTC",
                   ]} />
+
+                  <div className="p-4 border-t border-border text-center">
+                    <AddToQuoteButton model="GT1300" category="GT Series — Mini PC" productName="GT1300 Mini PC" />
+                  </div>
 
                   {/* Key Specs */}
                   <div className="grid grid-cols-2 gap-4">
@@ -5692,9 +5682,7 @@ int sensor = (inb_p(0xA04) >> 2) & 0x01;       // GPIO5 → อ่าน Sensor`
                 );
               })()}
               <div className="text-center">
-                <button onClick={() => setQuoteProduct("GT1200")} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-                  <FileText size={16} /> ขอใบเสนอราคา GT1200
-                </button>
+                <AddToQuoteButton model="GT1200" category="GT Series — Mini PC" productName="GT1200 Mini PC" />
               </div>
 
               {useCasesGrid}
@@ -6041,14 +6029,12 @@ const ModelCard = ({ model, onQuote, selected, onToggleSelect }: { model: typeof
             <span className="font-bold text-foreground">{model.price.startsWith("สอบถาม") ? model.price : `฿${model.price}`}</span>
           </div>
         ) : <div />}
-        <button
-          type="button"
-          onClick={(e) => { e.stopPropagation(); onQuote?.(model.name); }}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition-colors"
-        >
-          <FileText size={12} />
-          ขอใบเสนอราคา
-        </button>
+        <AddToQuoteButton
+          model={model.name}
+          category="GT Series — Mini PC"
+          productName={`${model.name} Mini PC`}
+          variant="compact"
+        />
       </div>
     </div>
   </>
