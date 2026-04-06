@@ -362,6 +362,80 @@ export type Database = {
         }
         Relationships: []
       }
+      live_chat_conversations: {
+        Row: {
+          assigned_admin: string | null
+          created_at: string
+          guest_email: string | null
+          guest_name: string | null
+          id: string
+          last_message_at: string | null
+          status: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          assigned_admin?: string | null
+          created_at?: string
+          guest_email?: string | null
+          guest_name?: string | null
+          id?: string
+          last_message_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          assigned_admin?: string | null
+          created_at?: string
+          guest_email?: string | null
+          guest_name?: string | null
+          id?: string
+          last_message_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      live_chat_messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          read: boolean
+          sender_id: string | null
+          sender_type: string
+        }
+        Insert: {
+          content: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          read?: boolean
+          sender_id?: string | null
+          sender_type: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          read?: boolean
+          sender_id?: string | null
+          sender_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "live_chat_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "live_chat_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notifications: {
         Row: {
           created_at: string
