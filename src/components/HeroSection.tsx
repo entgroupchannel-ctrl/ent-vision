@@ -123,6 +123,7 @@ const HeroSection = () => {
   };
 
   return (
+    <>
     <section className="relative min-h-screen flex flex-col">
       {/* Full-bleed background image */}
       <div className="absolute inset-0 z-0">
