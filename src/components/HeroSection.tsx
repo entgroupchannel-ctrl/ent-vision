@@ -308,13 +308,27 @@ const HeroSection = () => {
                     ออกจากระบบ
                   </button>
                 </div>
-                <div className="flex justify-center pt-1">
+                <div className="flex justify-center gap-2 pt-1">
                   <ThemeToggle />
+                  <button
+                    onClick={() => { setMobileMenuOpen(false); setAiChatOpen(true); }}
+                    className="p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-surface-hover transition-colors"
+                    aria-label="AI Assistant"
+                  >
+                    <Bot size={18} />
+                  </button>
                 </div>
               </>
             ) : (
               <div className="flex items-center gap-2">
                 <ThemeToggle />
+                <button
+                  onClick={() => { setMobileMenuOpen(false); setAiChatOpen(true); }}
+                  className="p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-surface-hover transition-colors"
+                  aria-label="AI Assistant"
+                >
+                  <Bot size={18} />
+                </button>
                 <Link
                   to="/admin-login"
                   onClick={() => setMobileMenuOpen(false)}
