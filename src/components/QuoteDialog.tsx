@@ -196,7 +196,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
       products.filter((p) => p.category || p.model).forEach((p) => {
         trackEvent({
           eventType: "quote_request",
-          productSlug: p.model || undefined,
+          productId: p.model || undefined,
           productCategory: p.category || undefined,
           productName: p.model || undefined,
           metadata: { qty: p.qty, email: emailValue },
