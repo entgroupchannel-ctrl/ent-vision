@@ -157,6 +157,14 @@ const HeroSection = () => {
           )}
           <div className="w-px h-6 bg-white/10 mx-1" />
           <ThemeToggle />
+          <button
+            onClick={() => setAiChatOpen(true)}
+            className="p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-surface-hover transition-colors"
+            aria-label="AI Assistant"
+            title="AI ผู้เชี่ยวชาญ"
+          >
+            <Bot size={18} />
+          </button>
           <Link
             to="/wishlist"
             className="relative p-2.5 rounded-lg text-white/70 hover:text-red-400 hover:bg-white/10 transition-colors"
@@ -458,6 +466,8 @@ const HeroSection = () => {
       </div>
 
     </section>
+    {aiChatOpen && <AIChatWidget open={aiChatOpen} onClose={() => setAiChatOpen(false)} />}
+    </>
   );
 };
 
