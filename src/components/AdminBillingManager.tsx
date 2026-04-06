@@ -3,6 +3,7 @@ import {
   FileText, Send, CheckCircle, Clock, Loader2, RefreshCw, Search,
   Eye, ChevronDown, Building2, Phone, Mail, Hash, ArrowRight,
   AlertCircle, XCircle, CreditCard, Receipt, Printer, Calendar,
+  Plus,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -46,6 +47,24 @@ interface BillingItem {
   sort_order: number;
 }
 
+interface POQuote {
+  id: string;
+  quote_number: string | null;
+  name: string;
+  company: string | null;
+  email: string;
+  phone: string | null;
+  po_number: string | null;
+  subtotal: number;
+  discount_amount: number;
+  vat_amount: number;
+  withholding_tax: number;
+  grand_total: number;
+  payment_terms: string | null;
+  user_id: string | null;
+  assigned_to: string | null;
+}
+
 /* ─── Status Config ─── */
 const STATUS_CFG: Record<string, { label: string; color: string; icon: typeof Clock }> = {
   draft: { label: "ร่าง", color: "bg-muted text-muted-foreground border-border", icon: Clock },
@@ -67,6 +86,11 @@ const AdminBillingManager = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedBilling, setSelectedBilling] = useState<BillingNote | null>(null);
   const [billingItems, setBillingItems] = useState<BillingItem[]>([]);
+
+  // Create from PO dialog
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
+  const [poQuotes, setPOQuotes] = useState<POQuote[]>([]);
+  const [poLoading, setPOLoading] = useState(false);
 
   /* ─── Fetch ─── */
   const fetchBillings = async () => {
@@ -91,17 +115,94 @@ const AdminBillingManager = () => {
     setBillingItems((data as any) || []);
   };
 
+  /* ─── Fetch PO-approved quotes without billing ─── */
+  const fetchPOQuotes = async () => {
+    setPOLoading(true);
+    const { data } = await supabase
+      .from("quote_requests")
+      .select("id, quote_number, name, company, email, phone, po_number, subtotal, discount_amount, vat_amount, withholding_tax, grand_total, payment_terms, user_id, assigned_to")
+      .eq("po_status", "approved")
+      .order("created_at", { ascending: false });
+
+    // Filter out quotes that already have a billing note
+    const existingQuoteIds = billings.map(b => b.quote_id).filter(Boolean);
+    const available = (data || []).filter((q: any) => !existingQuoteIds.includes(q.id));
+    setPOQuotes(available as POQuote[]);
+    setPOLoading(false);
+  };
+
+  /* ─── Create Billing from PO Quote ─── */
+  const createBillingFromQuote = async (quote: POQuote) => {
+    try {
+      // Get order_id from sales_orders
+      const { data: order } = await (supabase.from as any)("sales_orders")
+        .select("id")
+        .eq("quote_id", quote.id)
+        .single();
+
+      const { data: billing, error } = await (supabase.from as any)("billing_notes").insert({
+        quote_id: quote.id,
+        order_id: order?.id || null,
+        customer_name: quote.name,
+        customer_company: quote.company,
+        customer_email: quote.email,
+        customer_phone: quote.phone,
+        po_number: quote.po_number,
+        subtotal: quote.subtotal,
+        discount_amount: quote.discount_amount,
+        vat_amount: quote.vat_amount || 0,
+        withholding_tax: quote.withholding_tax || 0,
+        grand_total: quote.grand_total,
+        payment_terms: quote.payment_terms,
+        due_date: new Date(Date.now() + 30 * 86400000).toISOString().split("T")[0],
+        assigned_to: quote.assigned_to,
+        user_id: quote.user_id,
+        created_by: user?.id,
+        status: "draft",
+      }).select().single();
+
+      if (error) throw error;
+
+      // Copy line items
+      const { data: lineItems } = await supabase
+        .from("quote_line_items")
+        .select("*")
+        .eq("quote_id", quote.id)
+        .order("sort_order");
+
+      if (lineItems && lineItems.length > 0 && billing) {
+        const billingItems = (lineItems as any[]).map((li) => ({
+          billing_note_id: (billing as any).id,
+          product_id: li.product_id,
+          model: li.model,
+          category: li.category,
+          description: li.admin_notes || li.model,
+          qty: li.qty,
+          unit_price: li.unit_price,
+          discount_percent: li.discount_percent || 0,
+          line_total: li.line_total || Math.round(li.unit_price * (1 - (li.discount_percent || 0) / 100) * li.qty * 100) / 100,
+          sort_order: li.sort_order || 0,
+        }));
+        await (supabase.from as any)("billing_note_items").insert(billingItems);
+      }
+
+      toast({ title: "สร้างใบวางบิลสำเร็จ", description: `เลขที่ ${(billing as any).billing_number}` });
+      setCreateDialogOpen(false);
+      fetchBillings();
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    }
+  };
+
   /* ─── Create Invoice from Billing ─── */
   const createInvoiceFromBilling = async (billing: BillingNote) => {
     try {
-      // Fetch billing items
       const { data: items } = await supabase
         .from("billing_note_items")
         .select("*")
         .eq("billing_note_id", billing.id)
         .order("sort_order");
 
-      // Create invoice
       const { data: inv, error } = await (supabase.from as any)("invoices").insert({
         quote_id: billing.quote_id,
         order_id: billing.order_id,
@@ -124,7 +225,6 @@ const AdminBillingManager = () => {
 
       if (error) throw error;
 
-      // Copy items
       if (inv && items && items.length > 0) {
         const invoiceItems = (items as any[]).map((bi: any) => ({
           invoice_id: (inv as any).id,
@@ -141,7 +241,6 @@ const AdminBillingManager = () => {
         await (supabase.from as any)("invoice_items").insert(invoiceItems);
       }
 
-      // Update billing status
       await (supabase.from as any)("billing_notes")
         .update({ status: "invoiced", updated_at: new Date().toISOString() })
         .eq("id", billing.id);
@@ -169,7 +268,6 @@ const AdminBillingManager = () => {
     return matchSearch && matchStatus;
   });
 
-  /* ─── Stats ─── */
   const stats = {
     total: billings.length,
     draft: billings.filter(b => b.status === "draft").length,
@@ -183,11 +281,19 @@ const AdminBillingManager = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-lg font-bold text-foreground">ใบวางบิล (Billing Notes)</h2>
-          <p className="text-xs text-muted-foreground">สร้างอัตโนมัติเมื่ออนุมัติ PO — สร้างใบแจ้งหนี้จากใบวางบิล</p>
+          <p className="text-xs text-muted-foreground">สร้างจาก PO ที่อนุมัติแล้ว → สร้างใบแจ้งหนี้</p>
         </div>
-        <button onClick={fetchBillings} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
-          <RefreshCw size={12} /> รีเฟรช
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => { setCreateDialogOpen(true); fetchPOQuotes(); }}
+            className="flex items-center gap-1 px-3 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90"
+          >
+            <Plus size={14} /> สร้างใบวางบิล
+          </button>
+          <button onClick={fetchBillings} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+            <RefreshCw size={12} /> รีเฟรช
+          </button>
+        </div>
       </div>
 
       {/* Stats */}
@@ -209,26 +315,17 @@ const AdminBillingManager = () => {
       <div className="flex gap-2">
         <div className="relative flex-1">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-          <input
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder="ค้นหาเลขที่ / ชื่อลูกค้า..."
-            className="w-full pl-9 pr-3 py-2 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-          />
+          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="ค้นหาเลขที่ / ชื่อลูกค้า..."
+            className="w-full pl-9 pr-3 py-2 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
         </div>
-        <select
-          value={statusFilter}
-          onChange={e => setStatusFilter(e.target.value)}
-          className="px-3 py-2 rounded-lg border border-border bg-background text-sm"
-        >
+        <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}
+          className="px-3 py-2 rounded-lg border border-border bg-background text-sm">
           <option value="all">ทุกสถานะ</option>
-          {Object.entries(STATUS_CFG).map(([k, v]) => (
-            <option key={k} value={k}>{v.label}</option>
-          ))}
+          {Object.entries(STATUS_CFG).map(([k, v]) => (<option key={k} value={k}>{v.label}</option>))}
         </select>
       </div>
 
-      {/* Loading */}
+      {/* List */}
       {loading ? (
         <div className="text-center py-12 text-muted-foreground text-sm flex items-center justify-center gap-2">
           <Loader2 size={16} className="animate-spin" /> กำลังโหลด...
@@ -242,19 +339,13 @@ const AdminBillingManager = () => {
             const isSelected = selectedBilling?.id === b.id;
             return (
               <div key={b.id} className="border border-border rounded-xl overflow-hidden bg-card">
-                {/* Row */}
-                <div
-                  className="p-4 cursor-pointer hover:bg-accent/30 transition-colors"
-                  onClick={() => {
-                    if (isSelected) { setSelectedBilling(null); setBillingItems([]); }
-                    else { setSelectedBilling(b); fetchBillingItems(b.id); }
-                  }}
-                >
+                <div className="p-4 cursor-pointer hover:bg-accent/30 transition-colors" onClick={() => {
+                  if (isSelected) { setSelectedBilling(null); setBillingItems([]); }
+                  else { setSelectedBilling(b); fetchBillingItems(b.id); }
+                }}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className={`px-2.5 py-1 rounded-full text-[10px] font-bold border ${st.color}`}>
-                        {st.label}
-                      </div>
+                      <div className={`px-2.5 py-1 rounded-full text-[10px] font-bold border ${st.color}`}>{st.label}</div>
                       <div>
                         <div className="font-bold text-sm text-foreground">{b.billing_number}</div>
                         <div className="text-xs text-muted-foreground">{b.customer_name}{b.customer_company ? ` · ${b.customer_company}` : ""}</div>
@@ -272,10 +363,8 @@ const AdminBillingManager = () => {
                   )}
                 </div>
 
-                {/* Expanded Detail */}
                 {isSelected && (
                   <div className="border-t border-border p-4 bg-accent/5 space-y-4">
-                    {/* Customer Info */}
                     <div className="grid grid-cols-2 gap-4 text-xs">
                       <div>
                         <div className="text-muted-foreground mb-1 font-medium">ข้อมูลลูกค้า</div>
@@ -296,7 +385,6 @@ const AdminBillingManager = () => {
                       </div>
                     </div>
 
-                    {/* Items Table */}
                     {billingItems.length > 0 && (
                       <div>
                         <div className="text-xs font-medium text-muted-foreground mb-2">รายการสินค้า ({billingItems.length})</div>
@@ -328,7 +416,6 @@ const AdminBillingManager = () => {
                           </tbody>
                         </table>
 
-                        {/* Totals */}
                         <div className="mt-3 flex justify-end">
                           <div className="w-48 space-y-1 text-xs">
                             <div className="flex justify-between"><span className="text-muted-foreground">รวม</span><span>{fmt(b.subtotal)}</span></div>
@@ -341,7 +428,6 @@ const AdminBillingManager = () => {
                       </div>
                     )}
 
-                    {/* Actions */}
                     <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
                       {b.status === "draft" && (
                         <button onClick={() => updateStatus(b.id, "sent")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-500/10 text-blue-500 text-xs font-medium hover:bg-blue-500/20">
@@ -364,6 +450,57 @@ const AdminBillingManager = () => {
               </div>
             );
           })}
+        </div>
+      )}
+
+      {/* ═══ Create from PO Dialog ═══ */}
+      {createDialogOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setCreateDialogOpen(false)}>
+          <div className="bg-card border border-border rounded-2xl p-6 w-full max-w-xl shadow-xl max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            <h3 className="text-lg font-bold mb-1 text-foreground">สร้างใบวางบิลจาก PO</h3>
+            <p className="text-xs text-muted-foreground mb-4">เลือก PO ที่อนุมัติแล้วเพื่อสร้างใบวางบิล</p>
+
+            {poLoading ? (
+              <div className="text-center py-12 text-muted-foreground text-sm flex items-center justify-center gap-2">
+                <Loader2 size={16} className="animate-spin" /> กำลังโหลด...
+              </div>
+            ) : poQuotes.length === 0 ? (
+              <div className="text-center py-12 text-muted-foreground text-sm">
+                <AlertCircle size={20} className="mx-auto mb-2 opacity-40" />
+                ไม่มี PO ที่พร้อมสร้างใบวางบิล<br />
+                <span className="text-[10px]">(อาจสร้างไปแล้ว หรือยังไม่มี PO ที่อนุมัติ)</span>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {poQuotes.map(q => (
+                  <div key={q.id} className="border border-border rounded-lg p-3 hover:border-primary/40 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-sm font-bold text-foreground">{q.quote_number || "—"}</div>
+                        <div className="text-xs text-muted-foreground">{q.name}{q.company ? ` · ${q.company}` : ""}</div>
+                        {q.po_number && <div className="text-[10px] text-muted-foreground mt-0.5"><Hash size={9} className="inline mr-0.5" />PO: {q.po_number}</div>}
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-bold text-foreground">฿{fmt(q.grand_total)}</div>
+                        <button
+                          onClick={() => createBillingFromQuote(q)}
+                          className="mt-1 px-3 py-1 rounded-lg bg-primary text-primary-foreground text-[10px] font-bold hover:bg-primary/90"
+                        >
+                          <Plus size={10} className="inline mr-0.5" /> สร้าง
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="mt-4 flex justify-end">
+              <button onClick={() => setCreateDialogOpen(false)} className="px-4 py-2 rounded-lg border border-border text-sm hover:bg-accent">
+                ปิด
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
