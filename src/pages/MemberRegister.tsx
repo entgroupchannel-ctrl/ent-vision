@@ -171,11 +171,25 @@ const MemberRegister = () => {
       });
       navigate("/admin-login");
     } catch (err: any) {
-      toast({
-        title: "สมัครสมาชิกไม่สำเร็จ",
-        description: err.message,
-        variant: "destructive",
-      });
+      const msg = err.message || "";
+      let title = "สมัครสมาชิกไม่สำเร็จ";
+      let description = msg;
+
+      if (msg.includes("rate limit") || msg.includes("email rate") || msg.includes("429")) {
+        title = "ส่งอีเมลบ่อยเกินไป";
+        description = "ระบบส่งอีเมลยืนยันได้จำกัด กรุณารอ 1-2 นาทีแล้วลองใหม่อีกครั้ง";
+      } else if (msg.includes("already registered") || msg.includes("already been registered") || msg.includes("User already registered")) {
+        title = "อีเมลนี้ถูกใช้แล้ว";
+        description = "อีเมลนี้เคยสมัครสมาชิกแล้ว กรุณาเข้าสู่ระบบ หรือใช้อีเมลอื่น";
+      } else if (msg.includes("valid email") || msg.includes("invalid")) {
+        title = "อีเมลไม่ถูกต้อง";
+        description = "กรุณาตรวจสอบรูปแบบอีเมลแล้วลองใหม่";
+      } else if (msg.includes("Password") && msg.includes("short")) {
+        title = "รหัสผ่านสั้นเกินไป";
+        description = "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
+      }
+
+      toast({ title, description, variant: "destructive" });
     } finally {
       setLoading(false);
     }
