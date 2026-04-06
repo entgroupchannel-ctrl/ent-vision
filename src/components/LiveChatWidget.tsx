@@ -227,7 +227,7 @@ const LiveChatWidget = () => {
           </span>
         )}
         {!hasUnread && (
-          <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+          <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse" />
         )}
         <span className="absolute right-16 bg-foreground text-background text-xs px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
           แชทกับทีมงาน ENT Group
