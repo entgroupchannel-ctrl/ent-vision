@@ -242,8 +242,8 @@ const AdminUserManagement = () => {
   // ── Render ──
   if (!isSuperAdmin) {
     return (
-      <div className="card-surface rounded-xl p-10 text-center text-sm text-muted-foreground">
-        <Shield size={32} className="mx-auto mb-3 opacity-20" />
+      <div className="card-surface rounded-xl p-14 text-center text-base text-muted-foreground font-medium">
+        <Shield size={40} className="mx-auto mb-4 opacity-25" />
         <p>เฉพาะ Super Admin เท่านั้นที่จัดการผู้ใช้ได้</p>
       </div>
     );
