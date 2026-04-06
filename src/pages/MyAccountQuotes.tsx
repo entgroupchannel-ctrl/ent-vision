@@ -341,19 +341,26 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                         </div>
                       </td>
                       <td className="px-2 py-3 relative" ref={menuOpenId === q.id ? menuRef as React.RefObject<HTMLTableCellElement> : undefined}>
-                        <button onClick={(e) => { e.stopPropagation(); setMenuOpenId(menuOpenId === q.id ? null : q.id); }} className="p-1.5 rounded-lg hover:bg-secondary/60 text-muted-foreground">
-                          <MoreHorizontal size={16} />
-                        </button>
+                        <TooltipProvider delayDuration={300}>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <button onClick={(e) => { e.stopPropagation(); setMenuOpenId(menuOpenId === q.id ? null : q.id); }} className="p-1.5 rounded-lg hover:bg-secondary/60 text-muted-foreground">
+                                <MoreHorizontal size={16} />
+                              </button>
+                            </TooltipTrigger>
+                            <TooltipContent side="left"><p className="text-xs">ตัวเลือกเพิ่มเติม</p></TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
                         {menuOpenId === q.id && (
-                          <div className="absolute right-2 top-10 z-20 bg-card border border-border rounded-xl shadow-xl py-1.5 w-44 animate-fade-in">
+                          <div className="absolute right-2 top-10 z-20 bg-card border border-border rounded-xl shadow-xl py-1.5 w-52 animate-fade-in">
                             <button onClick={() => handleExpand(q.id)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><FileText size={14} /> ดูรายละเอียด</button>
-                            <button onClick={() => { fetchLineItems(q.id); setTimeout(() => handlePrintQuote(q), 500); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Printer size={14} /> พิมพ์</button>
-                            <button onClick={() => handleShare(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Share2 size={14} /> แชร์</button>
-                            {q.pdf_url && <a href={q.pdf_url} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpenId(null)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Download size={14} /> ดาวน์โหลด</a>}
+                            <button onClick={() => { fetchLineItems(q.id); setTimeout(() => handlePrintQuote(q), 500); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Printer size={14} /> พิมพ์ใบเสนอราคา</button>
+                            <button onClick={() => handleShare(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Share2 size={14} /> แชร์ให้ผู้เกี่ยวข้อง</button>
+                            {q.pdf_url && <a href={q.pdf_url} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpenId(null)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Download size={14} /> ดาวน์โหลด PDF</a>}
                             <button onClick={() => handleCopyLink(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Copy size={14} /> คัดลอกลิงก์</button>
-                            <button onClick={() => handleDuplicate(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Plus size={14} /> สร้างซ้ำ</button>
+                            <button onClick={() => handleDuplicate(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Plus size={14} /> สร้างใบเสนอราคาใหม่จากรายการนี้</button>
                             <div className="border-t border-border my-1"></div>
-                            <button onClick={() => handleDelete(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm text-red-400 hover:bg-red-500/10"><Trash2 size={14} /> ลบ</button>
+                            <button onClick={() => handleDelete(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm text-red-400 hover:bg-red-500/10"><Trash2 size={14} /> ลบใบเสนอราคา</button>
                           </div>
                         )}
                       </td>
