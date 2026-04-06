@@ -9,10 +9,8 @@ import { ThemeProvider } from "@/hooks/use-theme";
 import { AuthProvider } from "@/hooks/useAuth";
 import { QuoteCartProvider } from "@/hooks/useQuoteCart";
 import Index from "./pages/Index.tsx";
-import FloatingContact from "./components/FloatingContact.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
-import AIChatWidget from "./components/AIChatWidget.tsx";
 import LiveChatWidget from "./components/LiveChatWidget.tsx";
 import FloatingQuoteBar from "./components/FloatingQuoteBar.tsx";
 
@@ -148,7 +146,6 @@ const App = () => (
             <SocialRibbon />
             <FloatingQuoteBar />
             <LiveChatWidget />
-            <AIChatWidget />
           </BrowserRouter>
         </TooltipProvider>
         </QuoteCartProvider>
