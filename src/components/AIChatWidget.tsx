@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { MessageCircle, X, Send, Bot, User, Minimize2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { supabase } from "@/integrations/supabase/client";
-import { useAutoHideWidget } from "@/hooks/useAutoHideWidget";
 import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 
 type Msg = { role: "user" | "assistant"; content: string };
@@ -19,8 +18,12 @@ function generateSessionId() {
   return `chat_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 }
 
-const AIChatWidget = () => {
-  const [open, setOpen] = useState(false);
+interface AIChatWidgetProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+const AIChatWidget = ({ open, onClose }: AIChatWidgetProps) => {
   const [messages, setMessages] = useState<Msg[]>([WELCOME_MSG]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -30,14 +33,6 @@ const AIChatWidget = () => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const { trackEvent } = useEngagementTracker();
   const chatTrackedRef = useRef(false);
-
-  // Auto-hide for the closed-state button (staggered from FloatingContact)
-  const { visible: buttonVisible, onInteraction, forceShow } = useAutoHideWidget({
-    initialDelay: 3000,
-    hideAfter: 10000,
-    showInterval: 40000,
-    showDuration: 6000,
-  });
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -199,23 +194,7 @@ const AIChatWidget = () => {
     }
   };
 
-  if (!open) {
-    return (
-      <button
-        onClick={() => { setOpen(true); forceShow(); }}
-        onMouseEnter={onInteraction}
-        className={`fixed top-20 right-6 z-50 w-10 h-10 rounded-full bg-secondary text-foreground shadow-lg hover:scale-110 transition-all duration-500 flex items-center justify-center group border border-border ${
-          buttonVisible ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0 pointer-events-none"
-        }`}
-        aria-label="Open AI Chat"
-      >
-        <Bot size={18} />
-        <span className="absolute right-12 bg-foreground text-background text-[10px] px-2.5 py-1 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
-          AI ผู้เชี่ยวชาญ
-        </span>
-      </button>
-    );
-  }
+  if (!open) return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[560px] max-h-[calc(100vh-3rem)] flex flex-col rounded-2xl shadow-2xl border border-border bg-background overflow-hidden">
@@ -228,7 +207,7 @@ const AIChatWidget = () => {
           <h3 className="font-bold text-sm">ENT AI Assistant</h3>
           <p className="text-[10px] opacity-80">ผู้เชี่ยวชาญ Industrial PC</p>
         </div>
-        <button onClick={() => setOpen(false)} className="p-1.5 rounded-lg hover:bg-primary-foreground/20 transition-colors">
+        <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-primary-foreground/20 transition-colors">
           <X size={18} />
         </button>
       </div>
