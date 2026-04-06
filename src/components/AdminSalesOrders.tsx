@@ -8,6 +8,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import DocCrossLinks from "@/components/admin/DocCrossLinks";
 
 /* ─── Types ─── */
 interface SalesOrder {
@@ -483,6 +484,11 @@ const AdminSalesOrders = () => {
                       className="px-3 py-1.5 rounded-lg bg-secondary text-xs font-medium hover:bg-secondary/80 transition-colors disabled:opacity-50">
                       บันทึก
                     </button>
+                  </div>
+
+                  {/* Related Documents */}
+                  <div className="border-t border-border pt-3">
+                    <DocCrossLinks quoteId={selected.quote_id} orderId={selected.id} exclude={["order"]} />
                   </div>
 
                   {/* Create Documents */}

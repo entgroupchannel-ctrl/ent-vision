@@ -8,6 +8,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import DocCrossLinks from "@/components/admin/DocCrossLinks";
 
 /* ─── Types ─── */
 interface Invoice {
@@ -761,6 +762,11 @@ const AdminInvoiceManager = () => {
                             {inv.withholding_tax > 0 && <div className="flex justify-between"><span className="text-muted-foreground">หัก ณ ที่จ่าย 3%</span><span className="text-red-400">-฿{fmt(inv.withholding_tax)}</span></div>}
                             <div className="flex justify-between border-t border-border pt-1 font-bold text-sm"><span>ยอดสุทธิ</span><span className="text-primary">฿{fmt(inv.grand_total)}</span></div>
                           </div>
+                        </div>
+
+                        {/* Related Documents */}
+                        <div className="pt-2 border-t border-border">
+                          <DocCrossLinks quoteId={inv.quote_id} orderId={inv.order_id} billingId={inv.billing_note_id} invoiceId={inv.id} exclude={["invoice"]} />
                         </div>
 
                         <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
