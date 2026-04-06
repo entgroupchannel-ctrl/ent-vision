@@ -90,6 +90,8 @@ const LiveChatWidget = () => {
               created_at: newMsg.created_at,
             }];
           });
+          // Mark unread if chat is minimized
+          if (!open) setHasUnread(true);
         }
       )
       .subscribe();
@@ -151,7 +153,7 @@ const LiveChatWidget = () => {
 
   const handleOpen = async () => {
     setOpen(true);
-    forceShow();
+    setHasUnread(false);
     if (!guestInfo && !user) {
       setShowGuestForm(true);
       return;
@@ -210,19 +212,23 @@ const LiveChatWidget = () => {
     return d.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" });
   };
 
-  // Closed state button
+  // Minimized state button - always visible
   if (!open) {
     return (
       <button
         onClick={handleOpen}
-        onMouseEnter={onInteraction}
-        className={`fixed bottom-24 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-xl hover:scale-110 transition-all duration-500 flex items-center justify-center group ${
-          buttonVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
-        }`}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group"
         aria-label="Live Chat"
       >
         <Headphones size={24} />
-        <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+        {hasUnread && (
+          <span className="absolute -top-1 -right-1 w-5 h-5 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full flex items-center justify-center animate-bounce">
+            !
+          </span>
+        )}
+        {!hasUnread && (
+          <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+        )}
         <span className="absolute right-16 bg-foreground text-background text-xs px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
           แชทกับทีมงาน ENT Group
         </span>
