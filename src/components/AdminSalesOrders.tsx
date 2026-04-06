@@ -485,6 +485,23 @@ const AdminSalesOrders = () => {
                     </button>
                   </div>
 
+                  {/* Create Invoice */}
+                  <div className="border-t border-border pt-3">
+                    <button
+                      onClick={() => {
+                        try {
+                          sessionStorage.setItem("create_invoice_order_id", selected.id);
+                          // Find admin dashboard's setTab if available
+                          const event = new CustomEvent("admin-switch-tab", { detail: "invoices" });
+                          window.dispatchEvent(event);
+                        } catch {}
+                      }}
+                      className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 transition-colors"
+                    >
+                      <FileText size={14} /> สร้างใบแจ้งหนี้จาก Order นี้
+                    </button>
+                  </div>
+
                   {/* Status Actions */}
                   <div className="border-t border-border pt-3 space-y-2">
                     <h4 className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">เปลี่ยนสถานะ</h4>
