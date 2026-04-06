@@ -78,7 +78,12 @@ const AdminLogin = () => {
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
-      toast({ title: "เข้าสู่ระบบไม่สำเร็จ", description: error.message, variant: "destructive" });
+      const friendlyMsg = error.message === "Email not confirmed"
+        ? "กรุณายืนยันอีเมลของคุณก่อนเข้าสู่ระบบ โปรดตรวจสอบกล่องจดหมาย (หรือ Spam) ครับ 📧"
+        : error.message === "Invalid login credentials"
+        ? "อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้งครับ"
+        : error.message;
+      toast({ title: "ไม่สามารถเข้าสู่ระบบได้", description: friendlyMsg });
     }
     setLoading(false);
   };
@@ -90,7 +95,7 @@ const AdminLogin = () => {
       options: { redirectTo: `${window.location.origin}/admin-login` },
     });
     if (error) {
-      toast({ title: "เข้าสู่ระบบไม่สำเร็จ", description: error.message, variant: "destructive" });
+      toast({ title: "ไม่สามารถเข้าสู่ระบบได้", description: error.message });
     }
     setLoading(false);
   };
