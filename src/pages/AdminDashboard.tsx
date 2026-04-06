@@ -398,6 +398,10 @@ const AdminDashboard = () => {
           <AdminQuoteReview />
         ) : tab === "users" ? (
           <AdminUserManagement />
+        ) : tab === "livechat" ? (
+          <Suspense fallback={<div className="text-center py-12 text-muted-foreground text-sm">กำลังโหลด...</div>}>
+            <AdminLiveChat />
+          </Suspense>
         ) : (
         <>
         {/* Filter & Export */}
