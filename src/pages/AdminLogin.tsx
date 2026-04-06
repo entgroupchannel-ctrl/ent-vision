@@ -16,20 +16,15 @@ const AdminLogin = () => {
   useEffect(() => {
     let mounted = true;
 
+    // Simple check: if user has a session, send to /admin
+    // AdminDashboard has its own guard — will redirect back if not admin
     const checkSession = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
         if (!mounted) return;
         if (session) {
-          const isAdmin = await checkAdmin(session.user.id);
-          if (!mounted) return;
-          if (isAdmin) {
-            navigate("/admin", { replace: true });
-            return;
-          } else {
-            navigate("/", { replace: true });
-            return;
-          }
+          navigate("/admin", { replace: true });
+          return;
         }
       } catch (err) {
         console.error("Session check error:", err);
@@ -40,38 +35,24 @@ const AdminLogin = () => {
 
     checkSession();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (!mounted) return;
-      if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session) {
-        const isAdmin = await checkAdmin(session.user.id);
-        if (!mounted) return;
-        if (isAdmin) {
-          navigate("/admin", { replace: true });
-        } else {
-          navigate("/", { replace: true });
-        }
+      if (event === "SIGNED_IN" && session) {
+        navigate("/admin", { replace: true });
       }
     });
+
+    // Failsafe: force show login after 3 seconds no matter what
+    const timeout = setTimeout(() => {
+      if (mounted) setChecking(false);
+    }, 3000);
 
     return () => {
       mounted = false;
       subscription.unsubscribe();
+      clearTimeout(timeout);
     };
   }, [navigate]);
-
-  const checkAdmin = async (userId: string): Promise<boolean> => {
-    try {
-      const result = await Promise.race([
-        supabase.rpc("is_admin", { _user_id: userId }),
-        new Promise<{ data: null }>((resolve) =>
-          setTimeout(() => resolve({ data: null }), 3000)
-        ),
-      ]);
-      return (result as any)?.data === true;
-    } catch {
-      return false;
-    }
-  };
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();

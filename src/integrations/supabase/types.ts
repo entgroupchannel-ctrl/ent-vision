@@ -833,6 +833,13 @@ export type Database = {
           payment_terms: string | null
           pdf_url: string | null
           phone: string | null
+          po_file_name: string | null
+          po_file_url: string | null
+          po_notes: string | null
+          po_number: string | null
+          po_status: string | null
+          po_uploaded_at: string | null
+          po_uploaded_by: string | null
           products: Json
           quote_number: string | null
           status: string
@@ -866,6 +873,13 @@ export type Database = {
           payment_terms?: string | null
           pdf_url?: string | null
           phone?: string | null
+          po_file_name?: string | null
+          po_file_url?: string | null
+          po_notes?: string | null
+          po_number?: string | null
+          po_status?: string | null
+          po_uploaded_at?: string | null
+          po_uploaded_by?: string | null
           products?: Json
           quote_number?: string | null
           status?: string
@@ -899,6 +913,13 @@ export type Database = {
           payment_terms?: string | null
           pdf_url?: string | null
           phone?: string | null
+          po_file_name?: string | null
+          po_file_url?: string | null
+          po_notes?: string | null
+          po_number?: string | null
+          po_status?: string | null
+          po_uploaded_at?: string | null
+          po_uploaded_by?: string | null
           products?: Json
           quote_number?: string | null
           status?: string
