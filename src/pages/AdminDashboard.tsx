@@ -91,6 +91,7 @@ const AdminDashboard = () => {
     engagement: "marketing.engagement",
     subscribers: "marketing.subscribers",
     users: "system.users",
+    livechat: "sales.contacts",
   };
 
   // Check if current tab allows edit
