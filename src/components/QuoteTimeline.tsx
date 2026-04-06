@@ -37,12 +37,12 @@ interface QuoteTimelineProps {
 
 /* ─── Constants ─── */
 const NEGOTIATION_SUBJECTS = [
-  { value: "price", label: "ขอต่อราคา", icon: DollarSign, placeholder: "เช่น ขอราคา ฿11,500/เครื่อง สำหรับ 5 เครื่อง" },
-  { value: "delivery", label: "ขอปรับเงื่อนไขจัดส่ง", icon: Truck, placeholder: "เช่น ขอจัดส่งภายใน 3 วัน" },
-  { value: "credit_term", label: "ขอเครดิตเทอม", icon: CreditCard, placeholder: "เช่น ขอเครดิต 30 วันหลังส่งมอบ" },
-  { value: "warranty", label: "ขอเพิ่มประกัน", icon: Shield, placeholder: "เช่น ขอประกัน 3 ปี" },
-  { value: "quantity", label: "ขอปรับจำนวน", icon: Package, placeholder: "เช่น ต้องการเพิ่มเป็น 10 เครื่อง" },
-  { value: "other", label: "อื่นๆ", icon: MessageSquare, placeholder: "รายละเอียด..." },
+  { value: "price", label: "สอบถามราคาพิเศษ", icon: DollarSign, placeholder: "เช่น สนใจราคาพิเศษสำหรับ 5 เครื่องขึ้นไป" },
+  { value: "delivery", label: "ปรึกษาเรื่องจัดส่ง", icon: Truck, placeholder: "เช่น ต้องการจัดส่งภายใน 3 วัน เป็นไปได้ไหม" },
+  { value: "credit_term", label: "สนใจเครดิตเทอม", icon: CreditCard, placeholder: "เช่น สนใจเครดิต 30 วันหลังส่งมอบ" },
+  { value: "warranty", label: "เพิ่มแพ็กเกจประกัน", icon: Shield, placeholder: "เช่น สนใจประกันแบบ 3 ปี" },
+  { value: "quantity", label: "ปรับจำนวนสั่งซื้อ", icon: Package, placeholder: "เช่น ต้องการเพิ่มเป็น 10 เครื่อง" },
+  { value: "other", label: "ข้อเสนอแนะอื่นๆ", icon: MessageSquare, placeholder: "รายละเอียดเพิ่มเติม..." },
 ];
 
 const RESOLUTION_BADGE: Record<string, { label: string; color: string }> = {
@@ -177,13 +177,13 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
         await (supabase.from as any)("notifications").insert({
           user_id: null, // TODO: send to admin users
           type: "negotiation",
-          title: `ลูกค้าขอต่อรอง — ${quoteNumber}`,
+          title: `ลูกค้าส่งข้อเสนอเพิ่มเติม — ${quoteNumber}`,
           message: `เรื่อง: ${subjectLabel} — ${negReason.trim().slice(0, 80)}`,
           link: "/admin?tab=quotes",
         });
       } catch {}
 
-      toast({ title: "ส่งคำขอต่อรองแล้ว", description: "Admin จะตอบกลับภายใน 24 ชม." });
+      toast({ title: "ส่งข้อเสนอเรียบร้อยแล้ว", description: "ทีมงานจะตอบกลับภายใน 24 ชม." });
 
       // Send email: negotiation_customer (notify sale)
       try {
@@ -364,7 +364,7 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
                   <div className="rounded-lg p-3 text-sm" style={{ background: role.bubble, borderRadius: msg.sender_role === "customer" ? "0 8px 8px 8px" : "8px 0 8px 8px" }}>
                     {msg.message_type === "negotiation" && msg.subject && (
                       <div className="text-xs font-bold text-foreground mb-1">
-                        {msg.sender_role === "customer" ? "ขอต่อรอง" : "ข้อเสนอ"}: {SUBJECT_LABELS[msg.subject] || msg.subject}
+                        {msg.sender_role === "customer" ? "ความต้องการเพิ่มเติม" : "ข้อเสนอ"}: {SUBJECT_LABELS[msg.subject] || msg.subject}
                       </div>
                     )}
                     <div className="text-foreground/90 whitespace-pre-wrap">{msg.content}</div>
@@ -466,7 +466,7 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
           {!isAdmin && (
             <button onClick={() => setFormMode("negotiate")}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${formMode === "negotiate" ? "bg-amber-500/10 text-amber-600" : "text-muted-foreground hover:bg-secondary"}`}>
-              <DollarSign size={12} className="inline mr-1" /> ขอต่อรอง
+              <MessageSquare size={12} className="inline mr-1" /> ข้อเสนอเพิ่มเติม
             </button>
           )}
         </div>
@@ -503,15 +503,15 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
               className={`${inp} text-xs`} />
 
             <textarea value={negReason} onChange={(e) => setNegReason(e.target.value)}
-              placeholder="เหตุผลในการขอต่อรอง... (จำเป็น)" className={`${inp} resize-none text-xs`} rows={2} />
+              placeholder="รายละเอียดที่ต้องการแจ้งทีมงาน... (จำเป็น)" className={`${inp} resize-none text-xs`} rows={2} />
 
             <div className="flex items-center justify-between">
               <span className="text-[10px] text-muted-foreground flex items-center gap-1">
-                <Clock size={10} /> Admin จะตอบภายใน 24 ชม.
+                <Clock size={10} /> ทีมงานจะตอบกลับภายใน 24 ชม.
               </span>
               <button onClick={handleSendNegotiation} disabled={sending || !negReason.trim()}
                 className="px-4 py-2 rounded-lg bg-amber-500 text-white text-xs font-bold hover:bg-amber-600 disabled:opacity-50 flex items-center gap-1">
-                {sending ? <Loader2 size={12} className="animate-spin" /> : <Send size={12} />} ส่งคำขอต่อรอง
+                {sending ? <Loader2 size={12} className="animate-spin" /> : <Send size={12} />} ส่งข้อเสนอ
               </button>
             </div>
           </div>
