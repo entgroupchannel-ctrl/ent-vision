@@ -41,6 +41,171 @@ export type Database = {
         }
         Relationships: []
       }
+      billing_note_items: {
+        Row: {
+          billing_note_id: string
+          category: string | null
+          created_at: string | null
+          description: string | null
+          discount_percent: number | null
+          id: string
+          line_total: number | null
+          model: string
+          product_id: string | null
+          qty: number | null
+          sort_order: number | null
+          unit_price: number | null
+        }
+        Insert: {
+          billing_note_id: string
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          discount_percent?: number | null
+          id?: string
+          line_total?: number | null
+          model: string
+          product_id?: string | null
+          qty?: number | null
+          sort_order?: number | null
+          unit_price?: number | null
+        }
+        Update: {
+          billing_note_id?: string
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          discount_percent?: number | null
+          id?: string
+          line_total?: number | null
+          model?: string
+          product_id?: string | null
+          qty?: number | null
+          sort_order?: number | null
+          unit_price?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "billing_note_items_billing_note_id_fkey"
+            columns: ["billing_note_id"]
+            isOneToOne: false
+            referencedRelation: "billing_notes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "billing_note_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "product_catalog"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      billing_notes: {
+        Row: {
+          assigned_to: string | null
+          billing_date: string
+          billing_number: string
+          created_at: string
+          created_by: string | null
+          customer_address: string | null
+          customer_company: string | null
+          customer_email: string | null
+          customer_name: string
+          customer_phone: string | null
+          customer_tax_id: string | null
+          discount_amount: number | null
+          due_date: string | null
+          grand_total: number | null
+          id: string
+          notes: string | null
+          order_id: string | null
+          payment_terms: string | null
+          po_file_url: string | null
+          po_number: string | null
+          quote_id: string | null
+          status: string
+          subtotal: number | null
+          updated_at: string | null
+          user_id: string | null
+          vat_amount: number | null
+          withholding_tax: number | null
+        }
+        Insert: {
+          assigned_to?: string | null
+          billing_date?: string
+          billing_number?: string
+          created_at?: string
+          created_by?: string | null
+          customer_address?: string | null
+          customer_company?: string | null
+          customer_email?: string | null
+          customer_name: string
+          customer_phone?: string | null
+          customer_tax_id?: string | null
+          discount_amount?: number | null
+          due_date?: string | null
+          grand_total?: number | null
+          id?: string
+          notes?: string | null
+          order_id?: string | null
+          payment_terms?: string | null
+          po_file_url?: string | null
+          po_number?: string | null
+          quote_id?: string | null
+          status?: string
+          subtotal?: number | null
+          updated_at?: string | null
+          user_id?: string | null
+          vat_amount?: number | null
+          withholding_tax?: number | null
+        }
+        Update: {
+          assigned_to?: string | null
+          billing_date?: string
+          billing_number?: string
+          created_at?: string
+          created_by?: string | null
+          customer_address?: string | null
+          customer_company?: string | null
+          customer_email?: string | null
+          customer_name?: string
+          customer_phone?: string | null
+          customer_tax_id?: string | null
+          discount_amount?: number | null
+          due_date?: string | null
+          grand_total?: number | null
+          id?: string
+          notes?: string | null
+          order_id?: string | null
+          payment_terms?: string | null
+          po_file_url?: string | null
+          po_number?: string | null
+          quote_id?: string | null
+          status?: string
+          subtotal?: number | null
+          updated_at?: string | null
+          user_id?: string | null
+          vat_amount?: number | null
+          withholding_tax?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "billing_notes_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "sales_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "billing_notes_quote_id_fkey"
+            columns: ["quote_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       business_cards: {
         Row: {
           address: string | null
@@ -256,6 +421,142 @@ export type Database = {
           whatsapp?: string | null
         }
         Relationships: []
+      }
+      delivery_note_items: {
+        Row: {
+          created_at: string | null
+          delivery_note_id: string
+          description: string | null
+          id: string
+          model: string
+          qty: number | null
+          serial_numbers: string[] | null
+          sort_order: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          delivery_note_id: string
+          description?: string | null
+          id?: string
+          model: string
+          qty?: number | null
+          serial_numbers?: string[] | null
+          sort_order?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          delivery_note_id?: string
+          description?: string | null
+          id?: string
+          model?: string
+          qty?: number | null
+          serial_numbers?: string[] | null
+          sort_order?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "delivery_note_items_delivery_note_id_fkey"
+            columns: ["delivery_note_id"]
+            isOneToOne: false
+            referencedRelation: "delivery_notes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      delivery_notes: {
+        Row: {
+          billing_note_id: string | null
+          courier: string | null
+          created_at: string
+          created_by: string | null
+          customer_address: string | null
+          customer_company: string | null
+          customer_name: string
+          customer_phone: string | null
+          delivery_address: string | null
+          delivery_date: string | null
+          delivery_number: string
+          id: string
+          invoice_id: string | null
+          notes: string | null
+          order_id: string | null
+          quote_id: string | null
+          status: string
+          tracking_number: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          billing_note_id?: string | null
+          courier?: string | null
+          created_at?: string
+          created_by?: string | null
+          customer_address?: string | null
+          customer_company?: string | null
+          customer_name: string
+          customer_phone?: string | null
+          delivery_address?: string | null
+          delivery_date?: string | null
+          delivery_number?: string
+          id?: string
+          invoice_id?: string | null
+          notes?: string | null
+          order_id?: string | null
+          quote_id?: string | null
+          status?: string
+          tracking_number?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          billing_note_id?: string | null
+          courier?: string | null
+          created_at?: string
+          created_by?: string | null
+          customer_address?: string | null
+          customer_company?: string | null
+          customer_name?: string
+          customer_phone?: string | null
+          delivery_address?: string | null
+          delivery_date?: string | null
+          delivery_number?: string
+          id?: string
+          invoice_id?: string | null
+          notes?: string | null
+          order_id?: string | null
+          quote_id?: string | null
+          status?: string
+          tracking_number?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "delivery_notes_billing_note_id_fkey"
+            columns: ["billing_note_id"]
+            isOneToOne: false
+            referencedRelation: "billing_notes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "delivery_notes_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "delivery_notes_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "sales_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "delivery_notes_quote_id_fkey"
+            columns: ["quote_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       demo_requests: {
         Row: {
@@ -605,6 +906,7 @@ export type Database = {
       invoices: {
         Row: {
           assigned_to: string | null
+          billing_note_id: string | null
           created_at: string
           created_by: string | null
           customer_address: string | null
@@ -632,6 +934,7 @@ export type Database = {
         }
         Insert: {
           assigned_to?: string | null
+          billing_note_id?: string | null
           created_at?: string
           created_by?: string | null
           customer_address?: string | null
@@ -659,6 +962,7 @@ export type Database = {
         }
         Update: {
           assigned_to?: string | null
+          billing_note_id?: string | null
           created_at?: string
           created_by?: string | null
           customer_address?: string | null
@@ -685,6 +989,13 @@ export type Database = {
           withholding_tax?: number | null
         }
         Relationships: [
+          {
+            foreignKeyName: "invoices_billing_note_id_fkey"
+            columns: ["billing_note_id"]
+            isOneToOne: false
+            referencedRelation: "billing_notes"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "invoices_order_id_fkey"
             columns: ["order_id"]
@@ -807,6 +1118,88 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      payment_records: {
+        Row: {
+          amount_paid: number
+          bank_name: string | null
+          billing_note_id: string | null
+          confirmed_at: string | null
+          confirmed_by: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          invoice_id: string | null
+          notes: string | null
+          payment_date: string
+          payment_method: string
+          payment_number: string
+          quote_id: string | null
+          reference_number: string | null
+          slip_url: string | null
+          status: string
+        }
+        Insert: {
+          amount_paid?: number
+          bank_name?: string | null
+          billing_note_id?: string | null
+          confirmed_at?: string | null
+          confirmed_by?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          invoice_id?: string | null
+          notes?: string | null
+          payment_date?: string
+          payment_method?: string
+          payment_number?: string
+          quote_id?: string | null
+          reference_number?: string | null
+          slip_url?: string | null
+          status?: string
+        }
+        Update: {
+          amount_paid?: number
+          bank_name?: string | null
+          billing_note_id?: string | null
+          confirmed_at?: string | null
+          confirmed_by?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          invoice_id?: string | null
+          notes?: string | null
+          payment_date?: string
+          payment_method?: string
+          payment_number?: string
+          quote_id?: string | null
+          reference_number?: string | null
+          slip_url?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_records_billing_note_id_fkey"
+            columns: ["billing_note_id"]
+            isOneToOne: false
+            referencedRelation: "billing_notes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_records_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_records_quote_id_fkey"
+            columns: ["quote_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       product_catalog: {
         Row: {
@@ -1191,6 +1584,7 @@ export type Database = {
       receipts: {
         Row: {
           amount_paid: number
+          billing_note_id: string | null
           created_at: string
           created_by: string | null
           customer_company: string | null
@@ -1201,6 +1595,7 @@ export type Database = {
           order_id: string | null
           payment_date: string
           payment_method: string | null
+          payment_record_id: string | null
           quote_id: string | null
           receipt_number: string
           status: string
@@ -1208,6 +1603,7 @@ export type Database = {
         }
         Insert: {
           amount_paid?: number
+          billing_note_id?: string | null
           created_at?: string
           created_by?: string | null
           customer_company?: string | null
@@ -1218,6 +1614,7 @@ export type Database = {
           order_id?: string | null
           payment_date?: string
           payment_method?: string | null
+          payment_record_id?: string | null
           quote_id?: string | null
           receipt_number: string
           status?: string
@@ -1225,6 +1622,7 @@ export type Database = {
         }
         Update: {
           amount_paid?: number
+          billing_note_id?: string | null
           created_at?: string
           created_by?: string | null
           customer_company?: string | null
@@ -1235,12 +1633,20 @@ export type Database = {
           order_id?: string | null
           payment_date?: string
           payment_method?: string | null
+          payment_record_id?: string | null
           quote_id?: string | null
           receipt_number?: string
           status?: string
           updated_at?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "receipts_billing_note_id_fkey"
+            columns: ["billing_note_id"]
+            isOneToOne: false
+            referencedRelation: "billing_notes"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "receipts_invoice_id_fkey"
             columns: ["invoice_id"]
@@ -1253,6 +1659,13 @@ export type Database = {
             columns: ["order_id"]
             isOneToOne: false
             referencedRelation: "sales_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "receipts_payment_record_id_fkey"
+            columns: ["payment_record_id"]
+            isOneToOne: false
+            referencedRelation: "payment_records"
             referencedColumns: ["id"]
           },
           {
