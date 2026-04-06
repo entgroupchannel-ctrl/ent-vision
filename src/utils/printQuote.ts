@@ -1,4 +1,86 @@
-/* ─── Professional Quote Print (ENT Group Style — per PRINT_QUOTE_DESIGN_SPEC) ─── */
+/* ─── Professional Quote Print v2 — PRINT_QUOTE_DESIGN_SPEC_V2 ─── */
+
+/* ── i18n ── */
+type Lang = 'th' | 'en';
+
+const i18n: Record<Lang, Record<string, string>> = {
+  th: {
+    title: 'ใบเสนอราคา',
+    quote_number: 'เลขที่',
+    date: 'วันที่',
+    valid_until: 'ยืนราคาถึง',
+    salesperson: 'ผู้ขาย',
+    job_name: 'ชื่องาน',
+    customer: 'ลูกค้า',
+    email: 'อีเมล',
+    phone: 'โทร',
+    tax_id: 'เลขประจำตัวผู้เสียภาษี',
+    item_no: '#',
+    description: 'รายละเอียด',
+    quantity: 'จำนวน',
+    unit_price: 'ราคาต่อหน่วย',
+    discount: 'ส่วนลด',
+    amount: 'มูลค่า',
+    subtotal: 'รวมเป็นเงิน',
+    discount_total: 'ส่วนลด',
+    after_discount: 'จำนวนเงินหลังหักส่วนลด',
+    vat: 'ภาษีมูลค่าเพิ่ม',
+    grand_total: 'จำนวนเงินรวมทั้งสิ้น',
+    wht: 'หัก ณ ที่จ่าย',
+    net_payable: 'ยอดชำระ',
+    currency: 'บาท',
+    notes: 'หมายเหตุ',
+    payment_method: 'วิธีการชำระเงิน',
+    payment_note: 'ลูกค้าเป็นผู้รับผิดชอบค่าใช้จ่าย ค่าธรรมเนียมในการโอนเงิน',
+    terms: 'เงื่อนไข',
+    purchaser: 'ผู้สั่งซื้อสินค้า',
+    authorized: 'ผู้อนุมัติ',
+    company_seal: 'ตราประทับ',
+    page_of: 'หน้าที่',
+    by_name: 'ในนาม',
+    date_label: 'วันที่',
+    payslip: 'Pay in slip มายัง',
+    savings: 'ออมทรัพย์',
+  },
+  en: {
+    title: 'Quotation',
+    quote_number: 'Quote No.',
+    date: 'Date',
+    valid_until: 'Valid Until',
+    salesperson: 'Salesperson',
+    job_name: 'Job Name',
+    customer: 'Customer',
+    email: 'Email',
+    phone: 'Tel',
+    tax_id: 'Tax ID',
+    item_no: '#',
+    description: 'Description',
+    quantity: 'Qty',
+    unit_price: 'Unit Price',
+    discount: 'Discount',
+    amount: 'Amount',
+    subtotal: 'Subtotal',
+    discount_total: 'Discount',
+    after_discount: 'After Discount',
+    vat: 'VAT',
+    grand_total: 'Grand Total',
+    wht: 'Withholding Tax',
+    net_payable: 'Net Payable',
+    currency: 'THB',
+    notes: 'Notes',
+    payment_method: 'Payment Method',
+    payment_note: 'Customer is responsible for all bank transfer fees.',
+    terms: 'Terms & Conditions',
+    purchaser: 'Purchaser',
+    authorized: 'Authorized',
+    company_seal: 'Company Seal',
+    page_of: 'Page',
+    by_name: 'By',
+    date_label: 'Date',
+    payslip: 'Pay in slip to',
+    savings: 'Savings',
+  },
+};
 
 const SPEC_LABELS: Record<string, string> = {
   cpu: "CPU", ram: "RAM", com: "COM", usb: "USB", lan: "LAN", display: "จอ",
@@ -6,6 +88,7 @@ const SPEC_LABELS: Record<string, string> = {
   os: "OS", power: "Power", dimension: "ขนาด", weight: "น้ำหนัก", certification: "Cert",
 };
 
+/* ── Interfaces ── */
 interface PrintQuote {
   quote_number: string | null;
   name: string;
@@ -78,6 +161,7 @@ const DEFAULT_COMPANY: CompanyInfo = {
   fax: "02-045-6105",
   website: "www.entgroup.co.th",
   email: "sales@entgroup.co.th",
+  logo_url: "/images/ent-logo.png",
   bank_accounts: [
     { bank: "ธนาคารกสิกรไทย", branch: "สาขา ปทุมธานี", type: "ออมทรัพย์", number: "841-2-05851-9" },
     { bank: "ธนาคารไทยพาณิชย์", branch: "สาขาบางบัวทอง (ปทุมธานี)", type: "ออมทรัพย์", number: "406-817747-1" },
@@ -124,17 +208,45 @@ function numberToThaiText(num: number): string {
   return result;
 }
 
-/* ── Clean description: strip price ranges ── */
+/* ── Number to English text (simple) ── */
+function numberToEnglishText(num: number): string {
+  const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+  const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+  function convert(n: number): string {
+    if (n === 0) return '';
+    if (n < 20) return ones[n];
+    if (n < 100) return tens[Math.floor(n / 10)] + (n % 10 ? '-' + ones[n % 10] : '');
+    if (n < 1000) return ones[Math.floor(n / 100)] + ' hundred' + (n % 100 ? ' ' + convert(n % 100) : '');
+    if (n < 1000000) return convert(Math.floor(n / 1000)) + ' thousand' + (n % 1000 ? ' ' + convert(n % 1000) : '');
+    return convert(Math.floor(n / 1000000)) + ' million' + (n % 1000000 ? ' ' + convert(n % 1000000) : '');
+  }
+
+  const intPart = Math.floor(num);
+  const decPart = Math.round((num - intPart) * 100);
+  let result = (convert(intPart) || 'zero') + ' baht';
+  if (decPart > 0) {
+    result += ' and ' + (convert(decPart) || 'zero') + ' satang';
+  } else {
+    result += ' only';
+  }
+  // Capitalize first letter
+  return result.charAt(0).toUpperCase() + result.slice(1);
+}
+
+/* ── Clean description ── */
 function cleanDescription(desc: string): string {
   if (!desc) return "";
   let cleaned = desc;
-  cleaned = cleaned.replace(/\|?\s*ราคา\s*฿[\d,]+\s*-\s*฿[\d,]+\s*\(\d+\s*configs?\)/gi, '');
-  cleaned = cleaned.replace(/\s*\|\s*ราคา\s*฿[\d,]+\s*-\s*฿[\d,]+\s*\(.*?\)/gi, '');
-  cleaned = cleaned.replace(/฿[\d,]+\s*-\s*฿[\d,]+\s*\(\d+\s*configs?\)/gi, '');
+  cleaned = cleaned.replace(/\|?\s*ราคา\s*[฿$]?[\d,]+\s*-\s*[฿$]?[\d,]+\s*\(\d+\s*configs?\)/gi, '');
+  cleaned = cleaned.replace(/\s*\|\s*ราคา\s*[฿$]?[\d,]+\s*-\s*[฿$]?[\d,]+\s*\(.*?\)/gi, '');
+  cleaned = cleaned.replace(/[฿$][\d,]+\s*-\s*[฿$][\d,]+\s*\(\d+\s*configs?\)/gi, '');
+  cleaned = cleaned.replace(/\|\s*$/, '');
   return cleaned.trim();
 }
 
-/* ── Format specs as separate lines ── */
+/* ── Format specs ── */
 function formatSpecLines(specs: Record<string, string>): string {
   return Object.entries(specs)
     .filter(([, v]) => v && v !== "No" && v !== "-")
@@ -157,14 +269,17 @@ export const printQuote = (
   saleName?: string,
   salePhone?: string,
   saleEmail?: string,
+  lang: Lang = 'th',
 ) => {
   const c = { ...DEFAULT_COMPANY, ...company };
+  const t = i18n[lang];
   const fp = (n: number) => new Intl.NumberFormat("th-TH", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
   const today = new Date().toLocaleDateString("th-TH", { day: "2-digit", month: "2-digit", year: "numeric" });
   const validDate = terms.valid_until
     ? new Date(terms.valid_until).toLocaleDateString("th-TH", { day: "2-digit", month: "2-digit", year: "numeric" })
     : "—";
 
+  /* ── Financial calc ── */
   const subtotal = items.reduce((s, i) => s + i.line_total, 0);
   const discountAmt = items.reduce((s, i) => {
     return s + (i.discount_percent > 0 ? Math.round(i.unit_price * i.qty * i.discount_percent / 100 * 100) / 100 : 0);
@@ -179,14 +294,18 @@ export const printQuote = (
   const whtAmount = whtPercent > 0 ? Math.round(beforeVat * whtPercent / 100 * 100) / 100 : 0;
   const netPayable = grandTotal - whtAmount;
   const finalAmount = whtPercent > 0 ? netPayable : grandTotal;
+  const amountText = lang === 'th' ? numberToThaiText(finalAmount) : numberToEnglishText(finalAmount);
 
-  // Item rows
+  /* ── Logo URL ── */
+  const logoUrl = c.logo_url || '/images/ent-logo.png';
+  const fullLogoUrl = logoUrl.startsWith('http') ? logoUrl : `${window.location.origin}${logoUrl}`;
+
+  /* ── Item rows ── */
   const itemRows = items.map((item, i) => {
     const specs = item._specs || item.custom_specs || {};
     const rawDesc = item._desc || item._name || "";
     const desc = cleanDescription(rawDesc);
     const specHtml = formatSpecLines(specs);
-    const unit = item._unit || "เครื่อง";
     const lineDiscount = item.discount_percent > 0 ? Math.round(item.unit_price * item.qty * item.discount_percent / 100 * 100) / 100 : 0;
 
     return `<tr>
@@ -204,154 +323,169 @@ export const printQuote = (
     </tr>`;
   }).join("");
 
-  /* ── Contact info for header right ── */
-  const contactName = q.name || "-";
-  const contactPhone = q.phone || "";
+  /* ── Company name by lang ── */
+  const coName = lang === 'th' ? c.company_name_th : c.company_name_en;
+  const coNameFull = lang === 'th' ? c.company_name_th : c.company_name_en;
 
-  const html = `<!DOCTYPE html><html lang="th"><head><meta charset="utf-8">
-<title>ใบเสนอราคา ${q.quote_number || ""}</title>
+  const html = `<!DOCTYPE html><html lang="${lang}"><head><meta charset="utf-8">
+<title>${t.title} ${q.quote_number || ""}</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Sarabun',sans-serif;font-size:11px;color:#1a1a2e;padding:0;margin:0}
+body{font-family:'Sarabun','THSarabunNew','Helvetica','Arial',sans-serif;font-size:10pt;color:#333;padding:0;margin:0}
+
+/* ── A4 Page Setup ── */
 @media print{
   body{padding:0}
-  @page{margin:12mm 15mm;size:A4}
+  @page{size:A4;margin:20mm 15mm 25mm 15mm}
   .page-break{page-break-before:always}
+  .no-break{page-break-inside:avoid}
 }
 @media screen{
-  body{max-width:820px;margin:0 auto;padding:20px}
+  body{max-width:210mm;margin:0 auto;padding:20mm 15mm;background:#f0f0f0}
+  .page-container{background:#fff;padding:20mm 15mm;min-height:297mm;box-shadow:0 2px 20px rgba(0,0,0,0.15);margin-bottom:10mm}
 }
 
 /* ── Colors ── */
 :root{
-  --orange:#E87722;
-  --orange-light:#FFF3E8;
-  --dark:#1a1a2e;
-  --gray:#666;
-  --light-gray:#f5f5f5;
-  --border:#ddd;
+  --primary:#E87722;
+  --primary-dark:#C45D10;
+  --text-dark:#333333;
+  --text-light:#666666;
+  --border:#E0E0E0;
+  --bg-light:#FFF8F0;
+  --table-header:#F5F5F5;
 }
 
 /* ── Header ── */
-.header{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;padding-bottom:10px;border-bottom:3px solid var(--orange)}
-.header-left{font-size:10px;line-height:1.7;color:var(--gray)}
-.header-left .co-name{font-size:15px;font-weight:700;color:var(--dark);display:block;margin-bottom:2px}
-.header-left .co-en{font-size:10px;color:var(--gray)}
-.header-left .tax-line{color:#888;font-size:9.5px}
+.header{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;padding-bottom:12px;border-bottom:3px solid var(--primary)}
+.header-left{font-size:9pt;line-height:1.8;color:var(--text-light)}
+.header-left .logo{height:55px;margin-bottom:6px;display:block}
+.header-left .co-name{font-size:14pt;font-weight:700;color:var(--text-dark);display:block;margin-bottom:1px}
+.header-left .co-en{font-size:9pt;color:var(--text-light)}
+.header-left .tax-line{color:#888;font-size:9pt}
 .header-right{text-align:right}
-.header-right .title{font-size:24px;font-weight:700;color:var(--orange);margin-bottom:6px}
-.header-right .info-grid{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;text-align:left;font-size:11px}
-.header-right .info-grid .lb{color:var(--gray);font-weight:600;text-align:right;white-space:nowrap}
-.header-right .info-grid .vl{color:var(--dark)}
+.header-right .title{font-size:24pt;font-weight:700;color:var(--primary);margin-bottom:8px}
+.header-right .info-box{background:var(--bg-light);border:1.5px solid var(--border);border-radius:6px;padding:10px 14px;text-align:left}
+.header-right .info-row{display:flex;justify-content:space-between;padding:2px 0;font-size:10pt}
+.header-right .info-row .lb{color:var(--text-light);font-weight:600;min-width:90px}
+.header-right .info-row .vl{color:var(--text-dark);text-align:right;flex:1}
+
+/* ── Compact Header (page 2+) ── */
+.header-compact{display:flex;align-items:center;justify-content:space-between;padding:6px 0 10px;margin-bottom:10px;border-bottom:2px solid var(--primary)}
+.header-compact .logo-sm{height:30px}
+.header-compact .compact-title{font-size:14pt;font-weight:700;color:var(--primary)}
+.header-compact .compact-qn{font-size:10pt;color:var(--text-light)}
 
 /* ── Customer Info ── */
-.customer-box{border:1.5px solid var(--border);border-radius:4px;padding:10px 14px;margin-bottom:14px}
-.customer-box .section-label{font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
-.customer-box p{font-size:11px;line-height:1.6;color:#333}
-.customer-box .cust-name{font-weight:700;font-size:12px;color:var(--dark)}
+.customer-box{border:1.5px solid var(--border);border-radius:6px;padding:12px 16px;margin-bottom:14px;background:var(--bg-light)}
+.customer-box .section-label{font-size:10pt;font-weight:700;color:var(--primary);letter-spacing:0.5px;margin-bottom:4px}
+.customer-box p{font-size:10pt;line-height:1.7;color:#333}
+.customer-box .cust-name{font-weight:700;font-size:11pt;color:var(--text-dark)}
 
 /* ── Product Table ── */
 table.items{width:100%;border-collapse:collapse;margin-bottom:0}
-table.items th{background:var(--dark);color:#fff;font-size:10px;font-weight:600;padding:8px 6px;text-align:left;white-space:nowrap}
+table.items th{background:var(--text-dark);color:#fff;font-size:10pt;font-weight:600;padding:8px 6px;text-align:left;white-space:nowrap}
 table.items th.c{text-align:center}
 table.items th.r{text-align:right}
-table.items td{padding:7px 6px;border-bottom:1px solid #e5e7eb;font-size:11px;vertical-align:top}
+table.items td{padding:8px 6px;border-bottom:1px solid #e5e7eb;font-size:10pt;vertical-align:top}
 table.items td.c{text-align:center}
 table.items td.r{text-align:right;white-space:nowrap}
 table.items tr:nth-child(even){background:#fafbfc}
-.product-name{font-weight:700;font-size:11.5px;color:var(--dark)}
-.product-desc{font-size:10px;color:#555;margin-top:2px;line-height:1.5}
+.product-name{font-weight:700;font-size:11pt;color:var(--text-dark)}
+.product-desc{font-size:9pt;color:#555;margin-top:3px;line-height:1.6}
 .spec-block{margin-top:4px}
-.spec-line{font-size:9.5px;color:#666;line-height:1.6;padding-left:8px}
-.admin-note{font-size:9.5px;color:var(--orange);margin-top:3px;font-style:italic}
+.spec-line{font-size:8.5pt;color:#666;line-height:1.7;padding-left:10px}
+.admin-note{font-size:9pt;color:var(--primary);margin-top:3px;font-style:italic}
 .desc-cell{max-width:360px}
 
 /* ── Totals ── */
-.totals-section{margin-top:12px;display:flex;justify-content:flex-end}
-.totals{width:320px}
-.totals .row{display:flex;justify-content:space-between;padding:4px 0;font-size:11px;color:#444}
+.totals-section{margin-top:14px;display:flex;justify-content:flex-end}
+.totals{width:340px}
+.totals .row{display:flex;justify-content:space-between;padding:4px 0;font-size:10pt;color:#444}
 .totals .row.sub{border-top:1px solid var(--border);padding-top:6px;margin-top:2px}
-.totals .row.vat{color:var(--orange);font-weight:600}
-.totals .row.grand{font-weight:700;font-size:14px;color:var(--dark);border-top:2.5px solid var(--orange);padding-top:8px;margin-top:4px}
-.totals .row.wht{color:#dc2626;font-size:11px}
-.totals .row.net{font-weight:700;font-size:13px;color:var(--dark);border-top:2px solid var(--dark);padding-top:6px;margin-top:4px}
-.thai-text{font-size:11px;color:var(--gray);margin:6px 0 16px;text-align:right;font-style:italic}
+.totals .row.vat{color:var(--primary);font-weight:600}
+.totals .row.grand{font-weight:700;font-size:14pt;color:var(--text-dark);border-top:3px double var(--primary);padding-top:8px;margin-top:6px}
+.totals .row.wht{color:#dc2626;font-size:10pt}
+.totals .row.net{font-weight:700;font-size:12pt;color:var(--text-dark);border-top:2px solid var(--text-dark);padding-top:6px;margin-top:4px}
+.thai-text{font-size:10pt;color:var(--text-light);margin:8px 0 16px;text-align:right;font-style:italic}
 
 /* ── Notes & Bank ── */
-.notes-section{margin-top:16px;padding-top:10px;border-top:1.5px solid var(--border)}
-.notes-section h3{font-size:12px;font-weight:700;color:var(--orange);margin-bottom:6px}
-.notes-section p,.notes-section div{font-size:10.5px;line-height:1.7;color:#444}
-.bank-block{margin-top:10px;padding:8px 12px;background:var(--light-gray);border-radius:4px}
-.bank-item{margin-bottom:6px}
-.bank-item strong{color:var(--dark)}
-.bank-item div{font-size:10px;color:var(--gray)}
-.payslip-note{font-size:10px;color:var(--orange);font-weight:600;margin-top:6px}
+.notes-section{margin-top:18px;padding-top:12px;border-top:2px solid var(--border)}
+.notes-section h3{font-size:12pt;font-weight:700;color:var(--primary);margin-bottom:8px}
+.notes-section p,.notes-section div{font-size:10pt;line-height:1.7;color:#444}
+.bank-block{margin-top:10px;padding:10px 14px;background:var(--bg-light);border:1px solid var(--border);border-radius:6px}
+.bank-item{margin-bottom:8px}
+.bank-item strong{color:var(--text-dark);font-size:10pt}
+.bank-item div{font-size:9.5pt;color:var(--text-light)}
+.payslip-note{font-size:10pt;color:var(--primary);font-weight:600;margin-top:8px}
 
 /* ── Terms ── */
-.terms-section{margin-top:14px;padding-top:10px;border-top:1.5px solid var(--border)}
-.terms-section h3{font-size:12px;font-weight:700;color:var(--orange);margin-bottom:6px}
-.terms-section .terms-body{font-size:10px;line-height:1.8;color:#555;white-space:pre-line}
+.terms-section{margin-top:16px;padding-top:12px;border-top:2px solid var(--border)}
+.terms-section h3{font-size:12pt;font-weight:700;color:var(--primary);margin-bottom:8px}
+.terms-section .terms-body{font-size:9pt;line-height:1.9;color:#555;white-space:pre-line}
 
 /* ── Signatures ── */
-.sigs{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;margin:40px 10px 20px;align-items:end}
-.sig{text-align:center;padding-top:50px;border-top:1px solid #999}
-.sig p{font-size:10px;color:var(--gray);margin-top:4px}
-.sig .name{font-size:11px;color:var(--dark);font-weight:600}
+.sigs{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;margin:45px 10px 20px;align-items:end;page-break-inside:avoid}
+.sig{text-align:center;padding-top:55px;border-top:1px solid #999}
+.sig p{font-size:10pt;color:var(--text-light);margin-top:4px}
+.sig .name{font-size:10pt;color:var(--text-dark);font-weight:600}
 .sig-stamp{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
-.sig-stamp .stamp-placeholder{width:80px;height:80px;border:2px dashed var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#ccc;margin-bottom:8px}
+.sig-stamp .stamp-placeholder{width:85px;height:85px;border:2px dashed var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9pt;color:#ccc;margin-bottom:8px}
 
 /* ── Footer ── */
-.page-footer{text-align:center;padding-top:10px;border-top:1px solid #e5e7eb;font-size:9px;color:#999;margin-top:20px}
+.page-footer{text-align:center;padding-top:12px;border-top:1px solid #e5e7eb;font-size:8pt;color:#999;margin-top:24px}
+.page-footer .page-num{margin-top:4px;font-size:9pt;color:var(--text-light);text-align:right}
 </style></head><body>
+
+<div class="page-container">
 
 <!-- ═══ HEADER ═══ -->
 <div class="header">
   <div class="header-left">
-    ${c.logo_url ? `<img src="${c.logo_url}" alt="Logo" style="height:50px;margin-bottom:6px;display:block">` : ""}
+    <img src="${fullLogoUrl}" alt="ENT Group" class="logo" onerror="this.style.display='none'">
     <span class="co-name">${c.company_name_th}</span>
     <span class="co-en">${c.company_name_en} (${c.branch})</span><br>
     ${c.address_line1} ${c.address_line2}<br>
     ${c.district} ${c.province}<br>
-    <span class="tax-line">เลขประจำตัวผู้เสียภาษี ${c.tax_id}</span><br>
-    โทร. ${c.phone} | แฟกซ์ ${c.fax}<br>
+    <span class="tax-line">${t.tax_id} ${c.tax_id}</span><br>
+    ${t.phone}. ${c.phone} | แฟกซ์ ${c.fax}<br>
     เบอร์มือถือ ${c.mobile}<br>
     ${c.website}
   </div>
   <div class="header-right">
-    <div class="title">ใบเสนอราคา</div>
-    <div class="info-grid">
-      <span class="lb">เลขที่:</span><span class="vl">${q.quote_number || "—"}</span>
-      <span class="lb">วันที่:</span><span class="vl">${today}</span>
-      <span class="lb">ยืนราคาถึง:</span><span class="vl">${validDate}</span>
-      ${saleEmail ? `<span class="lb">ผู้ขาย:</span><span class="vl">${saleEmail}</span>` : ""}
-      ${saleName ? `<span class="lb"></span><span class="vl">${saleName}${salePhone ? ` ${salePhone}` : ""}</span>` : ""}
-      <span class="lb">ชื่องาน:</span><span class="vl">${items.length > 0 ? items[0].model : "-"}</span>
-      <span class="lb">ผู้ติดต่อ:</span><span class="vl">${contactName}</span>
-      ${contactPhone ? `<span class="lb">เบอร์โทร:</span><span class="vl">${contactPhone}</span>` : ""}
+    <div class="title">${t.title}</div>
+    <div class="info-box">
+      <div class="info-row"><span class="lb">${t.quote_number}:</span><span class="vl">${q.quote_number || "—"}</span></div>
+      <div class="info-row"><span class="lb">${t.date}:</span><span class="vl">${today}</span></div>
+      <div class="info-row"><span class="lb">${t.valid_until}:</span><span class="vl">${validDate}</span></div>
+      ${saleName || saleEmail ? `<div class="info-row"><span class="lb">${t.salesperson}:</span><span class="vl">${saleName || ""}</span></div>` : ""}
+      ${saleEmail ? `<div class="info-row"><span class="lb"></span><span class="vl" style="font-size:9pt;color:var(--text-light)">${saleEmail}</span></div>` : ""}
+      ${salePhone ? `<div class="info-row"><span class="lb"></span><span class="vl" style="font-size:9pt;color:var(--text-light)">${salePhone}</span></div>` : ""}
+      <div class="info-row"><span class="lb">${t.job_name}:</span><span class="vl">${items.length > 0 ? items[0].model : "-"}</span></div>
     </div>
   </div>
 </div>
 
 <!-- ═══ CUSTOMER INFO ═══ -->
 <div class="customer-box">
-  <div class="section-label">ลูกค้า</div>
+  <div class="section-label">${t.customer}</div>
   <p class="cust-name">${q.company ? `${q.company}` : ""} ${q.name}${q.branch ? ` (${q.branch})` : ""}</p>
   ${q.company_address ? `<p>${q.company_address}</p>` : ""}
-  ${q.tax_id ? `<p style="font-size:10px;color:#888">เลขประจำตัวผู้เสียภาษี ${q.tax_id}</p>` : ""}
-  <p><span style="color:#888">อีเมล:</span> ${q.email}${q.phone ? ` | <span style="color:#888">โทร:</span> ${q.phone}` : ""}</p>
+  ${q.tax_id ? `<p style="font-size:9pt;color:#888">${t.tax_id} ${q.tax_id}</p>` : ""}
+  <p><span style="color:#888">${t.email}:</span> ${q.email}${q.phone ? ` | <span style="color:#888">${t.phone}:</span> ${q.phone}` : ""}</p>
 </div>
 
 <!-- ═══ PRODUCT TABLE ═══ -->
 <table class="items">
   <thead>
     <tr>
-      <th class="c" style="width:30px">#</th>
-      <th>รายละเอียด</th>
-      <th class="c" style="width:50px">จำนวน</th>
-      <th class="r" style="width:90px">ราคาต่อหน่วย</th>
-      <th class="r" style="width:70px">ส่วนลด</th>
-      <th class="r" style="width:90px">มูลค่า</th>
+      <th class="c" style="width:5%">${t.item_no}</th>
+      <th style="width:45%">${t.description}</th>
+      <th class="c" style="width:10%">${t.quantity}</th>
+      <th class="r" style="width:15%">${t.unit_price}</th>
+      <th class="r" style="width:10%">${t.discount}</th>
+      <th class="r" style="width:15%">${t.amount}</th>
     </tr>
   </thead>
   <tbody>
@@ -360,38 +494,38 @@ table.items tr:nth-child(even){background:#fafbfc}
 </table>
 
 <!-- ═══ TOTALS ═══ -->
-<div class="totals-section">
+<div class="totals-section no-break">
   <div class="totals">
-    <div class="row"><span>รวมเป็นเงิน</span><span>${fp(subtotal + totalDiscount)} บาท</span></div>
-    ${totalDiscount > 0 ? `<div class="row"><span>ส่วนลด</span><span>${fp(totalDiscount)} บาท</span></div>
-    <div class="row sub"><span>จำนวนเงินหลังหักส่วนลด</span><span>${fp(afterDiscount)} บาท</span></div>` : ""}
-    ${vatPercent > 0 ? `<div class="row vat"><span>ภาษีมูลค่าเพิ่ม ${vatPercent}%</span><span>${fp(vatAmount)} บาท</span></div>` : ""}
-    <div class="row grand"><span>จำนวนเงินรวมทั้งสิ้น</span><span>${fp(grandTotal)} บาท</span></div>
-    ${whtPercent > 0 ? `<div class="row wht"><span>หัก ณ ที่จ่าย ${whtPercent}%</span><span>-${fp(whtAmount)} บาท</span></div>
-    <div class="row net"><span>ยอดชำระ</span><span>${fp(netPayable)} บาท</span></div>` : ""}
+    <div class="row"><span>${t.subtotal}</span><span>${fp(subtotal + totalDiscount)} ${t.currency}</span></div>
+    ${totalDiscount > 0 ? `<div class="row"><span>${t.discount_total}</span><span>${fp(totalDiscount)} ${t.currency}</span></div>
+    <div class="row sub"><span>${t.after_discount}</span><span>${fp(afterDiscount)} ${t.currency}</span></div>` : ""}
+    ${vatPercent > 0 ? `<div class="row vat"><span>${t.vat} ${vatPercent}%</span><span>${fp(vatAmount)} ${t.currency}</span></div>` : ""}
+    <div class="row grand"><span>${t.grand_total}</span><span>${fp(grandTotal)} ${t.currency}</span></div>
+    ${whtPercent > 0 ? `<div class="row wht"><span>${t.wht} ${whtPercent}%</span><span>-${fp(whtAmount)} ${t.currency}</span></div>
+    <div class="row net"><span>${t.net_payable}</span><span>${fp(netPayable)} ${t.currency}</span></div>` : ""}
   </div>
 </div>
-<div class="thai-text">(${numberToThaiText(finalAmount)})</div>
+<div class="thai-text">(${amountText})</div>
 
 <!-- ═══ NOTES & BANK ═══ -->
-<div class="notes-section">
-  <h3>หมายเหตุ</h3>
-  <p>วิธีการชำระเงิน</p>
-  <p>ลูกค้าเป็นผู้รับผิดชอบค่าใช้จ่าย ค่าธรรมเนียมในการโอนเงิน</p>
+<div class="notes-section no-break">
+  <h3>${t.notes}</h3>
+  <p>${t.payment_method}</p>
+  <p>${t.payment_note}</p>
   ${(c.bank_accounts || []).length > 0 ? `
   <div class="bank-block">
     ${c.bank_accounts!.map(b => `<div class="bank-item">
-      <strong>${c.company_name_th}</strong>
+      <strong>${coNameFull}</strong>
       <div>${b.bank} ${b.branch}</div>
-      <div>${b.type} ${b.number}</div>
+      <div>${t.savings} ${b.number}</div>
     </div>`).join("")}
-    <div class="payslip-note">Pay in slip มายัง: accountant@entgroup.co.th</div>
+    <div class="payslip-note">${t.payslip}: accountant@entgroup.co.th</div>
   </div>` : ""}
 </div>
 
 <!-- ═══ TERMS ═══ -->
-${c.quote_terms ? `<div class="terms-section">
-  <h3>เงื่อนไข</h3>
+${c.quote_terms ? `<div class="terms-section no-break">
+  <h3>${t.terms}</h3>
   <div class="terms-body">${c.quote_terms}</div>
 </div>` : ""}
 
@@ -399,25 +533,27 @@ ${c.quote_terms ? `<div class="terms-section">
 <div class="sigs">
   <div>
     <div class="sig">
-      <p>ในนาม ${q.company || q.name}</p>
-      <p class="name">ผู้สั่งซื้อสินค้า &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; วันที่</p>
+      <p>${t.by_name} ${q.company || q.name}</p>
+      <p class="name">${t.purchaser} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${t.date_label}</p>
     </div>
   </div>
   <div class="sig-stamp">
-    <div class="stamp-placeholder">ตราประทับ</div>
+    <div class="stamp-placeholder">${t.company_seal}</div>
   </div>
   <div>
     <div class="sig">
-      <p>ในนาม ${c.company_name_th}</p>
-      <p class="name">ผู้อนุมัติ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; วันที่ ${today}</p>
+      <p>${t.by_name} ${coNameFull}</p>
+      <p class="name">${t.authorized} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${t.date_label} ${today}</p>
     </div>
   </div>
 </div>
 
 <!-- ═══ FOOTER ═══ -->
 <div class="page-footer">
-  <p>${c.company_name_th} | โทร. ${c.phone} | ${c.website} | ${c.email}</p>
+  <p>${coNameFull} | ${t.phone}. ${c.phone} | ${c.website} | ${c.email}</p>
 </div>
+
+</div><!-- /page-container -->
 
 </body></html>`;
 
