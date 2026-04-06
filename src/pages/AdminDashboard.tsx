@@ -218,7 +218,7 @@ const AdminDashboard = () => {
                   {sidebarMode === "full" ? <PanelLeftClose size={16} /> : <PanelLeft size={16} />}
                 </button>
 
-                {/* งานขาย */}
+                {/* ─── งานขาย ─── */}
                 {sidebarMode === "full" && (
                   <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-2 pb-1">งานขาย</p>
                 )}
@@ -227,8 +227,6 @@ const AdminDashboard = () => {
                   { id: "quotes" as Tab, label: "ใบเสนอราคา", icon: FileText, count: quotes.filter(q => q.status === "new").length },
                   { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
                   { id: "sales_orders" as Tab, label: "ยอดขาย / Order", icon: Package, count: 0 },
-                  { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
-                  { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
                   { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
@@ -252,14 +250,16 @@ const AdminDashboard = () => {
                   </button>
                 ))}
 
-                {/* สินค้า */}
+                {/* ─── การตลาด ─── */}
                 {sidebarMode === "full" && (
-                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">สินค้า</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">การตลาด</p>
                 )}
                 {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
                 {([
-                  { id: "catalog" as Tab, label: "สินค้า + ราคา", icon: Package },
-                  { id: "documents" as Tab, label: "คลังเอกสาร", icon: FolderOpen },
+                  { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
+                  { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
+                  { id: "engagement" as Tab, label: "Engagement", icon: BarChart3, count: 0 },
+                  { id: "subscribers" as Tab, label: "สมาชิก", icon: Mail, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
@@ -273,17 +273,23 @@ const AdminDashboard = () => {
                   >
                     <item.icon size={16} className="shrink-0" />
                     {sidebarMode === "full" && <span className="flex-1 text-left truncate">{item.label}</span>}
+                    {sidebarMode === "full" && item.count > 0 && (
+                      <span className="px-1.5 py-0.5 rounded-full bg-destructive text-destructive-foreground text-[11px] font-bold">{item.count}</span>
+                    )}
+                    {sidebarMode === "icon" && item.count > 0 && (
+                      <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-destructive" />
+                    )}
                   </button>
                 ))}
 
-                {/* การตลาด */}
+                {/* ─── สินค้า / เอกสาร ─── */}
                 {sidebarMode === "full" && (
-                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">การตลาด</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">สินค้า</p>
                 )}
                 {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
                 {([
-                  { id: "engagement" as Tab, label: "Engagement", icon: BarChart3 },
-                  { id: "subscribers" as Tab, label: "สมาชิก", icon: Mail },
+                  { id: "catalog" as Tab, label: "สินค้า + ราคา", icon: Package },
+                  { id: "documents" as Tab, label: "คลังเอกสาร", icon: FolderOpen },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
