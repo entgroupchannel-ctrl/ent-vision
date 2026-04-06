@@ -321,13 +321,22 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                         <div className="flex items-center justify-center gap-2">
                           <span className={`inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full border font-medium ${status.color}`}>{status.label}</span>
                           {q.status === "quoted" && q.grand_total > 0 && (
-                            <button
-                              onClick={(e) => { e.stopPropagation(); handleCustomerResponse(q.id, "accepted"); }}
-                              disabled={responding}
-                              className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-green-500/10 text-green-600 border border-green-500/30 font-bold hover:bg-green-500/20 transition-colors whitespace-nowrap"
-                            >
-                              <ThumbsUp size={11} /> รับราคา
-                            </button>
+                            <TooltipProvider delayDuration={200}>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); handleCustomerResponse(q.id, "accepted"); }}
+                                    disabled={responding}
+                                    className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-green-500/10 text-green-600 border border-green-500/30 font-bold hover:bg-green-500/20 transition-colors whitespace-nowrap"
+                                  >
+                                    <ThumbsUp size={11} /> ยืนยันสั่งซื้อ
+                                  </button>
+                                </TooltipTrigger>
+                                <TooltipContent side="top" className="max-w-[220px] text-center">
+                                  <p className="text-xs">ยืนยันรับราคานี้และดำเนินการสั่งซื้อ ระบบจะสร้างใบ PO ให้อัตโนมัติ</p>
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
                           )}
                         </div>
                       </td>
