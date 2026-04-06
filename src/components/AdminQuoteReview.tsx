@@ -629,13 +629,32 @@ const AdminQuoteReview = () => {
         <div className="lg:col-span-3">
           {selected ? (
             <div className="card-surface rounded-xl p-5 space-y-5 sticky top-24 max-h-[85vh] overflow-y-auto">
-              {/* Header + Actions */}
-              <div className="flex items-center justify-between">
+              {/* Header + Status Change + Actions */}
+              <div className="flex items-center justify-between flex-wrap gap-2">
                 <h3 className="text-lg font-bold text-foreground">{selected.quote_number || "Draft"}</h3>
                 <div className="flex items-center gap-2">
                   <button onClick={handlePrint} className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors" title="พิมพ์"><Printer size={16} /></button>
                   <button onClick={handleShare} className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors" title="แชร์"><Share2 size={16} /></button>
-                  <span className={`text-xs px-2 py-1 rounded-full border font-bold ${(STATUS_CFG[selected.status] || STATUS_CFG.new).color}`}>{(STATUS_CFG[selected.status] || STATUS_CFG.new).label}</span>
+                  {/* Status Dropdown */}
+                  <select
+                    value={selected.status}
+                    onChange={(e) => handleStatusChange(selected.id, e.target.value)}
+                    disabled={saving}
+                    className={`text-xs px-2.5 py-1.5 rounded-lg border font-bold cursor-pointer transition-colors ${(STATUS_CFG[selected.status] || STATUS_CFG.new).color}`}
+                  >
+                    {Object.entries(STATUS_CFG).map(([key, cfg]) => (
+                      <option key={key} value={key}>{cfg.label}</option>
+                    ))}
+                  </select>
+                  {/* Reset Button */}
+                  <button
+                    onClick={() => handleResetStatus(selected.id)}
+                    disabled={saving || selected.status === "new"}
+                    className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors disabled:opacity-30"
+                    title="เคลียร์สถานะ (รีเซ็ตกลับเป็นใหม่ ข้อมูลไม่หาย)"
+                  >
+                    <RefreshCw size={14} />
+                  </button>
                 </div>
               </div>
 
