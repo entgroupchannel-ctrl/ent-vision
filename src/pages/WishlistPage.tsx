@@ -8,6 +8,7 @@ import QuoteDialog from "@/components/QuoteDialog";
 import SEOHead from "@/components/SEOHead";
 import logo from "@/assets/logo-entgroup.avif";
 import ThemeToggle from "@/components/ThemeToggle";
+import QuoteCartButton from "@/components/QuoteCartButton";
 
 const WishlistPage = () => {
   const { items, remove, clear } = useWishlist();
@@ -62,6 +63,7 @@ const WishlistPage = () => {
             <span className="text-sm font-semibold text-foreground">สินค้าที่ถูกใจ</span>
           </div>
           <div className="flex items-center gap-2">
+            <QuoteCartButton />
             <ThemeToggle />
             <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
               <ArrowLeft size={14} /> กลับหน้าหลัก

@@ -12,6 +12,7 @@ import {
   Filter, Star, Building2, Maximize, Lightbulb, Headphones
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
+import QuoteCartButton from "@/components/QuoteCartButton";
 import logo from "@/assets/logo-entgroup.avif";
 import smartDisplayHero from "@/assets/smart-display-hero.jpg";
 import FooterCompact from "@/components/FooterCompact";
@@ -188,6 +189,7 @@ const SmartDisplay = () => {
             <span className="text-sm font-semibold text-foreground">Smart Display</span>
           </div>
           <div className="flex items-center gap-3">
+            <QuoteCartButton />
             <ThemeToggle />
             <Link to="/" className="hidden md:inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft size={16} /> กลับหน้าแรก

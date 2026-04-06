@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import FooterCompact from "@/components/FooterCompact";
 import SEOHead from "@/components/SEOHead";
 import ThemeToggle from "@/components/ThemeToggle";
+import QuoteCartButton from "@/components/QuoteCartButton";
 
 const deliverySteps = [
   { step: 1, title: "ยืนยันคำสั่งซื้อ", desc: "ตรวจสอบรายการสินค้าและเอกสารการชำระเงิน", icon: ClipboardCheck },
@@ -31,6 +32,7 @@ const Delivery = () => {
             <Link to="/" className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
               <ArrowLeft size={14} /> หน้าแรก
             </Link>
+            <QuoteCartButton />
             <ThemeToggle />
           </div>
           <div className="flex items-center gap-3">
