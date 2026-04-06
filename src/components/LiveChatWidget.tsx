@@ -299,8 +299,8 @@ const LiveChatWidget = () => {
           <h3 className="font-bold text-sm">ENT Group Live Chat</h3>
           <p className="text-[10px] opacity-80">สนทนากับทีมงานจริง</p>
         </div>
-        <button onClick={() => setOpen(false)} className="p-1.5 rounded-lg hover:bg-primary-foreground/20 transition-colors">
-          <X size={18} />
+        <button onClick={() => setOpen(false)} className="p-1.5 rounded-lg hover:bg-primary-foreground/20 transition-colors" title="ย่อหน้าต่าง">
+          <Minus size={18} />
         </button>
       </div>
 
