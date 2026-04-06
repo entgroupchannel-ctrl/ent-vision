@@ -4,19 +4,22 @@ import {
   Search, Plus, Minus, Trash2, FileText, Send, Loader2,
   ShoppingCart, Package, ChevronDown, HelpCircle, X,
   ChevronRight, ArrowLeft, CheckCircle, Lightbulb, MousePointer,
-  Save, FilePlus, FolderOpen,
+  Save, FilePlus, FolderOpen, Clock, MessageSquare, DollarSign,
+  Truck, Shield, Info,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 import { useQuoteCart } from "@/hooks/useQuoteCart";
+import QuoteTimeline from "@/components/QuoteTimeline";
 
 // ─── Types ───
 interface CatalogProduct {
   id: string;
   model: string;
   name_th: string | null;
+  description: string | null;
   category: string;
   base_price: number;
   specs: Record<string, string>;
@@ -32,6 +35,25 @@ interface CartItem {
   unitPrice: number;
   notes: string;
 }
+
+// ─── Quote Status Config ───
+const STATUS_CONFIG: Record<string, { label: string; color: string; step: number }> = {
+  draft: { label: "แบบร่าง", color: "bg-gray-400", step: 0 },
+  new: { label: "ส่งแล้ว", color: "bg-blue-500", step: 1 },
+  reviewing: { label: "กำลังตรวจสอบ", color: "bg-yellow-500", step: 2 },
+  quoted: { label: "เสนอราคาแล้ว", color: "bg-indigo-500", step: 3 },
+  negotiating: { label: "กำลังเจรจา", color: "bg-amber-500", step: 3 },
+  won: { label: "ตกลงราคา", color: "bg-green-500", step: 4 },
+  lost: { label: "ยกเลิก", color: "bg-red-500", step: 4 },
+};
+
+const MILESTONE_STEPS = [
+  { key: "draft", label: "สร้าง", icon: FileText },
+  { key: "new", label: "ส่ง Admin", icon: Send },
+  { key: "reviewing", label: "ตรวจสอบ", icon: Search },
+  { key: "quoted", label: "เสนอราคา", icon: DollarSign },
+  { key: "done", label: "สำเร็จ", icon: CheckCircle },
+];
 
 // ─── Onboarding Tutorial ───
 const TUTORIAL_STEPS = [
@@ -90,17 +112,22 @@ const UserQuoteCreate = () => {
   const [submitting, setSubmitting] = useState(false);
 
   // Draft management
-  const [savedDrafts, setSavedDrafts] = useState<{ id: string; quote_number: string; products: any[]; created_at: string; grand_total: number }[]>([]);
+  const [savedDrafts, setSavedDrafts] = useState<{ id: string; quote_number: string; products: any[]; created_at: string; grand_total: number; status?: string }[]>([]);
   const [currentDraftId, setCurrentDraftId] = useState<string | null>(null);
+  const [currentDraftStatus, setCurrentDraftStatus] = useState<string>("draft");
+  const [currentQuoteNumber, setCurrentQuoteNumber] = useState<string>("");
   const [savingDraft, setSavingDraft] = useState(false);
   const [showDrafts, setShowDrafts] = useState(false);
+
+  // Timeline toggle
+  const [showTimeline, setShowTimeline] = useState(false);
 
   // Fetch saved drafts
   const fetchDrafts = async () => {
     if (!user) return;
     try {
       const { data } = await (supabase.from as any)("quote_requests")
-        .select("id, quote_number, products, created_at, grand_total, details")
+        .select("id, quote_number, products, created_at, grand_total, details, status")
         .eq("user_id", user.id)
         .eq("status", "draft")
         .order("created_at", { ascending: false });
@@ -129,12 +156,13 @@ const UserQuoteCreate = () => {
 
       if (currentDraftId) {
         // Update existing draft
-        await (supabase.from as any)("quote_requests").update({
+        const { error: updateErr } = await (supabase.from as any)("quote_requests").update({
           products,
           details: generalNotes || null,
           subtotal: subtotal,
           grand_total: subtotal,
         }).eq("id", currentDraftId);
+        if (updateErr) throw updateErr;
 
         // Update line items
         await (supabase.from as any)("quote_line_items").delete().eq("quote_id", currentDraftId);
@@ -150,7 +178,8 @@ const UserQuoteCreate = () => {
           admin_notes: item.notes || null,
           sort_order: i,
         }));
-        await (supabase.from as any)("quote_line_items").insert(lineItems).catch(() => {});
+        const { error: liErr } = await (supabase.from as any)("quote_line_items").insert(lineItems);
+        if (liErr) console.warn("Line items insert warning:", liErr.message);
 
         toast({ title: "บันทึก Draft สำเร็จ", description: "ใบเสนอราคาถูกอัพเดทแล้ว" });
       } else {
@@ -166,12 +195,14 @@ const UserQuoteCreate = () => {
           subtotal: subtotal,
           grand_total: subtotal,
           status: "draft",
-        }).select("id").single();
+        }).select("id, quote_number").single();
 
         if (error) throw error;
 
         if (quoteData?.id) {
           setCurrentDraftId(quoteData.id);
+          setCurrentQuoteNumber(quoteData.quote_number || "");
+          setCurrentDraftStatus("draft");
           const lineItems = cart.map((item, i) => ({
             quote_id: quoteData.id,
             product_id: item.product?.id || null,
@@ -184,7 +215,8 @@ const UserQuoteCreate = () => {
             admin_notes: item.notes || null,
             sort_order: i,
           }));
-          await (supabase.from as any)("quote_line_items").insert(lineItems).catch(() => {});
+          const { error: liErr } = await (supabase.from as any)("quote_line_items").insert(lineItems);
+          if (liErr) console.warn("Line items insert warning:", liErr.message);
         }
         toast({ title: "บันทึก Draft สำเร็จ", description: "สามารถกลับมาแก้ไขได้ภายหลัง" });
       }
@@ -229,6 +261,8 @@ const UserQuoteCreate = () => {
       }
 
       setCurrentDraftId(draft.id);
+      setCurrentQuoteNumber(draft.quote_number || "");
+      setCurrentDraftStatus(draft.status || "draft");
       setGeneralNotes((draft as any).details || "");
       setShowDrafts(false);
       toast({ title: `โหลด Draft สำเร็จ` });
@@ -242,7 +276,10 @@ const UserQuoteCreate = () => {
     setCart([]);
     setGeneralNotes("");
     setCurrentDraftId(null);
+    setCurrentQuoteNumber("");
+    setCurrentDraftStatus("draft");
     setShowDrafts(false);
+    setShowTimeline(false);
   };
 
   // Delete draft
@@ -250,7 +287,7 @@ const UserQuoteCreate = () => {
     if (!confirm("ลบ Draft นี้?")) return;
     await (supabase.from as any)("quote_line_items").delete().eq("quote_id", id);
     await (supabase.from as any)("quote_requests").delete().eq("id", id);
-    if (currentDraftId === id) { setCurrentDraftId(null); setCart([]); setGeneralNotes(""); }
+    if (currentDraftId === id) { setCurrentDraftId(null); setCurrentQuoteNumber(""); setCurrentDraftStatus("draft"); setCart([]); setGeneralNotes(""); }
     fetchDrafts();
     toast({ title: "ลบ Draft แล้ว" });
   };
@@ -263,6 +300,7 @@ const UserQuoteCreate = () => {
           id: item.catalogProductId,
           model: item.model,
           name_th: item.productName,
+          description: null,
           category: item.category,
           base_price: item.unitPrice,
           specs: item.specs,
@@ -292,12 +330,12 @@ const UserQuoteCreate = () => {
     try { localStorage.setItem(TUTORIAL_KEY, "1"); } catch { /* silent */ }
   };
 
-  // Fetch catalog
+  // Fetch catalog — include description
   useEffect(() => {
     (async () => {
       try {
         const { data } = await (supabase.from as any)("product_catalog")
-          .select("id, model, name_th, category, base_price, specs, min_qty, lead_days")
+          .select("id, model, name_th, description, category, base_price, specs, min_qty, lead_days")
           .eq("is_active", true)
           .order("category")
           .order("model");
@@ -440,7 +478,8 @@ const UserQuoteCreate = () => {
           admin_notes: item.notes || null,
           sort_order: i,
         }));
-        await (supabase.from as any)("quote_line_items").insert(lineItems).catch(() => {});
+        const { error: liErr } = await (supabase.from as any)("quote_line_items").insert(lineItems);
+        if (liErr) console.warn("Line items insert warning:", liErr.message);
       }
 
       // Track
@@ -462,6 +501,19 @@ const UserQuoteCreate = () => {
       setSubmitting(false);
     }
   };
+
+  // ─── Milestone step calculator ───
+  const getMilestoneStep = (status: string): number => {
+    if (status === "won") return 5;
+    if (status === "lost") return 5;
+    if (status === "negotiating") return 4;
+    if (status === "quoted") return 3;
+    if (status === "reviewing") return 2;
+    if (status === "new") return 1;
+    return 0; // draft
+  };
+
+  const currentMilestone = getMilestoneStep(currentDraftStatus);
 
   return (
     <div className="space-y-6">
@@ -551,6 +603,9 @@ const UserQuoteCreate = () => {
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
           <FileText size={20} className="text-primary" /> สร้างใบเสนอราคา
+          {currentQuoteNumber && (
+            <span className="text-sm font-normal text-muted-foreground ml-1">({currentQuoteNumber})</span>
+          )}
         </h2>
         <button
           onClick={() => { setShowTutorial(true); setTutorialStep(0); }}
@@ -559,6 +614,91 @@ const UserQuoteCreate = () => {
           <HelpCircle size={14} /> วิธีใช้งาน
         </button>
       </div>
+
+      {/* ═══ Milestone Timeline (shown when editing existing quote) ═══ */}
+      {currentDraftId && currentDraftStatus !== "draft" && (
+        <div className="card-surface rounded-xl p-4 animate-fade-in">
+          {/* Milestone Steps Bar */}
+          <div className="flex items-center justify-between mb-4">
+            {MILESTONE_STEPS.map((step, i) => {
+              const StepIcon = step.icon;
+              const isActive = i <= currentMilestone;
+              const isCurrent = i === currentMilestone;
+              const isLost = currentDraftStatus === "lost" && i === MILESTONE_STEPS.length - 1;
+              return (
+                <div key={step.key} className="flex items-center flex-1 last:flex-none">
+                  <div className="flex flex-col items-center gap-1">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                      isLost ? "bg-red-500/10 text-red-500 border-2 border-red-500/30" :
+                      isCurrent ? "bg-primary/10 text-primary border-2 border-primary/30 ring-4 ring-primary/10" :
+                      isActive ? "bg-primary text-primary-foreground" :
+                      "bg-secondary text-muted-foreground/40 border border-border"
+                    }`}>
+                      <StepIcon size={14} />
+                    </div>
+                    <span className={`text-[10px] font-medium whitespace-nowrap ${
+                      isLost ? "text-red-500" :
+                      isCurrent ? "text-primary font-bold" :
+                      isActive ? "text-foreground" :
+                      "text-muted-foreground/40"
+                    }`}>
+                      {step.label}
+                    </span>
+                  </div>
+                  {i < MILESTONE_STEPS.length - 1 && (
+                    <div className={`flex-1 h-0.5 mx-2 mt-[-16px] rounded-full transition-all ${
+                      i < currentMilestone ? "bg-primary" : "bg-border"
+                    }`} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Current Status Badge */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className={`w-2 h-2 rounded-full ${STATUS_CONFIG[currentDraftStatus]?.color || "bg-gray-400"}`} />
+              <span className="text-xs font-medium text-foreground">
+                สถานะ: {STATUS_CONFIG[currentDraftStatus]?.label || currentDraftStatus}
+              </span>
+            </div>
+            {/* Toggle timeline conversation */}
+            {currentDraftStatus !== "draft" && (
+              <button
+                onClick={() => setShowTimeline(!showTimeline)}
+                className="flex items-center gap-1.5 text-xs text-primary hover:underline font-medium"
+              >
+                <MessageSquare size={13} />
+                {showTimeline ? "ซ่อนสนทนา" : "ดูสนทนา / ต่อรอง"}
+                <ChevronDown size={12} className={`transition-transform ${showTimeline ? "rotate-180" : ""}`} />
+              </button>
+            )}
+          </div>
+
+          {/* Timeline Conversation (collapsible) */}
+          {showTimeline && currentDraftId && user && (
+            <div className="mt-4 border-t border-border pt-4">
+              <QuoteTimeline
+                quoteId={currentDraftId}
+                quoteNumber={currentQuoteNumber || "Draft"}
+                currentUserId={user.id}
+                isAdmin={false}
+                onQuoteUpdated={() => {
+                  // Refresh status
+                  (async () => {
+                    try {
+                      const { data } = await (supabase.from as any)("quote_requests")
+                        .select("status").eq("id", currentDraftId).single();
+                      if (data) setCurrentDraftStatus(data.status);
+                    } catch {}
+                  })();
+                }}
+              />
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="flex gap-6 flex-col lg:flex-row">
         {/* ═══ Left: Product selection ═══ */}
@@ -701,6 +841,31 @@ const UserQuoteCreate = () => {
                             />
                           </div>
                         </div>
+
+                        {/* ═══ Product Description (read-only, from DB) ═══ */}
+                        {item.product?.description && (
+                          <div className="p-2.5 rounded-lg bg-blue-500/5 border border-blue-500/10">
+                            <div className="flex items-start gap-1.5">
+                              <Info size={12} className="text-blue-500 mt-0.5 shrink-0" />
+                              <div className="flex-1 min-w-0">
+                                <p className="text-[10px] font-medium text-blue-600 mb-0.5">รายละเอียดสินค้า</p>
+                                <p className="text-xs text-foreground/80 leading-relaxed line-clamp-3">
+                                  {item.product.description}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Specs hint from catalog (shown when no full description) */}
+                        {!item.product?.description && item.product?.specs?.cpu && (
+                          <p className="text-xs text-muted-foreground/60">
+                            {item.product.specs.cpu}
+                            {item.product.specs.ram && ` / ${item.product.specs.ram}`}
+                            {item.product.specs.storage && ` / ${item.product.specs.storage}`}
+                          </p>
+                        )}
+
                         {/* Row 2: Qty + Price */}
                         <div className="grid grid-cols-3 gap-2">
                           <div>
@@ -746,13 +911,16 @@ const UserQuoteCreate = () => {
                             </div>
                           </div>
                         </div>
-                        {/* Specs hint from catalog */}
-                        {item.product?.specs?.cpu && (
-                          <p className="text-xs text-muted-foreground/60">
-                            {item.product.specs.cpu}
-                            {item.product.specs.ram && ` / ${item.product.specs.ram}`}
-                            {item.product.specs.storage && ` / ${item.product.specs.storage}`}
-                          </p>
+
+                        {/* Specs badges (when description is shown, show specs separately) */}
+                        {item.product?.description && item.product?.specs?.cpu && (
+                          <div className="flex flex-wrap gap-1">
+                            {Object.entries(item.product.specs).slice(0, 4).map(([key, val]) => (
+                              <span key={key} className="text-[10px] px-1.5 py-0.5 rounded bg-secondary text-muted-foreground">
+                                {val}
+                              </span>
+                            ))}
+                          </div>
                         )}
                       </div>
                       <button
@@ -818,38 +986,44 @@ const UserQuoteCreate = () => {
             {currentDraftId && (
               <div className="mt-3 p-2.5 rounded-lg bg-yellow-500/5 border border-yellow-500/20 text-xs text-yellow-700 flex items-center gap-2">
                 <FileText size={13} />
-                <span>กำลังแก้ไข Draft</span>
+                <span>กำลังแก้ไข {currentDraftStatus === "draft" ? "Draft" : currentQuoteNumber || "ใบเสนอราคา"}</span>
               </div>
             )}
 
-            {/* Save Draft Button */}
-            <button
-              onClick={handleSaveDraft}
-              disabled={cart.length === 0 || savingDraft}
-              className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-secondary transition-colors disabled:opacity-50"
-            >
-              {savingDraft ? (
-                <><Loader2 size={14} className="animate-spin" /> กำลังบันทึก...</>
-              ) : (
-                <><Save size={14} /> บันทึก Draft</>
-              )}
-            </button>
+            {/* Save Draft Button — only for draft status */}
+            {(!currentDraftId || currentDraftStatus === "draft") && (
+              <button
+                onClick={handleSaveDraft}
+                disabled={cart.length === 0 || savingDraft}
+                className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-secondary transition-colors disabled:opacity-50"
+              >
+                {savingDraft ? (
+                  <><Loader2 size={14} className="animate-spin" /> กำลังบันทึก...</>
+                ) : (
+                  <><Save size={14} /> บันทึก Draft</>
+                )}
+              </button>
+            )}
 
-            {/* Send Button */}
-            <button
-              onClick={handleSubmit}
-              disabled={cart.length === 0 || submitting}
-              className="w-full mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-50"
-            >
-              {submitting ? (
-                <><Loader2 size={14} className="animate-spin" /> กำลังส่ง...</>
-              ) : (
-                <><Send size={14} /> ส่งให้ Admin ตรวจสอบ</>
-              )}
-            </button>
-            <p className="text-xs text-muted-foreground/50 text-center mt-2">
-              ทีมขายจะตรวจสอบและอนุมัติภายใน 2 ชม.
-            </p>
+            {/* Send Button — only for draft or new */}
+            {(!currentDraftId || currentDraftStatus === "draft") && (
+              <button
+                onClick={handleSubmit}
+                disabled={cart.length === 0 || submitting}
+                className="w-full mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-50"
+              >
+                {submitting ? (
+                  <><Loader2 size={14} className="animate-spin" /> กำลังส่ง...</>
+                ) : (
+                  <><Send size={14} /> ส่งให้ Admin ตรวจสอบ</>
+                )}
+              </button>
+            )}
+            {(!currentDraftId || currentDraftStatus === "draft") && (
+              <p className="text-xs text-muted-foreground/50 text-center mt-2">
+                ทีมขายจะตรวจสอบและอนุมัติภายใน 2 ชม.
+              </p>
+            )}
 
             {/* Drafts section */}
             {savedDrafts.length > 0 && (
