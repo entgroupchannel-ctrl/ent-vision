@@ -250,21 +250,21 @@ const AdminUserManagement = () => {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-          <Users size={18} className="text-primary" /> จัดการผู้ใช้ Admin ({adminUsers.length} คน)
+        <h3 className="text-xl font-extrabold text-foreground flex items-center gap-2.5">
+          <Users size={22} className="text-primary" /> จัดการผู้ใช้ Admin ({adminUsers.length} คน)
         </h3>
-        <div className="flex gap-2">
-          <button onClick={fetchAdminUsers} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
-            <RefreshCw size={14} className={loading ? "animate-spin" : ""} /> รีเฟรช
+        <div className="flex gap-3">
+          <button onClick={fetchAdminUsers} className="flex items-center gap-2 text-base font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <RefreshCw size={16} className={loading ? "animate-spin" : ""} /> รีเฟรช
           </button>
           <button
             onClick={() => { setShowAddForm(!showAddForm); setSearchResult(null); setAddEmail(""); }}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-base font-extrabold hover:bg-primary/90 transition-colors shadow-sm"
           >
-            <UserPlus size={14} /> เพิ่ม Admin
+            <UserPlus size={16} /> เพิ่ม Admin
           </button>
         </div>
       </div>
