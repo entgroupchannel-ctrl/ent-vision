@@ -13,6 +13,7 @@ import AddToQuoteButton from "@/components/AddToQuoteButton";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import { LineQRDialog } from "@/components/LineQRDialog";
 import ThemeToggle from "@/components/ThemeToggle";
+import QuoteCartButton from "@/components/QuoteCartButton";
 import ShareButtons from "@/components/ShareButtons";
 import logo from "@/assets/logo-entgroup.avif";
 import gt4500CpuOptions from "@/assets/gt4500-cpu-options.png";
