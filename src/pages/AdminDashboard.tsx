@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, Users, FileText, Mail, TrendingUp,
   Filter, RefreshCw, Eye, Clock, CheckCircle, XCircle,
   Star, Phone, Building2, MessageSquare, LogOut, Shield, Download,
   CalendarClock, Hash, Wallet, Code2, Cloud,
-  PanelLeftClose, PanelLeft, Package, FolderOpen, BarChart3,
+  PanelLeftClose, PanelLeft, Package, FolderOpen, BarChart3, Headphones,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -16,8 +16,9 @@ import AdminProductCatalog from "@/components/AdminProductCatalog";
 import AdminQuoteReview from "@/components/AdminQuoteReview";
 import AdminUserManagement from "@/components/AdminUserManagement";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
+const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
 
-type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users";
+type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
