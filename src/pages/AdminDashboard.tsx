@@ -230,6 +230,7 @@ const AdminDashboard = () => {
                   { id: "quotes" as Tab, label: "ใบเสนอราคา", icon: FileText, count: quotes.filter(q => q.status === "new").length },
                   { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
                   { id: "sales_orders" as Tab, label: "ยอดขาย / Order", icon: Package, count: 0 },
+                  { id: "invoices" as Tab, label: "เอกสารขาย", icon: Receipt, count: 0 },
                   { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
@@ -353,6 +354,7 @@ const AdminDashboard = () => {
               { id: "quotes" as Tab, label: "ใบเสนอราคา" },
               { id: "quote_review" as Tab, label: "จัดการ Quote" },
               { id: "sales_orders" as Tab, label: "ยอดขาย" },
+              { id: "invoices" as Tab, label: "เอกสารขาย" },
               { id: "catalog" as Tab, label: "สินค้า" },
               { id: "engagement" as Tab, label: "Engagement" },
               { id: "documents" as Tab, label: "เอกสาร" },
@@ -416,6 +418,8 @@ const AdminDashboard = () => {
           <AdminQuoteReview />
         ) : tab === "sales_orders" ? (
           <AdminSalesOrders />
+        ) : tab === "invoices" ? (
+          <AdminInvoiceManager />
         ) : tab === "users" ? (
           <AdminUserManagement />
         ) : tab === "livechat" ? (
