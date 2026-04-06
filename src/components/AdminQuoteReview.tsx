@@ -3,7 +3,7 @@ import {
   FileText, CheckCircle, Clock, Loader2, RefreshCw, Eye, Plus, Trash2,
   Search, User, Building2, Phone, Mail, Upload, Info, X, ExternalLink,
   FileUp, Paperclip, Printer, Share2, ChevronDown, CalendarDays, Link2,
-  UserCircle2, Users, ArrowRightLeft,
+  UserCircle2, Users, ArrowRightLeft, FileCheck, AlertCircle,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -20,6 +20,8 @@ interface QuoteRequest {
   approved_by: string | null; approved_at: string | null; pdf_url: string | null;
   customer_response: string | null; notes: string | null;
   assigned_to: string | null;
+  po_file_url: string | null; po_file_name: string | null; po_number: string | null;
+  po_uploaded_at: string | null; po_status: string | null; po_notes: string | null;
 }
 
 interface SalesTeamMember {
@@ -46,7 +48,8 @@ const STATUS_CFG: Record<string, { label: string; color: string }> = {
   new: { label: "ใหม่", color: "bg-blue-500/10 text-blue-500 border-blue-500/20" },
   quoted: { label: "ส่งราคาแล้ว", color: "bg-purple-500/10 text-purple-500 border-purple-500/20" },
   negotiating: { label: "เจรจา", color: "bg-orange-500/10 text-orange-500 border-orange-500/20" },
-  won: { label: "สำเร็จ", color: "bg-green-500/10 text-green-500 border-green-500/20" },
+  won: { label: "ตกลงราคา", color: "bg-green-500/10 text-green-500 border-green-500/20" },
+  po_received: { label: "รับ PO แล้ว", color: "bg-teal-500/10 text-teal-600 border-teal-500/20" },
   lost: { label: "ไม่สำเร็จ", color: "bg-red-500/10 text-red-400 border-red-500/20" },
 };
 
@@ -442,6 +445,42 @@ const AdminQuoteReview = () => {
     }
   };
 
+  /* ─── PO Approve / Reject ─── */
+  const handlePoAction = async (quoteId: string, action: "approved" | "rejected", reason?: string) => {
+    setSaving(true);
+    try {
+      const updates: any = { po_status: action };
+      if (action === "approved") {
+        updates.status = "po_received";
+      }
+      const { error } = await (supabase.from as any)("quote_requests").update(updates).eq("id", quoteId);
+      if (error) throw error;
+
+      // Notify customer
+      const quote = quotes.find((q) => q.id === quoteId);
+      if (quote?.user_id) {
+        try {
+          await (supabase.from as any)("notifications").insert({
+            user_id: quote.user_id,
+            type: action === "approved" ? "po_approved" : "po_rejected",
+            title: action === "approved" ? "PO ได้รับการอนุมัติ" : "PO ถูกปฏิเสธ",
+            message: action === "approved"
+              ? `${quote.quote_number || "#"} — PO ได้รับการยืนยัน กำลังดำเนินการต่อ`
+              : `${quote.quote_number || "#"} — ${reason || "กรุณาส่ง PO ใหม่"}`,
+            link: "/my-account?tab=quotes",
+          });
+        } catch {}
+      }
+
+      toast({ title: action === "approved" ? "อนุมัติ PO สำเร็จ" : "ปฏิเสธ PO แล้ว" });
+      fetchQuotes();
+      if (selected) selectQuote({ ...selected, ...updates });
+    } catch (err: any) {
+      toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
+    }
+    setSaving(false);
+  };
+
   const filtered = quotes.filter((q) => {
     if (q.status === "draft") return false;
     if (statusFilter !== "all" && q.status !== statusFilter) return false;
@@ -468,7 +507,7 @@ const AdminQuoteReview = () => {
       {/* Filters */}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div className="flex gap-1 flex-wrap">
-          {[{ v: "all", l: "ทั้งหมด" }, { v: "new", l: `ใหม่ (${newCount})` }, { v: "quoted", l: "ส่งราคาแล้ว" }, { v: "negotiating", l: "เจรจา" }, { v: "won", l: "สำเร็จ" }].map((f) => (
+          {[{ v: "all", l: "ทั้งหมด" }, { v: "new", l: `ใหม่ (${newCount})` }, { v: "quoted", l: "ส่งราคาแล้ว" }, { v: "negotiating", l: "เจรจา" }, { v: "won", l: "ตกลงราคา" }, { v: "po_received", l: "รับ PO" }, { v: "lost", l: "ไม่สำเร็จ" }].map((f) => (
             <button key={f.v} onClick={() => setStatusFilter(f.v)} className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${statusFilter === f.v ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary/60"}`}>{f.l}</button>
           ))}
         </div>
@@ -729,6 +768,73 @@ const AdminQuoteReview = () => {
                   onQuoteUpdated={() => { fetchQuotes(); if (selected) selectQuote(selected); }}
                 />
               </div>
+
+              {/* ═══ PO Review Section (Admin) ═══ */}
+              {selected.po_file_url && (
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
+                    <FileCheck size={13} className="text-teal-500" /> ใบสั่งซื้อ (PO) จากลูกค้า
+                  </h4>
+                  <div className="p-4 rounded-xl border border-teal-500/20 bg-teal-500/5">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-teal-500/10 flex items-center justify-center shrink-0">
+                        <FileCheck size={18} className="text-teal-500" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-bold text-foreground">{selected.po_file_name || "PO Document"}</p>
+                        {selected.po_number && <p className="text-xs text-muted-foreground">เลข PO: <span className="font-medium text-foreground">{selected.po_number}</span></p>}
+                        {selected.po_uploaded_at && <p className="text-[10px] text-muted-foreground">อัปโหลดเมื่อ {new Date(selected.po_uploaded_at).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</p>}
+                        {selected.po_notes && <p className="text-xs text-muted-foreground mt-1">หมายเหตุ: {selected.po_notes}</p>}
+                        <a href={selected.po_file_url} target="_blank" rel="noopener noreferrer"
+                          className="mt-2 inline-flex items-center gap-1.5 text-xs text-primary hover:underline font-medium">
+                          <ExternalLink size={12} /> เปิดดูไฟล์ PO
+                        </a>
+                      </div>
+                      <div className="shrink-0">
+                        {selected.po_status === "uploaded" && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-600 border border-yellow-500/20">รอตรวจสอบ</span>
+                        )}
+                        {selected.po_status === "approved" && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-600 border border-green-500/20">อนุมัติแล้ว</span>
+                        )}
+                        {selected.po_status === "rejected" && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-red-500/10 text-red-500 border border-red-500/20">ปฏิเสธ</span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Admin Actions for PO */}
+                    {selected.po_status === "uploaded" && (
+                      <div className="mt-3 pt-3 border-t border-teal-500/15 flex gap-2">
+                        <button
+                          onClick={() => handlePoAction(selected.id, "approved")}
+                          disabled={saving}
+                          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-green-500/10 text-green-600 text-xs font-bold hover:bg-green-500/20 transition-colors disabled:opacity-50"
+                        >
+                          <CheckCircle size={13} /> อนุมัติ PO
+                        </button>
+                        <button
+                          onClick={() => {
+                            const reason = prompt("เหตุผลที่ปฏิเสธ PO:");
+                            if (reason !== null) handlePoAction(selected.id, "rejected", reason);
+                          }}
+                          disabled={saving}
+                          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-red-500/10 text-red-500 text-xs font-bold hover:bg-red-500/20 transition-colors disabled:opacity-50"
+                        >
+                          <AlertCircle size={13} /> ปฏิเสธ
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* No PO yet but status is won */}
+              {!selected.po_file_url && selected.status === "won" && (
+                <div className="p-3 rounded-lg bg-yellow-500/5 border border-yellow-500/15 text-xs text-yellow-700 flex items-center gap-2">
+                  <Clock size={13} /> รอลูกค้าส่งใบสั่งซื้อ (PO)
+                </div>
+              )}
 
               {/* Actions */}
               <div className="flex gap-2 pt-2 border-t border-border">
