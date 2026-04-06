@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import QuoteTimeline from "@/components/QuoteTimeline";
+import { notifyQuoteStatus, getSaleInfo, productSummaryText } from "@/utils/notifyQuoteStatus";
 
 /* ─── Types ─── */
 interface QuoteRequest {
@@ -406,6 +407,22 @@ const AdminQuoteReview = () => {
         } catch {}
       }
       toast({ title: "อนุมัติสำเร็จ", description: `฿${grand.toLocaleString()}` });
+
+      // Send email: quoted
+      if (selected.email) {
+        const saleInfo = await getSaleInfo(selected.assigned_to);
+        notifyQuoteStatus({
+          event: "quoted",
+          quoteId: selected.id,
+          customerEmail: selected.email,
+          customerName: selected.name,
+          quoteNumber: selected.quote_number || "",
+          grandTotal: grand,
+          products: productSummaryText(selected.products),
+          ...saleInfo,
+        });
+      }
+
       setSelected(null);
       fetchQuotes();
     } catch (err: any) {
@@ -473,6 +490,23 @@ const AdminQuoteReview = () => {
       }
 
       toast({ title: action === "approved" ? "อนุมัติ PO สำเร็จ" : "ปฏิเสธ PO แล้ว" });
+
+      // Send email: po_approved or po_rejected
+      if (quote?.email) {
+        const saleInfo = await getSaleInfo(quote.assigned_to);
+        notifyQuoteStatus({
+          event: action === "approved" ? "po_approved" : "po_rejected",
+          quoteId: quoteId,
+          customerEmail: quote.email,
+          customerName: quote.name,
+          quoteNumber: quote.quote_number || "",
+          grandTotal: quote.grand_total,
+          poNumber: quote.po_number || "",
+          rejectReason: reason,
+          ...saleInfo,
+        });
+      }
+
       fetchQuotes();
       if (selected) selectQuote({ ...selected, ...updates });
     } catch (err: any) {

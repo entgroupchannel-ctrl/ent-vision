@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 import { useQuoteCart } from "@/hooks/useQuoteCart";
 import QuoteTimeline from "@/components/QuoteTimeline";
+import { notifyQuoteStatus, getSaleInfo, productSummaryText } from "@/utils/notifyQuoteStatus";
 
 // ─── Types ───
 interface CatalogProduct {
@@ -486,13 +487,31 @@ const UserQuoteCreate = () => {
       cart.forEach((item) => {
         trackEvent({
           eventType: "quote_request",
-          productName: item.customModel,
+          productSlug: item.customModel,
           productCategory: item.customCategory,
           metadata: { qty: item.qty, price: item.unitPrice },
         });
       });
 
       toast({ title: "ส่งคำขอใบเสนอราคาเรียบร้อย!", description: "ทีมขายจะตรวจสอบและอนุมัติให้" });
+
+      // Send email notification (fire & forget)
+      if (quoteId) {
+        const { data: savedQuote } = await (supabase.from as any)("quote_requests")
+          .select("quote_number, assigned_to").eq("id", quoteId).single();
+        const saleInfo = await getSaleInfo(savedQuote?.assigned_to || null);
+        notifyQuoteStatus({
+          event: "new",
+          quoteId: quoteId!,
+          customerEmail: user.email || "",
+          customerName: profileData.full_name || user.user_metadata?.full_name || "",
+          quoteNumber: savedQuote?.quote_number || "",
+          grandTotal: subtotal,
+          products: productSummaryText(products),
+          ...saleInfo,
+        });
+      }
+
       globalCart.clearCart();
       navigate("/my-account/quotes");
     } catch (err: any) {
