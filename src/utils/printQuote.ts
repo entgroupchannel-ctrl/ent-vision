@@ -1,4 +1,4 @@
-/* ─── Professional Quote Print Utility (FlowAccount Style) ─── */
+/* ─── Professional Quote Print (ENT Group Style — per PRINT_QUOTE_DESIGN_SPEC) ─── */
 
 const SPEC_LABELS: Record<string, string> = {
   cpu: "CPU", ram: "RAM", com: "COM", usb: "USB", lan: "LAN", display: "จอ",
@@ -13,6 +13,9 @@ interface PrintQuote {
   phone: string | null;
   company: string | null;
   details: string | null;
+  company_address?: string | null;
+  tax_id?: string | null;
+  branch?: string | null;
 }
 
 interface PrintLineItem {
@@ -61,7 +64,6 @@ interface CompanyInfo {
   withholding_tax_percent?: number;
 }
 
-// Default company info (used if company_settings not loaded)
 const DEFAULT_COMPANY: CompanyInfo = {
   company_name_th: "บริษัท อี เอ็น ที กรุ๊ป จำกัด",
   company_name_en: "ENT Group Co., Ltd.",
@@ -77,23 +79,17 @@ const DEFAULT_COMPANY: CompanyInfo = {
   website: "www.entgroup.co.th",
   email: "sales@entgroup.co.th",
   bank_accounts: [
-    { bank: "ธนาคารไทยพาณิชย์", branch: "สาขาบางบัวทอง (ปทุมธานี)", type: "ออมทรัพย์", number: "406-817747-1" },
     { bank: "ธนาคารกสิกรไทย", branch: "สาขา ปทุมธานี", type: "ออมทรัพย์", number: "841-2-05851-9" },
+    { bank: "ธนาคารไทยพาณิชย์", branch: "สาขาบางบัวทอง (ปทุมธานี)", type: "ออมทรัพย์", number: "406-817747-1" },
   ],
-  quote_terms: `1. กรณีสินค้าหมดสต็อก รอสินค้า By Order 30-45 วัน หรือมากกว่านั้น ขึ้นอยู่กับจำนวนสินค้าที่สั่ง
-2. กรณีลูกค้าสั่งซื้อสินค้า ลูกค้าต้องชำระเงินก่อนการสั่งซื้อ 70% หรือ 100% เต็มเท่านั้น
-3. สินค้าเป็น By Order หลังจากสินค้าพร้อมส่งแล้วลูกค้าชำระเงินยอดที่เหลือทั้งหมด (ก่อนการจัดส่งสินค้าให้ลูกค้า)
-4. สินค้าพร้อมส่ง ลูกค้าต้องชำระเงินเต็มจำนวน 100% ก่อนการจัดส่งสินค้าเท่านั้น
-5. เอกสารใบกำกับภาษีและใบเสร็จรับเงินจัดส่งพร้อมกับสินค้าในส่วนที่โอนที่เหลือ หรือ ชำระเต็มจำนวน 100%
-6. สินค้าที่เป็น By Order จากโรงงานต่างประเทศ กรณีถ้าลูกค้ามัดจำเงิน 100% (มีส่วนลดเพิ่มอีก 1%) แต่ถ้าสินค้ามีพร้อมส่งจะไม่ได้ลด 1%
-7. ของแถม ไม่สามารถใช้เป็นส่วนลดเงินสดได้
-8. การพิจารณาเสนอเงื่อนไขการขายหรือโปรโมชั่นจากบริษัทฯ ถือเป็นอันสิ้นสุด
-9. ใบเสนอราคายืนราคา 30 วันเท่านั้น นับตั้งแต่วันที่ลูกค้าขอราคา
-10. ลูกค้าเป็นผู้รับผิดชอบค่าใช้จ่าย ค่าธรรมเนียมในการโอนเงินเท่านั้น`,
+  quote_terms: `1.) บริษัทฯ สงวนสิทธิ์ในการเรียกค่าปรับ 30% สำหรับการยกเลิก PO หรือการสั่งซื้อในทุกกรณี
+2.) กรณีสินค้าพร้อมส่ง ลูกค้าต้องชำระค่าสินค้าและพร้อมรับสินค้าภายใน 15 วัน มิฉะนั้นถือว่าลูกค้าไม่พร้อมรับสินค้า ขอสงวนสิทธิ์ปล่อยสินค้าออกจากสต็อกทันที โดยไม่ต้องแจ้งให้ทราบ
+3.) กรณีลูกค้าไม่พร้อมรับสินค้า บริษัทฯ ขอสงวนสิทธิ์ในการเรียกเก็บเงินมัดจำ 30% โดยลูกค้าไม่สามารถเรียกร้องใดๆ`,
   vat_percent: 7,
   withholding_tax_percent: 3,
 };
 
+/* ── Thai number text ── */
 function numberToThaiText(num: number): string {
   const digits = ["", "หนึ่ง", "สอง", "สาม", "สี่", "ห้า", "หก", "เจ็ด", "แปด", "เก้า"];
   const units = ["", "สิบ", "ร้อย", "พัน", "หมื่น", "แสน", "ล้าน"];
@@ -128,6 +124,31 @@ function numberToThaiText(num: number): string {
   return result;
 }
 
+/* ── Clean description: strip price ranges ── */
+function cleanDescription(desc: string): string {
+  if (!desc) return "";
+  let cleaned = desc;
+  cleaned = cleaned.replace(/\|?\s*ราคา\s*฿[\d,]+\s*-\s*฿[\d,]+\s*\(\d+\s*configs?\)/gi, '');
+  cleaned = cleaned.replace(/\s*\|\s*ราคา\s*฿[\d,]+\s*-\s*฿[\d,]+\s*\(.*?\)/gi, '');
+  cleaned = cleaned.replace(/฿[\d,]+\s*-\s*฿[\d,]+\s*\(\d+\s*configs?\)/gi, '');
+  return cleaned.trim();
+}
+
+/* ── Format specs as separate lines ── */
+function formatSpecLines(specs: Record<string, string>): string {
+  return Object.entries(specs)
+    .filter(([, v]) => v && v !== "No" && v !== "-")
+    .map(([k, v]) => {
+      const label = SPEC_LABELS[k] || k;
+      const val = v === "Yes" ? "✓" : v;
+      return `<div class="spec-line">${label}: ${val}</div>`;
+    })
+    .join("");
+}
+
+/* ═══════════════════════════════════════════ */
+/*  MAIN EXPORT                                */
+/* ═══════════════════════════════════════════ */
 export const printQuote = (
   q: PrintQuote,
   items: PrintLineItem[],
@@ -145,188 +166,257 @@ export const printQuote = (
     : "—";
 
   const subtotal = items.reduce((s, i) => s + i.line_total, 0);
-  const discountTotal = terms.discount_amount || 0;
-  const afterDiscount = subtotal - discountTotal;
+  const discountAmt = items.reduce((s, i) => {
+    return s + (i.discount_percent > 0 ? Math.round(i.unit_price * i.qty * i.discount_percent / 100 * 100) / 100 : 0);
+  }, 0);
+  const totalDiscount = (terms.discount_amount || 0) + discountAmt;
+  const afterDiscount = subtotal;
+  const beforeVat = afterDiscount;
   const vatPercent = terms.include_vat !== false ? (terms.vat_percent || c.vat_percent || 7) : 0;
-  const vatAmount = vatPercent > 0 ? Math.round(afterDiscount * vatPercent / 100 * 100) / 100 : 0;
-  const grandBeforeTax = afterDiscount + vatAmount;
+  const vatAmount = vatPercent > 0 ? Math.round(beforeVat * vatPercent / 100 * 100) / 100 : 0;
+  const grandTotal = beforeVat + vatAmount;
   const whtPercent = terms.include_withholding_tax ? (terms.withholding_tax_percent || c.withholding_tax_percent || 3) : 0;
-  const whtAmount = whtPercent > 0 ? Math.round(afterDiscount * whtPercent / 100 * 100) / 100 : 0;
-  const netPayable = grandBeforeTax - whtAmount;
+  const whtAmount = whtPercent > 0 ? Math.round(beforeVat * whtPercent / 100 * 100) / 100 : 0;
+  const netPayable = grandTotal - whtAmount;
+  const finalAmount = whtPercent > 0 ? netPayable : grandTotal;
 
+  // Item rows
   const itemRows = items.map((item, i) => {
     const specs = item._specs || item.custom_specs || {};
-    const specStr = Object.entries(specs)
-      .filter(([, v]) => v && v !== "No")
-      .map(([k, v]) => `${SPEC_LABELS[k] || k}: ${v === "Yes" ? "✓" : v}`)
-      .join(" | ");
-    const desc = item._desc || item._name || "";
+    const rawDesc = item._desc || item._name || "";
+    const desc = cleanDescription(rawDesc);
+    const specHtml = formatSpecLines(specs);
     const unit = item._unit || "เครื่อง";
-    const discountAmt = item.discount_percent > 0 ? Math.round(item.unit_price * item.qty * item.discount_percent / 100 * 100) / 100 : 0;
+    const lineDiscount = item.discount_percent > 0 ? Math.round(item.unit_price * item.qty * item.discount_percent / 100 * 100) / 100 : 0;
 
     return `<tr>
       <td class="c">${i + 1}</td>
-      <td>
-        <strong>${item.model}</strong>
-        ${desc ? `<div class="desc">${desc}</div>` : ""}
-        ${specStr ? `<div class="desc">${specStr}</div>` : ""}
-        ${item.admin_notes ? `<div class="desc" style="color:#0891b2">* ${item.admin_notes}</div>` : ""}
+      <td class="desc-cell">
+        <div class="product-name">${item.model}</div>
+        ${desc ? `<div class="product-desc">${desc}</div>` : ""}
+        ${specHtml ? `<div class="spec-block">${specHtml}</div>` : ""}
+        ${item.admin_notes ? `<div class="admin-note">* ${item.admin_notes}</div>` : ""}
       </td>
-      <td class="r">${fp(item.qty)}</td>
-      <td class="c">${unit}</td>
+      <td class="c">${item.qty}</td>
       <td class="r">${fp(item.unit_price)}</td>
-      <td class="r">${fp(discountAmt)}</td>
+      <td class="r">${lineDiscount > 0 ? fp(lineDiscount) : "-"}</td>
       <td class="r">${fp(item.line_total)}</td>
     </tr>`;
   }).join("");
 
-  // Terms as a special row
-  const termsRow = c.quote_terms ? `<tr>
-    <td class="c">${items.length + 1}</td>
-    <td colspan="6">
-      <strong>เงื่อนไขการสั่งสินค้า และชำระเงินฝ่ายบัญชี</strong>
-      <div class="desc" style="white-space:pre-line;margin-top:6px;line-height:1.7">${c.quote_terms}</div>
-      ${(c.bank_accounts || []).length > 0 ? `<div style="margin-top:12px">${c.bank_accounts!.map((b) => `<div class="desc"><strong>${b.bank}</strong> ${b.branch}<br>${b.type} ${b.number}</div>`).join('<br>')}</div>` : ""}
-    </td>
-  </tr>` : "";
+  /* ── Contact info for header right ── */
+  const contactName = q.name || "-";
+  const contactPhone = q.phone || "";
 
-  const html = `<!DOCTYPE html><html><head><meta charset="utf-8">
+  const html = `<!DOCTYPE html><html lang="th"><head><meta charset="utf-8">
 <title>ใบเสนอราคา ${q.quote_number || ""}</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Sarabun','Noto Sans Thai',sans-serif;font-size:12px;color:#1a1a2e;padding:30px;max-width:820px;margin:0 auto}
-@media print{body{padding:15px}@page{margin:10mm;size:A4}}
-.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;padding-bottom:12px;border-bottom:3px solid #0891b2}
-.co{font-size:11px;line-height:1.6;color:#444}
-.co strong{font-size:14px;color:#1a1a2e;display:block}
-.co .tax{color:#666;font-size:10px}
-.qt{text-align:right}
-.qt h2{font-size:22px;color:#0891b2;margin-bottom:4px;font-weight:700}
-.qt p{font-size:11px;color:#666}
-.qt .num{font-size:16px;color:#1a1a2e;font-weight:700}
-.info{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.info-box{border:1px solid #e2e8f0;border-radius:6px;padding:12px}
-.info-box h4{font-size:10px;color:#0891b2;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.info-box p{font-size:11px;line-height:1.6;color:#333}
-.info-box .lb{color:#888;font-size:10px}
-.meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
-.meta-item{font-size:11px}
-.meta-item .lb{color:#888;font-size:10px;display:block}
-.meta-item .vl{font-weight:600}
-table{width:100%;border-collapse:collapse;margin-bottom:0}
-th{background:#0891b2;color:#fff;font-size:10px;font-weight:600;padding:7px 8px;text-align:left}
-th.c,td.c{text-align:center}
-th.r,td.r{text-align:right}
-td{padding:7px 8px;border-bottom:1px solid #e5e7eb;font-size:11px;vertical-align:top}
-tr:nth-child(even){background:#fafbfc}
-.desc{font-size:10px;color:#64748b;margin-top:3px;line-height:1.5}
-.totals{margin-top:12px;margin-left:auto;width:300px}
-.totals .row{display:flex;justify-content:space-between;padding:3px 0;font-size:11px;color:#444}
-.totals .row.hl{font-weight:700;color:#0891b2;font-size:13px;border-top:2px solid #0891b2;padding-top:8px;margin-top:4px}
-.totals .row.vat{color:#0891b2}
-.totals .row.wht{color:#ef4444}
-.totals .row.net{font-weight:700;font-size:14px;color:#1a1a2e;border-top:2px solid #1a1a2e;padding-top:8px;margin-top:4px}
-.thai-text{font-size:11px;color:#666;margin:8px 0;text-align:right;font-style:italic}
-.sigs{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin:40px 20px 20px}
+body{font-family:'Sarabun',sans-serif;font-size:11px;color:#1a1a2e;padding:0;margin:0}
+@media print{
+  body{padding:0}
+  @page{margin:12mm 15mm;size:A4}
+  .page-break{page-break-before:always}
+}
+@media screen{
+  body{max-width:820px;margin:0 auto;padding:20px}
+}
+
+/* ── Colors ── */
+:root{
+  --orange:#E87722;
+  --orange-light:#FFF3E8;
+  --dark:#1a1a2e;
+  --gray:#666;
+  --light-gray:#f5f5f5;
+  --border:#ddd;
+}
+
+/* ── Header ── */
+.header{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;padding-bottom:10px;border-bottom:3px solid var(--orange)}
+.header-left{font-size:10px;line-height:1.7;color:var(--gray)}
+.header-left .co-name{font-size:15px;font-weight:700;color:var(--dark);display:block;margin-bottom:2px}
+.header-left .co-en{font-size:10px;color:var(--gray)}
+.header-left .tax-line{color:#888;font-size:9.5px}
+.header-right{text-align:right}
+.header-right .title{font-size:24px;font-weight:700;color:var(--orange);margin-bottom:6px}
+.header-right .info-grid{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;text-align:left;font-size:11px}
+.header-right .info-grid .lb{color:var(--gray);font-weight:600;text-align:right;white-space:nowrap}
+.header-right .info-grid .vl{color:var(--dark)}
+
+/* ── Customer Info ── */
+.customer-box{border:1.5px solid var(--border);border-radius:4px;padding:10px 14px;margin-bottom:14px}
+.customer-box .section-label{font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.customer-box p{font-size:11px;line-height:1.6;color:#333}
+.customer-box .cust-name{font-weight:700;font-size:12px;color:var(--dark)}
+
+/* ── Product Table ── */
+table.items{width:100%;border-collapse:collapse;margin-bottom:0}
+table.items th{background:var(--dark);color:#fff;font-size:10px;font-weight:600;padding:8px 6px;text-align:left;white-space:nowrap}
+table.items th.c{text-align:center}
+table.items th.r{text-align:right}
+table.items td{padding:7px 6px;border-bottom:1px solid #e5e7eb;font-size:11px;vertical-align:top}
+table.items td.c{text-align:center}
+table.items td.r{text-align:right;white-space:nowrap}
+table.items tr:nth-child(even){background:#fafbfc}
+.product-name{font-weight:700;font-size:11.5px;color:var(--dark)}
+.product-desc{font-size:10px;color:#555;margin-top:2px;line-height:1.5}
+.spec-block{margin-top:4px}
+.spec-line{font-size:9.5px;color:#666;line-height:1.6;padding-left:8px}
+.admin-note{font-size:9.5px;color:var(--orange);margin-top:3px;font-style:italic}
+.desc-cell{max-width:360px}
+
+/* ── Totals ── */
+.totals-section{margin-top:12px;display:flex;justify-content:flex-end}
+.totals{width:320px}
+.totals .row{display:flex;justify-content:space-between;padding:4px 0;font-size:11px;color:#444}
+.totals .row.sub{border-top:1px solid var(--border);padding-top:6px;margin-top:2px}
+.totals .row.vat{color:var(--orange);font-weight:600}
+.totals .row.grand{font-weight:700;font-size:14px;color:var(--dark);border-top:2.5px solid var(--orange);padding-top:8px;margin-top:4px}
+.totals .row.wht{color:#dc2626;font-size:11px}
+.totals .row.net{font-weight:700;font-size:13px;color:var(--dark);border-top:2px solid var(--dark);padding-top:6px;margin-top:4px}
+.thai-text{font-size:11px;color:var(--gray);margin:6px 0 16px;text-align:right;font-style:italic}
+
+/* ── Notes & Bank ── */
+.notes-section{margin-top:16px;padding-top:10px;border-top:1.5px solid var(--border)}
+.notes-section h3{font-size:12px;font-weight:700;color:var(--orange);margin-bottom:6px}
+.notes-section p,.notes-section div{font-size:10.5px;line-height:1.7;color:#444}
+.bank-block{margin-top:10px;padding:8px 12px;background:var(--light-gray);border-radius:4px}
+.bank-item{margin-bottom:6px}
+.bank-item strong{color:var(--dark)}
+.bank-item div{font-size:10px;color:var(--gray)}
+.payslip-note{font-size:10px;color:var(--orange);font-weight:600;margin-top:6px}
+
+/* ── Terms ── */
+.terms-section{margin-top:14px;padding-top:10px;border-top:1.5px solid var(--border)}
+.terms-section h3{font-size:12px;font-weight:700;color:var(--orange);margin-bottom:6px}
+.terms-section .terms-body{font-size:10px;line-height:1.8;color:#555;white-space:pre-line}
+
+/* ── Signatures ── */
+.sigs{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;margin:40px 10px 20px;align-items:end}
 .sig{text-align:center;padding-top:50px;border-top:1px solid #999}
-.sig p{font-size:10px;color:#666;margin-top:4px}
-.sig .name{font-size:11px;color:#1a1a2e;font-weight:600}
-.footer{text-align:center;padding-top:12px;border-top:1px solid #e5e7eb;font-size:9px;color:#999}
+.sig p{font-size:10px;color:var(--gray);margin-top:4px}
+.sig .name{font-size:11px;color:var(--dark);font-weight:600}
+.sig-stamp{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.sig-stamp .stamp-placeholder{width:80px;height:80px;border:2px dashed var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#ccc;margin-bottom:8px}
+
+/* ── Footer ── */
+.page-footer{text-align:center;padding-top:10px;border-top:1px solid #e5e7eb;font-size:9px;color:#999;margin-top:20px}
 </style></head><body>
 
-<!-- Header -->
+<!-- ═══ HEADER ═══ -->
 <div class="header">
-  <div class="co">
-    <strong>${c.company_name_th}</strong>
-    <span style="font-size:11px;color:#666">${c.company_name_en} (${c.branch})</span><br>
+  <div class="header-left">
+    ${c.logo_url ? `<img src="${c.logo_url}" alt="Logo" style="height:50px;margin-bottom:6px;display:block">` : ""}
+    <span class="co-name">${c.company_name_th}</span>
+    <span class="co-en">${c.company_name_en} (${c.branch})</span><br>
     ${c.address_line1} ${c.address_line2}<br>
     ${c.district} ${c.province}<br>
-    <span class="tax">เลขประจำตัวผู้เสียภาษี ${c.tax_id}</span><br>
-    โทร. ${c.phone}<br>
+    <span class="tax-line">เลขประจำตัวผู้เสียภาษี ${c.tax_id}</span><br>
+    โทร. ${c.phone} | แฟกซ์ ${c.fax}<br>
     เบอร์มือถือ ${c.mobile}<br>
-    โทรสาร ${c.fax}<br>
     ${c.website}
   </div>
-  <div class="qt">
-    <h2>ใบเสนอราคา</h2>
-    <p class="num">${q.quote_number || "—"}</p>
-    <div style="margin-top:12px;text-align:left;font-size:11px">
-      <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px">
-        <span class="lb" style="color:#888">วันที่:</span><span>${today}</span>
-        <span class="lb" style="color:#888">ยืนราคาถึง:</span><span>${validDate}</span>
-        ${saleName ? `<span class="lb" style="color:#888">พนักงานขาย:</span><span>${saleName}${salePhone ? ` ${salePhone}` : ""}${saleEmail ? ` ${saleEmail}` : ""}</span>` : ""}
-      </div>
+  <div class="header-right">
+    <div class="title">ใบเสนอราคา</div>
+    <div class="info-grid">
+      <span class="lb">เลขที่:</span><span class="vl">${q.quote_number || "—"}</span>
+      <span class="lb">วันที่:</span><span class="vl">${today}</span>
+      <span class="lb">ยืนราคาถึง:</span><span class="vl">${validDate}</span>
+      ${saleEmail ? `<span class="lb">ผู้ขาย:</span><span class="vl">${saleEmail}</span>` : ""}
+      ${saleName ? `<span class="lb"></span><span class="vl">${saleName}${salePhone ? ` ${salePhone}` : ""}</span>` : ""}
+      <span class="lb">ชื่องาน:</span><span class="vl">${items.length > 0 ? items[0].model : "-"}</span>
+      <span class="lb">ผู้ติดต่อ:</span><span class="vl">${contactName}</span>
+      ${contactPhone ? `<span class="lb">เบอร์โทร:</span><span class="vl">${contactPhone}</span>` : ""}
     </div>
   </div>
 </div>
 
-<!-- Customer + Contact Info -->
-<div class="info">
-  <div class="info-box">
-    <h4>ลูกค้า</h4>
-    ${q.company ? `<p><strong>${q.company}</strong></p>` : ""}
-    <p>${q.name}</p>
-    ${q.phone ? `<p><span class="lb">โทร:</span> ${q.phone}</p>` : ""}
-    <p><span class="lb">อีเมล:</span> ${q.email}</p>
-  </div>
-  <div class="info-box">
-    <h4>ผู้ติดต่อ</h4>
-    <p><span class="lb">ชื่องาน:</span> ${items.length > 0 ? items[0].model : "-"}</p>
-    <p><span class="lb">ผู้ติดต่อ:</span> ${q.name}</p>
-    ${q.phone ? `<p><span class="lb">เบอร์โทร:</span> ${q.phone}</p>` : ""}
-  </div>
+<!-- ═══ CUSTOMER INFO ═══ -->
+<div class="customer-box">
+  <div class="section-label">ลูกค้า</div>
+  <p class="cust-name">${q.company ? `${q.company}` : ""} ${q.name}${q.branch ? ` (${q.branch})` : ""}</p>
+  ${q.company_address ? `<p>${q.company_address}</p>` : ""}
+  ${q.tax_id ? `<p style="font-size:10px;color:#888">เลขประจำตัวผู้เสียภาษี ${q.tax_id}</p>` : ""}
+  <p><span style="color:#888">อีเมล:</span> ${q.email}${q.phone ? ` | <span style="color:#888">โทร:</span> ${q.phone}` : ""}</p>
 </div>
 
-<!-- Product Table -->
-<table>
+<!-- ═══ PRODUCT TABLE ═══ -->
+<table class="items">
   <thead>
     <tr>
-      <th class="c" style="width:35px">ลำดับ</th>
-      <th>ชื่อสินค้า / รายละเอียด</th>
-      <th class="r" style="width:60px">จำนวน</th>
-      <th class="c" style="width:55px">หน่วย</th>
-      <th class="r" style="width:85px">ราคาต่อหน่วย</th>
-      <th class="r" style="width:70px">ส่วนลด (฿)</th>
-      <th class="r" style="width:85px">ราคารวม</th>
+      <th class="c" style="width:30px">#</th>
+      <th>รายละเอียด</th>
+      <th class="c" style="width:50px">จำนวน</th>
+      <th class="r" style="width:90px">ราคาต่อหน่วย</th>
+      <th class="r" style="width:70px">ส่วนลด</th>
+      <th class="r" style="width:90px">มูลค่า</th>
     </tr>
   </thead>
   <tbody>
     ${itemRows}
-    ${termsRow}
   </tbody>
 </table>
 
-<!-- Totals -->
-<div class="totals">
-  <div class="row"><span>รวมเป็นเงิน</span><span>${fp(subtotal)}</span></div>
-  ${discountTotal > 0 ? `<div class="row"><span>ส่วนลดรวม</span><span>-${fp(discountTotal)}</span></div>` : ""}
-  ${discountTotal > 0 ? `<div class="row"><span>ราคาหลังหักส่วนลด</span><span>${fp(afterDiscount)}</span></div>` : ""}
-  ${vatPercent > 0 ? `<div class="row vat"><span>☑ ภาษีมูลค่าเพิ่ม ${vatPercent}%</span><span>${fp(vatAmount)}</span></div>` : ""}
-  <div class="row hl"><span>จำนวนเงินรวมทั้งสิ้น</span><span>${fp(grandBeforeTax)}</span></div>
-  ${whtPercent > 0 ? `<div class="row wht"><span>หัก ณ ที่จ่าย ${whtPercent}%</span><span>-${fp(whtAmount)}</span></div>
-  <div class="row net"><span>ยอดชำระ</span><span>${fp(netPayable)}</span></div>` : ""}
+<!-- ═══ TOTALS ═══ -->
+<div class="totals-section">
+  <div class="totals">
+    <div class="row"><span>รวมเป็นเงิน</span><span>${fp(subtotal + totalDiscount)} บาท</span></div>
+    ${totalDiscount > 0 ? `<div class="row"><span>ส่วนลด</span><span>${fp(totalDiscount)} บาท</span></div>
+    <div class="row sub"><span>จำนวนเงินหลังหักส่วนลด</span><span>${fp(afterDiscount)} บาท</span></div>` : ""}
+    ${vatPercent > 0 ? `<div class="row vat"><span>ภาษีมูลค่าเพิ่ม ${vatPercent}%</span><span>${fp(vatAmount)} บาท</span></div>` : ""}
+    <div class="row grand"><span>จำนวนเงินรวมทั้งสิ้น</span><span>${fp(grandTotal)} บาท</span></div>
+    ${whtPercent > 0 ? `<div class="row wht"><span>หัก ณ ที่จ่าย ${whtPercent}%</span><span>-${fp(whtAmount)} บาท</span></div>
+    <div class="row net"><span>ยอดชำระ</span><span>${fp(netPayable)} บาท</span></div>` : ""}
+  </div>
+</div>
+<div class="thai-text">(${numberToThaiText(finalAmount)})</div>
+
+<!-- ═══ NOTES & BANK ═══ -->
+<div class="notes-section">
+  <h3>หมายเหตุ</h3>
+  <p>วิธีการชำระเงิน</p>
+  <p>ลูกค้าเป็นผู้รับผิดชอบค่าใช้จ่าย ค่าธรรมเนียมในการโอนเงิน</p>
+  ${(c.bank_accounts || []).length > 0 ? `
+  <div class="bank-block">
+    ${c.bank_accounts!.map(b => `<div class="bank-item">
+      <strong>${c.company_name_th}</strong>
+      <div>${b.bank} ${b.branch}</div>
+      <div>${b.type} ${b.number}</div>
+    </div>`).join("")}
+    <div class="payslip-note">Pay in slip มายัง: accountant@entgroup.co.th</div>
+  </div>` : ""}
 </div>
 
-<div class="thai-text">(${numberToThaiText(whtPercent > 0 ? netPayable : grandBeforeTax)})</div>
+<!-- ═══ TERMS ═══ -->
+${c.quote_terms ? `<div class="terms-section">
+  <h3>เงื่อนไข</h3>
+  <div class="terms-body">${c.quote_terms}</div>
+</div>` : ""}
 
-<!-- Signatures -->
+<!-- ═══ SIGNATURES ═══ -->
 <div class="sigs">
   <div>
     <div class="sig">
       <p>ในนาม ${q.company || q.name}</p>
-      <p class="name">ผู้สั่งซื้อสินค้า &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; วันที่</p>
+      <p class="name">ผู้สั่งซื้อสินค้า &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; วันที่</p>
     </div>
+  </div>
+  <div class="sig-stamp">
+    <div class="stamp-placeholder">ตราประทับ</div>
   </div>
   <div>
     <div class="sig">
       <p>ในนาม ${c.company_name_th}</p>
-      <p class="name">ผู้อนุมัติ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; วันที่</p>
+      <p class="name">ผู้อนุมัติ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; วันที่ ${today}</p>
     </div>
   </div>
 </div>
 
-<div class="footer">
-  <p>${c.company_name_th} | ${c.phone} | ${c.website} | ${c.email}</p>
+<!-- ═══ FOOTER ═══ -->
+<div class="page-footer">
+  <p>${c.company_name_th} | โทร. ${c.phone} | ${c.website} | ${c.email}</p>
 </div>
 
 </body></html>`;
