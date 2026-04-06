@@ -221,6 +221,7 @@ const AdminDashboard = () => {
                   { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
                   { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
                   { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
+                  { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
@@ -340,6 +341,7 @@ const AdminDashboard = () => {
               { id: "chatleads" as Tab, label: "Chat Leads" },
               { id: "subscribers" as Tab, label: "สมาชิก" },
               { id: "software" as Tab, label: "ซอฟต์แวร์" },
+              { id: "livechat" as Tab, label: "Live Chat" },
             ]).map((t) => (
               <button
                 key={t.id}
