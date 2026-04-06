@@ -80,14 +80,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       setSession(session);
       setUser(session?.user ?? null);
-      setLoading(true);
+
       if (session?.user) {
+        // Don't set loading=true during token refresh — preserve existing admin state
+        // to avoid flashing redirects in AdminDashboard
         await checkRoles(session.user.id);
       } else {
         setIsAdmin(false);
         setIsSuperAdmin(false);
       }
-      if (mounted) setLoading(false);
     });
 
     return () => {

@@ -115,10 +115,13 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
-    if (!authLoading && !isAdmin) {
+    if (!authLoading && user && !isAdmin) {
       navigate("/admin-login", { replace: true });
     }
-  }, [authLoading, isAdmin, navigate]);
+    if (!authLoading && !user) {
+      navigate("/admin-login", { replace: true });
+    }
+  }, [authLoading, isAdmin, user, navigate]);
 
   useEffect(() => { if (isAdmin) fetchData(); }, [isAdmin]);
 
