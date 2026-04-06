@@ -146,6 +146,7 @@ const App = () => (
             
             <SocialRibbon />
             <FloatingQuoteBar />
+            <GlobalFloatingToolbar />
             <LiveChatWidget />
           </BrowserRouter>
         </TooltipProvider>
