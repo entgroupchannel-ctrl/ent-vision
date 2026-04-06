@@ -745,20 +745,86 @@ export type Database = {
           },
         ]
       }
+      quote_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          message_type: string
+          new_value: string | null
+          old_value: string | null
+          proposed_value: string | null
+          quote_id: string
+          resolution: string | null
+          responded_at: string | null
+          sender_id: string | null
+          sender_role: string
+          sla_deadline: string | null
+          sla_met: boolean | null
+          subject: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          message_type?: string
+          new_value?: string | null
+          old_value?: string | null
+          proposed_value?: string | null
+          quote_id: string
+          resolution?: string | null
+          responded_at?: string | null
+          sender_id?: string | null
+          sender_role?: string
+          sla_deadline?: string | null
+          sla_met?: boolean | null
+          subject?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          message_type?: string
+          new_value?: string | null
+          old_value?: string | null
+          proposed_value?: string | null
+          quote_id?: string
+          resolution?: string | null
+          responded_at?: string | null
+          sender_id?: string | null
+          sender_role?: string
+          sla_deadline?: string | null
+          sla_met?: boolean | null
+          subject?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quote_messages_quote_id_fkey"
+            columns: ["quote_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       quote_requests: {
         Row: {
+          admin_sla_hours: number | null
           approved_at: string | null
           approved_by: string | null
           callback_time: string | null
           company: string | null
           created_at: string
           customer_response: string | null
+          customer_sla_hours: number | null
           delivery_terms: string | null
           details: string | null
           discount_amount: number | null
           email: string
           grand_total: number | null
           id: string
+          last_action_at: string | null
+          last_action_by: string | null
           lead_score: number
           line_id: string | null
           name: string
@@ -775,18 +841,22 @@ export type Database = {
           whatsapp: string | null
         }
         Insert: {
+          admin_sla_hours?: number | null
           approved_at?: string | null
           approved_by?: string | null
           callback_time?: string | null
           company?: string | null
           created_at?: string
           customer_response?: string | null
+          customer_sla_hours?: number | null
           delivery_terms?: string | null
           details?: string | null
           discount_amount?: number | null
           email: string
           grand_total?: number | null
           id?: string
+          last_action_at?: string | null
+          last_action_by?: string | null
           lead_score?: number
           line_id?: string | null
           name: string
@@ -803,18 +873,22 @@ export type Database = {
           whatsapp?: string | null
         }
         Update: {
+          admin_sla_hours?: number | null
           approved_at?: string | null
           approved_by?: string | null
           callback_time?: string | null
           company?: string | null
           created_at?: string
           customer_response?: string | null
+          customer_sla_hours?: number | null
           delivery_terms?: string | null
           details?: string | null
           discount_amount?: number | null
           email?: string
           grand_total?: number | null
           id?: string
+          last_action_at?: string | null
+          last_action_by?: string | null
           lead_score?: number
           line_id?: string | null
           name?: string
@@ -961,6 +1035,7 @@ export type Database = {
         Args: { _document_id: string; _user_id: string }
         Returns: boolean
       }
+      count_pending_negotiations: { Args: never; Returns: number }
       generate_doc_share_token: {
         Args: { _document_id: string }
         Returns: string
