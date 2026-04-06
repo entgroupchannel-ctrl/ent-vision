@@ -1,0 +1,612 @@
+import { useState, useEffect } from "react";
+import {
+  FileText, Receipt, FileCheck, Plus, Eye, RefreshCw, Search,
+  Clock, CheckCircle, Send, AlertCircle, Loader2, ChevronDown,
+  Building2, Phone, Mail, Printer, Download, ArrowRight,
+  DollarSign, Calendar, Hash, XCircle, CreditCard,
+} from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
+
+/* ─── Types ─── */
+interface Invoice {
+  id: string;
+  invoice_number: string;
+  quote_id: string | null;
+  order_id: string | null;
+  customer_name: string;
+  customer_company: string | null;
+  customer_address: string | null;
+  customer_tax_id: string | null;
+  customer_email: string | null;
+  customer_phone: string | null;
+  invoice_date: string;
+  due_date: string | null;
+  subtotal: number;
+  discount_amount: number;
+  vat_amount: number;
+  withholding_tax: number;
+  grand_total: number;
+  status: string;
+  payment_terms: string | null;
+  notes: string | null;
+  created_at: string;
+}
+
+interface TaxInvoice {
+  id: string;
+  tax_invoice_number: string;
+  invoice_id: string | null;
+  customer_name: string;
+  customer_company: string | null;
+  customer_tax_id: string | null;
+  customer_address: string | null;
+  issue_date: string;
+  subtotal: number;
+  vat_amount: number;
+  grand_total: number;
+  status: string;
+  created_at: string;
+}
+
+interface ReceiptDoc {
+  id: string;
+  receipt_number: string;
+  invoice_id: string | null;
+  customer_name: string;
+  customer_company: string | null;
+  payment_date: string;
+  payment_method: string | null;
+  amount_paid: number;
+  status: string;
+  created_at: string;
+}
+
+interface InvoiceItem {
+  id: string;
+  model: string;
+  category: string | null;
+  description: string | null;
+  qty: number;
+  unit_price: number;
+  discount_percent: number;
+  line_total: number;
+  sort_order: number;
+}
+
+type DocTab = "invoices" | "tax_invoices" | "receipts";
+
+/* ─── Status Config ─── */
+const INV_STATUS: Record<string, { label: string; color: string; icon: typeof Clock }> = {
+  draft: { label: "ร่าง", color: "bg-muted text-muted-foreground border-border", icon: Clock },
+  sent: { label: "ส่งแล้ว", color: "bg-blue-500/10 text-blue-500 border-blue-500/20", icon: Send },
+  paid: { label: "ชำระแล้ว", color: "bg-green-500/10 text-green-500 border-green-500/20", icon: CheckCircle },
+  overdue: { label: "เกินกำหนด", color: "bg-red-500/10 text-red-400 border-red-500/20", icon: AlertCircle },
+  cancelled: { label: "ยกเลิก", color: "bg-muted text-muted-foreground border-border", icon: XCircle },
+};
+
+const TIV_STATUS: Record<string, { label: string; color: string }> = {
+  draft: { label: "ร่าง", color: "bg-muted text-muted-foreground border-border" },
+  issued: { label: "ออกแล้ว", color: "bg-green-500/10 text-green-500 border-green-500/20" },
+  cancelled: { label: "ยกเลิก", color: "bg-red-500/10 text-red-400 border-red-500/20" },
+};
+
+const RCP_STATUS: Record<string, { label: string; color: string }> = {
+  draft: { label: "ร่าง", color: "bg-muted text-muted-foreground border-border" },
+  issued: { label: "ออกแล้ว", color: "bg-green-500/10 text-green-500 border-green-500/20" },
+  cancelled: { label: "ยกเลิก", color: "bg-red-500/10 text-red-400 border-red-500/20" },
+};
+
+const PAYMENT_METHODS: Record<string, string> = {
+  transfer: "โอนเงิน",
+  cash: "เงินสด",
+  cheque: "เช็ค",
+  credit_card: "บัตรเครดิต",
+};
+
+const fmt = (n: number) => n.toLocaleString("th-TH", { minimumFractionDigits: 2 });
+const fmtDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" });
+
+/* ═══════════════════════════════════════════════════ */
+const AdminInvoiceManager = () => {
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const [docTab, setDocTab] = useState<DocTab>("invoices");
+  const [invoices, setInvoices] = useState<Invoice[]>([]);
+  const [taxInvoices, setTaxInvoices] = useState<TaxInvoice[]>([]);
+  const [receipts, setReceipts] = useState<ReceiptDoc[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null);
+  const [invoiceItems, setInvoiceItems] = useState<InvoiceItem[]>([]);
+  const [statusFilter, setStatusFilter] = useState("all");
+
+  /* ─── Fetch ─── */
+  const fetchAll = async () => {
+    setLoading(true);
+    const [inv, tiv, rcp] = await Promise.all([
+      supabase.from("invoices").select("*").order("created_at", { ascending: false }),
+      supabase.from("tax_invoices").select("*").order("created_at", { ascending: false }),
+      supabase.from("receipts").select("*").order("created_at", { ascending: false }),
+    ]);
+    if (inv.data) setInvoices(inv.data as any);
+    if (tiv.data) setTaxInvoices(tiv.data as any);
+    if (rcp.data) setReceipts(rcp.data as any);
+    setLoading(false);
+  };
+
+  useEffect(() => { fetchAll(); }, []);
+
+  const fetchInvoiceItems = async (invoiceId: string) => {
+    const { data } = await supabase
+      .from("invoice_items")
+      .select("*")
+      .eq("invoice_id", invoiceId)
+      .order("sort_order");
+    setInvoiceItems((data as any) || []);
+  };
+
+  /* ─── Create from Sales Order ─── */
+  const createInvoiceFromOrder = async (orderId: string) => {
+    try {
+      // Fetch order + items
+      const { data: order } = await supabase.from("sales_orders").select("*").eq("id", orderId).single();
+      if (!order) throw new Error("ไม่พบ Order");
+
+      const { data: orderItems } = await supabase.from("sales_order_items").select("*").eq("order_id", orderId).order("sort_order");
+
+      // Create invoice
+      const { data: inv, error } = await supabase.from("invoices").insert({
+        quote_id: (order as any).quote_id,
+        order_id: orderId,
+        customer_name: (order as any).customer_name,
+        customer_company: (order as any).customer_company,
+        customer_email: (order as any).customer_email,
+        customer_phone: (order as any).customer_phone,
+        subtotal: (order as any).subtotal,
+        discount_amount: (order as any).discount_amount,
+        vat_amount: (order as any).vat_amount,
+        withholding_tax: (order as any).withholding_tax,
+        grand_total: (order as any).grand_total,
+        payment_terms: (order as any).payment_terms,
+        user_id: (order as any).user_id,
+        assigned_to: (order as any).assigned_to,
+        created_by: user?.id,
+        due_date: new Date(Date.now() + 30 * 86400000).toISOString().split("T")[0],
+      } as any).select().single();
+
+      if (error) throw error;
+
+      // Create invoice items
+      if (orderItems && (inv as any)) {
+        const items = (orderItems as any[]).map((oi, i) => ({
+          invoice_id: (inv as any).id,
+          product_id: oi.product_id,
+          model: oi.model,
+          category: oi.category,
+          description: oi.description || oi.name_th,
+          qty: oi.qty || 1,
+          unit_price: oi.unit_price || 0,
+          discount_percent: oi.discount_percent || 0,
+          line_total: oi.line_total || 0,
+          sort_order: oi.sort_order || i,
+        }));
+        await supabase.from("invoice_items").insert(items as any);
+      }
+
+      toast({ title: "สร้างใบแจ้งหนี้สำเร็จ", description: `เลขที่ ${(inv as any).invoice_number}` });
+      fetchAll();
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    }
+  };
+
+  /* ─── Create Tax Invoice from Invoice ─── */
+  const createTaxInvoice = async (invoice: Invoice) => {
+    try {
+      const { data, error } = await supabase.from("tax_invoices").insert({
+        invoice_id: invoice.id,
+        quote_id: invoice.quote_id,
+        order_id: invoice.order_id,
+        customer_name: invoice.customer_name,
+        customer_company: invoice.customer_company,
+        customer_address: invoice.customer_address,
+        customer_tax_id: invoice.customer_tax_id,
+        subtotal: invoice.subtotal,
+        vat_amount: invoice.vat_amount,
+        grand_total: invoice.grand_total,
+        created_by: user?.id,
+      } as any).select().single();
+
+      if (error) throw error;
+      toast({ title: "สร้างใบกำกับภาษีสำเร็จ", description: `เลขที่ ${(data as any).tax_invoice_number}` });
+      fetchAll();
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    }
+  };
+
+  /* ─── Create Receipt from Invoice ─── */
+  const createReceipt = async (invoice: Invoice) => {
+    try {
+      const { data, error } = await supabase.from("receipts").insert({
+        invoice_id: invoice.id,
+        quote_id: invoice.quote_id,
+        order_id: invoice.order_id,
+        customer_name: invoice.customer_name,
+        customer_company: invoice.customer_company,
+        amount_paid: invoice.grand_total,
+        payment_method: "transfer",
+        created_by: user?.id,
+      } as any).select().single();
+
+      if (error) throw error;
+      toast({ title: "สร้างใบเสร็จรับเงินสำเร็จ", description: `เลขที่ ${(data as any).receipt_number}` });
+      fetchAll();
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    }
+  };
+
+  /* ─── Update status ─── */
+  const updateInvoiceStatus = async (id: string, status: string) => {
+    const { error } = await supabase.from("invoices").update({ status, updated_at: new Date().toISOString() } as any).eq("id", id);
+    if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
+    else { toast({ title: "อัปเดตสถานะสำเร็จ" }); fetchAll(); }
+  };
+
+  const updateTaxInvoiceStatus = async (id: string, status: string) => {
+    const { error } = await supabase.from("tax_invoices").update({ status, updated_at: new Date().toISOString() } as any).eq("id", id);
+    if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
+    else { toast({ title: "อัปเดตสถานะสำเร็จ" }); fetchAll(); }
+  };
+
+  const updateReceiptStatus = async (id: string, status: string) => {
+    const { error } = await supabase.from("receipts").update({ status, updated_at: new Date().toISOString() } as any).eq("id", id);
+    if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
+    else { toast({ title: "อัปเดตสถานะสำเร็จ" }); fetchAll(); }
+  };
+
+  /* ─── Filter ─── */
+  const filteredInvoices = invoices.filter(inv => {
+    const matchSearch = !search || inv.invoice_number.toLowerCase().includes(search.toLowerCase()) || inv.customer_name.toLowerCase().includes(search.toLowerCase());
+    const matchStatus = statusFilter === "all" || inv.status === statusFilter;
+    return matchSearch && matchStatus;
+  });
+
+  const filteredTaxInvoices = taxInvoices.filter(t => {
+    const matchSearch = !search || t.tax_invoice_number.toLowerCase().includes(search.toLowerCase()) || t.customer_name.toLowerCase().includes(search.toLowerCase());
+    const matchStatus = statusFilter === "all" || t.status === statusFilter;
+    return matchSearch && matchStatus;
+  });
+
+  const filteredReceipts = receipts.filter(r => {
+    const matchSearch = !search || r.receipt_number.toLowerCase().includes(search.toLowerCase()) || r.customer_name.toLowerCase().includes(search.toLowerCase());
+    const matchStatus = statusFilter === "all" || r.status === statusFilter;
+    return matchSearch && matchStatus;
+  });
+
+  /* ─── Stats ─── */
+  const stats = {
+    totalInvoices: invoices.length,
+    unpaid: invoices.filter(i => i.status === "sent").length,
+    paid: invoices.filter(i => i.status === "paid").length,
+    totalTaxInvoices: taxInvoices.length,
+    totalReceipts: receipts.length,
+    totalRevenue: invoices.filter(i => i.status === "paid").reduce((sum, i) => sum + i.grand_total, 0),
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* ─── Header Stats ─── */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {[
+          { label: "ใบแจ้งหนี้", value: stats.totalInvoices, icon: FileText, color: "text-blue-500" },
+          { label: "รอชำระ", value: stats.unpaid, icon: Clock, color: "text-orange-500" },
+          { label: "ชำระแล้ว", value: stats.paid, icon: CheckCircle, color: "text-green-500" },
+          { label: "รายได้รวม", value: `฿${fmt(stats.totalRevenue)}`, icon: DollarSign, color: "text-primary" },
+        ].map((s, i) => (
+          <div key={i} className="card-surface rounded-xl p-4 border border-border">
+            <div className="flex items-center gap-2 mb-1">
+              <s.icon size={16} className={s.color} />
+              <span className="text-xs text-muted-foreground">{s.label}</span>
+            </div>
+            <p className="text-lg font-bold text-foreground">{s.value}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* ─── Sub-tabs ─── */}
+      <div className="flex items-center gap-2 border-b border-border pb-2">
+        {([
+          { id: "invoices" as DocTab, label: "ใบแจ้งหนี้", icon: FileText, count: stats.totalInvoices },
+          { id: "tax_invoices" as DocTab, label: "ใบกำกับภาษี", icon: FileCheck, count: stats.totalTaxInvoices },
+          { id: "receipts" as DocTab, label: "ใบเสร็จรับเงิน", icon: Receipt, count: stats.totalReceipts },
+        ]).map(t => (
+          <button
+            key={t.id}
+            onClick={() => { setDocTab(t.id); setSelectedInvoice(null); setStatusFilter("all"); }}
+            className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+              docTab === t.id ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <t.icon size={14} />
+            {t.label}
+            <span className="text-xs ml-1 opacity-60">({t.count})</span>
+          </button>
+        ))}
+
+        <div className="flex-1" />
+        <button onClick={fetchAll} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+          <RefreshCw size={12} className={loading ? "animate-spin" : ""} /> รีเฟรช
+        </button>
+      </div>
+
+      {/* ─── Search + Filter ─── */}
+      <div className="flex gap-2">
+        <div className="flex-1 relative">
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <input
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="ค้นหาเลขที่ / ชื่อลูกค้า..."
+            className="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground"
+          />
+        </div>
+        <select
+          value={statusFilter}
+          onChange={e => setStatusFilter(e.target.value)}
+          className="px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground"
+        >
+          <option value="all">ทุกสถานะ</option>
+          {docTab === "invoices" && Object.entries(INV_STATUS).map(([k, v]) => (
+            <option key={k} value={k}>{v.label}</option>
+          ))}
+          {docTab === "tax_invoices" && Object.entries(TIV_STATUS).map(([k, v]) => (
+            <option key={k} value={k}>{v.label}</option>
+          ))}
+          {docTab === "receipts" && Object.entries(RCP_STATUS).map(([k, v]) => (
+            <option key={k} value={k}>{v.label}</option>
+          ))}
+        </select>
+      </div>
+
+      {loading ? (
+        <div className="text-center py-12 text-muted-foreground"><Loader2 className="inline animate-spin mr-2" size={16} />กำลังโหลด...</div>
+      ) : (
+        <>
+          {/* ═══ INVOICES TAB ═══ */}
+          {docTab === "invoices" && (
+            <div className="space-y-2">
+              {filteredInvoices.length === 0 ? (
+                <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มีใบแจ้งหนี้</div>
+              ) : filteredInvoices.map(inv => {
+                const st = INV_STATUS[inv.status] || INV_STATUS.draft;
+                const StIcon = st.icon;
+                const isSelected = selectedInvoice?.id === inv.id;
+
+                return (
+                  <div key={inv.id} className="card-surface rounded-xl border border-border overflow-hidden">
+                    <button
+                      onClick={() => {
+                        if (isSelected) { setSelectedInvoice(null); }
+                        else { setSelectedInvoice(inv); fetchInvoiceItems(inv.id); }
+                      }}
+                      className="w-full flex items-center gap-3 p-4 text-left hover:bg-muted/30 transition-colors"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0">
+                        <FileText size={18} className="text-blue-500" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className="text-sm font-bold text-foreground">{inv.invoice_number}</span>
+                          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border ${st.color}`}>
+                            <StIcon size={10} /> {st.label}
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-foreground truncate">
+                          {inv.customer_company || inv.customer_name} • {fmtDate(inv.invoice_date)}
+                        </p>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <p className="text-sm font-bold text-foreground">฿{fmt(inv.grand_total)}</p>
+                        {inv.due_date && <p className="text-[10px] text-muted-foreground">ครบ {fmtDate(inv.due_date)}</p>}
+                      </div>
+                    </button>
+
+                    {/* Detail panel */}
+                    {isSelected && (
+                      <div className="border-t border-border p-4 space-y-4 animate-fade-in">
+                        {/* Customer info */}
+                        <div className="grid grid-cols-2 gap-3 text-xs">
+                          <div>
+                            <p className="text-muted-foreground mb-1">ลูกค้า</p>
+                            <p className="font-medium text-foreground">{inv.customer_name}</p>
+                            {inv.customer_company && <p className="text-muted-foreground flex items-center gap-1"><Building2 size={10} />{inv.customer_company}</p>}
+                            {inv.customer_email && <p className="text-muted-foreground flex items-center gap-1"><Mail size={10} />{inv.customer_email}</p>}
+                            {inv.customer_phone && <p className="text-muted-foreground flex items-center gap-1"><Phone size={10} />{inv.customer_phone}</p>}
+                          </div>
+                          <div>
+                            {inv.customer_tax_id && <p className="text-muted-foreground">เลขผู้เสียภาษี: <span className="text-foreground font-medium">{inv.customer_tax_id}</span></p>}
+                            {inv.payment_terms && <p className="text-muted-foreground mt-1">เงื่อนไข: <span className="text-foreground">{inv.payment_terms}</span></p>}
+                          </div>
+                        </div>
+
+                        {/* Items */}
+                        {invoiceItems.length > 0 && (
+                          <div>
+                            <p className="text-xs font-bold text-foreground mb-2">รายการสินค้า</p>
+                            <div className="rounded-lg border border-border overflow-hidden">
+                              <table className="w-full text-xs">
+                                <thead>
+                                  <tr className="bg-muted/50">
+                                    <th className="text-left px-3 py-2 font-medium text-muted-foreground">#</th>
+                                    <th className="text-left px-3 py-2 font-medium text-muted-foreground">รุ่น</th>
+                                    <th className="text-left px-3 py-2 font-medium text-muted-foreground">รายละเอียด</th>
+                                    <th className="text-right px-3 py-2 font-medium text-muted-foreground">จำนวน</th>
+                                    <th className="text-right px-3 py-2 font-medium text-muted-foreground">ราคา</th>
+                                    <th className="text-right px-3 py-2 font-medium text-muted-foreground">รวม</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {invoiceItems.map((item, i) => (
+                                    <tr key={item.id} className="border-t border-border/50">
+                                      <td className="px-3 py-2 text-muted-foreground">{i + 1}</td>
+                                      <td className="px-3 py-2 font-medium text-foreground">{item.model}</td>
+                                      <td className="px-3 py-2 text-muted-foreground">{item.description || item.category || "-"}</td>
+                                      <td className="px-3 py-2 text-right">{item.qty}</td>
+                                      <td className="px-3 py-2 text-right">{fmt(item.unit_price)}</td>
+                                      <td className="px-3 py-2 text-right font-medium">{fmt(item.line_total)}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Summary */}
+                        <div className="flex justify-end">
+                          <div className="w-64 space-y-1 text-xs">
+                            <div className="flex justify-between"><span className="text-muted-foreground">ยอดรวม</span><span>฿{fmt(inv.subtotal)}</span></div>
+                            {inv.discount_amount > 0 && <div className="flex justify-between"><span className="text-muted-foreground">ส่วนลด</span><span className="text-red-400">-฿{fmt(inv.discount_amount)}</span></div>}
+                            {inv.vat_amount > 0 && <div className="flex justify-between"><span className="text-muted-foreground">VAT 7%</span><span>฿{fmt(inv.vat_amount)}</span></div>}
+                            {inv.withholding_tax > 0 && <div className="flex justify-between"><span className="text-muted-foreground">หัก ณ ที่จ่าย 3%</span><span className="text-red-400">-฿{fmt(inv.withholding_tax)}</span></div>}
+                            <div className="flex justify-between border-t border-border pt-1 font-bold text-sm">
+                              <span>ยอดสุทธิ</span><span className="text-primary">฿{fmt(inv.grand_total)}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
+                          {inv.status === "draft" && (
+                            <button onClick={() => updateInvoiceStatus(inv.id, "sent")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-500/10 text-blue-500 text-xs font-medium hover:bg-blue-500/20">
+                              <Send size={12} /> ส่งใบแจ้งหนี้
+                            </button>
+                          )}
+                          {inv.status === "sent" && (
+                            <button onClick={() => updateInvoiceStatus(inv.id, "paid")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-green-500/10 text-green-500 text-xs font-medium hover:bg-green-500/20">
+                              <CheckCircle size={12} /> บันทึกชำระแล้ว
+                            </button>
+                          )}
+                          {(inv.status === "sent" || inv.status === "paid") && !taxInvoices.some(t => t.invoice_id === inv.id) && (
+                            <button onClick={() => createTaxInvoice(inv)} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-purple-500/10 text-purple-500 text-xs font-medium hover:bg-purple-500/20">
+                              <FileCheck size={12} /> สร้างใบกำกับภาษี
+                            </button>
+                          )}
+                          {inv.status === "paid" && !receipts.some(r => r.invoice_id === inv.id) && (
+                            <button onClick={() => createReceipt(inv)} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-orange-500/10 text-orange-500 text-xs font-medium hover:bg-orange-500/20">
+                              <Receipt size={12} /> สร้างใบเสร็จรับเงิน
+                            </button>
+                          )}
+                          {inv.status !== "cancelled" && inv.status !== "paid" && (
+                            <button onClick={() => updateInvoiceStatus(inv.id, "cancelled")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs text-muted-foreground hover:text-red-400">
+                              <XCircle size={12} /> ยกเลิก
+                            </button>
+                          )}
+                        </div>
+
+                        {inv.notes && (
+                          <div className="rounded-lg bg-muted/30 p-3 text-xs text-muted-foreground">{inv.notes}</div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* ═══ TAX INVOICES TAB ═══ */}
+          {docTab === "tax_invoices" && (
+            <div className="space-y-2">
+              {filteredTaxInvoices.length === 0 ? (
+                <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มีใบกำกับภาษี</div>
+              ) : filteredTaxInvoices.map(tiv => {
+                const st = TIV_STATUS[tiv.status] || TIV_STATUS.draft;
+                return (
+                  <div key={tiv.id} className="card-surface rounded-xl border border-border p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center shrink-0">
+                        <FileCheck size={18} className="text-purple-500" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className="text-sm font-bold text-foreground">{tiv.tax_invoice_number}</span>
+                          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border ${st.color}`}>
+                            {st.label}
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-foreground truncate">
+                          {tiv.customer_company || tiv.customer_name} • {fmtDate(tiv.issue_date)}
+                          {tiv.customer_tax_id && ` • TAX: ${tiv.customer_tax_id}`}
+                        </p>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <p className="text-sm font-bold text-foreground">฿{fmt(tiv.grand_total)}</p>
+                        <p className="text-[10px] text-muted-foreground">VAT ฿{fmt(tiv.vat_amount)}</p>
+                      </div>
+                      <div className="flex gap-1">
+                        {tiv.status === "draft" && (
+                          <button onClick={() => updateTaxInvoiceStatus(tiv.id, "issued")} className="px-2 py-1 rounded text-[10px] bg-green-500/10 text-green-500 hover:bg-green-500/20">
+                            ออกเอกสาร
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* ═══ RECEIPTS TAB ═══ */}
+          {docTab === "receipts" && (
+            <div className="space-y-2">
+              {filteredReceipts.length === 0 ? (
+                <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มีใบเสร็จรับเงิน</div>
+              ) : filteredReceipts.map(rcp => {
+                const st = RCP_STATUS[rcp.status] || RCP_STATUS.draft;
+                return (
+                  <div key={rcp.id} className="card-surface rounded-xl border border-border p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center shrink-0">
+                        <Receipt size={18} className="text-orange-500" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className="text-sm font-bold text-foreground">{rcp.receipt_number}</span>
+                          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border ${st.color}`}>
+                            {st.label}
+                          </span>
+                        </div>
+                        <p className="text-xs text-muted-foreground truncate">
+                          {rcp.customer_company || rcp.customer_name} • {fmtDate(rcp.payment_date)}
+                          {rcp.payment_method && ` • ${PAYMENT_METHODS[rcp.payment_method] || rcp.payment_method}`}
+                        </p>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <p className="text-sm font-bold text-foreground">฿{fmt(rcp.amount_paid)}</p>
+                      </div>
+                      <div className="flex gap-1">
+                        {rcp.status === "draft" && (
+                          <button onClick={() => updateReceiptStatus(rcp.id, "issued")} className="px-2 py-1 rounded text-[10px] bg-green-500/10 text-green-500 hover:bg-green-500/20">
+                            ออกเอกสาร
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default AdminInvoiceManager;
