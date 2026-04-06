@@ -61,7 +61,7 @@ const MyAccountQuotes = () => {
   const [reQuoteProducts, setReQuoteProducts] = useState<any[] | null>(null);
   const [responding, setResponding] = useState(false);
   const [menuOpenId, setMenuOpenId] = useState<string | null>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLTableCellElement>(null);
   const poFileRef = useRef<HTMLInputElement>(null);
   const [poUploading, setPoUploading] = useState(false);
   const [poNumber, setPoNumber] = useState("");
