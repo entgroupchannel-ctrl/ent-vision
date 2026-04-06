@@ -51,7 +51,7 @@ interface CatalogProduct {
   id: string; model: string; name_th: string; specs: Record<string, string>;
 }
 
-const MyAccountQuotes = () => {
+const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void }) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [quotes, setQuotes] = useState<QuoteRequest[]>([]);
@@ -317,7 +317,18 @@ const MyAccountQuotes = () => {
                       <td className="px-4 py-3 text-muted-foreground"><span className="line-clamp-1">{productSummary(q.products)}</span></td>
                       <td className="px-4 py-3 text-right font-bold">{hasPrice ? `฿${fp(q.grand_total)}` : <span className="text-muted-foreground font-normal">รอราคา</span>}</td>
                       <td className="px-4 py-3 text-center">
-                        <span className={`inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full border font-medium ${status.color}`}>{status.label}</span>
+                        <div className="flex items-center justify-center gap-2">
+                          <span className={`inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full border font-medium ${status.color}`}>{status.label}</span>
+                          {q.status === "quoted" && q.grand_total > 0 && (
+                            <button
+                              onClick={(e) => { e.stopPropagation(); handleCustomerResponse(q.id, "accepted"); }}
+                              disabled={responding}
+                              className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-full bg-green-500/10 text-green-600 border border-green-500/30 font-bold hover:bg-green-500/20 transition-colors whitespace-nowrap"
+                            >
+                              <ThumbsUp size={11} /> รับราคา
+                            </button>
+                          )}
+                        </div>
                       </td>
                       <td className="px-2 py-3 relative" ref={menuOpenId === q.id ? menuRef as React.RefObject<HTMLTableCellElement> : undefined}>
                         <button onClick={(e) => { e.stopPropagation(); setMenuOpenId(menuOpenId === q.id ? null : q.id); }} className="p-1.5 rounded-lg hover:bg-secondary/60 text-muted-foreground">

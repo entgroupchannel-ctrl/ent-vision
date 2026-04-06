@@ -89,7 +89,7 @@ const TUTORIAL_KEY = "ent_quote_tutorial_done";
 const inputClass =
   "w-full px-3 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
 
-const UserQuoteCreate = () => {
+const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
