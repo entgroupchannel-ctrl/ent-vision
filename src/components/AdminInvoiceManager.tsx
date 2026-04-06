@@ -764,6 +764,11 @@ const AdminInvoiceManager = () => {
                           </div>
                         </div>
 
+                        {/* Related Documents */}
+                        <div className="pt-2 border-t border-border">
+                          <DocCrossLinks quoteId={inv.quote_id} orderId={inv.order_id} billingId={inv.billing_note_id} invoiceId={inv.id} exclude={["invoice"]} />
+                        </div>
+
                         <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
                           {inv.status === "draft" && (
                             <button onClick={() => updateInvoiceStatus(inv.id, "sent")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-500/10 text-blue-500 text-xs font-medium hover:bg-blue-500/20">
