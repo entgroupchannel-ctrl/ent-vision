@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {
   Truck, Package, CheckCircle, Clock, Loader2, RefreshCw, Search,
   Eye, MapPin, Hash, AlertCircle, XCircle, Send, Calendar,
-  Building2, Phone, Printer, ArrowRight,
+  Building2, Phone, Printer, ArrowRight, Plus, FileText,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -38,6 +38,31 @@ interface DeliveryItem {
   sort_order: number;
 }
 
+interface InvoiceForDelivery {
+  id: string;
+  invoice_number: string;
+  customer_name: string;
+  customer_company: string | null;
+  customer_address: string | null;
+  customer_phone: string | null;
+  quote_id: string | null;
+  order_id: string | null;
+  billing_note_id: string | null;
+  grand_total: number;
+  status: string;
+}
+
+interface ReceiptForDelivery {
+  id: string;
+  receipt_number: string;
+  customer_name: string;
+  customer_company: string | null;
+  invoice_id: string | null;
+  quote_id: string | null;
+  order_id: string | null;
+  amount_paid: number;
+}
+
 /* ─── Status Config ─── */
 const STATUS_CFG: Record<string, { label: string; color: string; icon: typeof Clock }> = {
   preparing: { label: "กำลังจัดเตรียม", color: "bg-yellow-500/10 text-yellow-600 border-yellow-500/20", icon: Package },
@@ -51,6 +76,7 @@ const COURIERS = [
 ];
 
 const fmtDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" });
+const fmt = (n: number) => n.toLocaleString("th-TH", { minimumFractionDigits: 2 });
 
 /* ═══════════════════════════════════════════════════ */
 const AdminDeliveryManager = () => {
@@ -69,6 +95,12 @@ const AdminDeliveryManager = () => {
   const [shipTracking, setShipTracking] = useState("");
   const [shipTarget, setShipTarget] = useState<DeliveryNote | null>(null);
 
+  // Create from Invoice/Receipt dialog
+  const [createSource, setCreateSource] = useState<"invoice" | "receipt" | null>(null);
+  const [invoicesForCreate, setInvoicesForCreate] = useState<InvoiceForDelivery[]>([]);
+  const [receiptsForCreate, setReceiptsForCreate] = useState<ReceiptForDelivery[]>([]);
+  const [sourceLoading, setSourceLoading] = useState(false);
+
   /* ─── Fetch ─── */
   const fetchDeliveries = async () => {
     setLoading(true);
@@ -84,34 +116,134 @@ const AdminDeliveryManager = () => {
     setDeliveryItems((data as any) || []);
   };
 
+  /* ─── Fetch sources for create ─── */
+  const fetchInvoicesForCreate = async () => {
+    setSourceLoading(true);
+    const existingInvIds = deliveries.map(d => d.invoice_id).filter(Boolean);
+    const { data } = await supabase.from("invoices")
+      .select("id, invoice_number, customer_name, customer_company, customer_address, customer_phone, quote_id, order_id, billing_note_id, grand_total, status")
+      .in("status", ["draft", "sent", "paid"])
+      .order("created_at", { ascending: false });
+    setInvoicesForCreate(((data || []) as any[]).filter(i => !existingInvIds.includes(i.id)));
+    setSourceLoading(false);
+  };
+
+  const fetchReceiptsForCreate = async () => {
+    setSourceLoading(true);
+    const { data } = await supabase.from("receipts")
+      .select("id, receipt_number, customer_name, customer_company, invoice_id, quote_id, order_id, amount_paid")
+      .eq("status", "issued")
+      .order("created_at", { ascending: false });
+    setReceiptsForCreate((data || []) as any[]);
+    setSourceLoading(false);
+  };
+
+  /* ─── Create from Invoice ─── */
+  const createFromInvoice = async (inv: InvoiceForDelivery) => {
+    try {
+      const { data: invItems } = await supabase.from("invoice_items").select("*").eq("invoice_id", inv.id).order("sort_order");
+
+      const { data: delivery, error } = await (supabase.from as any)("delivery_notes").insert({
+        invoice_id: inv.id,
+        billing_note_id: inv.billing_note_id || null,
+        quote_id: inv.quote_id,
+        order_id: inv.order_id,
+        customer_name: inv.customer_name,
+        customer_company: inv.customer_company,
+        customer_address: inv.customer_address,
+        customer_phone: inv.customer_phone,
+        delivery_address: inv.customer_address,
+        created_by: user?.id,
+      }).select().single();
+
+      if (error) throw error;
+
+      if (delivery && invItems && invItems.length > 0) {
+        const items = (invItems as any[]).map((ii: any) => ({
+          delivery_note_id: (delivery as any).id,
+          model: ii.model,
+          description: ii.description,
+          qty: ii.qty || 1,
+          sort_order: ii.sort_order || 0,
+        }));
+        await (supabase.from as any)("delivery_note_items").insert(items);
+      }
+
+      toast({ title: "สร้างใบส่งสินค้าสำเร็จ", description: `เลขที่ ${(delivery as any).delivery_number}` });
+      setCreateSource(null);
+      fetchDeliveries();
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    }
+  };
+
+  /* ─── Create from Receipt ─── */
+  const createFromReceipt = async (rcp: ReceiptForDelivery) => {
+    try {
+      // Get invoice items if linked
+      let items: any[] = [];
+      let address: string | null = null;
+      let phone: string | null = null;
+
+      if (rcp.invoice_id) {
+        const { data: inv } = await supabase.from("invoices").select("customer_address, customer_phone").eq("id", rcp.invoice_id).single();
+        if (inv) { address = (inv as any).customer_address; phone = (inv as any).customer_phone; }
+        const { data: invItems } = await supabase.from("invoice_items").select("*").eq("invoice_id", rcp.invoice_id).order("sort_order");
+        items = (invItems || []) as any[];
+      }
+
+      const { data: delivery, error } = await (supabase.from as any)("delivery_notes").insert({
+        invoice_id: rcp.invoice_id,
+        quote_id: rcp.quote_id,
+        order_id: rcp.order_id,
+        customer_name: rcp.customer_name,
+        customer_company: rcp.customer_company,
+        customer_address: address,
+        customer_phone: phone,
+        delivery_address: address,
+        created_by: user?.id,
+      }).select().single();
+
+      if (error) throw error;
+
+      if (delivery && items.length > 0) {
+        const dnItems = items.map((ii: any) => ({
+          delivery_note_id: (delivery as any).id,
+          model: ii.model,
+          description: ii.description,
+          qty: ii.qty || 1,
+          sort_order: ii.sort_order || 0,
+        }));
+        await (supabase.from as any)("delivery_note_items").insert(dnItems);
+      }
+
+      toast({ title: "สร้างใบส่งสินค้าสำเร็จ", description: `เลขที่ ${(delivery as any).delivery_number}` });
+      setCreateSource(null);
+      fetchDeliveries();
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    }
+  };
+
   /* ─── Mark Shipped ─── */
   const handleShip = async () => {
     if (!shipTarget || !shipCourier) return;
     const { error } = await (supabase.from as any)("delivery_notes").update({
-      status: "shipped",
-      courier: shipCourier,
-      tracking_number: shipTracking || null,
-      updated_at: new Date().toISOString(),
+      status: "shipped", courier: shipCourier, tracking_number: shipTracking || null, updated_at: new Date().toISOString(),
     }).eq("id", shipTarget.id);
 
     if (error) {
       toast({ title: "เกิดข้อผิดพลาด", description: error.message, variant: "destructive" });
     } else {
       toast({ title: "บันทึกการจัดส่งสำเร็จ", description: `${shipTarget.delivery_number} — ${shipCourier}${shipTracking ? ` (${shipTracking})` : ""}` });
-      setShipDialogOpen(false);
-      setShipCourier("");
-      setShipTracking("");
-      setShipTarget(null);
+      setShipDialogOpen(false); setShipCourier(""); setShipTracking(""); setShipTarget(null);
       fetchDeliveries();
     }
   };
 
   /* ─── Mark Delivered ─── */
   const markDelivered = async (id: string) => {
-    const { error } = await (supabase.from as any)("delivery_notes").update({
-      status: "delivered",
-      updated_at: new Date().toISOString(),
-    }).eq("id", id);
+    const { error } = await (supabase.from as any)("delivery_notes").update({ status: "delivered", updated_at: new Date().toISOString() }).eq("id", id);
     if (!error) { toast({ title: "บันทึกส่งมอบสำเร็จ" }); fetchDeliveries(); }
   };
 
@@ -135,11 +267,21 @@ const AdminDeliveryManager = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-lg font-bold text-foreground">ใบส่งสินค้า (Delivery Notes)</h2>
-          <p className="text-xs text-muted-foreground">ติดตามการจัดส่ง — สร้างจากใบแจ้งหนี้</p>
+          <p className="text-xs text-muted-foreground">สร้างจากใบแจ้งหนี้หรือใบเสร็จรับเงิน</p>
         </div>
-        <button onClick={fetchDeliveries} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
-          <RefreshCw size={12} /> รีเฟรช
-        </button>
+        <div className="flex items-center gap-2">
+          <button onClick={() => { setCreateSource("invoice"); fetchInvoicesForCreate(); }}
+            className="flex items-center gap-1 px-3 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90">
+            <Plus size={14} /> สร้างจากใบแจ้งหนี้
+          </button>
+          <button onClick={() => { setCreateSource("receipt"); fetchReceiptsForCreate(); }}
+            className="flex items-center gap-1 px-3 py-2 rounded-lg bg-secondary text-secondary-foreground text-xs font-bold hover:bg-secondary/80">
+            <Plus size={14} /> สร้างจากใบเสร็จ
+          </button>
+          <button onClick={fetchDeliveries} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+            <RefreshCw size={12} /> รีเฟรช
+          </button>
+        </div>
       </div>
 
       {/* Stats */}
@@ -173,9 +315,7 @@ const AdminDeliveryManager = () => {
 
       {/* List */}
       {loading ? (
-        <div className="text-center py-12 text-muted-foreground text-sm flex items-center justify-center gap-2">
-          <Loader2 size={16} className="animate-spin" /> กำลังโหลด...
-        </div>
+        <div className="text-center py-12 text-muted-foreground text-sm flex items-center justify-center gap-2"><Loader2 size={16} className="animate-spin" /> กำลังโหลด...</div>
       ) : filtered.length === 0 ? (
         <div className="text-center py-12 text-muted-foreground text-sm">ไม่พบใบส่งสินค้า</div>
       ) : (
@@ -200,9 +340,7 @@ const AdminDeliveryManager = () => {
                     <div className="text-right text-xs text-muted-foreground">
                       <div>{fmtDate(d.delivery_date)}</div>
                       {d.tracking_number && (
-                        <div className="font-medium text-foreground mt-0.5">
-                          <Truck size={10} className="inline mr-1" />{d.courier}: {d.tracking_number}
-                        </div>
+                        <div className="font-medium text-foreground mt-0.5"><Truck size={10} className="inline mr-1" />{d.courier}: {d.tracking_number}</div>
                       )}
                     </div>
                   </div>
@@ -210,7 +348,6 @@ const AdminDeliveryManager = () => {
 
                 {isSelected && (
                   <div className="border-t border-border p-4 bg-accent/5 space-y-4">
-                    {/* Delivery Info */}
                     <div className="grid grid-cols-2 gap-4 text-xs">
                       <div className="space-y-1">
                         {d.delivery_address && <div className="flex items-start gap-1"><MapPin size={11} className="mt-0.5 shrink-0" /><span>{d.delivery_address}</span></div>}
@@ -223,7 +360,6 @@ const AdminDeliveryManager = () => {
                       </div>
                     </div>
 
-                    {/* Items */}
                     {deliveryItems.length > 0 && (
                       <table className="w-full text-xs">
                         <thead>
@@ -250,7 +386,6 @@ const AdminDeliveryManager = () => {
                       </table>
                     )}
 
-                    {/* Actions */}
                     <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
                       {d.status === "preparing" && (
                         <button onClick={() => { setShipTarget(d); setShipDialogOpen(true); }}
@@ -273,11 +408,11 @@ const AdminDeliveryManager = () => {
         </div>
       )}
 
-      {/* Ship Dialog */}
+      {/* ═══ Ship Dialog ═══ */}
       {shipDialogOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setShipDialogOpen(false)}>
           <div className="bg-card border border-border rounded-2xl p-6 w-full max-w-md shadow-xl" onClick={e => e.stopPropagation()}>
-            <h3 className="text-lg font-bold mb-4">บันทึกการจัดส่ง — {shipTarget?.delivery_number}</h3>
+            <h3 className="text-lg font-bold mb-4 text-foreground">บันทึกการจัดส่ง — {shipTarget?.delivery_number}</h3>
             <div className="space-y-3">
               <div>
                 <label className="text-xs font-medium text-muted-foreground mb-1 block">บริษัทขนส่ง *</label>
@@ -289,20 +424,90 @@ const AdminDeliveryManager = () => {
               </div>
               <div>
                 <label className="text-xs font-medium text-muted-foreground mb-1 block">Tracking Number</label>
-                <input value={shipTracking} onChange={e => setShipTracking(e.target.value)}
-                  placeholder="เลข tracking (ถ้ามี)"
+                <input value={shipTracking} onChange={e => setShipTracking(e.target.value)} placeholder="เลข tracking (ถ้ามี)"
                   className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm" />
               </div>
               <div className="flex gap-2 pt-2">
                 <button onClick={handleShip} disabled={!shipCourier}
-                  className="flex-1 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 disabled:opacity-40">
-                  ยืนยันจัดส่ง
-                </button>
-                <button onClick={() => setShipDialogOpen(false)}
-                  className="px-4 py-2.5 rounded-lg border border-border text-sm hover:bg-accent">
-                  ยกเลิก
-                </button>
+                  className="flex-1 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 disabled:opacity-40">ยืนยันจัดส่ง</button>
+                <button onClick={() => setShipDialogOpen(false)} className="px-4 py-2.5 rounded-lg border border-border text-sm hover:bg-accent">ยกเลิก</button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ Create from Invoice Dialog ═══ */}
+      {createSource === "invoice" && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setCreateSource(null)}>
+          <div className="bg-card border border-border rounded-2xl p-6 w-full max-w-xl shadow-xl max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            <h3 className="text-lg font-bold mb-1 text-foreground">สร้างใบส่งสินค้าจากใบแจ้งหนี้</h3>
+            <p className="text-xs text-muted-foreground mb-4">เลือกใบแจ้งหนี้เพื่อสร้างใบส่งสินค้า</p>
+            {sourceLoading ? (
+              <div className="text-center py-12 text-muted-foreground text-sm"><Loader2 size={16} className="animate-spin inline mr-2" />กำลังโหลด...</div>
+            ) : invoicesForCreate.length === 0 ? (
+              <div className="text-center py-12 text-muted-foreground text-sm"><AlertCircle size={20} className="mx-auto mb-2 opacity-40" />ไม่มีใบแจ้งหนี้ที่พร้อมสร้าง</div>
+            ) : (
+              <div className="space-y-2">
+                {invoicesForCreate.map(inv => (
+                  <div key={inv.id} className="border border-border rounded-lg p-3 hover:border-primary/40 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-sm font-bold text-foreground">{inv.invoice_number}</div>
+                        <div className="text-xs text-muted-foreground">{inv.customer_name}{inv.customer_company ? ` · ${inv.customer_company}` : ""}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-bold text-foreground">฿{fmt(inv.grand_total)}</div>
+                        <button onClick={() => createFromInvoice(inv)}
+                          className="mt-1 px-3 py-1 rounded-lg bg-primary text-primary-foreground text-[10px] font-bold hover:bg-primary/90">
+                          <Plus size={10} className="inline mr-0.5" /> สร้าง
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="mt-4 flex justify-end">
+              <button onClick={() => setCreateSource(null)} className="px-4 py-2 rounded-lg border border-border text-sm hover:bg-accent">ปิด</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ Create from Receipt Dialog ═══ */}
+      {createSource === "receipt" && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setCreateSource(null)}>
+          <div className="bg-card border border-border rounded-2xl p-6 w-full max-w-xl shadow-xl max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            <h3 className="text-lg font-bold mb-1 text-foreground">สร้างใบส่งสินค้าจากใบเสร็จ</h3>
+            <p className="text-xs text-muted-foreground mb-4">เลือกใบเสร็จรับเงินเพื่อสร้างใบส่งสินค้า</p>
+            {sourceLoading ? (
+              <div className="text-center py-12 text-muted-foreground text-sm"><Loader2 size={16} className="animate-spin inline mr-2" />กำลังโหลด...</div>
+            ) : receiptsForCreate.length === 0 ? (
+              <div className="text-center py-12 text-muted-foreground text-sm"><AlertCircle size={20} className="mx-auto mb-2 opacity-40" />ไม่มีใบเสร็จที่พร้อมสร้าง</div>
+            ) : (
+              <div className="space-y-2">
+                {receiptsForCreate.map(rcp => (
+                  <div key={rcp.id} className="border border-border rounded-lg p-3 hover:border-primary/40 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-sm font-bold text-foreground">{rcp.receipt_number}</div>
+                        <div className="text-xs text-muted-foreground">{rcp.customer_name}{rcp.customer_company ? ` · ${rcp.customer_company}` : ""}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-bold text-foreground">฿{fmt(rcp.amount_paid)}</div>
+                        <button onClick={() => createFromReceipt(rcp)}
+                          className="mt-1 px-3 py-1 rounded-lg bg-primary text-primary-foreground text-[10px] font-bold hover:bg-primary/90">
+                          <Plus size={10} className="inline mr-0.5" /> สร้าง
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="mt-4 flex justify-end">
+              <button onClick={() => setCreateSource(null)} className="px-4 py-2 rounded-lg border border-border text-sm hover:bg-accent">ปิด</button>
             </div>
           </div>
         </div>
