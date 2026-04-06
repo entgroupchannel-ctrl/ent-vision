@@ -12,6 +12,7 @@ import QuoteTimeline from "@/components/QuoteTimeline";
 import { printQuote } from "@/utils/printQuote";
 
 const statusConfig: Record<string, { label: string; color: string }> = {
+  draft: { label: "แบบร่าง", color: "bg-gray-500/10 text-gray-500 border-gray-500/20" },
   new: { label: "รอดำเนินการ", color: "bg-blue-500/10 text-blue-500 border-blue-500/20" },
   contacted: { label: "ติดต่อแล้ว", color: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20" },
   quoted: { label: "ส่งราคาแล้ว", color: "bg-purple-500/10 text-purple-500 border-purple-500/20" },

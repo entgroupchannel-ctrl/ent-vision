@@ -4,6 +4,7 @@ import {
   Search, Plus, Minus, Trash2, FileText, Send, Loader2,
   ShoppingCart, Package, ChevronDown, HelpCircle, X,
   ChevronRight, ArrowLeft, CheckCircle, Lightbulb, MousePointer,
+  Save, FilePlus, FolderOpen,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -87,6 +88,172 @@ const UserQuoteCreate = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [generalNotes, setGeneralNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  // Draft management
+  const [savedDrafts, setSavedDrafts] = useState<{ id: string; quote_number: string; products: any[]; created_at: string; grand_total: number }[]>([]);
+  const [currentDraftId, setCurrentDraftId] = useState<string | null>(null);
+  const [savingDraft, setSavingDraft] = useState(false);
+  const [showDrafts, setShowDrafts] = useState(false);
+
+  // Fetch saved drafts
+  const fetchDrafts = async () => {
+    if (!user) return;
+    try {
+      const { data } = await (supabase.from as any)("quote_requests")
+        .select("id, quote_number, products, created_at, grand_total, details")
+        .eq("user_id", user.id)
+        .eq("status", "draft")
+        .order("created_at", { ascending: false });
+      if (data) setSavedDrafts(data);
+    } catch {}
+  };
+
+  useEffect(() => { fetchDrafts(); }, [user]);
+
+  // Save as draft (without sending)
+  const handleSaveDraft = async () => {
+    if (!user || cart.length === 0) return;
+    setSavingDraft(true);
+    try {
+      let profileData: any = {};
+      try {
+        const { data } = await (supabase.from as any)("profiles").select("*").eq("id", user.id).single();
+        if (data) profileData = data;
+      } catch {}
+
+      const products = cart.map((item) => ({
+        category: item.customCategory || item.product?.category || "",
+        model: item.customModel || item.product?.model || "",
+        qty: item.qty,
+      }));
+
+      if (currentDraftId) {
+        // Update existing draft
+        await (supabase.from as any)("quote_requests").update({
+          products,
+          details: generalNotes || null,
+          subtotal: subtotal,
+          grand_total: subtotal,
+        }).eq("id", currentDraftId);
+
+        // Update line items
+        await (supabase.from as any)("quote_line_items").delete().eq("quote_id", currentDraftId);
+        const lineItems = cart.map((item, i) => ({
+          quote_id: currentDraftId,
+          product_id: item.product?.id || null,
+          model: item.customModel || item.product?.model || "",
+          category: item.customCategory || item.product?.category || "",
+          qty: item.qty,
+          unit_price: item.unitPrice || 0,
+          discount_percent: 0,
+          custom_specs: item.product?.specs || {},
+          admin_notes: item.notes || null,
+          sort_order: i,
+        }));
+        await (supabase.from as any)("quote_line_items").insert(lineItems).catch(() => {});
+
+        toast({ title: "บันทึก Draft สำเร็จ", description: "ใบเสนอราคาถูกอัพเดทแล้ว" });
+      } else {
+        // Create new draft
+        const { data: quoteData, error } = await (supabase.from as any)("quote_requests").insert({
+          user_id: user.id,
+          name: profileData.full_name || user.user_metadata?.full_name || "",
+          email: user.email || "",
+          phone: profileData.phone || null,
+          company: profileData.company_name || null,
+          products,
+          details: generalNotes || null,
+          subtotal: subtotal,
+          grand_total: subtotal,
+          status: "draft",
+        }).select("id").single();
+
+        if (error) throw error;
+
+        if (quoteData?.id) {
+          setCurrentDraftId(quoteData.id);
+          const lineItems = cart.map((item, i) => ({
+            quote_id: quoteData.id,
+            product_id: item.product?.id || null,
+            model: item.customModel || item.product?.model || "",
+            category: item.customCategory || item.product?.category || "",
+            qty: item.qty,
+            unit_price: item.unitPrice || 0,
+            discount_percent: 0,
+            custom_specs: item.product?.specs || {},
+            admin_notes: item.notes || null,
+            sort_order: i,
+          }));
+          await (supabase.from as any)("quote_line_items").insert(lineItems).catch(() => {});
+        }
+        toast({ title: "บันทึก Draft สำเร็จ", description: "สามารถกลับมาแก้ไขได้ภายหลัง" });
+      }
+      fetchDrafts();
+    } catch (err: any) {
+      toast({ title: "บันทึกไม่ได้", description: err.message, variant: "destructive" });
+    }
+    setSavingDraft(false);
+  };
+
+  // Load a draft
+  const handleLoadDraft = async (draft: typeof savedDrafts[0]) => {
+    try {
+      // Load line items
+      const { data: lineData } = await (supabase.from as any)("quote_line_items")
+        .select("*").eq("quote_id", draft.id).order("sort_order");
+
+      if (lineData && lineData.length > 0) {
+        const loaded: CartItem[] = lineData.map((li: any) => ({
+          product: li.product_id ? catalog.find((c) => c.id === li.product_id) || null : null,
+          customModel: li.model || "",
+          customCategory: li.category || "",
+          qty: li.qty || 1,
+          unitPrice: li.unit_price || 0,
+          notes: li.admin_notes || "",
+        }));
+        setCart(loaded);
+      } else {
+        // Fallback to products array
+        const loaded: CartItem[] = (draft.products || []).map((p: any) => {
+          const cat = catalog.find((c) => c.model === p.model);
+          return {
+            product: cat || null,
+            customModel: p.model || "",
+            customCategory: p.category || "",
+            qty: p.qty || 1,
+            unitPrice: cat?.base_price || 0,
+            notes: "",
+          };
+        });
+        setCart(loaded);
+      }
+
+      setCurrentDraftId(draft.id);
+      setGeneralNotes((draft as any).details || "");
+      setShowDrafts(false);
+      toast({ title: `โหลด Draft สำเร็จ` });
+    } catch (err: any) {
+      toast({ title: "โหลดไม่ได้", description: err.message, variant: "destructive" });
+    }
+  };
+
+  // Clear cart and start new
+  const handleNewQuote = () => {
+    setCart([]);
+    setGeneralNotes("");
+    setCurrentDraftId(null);
+    setShowDrafts(false);
+  };
+
+  // Delete draft
+  const handleDeleteDraft = async (id: string) => {
+    if (!confirm("ลบ Draft นี้?")) return;
+    await (supabase.from as any)("quote_line_items").delete().eq("quote_id", id);
+    await (supabase.from as any)("quote_requests").delete().eq("id", id);
+    if (currentDraftId === id) { setCurrentDraftId(null); setCart([]); setGeneralNotes(""); }
+    fetchDrafts();
+    toast({ title: "ลบ Draft แล้ว" });
+  };
 
   // Pre-fill cart from global QuoteCart (items added from product pages)
   useEffect(() => {
@@ -198,7 +365,7 @@ const UserQuoteCreate = () => {
   const formatPrice = (n: number) =>
     new Intl.NumberFormat("th-TH", { minimumFractionDigits: 0 }).format(Math.round(n));
 
-  // Submit
+  // Submit (send to admin)
   const handleSubmit = async () => {
     if (!user || cart.length === 0) return;
     const hasModel = cart.every((item) => item.customModel.trim());
@@ -221,24 +388,48 @@ const UserQuoteCreate = () => {
         qty: item.qty,
       }));
 
-      const { data: quoteData, error } = await (supabase.from as any)("quote_requests").insert({
-        user_id: user.id,
-        name: profileData.full_name || user.user_metadata?.full_name || "",
-        email: user.email || "",
-        phone: profileData.phone || null,
-        company: profileData.company_name || null,
-        products,
-        details: generalNotes || null,
-        subtotal: subtotal,
-        grand_total: subtotal,
-      }).select("id").single();
+      let quoteId = currentDraftId;
 
-      if (error) throw error;
+      if (currentDraftId) {
+        // Update existing draft → change status to "new" (sent)
+        const { error } = await (supabase.from as any)("quote_requests").update({
+          products,
+          details: generalNotes || null,
+          subtotal: subtotal,
+          grand_total: subtotal,
+          status: "new",
+          name: profileData.full_name || user.user_metadata?.full_name || "",
+          email: user.email || "",
+          phone: profileData.phone || null,
+          company: profileData.company_name || null,
+        }).eq("id", currentDraftId);
+        if (error) throw error;
+
+        // Replace line items
+        await (supabase.from as any)("quote_line_items").delete().eq("quote_id", currentDraftId);
+      } else {
+        // Create new and send immediately
+        const { data: quoteData, error } = await (supabase.from as any)("quote_requests").insert({
+          user_id: user.id,
+          name: profileData.full_name || user.user_metadata?.full_name || "",
+          email: user.email || "",
+          phone: profileData.phone || null,
+          company: profileData.company_name || null,
+          products,
+          details: generalNotes || null,
+          subtotal: subtotal,
+          grand_total: subtotal,
+          status: "new",
+        }).select("id").single();
+
+        if (error) throw error;
+        quoteId = quoteData?.id;
+      }
 
       // Insert line items
-      if (quoteData?.id) {
+      if (quoteId) {
         const lineItems = cart.map((item, i) => ({
-          quote_id: quoteData.id,
+          quote_id: quoteId,
           product_id: item.product?.id || null,
           model: item.customModel || item.product?.model || "",
           category: item.customCategory || item.product?.category || "",
@@ -256,7 +447,7 @@ const UserQuoteCreate = () => {
       cart.forEach((item) => {
         trackEvent({
           eventType: "quote_request",
-          productId: item.customModel,
+          productSlug: item.customModel,
           productCategory: item.customCategory,
           metadata: { qty: item.qty, price: item.unitPrice },
         });
@@ -623,20 +814,75 @@ const UserQuoteCreate = () => {
               <p className="text-xs text-muted-foreground">ไม่จำเป็นต้องกรอกราคา — เว้นว่างได้ ทีมขายจะตรวจสอบและกำหนดราคาที่เหมาะสมให้</p>
             </div>
 
+            {/* Draft info */}
+            {currentDraftId && (
+              <div className="mt-3 p-2.5 rounded-lg bg-yellow-500/5 border border-yellow-500/20 text-xs text-yellow-700 flex items-center gap-2">
+                <FileText size={13} />
+                <span>กำลังแก้ไข Draft</span>
+              </div>
+            )}
+
+            {/* Save Draft Button */}
+            <button
+              onClick={handleSaveDraft}
+              disabled={cart.length === 0 || savingDraft}
+              className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border text-sm font-medium text-foreground hover:bg-secondary transition-colors disabled:opacity-50"
+            >
+              {savingDraft ? (
+                <><Loader2 size={14} className="animate-spin" /> กำลังบันทึก...</>
+              ) : (
+                <><Save size={14} /> บันทึก Draft</>
+              )}
+            </button>
+
+            {/* Send Button */}
             <button
               onClick={handleSubmit}
               disabled={cart.length === 0 || submitting}
-              className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-50"
+              className="w-full mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-50"
             >
               {submitting ? (
                 <><Loader2 size={14} className="animate-spin" /> กำลังส่ง...</>
               ) : (
-                <><Send size={14} /> ส่งขอใบเสนอราคา</>
+                <><Send size={14} /> ส่งให้ Admin ตรวจสอบ</>
               )}
             </button>
             <p className="text-xs text-muted-foreground/50 text-center mt-2">
               ทีมขายจะตรวจสอบและอนุมัติภายใน 2 ชม.
             </p>
+
+            {/* Drafts section */}
+            {savedDrafts.length > 0 && (
+              <div className="mt-4 border-t border-border pt-3">
+                <button onClick={() => setShowDrafts(!showDrafts)}
+                  className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors w-full">
+                  <FolderOpen size={13} /> Draft ที่บันทึก ({savedDrafts.length})
+                  <ChevronDown size={12} className={`ml-auto transition-transform ${showDrafts ? "rotate-180" : ""}`} />
+                </button>
+                {showDrafts && (
+                  <div className="mt-2 space-y-1.5">
+                    {savedDrafts.map((d) => (
+                      <div key={d.id} className="flex items-center gap-2 p-2 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors">
+                        <button onClick={() => handleLoadDraft(d)} className="flex-1 text-left text-xs">
+                          <span className="font-medium text-foreground">{d.quote_number || "Draft"}</span>
+                          <span className="text-muted-foreground ml-1.5">{(d.products || []).length} รายการ</span>
+                          {d.grand_total > 0 && <span className="text-primary ml-1.5">฿{formatPrice(d.grand_total)}</span>}
+                        </button>
+                        <button onClick={() => handleDeleteDraft(d.id)} className="p-1 rounded hover:bg-red-500/10 text-muted-foreground/40 hover:text-red-500">
+                          <Trash2 size={11} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* New Quote Button */}
+            <button onClick={handleNewQuote}
+              className="w-full mt-3 flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-dashed border-border text-xs text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors">
+              <FilePlus size={13} /> สร้างใบเสนอราคาใหม่
+            </button>
           </div>
         </div>
       </div>
