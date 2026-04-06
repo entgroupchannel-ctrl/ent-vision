@@ -7,6 +7,7 @@ import {
   CalendarClock, Hash, Wallet, Code2, Cloud,
   PanelLeftClose, PanelLeft, Package, FolderOpen, BarChart3, Headphones,
 } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
@@ -179,6 +180,7 @@ const AdminDashboard = () => {
                 </span>
               )}
               <span className="text-sm text-muted-foreground">{user?.email}</span>
+              <ThemeToggle />
               <button
                 onClick={fetchData}
                 className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
