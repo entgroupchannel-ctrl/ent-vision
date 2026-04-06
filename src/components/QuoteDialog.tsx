@@ -196,7 +196,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
       products.filter((p) => p.category || p.model).forEach((p) => {
         trackEvent({
           eventType: "quote_request",
-          productSlug: p.model || undefined,
+          productId: p.model || undefined,
           productCategory: p.category || undefined,
           productName: p.model || undefined,
           metadata: { qty: p.qty, email: emailValue },
@@ -336,8 +336,8 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
               </div>
               <div className="space-y-2">
                 {products.map((product, index) => (
-                  <div key={index} className="flex gap-2 items-center group">
-                    <span className="w-4 text-xs text-muted-foreground/60 text-right shrink-0">{index + 1}.</span>
+                  <div key={index} className="mb-2">
+                  <div className="flex gap-2 items-center group">
                     <div className="flex-1 grid grid-cols-[1fr_1fr_80px] gap-2">
                       <select
                         value={product.category}
