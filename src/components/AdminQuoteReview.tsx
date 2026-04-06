@@ -24,6 +24,8 @@ interface QuoteRequest {
   assigned_to: string | null;
   po_file_url: string | null; po_file_name: string | null; po_number: string | null;
   po_uploaded_at: string | null; po_status: string | null; po_notes: string | null;
+  vat_amount: number | null; withholding_tax: number | null;
+  include_vat: boolean | null; include_withholding_tax: boolean | null;
 }
 
 interface SalesTeamMember {
