@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Lock, LogIn, Eye, EyeOff } from "lucide-react";
-import logo from "@/assets/logo-entgroup.avif";
+import { Mail, Lock, LogIn, Eye, EyeOff, Loader2 } from "lucide-react";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -26,8 +25,10 @@ const AdminLogin = () => {
           if (!mounted) return;
           if (isAdmin) {
             navigate("/admin", { replace: true });
+            return;
           } else {
             navigate("/", { replace: true });
+            return;
           }
         }
       } catch (err) {
@@ -41,7 +42,6 @@ const AdminLogin = () => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (!mounted) return;
-      // Only react to explicit sign-in events, not token refreshes
       if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session) {
         const isAdmin = await checkAdmin(session.user.id);
         if (!mounted) return;
@@ -59,15 +59,15 @@ const AdminLogin = () => {
     };
   }, [navigate]);
 
-  const checkAdmin = async (userId: string) => {
+  const checkAdmin = async (userId: string): Promise<boolean> => {
     try {
-      const { data } = await Promise.race([
+      const result = await Promise.race([
         supabase.rpc("is_admin", { _user_id: userId }),
         new Promise<{ data: null }>((resolve) =>
           setTimeout(() => resolve({ data: null }), 3000)
         ),
       ]);
-      return data === true;
+      return (result as any)?.data === true;
     } catch {
       return false;
     }
@@ -76,26 +76,34 @@ const AdminLogin = () => {
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      const friendlyMsg = error.message === "Email not confirmed"
-        ? "กรุณายืนยันอีเมลของคุณก่อนเข้าสู่ระบบ โปรดตรวจสอบกล่องจดหมาย (หรือ Spam) ครับ 📧"
-        : error.message === "Invalid login credentials"
-        ? "อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้งครับ"
-        : error.message;
-      toast({ title: "ไม่สามารถเข้าสู่ระบบได้", description: friendlyMsg });
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        const friendlyMsg = error.message === "Email not confirmed"
+          ? "กรุณายืนยันอีเมลของคุณก่อนเข้าสู่ระบบ โปรดตรวจสอบกล่องจดหมาย (หรือ Spam) ครับ 📧"
+          : error.message === "Invalid login credentials"
+          ? "อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้งครับ"
+          : error.message;
+        toast({ title: "ไม่สามารถเข้าสู่ระบบได้", description: friendlyMsg });
+      }
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
     }
     setLoading(false);
   };
 
   const handleGoogleLogin = async () => {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: `${window.location.origin}/admin-login` },
-    });
-    if (error) {
-      toast({ title: "ไม่สามารถเข้าสู่ระบบได้", description: error.message });
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: `${window.location.origin}/admin-login` },
+      });
+      if (error) {
+        toast({ title: "ไม่สามารถเข้าสู่ระบบได้", description: error.message });
+      }
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
     }
     setLoading(false);
   };
@@ -103,7 +111,9 @@ const AdminLogin = () => {
   if (checking) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-muted-foreground text-sm">กำลังตรวจสอบ...</div>
+        <div className="flex items-center gap-2 text-muted-foreground text-sm">
+          <Loader2 size={16} className="animate-spin" /> กำลังตรวจสอบ...
+        </div>
       </div>
     );
   }
@@ -115,7 +125,8 @@ const AdminLogin = () => {
       <div className="w-full max-w-sm relative z-10">
         <div className="text-center mb-8">
           <a href="/" className="inline-block mb-4">
-            <img src={logo} alt="ENT GROUP" className="h-10 mx-auto" />
+            <img src="/logo-entgroup.avif" alt="ENT GROUP" className="h-10 mx-auto" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+            <h2 className="text-xl font-bold text-primary mt-1">ENT GROUP</h2>
           </a>
           <h1 className="text-2xl font-display font-bold text-foreground mb-1">เข้าสู่ระบบ</h1>
           <p className="text-sm text-muted-foreground">เข้าสู่ระบบสำหรับสมาชิกและผู้ดูแลระบบ</p>
@@ -153,7 +164,8 @@ const AdminLogin = () => {
               disabled={loading}
               className="w-full py-2.5 text-sm font-medium rounded-xl bg-primary text-primary-foreground hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
             >
-              <LogIn size={14} /> {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
+              {loading ? <Loader2 size={14} className="animate-spin" /> : <LogIn size={14} />}
+              {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
             </button>
             <div className="text-right">
               <a href="/forgot-password" className="text-xs text-primary hover:underline font-medium">
