@@ -3,6 +3,7 @@ import {
   FileText, CheckCircle, Clock, Loader2, RefreshCw, Eye, Plus, Trash2,
   Search, User, Building2, Phone, Mail, Upload, Info, X, ExternalLink,
   FileUp, Paperclip, Printer, Share2, ChevronDown, CalendarDays, Link2,
+  UserCircle2, Users, ArrowRightLeft,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -18,6 +19,11 @@ interface QuoteRequest {
   valid_until: string | null; payment_terms: string | null; delivery_terms: string | null;
   approved_by: string | null; approved_at: string | null; pdf_url: string | null;
   customer_response: string | null; notes: string | null;
+  assigned_to: string | null;
+}
+
+interface SalesTeamMember {
+  user_id: string; email: string; full_name: string; role: string;
 }
 
 interface LineItem {
@@ -195,6 +201,9 @@ const AdminQuoteReview = () => {
   const [pdfUp, setPdfUp] = useState(false);
   const [showDocPick, setShowDocPick] = useState(false);
   const [docLib, setDocLib] = useState<DocLibraryItem[]>([]);
+  const [salesTeam, setSalesTeam] = useState<SalesTeamMember[]>([]);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+  const [assignFilter, setAssignFilter] = useState<string>("all");
 
   const [edit, setEdit] = useState({
     discount_amount: 0, valid_until: "", payment_terms: "มัดจำ 70% ส่วนที่เหลือจ่ายก่อนส่งสินค้า",
@@ -232,7 +241,22 @@ const AdminQuoteReview = () => {
     if (data) setDocLib(data);
   };
 
-  useEffect(() => { fetchQuotes(); fetchCatalog(); fetchDocLib(); }, []);
+  const fetchSalesTeam = async () => {
+    try {
+      const { data } = await supabase.rpc("get_sales_team");
+      if (data) setSalesTeam(data as SalesTeamMember[]);
+    } catch {}
+  };
+
+  const checkSuperAdmin = async () => {
+    if (!user) return;
+    try {
+      const { data } = await supabase.rpc("has_role", { _user_id: user.id, _role: "super_admin" });
+      setIsSuperAdmin(!!data);
+    } catch {}
+  };
+
+  useEffect(() => { fetchQuotes(); fetchCatalog(); fetchDocLib(); fetchSalesTeam(); checkSuperAdmin(); }, [user]);
 
   /* ─── Select Quote ─── */
   const selectQuote = async (q: QuoteRequest) => {
@@ -390,9 +414,40 @@ const AdminQuoteReview = () => {
   const fd = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
   const addDays = (d: number) => { const dt = new Date(); dt.setDate(dt.getDate() + d); return dt.toISOString().split("T")[0]; };
 
+  const getAdminName = (uid: string | null): string => {
+    if (!uid) return "ยังไม่มอบหมาย";
+    const found = salesTeam.find((s) => s.user_id === uid);
+    return found ? found.full_name : uid.slice(0, 8);
+  };
+
+  const getAdminShortName = (uid: string | null): string => {
+    if (!uid) return "—";
+    const found = salesTeam.find((s) => s.user_id === uid);
+    if (!found) return "?";
+    const name = found.full_name;
+    return name.length > 10 ? name.slice(0, 10) + "…" : name;
+  };
+
+  const handleReassign = async (quoteId: string, newAdminId: string) => {
+    try {
+      const { error } = await supabase.rpc("reassign_quote", { _quote_id: quoteId, _new_admin_id: newAdminId });
+      if (error) throw error;
+      toast({ title: "มอบหมายใหม่สำเร็จ", description: `ส่งให้ ${getAdminName(newAdminId)}` });
+      fetchQuotes();
+      if (selected) setSelected({ ...selected, assigned_to: newAdminId });
+    } catch (err: any) {
+      toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
+    }
+  };
+
   const filtered = quotes.filter((q) => {
+    if (q.status === "draft") return false;
     if (statusFilter !== "all" && q.status !== statusFilter) return false;
     if (searchText) { const s = searchText.toLowerCase(); if (![q.name, q.email, q.quote_number || "", q.company || ""].some((f) => f.toLowerCase().includes(s))) return false; }
+    // Assignment filter
+    if (assignFilter === "mine" && q.assigned_to !== user?.id) return false;
+    if (assignFilter === "unassigned" && q.assigned_to !== null) return false;
+    if (assignFilter !== "all" && assignFilter !== "mine" && assignFilter !== "unassigned" && q.assigned_to !== assignFilter) return false;
     return true;
   });
 
@@ -416,6 +471,18 @@ const AdminQuoteReview = () => {
           ))}
         </div>
         <div className="flex items-center gap-2">
+          {/* Sales person filter */}
+          <div className="flex items-center gap-1.5">
+            <Users size={13} className="text-muted-foreground" />
+            <select value={assignFilter} onChange={(e) => setAssignFilter(e.target.value)} className={`${inp} text-xs py-1.5 w-36`}>
+              <option value="all">ทุกคน ({quotes.filter((q) => q.status !== "draft").length})</option>
+              <option value="mine">ของฉัน ({quotes.filter((q) => q.assigned_to === user?.id).length})</option>
+              <option value="unassigned">ยังไม่มอบหมาย ({quotes.filter((q) => !q.assigned_to && q.status !== "draft").length})</option>
+              {isSuperAdmin && salesTeam.map((s) => (
+                <option key={s.user_id} value={s.user_id}>{s.full_name} ({quotes.filter((q) => q.assigned_to === s.user_id).length})</option>
+              ))}
+            </select>
+          </div>
           <div className="relative">
             <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input type="text" placeholder="ค้นหา..." value={searchText} onChange={(e) => setSearchText(e.target.value)} className={`${inp} pl-8 py-1.5 text-xs w-40`} />
@@ -442,6 +509,18 @@ const AdminQuoteReview = () => {
                   <span className="text-[11px] text-muted-foreground">{fd(q.created_at)}</span>
                   {q.grand_total > 0 && <span className="text-xs font-bold text-primary">฿{fp(q.grand_total)}</span>}
                 </div>
+                {q.assigned_to && (
+                  <div className="flex items-center gap-1 mt-1">
+                    <UserCircle2 size={11} className="text-muted-foreground" />
+                    <span className="text-[10px] text-muted-foreground">{getAdminShortName(q.assigned_to)}</span>
+                  </div>
+                )}
+                {!q.assigned_to && q.status !== "draft" && (
+                  <div className="flex items-center gap-1 mt-1">
+                    <UserCircle2 size={11} className="text-orange-400" />
+                    <span className="text-[10px] text-orange-400">ยังไม่มอบหมาย</span>
+                  </div>
+                )}
               </button>
             );
           })}
@@ -471,6 +550,35 @@ const AdminQuoteReview = () => {
                   {selected.phone && <span className="flex items-center gap-2 text-foreground"><Phone size={13} className="text-primary" /> {selected.phone}</span>}
                 </div>
                 {selected.details && <p className="text-xs text-muted-foreground p-2 rounded bg-background border border-border">{selected.details}</p>}
+              </div>
+
+              {/* ═══ Assigned Sales Person ═══ */}
+              <div className="p-3 rounded-xl bg-indigo-500/5 border border-indigo-500/15 flex items-center gap-3">
+                <UserCircle2 size={18} className="text-indigo-500 shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] font-medium text-indigo-400 uppercase tracking-wider">Sale ผู้ดูแล</p>
+                  <p className="text-sm font-bold text-foreground">
+                    {selected.assigned_to ? getAdminName(selected.assigned_to) : <span className="text-orange-400">ยังไม่มอบหมาย</span>}
+                  </p>
+                </div>
+                {/* Super Admin can reassign */}
+                {isSuperAdmin && (
+                  <div className="flex items-center gap-1.5">
+                    <ArrowRightLeft size={12} className="text-muted-foreground" />
+                    <select
+                      value={selected.assigned_to || ""}
+                      onChange={(e) => e.target.value && handleReassign(selected.id, e.target.value)}
+                      className={`${inp} text-[11px] py-1 w-36`}
+                    >
+                      <option value="">มอบหมายให้...</option>
+                      {salesTeam.map((s) => (
+                        <option key={s.user_id} value={s.user_id}>
+                          {s.full_name} {s.role === "super_admin" ? "(SA)" : ""}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
               </div>
 
               {/* ═══ Line Items ═══ */}
