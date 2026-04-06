@@ -130,7 +130,7 @@ const MyDocuments = () => {
     fetchRequests();
     fetchMyAccess();
     fetchUserTier();
-    trackEvent({ eventType: "page_view", metadata: { page: "my_documents" } });
+    trackEvent({ eventType: "product_view", metadata: { page: "my_documents" } });
   }, [user]);
 
   /* ─── Check Download Permission ─── */
@@ -166,7 +166,7 @@ const MyDocuments = () => {
         .eq("id", doc.id);
     } catch {}
 
-    track("document_download", { document_id: doc.id, title: doc.title });
+    trackEvent({ eventType: "product_view", metadata: { document_id: doc.id, title: doc.title, action: "download" } });
 
     // Open file
     window.open(doc.file_url, "_blank");
@@ -185,7 +185,7 @@ const MyDocuments = () => {
       });
       if (error) throw error;
 
-      track("document_request", { document_id: doc.id, title: doc.title });
+      trackEvent({ eventType: "contact_submit", metadata: { document_id: doc.id, title: doc.title, action: "request_access" } });
       toast({ title: "ส่งคำขอสำเร็จ", description: "Admin จะตรวจสอบและอนุมัติให้เร็วที่สุด" });
       setRequestingId(null);
       setRequestNotes("");
