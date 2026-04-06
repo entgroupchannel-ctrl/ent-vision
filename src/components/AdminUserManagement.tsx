@@ -271,60 +271,60 @@ const AdminUserManagement = () => {
 
       {/* ═══ Add User Form ═══ */}
       {showAddForm && (
-        <div className="card-surface rounded-xl p-5 space-y-4 animate-fade-in">
-          <h4 className="text-sm font-bold text-foreground flex items-center gap-2">
-            <UserPlus size={16} className="text-primary" /> เพิ่ม Admin ใหม่
+        <div className="card-surface rounded-xl p-6 space-y-5 animate-fade-in">
+          <h4 className="text-lg font-extrabold text-foreground flex items-center gap-2.5">
+            <UserPlus size={20} className="text-primary" /> เพิ่ม Admin ใหม่
           </h4>
 
           {/* Step 1: Search by email */}
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1.5">ค้นหาผู้ใช้ด้วยอีเมล</label>
-            <div className="flex gap-2">
+            <label className="block text-base font-bold text-foreground mb-2">ค้นหาผู้ใช้ด้วยอีเมล</label>
+            <div className="flex gap-3">
               <div className="relative flex-1">
-                <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
                 <input
                   value={addEmail}
                   onChange={(e) => { setAddEmail(e.target.value); setSearchResult(null); }}
                   onKeyDown={(e) => e.key === "Enter" && handleSearchEmail()}
-                  className={`${inputClass} pl-9`}
+                  className={`${inputClass} pl-10`}
                   placeholder="พิมพ์อีเมลแล้วกดค้นหา เช่น staff@entgroup.co.th"
                 />
               </div>
               <button
                 onClick={handleSearchEmail}
                 disabled={searching || !addEmail}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-secondary text-foreground text-sm font-medium hover:bg-secondary/80 transition-colors disabled:opacity-50"
+                className="flex items-center gap-2 px-5 py-3 rounded-lg bg-secondary text-foreground text-base font-bold hover:bg-secondary/80 transition-colors disabled:opacity-50"
               >
-                {searching ? <Loader2 size={14} className="animate-spin" /> : <Search size={14} />}
+                {searching ? <Loader2 size={16} className="animate-spin" /> : <Search size={16} />}
                 ค้นหา
               </button>
             </div>
-            <p className="text-xs text-muted-foreground mt-1.5">ผู้ใช้ต้องสมัครสมาชิกในเว็บไซต์ก่อน จึงจะเพิ่มเป็น Admin ได้</p>
+            <p className="text-sm text-muted-foreground mt-2">ผู้ใช้ต้องสมัครสมาชิกในเว็บไซต์ก่อน จึงจะเพิ่มเป็น Admin ได้</p>
           </div>
 
           {/* Step 2: Found user → set role + preset */}
           {searchResult && (
-            <div className="border border-primary/20 bg-primary/5 rounded-xl p-4 space-y-3 animate-fade-in">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Mail size={18} className="text-primary" />
+            <div className="border-2 border-primary/30 bg-primary/5 rounded-xl p-5 space-y-4 animate-fade-in">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/15 flex items-center justify-center">
+                  <Mail size={22} className="text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-foreground">{searchResult.email}</p>
-                  <p className="text-xs text-muted-foreground">User ID: {searchResult.user_id.slice(0, 12)}...</p>
+                  <p className="text-base font-extrabold text-foreground">{searchResult.email}</p>
+                  <p className="text-sm text-muted-foreground">User ID: {searchResult.user_id.slice(0, 12)}...</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5">บทบาท</label>
+                  <label className="block text-base font-bold text-foreground mb-2">บทบาท</label>
                   <select value={addRole} onChange={(e) => setAddRole(e.target.value as any)} className={inputClass}>
                     <option value="admin">Admin — เข้า Dashboard ได้</option>
                     <option value="moderator">Moderator — สิทธิ์จำกัด</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5">ชุดสิทธิ์เริ่มต้น</label>
+                  <label className="block text-base font-bold text-foreground mb-2">ชุดสิทธิ์เริ่มต้น</label>
                   <select value={addPreset} onChange={(e) => setAddPreset(e.target.value)} className={inputClass}>
                     {Object.entries(PRESETS).filter(([id]) => id !== "super_admin").map(([id, preset]) => (
                       <option key={id} value={id}>{preset.label}</option>
@@ -333,18 +333,18 @@ const AdminUserManagement = () => {
                 </div>
               </div>
 
-              <div className="flex gap-2 pt-1">
+              <div className="flex gap-3 pt-2">
                 <button
                   onClick={handleAddUser}
                   disabled={adding}
-                  className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 disabled:opacity-60 transition-colors"
+                  className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground text-base font-extrabold hover:bg-primary/90 disabled:opacity-60 transition-colors shadow-sm"
                 >
-                  {adding ? <Loader2 size={14} className="animate-spin" /> : <UserPlus size={14} />}
+                  {adding ? <Loader2 size={16} className="animate-spin" /> : <UserPlus size={16} />}
                   เพิ่ม {searchResult.email} เป็น {roleLabels[addRole]}
                 </button>
                 <button
                   onClick={() => { setShowAddForm(false); setSearchResult(null); setAddEmail(""); }}
-                  className="px-4 py-2 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="px-5 py-3 rounded-lg border border-border text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
                   ยกเลิก
                 </button>
