@@ -3,7 +3,7 @@ import {
   FileText, CheckCircle, Clock, Loader2, RefreshCw, Eye, Plus, Trash2,
   Search, User, Building2, Phone, Mail, Upload, Info, X, ExternalLink,
   FileUp, Paperclip, Printer, Share2, ChevronDown, CalendarDays, Link2,
-  UserCircle2, Users, ArrowRightLeft, FileCheck, AlertCircle,
+  UserCircle2, Users, ArrowRightLeft, FileCheck, AlertCircle, Package,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -108,6 +108,9 @@ const AdminQuoteReview = () => {
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [assignFilter, setAssignFilter] = useState<string>("all");
   const [companySettings, setCompanySettings] = useState<any>(null);
+  const [hasOrder, setHasOrder] = useState(false);
+  const [hasBilling, setHasBilling] = useState(false);
+  const [creatingDocs, setCreatingDocs] = useState(false);
 
   const [edit, setEdit] = useState({
     discount_amount: 0, valid_until: "", payment_terms: "มัดจำ 70% ส่วนที่เหลือจ่ายก่อนส่งสินค้า",
@@ -205,6 +208,8 @@ const AdminQuoteReview = () => {
       }
     } catch {}
     setLineLoading(false);
+    // Check if order/billing already created for this quote
+    checkExistingDocs(q.id);
   };
 
   const enrich = (it: LineItem): LineItem => {
@@ -435,14 +440,133 @@ const AdminQuoteReview = () => {
     setSaving(false);
   };
 
-  /* ─── Change Status (inline dropdown) ─── */
+  /* ─── Check if Order/Billing already exist for selected quote ─── */
+  const checkExistingDocs = async (quoteId: string) => {
+    const [orderRes, billingRes] = await Promise.all([
+      (supabase.from as any)("sales_orders").select("id").eq("quote_id", quoteId).limit(1),
+      (supabase.from as any)("billing_notes").select("id").eq("quote_id", quoteId).limit(1),
+    ]);
+    setHasOrder((orderRes.data || []).length > 0);
+    setHasBilling((billingRes.data || []).length > 0);
+  };
+
+  /* ─── Manual Create Order + Billing (fallback when trigger didn't fire) ─── */
+  const manualCreateOrderAndBilling = async (quoteId: string) => {
+    if (!user) return;
+    const quote = quotes.find((q) => q.id === quoteId);
+    if (!quote) return;
+
+    setCreatingDocs(true);
+    try {
+      // Check again to prevent duplicates
+      const { data: existingOrder } = await (supabase.from as any)("sales_orders").select("id").eq("quote_id", quoteId).limit(1);
+      const { data: existingBilling } = await (supabase.from as any)("billing_notes").select("id").eq("quote_id", quoteId).limit(1);
+
+      let orderId: string | null = existingOrder?.[0]?.id || null;
+      let billingId: string | null = existingBilling?.[0]?.id || null;
+
+      // Create Sales Order if not exists
+      if (!orderId) {
+        const { data: order, error: orderErr } = await (supabase.from as any)("sales_orders").insert({
+          quote_id: quoteId,
+          customer_name: quote.name,
+          customer_email: quote.email,
+          customer_phone: quote.phone,
+          customer_company: quote.company,
+          user_id: quote.user_id,
+          assigned_to: quote.assigned_to,
+          po_number: quote.po_number,
+          po_file_url: quote.po_file_url,
+          po_file_name: quote.po_file_name,
+          subtotal: quote.subtotal,
+          discount_amount: quote.discount_amount,
+          vat_amount: quote.vat_amount || 0,
+          withholding_tax: quote.withholding_tax || 0,
+          grand_total: quote.grand_total,
+          net_payable: quote.grand_total - (quote.withholding_tax || 0),
+          payment_terms: quote.payment_terms,
+          delivery_terms: quote.delivery_terms,
+          status: "confirmed",
+        }).select().single();
+        if (orderErr) throw orderErr;
+        orderId = order.id;
+
+        // Copy line items
+        const orderItems = items.map((li, i) => ({
+          order_id: orderId,
+          product_id: li.product_id,
+          model: li.model,
+          category: li.category,
+          name_th: li._name,
+          description: li._desc,
+          qty: li.qty,
+          unit_price: li.unit_price,
+          discount_percent: li.discount_percent,
+          line_total: li.line_total,
+          specs: li.custom_specs,
+          admin_notes: li.admin_notes,
+          sort_order: li.sort_order || i,
+        }));
+        await (supabase.from as any)("sales_order_items").insert(orderItems);
+      }
+
+      // Create Billing Note if not exists
+      if (!billingId) {
+        const { data: billing, error: billingErr } = await (supabase.from as any)("billing_notes").insert({
+          quote_id: quoteId,
+          order_id: orderId,
+          customer_name: quote.name,
+          customer_company: quote.company,
+          customer_email: quote.email,
+          customer_phone: quote.phone,
+          po_number: quote.po_number,
+          po_file_url: quote.po_file_url,
+          subtotal: quote.subtotal,
+          discount_amount: quote.discount_amount,
+          vat_amount: quote.vat_amount || 0,
+          withholding_tax: quote.withholding_tax || 0,
+          grand_total: quote.grand_total,
+          payment_terms: quote.payment_terms,
+          due_date: new Date(Date.now() + 30 * 86400000).toISOString().split("T")[0],
+          assigned_to: quote.assigned_to,
+          user_id: quote.user_id,
+          status: "draft",
+          created_by: user.id,
+        }).select().single();
+        if (billingErr) throw billingErr;
+        billingId = billing.id;
+
+        // Copy line items
+        const billingItems = items.map((li, i) => ({
+          billing_note_id: billingId,
+          product_id: li.product_id,
+          model: li.model,
+          category: li.category,
+          description: li._desc || li._name || li.model,
+          qty: li.qty,
+          unit_price: li.unit_price,
+          discount_percent: li.discount_percent,
+          line_total: li.line_total,
+          sort_order: li.sort_order || i,
+        }));
+        await (supabase.from as any)("billing_note_items").insert(billingItems);
+      }
+
+      toast({ title: "สร้างเอกสารสำเร็จ", description: "สร้าง Sales Order + ใบวางบิลเรียบร้อย" });
+      setHasOrder(true);
+      setHasBilling(true);
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    }
+    setCreatingDocs(false);
+  };
   const handleStatusChange = async (quoteId: string, newStatus: string) => {
     if (!user) return;
     const quote = quotes.find((q) => q.id === quoteId);
     if (!quote) return;
 
     // Confirm if changing to important states
-    if (newStatus === "won" && !confirm("ยืนยันเปลี่ยนเป็น 'ตกลงราคา'? ลูกค้าจะได้รับแจ้งเตือน")) return;
+    if (newStatus === "won" && !confirm("ยืนยันเปลี่ยนเป็น 'ตกลงราคา'?\n\n• ระบบจะสร้าง Sales Order + ใบวางบิลอัตโนมัติ\n• ลูกค้าจะได้รับแจ้งเตือน")) return;
     if (newStatus === "lost" && !confirm("ยืนยันปิดเป็น 'ไม่สำเร็จ'?")) return;
 
     setSaving(true);
@@ -938,8 +1062,21 @@ const AdminQuoteReview = () => {
                   <Printer size={14} /> พิมพ์ใบเสนอราคา
                 </button>
                 {["won", "po_received"].includes(selected.status) ? (
-                  <div className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-500/10 text-green-600 border border-green-500/20 text-sm font-bold">
-                    <CheckCircle size={14} /> จบขั้นตอนเสนอราคาแล้ว
+                  <div className="flex-1 flex flex-col gap-2">
+                    {hasOrder && hasBilling ? (
+                      <div className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-500/10 text-green-600 border border-green-500/20 text-sm font-bold">
+                        <CheckCircle size={14} /> สร้าง Order + ใบวางบิลแล้ว
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => manualCreateOrderAndBilling(selected.id)}
+                        disabled={creatingDocs}
+                        className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-teal-600 text-white text-sm font-bold hover:bg-teal-700 transition-colors disabled:opacity-60"
+                      >
+                        {creatingDocs ? <Loader2 size={14} className="animate-spin" /> : <Package size={14} />}
+                        {creatingDocs ? "กำลังสร้าง..." : "สร้าง Sales Order + ใบวางบิล"}
+                      </button>
+                    )}
                   </div>
                 ) : (
                   <button onClick={handleApprove} disabled={saving || items.length === 0} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60">
