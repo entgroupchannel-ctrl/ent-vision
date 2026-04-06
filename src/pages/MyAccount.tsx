@@ -19,8 +19,9 @@ import MyNotifications from "@/pages/MyNotifications";
 import MyDemos from "@/pages/MyDemos";
 import UserQuoteCreate from "@/pages/UserQuoteCreate";
 import MyOrders from "@/pages/MyOrders";
+import MyInvoices from "@/pages/MyInvoices";
 
-type Tab = "profile" | "quotes" | "quote_create" | "orders" | "wishlist" | "documents" | "notifications" | "demos";
+type Tab = "profile" | "quotes" | "quote_create" | "orders" | "invoices" | "wishlist" | "documents" | "notifications" | "demos";
 
 const MyAccount = () => {
   const { user, isAdmin, loading: authLoading, signOut } = useAuth();
@@ -32,6 +33,7 @@ const MyAccount = () => {
     if (path.includes("/quotes/create")) return "quote_create";
     if (path.includes("/quotes")) return "quotes";
     if (path.includes("/orders")) return "orders";
+    if (path.includes("/invoices")) return "invoices";
     if (path.includes("/wishlist")) return "wishlist";
     if (path.includes("/documents")) return "documents";
     if (path.includes("/notifications")) return "notifications";
@@ -91,6 +93,7 @@ const MyAccount = () => {
     { id: "quotes", label: "ใบเสนอราคา", icon: FileText },
     { id: "quote_create", label: "สร้างใบเสนอราคา", icon: Plus },
     { id: "orders", label: "คำสั่งซื้อ", icon: Package },
+    { id: "invoices", label: "ใบแจ้งหนี้/ใบเสร็จ", icon: FileText },
     { id: "wishlist", label: "รายการถูกใจ", icon: Heart },
     { id: "documents", label: "ศูนย์เอกสาร", icon: FolderOpen },
     { id: "notifications", label: "แจ้งเตือน", icon: Bell, badge: unreadCount },
@@ -232,6 +235,7 @@ const MyAccount = () => {
             {tab === "quotes" && <MyAccountQuotes />}
             {tab === "quote_create" && <UserQuoteCreate />}
             {tab === "orders" && <MyOrders />}
+            {tab === "invoices" && <MyInvoices />}
             {tab === "wishlist" && <MyAccountWishlist />}
             {tab === "documents" && <MyDocuments />}
             {tab === "notifications" && <MyNotifications />}
