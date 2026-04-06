@@ -63,7 +63,7 @@ const inputClass =
 const MyDocuments = () => {
   const { user } = useAuth();
   const { toast } = useToast();
-  const { track } = useEngagementTracker();
+  const { trackEvent } = useEngagementTracker();
 
   const [activeView, setActiveView] = useState<"browse" | "requests">("browse");
   const [docs, setDocs] = useState<DocItem[]>([]);
