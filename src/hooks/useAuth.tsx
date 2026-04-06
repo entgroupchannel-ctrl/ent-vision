@@ -25,29 +25,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const initDoneRef = useRef(false);
+  const checkingRolesRef = useRef(false);
 
   const checkRoles = async (userId: string) => {
+    if (checkingRolesRef.current) return;
+    checkingRolesRef.current = true;
     try {
       const [adminRes, superRes] = await Promise.all([
-        Promise.race([
-          supabase.rpc("is_admin", { _user_id: userId }),
-          new Promise<{ data: null }>((resolve) =>
-            setTimeout(() => resolve({ data: null }), 3000)
-          ),
-        ]),
-        Promise.race([
-          supabase.rpc("has_role", { _user_id: userId, _role: "super_admin" }),
-          new Promise<{ data: null }>((resolve) =>
-            setTimeout(() => resolve({ data: null }), 3000)
-          ),
-        ]),
+        supabase.rpc("is_admin", { _user_id: userId }).then(
+          (r) => r,
+          () => ({ data: null })
+        ),
+        supabase.rpc("has_role", { _user_id: userId, _role: "super_admin" }).then(
+          (r) => r,
+          () => ({ data: null })
+        ),
       ]);
-      setIsAdmin(adminRes.data === true);
-      setIsSuperAdmin(superRes.data === true);
+      if (adminRes.data !== null) setIsAdmin(adminRes.data === true);
+      if (superRes.data !== null) setIsSuperAdmin(superRes.data === true);
     } catch {
-      setIsAdmin(false);
-      setIsSuperAdmin(false);
+      // On error preserve existing state - don't reset to false
     }
+    checkingRolesRef.current = false;
   };
 
   useEffect(() => {
@@ -65,7 +64,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       } catch (e) {
         console.error("useAuth init error:", e);
       } finally {
-      if (mounted) {
+        if (mounted) {
           initDoneRef.current = true;
           setLoading(false);
         }
@@ -74,17 +73,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     init();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (!mounted) return;
       if (!initDoneRef.current) return;
+
+      // TOKEN_REFRESHED: update session silently, don't touch admin state
+      if (event === "TOKEN_REFRESHED") {
+        setSession(session);
+        setUser(session?.user ?? null);
+        return;
+      }
 
       setSession(session);
       setUser(session?.user ?? null);
 
+      if (event === "SIGNED_OUT") {
+        setIsAdmin(false);
+        setIsSuperAdmin(false);
+        return;
+      }
+
       if (session?.user) {
-        // Don't set loading=true during token refresh — preserve existing admin state
-        // to avoid flashing redirects in AdminDashboard
-        await checkRoles(session.user.id);
+        if (event === "SIGNED_IN") {
+          await checkRoles(session.user.id);
+        }
       } else {
         setIsAdmin(false);
         setIsSuperAdmin(false);
