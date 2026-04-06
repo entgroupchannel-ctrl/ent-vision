@@ -15,6 +15,7 @@ import {
   Clock, TrendingUp, Award, Quote, MapPin, Calendar
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
+import QuoteCartButton from "@/components/QuoteCartButton";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
 
@@ -251,6 +252,7 @@ const VCloudPoint = () => {
             <a href="https://vcloudpoint.info/" target="_blank" rel="noopener noreferrer" className="text-xs text-muted-foreground hover:text-primary flex items-center gap-1 transition-colors">
               vcloudpoint.info <ExternalLink size={12} />
             </a>
+            <QuoteCartButton />
             <ThemeToggle />
           </div>
         </div>

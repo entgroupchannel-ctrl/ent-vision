@@ -11,6 +11,7 @@ import {
   HardDrive, MemoryStick, Layers, RectangleHorizontal, Square
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
+import QuoteCartButton from "@/components/QuoteCartButton";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
 import { LineQRDialog } from "@/components/LineQRDialog";
@@ -277,6 +278,7 @@ const PanelPC = () => {
             <span className="text-sm font-semibold text-foreground">GTY/GTG Panel PC</span>
           </div>
           <div className="flex items-center gap-3">
+            <QuoteCartButton />
             <ThemeToggle />
             <Link to="/" className="hidden md:inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft size={16} /> กลับหน้าหลัก

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Search, Menu, X, ChevronDown, UserPlus, LogOut, User, LogIn, FileText, Heart, Shield, FolderOpen, Bell, Bot } from "lucide-react";
 import { toast } from "sonner";
 import ThemeToggle from "@/components/ThemeToggle";
+import QuoteCartButton from "@/components/QuoteCartButton";
 import AIChatWidget from "@/components/AIChatWidget";
 import MegaMenu, { MobileMegaMenu } from "@/components/MegaMenu";
 import { useAuth } from "@/hooks/useAuth";
@@ -157,6 +158,7 @@ const HeroSection = () => {
             )
           )}
           <div className="w-px h-6 bg-white/10 mx-1" />
+          <QuoteCartButton />
           <ThemeToggle />
           <button
             onClick={() => setAiChatOpen(true)}
@@ -309,6 +311,7 @@ const HeroSection = () => {
                   </button>
                 </div>
                 <div className="flex justify-center gap-2 pt-1">
+                  <QuoteCartButton />
                   <ThemeToggle />
                   <button
                     onClick={() => { setMobileMenuOpen(false); setAiChatOpen(true); }}
@@ -321,6 +324,7 @@ const HeroSection = () => {
               </>
             ) : (
               <div className="flex items-center gap-2">
+                <QuoteCartButton />
                 <ThemeToggle />
                 <button
                   onClick={() => { setMobileMenuOpen(false); setAiChatOpen(true); }}

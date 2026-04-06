@@ -13,6 +13,7 @@ import AddToQuoteButton from "@/components/AddToQuoteButton";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import { LineQRDialog } from "@/components/LineQRDialog";
 import ThemeToggle from "@/components/ThemeToggle";
+import QuoteCartButton from "@/components/QuoteCartButton";
 import ShareButtons from "@/components/ShareButtons";
 import logo from "@/assets/logo-entgroup.avif";
 import gt4500CpuOptions from "@/assets/gt4500-cpu-options.png";
@@ -696,6 +697,7 @@ const GTSeries = () => {
             <span className="text-sm font-semibold text-foreground">GT Series</span>
           </div>
           <div className="flex items-center gap-3">
+            <QuoteCartButton />
             <ThemeToggle />
             <Link to="/" className="hidden md:inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft size={16} /> กลับหน้าหลัก

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import ThemeToggle from "@/components/ThemeToggle";
+import QuoteCartButton from "@/components/QuoteCartButton";
 import logo from "@/assets/logo-entgroup.avif";
 import FooterCompact from "@/components/FooterCompact";
 import QuoteDialog from "@/components/QuoteDialog";
@@ -776,7 +777,8 @@ const MiniPCFirewall = () => {
             <div className="w-px h-6 bg-border" />
             <img src={logo} alt="ENT GROUP" className="h-7 w-auto dark:invert" />
           </div>
-          <ThemeToggle />
+          <QuoteCartButton />
+            <ThemeToggle />
         </div>
       </nav>
 
