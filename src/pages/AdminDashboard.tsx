@@ -19,10 +19,11 @@ import AdminQuoteReview from "@/components/AdminQuoteReview";
 import AdminSalesOrders from "@/components/AdminSalesOrders";
 import AdminInvoiceManager from "@/components/AdminInvoiceManager";
 import AdminUserManagement from "@/components/AdminUserManagement";
+import AdminCustomerManager from "@/components/AdminCustomerManager";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
 const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
 
-type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders" | "invoices";
+type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "customers" | "livechat" | "sales_orders" | "invoices";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -95,6 +96,7 @@ const AdminDashboard = () => {
     engagement: "marketing.engagement",
     subscribers: "marketing.subscribers",
     users: "system.users",
+    customers: "system.users",
     livechat: "sales.contacts",
     sales_orders: "sales.quote_review",
     invoices: "sales.quote_review",
@@ -318,16 +320,28 @@ const AdminDashboard = () => {
                     )}
                     {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
                     <button
+                      onClick={() => { setTab("customers"); setStatusFilter("all"); setSelectedItem(null); }}
+                      className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                        tab === "customers"
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                      } ${sidebarMode === "icon" ? "justify-center" : ""}`}
+                      title={sidebarMode === "icon" ? "จัดการลูกค้า" : undefined}
+                    >
+                      <Building2 size={16} className="shrink-0" />
+                      {sidebarMode === "full" && <span className="flex-1 text-left truncate">จัดการลูกค้า</span>}
+                    </button>
+                    <button
                       onClick={() => { setTab("users"); setStatusFilter("all"); setSelectedItem(null); }}
                       className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                         tab === "users"
                           ? "bg-primary/10 text-primary"
                           : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
                       } ${sidebarMode === "icon" ? "justify-center" : ""}`}
-                      title={sidebarMode === "icon" ? "จัดการผู้ใช้" : undefined}
+                      title={sidebarMode === "icon" ? "จัดการผู้ใช้ Admin" : undefined}
                     >
                       <Shield size={16} className="shrink-0" />
-                      {sidebarMode === "full" && <span className="flex-1 text-left truncate">จัดการผู้ใช้</span>}
+                      {sidebarMode === "full" && <span className="flex-1 text-left truncate">จัดการ Admin</span>}
                     </button>
                   </>
                 )}
@@ -420,6 +434,8 @@ const AdminDashboard = () => {
           <AdminSalesOrders />
         ) : tab === "invoices" ? (
           <AdminInvoiceManager />
+        ) : tab === "customers" ? (
+          <AdminCustomerManager />
         ) : tab === "users" ? (
           <AdminUserManagement />
         ) : tab === "livechat" ? (

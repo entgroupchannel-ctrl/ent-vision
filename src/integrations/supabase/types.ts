@@ -876,10 +876,13 @@ export type Database = {
       }
       profiles: {
         Row: {
+          account_manager_id: string | null
           company_address: string | null
           company_name: string | null
           company_position: string | null
+          credit_terms: string | null
           customer_tier: string
+          discount_percent: number | null
           full_name: string | null
           id: string
           line_id: string | null
@@ -890,10 +893,13 @@ export type Database = {
           whatsapp: string | null
         }
         Insert: {
+          account_manager_id?: string | null
           company_address?: string | null
           company_name?: string | null
           company_position?: string | null
+          credit_terms?: string | null
           customer_tier?: string
+          discount_percent?: number | null
           full_name?: string | null
           id: string
           line_id?: string | null
@@ -904,10 +910,13 @@ export type Database = {
           whatsapp?: string | null
         }
         Update: {
+          account_manager_id?: string | null
           company_address?: string | null
           company_name?: string | null
           company_position?: string | null
+          credit_terms?: string | null
           customer_tier?: string
+          discount_percent?: number | null
           full_name?: string | null
           id?: string
           line_id?: string | null
