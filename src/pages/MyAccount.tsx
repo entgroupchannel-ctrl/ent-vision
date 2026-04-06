@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   User, FileText, Heart, FolderOpen, Bell, Wrench,
   ArrowLeft, LogOut, Shield, PanelLeftClose, PanelLeft,
-  Plus,
+  Plus, Package,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -18,8 +18,9 @@ import MyDocuments from "@/pages/MyDocuments";
 import MyNotifications from "@/pages/MyNotifications";
 import MyDemos from "@/pages/MyDemos";
 import UserQuoteCreate from "@/pages/UserQuoteCreate";
+import MyOrders from "@/pages/MyOrders";
 
-type Tab = "profile" | "quotes" | "quote_create" | "wishlist" | "documents" | "notifications" | "demos";
+type Tab = "profile" | "quotes" | "quote_create" | "orders" | "wishlist" | "documents" | "notifications" | "demos";
 
 const MyAccount = () => {
   const { user, isAdmin, loading: authLoading, signOut } = useAuth();
@@ -30,6 +31,7 @@ const MyAccount = () => {
   const getTabFromPath = (path: string): Tab => {
     if (path.includes("/quotes/create")) return "quote_create";
     if (path.includes("/quotes")) return "quotes";
+    if (path.includes("/orders")) return "orders";
     if (path.includes("/wishlist")) return "wishlist";
     if (path.includes("/documents")) return "documents";
     if (path.includes("/notifications")) return "notifications";
@@ -88,6 +90,7 @@ const MyAccount = () => {
     { id: "profile", label: "โปรไฟล์ของฉัน", icon: User },
     { id: "quotes", label: "ใบเสนอราคา", icon: FileText },
     { id: "quote_create", label: "สร้างใบเสนอราคา", icon: Plus },
+    { id: "orders", label: "คำสั่งซื้อ", icon: Package },
     { id: "wishlist", label: "รายการถูกใจ", icon: Heart },
     { id: "documents", label: "ศูนย์เอกสาร", icon: FolderOpen },
     { id: "notifications", label: "แจ้งเตือน", icon: Bell, badge: unreadCount },
@@ -228,6 +231,7 @@ const MyAccount = () => {
             {tab === "profile" && <MyProfile />}
             {tab === "quotes" && <MyAccountQuotes />}
             {tab === "quote_create" && <UserQuoteCreate />}
+            {tab === "orders" && <MyOrders />}
             {tab === "wishlist" && <MyAccountWishlist />}
             {tab === "documents" && <MyDocuments />}
             {tab === "notifications" && <MyNotifications />}
