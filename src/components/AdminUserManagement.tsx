@@ -355,15 +355,15 @@ const AdminUserManagement = () => {
       )}
 
       {/* ═══ User List + Permission Editor ═══ */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
         {/* Left: User list */}
-        <div className="lg:col-span-2 space-y-1.5">
+        <div className="lg:col-span-2 space-y-2">
           {loading ? (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 size={20} className="animate-spin text-muted-foreground" />
+            <div className="flex items-center justify-center py-16">
+              <Loader2 size={24} className="animate-spin text-muted-foreground" />
             </div>
           ) : adminUsers.length === 0 ? (
-            <div className="card-surface rounded-xl p-10 text-center text-sm text-muted-foreground">ไม่มี Admin ในระบบ</div>
+            <div className="card-surface rounded-xl p-12 text-center text-base text-muted-foreground">ไม่มี Admin ในระบบ</div>
           ) : (
             adminUsers.map((u) => {
               const isSelected = selectedUser?.user_id === u.user_id;
@@ -374,25 +374,25 @@ const AdminUserManagement = () => {
               return (
                 <div
                   key={u.user_id}
-                  className={`p-4 rounded-lg border transition-all ${
-                    isSelected ? "border-primary bg-primary/5" : "border-border hover:border-primary/30"
+                  className={`p-5 rounded-xl border-2 transition-all cursor-pointer ${
+                    isSelected ? "border-primary bg-primary/5 shadow-md" : "border-border hover:border-primary/40 hover:shadow-sm"
                   }`}
                 >
                   <div className="flex items-start justify-between">
                     <button onClick={() => selectUser(u)} className="flex-1 text-left">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm font-bold text-foreground">{u.email}</span>
-                        {isSelf && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-secondary text-muted-foreground">คุณ</span>}
+                      <div className="flex items-center gap-2.5 mb-1.5">
+                        <span className="text-base font-extrabold text-foreground">{u.email}</span>
+                        {isSelf && <span className="text-xs px-2 py-0.5 rounded-full bg-secondary text-muted-foreground font-bold">คุณ</span>}
                       </div>
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className={`text-xs px-2 py-0.5 rounded-full border font-medium ${roleColors[u.role] || roleColors.admin}`}>
+                      <div className="flex items-center gap-2.5 mb-2">
+                        <span className={`text-sm px-3 py-1 rounded-full border font-bold ${roleColors[u.role] || roleColors.admin}`}>
                           {roleLabels[u.role] || u.role}
                         </span>
                       </div>
-                      <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                        <span className="flex items-center gap-1"><Pencil size={10} /> {editCount} edit</span>
-                        <span className="flex items-center gap-1"><Eye size={10} /> {viewCount} view</span>
-                        <span className="flex items-center gap-1"><Clock size={10} /> {new Date(u.role_created_at).toLocaleDateString("th-TH")}</span>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground font-medium">
+                        <span className="flex items-center gap-1.5"><Pencil size={13} /> {editCount} edit</span>
+                        <span className="flex items-center gap-1.5"><Eye size={13} /> {viewCount} view</span>
+                        <span className="flex items-center gap-1.5"><Clock size={13} /> {new Date(u.role_created_at).toLocaleDateString("th-TH")}</span>
                       </div>
                     </button>
 
@@ -400,10 +400,10 @@ const AdminUserManagement = () => {
                     {u.role !== "super_admin" && !isSelf && (
                       <button
                         onClick={() => handleRemoveUser(u)}
-                        className="p-2 rounded-lg text-muted-foreground/30 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                        className="p-2.5 rounded-lg text-muted-foreground/40 hover:text-destructive hover:bg-destructive/10 transition-colors"
                         title="ลบสิทธิ์ Admin"
                       >
-                        <UserMinus size={14} />
+                        <UserMinus size={18} />
                       </button>
                     )}
                   </div>
@@ -416,20 +416,20 @@ const AdminUserManagement = () => {
         {/* Right: Permission editor */}
         <div className="lg:col-span-3">
           {selectedUser ? (
-            <div className="card-surface rounded-xl p-5 sticky top-20">
-              <div className="flex items-center justify-between mb-4">
+            <div className="card-surface rounded-xl p-6 sticky top-20">
+              <div className="flex items-center justify-between mb-5">
                 <div>
-                  <h4 className="text-base font-bold text-foreground">{selectedUser.email}</h4>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className={`text-xs px-2 py-0.5 rounded-full border font-medium ${roleColors[selectedUser.role] || roleColors.admin}`}>
+                  <h4 className="text-lg font-extrabold text-foreground">{selectedUser.email}</h4>
+                  <div className="flex items-center gap-3 mt-1.5">
+                    <span className={`text-sm px-3 py-1 rounded-full border font-bold ${roleColors[selectedUser.role] || roleColors.admin}`}>
                       {roleLabels[selectedUser.role] || selectedUser.role}
                     </span>
-                    <span className="text-xs text-muted-foreground">สมาชิกตั้งแต่ {new Date(selectedUser.user_created_at).toLocaleDateString("th-TH")}</span>
+                    <span className="text-sm text-muted-foreground font-medium">สมาชิกตั้งแต่ {new Date(selectedUser.user_created_at).toLocaleDateString("th-TH")}</span>
                   </div>
                 </div>
                 <select
                   onChange={(e) => applyPreset(e.target.value)}
-                  className="text-sm px-3 py-2 rounded-lg border border-border bg-background text-foreground"
+                  className="text-base font-bold px-4 py-2.5 rounded-lg border border-border bg-background text-foreground"
                   defaultValue=""
                 >
                   <option value="" disabled>ใช้ชุดสิทธิ์สำเร็จรูป...</option>
@@ -440,11 +440,11 @@ const AdminUserManagement = () => {
               </div>
 
               {/* Permission grid */}
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {PERMISSION_GROUPS.map((group) => (
                   <div key={group.label}>
-                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/50 mb-2">{group.label}</p>
-                    <div className="space-y-1.5">
+                    <p className="text-sm font-extrabold uppercase tracking-wider text-muted-foreground mb-2.5">{group.label}</p>
+                    <div className="space-y-2">
                       {group.keys.map((key) => {
                         const level = editPerms[key] || "none";
                         const config = ACCESS_ICONS[level];
@@ -452,18 +452,18 @@ const AdminUserManagement = () => {
                         return (
                           <div
                             key={key}
-                            className="flex items-center justify-between p-3 rounded-lg border border-border hover:bg-secondary/20 transition-colors"
+                            className="flex items-center justify-between p-4 rounded-xl border border-border hover:bg-secondary/30 transition-colors"
                           >
                             <div>
-                              <span className="text-sm font-medium text-foreground">{PERMISSION_LABELS[key]}</span>
-                              <span className="text-xs text-muted-foreground ml-2">{key}</span>
+                              <span className="text-base font-bold text-foreground">{PERMISSION_LABELS[key]}</span>
+                              <span className="text-sm text-muted-foreground ml-2.5 font-medium">{key}</span>
                             </div>
                             <button
                               onClick={() => togglePermission(key)}
-                              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors ${config.color}`}
+                              className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm transition-colors ${config.color}`}
                               title="คลิกเพื่อเปลี่ยน: ไม่มีสิทธิ์ → ดูได้ → แก้ไขได้"
                             >
-                              <Icon size={12} /> {config.label}
+                              <Icon size={15} /> {config.label}
                             </button>
                           </div>
                         );
@@ -474,28 +474,28 @@ const AdminUserManagement = () => {
               </div>
 
               {/* Legend */}
-              <div className="flex items-center gap-4 mt-4 pt-3 border-t border-border text-xs text-muted-foreground">
+              <div className="flex items-center gap-5 mt-5 pt-4 border-t border-border text-sm text-muted-foreground font-medium">
                 <span>คลิกปุ่มเพื่อสลับ:</span>
-                <span className="flex items-center gap-1"><Ban size={10} /> ไม่มีสิทธิ์</span>
+                <span className="flex items-center gap-1.5"><Ban size={13} /> ไม่มีสิทธิ์</span>
                 <span>→</span>
-                <span className="flex items-center gap-1"><Eye size={10} /> ดูได้</span>
+                <span className="flex items-center gap-1.5"><Eye size={13} /> ดูได้</span>
                 <span>→</span>
-                <span className="flex items-center gap-1"><Pencil size={10} /> แก้ไขได้</span>
+                <span className="flex items-center gap-1.5"><Pencil size={13} /> แก้ไขได้</span>
               </div>
 
               {/* Save */}
               <button
                 onClick={handleSavePermissions}
                 disabled={saving}
-                className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60"
+                className="w-full mt-5 flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-xl bg-primary text-primary-foreground text-base font-extrabold hover:bg-primary/90 transition-colors disabled:opacity-60 shadow-sm"
               >
-                {saving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
+                {saving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
                 บันทึกสิทธิ์
               </button>
             </div>
           ) : (
-            <div className="card-surface rounded-xl p-10 text-center text-sm text-muted-foreground">
-              <Shield size={28} className="mx-auto mb-3 opacity-20" />
+            <div className="card-surface rounded-xl p-14 text-center text-base text-muted-foreground font-medium">
+              <Shield size={36} className="mx-auto mb-4 opacity-25" />
               เลือก Admin จากรายการเพื่อจัดการสิทธิ์
             </div>
           )}
