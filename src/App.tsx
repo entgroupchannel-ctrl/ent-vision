@@ -13,6 +13,7 @@ import FloatingContact from "./components/FloatingContact.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
 import AIChatWidget from "./components/AIChatWidget.tsx";
+import LiveChatWidget from "./components/LiveChatWidget.tsx";
 import FloatingQuoteBar from "./components/FloatingQuoteBar.tsx";
 
 /* ── Lazy-loaded pages ── */
@@ -146,6 +147,7 @@ const App = () => (
             
             <SocialRibbon />
             <FloatingQuoteBar />
+            <LiveChatWidget />
             <AIChatWidget />
           </BrowserRouter>
         </TooltipProvider>

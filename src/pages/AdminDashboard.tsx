@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, Users, FileText, Mail, TrendingUp,
   Filter, RefreshCw, Eye, Clock, CheckCircle, XCircle,
   Star, Phone, Building2, MessageSquare, LogOut, Shield, Download,
   CalendarClock, Hash, Wallet, Code2, Cloud,
-  PanelLeftClose, PanelLeft, Package, FolderOpen, BarChart3,
+  PanelLeftClose, PanelLeft, Package, FolderOpen, BarChart3, Headphones,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -16,8 +16,9 @@ import AdminProductCatalog from "@/components/AdminProductCatalog";
 import AdminQuoteReview from "@/components/AdminQuoteReview";
 import AdminUserManagement from "@/components/AdminUserManagement";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
+const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
 
-type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users";
+type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -90,6 +91,7 @@ const AdminDashboard = () => {
     engagement: "marketing.engagement",
     subscribers: "marketing.subscribers",
     users: "system.users",
+    livechat: "sales.contacts",
   };
 
   // Check if current tab allows edit
@@ -219,6 +221,7 @@ const AdminDashboard = () => {
                   { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
                   { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
                   { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
+                  { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
@@ -338,6 +341,7 @@ const AdminDashboard = () => {
               { id: "chatleads" as Tab, label: "Chat Leads" },
               { id: "subscribers" as Tab, label: "สมาชิก" },
               { id: "software" as Tab, label: "ซอฟต์แวร์" },
+              { id: "livechat" as Tab, label: "Live Chat" },
             ]).map((t) => (
               <button
                 key={t.id}
@@ -394,6 +398,10 @@ const AdminDashboard = () => {
           <AdminQuoteReview />
         ) : tab === "users" ? (
           <AdminUserManagement />
+        ) : tab === "livechat" ? (
+          <Suspense fallback={<div className="text-center py-12 text-muted-foreground text-sm">กำลังโหลด...</div>}>
+            <AdminLiveChat />
+          </Suspense>
         ) : (
         <>
         {/* Filter & Export */}

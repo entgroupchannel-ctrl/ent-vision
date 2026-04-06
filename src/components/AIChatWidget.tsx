@@ -204,15 +204,14 @@ const AIChatWidget = () => {
       <button
         onClick={() => { setOpen(true); forceShow(); }}
         onMouseEnter={onInteraction}
-        className={`fixed bottom-24 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-xl hover:scale-110 transition-all duration-500 flex items-center justify-center group ${
-          buttonVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
+        className={`fixed top-20 right-6 z-50 w-10 h-10 rounded-full bg-secondary text-foreground shadow-lg hover:scale-110 transition-all duration-500 flex items-center justify-center group border border-border ${
+          buttonVisible ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0 pointer-events-none"
         }`}
         aria-label="Open AI Chat"
       >
-        <MessageCircle size={24} />
-        <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-        <span className="absolute right-16 bg-foreground text-background text-xs px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
-          สนทนากับ AI ผู้เชี่ยวชาญ
+        <Bot size={18} />
+        <span className="absolute right-12 bg-foreground text-background text-[10px] px-2.5 py-1 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
+          AI ผู้เชี่ยวชาญ
         </span>
       </button>
     );
