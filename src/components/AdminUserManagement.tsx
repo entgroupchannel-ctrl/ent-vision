@@ -152,7 +152,9 @@ const AdminUserManagement = () => {
           permission_key: key,
           access_level: preset.permissions[key],
         }));
-        await (supabase.from as any)("admin_permissions").insert(inserts).catch(() => {});
+        try {
+          await (supabase.from as any)("admin_permissions").insert(inserts);
+        } catch {}
       }
 
       toast({ title: `เพิ่ม ${searchResult.email} เป็น ${roleLabels[addRole]} สำเร็จ` });
