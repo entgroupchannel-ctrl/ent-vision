@@ -507,7 +507,7 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
 
             <div className="flex items-center justify-between">
               <span className="text-[10px] text-muted-foreground flex items-center gap-1">
-                <Clock size={10} /> Admin จะตอบภายใน 24 ชม.
+                <Clock size={10} /> ทีมงานจะตอบกลับภายใน 24 ชม.
               </span>
               <button onClick={handleSendNegotiation} disabled={sending || !negReason.trim()}
                 className="px-4 py-2 rounded-lg bg-amber-500 text-white text-xs font-bold hover:bg-amber-600 disabled:opacity-50 flex items-center gap-1">
