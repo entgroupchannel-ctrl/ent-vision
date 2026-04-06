@@ -485,21 +485,44 @@ const AdminSalesOrders = () => {
                     </button>
                   </div>
 
-                  {/* Create Invoice */}
-                  <div className="border-t border-border pt-3">
-                    <button
-                      onClick={() => {
-                        try {
-                          sessionStorage.setItem("create_invoice_order_id", selected.id);
-                          // Find admin dashboard's setTab if available
-                          const event = new CustomEvent("admin-switch-tab", { detail: "invoices" });
-                          window.dispatchEvent(event);
-                        } catch {}
-                      }}
-                      className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 transition-colors"
-                    >
-                      <FileText size={14} /> สร้างใบแจ้งหนี้จาก Order นี้
-                    </button>
+                  {/* Create Documents */}
+                  <div className="border-t border-border pt-3 space-y-2">
+                    <h4 className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">สร้างเอกสาร</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      <button
+                        onClick={() => {
+                          try {
+                            sessionStorage.setItem("create_billing_order_id", selected.id);
+                            window.dispatchEvent(new CustomEvent("admin-switch-tab", { detail: "billing" }));
+                          } catch {}
+                        }}
+                        className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-yellow-500/10 text-yellow-600 text-xs font-bold hover:bg-yellow-500/20 transition-colors border border-yellow-500/20"
+                      >
+                        <CreditCard size={14} /> ใบวางบิล
+                      </button>
+                      <button
+                        onClick={() => {
+                          try {
+                            sessionStorage.setItem("create_invoice_order_id", selected.id);
+                            window.dispatchEvent(new CustomEvent("admin-switch-tab", { detail: "invoices" }));
+                          } catch {}
+                        }}
+                        className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 transition-colors border border-primary/20"
+                      >
+                        <FileText size={14} /> ใบแจ้งหนี้
+                      </button>
+                      <button
+                        onClick={() => {
+                          try {
+                            sessionStorage.setItem("create_delivery_order_id", selected.id);
+                            window.dispatchEvent(new CustomEvent("admin-switch-tab", { detail: "delivery" }));
+                          } catch {}
+                        }}
+                        className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-blue-500/10 text-blue-500 text-xs font-bold hover:bg-blue-500/20 transition-colors border border-blue-500/20"
+                      >
+                        <Truck size={14} /> ใบส่งสินค้า
+                      </button>
+                    </div>
                   </div>
 
                   {/* Status Actions */}
