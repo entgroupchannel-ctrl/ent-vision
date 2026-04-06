@@ -319,7 +319,7 @@ const MyAccountQuotes = () => {
                       <td className="px-4 py-3 text-center">
                         <span className={`inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full border font-medium ${status.color}`}>{status.label}</span>
                       </td>
-                      <td className="px-2 py-3 relative" ref={menuOpenId === q.id ? menuRef : undefined}>
+                      <td className="px-2 py-3 relative" ref={menuOpenId === q.id ? menuRef as React.RefObject<HTMLTableCellElement> : undefined}>
                         <button onClick={(e) => { e.stopPropagation(); setMenuOpenId(menuOpenId === q.id ? null : q.id); }} className="p-1.5 rounded-lg hover:bg-secondary/60 text-muted-foreground">
                           <MoreHorizontal size={16} />
                         </button>

@@ -179,6 +179,8 @@ const AdminQuoteReview = () => {
       payment_terms: q.payment_terms || "มัดจำ 70% ส่วนที่เหลือจ่ายก่อนส่งสินค้า",
       delivery_terms: q.delivery_terms || "ส่งฟรีทั่วประเทศ",
       pdf_url: q.pdf_url || "", notes: q.notes || "",
+      include_vat: q.include_vat ?? true,
+      include_withholding_tax: q.include_withholding_tax ?? false,
     });
 
     setLineLoading(true);
