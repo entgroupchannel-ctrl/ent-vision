@@ -157,6 +157,7 @@ const HeroSection = () => {
             )
           )}
           <div className="w-px h-6 bg-white/10 mx-1" />
+          <QuoteCartButton />
           <ThemeToggle />
           <button
             onClick={() => setAiChatOpen(true)}
