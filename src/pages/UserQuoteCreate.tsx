@@ -487,7 +487,7 @@ const UserQuoteCreate = () => {
       cart.forEach((item) => {
         trackEvent({
           eventType: "quote_request",
-          productSlug: item.customModel,
+          productId: item.customModel,
           productCategory: item.customCategory,
           metadata: { qty: item.qty, price: item.unitPrice },
         });

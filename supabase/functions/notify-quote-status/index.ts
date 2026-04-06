@@ -4,7 +4,7 @@ const corsHeaders = {
 }
 
 const GATEWAY_URL = 'https://connector-gateway.lovable.dev/resend'
-const FROM_EMAIL = 'ENT Group <onboarding@resend.dev>' // เปลี่ยนเป็น noreply@entgroup.co.th หลัง verify domain
+const FROM_EMAIL = 'ENT Group <noreply@entgroup.co.th>'
 const CC_SALES = 'sales@entgroup.co.th'
 const SITE_URL = 'https://www.entgroup.co.th'
 
