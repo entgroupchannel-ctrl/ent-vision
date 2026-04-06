@@ -48,13 +48,13 @@ interface CatalogProduct {
 interface DocLibraryItem { id: string; title: string; file_url: string; category: string; }
 
 /* ─── Constants ─── */
-const STATUS_CFG: Record<string, { label: string; color: string }> = {
-  new: { label: "ใหม่", color: "bg-blue-500/10 text-blue-500 border-blue-500/20" },
-  quoted: { label: "ส่งราคาแล้ว", color: "bg-purple-500/10 text-purple-500 border-purple-500/20" },
-  negotiating: { label: "เจรจา", color: "bg-orange-500/10 text-orange-500 border-orange-500/20" },
-  won: { label: "ตกลงราคา", color: "bg-green-500/10 text-green-500 border-green-500/20" },
-  po_received: { label: "รับ PO แล้ว", color: "bg-teal-500/10 text-teal-600 border-teal-500/20" },
-  lost: { label: "ไม่สำเร็จ", color: "bg-red-500/10 text-red-400 border-red-500/20" },
+const STATUS_CFG: Record<string, { label: string; color: string; order: number }> = {
+  new: { label: "ใหม่", color: "bg-blue-500/10 text-blue-500 border-blue-500/20", order: 0 },
+  quoted: { label: "ส่งราคาแล้ว", color: "bg-purple-500/10 text-purple-500 border-purple-500/20", order: 1 },
+  negotiating: { label: "เจรจา", color: "bg-orange-500/10 text-orange-500 border-orange-500/20", order: 2 },
+  won: { label: "ตกลงราคา", color: "bg-green-500/10 text-green-500 border-green-500/20", order: 3 },
+  po_received: { label: "รับ PO แล้ว", color: "bg-teal-500/10 text-teal-600 border-teal-500/20", order: 4 },
+  lost: { label: "ไม่สำเร็จ", color: "bg-red-500/10 text-red-400 border-red-500/20", order: 5 },
 };
 
 const DELIVERY_OPTS = [
