@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   User, FileText, Heart, FolderOpen, Bell, Wrench,
@@ -73,18 +73,51 @@ const MyAccount = () => {
     }
   }, [authLoading, user, navigate]);
 
+  // Fetch unread count
+  const fetchUnread = useCallback(async () => {
+    if (!user) return;
+    try {
+      const { count } = await (supabase.from as any)("notifications")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", user.id)
+        .eq("read", false);
+      setUnreadCount(count || 0);
+    } catch { /* silent */ }
+  }, [user]);
+
+  useEffect(() => { fetchUnread(); }, [fetchUnread, tab]);
+
+  // Realtime: listen for new notifications
   useEffect(() => {
     if (!user) return;
-    (async () => {
-      try {
-        const { count } = await (supabase.from as any)("notifications")
-          .select("*", { count: "exact", head: true })
-          .eq("user_id", user.id)
-          .eq("read", false);
-        setUnreadCount(count || 0);
-      } catch { /* silent */ }
-    })();
-  }, [user, tab]);
+    const channel = supabase
+      .channel("user-notifications-realtime")
+      .on(
+        "postgres_changes" as any,
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "notifications",
+          filter: `user_id=eq.${user.id}`,
+        },
+        (payload: any) => {
+          setUnreadCount((prev) => prev + 1);
+          // Show toast for new notification
+          if (payload.new) {
+            const n = payload.new as { title?: string; message?: string };
+            import("@/hooks/use-toast").then(({ toast }) => {
+              toast({
+                title: n.title || "แจ้งเตือนใหม่",
+                description: n.message || "",
+              });
+            });
+          }
+        }
+      )
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [user]);
 
   if (authLoading) {
     return (

@@ -48,6 +48,30 @@ const MyNotifications = () => {
 
   useEffect(() => { fetchNotifications(); }, [user]);
 
+  // Realtime: auto-append new notifications
+  useEffect(() => {
+    if (!user) return;
+    const channel = supabase
+      .channel("my-notifications-realtime")
+      .on(
+        "postgres_changes" as any,
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "notifications",
+          filter: `user_id=eq.${user.id}`,
+        },
+        (payload: any) => {
+          if (payload.new) {
+            setNotifications((prev) => [payload.new as Notification, ...prev]);
+          }
+        }
+      )
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, [user]);
+
   const markAsRead = async (id: string) => {
     await (supabase.from as any)("notifications").update({ read: true }).eq("id", id);
     setNotifications((prev) => prev.map((n) => n.id === id ? { ...n, read: true } : n));
