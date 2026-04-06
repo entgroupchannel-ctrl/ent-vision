@@ -22,18 +22,18 @@ interface AdminUser {
 }
 
 const ACCESS_ICONS: Record<AccessLevel, { icon: typeof Eye; label: string; color: string }> = {
-  edit: { icon: Pencil, label: "แก้ไขได้", color: "text-green-500 bg-green-500/10 border-green-500/20" },
-  view: { icon: Eye, label: "ดูได้", color: "text-blue-500 bg-blue-500/10 border-blue-500/20" },
-  none: { icon: Ban, label: "ไม่มีสิทธิ์", color: "text-muted-foreground bg-muted border-border" },
+  edit: { icon: Pencil, label: "แก้ไขได้", color: "text-green-600 bg-green-500/15 border-green-500/30 font-bold" },
+  view: { icon: Eye, label: "ดูได้", color: "text-blue-600 bg-blue-500/15 border-blue-500/30 font-bold" },
+  none: { icon: Ban, label: "ไม่มีสิทธิ์", color: "text-muted-foreground bg-muted border-border font-medium" },
 };
 
 const inputClass =
-  "w-full px-3 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
+  "w-full px-4 py-3 rounded-lg border border-border bg-background text-base font-medium text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all";
 
 const roleColors: Record<string, string> = {
-  super_admin: "bg-primary/10 text-primary border-primary/20",
-  admin: "bg-blue-500/10 text-blue-500 border-blue-500/20",
-  moderator: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
+  super_admin: "bg-primary/15 text-primary border-primary/30",
+  admin: "bg-blue-500/15 text-blue-600 border-blue-500/30",
+  moderator: "bg-yellow-500/15 text-yellow-600 border-yellow-500/30",
 };
 
 const roleLabels: Record<string, string> = {
