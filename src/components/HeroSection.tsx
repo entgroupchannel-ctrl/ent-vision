@@ -311,6 +311,7 @@ const HeroSection = () => {
                   </button>
                 </div>
                 <div className="flex justify-center gap-2 pt-1">
+                  <QuoteCartButton />
                   <ThemeToggle />
                   <button
                     onClick={() => { setMobileMenuOpen(false); setAiChatOpen(true); }}
@@ -323,6 +324,7 @@ const HeroSection = () => {
               </>
             ) : (
               <div className="flex items-center gap-2">
+                <QuoteCartButton />
                 <ThemeToggle />
                 <button
                   onClick={() => { setMobileMenuOpen(false); setAiChatOpen(true); }}
