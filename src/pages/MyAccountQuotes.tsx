@@ -132,7 +132,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
         customer_response: response,
         status: response === "accepted" ? "won" : "negotiating",
       }).eq("id", qid);
-      toast({ title: response === "accepted" ? "ยอมรับราคาแล้ว" : "ส่งคำขอเจรจาแล้ว" });
+      toast({ title: response === "accepted" ? "ยืนยันสั่งซื้อเรียบร้อยแล้ว" : "ส่งข้อเสนอเพิ่มเติมแล้ว" });
       fetchQuotes();
     } catch {}
     setResponding(false);
