@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, Menu, X, ChevronDown, UserPlus, LogOut, User, LogIn, FileText, Heart, Shield, FolderOpen, Bell } from "lucide-react";
+import { Search, Menu, X, ChevronDown, UserPlus, LogOut, User, LogIn, FileText, Heart, Shield, FolderOpen, Bell, Bot } from "lucide-react";
 import { toast } from "sonner";
 import ThemeToggle from "@/components/ThemeToggle";
+import AIChatWidget from "@/components/AIChatWidget";
 import MegaMenu, { MobileMegaMenu } from "@/components/MegaMenu";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -72,6 +73,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
   const { count: wishlistCount } = useWishlist();
   const [searchOpen, setSearchOpen] = useState(false);
+  const [aiChatOpen, setAiChatOpen] = useState(false);
   const [tagsExpanded, setTagsExpanded] = useState(true);
 
   // Auto-collapse tags after 10 seconds
@@ -121,6 +123,7 @@ const HeroSection = () => {
   };
 
   return (
+    <>
     <section className="relative min-h-screen flex flex-col">
       {/* Full-bleed background image */}
       <div className="absolute inset-0 z-0">
@@ -155,6 +158,14 @@ const HeroSection = () => {
           )}
           <div className="w-px h-6 bg-white/10 mx-1" />
           <ThemeToggle />
+          <button
+            onClick={() => setAiChatOpen(true)}
+            className="p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-surface-hover transition-colors"
+            aria-label="AI Assistant"
+            title="AI ผู้เชี่ยวชาญ"
+          >
+            <Bot size={18} />
+          </button>
           <Link
             to="/wishlist"
             className="relative p-2.5 rounded-lg text-white/70 hover:text-red-400 hover:bg-white/10 transition-colors"
@@ -297,13 +308,27 @@ const HeroSection = () => {
                     ออกจากระบบ
                   </button>
                 </div>
-                <div className="flex justify-center pt-1">
+                <div className="flex justify-center gap-2 pt-1">
                   <ThemeToggle />
+                  <button
+                    onClick={() => { setMobileMenuOpen(false); setAiChatOpen(true); }}
+                    className="p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-surface-hover transition-colors"
+                    aria-label="AI Assistant"
+                  >
+                    <Bot size={18} />
+                  </button>
                 </div>
               </>
             ) : (
               <div className="flex items-center gap-2">
                 <ThemeToggle />
+                <button
+                  onClick={() => { setMobileMenuOpen(false); setAiChatOpen(true); }}
+                  className="p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-surface-hover transition-colors"
+                  aria-label="AI Assistant"
+                >
+                  <Bot size={18} />
+                </button>
                 <Link
                   to="/admin-login"
                   onClick={() => setMobileMenuOpen(false)}
@@ -456,6 +481,8 @@ const HeroSection = () => {
       </div>
 
     </section>
+    {aiChatOpen && <AIChatWidget open={aiChatOpen} onClose={() => setAiChatOpen(false)} />}
+    </>
   );
 };
 
