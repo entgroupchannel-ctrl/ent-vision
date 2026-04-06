@@ -130,7 +130,7 @@ const MyDocuments = () => {
     fetchRequests();
     fetchMyAccess();
     fetchUserTier();
-    track("page_view", { page: "my_documents" });
+    trackEvent({ eventType: "page_view", metadata: { page: "my_documents" } });
   }, [user]);
 
   /* ─── Check Download Permission ─── */
