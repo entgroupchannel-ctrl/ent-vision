@@ -812,6 +812,7 @@ export type Database = {
           admin_sla_hours: number | null
           approved_at: string | null
           approved_by: string | null
+          assigned_to: string | null
           callback_time: string | null
           company: string | null
           created_at: string
@@ -844,6 +845,7 @@ export type Database = {
           admin_sla_hours?: number | null
           approved_at?: string | null
           approved_by?: string | null
+          assigned_to?: string | null
           callback_time?: string | null
           company?: string | null
           created_at?: string
@@ -876,6 +878,7 @@ export type Database = {
           admin_sla_hours?: number | null
           approved_at?: string | null
           approved_by?: string | null
+          assigned_to?: string | null
           callback_time?: string | null
           company?: string | null
           created_at?: string
@@ -903,6 +906,24 @@ export type Database = {
           user_id?: string | null
           valid_until?: string | null
           whatsapp?: string | null
+        }
+        Relationships: []
+      }
+      sale_assignment_config: {
+        Row: {
+          id: string
+          last_assigned_user_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          last_assigned_user_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          last_assigned_user_id?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -1050,9 +1071,19 @@ export type Database = {
           user_id: string
         }[]
       }
+      get_next_sales_person: { Args: never; Returns: string }
       get_permission: {
         Args: { _permission_key: string; _user_id: string }
         Returns: string
+      }
+      get_sales_team: {
+        Args: never
+        Returns: {
+          email: string
+          full_name: string
+          role: string
+          user_id: string
+        }[]
       }
       has_role: {
         Args: {
@@ -1069,6 +1100,10 @@ export type Database = {
           email: string
           user_id: string
         }[]
+      }
+      reassign_quote: {
+        Args: { _new_admin_id: string; _quote_id: string }
+        Returns: undefined
       }
       remove_admin_user: { Args: { _user_id: string }; Returns: boolean }
     }
