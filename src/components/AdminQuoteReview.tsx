@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import QuoteTimeline from "@/components/QuoteTimeline";
+import DocCrossLinks from "@/components/admin/DocCrossLinks";
 import { notifyQuoteStatus, getSaleInfo, productSummaryText } from "@/utils/notifyQuoteStatus";
 import { printQuote } from "@/utils/printQuote";
 
@@ -921,6 +922,13 @@ const AdminQuoteReview = () => {
               {!selected.po_file_url && selected.status === "won" && (
                 <div className="p-3 rounded-lg bg-yellow-500/5 border border-yellow-500/15 text-xs text-yellow-700 flex items-center gap-2">
                   <Clock size={13} /> รอลูกค้าส่งใบสั่งซื้อ (PO)
+                </div>
+              )}
+
+              {/* Cross-reference links */}
+              {["won", "po_received"].includes(selected.status) && (
+                <div className="p-3 rounded-xl bg-secondary/20 border border-border">
+                  <DocCrossLinks quoteId={selected.id} exclude={["quote"]} />
                 </div>
               )}
 

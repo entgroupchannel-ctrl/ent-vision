@@ -8,6 +8,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import DocCrossLinks from "@/components/admin/DocCrossLinks";
 
 /* ─── Types ─── */
 interface BillingNote {
@@ -427,6 +428,11 @@ const AdminBillingManager = () => {
                         </div>
                       </div>
                     )}
+
+                    {/* Related Documents */}
+                    <div className="pt-2 border-t border-border">
+                      <DocCrossLinks quoteId={b.quote_id} orderId={b.order_id} billingId={b.id} exclude={["billing"]} />
+                    </div>
 
                     <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
                       {b.status === "draft" && (

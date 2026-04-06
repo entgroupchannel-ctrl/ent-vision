@@ -8,6 +8,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import DocCrossLinks from "@/components/admin/DocCrossLinks";
 
 /* ─── Types ─── */
 interface Invoice {
