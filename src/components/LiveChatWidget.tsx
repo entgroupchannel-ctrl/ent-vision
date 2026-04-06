@@ -179,22 +179,22 @@ const LiveChatWidget = () => {
     setSending(true);
     setInput("");
 
-    const optimistic: Message = {
-      id: `temp-${Date.now()}`,
-      sender_type: "user",
-      content: text,
-      created_at: new Date().toISOString(),
-    };
-    setMessages((prev) => [...prev, optimistic]);
-
-    const { error } = await supabase.from("live_chat_messages").insert({
+    const { data, error } = await supabase.from("live_chat_messages").insert({
       conversation_id: conversationId,
       sender_type: "user",
       sender_id: user?.id || null,
       content: text,
-    });
+    }).select("id, sender_type, content, created_at").single();
 
-    if (error) console.error("Send failed:", error);
+    if (error) {
+      console.error("Send failed:", error);
+    } else if (data) {
+      // Add message only if realtime hasn't already added it
+      setMessages((prev) => {
+        if (prev.some((m) => m.id === data.id)) return prev;
+        return [...prev, data as Message];
+      });
+    }
 
     // Update last_message_at
     await supabase
