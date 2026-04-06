@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { MessageCircle, X, Send, User, Headphones, Loader2 } from "lucide-react";
+import { MessageCircle, X, Send, User, Headphones, Loader2, Minus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-import { useAutoHideWidget } from "@/hooks/useAutoHideWidget";
 
 type Message = {
   id: string;
@@ -23,15 +22,9 @@ const LiveChatWidget = () => {
   const [guestInfo, setGuestInfo] = useState<GuestInfo | null>(null);
   const [guestForm, setGuestForm] = useState({ name: "", email: "" });
   const [showGuestForm, setShowGuestForm] = useState(false);
+  const [hasUnread, setHasUnread] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-
-  const { visible: buttonVisible, onInteraction, forceShow } = useAutoHideWidget({
-    initialDelay: 3000,
-    hideAfter: 8000,
-    showInterval: 35000,
-    showDuration: 6000,
-  });
 
   // Scroll to bottom
   useEffect(() => {
