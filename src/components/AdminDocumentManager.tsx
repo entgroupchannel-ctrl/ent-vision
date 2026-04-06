@@ -254,12 +254,14 @@ const AdminDocumentManager = () => {
         }, { onConflict: "user_id,document_id" });
       }
 
-      await (supabase.from as any)("notifications").insert({
-        user_id: req.user_id, type: "document_ready",
-        title: "คำขอเอกสารได้รับอนุมัติ",
-        message: `เอกสาร "${req.document_type}" พร้อมดาวน์โหลดแล้ว`,
-        link: "/my-account?tab=documents",
-      }).catch(() => {});
+      try {
+        await (supabase.from as any)("notifications").insert({
+          user_id: req.user_id, type: "document_ready",
+          title: "คำขอเอกสารได้รับอนุมัติ",
+          message: `เอกสาร "${req.document_type}" พร้อมดาวน์โหลดแล้ว`,
+          link: "/my-account?tab=documents",
+        });
+      } catch {}
 
       toast({ title: "อนุมัติคำขอสำเร็จ" });
       fetchRequests();
@@ -276,12 +278,14 @@ const AdminDocumentManager = () => {
         .update({ status: "rejected", admin_notes: reason || "ไม่อนุมัติ", updated_at: new Date().toISOString() })
         .eq("id", req.id);
 
-      await (supabase.from as any)("notifications").insert({
-        user_id: req.user_id, type: "document_rejected",
-        title: "คำขอเอกสารไม่ได้รับอนุมัติ",
-        message: reason || "ไม่อนุมัติ",
-        link: "/my-account?tab=documents",
-      }).catch(() => {});
+      try {
+        await (supabase.from as any)("notifications").insert({
+          user_id: req.user_id, type: "document_rejected",
+          title: "คำขอเอกสารไม่ได้รับอนุมัติ",
+          message: reason || "ไม่อนุมัติ",
+          link: "/my-account?tab=documents",
+        });
+      } catch {}
 
       toast({ title: "ปฏิเสธคำขอแล้ว" });
       fetchRequests();

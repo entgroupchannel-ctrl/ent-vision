@@ -168,7 +168,9 @@ const QuoteBuilder = () => {
           sort_order: i,
         }));
 
-        await (supabase.from as any)("quote_line_items").insert(lineItems).catch(() => {});
+        try {
+          await (supabase.from as any)("quote_line_items").insert(lineItems);
+        } catch {}
       }
 
       // Track engagement

@@ -393,12 +393,14 @@ const AdminQuoteReview = () => {
       if (qErr) throw qErr;
 
       if (selected.user_id) {
-        await (supabase.from as any)("notifications").insert({
-          user_id: selected.user_id, type: "quote_status",
-          title: "ใบเสนอราคาพร้อมแล้ว",
-          message: `${selected.quote_number || "#"} มูลค่า ฿${grand.toLocaleString()}`,
-          link: "/my-account?tab=quotes",
-        }).catch(() => {});
+        try {
+          await (supabase.from as any)("notifications").insert({
+            user_id: selected.user_id, type: "quote_status",
+            title: "ใบเสนอราคาพร้อมแล้ว",
+            message: `${selected.quote_number || "#"} มูลค่า ฿${grand.toLocaleString()}`,
+            link: "/my-account?tab=quotes",
+          });
+        } catch {}
       }
       toast({ title: "อนุมัติสำเร็จ", description: `฿${grand.toLocaleString()}` });
       setSelected(null);

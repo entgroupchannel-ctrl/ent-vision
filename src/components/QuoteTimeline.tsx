@@ -172,13 +172,15 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
       }).eq("id", quoteId);
 
       // Notify admin
-      await (supabase.from as any)("notifications").insert({
-        user_id: null, // TODO: send to admin users
-        type: "negotiation",
-        title: `ลูกค้าขอต่อรอง — ${quoteNumber}`,
-        message: `เรื่อง: ${subjectLabel} — ${negReason.trim().slice(0, 80)}`,
-        link: "/admin?tab=quotes",
-      }).catch(() => {});
+      try {
+        await (supabase.from as any)("notifications").insert({
+          user_id: null, // TODO: send to admin users
+          type: "negotiation",
+          title: `ลูกค้าขอต่อรอง — ${quoteNumber}`,
+          message: `เรื่อง: ${subjectLabel} — ${negReason.trim().slice(0, 80)}`,
+          link: "/admin?tab=quotes",
+        });
+      } catch {}
 
       toast({ title: "ส่งคำขอต่อรองแล้ว", description: "Admin จะตอบกลับภายใน 24 ชม." });
       setNegReason("");
@@ -240,13 +242,15 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
       // Notify customer
       const quote = await (supabase.from as any)("quote_requests").select("user_id").eq("id", quoteId).single();
       if (quote.data?.user_id) {
-        await (supabase.from as any)("notifications").insert({
-          user_id: quote.data.user_id,
-          type: "negotiation_reply",
-          title: `Admin ตอบกลับ — ${quoteNumber}`,
-          message: `${actionLabel}: ${content.slice(0, 80)}`,
-          link: "/my-account?tab=quotes",
-        }).catch(() => {});
+        try {
+          await (supabase.from as any)("notifications").insert({
+            user_id: quote.data.user_id,
+            type: "negotiation_reply",
+            title: `Admin ตอบกลับ — ${quoteNumber}`,
+            message: `${actionLabel}: ${content.slice(0, 80)}`,
+            link: "/my-account?tab=quotes",
+          });
+        } catch {}
       }
 
       toast({ title: `${actionLabel}แล้ว` });
