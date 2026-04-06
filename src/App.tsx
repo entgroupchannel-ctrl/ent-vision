@@ -13,6 +13,7 @@ import ScrollToTop from "./components/ScrollToTop.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
 import LiveChatWidget from "./components/LiveChatWidget.tsx";
 import FloatingQuoteBar from "./components/FloatingQuoteBar.tsx";
+import GlobalFloatingToolbar from "./components/GlobalFloatingToolbar.tsx";
 
 /* ── Lazy-loaded pages ── */
 const GTSeries = lazy(() => import("./pages/GTSeries.tsx"));
