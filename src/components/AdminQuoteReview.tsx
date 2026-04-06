@@ -48,13 +48,13 @@ interface CatalogProduct {
 interface DocLibraryItem { id: string; title: string; file_url: string; category: string; }
 
 /* ─── Constants ─── */
-const STATUS_CFG: Record<string, { label: string; color: string }> = {
-  new: { label: "ใหม่", color: "bg-blue-500/10 text-blue-500 border-blue-500/20" },
-  quoted: { label: "ส่งราคาแล้ว", color: "bg-purple-500/10 text-purple-500 border-purple-500/20" },
-  negotiating: { label: "เจรจา", color: "bg-orange-500/10 text-orange-500 border-orange-500/20" },
-  won: { label: "ตกลงราคา", color: "bg-green-500/10 text-green-500 border-green-500/20" },
-  po_received: { label: "รับ PO แล้ว", color: "bg-teal-500/10 text-teal-600 border-teal-500/20" },
-  lost: { label: "ไม่สำเร็จ", color: "bg-red-500/10 text-red-400 border-red-500/20" },
+const STATUS_CFG: Record<string, { label: string; color: string; order: number }> = {
+  new: { label: "ใหม่", color: "bg-blue-500/10 text-blue-500 border-blue-500/20", order: 0 },
+  quoted: { label: "ส่งราคาแล้ว", color: "bg-purple-500/10 text-purple-500 border-purple-500/20", order: 1 },
+  negotiating: { label: "เจรจา", color: "bg-orange-500/10 text-orange-500 border-orange-500/20", order: 2 },
+  won: { label: "ตกลงราคา", color: "bg-green-500/10 text-green-500 border-green-500/20", order: 3 },
+  po_received: { label: "รับ PO แล้ว", color: "bg-teal-500/10 text-teal-600 border-teal-500/20", order: 4 },
+  lost: { label: "ไม่สำเร็จ", color: "bg-red-500/10 text-red-400 border-red-500/20", order: 5 },
 };
 
 const DELIVERY_OPTS = [
@@ -394,7 +394,6 @@ const AdminQuoteReview = () => {
       const { error } = await (supabase.from as any)("quote_requests").update(updates).eq("id", quoteId);
       if (error) throw error;
 
-      // Notify customer
       const quote = quotes.find((q) => q.id === quoteId);
       if (quote?.user_id) {
         try {
@@ -412,7 +411,6 @@ const AdminQuoteReview = () => {
 
       toast({ title: action === "approved" ? "อนุมัติ PO สำเร็จ" : "ปฏิเสธ PO แล้ว" });
 
-      // Send email: po_approved or po_rejected
       if (quote?.email) {
         const saleInfo = await getSaleInfo(quote.assigned_to);
         notifyQuoteStatus({
@@ -430,6 +428,111 @@ const AdminQuoteReview = () => {
 
       fetchQuotes();
       if (selected) selectQuote({ ...selected, ...updates });
+    } catch (err: any) {
+      toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
+    }
+    setSaving(false);
+  };
+
+  /* ─── Change Status (inline dropdown) ─── */
+  const handleStatusChange = async (quoteId: string, newStatus: string) => {
+    if (!user) return;
+    const quote = quotes.find((q) => q.id === quoteId);
+    if (!quote) return;
+
+    // Confirm if changing to important states
+    if (newStatus === "won" && !confirm("ยืนยันเปลี่ยนเป็น 'ตกลงราคา'? ลูกค้าจะได้รับแจ้งเตือน")) return;
+    if (newStatus === "lost" && !confirm("ยืนยันปิดเป็น 'ไม่สำเร็จ'?")) return;
+
+    setSaving(true);
+    try {
+      const updates: any = { status: newStatus };
+
+      // If moving to quoted, auto-set approved fields
+      if (newStatus === "quoted" && !quote.approved_by) {
+        updates.approved_by = user.id;
+        updates.approved_at = new Date().toISOString();
+      }
+
+      const { error } = await (supabase.from as any)("quote_requests").update(updates).eq("id", quoteId);
+      if (error) throw error;
+
+      // Log status change as a message (preserves history)
+      try {
+        await (supabase.from as any)("quote_messages").insert({
+          quote_id: quoteId,
+          sender_id: user.id,
+          sender_role: "admin",
+          message_type: "status_change",
+          content: `เปลี่ยนสถานะจาก "${(STATUS_CFG[quote.status] || { label: quote.status }).label}" เป็น "${(STATUS_CFG[newStatus] || { label: newStatus }).label}"`,
+          old_value: quote.status,
+          new_value: newStatus,
+        });
+      } catch {}
+
+      // Notify customer for important status changes
+      if (quote.user_id && ["quoted", "won", "lost"].includes(newStatus)) {
+        try {
+          const titles: Record<string, string> = {
+            quoted: "ใบเสนอราคาพร้อมแล้ว",
+            won: "ยืนยันตกลงราคา",
+            lost: "ใบเสนอราคาถูกปิด",
+          };
+          await (supabase.from as any)("notifications").insert({
+            user_id: quote.user_id,
+            type: "quote_status",
+            title: titles[newStatus] || "สถานะใบเสนอราคาเปลี่ยน",
+            message: `${quote.quote_number || "#"} — ${(STATUS_CFG[newStatus] || { label: newStatus }).label}`,
+            link: "/my-account?tab=quotes",
+          });
+        } catch {}
+      }
+
+      toast({ title: "เปลี่ยนสถานะแล้ว", description: `→ ${(STATUS_CFG[newStatus] || { label: newStatus }).label}` });
+      fetchQuotes();
+      if (selected?.id === quoteId) selectQuote({ ...quote, ...updates });
+    } catch (err: any) {
+      toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
+    }
+    setSaving(false);
+  };
+
+  /* ─── Reset Status (preserve messages, files, conversation) ─── */
+  const handleResetStatus = async (quoteId: string) => {
+    const quote = quotes.find((q) => q.id === quoteId);
+    if (!quote) return;
+    if (!confirm(
+      `เคลียร์สถานะใบเสนอราคา ${quote.quote_number || ""} กลับเป็น "ใหม่"?\n\n` +
+      "• ข้อความ/สนทนาทั้งหมดจะยังคงอยู่\n" +
+      "• ไฟล์ PO/เอกสารจะไม่ถูกลบ\n" +
+      "• เฉพาะสถานะที่จะถูกรีเซ็ต"
+    )) return;
+
+    setSaving(true);
+    try {
+      const { error } = await (supabase.from as any)("quote_requests").update({
+        status: "new",
+        customer_response: null,
+        po_status: null,
+      }).eq("id", quoteId);
+      if (error) throw error;
+
+      // Log reset as a message
+      try {
+        await (supabase.from as any)("quote_messages").insert({
+          quote_id: quoteId,
+          sender_id: user?.id || null,
+          sender_role: "admin",
+          message_type: "status_change",
+          content: `รีเซ็ตสถานะจาก "${(STATUS_CFG[quote.status] || { label: quote.status }).label}" กลับเป็น "ใหม่" (ข้อความและไฟล์ยังคงอยู่)`,
+          old_value: quote.status,
+          new_value: "new",
+        });
+      } catch {}
+
+      toast({ title: "รีเซ็ตสถานะแล้ว", description: "ข้อความและไฟล์ยังคงอยู่ครบ" });
+      fetchQuotes();
+      if (selected?.id === quoteId) selectQuote({ ...quote, status: "new", customer_response: null, po_status: null });
     } catch (err: any) {
       toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
     }
@@ -526,13 +629,32 @@ const AdminQuoteReview = () => {
         <div className="lg:col-span-3">
           {selected ? (
             <div className="card-surface rounded-xl p-5 space-y-5 sticky top-24 max-h-[85vh] overflow-y-auto">
-              {/* Header + Actions */}
-              <div className="flex items-center justify-between">
+              {/* Header + Status Change + Actions */}
+              <div className="flex items-center justify-between flex-wrap gap-2">
                 <h3 className="text-lg font-bold text-foreground">{selected.quote_number || "Draft"}</h3>
                 <div className="flex items-center gap-2">
                   <button onClick={handlePrint} className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors" title="พิมพ์"><Printer size={16} /></button>
                   <button onClick={handleShare} className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors" title="แชร์"><Share2 size={16} /></button>
-                  <span className={`text-xs px-2 py-1 rounded-full border font-bold ${(STATUS_CFG[selected.status] || STATUS_CFG.new).color}`}>{(STATUS_CFG[selected.status] || STATUS_CFG.new).label}</span>
+                  {/* Status Dropdown */}
+                  <select
+                    value={selected.status}
+                    onChange={(e) => handleStatusChange(selected.id, e.target.value)}
+                    disabled={saving}
+                    className={`text-xs px-2.5 py-1.5 rounded-lg border font-bold cursor-pointer transition-colors ${(STATUS_CFG[selected.status] || STATUS_CFG.new).color}`}
+                  >
+                    {Object.entries(STATUS_CFG).map(([key, cfg]) => (
+                      <option key={key} value={key}>{cfg.label}</option>
+                    ))}
+                  </select>
+                  {/* Reset Button */}
+                  <button
+                    onClick={() => handleResetStatus(selected.id)}
+                    disabled={saving || selected.status === "new"}
+                    className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors disabled:opacity-30"
+                    title="เคลียร์สถานะ (รีเซ็ตกลับเป็นใหม่ ข้อมูลไม่หาย)"
+                  >
+                    <RefreshCw size={14} />
+                  </button>
                 </div>
               </div>
 
