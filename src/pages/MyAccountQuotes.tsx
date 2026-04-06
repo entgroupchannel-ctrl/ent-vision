@@ -5,6 +5,7 @@ import {
   Printer, Share2, Copy, Trash2, RefreshCw, Info, Package,
   Upload, FileCheck, AlertCircle,
 } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
