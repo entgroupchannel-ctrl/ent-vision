@@ -18,12 +18,14 @@ import AdminProductCatalog from "@/components/AdminProductCatalog";
 import AdminQuoteReview from "@/components/AdminQuoteReview";
 import AdminSalesOrders from "@/components/AdminSalesOrders";
 import AdminInvoiceManager from "@/components/AdminInvoiceManager";
+import AdminBillingManager from "@/components/AdminBillingManager";
+import AdminDeliveryManager from "@/components/AdminDeliveryManager";
+import AdminPaymentManager from "@/components/AdminPaymentManager";
 import AdminUserManagement from "@/components/AdminUserManagement";
-import AdminCustomerManager from "@/components/AdminCustomerManager";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
 const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
 
-type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "customers" | "livechat" | "sales_orders" | "invoices";
+type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -96,10 +98,12 @@ const AdminDashboard = () => {
     engagement: "marketing.engagement",
     subscribers: "marketing.subscribers",
     users: "system.users",
-    customers: "system.users",
     livechat: "sales.contacts",
     sales_orders: "sales.quote_review",
     invoices: "sales.quote_review",
+    billing: "sales.quote_review",
+    delivery: "sales.quote_review",
+    payments: "sales.quote_review",
   };
 
   // Check if current tab allows edit
@@ -132,6 +136,20 @@ const AdminDashboard = () => {
   }, [authLoading, isAdmin, user, navigate]);
 
   useEffect(() => { if (isAdmin) fetchData(); }, [isAdmin]);
+
+  // Listen for cross-component tab switching (e.g. invoice → payments)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail && typeof detail === "string") {
+        setTab(detail as Tab);
+        setStatusFilter("all");
+        setSelectedItem(null);
+      }
+    };
+    window.addEventListener("admin-switch-tab", handler);
+    return () => window.removeEventListener("admin-switch-tab", handler);
+  }, []);
 
   const updateStatus = async (table: string, id: string, status: string) => {
     const { error } = await (supabase.from(table as any) as any).update({ status }).eq("id", id);
@@ -232,7 +250,10 @@ const AdminDashboard = () => {
                   { id: "quotes" as Tab, label: "ใบเสนอราคา", icon: FileText, count: quotes.filter(q => q.status === "new").length },
                   { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
                   { id: "sales_orders" as Tab, label: "ยอดขาย / Order", icon: Package, count: 0 },
-                  { id: "invoices" as Tab, label: "เอกสารขาย", icon: Receipt, count: 0 },
+                  { id: "billing" as Tab, label: "ใบวางบิล", icon: FileText, count: 0 },
+                  { id: "invoices" as Tab, label: "ใบแจ้งหนี้", icon: Receipt, count: 0 },
+                  { id: "delivery" as Tab, label: "ใบส่งสินค้า", icon: Package, count: 0 },
+                  { id: "payments" as Tab, label: "บันทึกจ่ายเงิน", icon: Wallet, count: 0 },
                   { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
@@ -320,28 +341,16 @@ const AdminDashboard = () => {
                     )}
                     {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
                     <button
-                      onClick={() => { setTab("customers"); setStatusFilter("all"); setSelectedItem(null); }}
-                      className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                        tab === "customers"
-                          ? "bg-primary/10 text-primary"
-                          : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
-                      } ${sidebarMode === "icon" ? "justify-center" : ""}`}
-                      title={sidebarMode === "icon" ? "จัดการลูกค้า" : undefined}
-                    >
-                      <Building2 size={16} className="shrink-0" />
-                      {sidebarMode === "full" && <span className="flex-1 text-left truncate">จัดการลูกค้า</span>}
-                    </button>
-                    <button
                       onClick={() => { setTab("users"); setStatusFilter("all"); setSelectedItem(null); }}
                       className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                         tab === "users"
                           ? "bg-primary/10 text-primary"
                           : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
                       } ${sidebarMode === "icon" ? "justify-center" : ""}`}
-                      title={sidebarMode === "icon" ? "จัดการผู้ใช้ Admin" : undefined}
+                      title={sidebarMode === "icon" ? "จัดการผู้ใช้" : undefined}
                     >
                       <Shield size={16} className="shrink-0" />
-                      {sidebarMode === "full" && <span className="flex-1 text-left truncate">จัดการ Admin</span>}
+                      {sidebarMode === "full" && <span className="flex-1 text-left truncate">จัดการผู้ใช้</span>}
                     </button>
                   </>
                 )}
@@ -368,7 +377,10 @@ const AdminDashboard = () => {
               { id: "quotes" as Tab, label: "ใบเสนอราคา" },
               { id: "quote_review" as Tab, label: "จัดการ Quote" },
               { id: "sales_orders" as Tab, label: "ยอดขาย" },
-              { id: "invoices" as Tab, label: "เอกสารขาย" },
+              { id: "billing" as Tab, label: "ใบวางบิล" },
+              { id: "invoices" as Tab, label: "ใบแจ้งหนี้" },
+              { id: "delivery" as Tab, label: "ใบส่งสินค้า" },
+              { id: "payments" as Tab, label: "จ่ายเงิน" },
               { id: "catalog" as Tab, label: "สินค้า" },
               { id: "engagement" as Tab, label: "Engagement" },
               { id: "documents" as Tab, label: "เอกสาร" },
@@ -432,10 +444,14 @@ const AdminDashboard = () => {
           <AdminQuoteReview />
         ) : tab === "sales_orders" ? (
           <AdminSalesOrders />
+        ) : tab === "billing" ? (
+          <AdminBillingManager />
         ) : tab === "invoices" ? (
           <AdminInvoiceManager />
-        ) : tab === "customers" ? (
-          <AdminCustomerManager />
+        ) : tab === "delivery" ? (
+          <AdminDeliveryManager />
+        ) : tab === "payments" ? (
+          <AdminPaymentManager />
         ) : tab === "users" ? (
           <AdminUserManagement />
         ) : tab === "livechat" ? (

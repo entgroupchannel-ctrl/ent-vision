@@ -3,7 +3,7 @@ import {
   FileText, Receipt, FileCheck, Plus, Eye, RefreshCw, Search,
   Clock, CheckCircle, Send, AlertCircle, Loader2, ChevronDown,
   Building2, Phone, Mail, Printer, Download, ArrowRight,
-  DollarSign, Calendar, Hash, XCircle, CreditCard,
+  DollarSign, Calendar, Hash, XCircle, CreditCard, Truck,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -249,6 +249,46 @@ const AdminInvoiceManager = () => {
     }
   };
 
+  /* ─── Create Delivery Note from Invoice ─── */
+  const createDeliveryFromInvoice = async (invoice: Invoice) => {
+    try {
+      const { data: invItems } = await supabase
+        .from("invoice_items").select("*")
+        .eq("invoice_id", invoice.id).order("sort_order");
+
+      const { data: delivery, error } = await (supabase.from as any)("delivery_notes").insert({
+        invoice_id: invoice.id,
+        billing_note_id: (invoice as any).billing_note_id || null,
+        quote_id: invoice.quote_id,
+        order_id: invoice.order_id,
+        customer_name: invoice.customer_name,
+        customer_company: invoice.customer_company,
+        customer_address: invoice.customer_address,
+        customer_phone: invoice.customer_phone,
+        delivery_address: invoice.customer_address,
+        created_by: user?.id,
+      }).select().single();
+
+      if (error) throw error;
+
+      if (delivery && invItems && invItems.length > 0) {
+        const items = (invItems as any[]).map((ii: any) => ({
+          delivery_note_id: (delivery as any).id,
+          model: ii.model,
+          description: ii.description,
+          qty: ii.qty || 1,
+          sort_order: ii.sort_order || 0,
+        }));
+        await (supabase.from as any)("delivery_note_items").insert(items);
+      }
+
+      toast({ title: "สร้างใบส่งสินค้าสำเร็จ", description: `เลขที่ ${(delivery as any).delivery_number}` });
+      fetchAll();
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    }
+  };
+
   /* ─── Update status ─── */
   const updateInvoiceStatus = async (id: string, status: string) => {
     const { error } = await supabase.from("invoices").update({ status, updated_at: new Date().toISOString() } as any).eq("id", id);
@@ -487,8 +527,16 @@ const AdminInvoiceManager = () => {
                             </button>
                           )}
                           {inv.status === "sent" && (
-                            <button onClick={() => updateInvoiceStatus(inv.id, "paid")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-green-500/10 text-green-500 text-xs font-medium hover:bg-green-500/20">
-                              <CheckCircle size={12} /> บันทึกชำระแล้ว
+                            <button onClick={() => {
+                              const event = new CustomEvent("admin-switch-tab", { detail: "payments" });
+                              window.dispatchEvent(event);
+                            }} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-green-500/10 text-green-500 text-xs font-medium hover:bg-green-500/20">
+                              <CreditCard size={12} /> บันทึกจ่ายเงิน
+                            </button>
+                          )}
+                          {(inv.status === "draft" || inv.status === "sent" || inv.status === "paid") && (
+                            <button onClick={() => createDeliveryFromInvoice(inv)} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-teal-500/10 text-teal-600 text-xs font-medium hover:bg-teal-500/20">
+                              <Truck size={12} /> สร้างใบส่งสินค้า
                             </button>
                           )}
                           {(inv.status === "sent" || inv.status === "paid") && !taxInvoices.some(t => t.invoice_id === inv.id) && (
