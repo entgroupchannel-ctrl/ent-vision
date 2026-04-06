@@ -73,6 +73,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
   const { count: wishlistCount } = useWishlist();
   const [searchOpen, setSearchOpen] = useState(false);
+  const [aiChatOpen, setAiChatOpen] = useState(false);
   const [tagsExpanded, setTagsExpanded] = useState(true);
 
   // Auto-collapse tags after 10 seconds
