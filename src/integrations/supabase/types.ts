@@ -1038,6 +1038,188 @@ export type Database = {
         }
         Relationships: []
       }
+      sales_order_items: {
+        Row: {
+          admin_notes: string | null
+          category: string | null
+          description: string | null
+          discount_percent: number | null
+          id: string
+          line_total: number | null
+          model: string
+          name_th: string | null
+          order_id: string
+          product_id: string | null
+          qty: number | null
+          sort_order: number | null
+          specs: Json | null
+          unit_label: string | null
+          unit_price: number | null
+          warranty_terms: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          category?: string | null
+          description?: string | null
+          discount_percent?: number | null
+          id?: string
+          line_total?: number | null
+          model: string
+          name_th?: string | null
+          order_id: string
+          product_id?: string | null
+          qty?: number | null
+          sort_order?: number | null
+          specs?: Json | null
+          unit_label?: string | null
+          unit_price?: number | null
+          warranty_terms?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          category?: string | null
+          description?: string | null
+          discount_percent?: number | null
+          id?: string
+          line_total?: number | null
+          model?: string
+          name_th?: string | null
+          order_id?: string
+          product_id?: string | null
+          qty?: number | null
+          sort_order?: number | null
+          specs?: Json | null
+          unit_label?: string | null
+          unit_price?: number | null
+          warranty_terms?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sales_order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "sales_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sales_order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "product_catalog"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sales_orders: {
+        Row: {
+          admin_notes: string | null
+          assigned_to: string | null
+          completed_at: string | null
+          created_at: string
+          customer_company: string | null
+          customer_email: string | null
+          customer_name: string
+          customer_phone: string | null
+          delivered_at: string | null
+          delivery_terms: string | null
+          discount_amount: number | null
+          grand_total: number | null
+          id: string
+          internal_notes: string | null
+          net_payable: number | null
+          order_number: string
+          payment_terms: string | null
+          po_file_name: string | null
+          po_file_url: string | null
+          po_number: string | null
+          quote_id: string
+          shipped_at: string | null
+          shipping_provider: string | null
+          status: string
+          subtotal: number | null
+          tracking_number: string | null
+          updated_at: string | null
+          user_id: string | null
+          vat_amount: number | null
+          warranty_terms: string | null
+          withholding_tax: number | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          customer_company?: string | null
+          customer_email?: string | null
+          customer_name: string
+          customer_phone?: string | null
+          delivered_at?: string | null
+          delivery_terms?: string | null
+          discount_amount?: number | null
+          grand_total?: number | null
+          id?: string
+          internal_notes?: string | null
+          net_payable?: number | null
+          order_number: string
+          payment_terms?: string | null
+          po_file_name?: string | null
+          po_file_url?: string | null
+          po_number?: string | null
+          quote_id: string
+          shipped_at?: string | null
+          shipping_provider?: string | null
+          status?: string
+          subtotal?: number | null
+          tracking_number?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+          vat_amount?: number | null
+          warranty_terms?: string | null
+          withholding_tax?: number | null
+        }
+        Update: {
+          admin_notes?: string | null
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          customer_company?: string | null
+          customer_email?: string | null
+          customer_name?: string
+          customer_phone?: string | null
+          delivered_at?: string | null
+          delivery_terms?: string | null
+          discount_amount?: number | null
+          grand_total?: number | null
+          id?: string
+          internal_notes?: string | null
+          net_payable?: number | null
+          order_number?: string
+          payment_terms?: string | null
+          po_file_name?: string | null
+          po_file_url?: string | null
+          po_number?: string | null
+          quote_id?: string
+          shipped_at?: string | null
+          shipping_provider?: string | null
+          status?: string
+          subtotal?: number | null
+          tracking_number?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+          vat_amount?: number | null
+          warranty_terms?: string | null
+          withholding_tax?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sales_orders_quote_id_fkey"
+            columns: ["quote_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       software_inquiries: {
         Row: {
           budget_range: string | null
@@ -1182,10 +1364,34 @@ export type Database = {
           user_id: string
         }[]
       }
+      get_monthly_revenue: {
+        Args: { _year?: number }
+        Returns: {
+          month_name: string
+          month_num: number
+          order_count: number
+          total_revenue: number
+        }[]
+      }
       get_next_sales_person: { Args: never; Returns: string }
       get_permission: {
         Args: { _permission_key: string; _user_id: string }
         Returns: string
+      }
+      get_sales_dashboard: {
+        Args: { _year?: number }
+        Returns: {
+          completed_count: number
+          confirmed_count: number
+          delivered_count: number
+          processing_count: number
+          sale_email: string
+          sale_name: string
+          sale_user_id: string
+          shipped_count: number
+          total_orders: number
+          total_revenue: number
+        }[]
       }
       get_sales_team: {
         Args: never
