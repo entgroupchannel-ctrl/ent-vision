@@ -124,9 +124,11 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
   };
 
   const handleProductChange = async (index: number, field: keyof ProductItem, value: string | number) => {
-    const updated = [...products];
-    updated[index] = { ...updated[index], [field]: value };
-    setProducts(updated);
+    setProducts((prev) => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], [field]: value };
+      return updated;
+    });
 
     // Fetch catalog data when model changes
     if (field === "model" && typeof value === "string" && value) {
@@ -136,15 +138,12 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
           .eq("is_active", true)
           .ilike("model", value)
           .limit(1);
-        if (data && data.length > 0) {
-          const updatedWithCatalog = [...products];
-          updatedWithCatalog[index] = { ...updatedWithCatalog[index], [field]: value, _catalogData: data[0] };
-          setProducts(updatedWithCatalog);
-        } else {
-          const updatedNoCatalog = [...products];
-          updatedNoCatalog[index] = { ...updatedNoCatalog[index], [field]: value, _catalogData: null };
-          setProducts(updatedNoCatalog);
-        }
+        const catalogData = data && data.length > 0 ? data[0] : null;
+        setProducts((prev) => {
+          const updated = [...prev];
+          updated[index] = { ...updated[index], model: value, _catalogData: catalogData };
+          return updated;
+        });
       } catch { /* silent */ }
     }
   };
@@ -197,7 +196,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
       products.filter((p) => p.category || p.model).forEach((p) => {
         trackEvent({
           eventType: "quote_request",
-          productId: p.model || undefined,
+          productSlug: p.model || undefined,
           productCategory: p.category || undefined,
           productName: p.model || undefined,
           metadata: { qty: p.qty, email: emailValue },
@@ -337,8 +336,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
               </div>
               <div className="space-y-2">
                 {products.map((product, index) => (
-                  <div key={index}>
-                    <div className="flex gap-2 items-center group">
+                  <div key={index} className="flex gap-2 items-center group">
                     <span className="w-4 text-xs text-muted-foreground/60 text-right shrink-0">{index + 1}.</span>
                     <div className="flex-1 grid grid-cols-[1fr_1fr_80px] gap-2">
                       <select
@@ -404,19 +402,30 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
                   </div>
                   {/* Product detail from catalog */}
                   {product.model && product._catalogData && (
-                    <div className="ml-6 mt-1 mb-2 p-2.5 rounded-lg bg-secondary/30 border border-border/50 text-xs space-y-1">
+                    <div className="ml-6 mt-1 mb-2 p-2.5 rounded-lg bg-secondary/30 border border-border/50 text-xs space-y-1.5">
                       <p className="font-medium text-foreground">{product._catalogData.name_th || product.model}</p>
                       {product._catalogData.description && (
                         <p className="text-muted-foreground line-clamp-2">{product._catalogData.description}</p>
                       )}
-                      <div className="flex flex-wrap gap-x-4 gap-y-0.5 text-muted-foreground">
-                        {product._catalogData.specs?.cpu && <span>CPU: {product._catalogData.specs.cpu}</span>}
-                        {product._catalogData.specs?.ram && <span>RAM: {product._catalogData.specs.ram}</span>}
-                        {product._catalogData.specs?.storage && <span>Storage: {product._catalogData.specs.storage}</span>}
-                        {product._catalogData.specs?.display && <span>Display: {product._catalogData.specs.display}</span>}
-                        {product._catalogData.specs?.lan && <span>LAN: {product._catalogData.specs.lan}</span>}
-                        {product._catalogData.specs?.com && <span>COM: {product._catalogData.specs.com}</span>}
-                      </div>
+                      {product._catalogData.specs && Object.keys(product._catalogData.specs).length > 0 && (
+                        <div className="flex flex-wrap gap-x-3 gap-y-1 text-muted-foreground">
+                          {Object.entries(product._catalogData.specs).map(([key, val]) => {
+                            if (!val || val === "No" || val === "Yes" && key !== "fanless" && key !== "gpio" && key !== "sim") return null;
+                            const labels: Record<string, string> = {
+                              cpu: "CPU", ram: "RAM", storage: "Storage", display: "จอ",
+                              com: "COM", usb: "USB", lan: "LAN", gpio: "GPIO", sim: "SIM",
+                              gen: "Gen", fanless: "Fanless", ip_rating: "IP",
+                            };
+                            const label = labels[key] || key;
+                            const display = val === "Yes" ? "✓" : val;
+                            return (
+                              <span key={key} className="inline-flex items-center gap-0.5">
+                                <span className="font-medium text-foreground/60">{label}:</span> {display}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      )}
                       {product._catalogData.base_price > 0 && (
                         <p className="text-primary font-bold">ราคาเริ่มต้น ฿{product._catalogData.base_price.toLocaleString()}</p>
                       )}
