@@ -242,46 +242,143 @@ export type Database = {
         }
         Relationships: []
       }
+      document_access: {
+        Row: {
+          document_id: string
+          expires_at: string | null
+          granted_at: string
+          granted_by: string | null
+          id: string
+          notes: string | null
+          user_id: string
+        }
+        Insert: {
+          document_id: string
+          expires_at?: string | null
+          granted_at?: string
+          granted_by?: string | null
+          id?: string
+          notes?: string | null
+          user_id: string
+        }
+        Update: {
+          document_id?: string
+          expires_at?: string | null
+          granted_at?: string
+          granted_by?: string | null
+          id?: string
+          notes?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_access_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "document_library"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_download_log: {
+        Row: {
+          document_id: string
+          downloaded_at: string
+          id: string
+          ip_address: string | null
+          method: string | null
+          user_id: string | null
+        }
+        Insert: {
+          document_id: string
+          downloaded_at?: string
+          id?: string
+          ip_address?: string | null
+          method?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          document_id?: string
+          downloaded_at?: string
+          id?: string
+          ip_address?: string | null
+          method?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_download_log_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "document_library"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       document_library: {
         Row: {
+          access_level: string
+          category: string
           created_at: string
           description: string | null
           document_type: string
           download_count: number
+          file_size: number | null
+          file_type: string | null
           file_url: string
           id: string
           is_public: boolean
           product_model: string | null
+          share_token: string | null
           title: string
+          updated_at: string | null
+          uploaded_by: string | null
         }
         Insert: {
+          access_level?: string
+          category?: string
           created_at?: string
           description?: string | null
           document_type: string
           download_count?: number
+          file_size?: number | null
+          file_type?: string | null
           file_url: string
           id?: string
           is_public?: boolean
           product_model?: string | null
+          share_token?: string | null
           title: string
+          updated_at?: string | null
+          uploaded_by?: string | null
         }
         Update: {
+          access_level?: string
+          category?: string
           created_at?: string
           description?: string | null
           document_type?: string
           download_count?: number
+          file_size?: number | null
+          file_type?: string | null
           file_url?: string
           id?: string
           is_public?: boolean
           product_model?: string | null
+          share_token?: string | null
           title?: string
+          updated_at?: string | null
+          uploaded_by?: string | null
         }
         Relationships: []
       }
       document_requests: {
         Row: {
           admin_notes: string | null
+          approved_at: string | null
+          approved_by: string | null
           created_at: string
+          document_id: string | null
           document_type: string
           file_url: string | null
           id: string
@@ -294,7 +391,10 @@ export type Database = {
         }
         Insert: {
           admin_notes?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
           created_at?: string
+          document_id?: string | null
           document_type: string
           file_url?: string | null
           id?: string
@@ -307,7 +407,10 @@ export type Database = {
         }
         Update: {
           admin_notes?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
           created_at?: string
+          document_id?: string | null
           document_type?: string
           file_url?: string | null
           id?: string
@@ -318,7 +421,15 @@ export type Database = {
           updated_at?: string | null
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "document_requests_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "document_library"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       engagement_events: {
         Row: {
@@ -531,6 +642,7 @@ export type Database = {
           company_address: string | null
           company_name: string | null
           company_position: string | null
+          customer_tier: string
           full_name: string | null
           id: string
           line_id: string | null
@@ -544,6 +656,7 @@ export type Database = {
           company_address?: string | null
           company_name?: string | null
           company_position?: string | null
+          customer_tier?: string
           full_name?: string | null
           id: string
           line_id?: string | null
@@ -557,6 +670,7 @@ export type Database = {
           company_address?: string | null
           company_name?: string | null
           company_position?: string | null
+          customer_tier?: string
           full_name?: string | null
           id?: string
           line_id?: string | null
@@ -843,6 +957,14 @@ export type Database = {
       }
     }
     Functions: {
+      can_download_document: {
+        Args: { _document_id: string; _user_id: string }
+        Returns: boolean
+      }
+      generate_doc_share_token: {
+        Args: { _document_id: string }
+        Returns: string
+      }
       get_admin_users: {
         Args: never
         Returns: {
