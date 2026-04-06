@@ -336,8 +336,8 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
               </div>
               <div className="space-y-2">
                 {products.map((product, index) => (
-                  <div key={index} className="space-y-0">
-                    <span className="w-4 text-xs text-muted-foreground/60 text-right shrink-0">{index + 1}.</span>
+                  <div key={index} className="mb-2">
+                  <div className="flex gap-2 items-center group">
                     <div className="flex-1 grid grid-cols-[1fr_1fr_80px] gap-2">
                       <select
                         value={product.category}
