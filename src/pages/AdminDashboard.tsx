@@ -14,11 +14,12 @@ import EngagementAnalytics from "@/components/EngagementAnalytics";
 import AdminDocumentManager from "@/components/AdminDocumentManager";
 import AdminProductCatalog from "@/components/AdminProductCatalog";
 import AdminQuoteReview from "@/components/AdminQuoteReview";
+import AdminSalesOrders from "@/components/AdminSalesOrders";
 import AdminUserManagement from "@/components/AdminUserManagement";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
 const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
 
-type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat";
+type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -92,6 +93,7 @@ const AdminDashboard = () => {
     subscribers: "marketing.subscribers",
     users: "system.users",
     livechat: "sales.contacts",
+    sales_orders: "sales.quote_review",
   };
 
   // Check if current tab allows edit
@@ -222,6 +224,7 @@ const AdminDashboard = () => {
                   { id: "contacts" as Tab, label: "ติดต่อเข้ามา", icon: MessageSquare, count: contacts.filter(c => c.status === "new").length },
                   { id: "quotes" as Tab, label: "ใบเสนอราคา", icon: FileText, count: quotes.filter(q => q.status === "new").length },
                   { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
+                  { id: "sales_orders" as Tab, label: "ยอดขาย / Order", icon: Package, count: 0 },
                   { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
                   { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
                   { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
@@ -338,6 +341,7 @@ const AdminDashboard = () => {
               { id: "contacts" as Tab, label: "ติดต่อ" },
               { id: "quotes" as Tab, label: "ใบเสนอราคา" },
               { id: "quote_review" as Tab, label: "จัดการ Quote" },
+              { id: "sales_orders" as Tab, label: "ยอดขาย" },
               { id: "catalog" as Tab, label: "สินค้า" },
               { id: "engagement" as Tab, label: "Engagement" },
               { id: "documents" as Tab, label: "เอกสาร" },
@@ -399,6 +403,8 @@ const AdminDashboard = () => {
           <AdminProductCatalog />
         ) : tab === "quote_review" ? (
           <AdminQuoteReview />
+        ) : tab === "sales_orders" ? (
+          <AdminSalesOrders />
         ) : tab === "users" ? (
           <AdminUserManagement />
         ) : tab === "livechat" ? (
