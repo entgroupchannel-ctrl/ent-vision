@@ -125,6 +125,9 @@ const AdminDocumentManager = () => {
   const [logs, setLogs] = useState<DownloadLog[]>([]);
   const [logsLoading, setLogsLoading] = useState(false);
 
+  // User profiles cache (for showing names instead of IDs)
+  const [userProfiles, setUserProfiles] = useState<Record<string, { full_name: string; company_name: string | null }>>({});
+
   // Edit
   const [editDoc, setEditDoc] = useState<DocLibrary | null>(null);
 
@@ -142,7 +145,21 @@ const AdminDocumentManager = () => {
     setReqLoading(true);
     try {
       const { data } = await (supabase.from as any)("document_requests").select("*").order("created_at", { ascending: false });
-      if (data) setRequests(data);
+      if (data) {
+        setRequests(data);
+        // Fetch user profiles for all unique user_ids
+        const userIds = [...new Set(data.map((r: DocRequest) => r.user_id))];
+        if (userIds.length > 0) {
+          const { data: profiles } = await (supabase.from as any)("profiles")
+            .select("id, full_name, company_name")
+            .in("id", userIds);
+          if (profiles) {
+            const map: Record<string, { full_name: string; company_name: string | null }> = {};
+            profiles.forEach((p: any) => { map[p.id] = { full_name: p.full_name || "", company_name: p.company_name || null }; });
+            setUserProfiles((prev) => ({ ...prev, ...map }));
+          }
+        }
+      }
     } catch {}
     setReqLoading(false);
   };
@@ -150,7 +167,21 @@ const AdminDocumentManager = () => {
   const fetchAccess = async () => {
     try {
       const { data } = await (supabase.from as any)("document_access").select("*").order("granted_at", { ascending: false });
-      if (data) setAccesses(data);
+      if (data) {
+        setAccesses(data);
+        // Also fetch profiles for access list
+        const userIds = [...new Set(data.map((a: DocAccess) => a.user_id))];
+        if (userIds.length > 0) {
+          const { data: profiles } = await (supabase.from as any)("profiles")
+            .select("id, full_name, company_name")
+            .in("id", userIds);
+          if (profiles) {
+            const map: Record<string, { full_name: string; company_name: string | null }> = {};
+            profiles.forEach((p: any) => { map[p.id] = { full_name: p.full_name || "", company_name: p.company_name || null }; });
+            setUserProfiles((prev) => ({ ...prev, ...map }));
+          }
+        }
+      }
     } catch {}
   };
 
@@ -326,6 +357,12 @@ const AdminDocumentManager = () => {
     if (b < 1024) return `${b} B`;
     if (b < 1048576) return `${(b / 1024).toFixed(1)} KB`;
     return `${(b / 1048576).toFixed(1)} MB`;
+  };
+  const getUserDisplayName = (uid: string): string => {
+    const p = userProfiles[uid];
+    if (p?.full_name && p?.company_name) return `${p.full_name} (${p.company_name})`;
+    if (p?.full_name) return p.full_name;
+    return uid.slice(0, 12) + "…";
   };
 
   const accessBadge = (level: string) => {
@@ -503,7 +540,7 @@ const AdminDocumentManager = () => {
                           </span>
                         </div>
                         <div className="mt-1.5 text-xs text-muted-foreground space-y-0.5">
-                          <p>User ID: <span className="text-foreground font-medium font-mono">{req.user_id.slice(0, 16)}...</span></p>
+                          <p>ผู้ขอ: <span className="text-foreground font-medium">{getUserDisplayName(req.user_id)}</span></p>
                           {req.notes && <p>หมายเหตุ: <span className="text-foreground">{req.notes}</span></p>}
                           {req.admin_notes && <p>Admin: <span className="text-foreground">{req.admin_notes}</span></p>}
                           <p>{fmt(req.created_at)}</p>
@@ -548,7 +585,7 @@ const AdminDocumentManager = () => {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <UserCheck size={14} className="text-green-500 shrink-0" />
-                        <span className="text-sm font-medium text-foreground font-mono">{a.user_id.slice(0, 16)}...</span>
+                        <span className="text-sm font-medium text-foreground">{getUserDisplayName(a.user_id)}</span>
                         <span className="text-muted-foreground text-xs">→</span>
                         <span className="text-sm text-foreground font-medium">{doc?.title || "เอกสาร #" + a.document_id.slice(0, 8)}</span>
                       </div>
@@ -600,7 +637,7 @@ const AdminDocumentManager = () => {
                     return (
                       <tr key={log.id} className="border-t border-border/50 hover:bg-secondary/30">
                         <td className="py-2 px-3 text-muted-foreground">{fmt(log.downloaded_at)}</td>
-                        <td className="py-2 px-3 font-medium text-foreground font-mono">{log.user_id?.slice(0, 12) || "—"}...</td>
+                        <td className="py-2 px-3 font-medium text-foreground">{log.user_id ? getUserDisplayName(log.user_id) : "—"}</td>
                         <td className="py-2 px-3">{doc?.title || log.document_id.slice(0, 12)}</td>
                         <td className="py-2 px-3"><span className="px-1.5 py-0.5 rounded bg-secondary text-muted-foreground">{log.method}</span></td>
                       </tr>
