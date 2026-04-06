@@ -75,27 +75,33 @@ const AdminCustomerManager = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      // Fetch all profiles (admin can see all)
-      const { data: profiles, error } = await supabase
-        .from("profiles")
-        .select("id, full_name, company_name, phone, customer_tier, credit_terms, discount_percent, account_manager_id")
-        .order("company_name", { ascending: true });
-      if (error) throw error;
+      // Fetch profiles + sales team + admin user IDs in parallel
+      const [profilesRes, salesRes, adminRes] = await Promise.all([
+        supabase
+          .from("profiles")
+          .select("id, full_name, company_name, phone, customer_tier, credit_terms, discount_percent, account_manager_id")
+          .order("company_name", { ascending: true }),
+        supabase.rpc("get_sales_team"),
+        supabase.rpc("get_admin_users"),
+      ]);
 
-      // Fetch emails from auth via lookup (get all users' emails)
-      // We'll enrich with email from a separate call
-      // For now fetch sales team
-      const { data: sales } = await supabase.rpc("get_sales_team");
+      if (profilesRes.error) throw profilesRes.error;
 
-      setSalesTeam((sales as SalesUser[]) || []);
+      setSalesTeam((salesRes.data as SalesUser[]) || []);
 
-      // Since we can't directly get emails from profiles, we'll show name/company
-      // Admin can see profiles due to RLS
+      // Build set of admin user IDs to exclude
+      const adminIds = new Set(
+        ((adminRes.data as any[]) || []).map((a: any) => a.user_id)
+      );
+
+      // Filter out admin/super_admin users — show only real customers
       setCustomers(
-        (profiles || []).map((p: any) => ({
-          ...p,
-          email: "", // Will be shown as N/A if not available
-        }))
+        (profilesRes.data || [])
+          .filter((p: any) => !adminIds.has(p.id))
+          .map((p: any) => ({
+            ...p,
+            email: "",
+          }))
       );
     } catch (err: any) {
       toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: err.message, variant: "destructive" });
