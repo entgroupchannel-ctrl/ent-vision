@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import QuoteDialog from "@/components/QuoteDialog";
 import QuoteTimeline from "@/components/QuoteTimeline";
 import { printQuote } from "@/utils/printQuote";
+import { notifyQuoteStatus, getSaleInfo, productSummaryText } from "@/utils/notifyQuoteStatus";
 
 const statusConfig: Record<string, { label: string; color: string }> = {
   draft: { label: "แบบร่าง", color: "bg-gray-500/10 text-gray-500 border-gray-500/20" },
@@ -61,7 +62,7 @@ const MyAccountQuotes = () => {
   const [reQuoteProducts, setReQuoteProducts] = useState<any[] | null>(null);
   const [responding, setResponding] = useState(false);
   const [menuOpenId, setMenuOpenId] = useState<string | null>(null);
-  const menuRef = useRef<HTMLTableCellElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const poFileRef = useRef<HTMLInputElement>(null);
   const [poUploading, setPoUploading] = useState(false);
   const [poNumber, setPoNumber] = useState("");
@@ -202,6 +203,24 @@ const MyAccountQuotes = () => {
       } catch {}
 
       toast({ title: "อัปโหลด PO สำเร็จ", description: "ทีมขายจะตรวจสอบและดำเนินการต่อ" });
+
+      // Send email: po_uploaded
+      const q = quotes.find((qq) => qq.id === quoteId);
+      if (q) {
+        const saleInfo = await getSaleInfo((q as any).assigned_to || null);
+        notifyQuoteStatus({
+          event: "po_uploaded",
+          quoteId,
+          customerEmail: q.email,
+          customerName: q.name,
+          quoteNumber: q.quote_number || "",
+          grandTotal: q.grand_total,
+          poNumber: poNumber || "",
+          poFileName: file.name,
+          ...saleInfo,
+        });
+      }
+
       setPoNumber("");
       setPoNotes("");
       fetchQuotes();

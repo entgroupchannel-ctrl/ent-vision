@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { notifyQuoteStatus, getSaleInfo } from "@/utils/notifyQuoteStatus";
 
 /* ─── Types ─── */
 interface QuoteMessage {
@@ -183,6 +184,28 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
       } catch {}
 
       toast({ title: "ส่งคำขอต่อรองแล้ว", description: "Admin จะตอบกลับภายใน 24 ชม." });
+
+      // Send email: negotiation_customer (notify sale)
+      try {
+        const { data: quoteData } = await (supabase.from as any)("quote_requests")
+          .select("email, name, quote_number, grand_total, assigned_to, products")
+          .eq("id", quoteId).single();
+        if (quoteData) {
+          const saleInfo = await getSaleInfo(quoteData.assigned_to);
+          notifyQuoteStatus({
+            event: "negotiation_customer",
+            quoteId,
+            customerEmail: quoteData.email,
+            customerName: quoteData.name,
+            quoteNumber: quoteData.quote_number || quoteNumber,
+            grandTotal: quoteData.grand_total,
+            negotiationSubject: subjectLabel,
+            counterValue: negProposed.trim() || undefined,
+            ...saleInfo,
+          });
+        }
+      } catch {}
+
       setNegReason("");
       setNegProposed("");
       setFormMode("message");
@@ -254,6 +277,27 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
       }
 
       toast({ title: `${actionLabel}แล้ว` });
+
+      // Send email: negotiation_admin_reply (notify customer)
+      try {
+        const { data: quoteInfo } = await (supabase.from as any)("quote_requests")
+          .select("email, name, quote_number, grand_total, assigned_to")
+          .eq("id", quoteId).single();
+        if (quoteInfo?.email) {
+          const saleInfo = await getSaleInfo(quoteInfo.assigned_to);
+          notifyQuoteStatus({
+            event: "negotiation_admin_reply",
+            quoteId,
+            customerEmail: quoteInfo.email,
+            customerName: quoteInfo.name,
+            quoteNumber: quoteInfo.quote_number || quoteNumber,
+            grandTotal: quoteInfo.grand_total,
+            counterValue: adminAction === "counter" ? adminCounterValue : (adminAction === "accepted" ? "ยอมรับตามที่ลูกค้าขอ" : "ปฏิเสธ"),
+            ...saleInfo,
+          });
+        }
+      } catch {}
+
       setRespondingTo(null);
       setAdminReply("");
       setAdminCounterValue("");
