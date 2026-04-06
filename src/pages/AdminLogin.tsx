@@ -104,8 +104,8 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-white via-gray-50 to-gray-200 dark:from-[hsl(220,20%,14%)] dark:via-[hsl(220,15%,18%)] dark:to-[hsl(220,10%,10%)] relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(0,0%,85%,0.3),transparent_60%)] dark:bg-[radial-gradient(ellipse_at_top_right,hsl(200,60%,25%,0.15),transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,hsl(0,0%,90%,0.2),transparent_60%)] dark:bg-[radial-gradient(ellipse_at_bottom_left,hsl(220,50%,30%,0.1),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(0,0%,85%,0.3),transparent_60%)] dark:bg-[radial-gradient(ellipse_at_top_right,hsl(200,60%,25%,0.15),transparent_60%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,hsl(0,0%,90%,0.2),transparent_60%)] dark:bg-[radial-gradient(ellipse_at_bottom_left,hsl(220,50%,30%,0.1),transparent_60%)] pointer-events-none" />
       <div className="w-full max-w-sm relative z-10">
         <div className="text-center mb-8">
           <a href="/" className="inline-block mb-4">
