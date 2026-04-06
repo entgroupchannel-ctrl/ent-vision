@@ -134,6 +134,75 @@ export type Database = {
         }
         Relationships: []
       }
+      company_settings: {
+        Row: {
+          address_line1: string | null
+          address_line2: string | null
+          bank_accounts: Json | null
+          branch: string | null
+          company_name_en: string | null
+          company_name_th: string | null
+          district: string | null
+          email: string | null
+          fax: string | null
+          id: string
+          logo_url: string | null
+          mobile: string | null
+          phone: string | null
+          province: string | null
+          quote_terms: string | null
+          tax_id: string | null
+          updated_at: string | null
+          vat_percent: number | null
+          website: string | null
+          withholding_tax_percent: number | null
+        }
+        Insert: {
+          address_line1?: string | null
+          address_line2?: string | null
+          bank_accounts?: Json | null
+          branch?: string | null
+          company_name_en?: string | null
+          company_name_th?: string | null
+          district?: string | null
+          email?: string | null
+          fax?: string | null
+          id?: string
+          logo_url?: string | null
+          mobile?: string | null
+          phone?: string | null
+          province?: string | null
+          quote_terms?: string | null
+          tax_id?: string | null
+          updated_at?: string | null
+          vat_percent?: number | null
+          website?: string | null
+          withholding_tax_percent?: number | null
+        }
+        Update: {
+          address_line1?: string | null
+          address_line2?: string | null
+          bank_accounts?: Json | null
+          branch?: string | null
+          company_name_en?: string | null
+          company_name_th?: string | null
+          district?: string | null
+          email?: string | null
+          fax?: string | null
+          id?: string
+          logo_url?: string | null
+          mobile?: string | null
+          phone?: string | null
+          province?: string | null
+          quote_terms?: string | null
+          tax_id?: string | null
+          updated_at?: string | null
+          vat_percent?: number | null
+          website?: string | null
+          withholding_tax_percent?: number | null
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           business_card_data: Json | null
@@ -583,6 +652,7 @@ export type Database = {
       product_catalog: {
         Row: {
           base_price: number
+          brand: string | null
           category: string
           configurable_options: Json | null
           created_at: string
@@ -597,10 +667,13 @@ export type Database = {
           notes: string | null
           specs: Json | null
           subcategory: string | null
+          unit_label: string | null
           updated_at: string | null
+          warranty_terms: string | null
         }
         Insert: {
           base_price?: number
+          brand?: string | null
           category: string
           configurable_options?: Json | null
           created_at?: string
@@ -615,10 +688,13 @@ export type Database = {
           notes?: string | null
           specs?: Json | null
           subcategory?: string | null
+          unit_label?: string | null
           updated_at?: string | null
+          warranty_terms?: string | null
         }
         Update: {
           base_price?: number
+          brand?: string | null
           category?: string
           configurable_options?: Json | null
           created_at?: string
@@ -633,7 +709,9 @@ export type Database = {
           notes?: string | null
           specs?: Json | null
           subcategory?: string | null
+          unit_label?: string | null
           updated_at?: string | null
+          warranty_terms?: string | null
         }
         Relationships: []
       }
@@ -824,6 +902,8 @@ export type Database = {
           email: string
           grand_total: number | null
           id: string
+          include_vat: boolean | null
+          include_withholding_tax: boolean | null
           last_action_at: string | null
           last_action_by: string | null
           lead_score: number
@@ -846,7 +926,9 @@ export type Database = {
           subtotal: number | null
           user_id: string | null
           valid_until: string | null
+          vat_amount: number | null
           whatsapp: string | null
+          withholding_tax: number | null
         }
         Insert: {
           admin_sla_hours?: number | null
@@ -864,6 +946,8 @@ export type Database = {
           email: string
           grand_total?: number | null
           id?: string
+          include_vat?: boolean | null
+          include_withholding_tax?: boolean | null
           last_action_at?: string | null
           last_action_by?: string | null
           lead_score?: number
@@ -886,7 +970,9 @@ export type Database = {
           subtotal?: number | null
           user_id?: string | null
           valid_until?: string | null
+          vat_amount?: number | null
           whatsapp?: string | null
+          withholding_tax?: number | null
         }
         Update: {
           admin_sla_hours?: number | null
@@ -904,6 +990,8 @@ export type Database = {
           email?: string
           grand_total?: number | null
           id?: string
+          include_vat?: boolean | null
+          include_withholding_tax?: boolean | null
           last_action_at?: string | null
           last_action_by?: string | null
           lead_score?: number
@@ -926,7 +1014,9 @@ export type Database = {
           subtotal?: number | null
           user_id?: string | null
           valid_until?: string | null
+          vat_amount?: number | null
           whatsapp?: string | null
+          withholding_tax?: number | null
         }
         Relationships: []
       }
