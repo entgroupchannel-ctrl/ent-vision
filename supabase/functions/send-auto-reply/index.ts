@@ -115,7 +115,7 @@ Deno.serve(async (req) => {
         'X-Connection-Api-Key': RESEND_API_KEY,
       },
       body: JSON.stringify({
-        from: 'ENT Group <onboarding@resend.dev>',
+        from: 'ENT Group <noreply@entgroup.co.th>',
         to: [email],
         subject,
         html,
