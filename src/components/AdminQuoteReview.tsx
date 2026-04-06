@@ -929,10 +929,16 @@ const AdminQuoteReview = () => {
                 <button onClick={handlePrint} className="px-4 py-3 rounded-xl border border-border text-sm font-medium hover:bg-secondary transition-colors flex items-center gap-2">
                   <Printer size={14} /> พิมพ์ใบเสนอราคา
                 </button>
-                <button onClick={handleApprove} disabled={saving || items.length === 0} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60">
-                  {saving ? <Loader2 size={14} className="animate-spin" /> : <CheckCircle size={14} />}
-                  อนุมัติ + ส่งราคาให้ลูกค้า
-                </button>
+                {["won", "po_received"].includes(selected.status) ? (
+                  <div className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-500/10 text-green-600 border border-green-500/20 text-sm font-bold">
+                    <CheckCircle size={14} /> จบขั้นตอนเสนอราคาแล้ว
+                  </div>
+                ) : (
+                  <button onClick={handleApprove} disabled={saving || items.length === 0} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60">
+                    {saving ? <Loader2 size={14} className="animate-spin" /> : <CheckCircle size={14} />}
+                    อนุมัติ + ส่งราคาให้ลูกค้า
+                  </button>
+                )}
               </div>
             </div>
           ) : (
