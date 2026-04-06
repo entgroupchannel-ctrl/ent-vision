@@ -10,6 +10,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import QuoteTimeline from "@/components/QuoteTimeline";
 import { notifyQuoteStatus, getSaleInfo, productSummaryText } from "@/utils/notifyQuoteStatus";
+import { printQuote } from "@/utils/printQuote";
 
 /* ─── Types ─── */
 interface QuoteRequest {
@@ -80,111 +81,6 @@ const SPEC_LABELS: Record<string, string> = {
 const inp = "w-full px-3 py-2 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
 const lbl = "text-[11px] font-medium text-muted-foreground mb-1 block";
 
-/* ─── Print Template ─── */
-const buildPrintHtml = (q: QuoteRequest, items: LineItem[], edit: any) => {
-  const fp = (n: number) => new Intl.NumberFormat("th-TH").format(n);
-  const subtotal = items.reduce((s, i) => s + i.line_total, 0);
-  const grand = subtotal - (edit.discount_amount || 0);
-  const today = new Date().toLocaleDateString("th-TH", { day: "numeric", month: "long", year: "numeric" });
-  const validDate = edit.valid_until ? new Date(edit.valid_until).toLocaleDateString("th-TH", { day: "numeric", month: "long", year: "numeric" }) : "—";
-
-  return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>ใบเสนอราคา ${q.quote_number || ""}</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Sarabun','Noto Sans Thai',sans-serif;font-size:13px;color:#1a1a1a;padding:40px;max-width:800px;margin:0 auto}
-@media print{body{padding:20px}}
-.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #0ea5e9}
-.logo-area h1{font-size:22px;font-weight:700;color:#0ea5e9}
-.logo-area p{font-size:11px;color:#666;margin-top:2px}
-.quote-info{text-align:right}
-.quote-info h2{font-size:18px;font-weight:700;color:#1a1a1a}
-.quote-info p{font-size:11px;color:#666}
-.customer{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin-bottom:20px}
-.customer h3{font-size:12px;font-weight:600;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
-.customer-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.customer-grid span{font-size:12px}
-.customer-grid .label{color:#64748b}
-table{width:100%;border-collapse:collapse;margin-bottom:16px}
-th{background:#0ea5e9;color:#fff;font-size:11px;font-weight:600;padding:8px 10px;text-align:left}
-th:nth-child(3),th:nth-child(4),th:nth-child(5),th:nth-child(6){text-align:right}
-td{padding:8px 10px;border-bottom:1px solid #e2e8f0;font-size:12px;vertical-align:top}
-td:nth-child(3),td:nth-child(4),td:nth-child(5),td:nth-child(6){text-align:right}
-.spec-text{font-size:10px;color:#64748b;margin-top:3px;line-height:1.4}
-.totals{float:right;width:280px;margin-bottom:20px}
-.totals .row{display:flex;justify-content:space-between;padding:4px 0;font-size:12px}
-.totals .grand{font-size:16px;font-weight:700;color:#0ea5e9;border-top:2px solid #0ea5e9;padding-top:8px;margin-top:4px}
-.terms{clear:both;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin-bottom:20px}
-.terms h3{font-size:12px;font-weight:600;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
-.terms-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.terms-grid .label{color:#64748b;font-size:11px}
-.terms-grid .value{font-size:12px;font-weight:500}
-.footer{text-align:center;padding-top:16px;border-top:1px solid #e2e8f0;font-size:10px;color:#94a3b8}
-.signatures{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:32px 0;padding-top:20px}
-.sig-box{text-align:center;padding-top:60px;border-top:1px solid #cbd5e1}
-.sig-box p{font-size:11px;color:#64748b}
-</style></head><body>
-<div class="header">
-  <div class="logo-area">
-    <h1>ENT GROUP</h1>
-    <p>บริษัท อี.เอ็น.ที. กรุ๊ป จำกัด</p>
-    <p>Industrial Computer Solutions</p>
-  </div>
-  <div class="quote-info">
-    <h2>ใบเสนอราคา</h2>
-    <p>เลขที่: <strong>${q.quote_number || "—"}</strong></p>
-    <p>วันที่: ${today}</p>
-  </div>
-</div>
-<div class="customer">
-  <h3>ข้อมูลลูกค้า</h3>
-  <div class="customer-grid">
-    <span><span class="label">ชื่อ:</span> ${q.name}</span>
-    <span><span class="label">อีเมล:</span> ${q.email}</span>
-    ${q.company ? `<span><span class="label">บริษัท:</span> ${q.company}</span>` : ""}
-    ${q.phone ? `<span><span class="label">โทร:</span> ${q.phone}</span>` : ""}
-  </div>
-  ${q.details ? `<p style="margin-top:6px;font-size:11px;color:#64748b">${q.details}</p>` : ""}
-</div>
-<table>
-  <thead><tr><th style="width:30px">#</th><th>รายการ</th><th>จำนวน</th><th>ราคา/หน่วย</th><th>ส่วนลด</th><th>รวม</th></tr></thead>
-  <tbody>${items.map((item, i) => {
-    const specs = item._specs || item.custom_specs || {};
-    const specStr = Object.entries(specs).filter(([, v]) => v && v !== "No").map(([k, v]) => `${SPEC_LABELS[k] || k}: ${v === "Yes" ? "✓" : v}`).join(" | ");
-    return `<tr>
-      <td>${i + 1}</td>
-      <td><strong>${item.model}</strong>${item._name ? `<br><span style="font-size:10px;color:#64748b">${item._name}</span>` : ""}${specStr ? `<div class="spec-text">${specStr}</div>` : ""}${item.admin_notes ? `<div class="spec-text" style="color:#0ea5e9">* ${item.admin_notes}</div>` : ""}</td>
-      <td>${item.qty}</td>
-      <td>฿${fp(item.unit_price)}</td>
-      <td>${item.discount_percent > 0 ? item.discount_percent + "%" : "—"}</td>
-      <td>฿${fp(item.line_total)}</td>
-    </tr>`;
-  }).join("")}</tbody>
-</table>
-<div class="totals">
-  <div class="row"><span>รวมก่อนส่วนลด</span><span>฿${fp(subtotal)}</span></div>
-  ${edit.discount_amount > 0 ? `<div class="row"><span>ส่วนลด</span><span>-฿${fp(edit.discount_amount)}</span></div>` : ""}
-  <div class="row grand"><span>ยอดรวมสุทธิ</span><span>฿${fp(grand)}</span></div>
-</div>
-<div class="terms">
-  <h3>เงื่อนไข</h3>
-  <div class="terms-grid">
-    <div><span class="label">ราคายืนถึง:</span><br><span class="value">${validDate}</span></div>
-    <div><span class="label">เงื่อนไขชำระ:</span><br><span class="value">${edit.payment_terms || "—"}</span></div>
-    <div><span class="label">เงื่อนไขจัดส่ง:</span><br><span class="value">${edit.delivery_terms || "—"}</span></div>
-    <div><span class="label">การรับประกัน:</span><br><span class="value">1 ปี Carry-in</span></div>
-  </div>
-</div>
-<div class="signatures">
-  <div class="sig-box"><p>ผู้เสนอราคา (ENT GROUP)</p></div>
-  <div class="sig-box"><p>ผู้อนุมัติ / ลูกค้า</p></div>
-</div>
-<div class="footer">
-  <p>บริษัท อี.เอ็น.ที. กรุ๊ป จำกัด | www.entgroup.co.th | 02-XXX-XXXX</p>
-  <p>เอกสารนี้สร้างจากระบบ ENT Vision — ${new Date().toISOString()}</p>
-</div>
-</body></html>`;
-};
-
 /* ─── Component ─── */
 const AdminQuoteReview = () => {
   const { user } = useAuth();
@@ -208,10 +104,12 @@ const AdminQuoteReview = () => {
   const [salesTeam, setSalesTeam] = useState<SalesTeamMember[]>([]);
   const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [assignFilter, setAssignFilter] = useState<string>("all");
+  const [companySettings, setCompanySettings] = useState<any>(null);
 
   const [edit, setEdit] = useState({
     discount_amount: 0, valid_until: "", payment_terms: "มัดจำ 70% ส่วนที่เหลือจ่ายก่อนส่งสินค้า",
     delivery_terms: "ส่งฟรีทั่วประเทศ", pdf_url: "", notes: "",
+    include_vat: true, include_withholding_tax: false,
   });
 
   // Derived: categories from catalog
@@ -260,7 +158,14 @@ const AdminQuoteReview = () => {
     } catch {}
   };
 
-  useEffect(() => { fetchQuotes(); fetchCatalog(); fetchDocLib(); fetchSalesTeam(); checkSuperAdmin(); }, [user]);
+  const fetchCompanySettings = async () => {
+    try {
+      const { data } = await (supabase.from as any)("company_settings").select("*").eq("id", "default").single();
+      if (data) setCompanySettings(data);
+    } catch {}
+  };
+
+  useEffect(() => { fetchQuotes(); fetchCatalog(); fetchDocLib(); fetchSalesTeam(); checkSuperAdmin(); fetchCompanySettings(); }, [user]);
 
   /* ─── Select Quote ─── */
   const selectQuote = async (q: QuoteRequest) => {
@@ -352,9 +257,21 @@ const AdminQuoteReview = () => {
   /* ─── Print ─── */
   const handlePrint = () => {
     if (!selected) return;
-    const html = buildPrintHtml(selected, items, edit);
-    const w = window.open("", "_blank");
-    if (w) { w.document.write(html); w.document.close(); setTimeout(() => w.print(), 500); }
+    const saleInfo = salesTeam.find((s) => s.user_id === selected.assigned_to);
+    printQuote(
+      { quote_number: selected.quote_number, name: selected.name, email: selected.email, phone: selected.phone, company: selected.company, details: selected.details },
+      items.map((it) => ({ ...it, _name: it._name, _desc: it._desc, _specs: it._specs, _unit: (it as any)._unit })),
+      {
+        discount_amount: edit.discount_amount, valid_until: edit.valid_until,
+        payment_terms: edit.payment_terms, delivery_terms: edit.delivery_terms,
+        include_vat: edit.include_vat, vat_percent: companySettings?.vat_percent || 7,
+        include_withholding_tax: edit.include_withholding_tax, withholding_tax_percent: companySettings?.withholding_tax_percent || 3,
+      },
+      companySettings || undefined,
+      saleInfo?.full_name,
+      undefined,
+      saleInfo?.email,
+    );
   };
 
   /* ─── Share Link ─── */
@@ -760,6 +677,17 @@ const AdminQuoteReview = () => {
                     <select value={edit.delivery_terms} onChange={(e) => setEdit((f) => ({ ...f, delivery_terms: e.target.value }))} className={inp}>
                       {DELIVERY_OPTS.map((o) => <option key={o} value={o}>{o}</option>)}
                     </select>
+                  </div>
+                  {/* VAT & WHT */}
+                  <div className="col-span-2 flex gap-6 pt-2">
+                    <label className="flex items-center gap-2 text-xs text-foreground cursor-pointer">
+                      <input type="checkbox" checked={edit.include_vat} onChange={(e) => setEdit((f) => ({ ...f, include_vat: e.target.checked }))} className="rounded border-border text-primary w-3.5 h-3.5" />
+                      ภาษีมูลค่าเพิ่ม {companySettings?.vat_percent || 7}%
+                    </label>
+                    <label className="flex items-center gap-2 text-xs text-foreground cursor-pointer">
+                      <input type="checkbox" checked={edit.include_withholding_tax} onChange={(e) => setEdit((f) => ({ ...f, include_withholding_tax: e.target.checked }))} className="rounded border-border text-primary w-3.5 h-3.5" />
+                      หัก ณ ที่จ่าย {companySettings?.withholding_tax_percent || 3}%
+                    </label>
                   </div>
                 </div>
               </div>

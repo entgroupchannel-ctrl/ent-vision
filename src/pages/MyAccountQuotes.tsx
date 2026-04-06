@@ -67,6 +67,7 @@ const MyAccountQuotes = () => {
   const [poUploading, setPoUploading] = useState(false);
   const [poNumber, setPoNumber] = useState("");
   const [poNotes, setPoNotes] = useState("");
+  const [companySettings, setCompanySettings] = useState<any>(null);
 
   const fetchQuotes = async () => {
     if (!user) return;
@@ -83,7 +84,15 @@ const MyAccountQuotes = () => {
     if (data) setCatalog(data);
   };
 
-  useEffect(() => { fetchQuotes(); fetchCatalog(); }, [user]);
+  useEffect(() => {
+    fetchQuotes(); fetchCatalog();
+    (async () => {
+      try {
+        const { data } = await (supabase.from as any)("company_settings").select("*").eq("id", "default").single();
+        if (data) setCompanySettings(data);
+      } catch {}
+    })();
+  }, [user]);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -133,7 +142,12 @@ const MyAccountQuotes = () => {
     printQuote(
       { quote_number: q.quote_number, name: q.name, email: q.email, phone: q.phone, company: q.company, details: q.details },
       items.map((it) => ({ ...it, _name: it._name, _specs: it._specs })),
-      { discount_amount: q.discount_amount, valid_until: q.valid_until || "", payment_terms: q.payment_terms || "", delivery_terms: q.delivery_terms || "" }
+      {
+        discount_amount: q.discount_amount, valid_until: q.valid_until || "",
+        payment_terms: q.payment_terms || "", delivery_terms: q.delivery_terms || "",
+        include_vat: true, vat_percent: companySettings?.vat_percent || 7,
+      },
+      companySettings || undefined,
     );
   };
 
@@ -305,7 +319,7 @@ const MyAccountQuotes = () => {
                       <td className="px-4 py-3 text-center">
                         <span className={`inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full border font-medium ${status.color}`}>{status.label}</span>
                       </td>
-                      <td className="px-2 py-3 relative" ref={menuOpenId === q.id ? menuRef as React.RefObject<HTMLTableCellElement> : undefined}>
+                      <td className="px-2 py-3 relative" ref={menuOpenId === q.id ? menuRef : undefined}>
                         <button onClick={(e) => { e.stopPropagation(); setMenuOpenId(menuOpenId === q.id ? null : q.id); }} className="p-1.5 rounded-lg hover:bg-secondary/60 text-muted-foreground">
                           <MoreHorizontal size={16} />
                         </button>
