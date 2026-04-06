@@ -1,30 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   FolderOpen, Upload, FileText, Download, Clock, CheckCircle,
-  XCircle, Loader2, Send, Trash2, Eye, RefreshCw, Search,
-  Shield, BookOpen, Link2, ExternalLink, Plus,
+  XCircle, Loader2, Trash2, Eye, Search, Shield, Link2,
+  Copy, Users, Lock, Unlock, Globe, Star, AlertTriangle,
+  ChevronDown, MoreHorizontal, Filter, RefreshCw, UserCheck,
+  FileUp, X, Check, ExternalLink, History,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
-// ─── Types ───
-interface DocRequest {
-  id: string;
-  user_id: string;
-  document_type: string;
-  product_model: string | null;
-  serial_number: string | null;
-  notes: string | null;
-  status: string;
-  file_url: string | null;
-  admin_notes: string | null;
-  created_at: string;
-  updated_at: string | null;
-  // joined
-  user_email?: string;
-}
-
-interface DocLibraryItem {
+/* ─── Types ─── */
+interface DocLibrary {
   id: string;
   document_type: string;
   title: string;
@@ -33,512 +19,706 @@ interface DocLibraryItem {
   product_model: string | null;
   is_public: boolean;
   download_count: number;
+  access_level: string;
+  category: string;
+  file_size: number | null;
+  file_type: string | null;
+  share_token: string | null;
   created_at: string;
+  updated_at: string | null;
 }
 
-// ─── Constants ───
-const DOC_TYPE_LABELS: Record<string, string> = {
-  vendor_registration: "Vendor Registration Form",
-  company_profile: "Company Profile",
-  catalog: "Product Catalog",
-  warranty_certificate: "ใบรับประกัน",
-  certificate_of_conformity: "Certificate of Conformity",
-  datasheet: "Datasheet",
-  boq_template: "BOQ Template",
-};
+interface DocRequest {
+  id: string;
+  user_id: string;
+  document_type: string;
+  document_id: string | null;
+  product_model: string | null;
+  serial_number: string | null;
+  notes: string | null;
+  status: string;
+  file_url: string | null;
+  admin_notes: string | null;
+  approved_by: string | null;
+  approved_at: string | null;
+  created_at: string;
+  updated_at: string | null;
+}
 
-const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
-  pending: { label: "รอดำเนินการ", color: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20" },
-  approved: { label: "อนุมัติ", color: "bg-blue-500/10 text-blue-500 border-blue-500/20" },
-  ready: { label: "พร้อมดาวน์โหลด", color: "bg-green-500/10 text-green-500 border-green-500/20" },
-  rejected: { label: "ไม่อนุมัติ", color: "bg-red-500/10 text-red-400 border-red-500/20" },
+interface DocAccess {
+  id: string;
+  user_id: string;
+  document_id: string;
+  granted_by: string | null;
+  granted_at: string;
+  expires_at: string | null;
+  notes: string | null;
+}
+
+interface DownloadLog {
+  id: string;
+  document_id: string;
+  user_id: string | null;
+  downloaded_at: string;
+  method: string;
+}
+
+/* ─── Constants ─── */
+const ACCESS_LEVELS = [
+  { value: "public", label: "สาธารณะ", desc: "ทุกคนเห็น+โหลดได้", icon: Globe, color: "text-green-500" },
+  { value: "visible", label: "เห็นได้ — ต้องขอ", desc: "เห็นเอกสาร แต่ต้องขอสิทธิ์ก่อนโหลด", icon: Eye, color: "text-yellow-500" },
+  { value: "vip", label: "ลูกค้า VIP", desc: "เฉพาะลูกค้า VIP โหลดได้เลย", icon: Star, color: "text-purple-500" },
+  { value: "private", label: "ซ่อน", desc: "ซ่อนจากผู้ใช้ทั่วไป", icon: Lock, color: "text-red-500" },
+];
+
+const CATEGORIES = [
+  { value: "company", label: "เอกสารบริษัท" },
+  { value: "product", label: "เอกสารสินค้า" },
+  { value: "certificate", label: "ใบรับรอง / Certificate" },
+  { value: "general", label: "ทั่วไป" },
+];
+
+const STATUS_CONFIG: Record<string, { label: string; color: string; icon: typeof Clock }> = {
+  pending: { label: "รอดำเนินการ", color: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20", icon: Clock },
+  approved: { label: "อนุมัติแล้ว", color: "bg-green-500/10 text-green-500 border-green-500/20", icon: CheckCircle },
+  rejected: { label: "ไม่อนุมัติ", color: "bg-red-500/10 text-red-400 border-red-500/20", icon: XCircle },
 };
 
 const inputClass =
-  "w-full px-3 py-2 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
+  "w-full px-3 py-2.5 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
 
+const btnPrimary =
+  "inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all disabled:opacity-50";
+
+const btnSecondary =
+  "inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-background text-sm font-medium hover:bg-secondary transition-all";
+
+/* ─── Component ─── */
 const AdminDocumentManager = () => {
   const { toast } = useToast();
-  const [activeTab, setActiveTab] = useState<"requests" | "library">("requests");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [activeTab, setActiveTab] = useState<"library" | "requests" | "access" | "logs">("library");
+
+  // Library
+  const [docs, setDocs] = useState<DocLibrary[]>([]);
+  const [docsLoading, setDocsLoading] = useState(true);
+  const [searchText, setSearchText] = useState("");
+  const [filterCategory, setFilterCategory] = useState("all");
+  const [filterAccess, setFilterAccess] = useState("all");
+
+  // Upload
+  const [showUpload, setShowUpload] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadForm, setUploadForm] = useState({ title: "", description: "", document_type: "general", category: "company", access_level: "visible", product_model: "" });
+  const [uploadFile, setUploadFile] = useState<File | null>(null);
+
+  // Requests
   const [requests, setRequests] = useState<DocRequest[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedRequest, setSelectedRequest] = useState<DocRequest | null>(null);
-  const [actionLoading, setActionLoading] = useState(false);
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [replyForm, setReplyForm] = useState({ file_url: "", admin_notes: "", status: "ready" });
+  const [reqLoading, setReqLoading] = useState(true);
+  const [reqFilter, setReqFilter] = useState("pending");
 
-  // Library state
-  const [libraryItems, setLibraryItems] = useState<DocLibraryItem[]>([]);
-  const [libraryLoading, setLibraryLoading] = useState(false);
-  const [showUploadForm, setShowUploadForm] = useState(false);
-  const [uploadForm, setUploadForm] = useState({
-    document_type: "catalog",
-    title: "",
-    description: "",
-    file_url: "",
-    product_model: "",
-    is_public: true,
-  });
-  const [uploadLoading, setUploadLoading] = useState(false);
+  // Access
+  const [accesses, setAccesses] = useState<DocAccess[]>([]);
 
-  // ─── Fetch Requests ───
+  // Logs
+  const [logs, setLogs] = useState<DownloadLog[]>([]);
+  const [logsLoading, setLogsLoading] = useState(false);
+
+  // Edit
+  const [editDoc, setEditDoc] = useState<DocLibrary | null>(null);
+
+  /* ─── Fetch ─── */
+  const fetchDocs = async () => {
+    setDocsLoading(true);
+    try {
+      const { data } = await (supabase.from as any)("document_library").select("*").order("created_at", { ascending: false });
+      if (data) setDocs(data);
+    } catch {}
+    setDocsLoading(false);
+  };
+
   const fetchRequests = async () => {
-    setLoading(true);
+    setReqLoading(true);
     try {
-      const { data } = await (supabase.from as any)("document_requests")
-        .select("*")
-        .order("created_at", { ascending: false });
+      const { data } = await (supabase.from as any)("document_requests").select("*").order("created_at", { ascending: false });
       if (data) setRequests(data);
-    } catch { /* silent */ }
-    setLoading(false);
+    } catch {}
+    setReqLoading(false);
   };
 
-  // ─── Fetch Library ───
-  const fetchLibrary = async () => {
-    setLibraryLoading(true);
+  const fetchAccess = async () => {
     try {
-      const { data } = await (supabase.from as any)("document_library")
-        .select("*")
-        .order("created_at", { ascending: false });
-      if (data) setLibraryItems(data);
-    } catch { /* table may not exist yet */ }
-    setLibraryLoading(false);
+      const { data } = await (supabase.from as any)("document_access").select("*").order("granted_at", { ascending: false });
+      if (data) setAccesses(data);
+    } catch {}
   };
 
-  useEffect(() => {
-    fetchRequests();
-    fetchLibrary();
-  }, []);
-
-  // ─── Handle Request Action ───
-  const handleUpdateRequest = async (requestId: string, newStatus: string, fileUrl?: string, adminNotes?: string) => {
-    setActionLoading(true);
+  const fetchLogs = async () => {
+    setLogsLoading(true);
     try {
-      const updateData: Record<string, unknown> = {
-        status: newStatus,
-        updated_at: new Date().toISOString(),
-      };
-      if (fileUrl) updateData.file_url = fileUrl;
-      if (adminNotes) updateData.admin_notes = adminNotes;
-
-      const { error } = await (supabase.from as any)("document_requests")
-        .update(updateData)
-        .eq("id", requestId);
-      if (error) throw error;
-
-      // Send notification to user
-      const request = requests.find((r) => r.id === requestId);
-      if (request?.user_id) {
-        const notifTitle = newStatus === "ready"
-          ? "เอกสารพร้อมดาวน์โหลด"
-          : newStatus === "rejected"
-          ? "คำขอเอกสารไม่ได้รับอนุมัติ"
-          : "สถานะเอกสารอัปเดต";
-        const notifMsg = `${DOC_TYPE_LABELS[request.document_type] || request.document_type} — ${STATUS_CONFIG[newStatus]?.label || newStatus}`;
-
-        await (supabase.from as any)("notifications").insert({
-          user_id: request.user_id,
-          type: "document_ready",
-          title: notifTitle,
-          message: notifMsg + (adminNotes ? ` (${adminNotes})` : ""),
-          link: "/my-account/documents",
-        }).catch(() => {});
-      }
-
-      toast({ title: "อัปเดตสำเร็จ" });
-      setSelectedRequest(null);
-      setReplyForm({ file_url: "", admin_notes: "", status: "ready" });
-      fetchRequests();
-    } catch (err: any) {
-      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
-    } finally {
-      setActionLoading(false);
-    }
+      const { data } = await (supabase.from as any)("document_download_log").select("*").order("downloaded_at", { ascending: false }).limit(100);
+      if (data) setLogs(data);
+    } catch {}
+    setLogsLoading(false);
   };
 
-  // ─── Handle Library Upload ───
-  const handleUploadToLibrary = async () => {
-    if (!uploadForm.title || !uploadForm.file_url) {
-      toast({ title: "กรุณากรอกชื่อเอกสารและ URL", variant: "destructive" });
+  useEffect(() => { fetchDocs(); fetchRequests(); fetchAccess(); }, []);
+  useEffect(() => { if (activeTab === "logs") fetchLogs(); }, [activeTab]);
+
+  /* ─── Upload ─── */
+  const handleFileUpload = async () => {
+    if (!uploadFile || !uploadForm.title) {
+      toast({ title: "กรุณากรอกชื่อเอกสารและเลือกไฟล์", variant: "destructive" });
       return;
     }
-    setUploadLoading(true);
+    setUploading(true);
     try {
-      const { error } = await (supabase.from as any)("document_library").insert({
+      const filePath = `docs/${Date.now()}_${uploadFile.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
+      const { error: upErr } = await supabase.storage.from("documents").upload(filePath, uploadFile, { contentType: uploadFile.type });
+      if (upErr) throw upErr;
+
+      const { data: urlData } = supabase.storage.from("documents").getPublicUrl(filePath);
+      const fileUrl = urlData?.publicUrl || "";
+
+      const { error: insErr } = await (supabase.from as any)("document_library").insert({
         document_type: uploadForm.document_type,
         title: uploadForm.title,
         description: uploadForm.description || null,
-        file_url: uploadForm.file_url,
+        file_url: fileUrl,
         product_model: uploadForm.product_model || null,
-        is_public: uploadForm.is_public,
+        is_public: uploadForm.access_level !== "private",
+        access_level: uploadForm.access_level,
+        category: uploadForm.category,
+        file_size: uploadFile.size,
+        file_type: uploadFile.type,
         download_count: 0,
       });
-      if (error) throw error;
-      toast({ title: "เพิ่มเอกสารสำเร็จ" });
-      setUploadForm({ document_type: "catalog", title: "", description: "", file_url: "", product_model: "", is_public: true });
-      setShowUploadForm(false);
-      fetchLibrary();
+      if (insErr) throw insErr;
+
+      toast({ title: "อัปโหลดเอกสารสำเร็จ" });
+      setShowUpload(false);
+      setUploadFile(null);
+      setUploadForm({ title: "", description: "", document_type: "general", category: "company", access_level: "visible", product_model: "" });
+      fetchDocs();
     } catch (err: any) {
-      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+      toast({ title: "อัปโหลดล้มเหลว", description: err.message, variant: "destructive" });
     } finally {
-      setUploadLoading(false);
+      setUploading(false);
     }
   };
 
-  const handleDeleteLibraryItem = async (id: string) => {
-    if (!confirm("ลบเอกสารนี้?")) return;
-    await (supabase.from as any)("document_library").delete().eq("id", id);
-    fetchLibrary();
-    toast({ title: "ลบเอกสารแล้ว" });
+  /* ─── Approve / Reject ─── */
+  const handleApproveRequest = async (req: DocRequest) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      await (supabase.from as any)("document_requests")
+        .update({ status: "approved", approved_by: user?.id, approved_at: new Date().toISOString(), updated_at: new Date().toISOString() })
+        .eq("id", req.id);
+
+      if (req.document_id) {
+        await (supabase.from as any)("document_access").upsert({
+          user_id: req.user_id, document_id: req.document_id, granted_by: user?.id,
+          notes: `อนุมัติจากคำขอ #${req.id.slice(0, 8)}`,
+        }, { onConflict: "user_id,document_id" });
+      }
+
+      await (supabase.from as any)("notifications").insert({
+        user_id: req.user_id, type: "document_ready",
+        title: "คำขอเอกสารได้รับอนุมัติ",
+        message: `เอกสาร "${req.document_type}" พร้อมดาวน์โหลดแล้ว`,
+        link: "/my-account?tab=documents",
+      }).catch(() => {});
+
+      toast({ title: "อนุมัติคำขอสำเร็จ" });
+      fetchRequests();
+      fetchAccess();
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    }
   };
 
-  // ─── Helpers ───
-  const formatDate = (d: string) =>
-    new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+  const handleRejectRequest = async (req: DocRequest) => {
+    const reason = prompt("เหตุผลที่ปฏิเสธ (ไม่บังคับ):");
+    try {
+      await (supabase.from as any)("document_requests")
+        .update({ status: "rejected", admin_notes: reason || "ไม่อนุมัติ", updated_at: new Date().toISOString() })
+        .eq("id", req.id);
 
-  const filteredRequests = statusFilter === "all"
-    ? requests
-    : requests.filter((r) => r.status === statusFilter);
+      await (supabase.from as any)("notifications").insert({
+        user_id: req.user_id, type: "document_rejected",
+        title: "คำขอเอกสารไม่ได้รับอนุมัติ",
+        message: reason || "ไม่อนุมัติ",
+        link: "/my-account?tab=documents",
+      }).catch(() => {});
 
+      toast({ title: "ปฏิเสธคำขอแล้ว" });
+      fetchRequests();
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    }
+  };
+
+  /* ─── Share Link ─── */
+  const handleShareLink = async (doc: DocLibrary) => {
+    try {
+      if (doc.share_token) {
+        const link = `${window.location.origin}/documents/share/${doc.share_token}`;
+        await navigator.clipboard.writeText(link);
+        toast({ title: "คัดลอกลิงก์แชร์แล้ว", description: link });
+      } else {
+        const { data, error } = await (supabase.rpc as any)("generate_doc_share_token", { _document_id: doc.id });
+        if (error) throw error;
+        const link = `${window.location.origin}/documents/share/${data}`;
+        await navigator.clipboard.writeText(link);
+        toast({ title: "สร้างและคัดลอกลิงก์แชร์แล้ว", description: link });
+        fetchDocs();
+      }
+    } catch (err: any) {
+      toast({ title: "ไม่สามารถสร้างลิงก์ได้", description: err.message, variant: "destructive" });
+    }
+  };
+
+  /* ─── Delete / Update ─── */
+  const handleDeleteDoc = async (doc: DocLibrary) => {
+    if (!confirm(`ลบเอกสาร "${doc.title}"?`)) return;
+    try {
+      if (doc.file_url?.includes("/documents/")) {
+        const path = doc.file_url.split("/documents/")[1];
+        if (path) await supabase.storage.from("documents").remove([decodeURIComponent(path)]);
+      }
+      await (supabase.from as any)("document_library").delete().eq("id", doc.id);
+      toast({ title: "ลบเอกสารแล้ว" });
+      fetchDocs();
+    } catch (err: any) {
+      toast({ title: "ลบไม่ได้", description: err.message, variant: "destructive" });
+    }
+  };
+
+  const handleUpdateDoc = async () => {
+    if (!editDoc) return;
+    try {
+      await (supabase.from as any)("document_library").update({
+        title: editDoc.title, description: editDoc.description,
+        access_level: editDoc.access_level, category: editDoc.category,
+        is_public: editDoc.access_level !== "private",
+        updated_at: new Date().toISOString(),
+      }).eq("id", editDoc.id);
+      toast({ title: "บันทึกสำเร็จ" });
+      setEditDoc(null);
+      fetchDocs();
+    } catch (err: any) {
+      toast({ title: "บันทึกไม่ได้", description: err.message, variant: "destructive" });
+    }
+  };
+
+  const handleRevokeAccess = async (id: string) => {
+    if (!confirm("ยกเลิกสิทธิ์?")) return;
+    await (supabase.from as any)("document_access").delete().eq("id", id);
+    toast({ title: "ยกเลิกสิทธิ์แล้ว" });
+    fetchAccess();
+  };
+
+  /* ─── Helpers ─── */
+  const fmt = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+  const fmtSize = (b: number | null) => {
+    if (!b) return "—";
+    if (b < 1024) return `${b} B`;
+    if (b < 1048576) return `${(b / 1024).toFixed(1)} KB`;
+    return `${(b / 1048576).toFixed(1)} MB`;
+  };
+
+  const accessBadge = (level: string) => {
+    const a = ACCESS_LEVELS.find((l) => l.value === level);
+    if (!a) return null;
+    const Icon = a.icon;
+    return (
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border bg-secondary/50">
+        <Icon size={11} className={a.color} /> {a.label}
+      </span>
+    );
+  };
+
+  const filteredDocs = docs.filter((d) => {
+    if (filterCategory !== "all" && d.category !== filterCategory) return false;
+    if (filterAccess !== "all" && d.access_level !== filterAccess) return false;
+    if (searchText && !d.title.toLowerCase().includes(searchText.toLowerCase())) return false;
+    return true;
+  });
+
+  const filteredRequests = reqFilter === "all" ? requests : requests.filter((r) => r.status === reqFilter);
   const pendingCount = requests.filter((r) => r.status === "pending").length;
 
-  // ─── Render ───
+  const tabs = [
+    { id: "library" as const, label: "คลังเอกสาร", icon: FolderOpen, count: docs.length },
+    { id: "requests" as const, label: "คำขอเอกสาร", icon: FileText, count: pendingCount },
+    { id: "access" as const, label: "สิทธิ์การเข้าถึง", icon: Users, count: accesses.length },
+    { id: "logs" as const, label: "ประวัติดาวน์โหลด", icon: History, count: null },
+  ];
+
   return (
-    <div className="space-y-4">
-      {/* Sub-tabs */}
-      <div className="flex items-center gap-2">
-        <button
-          onClick={() => setActiveTab("requests")}
-          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-            activeTab === "requests" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
-          }`}
-        >
-          📋 คำขอเอกสาร {pendingCount > 0 && <span className="ml-1 px-1.5 py-0.5 rounded-full bg-destructive text-destructive-foreground text-xs font-bold">{pendingCount}</span>}
-        </button>
-        <button
-          onClick={() => setActiveTab("library")}
-          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-            activeTab === "library" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
-          }`}
-        >
-          📂 คลังเอกสาร ({libraryItems.length})
-        </button>
-        <div className="ml-auto">
-          <button
-            onClick={() => { fetchRequests(); fetchLibrary(); }}
-            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <RefreshCw size={12} className={loading ? "animate-spin" : ""} /> รีเฟรช
-          </button>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-display font-bold text-foreground">ศูนย์จัดการเอกสาร</h2>
+          <p className="text-sm text-muted-foreground mt-1">อัปโหลด, จัดการสิทธิ์, อนุมัติคำขอ และแชร์เอกสาร</p>
         </div>
+        <button onClick={() => setShowUpload(true)} className={btnPrimary}>
+          <Upload size={16} /> อัปโหลดเอกสาร
+        </button>
       </div>
 
-      {/* ═══════ TAB: Document Requests ═══════ */}
-      {activeTab === "requests" && (
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-          {/* Left: List */}
-          <div className="lg:col-span-3 space-y-3">
-            {/* Filter */}
-            <div className="flex gap-1">
-              {[
-                { value: "all", label: "ทั้งหมด" },
-                { value: "pending", label: "รอดำเนินการ" },
-                { value: "ready", label: "พร้อม" },
-                { value: "rejected", label: "ไม่อนุมัติ" },
-              ].map((f) => (
-                <button
-                  key={f.value}
-                  onClick={() => setStatusFilter(f.value)}
-                  className={`px-2.5 py-1 rounded-lg text-sm font-medium transition-colors ${
-                    statusFilter === f.value ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary/60"
-                  }`}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
+      {/* Tabs */}
+      <div className="flex gap-1 bg-secondary/50 rounded-xl p-1">
+        {tabs.map((t) => {
+          const Icon = t.icon;
+          return (
+            <button key={t.id} onClick={() => setActiveTab(t.id)}
+              className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-all
+                ${activeTab === t.id ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}>
+              <Icon size={15} />
+              <span className="hidden sm:inline">{t.label}</span>
+              {t.count !== null && t.count > 0 && (
+                <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${t.id === "requests" && pendingCount > 0 ? "bg-red-500 text-white" : "bg-muted text-muted-foreground"}`}>
+                  {t.count}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
 
-            {loading ? (
-              <div className="flex items-center justify-center py-12">
-                <Loader2 size={20} className="animate-spin text-muted-foreground" />
-              </div>
-            ) : filteredRequests.length === 0 ? (
-              <div className="card-surface rounded-xl p-8 text-center text-muted-foreground text-xs">
-                ไม่มีคำขอเอกสาร
-              </div>
-            ) : (
-              <div className="space-y-1.5">
-                {filteredRequests.map((req) => {
-                  const status = STATUS_CONFIG[req.status] || STATUS_CONFIG.pending;
-                  const isSelected = selectedRequest?.id === req.id;
-                  return (
-                    <button
-                      key={req.id}
-                      onClick={() => { setSelectedRequest(req); setReplyForm({ file_url: req.file_url || "", admin_notes: req.admin_notes || "", status: req.status }); }}
-                      className={`w-full text-left p-3 rounded-lg border transition-all ${
-                        isSelected ? "border-primary bg-primary/5" : "border-border hover:border-primary/30 hover:bg-secondary/20"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm font-bold text-foreground">
-                          {DOC_TYPE_LABELS[req.document_type] || req.document_type}
-                        </span>
-                        <span className={`text-xs px-1.5 py-0.5 rounded-full border font-medium ${status.color}`}>
-                          {status.label}
-                        </span>
-                      </div>
-                      {req.product_model && <p className="text-xs text-muted-foreground">รุ่น: {req.product_model}</p>}
-                      {req.serial_number && <p className="text-xs text-muted-foreground">S/N: {req.serial_number}</p>}
-                      <p className="text-xs text-muted-foreground/60 mt-1">
-                        User: {req.user_id.slice(0, 8)}... · {formatDate(req.created_at)}
-                      </p>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
+      {/* ═══ TAB: Library ═══ */}
+      {activeTab === "library" && (
+        <div className="space-y-4">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="relative flex-1">
+              <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <input type="text" placeholder="ค้นหาเอกสาร..." value={searchText} onChange={(e) => setSearchText(e.target.value)} className={`${inputClass} pl-9`} />
+            </div>
+            <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} className={`${inputClass} w-auto`}>
+              <option value="all">ทุกหมวด</option>
+              {CATEGORIES.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
+            </select>
+            <select value={filterAccess} onChange={(e) => setFilterAccess(e.target.value)} className={`${inputClass} w-auto`}>
+              <option value="all">ทุกระดับ</option>
+              {ACCESS_LEVELS.map((a) => <option key={a.value} value={a.value}>{a.label}</option>)}
+            </select>
           </div>
 
-          {/* Right: Detail + Actions */}
-          <div className="lg:col-span-2">
-            {selectedRequest ? (
-              <div className="card-surface rounded-xl p-4 space-y-4 sticky top-24">
-                <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
-                  <FileText size={14} className="text-primary" />
-                  {DOC_TYPE_LABELS[selectedRequest.document_type] || selectedRequest.document_type}
-                </h3>
-
-                <div className="space-y-2 text-xs">
-                  <div>
-                    <span className="text-muted-foreground">User ID:</span>
-                    <span className="ml-2 text-foreground font-mono text-xs">{selectedRequest.user_id}</span>
-                  </div>
-                  {selectedRequest.product_model && (
-                    <div>
-                      <span className="text-muted-foreground">รุ่นสินค้า:</span>
-                      <span className="ml-2 text-foreground">{selectedRequest.product_model}</span>
+          {docsLoading ? (
+            <div className="text-center py-16"><Loader2 size={24} className="animate-spin mx-auto text-muted-foreground" /></div>
+          ) : filteredDocs.length === 0 ? (
+            <div className="text-center py-16 text-muted-foreground">
+              <FolderOpen size={40} className="mx-auto mb-3 opacity-30" />
+              <p>ยังไม่มีเอกสารในคลัง</p>
+              <button onClick={() => setShowUpload(true)} className={`${btnPrimary} mt-4`}><Upload size={15} /> อัปโหลดเอกสารแรก</button>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {filteredDocs.map((doc) => (
+                <div key={doc.id} className="p-4 rounded-xl border border-border bg-card hover:bg-secondary/20 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <FileText size={20} className="text-primary" />
                     </div>
-                  )}
-                  {selectedRequest.serial_number && (
-                    <div>
-                      <span className="text-muted-foreground">Serial Number:</span>
-                      <span className="ml-2 text-foreground font-mono">{selectedRequest.serial_number}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <h4 className="font-semibold text-foreground text-sm">{doc.title}</h4>
+                        {accessBadge(doc.access_level)}
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground">
+                          {CATEGORIES.find((c) => c.value === doc.category)?.label || doc.category}
+                        </span>
+                      </div>
+                      {doc.description && <p className="text-xs text-muted-foreground mt-1 line-clamp-1">{doc.description}</p>}
+                      <div className="flex items-center gap-4 mt-2 text-[11px] text-muted-foreground">
+                        <span>{fmt(doc.created_at)}</span>
+                        <span>{fmtSize(doc.file_size)}</span>
+                        <span className="flex items-center gap-1"><Download size={11} /> {doc.download_count}</span>
+                        {!doc.file_url && <span className="text-yellow-500 flex items-center gap-1"><AlertTriangle size={11} /> ยังไม่มีไฟล์</span>}
+                        {doc.share_token && <span className="text-primary flex items-center gap-1"><Link2 size={11} /> มีลิงก์แชร์</span>}
+                      </div>
                     </div>
-                  )}
-                  {selectedRequest.notes && (
-                    <div>
-                      <span className="text-muted-foreground block mb-1">หมายเหตุจาก User:</span>
-                      <p className="bg-muted/30 rounded-lg p-2 text-foreground">{selectedRequest.notes}</p>
+                    <div className="flex items-center gap-1 shrink-0">
+                      {doc.file_url && (
+                        <a href={doc.file_url} target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground" title="เปิดไฟล์">
+                          <ExternalLink size={15} />
+                        </a>
+                      )}
+                      <button onClick={() => handleShareLink(doc)} className="p-2 rounded-lg hover:bg-secondary transition-colors text-muted-foreground hover:text-primary" title="สร้าง/คัดลอกลิงก์แชร์">
+                        <Link2 size={15} />
+                      </button>
+                      <button onClick={() => setEditDoc(doc)} className="p-2 rounded-lg hover:bg-secondary transition-colors text-muted-foreground hover:text-foreground" title="แก้ไข">
+                        <Eye size={15} />
+                      </button>
+                      <button onClick={() => handleDeleteDoc(doc)} className="p-2 rounded-lg hover:bg-secondary transition-colors text-muted-foreground hover:text-red-500" title="ลบ">
+                        <Trash2 size={15} />
+                      </button>
                     </div>
-                  )}
-                  <div>
-                    <span className="text-muted-foreground">วันที่ขอ:</span>
-                    <span className="ml-2 text-foreground">{formatDate(selectedRequest.created_at)}</span>
                   </div>
                 </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
-                {/* Action Form */}
-                <div className="space-y-3 pt-3 border-t border-border">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">URL ไฟล์เอกสาร</label>
-                    <input
-                      value={replyForm.file_url}
-                      onChange={(e) => setReplyForm((f) => ({ ...f, file_url: e.target.value }))}
-                      className={inputClass}
-                      placeholder="https://... (ลิงก์ไฟล์ PDF / Google Drive)"
-                    />
+      {/* ═══ TAB: Requests ═══ */}
+      {activeTab === "requests" && (
+        <div className="space-y-4">
+          <div className="flex gap-2 flex-wrap">
+            {["pending", "approved", "rejected", "all"].map((s) => (
+              <button key={s} onClick={() => setReqFilter(s)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${reqFilter === s ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground hover:text-foreground"}`}>
+                {s === "all" ? "ทั้งหมด" : STATUS_CONFIG[s]?.label || s}
+                {s === "pending" && pendingCount > 0 && <span className="ml-1.5 bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">{pendingCount}</span>}
+              </button>
+            ))}
+          </div>
+
+          {reqLoading ? (
+            <div className="text-center py-16"><Loader2 size={24} className="animate-spin mx-auto text-muted-foreground" /></div>
+          ) : filteredRequests.length === 0 ? (
+            <div className="text-center py-16 text-muted-foreground">
+              <CheckCircle size={40} className="mx-auto mb-3 opacity-30" />
+              <p>ไม่มีคำขอ{reqFilter === "pending" ? "ที่รอดำเนินการ" : ""}</p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {filteredRequests.map((req) => {
+                const sc = STATUS_CONFIG[req.status] || STATUS_CONFIG.pending;
+                const Icon = sc.icon;
+                const docRef = req.document_id ? docs.find((d) => d.id === req.document_id) : null;
+                return (
+                  <div key={req.id} className="p-4 rounded-xl border border-border bg-card">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border ${sc.color}`}>
+                            <Icon size={11} /> {sc.label}
+                          </span>
+                          <span className="font-semibold text-foreground text-sm">
+                            {docRef?.title || req.document_type}
+                          </span>
+                        </div>
+                        <div className="mt-1.5 text-xs text-muted-foreground space-y-0.5">
+                          <p>User ID: <span className="text-foreground font-medium font-mono">{req.user_id.slice(0, 16)}...</span></p>
+                          {req.notes && <p>หมายเหตุ: <span className="text-foreground">{req.notes}</span></p>}
+                          {req.admin_notes && <p>Admin: <span className="text-foreground">{req.admin_notes}</span></p>}
+                          <p>{fmt(req.created_at)}</p>
+                        </div>
+                      </div>
+                      {req.status === "pending" && (
+                        <div className="flex gap-2 shrink-0">
+                          <button onClick={() => handleApproveRequest(req)}
+                            className="px-3 py-1.5 rounded-lg bg-green-500/10 text-green-600 text-xs font-semibold hover:bg-green-500/20 transition-colors flex items-center gap-1">
+                            <Check size={13} /> อนุมัติ
+                          </button>
+                          <button onClick={() => handleRejectRequest(req)}
+                            className="px-3 py-1.5 rounded-lg bg-red-500/10 text-red-500 text-xs font-semibold hover:bg-red-500/20 transition-colors flex items-center gap-1">
+                            <X size={13} /> ปฏิเสธ
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">หมายเหตุจาก Admin</label>
-                    <textarea
-                      value={replyForm.admin_notes}
-                      onChange={(e) => setReplyForm((f) => ({ ...f, admin_notes: e.target.value }))}
-                      className={`${inputClass} resize-none`}
-                      rows={2}
-                      placeholder="ข้อความถึงลูกค้า (ไม่บังคับ)"
-                    />
-                  </div>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handleUpdateRequest(selectedRequest.id, "ready", replyForm.file_url, replyForm.admin_notes)}
-                      disabled={actionLoading}
-                      className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-green-500/10 text-green-500 border border-green-500/20 text-sm font-bold hover:bg-green-500/20 transition-colors disabled:opacity-60"
-                    >
-                      {actionLoading ? <Loader2 size={12} className="animate-spin" /> : <CheckCircle size={12} />}
-                      อนุมัติ + ส่งไฟล์
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ═══ TAB: Access ═══ */}
+      {activeTab === "access" && (
+        <div className="space-y-4">
+          <p className="text-sm text-muted-foreground">สิทธิ์เข้าถึงเอกสารที่กำหนดเฉพาะ user — จากการอนุมัติคำขอ หรือ admin กำหนดเอง</p>
+          {accesses.length === 0 ? (
+            <div className="text-center py-16 text-muted-foreground">
+              <Users size={40} className="mx-auto mb-3 opacity-30" />
+              <p>ยังไม่มีสิทธิ์เฉพาะ — จะเกิดขึ้นเมื่ออนุมัติคำขอเอกสาร</p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {accesses.map((a) => {
+                const doc = docs.find((d) => d.id === a.document_id);
+                return (
+                  <div key={a.id} className="p-4 rounded-xl border border-border bg-card flex items-center justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <UserCheck size={14} className="text-green-500 shrink-0" />
+                        <span className="text-sm font-medium text-foreground font-mono">{a.user_id.slice(0, 16)}...</span>
+                        <span className="text-muted-foreground text-xs">→</span>
+                        <span className="text-sm text-foreground font-medium">{doc?.title || "เอกสาร #" + a.document_id.slice(0, 8)}</span>
+                      </div>
+                      <div className="text-[11px] text-muted-foreground mt-1 flex flex-wrap gap-3">
+                        <span>อนุมัติเมื่อ {fmt(a.granted_at)}</span>
+                        {a.expires_at && <span className="text-yellow-500">หมดอายุ {fmt(a.expires_at)}</span>}
+                        {a.notes && <span>— {a.notes}</span>}
+                      </div>
+                    </div>
+                    <button onClick={() => handleRevokeAccess(a.id)} className="p-2 rounded-lg hover:bg-red-500/10 text-muted-foreground hover:text-red-500 transition-colors" title="ยกเลิกสิทธิ์">
+                      <XCircle size={15} />
                     </button>
-                    <button
-                      onClick={() => handleUpdateRequest(selectedRequest.id, "rejected", undefined, replyForm.admin_notes)}
-                      disabled={actionLoading}
-                      className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 text-sm font-bold hover:bg-red-500/20 transition-colors disabled:opacity-60"
-                    >
-                      <XCircle size={12} /> ปฏิเสธ
-                    </button>
                   </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ═══ TAB: Logs ═══ */}
+      {activeTab === "logs" && (
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">ประวัติดาวน์โหลดเอกสาร (ล่าสุด 100 รายการ)</p>
+            <button onClick={fetchLogs} className={btnSecondary}><RefreshCw size={14} /> รีเฟรช</button>
+          </div>
+          {logsLoading ? (
+            <div className="text-center py-16"><Loader2 size={24} className="animate-spin mx-auto text-muted-foreground" /></div>
+          ) : logs.length === 0 ? (
+            <div className="text-center py-16 text-muted-foreground">
+              <History size={40} className="mx-auto mb-3 opacity-30" />
+              <p>ยังไม่มีประวัติดาวน์โหลด</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto rounded-xl border border-border">
+              <table className="w-full text-xs">
+                <thead className="bg-secondary/50">
+                  <tr className="text-muted-foreground">
+                    <th className="text-left py-2.5 px-3 font-medium">เวลา</th>
+                    <th className="text-left py-2.5 px-3 font-medium">User</th>
+                    <th className="text-left py-2.5 px-3 font-medium">เอกสาร</th>
+                    <th className="text-left py-2.5 px-3 font-medium">ช่องทาง</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {logs.map((log) => {
+                    const doc = docs.find((d) => d.id === log.document_id);
+                    return (
+                      <tr key={log.id} className="border-t border-border/50 hover:bg-secondary/30">
+                        <td className="py-2 px-3 text-muted-foreground">{fmt(log.downloaded_at)}</td>
+                        <td className="py-2 px-3 font-medium text-foreground font-mono">{log.user_id?.slice(0, 12) || "—"}...</td>
+                        <td className="py-2 px-3">{doc?.title || log.document_id.slice(0, 12)}</td>
+                        <td className="py-2 px-3"><span className="px-1.5 py-0.5 rounded bg-secondary text-muted-foreground">{log.method}</span></td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ═══ MODAL: Upload ═══ */}
+      {showUpload && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowUpload(false)}>
+          <div className="bg-card border border-border rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="p-6 border-b border-border flex items-center justify-between">
+              <h3 className="text-lg font-bold text-foreground flex items-center gap-2"><FileUp size={20} className="text-primary" /> อัปโหลดเอกสาร</h3>
+              <button onClick={() => setShowUpload(false)} className="p-1.5 rounded-lg hover:bg-secondary"><X size={18} /></button>
+            </div>
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="text-sm font-medium text-foreground mb-1.5 block">ชื่อเอกสาร *</label>
+                <input type="text" placeholder="เช่น หนังสือรับรองบริษัท" value={uploadForm.title} onChange={(e) => setUploadForm({ ...uploadForm, title: e.target.value })} className={inputClass} />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-foreground mb-1.5 block">คำอธิบาย</label>
+                <textarea placeholder="รายละเอียดเอกสาร..." value={uploadForm.description} onChange={(e) => setUploadForm({ ...uploadForm, description: e.target.value })} className={`${inputClass} resize-none`} rows={2} />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-1.5 block">หมวดหมู่</label>
+                  <select value={uploadForm.category} onChange={(e) => setUploadForm({ ...uploadForm, category: e.target.value })} className={inputClass}>
+                    {CATEGORIES.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-1.5 block">ระดับสิทธิ์</label>
+                  <select value={uploadForm.access_level} onChange={(e) => setUploadForm({ ...uploadForm, access_level: e.target.value })} className={inputClass}>
+                    {ACCESS_LEVELS.map((a) => <option key={a.value} value={a.value}>{a.label}</option>)}
+                  </select>
                 </div>
               </div>
-            ) : (
-              <div className="card-surface rounded-xl p-8 text-center text-muted-foreground text-xs">
-                <Eye size={24} className="mx-auto mb-2 opacity-30" />
-                เลือกคำขอเพื่อดูรายละเอียด
+              {/* Access level description */}
+              <div className="p-3 rounded-lg bg-secondary/50 text-xs text-muted-foreground">
+                {ACCESS_LEVELS.find((a) => a.value === uploadForm.access_level)?.desc}
               </div>
-            )}
+              <div>
+                <label className="text-sm font-medium text-foreground mb-1.5 block">เลือกไฟล์ *</label>
+                <input ref={fileInputRef} type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.zip,.rar" onChange={(e) => setUploadFile(e.target.files?.[0] || null)} className="hidden" />
+                <button onClick={() => fileInputRef.current?.click()} className={`${btnSecondary} w-full justify-center`}>
+                  <Upload size={15} />
+                  {uploadFile ? <span className="truncate">{uploadFile.name} ({fmtSize(uploadFile.size)})</span> : <span>Browse ไฟล์... (PDF, DOC, XLS, JPG, ZIP)</span>}
+                </button>
+              </div>
+            </div>
+            <div className="p-6 border-t border-border flex justify-end gap-3">
+              <button onClick={() => setShowUpload(false)} className={btnSecondary}>ยกเลิก</button>
+              <button onClick={handleFileUpload} disabled={uploading || !uploadFile || !uploadForm.title} className={btnPrimary}>
+                {uploading ? <Loader2 size={15} className="animate-spin" /> : <Upload size={15} />}
+                {uploading ? "กำลังอัปโหลด..." : "อัปโหลด"}
+              </button>
+            </div>
           </div>
         </div>
       )}
 
-      {/* ═══════ TAB: Document Library ═══════ */}
-      {activeTab === "library" && (
-        <div className="space-y-4">
-          {/* Upload button */}
-          <div className="flex justify-end">
-            <button
-              onClick={() => setShowUploadForm(!showUploadForm)}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors"
-            >
-              <Plus size={14} /> เพิ่มเอกสาร
-            </button>
-          </div>
-
-          {/* Upload Form */}
-          {showUploadForm && (
-            <div className="card-surface rounded-xl p-5 space-y-3 animate-fade-in">
-              <h3 className="text-sm font-bold text-foreground">เพิ่มเอกสารเข้าคลัง</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {/* ═══ MODAL: Edit ═══ */}
+      {editDoc && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setEditDoc(null)}>
+          <div className="bg-card border border-border rounded-2xl shadow-2xl w-full max-w-lg" onClick={(e) => e.stopPropagation()}>
+            <div className="p-6 border-b border-border flex items-center justify-between">
+              <h3 className="text-lg font-bold text-foreground">แก้ไขเอกสาร</h3>
+              <button onClick={() => setEditDoc(null)} className="p-1.5 rounded-lg hover:bg-secondary"><X size={18} /></button>
+            </div>
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="text-sm font-medium text-foreground mb-1.5 block">ชื่อเอกสาร</label>
+                <input type="text" value={editDoc.title} onChange={(e) => setEditDoc({ ...editDoc, title: e.target.value })} className={inputClass} />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-foreground mb-1.5 block">คำอธิบาย</label>
+                <textarea value={editDoc.description || ""} onChange={(e) => setEditDoc({ ...editDoc, description: e.target.value })} className={`${inputClass} resize-none`} rows={2} />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1">ประเภทเอกสาร</label>
-                  <select
-                    value={uploadForm.document_type}
-                    onChange={(e) => setUploadForm((f) => ({ ...f, document_type: e.target.value }))}
-                    className={inputClass}
-                  >
-                    {Object.entries(DOC_TYPE_LABELS).map(([val, label]) => (
-                      <option key={val} value={val}>{label}</option>
-                    ))}
+                  <label className="text-sm font-medium text-foreground mb-1.5 block">หมวดหมู่</label>
+                  <select value={editDoc.category} onChange={(e) => setEditDoc({ ...editDoc, category: e.target.value })} className={inputClass}>
+                    {CATEGORIES.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1">ชื่อเอกสาร *</label>
-                  <input
-                    value={uploadForm.title}
-                    onChange={(e) => setUploadForm((f) => ({ ...f, title: e.target.value }))}
-                    className={inputClass}
-                    placeholder="เช่น ENT Group Company Profile 2025"
-                  />
+                  <label className="text-sm font-medium text-foreground mb-1.5 block">ระดับสิทธิ์</label>
+                  <select value={editDoc.access_level} onChange={(e) => setEditDoc({ ...editDoc, access_level: e.target.value })} className={inputClass}>
+                    {ACCESS_LEVELS.map((a) => <option key={a.value} value={a.value}>{a.label}</option>)}
+                  </select>
                 </div>
+              </div>
+              {editDoc.share_token && (
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1">URL ไฟล์ *</label>
-                  <input
-                    value={uploadForm.file_url}
-                    onChange={(e) => setUploadForm((f) => ({ ...f, file_url: e.target.value }))}
-                    className={inputClass}
-                    placeholder="https://... (Supabase Storage / Google Drive)"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-1">รุ่นสินค้า (ถ้ามี)</label>
-                  <input
-                    value={uploadForm.product_model}
-                    onChange={(e) => setUploadForm((f) => ({ ...f, product_model: e.target.value }))}
-                    className={inputClass}
-                    placeholder="เช่น GT9000"
-                  />
-                </div>
-                <div className="sm:col-span-2">
-                  <label className="block text-sm font-medium text-foreground mb-1">คำอธิบาย</label>
-                  <input
-                    value={uploadForm.description}
-                    onChange={(e) => setUploadForm((f) => ({ ...f, description: e.target.value }))}
-                    className={inputClass}
-                    placeholder="คำอธิบายสั้นๆ"
-                  />
-                </div>
-                <div className="sm:col-span-2 flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={uploadForm.is_public}
-                    onChange={(e) => setUploadForm((f) => ({ ...f, is_public: e.target.checked }))}
-                    className="rounded border-border text-primary w-4 h-4"
-                  />
-                  <span className="text-xs text-muted-foreground">สาธารณะ (User ดาวน์โหลดได้ทันทีเมื่อขอ)</span>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={handleUploadToLibrary}
-                  disabled={uploadLoading}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60"
-                >
-                  {uploadLoading ? <Loader2 size={12} className="animate-spin" /> : <Upload size={12} />}
-                  บันทึก
-                </button>
-                <button
-                  onClick={() => setShowUploadForm(false)}
-                  className="px-4 py-2 rounded-lg border border-border text-xs text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  ยกเลิก
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Library List */}
-          <div className="card-surface rounded-xl p-5">
-            {libraryLoading ? (
-              <div className="flex items-center justify-center py-8">
-                <Loader2 size={20} className="animate-spin text-muted-foreground" />
-              </div>
-            ) : libraryItems.length === 0 ? (
-              <div className="text-center py-8">
-                <FolderOpen size={32} className="mx-auto mb-3 text-muted-foreground/30" />
-                <p className="text-sm text-muted-foreground">ยังไม่มีเอกสารในคลัง</p>
-                <p className="text-xs text-muted-foreground/60 mt-1">กดปุ่ม "เพิ่มเอกสาร" เพื่อเริ่มเพิ่ม</p>
-              </div>
-            ) : (
-              <div className="space-y-2">
-                {libraryItems.map((item) => (
-                  <div key={item.id} className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-secondary/20 transition-colors">
-                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <FileText size={16} className="text-primary" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-foreground">{item.title}</span>
-                        <span className="text-xs px-1.5 py-0.5 rounded-full bg-secondary text-muted-foreground">
-                          {DOC_TYPE_LABELS[item.document_type] || item.document_type}
-                        </span>
-                        {item.is_public && (
-                          <span className="text-xs px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">
-                            สาธารณะ
-                          </span>
-                        )}
-                      </div>
-                      {item.description && <p className="text-xs text-muted-foreground mt-0.5">{item.description}</p>}
-                      {item.product_model && <p className="text-xs text-muted-foreground">รุ่น: {item.product_model}</p>}
-                      <p className="text-xs text-muted-foreground/60 mt-1">
-                        ดาวน์โหลด {item.download_count} ครั้ง · {formatDate(item.created_at)}
-                      </p>
-                    </div>
-                    <a
-                      href={item.file_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:text-primary/80 transition-colors shrink-0"
-                      title="เปิดไฟล์"
-                    >
-                      <ExternalLink size={14} />
-                    </a>
-                    <button
-                      onClick={() => handleDeleteLibraryItem(item.id)}
-                      className="text-muted-foreground/40 hover:text-destructive transition-colors shrink-0"
-                      title="ลบ"
-                    >
-                      <Trash2 size={14} />
-                    </button>
+                  <label className="text-sm font-medium text-foreground mb-1.5 block">ลิงก์แชร์</label>
+                  <div className="flex gap-2">
+                    <input type="text" readOnly value={`${window.location.origin}/documents/share/${editDoc.share_token}`} className={`${inputClass} text-xs font-mono`} />
+                    <button onClick={() => { navigator.clipboard.writeText(`${window.location.origin}/documents/share/${editDoc.share_token}`); toast({ title: "คัดลอกแล้ว" }); }} className={btnSecondary}><Copy size={14} /></button>
                   </div>
-                ))}
-              </div>
-            )}
+                </div>
+              )}
+              {editDoc.file_url && (
+                <div className="text-xs text-muted-foreground">
+                  ไฟล์: <a href={editDoc.file_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{editDoc.file_url.split("/").pop()}</a>
+                  {editDoc.file_size && <span className="ml-2">({fmtSize(editDoc.file_size)})</span>}
+                </div>
+              )}
+            </div>
+            <div className="p-6 border-t border-border flex justify-end gap-3">
+              <button onClick={() => setEditDoc(null)} className={btnSecondary}>ยกเลิก</button>
+              <button onClick={handleUpdateDoc} className={btnPrimary}><Check size={15} /> บันทึก</button>
+            </div>
           </div>
         </div>
       )}
