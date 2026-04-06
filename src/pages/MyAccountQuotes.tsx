@@ -67,6 +67,7 @@ const MyAccountQuotes = () => {
   const [poUploading, setPoUploading] = useState(false);
   const [poNumber, setPoNumber] = useState("");
   const [poNotes, setPoNotes] = useState("");
+  const [companySettings, setCompanySettings] = useState<any>(null);
 
   const fetchQuotes = async () => {
     if (!user) return;
@@ -83,7 +84,15 @@ const MyAccountQuotes = () => {
     if (data) setCatalog(data);
   };
 
-  useEffect(() => { fetchQuotes(); fetchCatalog(); }, [user]);
+  useEffect(() => {
+    fetchQuotes(); fetchCatalog();
+    (async () => {
+      try {
+        const { data } = await (supabase.from as any)("company_settings").select("*").eq("id", "default").single();
+        if (data) setCompanySettings(data);
+      } catch {}
+    })();
+  }, [user]);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -133,7 +142,12 @@ const MyAccountQuotes = () => {
     printQuote(
       { quote_number: q.quote_number, name: q.name, email: q.email, phone: q.phone, company: q.company, details: q.details },
       items.map((it) => ({ ...it, _name: it._name, _specs: it._specs })),
-      { discount_amount: q.discount_amount, valid_until: q.valid_until || "", payment_terms: q.payment_terms || "", delivery_terms: q.delivery_terms || "" }
+      {
+        discount_amount: q.discount_amount, valid_until: q.valid_until || "",
+        payment_terms: q.payment_terms || "", delivery_terms: q.delivery_terms || "",
+        include_vat: true, vat_percent: companySettings?.vat_percent || 7,
+      },
+      companySettings || undefined,
     );
   };
 
