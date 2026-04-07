@@ -68,6 +68,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
   const poFileRef = useRef<HTMLInputElement>(null);
   const [poUploading, setPoUploading] = useState(false);
   const [submittingId, setSubmittingId] = useState<string | null>(null);
+  const [printingId, setPrintingId] = useState<string | null>(null);
   const [poNumber, setPoNumber] = useState("");
   const [poNotes, setPoNotes] = useState("");
   const [companySettings, setCompanySettings] = useState<any>(null);
@@ -105,7 +106,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  const fetchLineItems = async (quoteId: string) => {
+  const fetchLineItems = async (quoteId: string): Promise<LineItem[]> => {
     try {
       const { data } = await (supabase.from as any)("quote_line_items")
         .select("*").eq("quote_id", quoteId).order("sort_order");
@@ -116,8 +117,10 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
           return { ...it, _name: cat?.name_th || "", _specs: cat?.specs || it.custom_specs || {} };
         });
         setLineItems((prev) => ({ ...prev, [quoteId]: enriched }));
+        return enriched;
       }
     } catch {}
+    return [];
   };
 
   const handleExpand = (id: string) => {
@@ -149,18 +152,30 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
     setResponding(false);
   };
 
-  const handlePrintQuote = (q: QuoteRequest) => {
-    const items = lineItems[q.id] || [];
-    printQuote(
-      { quote_number: q.quote_number, name: q.name, email: q.email, phone: q.phone, company: q.company, details: q.details },
-      items.map((it) => ({ ...it, _name: it._name, _specs: it._specs })),
-      {
-        discount_amount: q.discount_amount, valid_until: q.valid_until || "",
-        payment_terms: q.payment_terms || "", delivery_terms: q.delivery_terms || "",
-        include_vat: true, vat_percent: companySettings?.vat_percent || 7,
-      },
-      companySettings || undefined,
-    );
+  const handlePrintQuote = async (q: QuoteRequest) => {
+    if (printingId) return;
+    setPrintingId(q.id);
+    try {
+      const freshItems = await fetchLineItems(q.id);
+      const saleInfo = await getSaleInfo((q as any).assigned_to || null);
+      printQuote(
+        { quote_number: q.quote_number, name: q.name, email: q.email, phone: q.phone, company: q.company, details: q.details },
+        freshItems.map((it) => ({ ...it, _name: it._name, _specs: it._specs })),
+        {
+          discount_amount: q.discount_amount, valid_until: q.valid_until || "",
+          payment_terms: q.payment_terms || "", delivery_terms: q.delivery_terms || "",
+          include_vat: true, vat_percent: companySettings?.vat_percent || 7,
+        },
+        companySettings || undefined,
+        saleInfo.saleName,
+        undefined,
+        saleInfo.saleEmail,
+      );
+    } catch (err: any) {
+      toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message || "เกิดข้อผิดพลาด", variant: "destructive" });
+    } finally {
+      setPrintingId(null);
+    }
   };
 
   const handleShare = async (q: QuoteRequest) => {
@@ -429,7 +444,13 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                               </>
                             )}
                             <button onClick={(e) => { e.stopPropagation(); handleExpand(q.id); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><FileText size={14} /> ดูรายละเอียด</button>
-                            <button onClick={(e) => { e.stopPropagation(); fetchLineItems(q.id); setTimeout(() => handlePrintQuote(q), 500); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Printer size={14} /> พิมพ์ใบเสนอราคา</button>
+                            <button
+                              onClick={(e) => { e.stopPropagation(); handlePrintQuote(q); setMenuOpenId(null); }}
+                              disabled={printingId === q.id}
+                              className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60 disabled:opacity-50"
+                            >
+                              <Printer size={14} /> {printingId === q.id ? "กำลังโหลด..." : "พิมพ์ใบเสนอราคา"}
+                            </button>
                             <button onClick={(e) => { e.stopPropagation(); handleShare(q); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Share2 size={14} /> แชร์ให้ผู้เกี่ยวข้อง</button>
                             {q.pdf_url && <a href={q.pdf_url} target="_blank" rel="noopener noreferrer" onClick={(e) => { e.stopPropagation(); setMenuOpenId(null); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Download size={14} /> ดาวน์โหลด PDF</a>}
                             <button onClick={(e) => { e.stopPropagation(); handleCopyLink(q); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Copy size={14} /> คัดลอกลิงก์</button>
@@ -659,9 +680,10 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                         <Download size={14} /> ดาวน์โหลด PDF
                       </a>
                     )}
-                    <button onClick={() => { fetchLineItems(q.id); setTimeout(() => handlePrintQuote(q), 500); }}
-                      className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      <Printer size={14} /> พิมพ์ใบเสนอราคา
+                    <button onClick={() => handlePrintQuote(q)}
+                      disabled={printingId === q.id}
+                      className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground transition-colors disabled:opacity-50">
+                      <Printer size={14} /> {printingId === q.id ? "กำลังโหลด..." : "พิมพ์ใบเสนอราคา"}
                     </button>
                     <button onClick={() => handleShare(q)}
                       className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground transition-colors">
