@@ -94,6 +94,7 @@ const userFeatures = [
       "ระบบแจ้ง Admin อัตโนมัติ",
     ],
     screenshotPlaceholder: "ส่วน Upload PO + ปุ่มยืนยัน",
+    screenshot: "/images/platform/po-upload.png",
   },
   {
     id: "notifications",
@@ -106,6 +107,7 @@ const userFeatures = [
       "สรุปรายวัน (กำลังพัฒนา)",
     ],
     screenshotPlaceholder: "Notification Bell + รายการแจ้งเตือน",
+    screenshot: "/images/platform/notifications-illust.png",
   },
   {
     id: "account",
@@ -118,6 +120,7 @@ const userFeatures = [
       "ขอเอกสาร ใบรับประกัน ใบกำกับภาษี",
     ],
     screenshotPlaceholder: "หน้า My Account Overview",
+    screenshot: "/images/platform/account-illust.png",
   },
 ];
 
