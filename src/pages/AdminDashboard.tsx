@@ -444,7 +444,12 @@ const AdminDashboard = () => {
         ) : tab === "quote_review" ? (
           <AdminQuoteReview />
         ) : tab === "sales_orders" ? (
-          <AdminSalesOrders />
+          <>
+            <RevenueChart />
+            <div className="mt-6">
+              <AdminSalesOrders />
+            </div>
+          </>
         ) : tab === "billing" ? (
           <AdminBillingManager />
         ) : tab === "invoices" ? (
