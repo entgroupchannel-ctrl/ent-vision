@@ -424,6 +424,7 @@ export type Database = {
           created_at: string
           created_by: string | null
           email: string
+          first_response_at: string | null
           follow_up_date: string | null
           id: string
           lead_score: number
@@ -433,6 +434,9 @@ export type Database = {
           notes: string | null
           phone: string | null
           priority: string | null
+          sla_breached: boolean | null
+          sla_resolution_due: string | null
+          sla_response_due: string | null
           source: string | null
           status: string
           whatsapp: string | null
@@ -451,6 +455,7 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           email: string
+          first_response_at?: string | null
           follow_up_date?: string | null
           id?: string
           lead_score?: number
@@ -460,6 +465,9 @@ export type Database = {
           notes?: string | null
           phone?: string | null
           priority?: string | null
+          sla_breached?: boolean | null
+          sla_resolution_due?: string | null
+          sla_response_due?: string | null
           source?: string | null
           status?: string
           whatsapp?: string | null
@@ -478,6 +486,7 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           email?: string
+          first_response_at?: string | null
           follow_up_date?: string | null
           id?: string
           lead_score?: number
@@ -487,6 +496,9 @@ export type Database = {
           notes?: string | null
           phone?: string | null
           priority?: string | null
+          sla_breached?: boolean | null
+          sla_resolution_due?: string | null
+          sla_response_due?: string | null
           source?: string | null
           status?: string
           whatsapp?: string | null
@@ -1176,8 +1188,12 @@ export type Database = {
           created_at: string
           id: string
           link: string | null
+          link_id: string | null
+          link_type: string | null
           message: string
+          metadata: Json | null
           read: boolean
+          read_at: string | null
           title: string
           type: string
           user_id: string
@@ -1186,8 +1202,12 @@ export type Database = {
           created_at?: string
           id?: string
           link?: string | null
+          link_id?: string | null
+          link_type?: string | null
           message: string
+          metadata?: Json | null
           read?: boolean
+          read_at?: string | null
           title: string
           type?: string
           user_id: string
@@ -1196,8 +1216,12 @@ export type Database = {
           created_at?: string
           id?: string
           link?: string | null
+          link_id?: string | null
+          link_type?: string | null
           message?: string
+          metadata?: Json | null
           read?: boolean
+          read_at?: string | null
           title?: string
           type?: string
           user_id?: string
@@ -1977,6 +2001,36 @@ export type Database = {
           },
         ]
       }
+      sla_config: {
+        Row: {
+          active: boolean | null
+          case_type: string
+          created_at: string
+          id: string
+          priority: string
+          resolution_hours: number
+          response_minutes: number
+        }
+        Insert: {
+          active?: boolean | null
+          case_type: string
+          created_at?: string
+          id?: string
+          priority: string
+          resolution_hours: number
+          response_minutes: number
+        }
+        Update: {
+          active?: boolean | null
+          case_type?: string
+          created_at?: string
+          id?: string
+          priority?: string
+          resolution_hours?: number
+          response_minutes?: number
+        }
+        Relationships: []
+      }
       software_inquiries: {
         Row: {
           budget_range: string | null
@@ -2190,11 +2244,29 @@ export type Database = {
       }
     }
     Functions: {
+      calculate_sla_dues: {
+        Args: { _case_type: string; _priority: string; _start_time?: string }
+        Returns: {
+          resolution_due: string
+          response_due: string
+        }[]
+      }
       can_download_document: {
         Args: { _document_id: string; _user_id: string }
         Returns: boolean
       }
       count_pending_negotiations: { Args: never; Returns: number }
+      detect_sla_breaches: {
+        Args: never
+        Returns: {
+          assigned_to: string
+          case_type: string
+          contact_id: string
+          customer_name: string
+          minutes_overdue: number
+          priority: string
+        }[]
+      }
       format_doc_number: {
         Args: { chain: string; prefix: string }
         Returns: string
@@ -2270,6 +2342,7 @@ export type Database = {
           user_id: string
         }[]
       }
+      get_unread_notification_count: { Args: never; Returns: number }
       get_yearly_revenue: {
         Args: { _years_back?: number }
         Returns: {
@@ -2295,11 +2368,13 @@ export type Database = {
           user_id: string
         }[]
       }
+      mark_notifications_read: { Args: { _ids?: string[] }; Returns: number }
       reassign_quote: {
         Args: { _new_admin_id: string; _quote_id: string }
         Returns: undefined
       }
       remove_admin_user: { Args: { _user_id: string }; Returns: boolean }
+      send_followup_reminders: { Args: never; Returns: number }
     }
     Enums: {
       app_role:
