@@ -441,25 +441,7 @@ const AdminDashboard = () => {
               </button>
             )}
 
-            {/* Stats row — hidden on dashboard tab (has its own stats) */}
-            {tab !== "dashboard" && (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                {[
-                  { label: "ติดต่อเข้ามา", value: stats.totalContacts, icon: MessageSquare, color: "text-blue-400" },
-                  { label: "ขอใบเสนอราคา", value: stats.totalQuotes, icon: FileText, color: "text-purple-400" },
-                  { label: "Lead ใหม่", value: stats.newLeads, icon: Users, color: "text-yellow-400" },
-                  { label: "Lead คุณภาพสูง", value: stats.highScoreLeads, icon: TrendingUp, color: "text-primary" },
-                ].map((s) => (
-                  <div key={s.label} className="card-surface rounded-xl p-5">
-                    <div className="flex items-center gap-2 mb-2">
-                      <s.icon size={16} className={s.color} />
-                      <span className="text-sm text-muted-foreground">{s.label}</span>
-                    </div>
-                    <span className="text-3xl font-bold text-foreground">{s.value}</span>
-                  </div>
-                ))}
-              </div>
-            )}
+            {/* Stats row removed — only show on dashboard tab */}
 
         {/* Engagement Analytics Tab — full width, no filter/export */}
         {tab === "dashboard" ? (
