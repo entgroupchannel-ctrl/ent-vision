@@ -1,14 +1,21 @@
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ShoppingCart, FileText, Send, Eye, MessageSquare, Shield,
   ClipboardList, Truck, CreditCard, BarChart3, Bell, Search,
   Heart, UserCheck, Headphones, ArrowRight, CheckCircle2,
   Package, Receipt, FileCheck, Users, Zap, Clock, ChevronRight,
-  Monitor, Lock, Globe
+  Monitor, Lock, Globe, Home, User, LogIn, UserPlus, LogOut,
+  FolderOpen, Bot, Menu, X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
 import FooterCompact from "@/components/FooterCompact";
+import ThemeToggle from "@/components/ThemeToggle";
+import AIChatWidget from "@/components/AIChatWidget";
+import QuoteCartButton from "@/components/QuoteCartButton";
+import { useAuth } from "@/hooks/useAuth";
+import logo from "@/assets/logo-entgroup.avif";
 
 /* ═══════════════════════════════════════════════════════════
  * Platform Tour — B2B Industrial Platform
@@ -179,6 +186,21 @@ const workflowSteps = [
 ];
 
 const PlatformTour = () => {
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [aiChatOpen, setAiChatOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  const { user, isAdmin, isSuperAdmin, signOut } = useAuth();
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEOHead
@@ -190,7 +212,82 @@ const PlatformTour = () => {
       {/* ═══════════════ Hero ═══════════════ */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[hsl(220,20%,8%)] via-[hsl(220,20%,12%)] to-[hsl(168,40%,12%)]">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(168_80%_38%/0.08),transparent_60%)]" />
-        <div className="relative container max-w-6xl mx-auto px-4 py-20 md:py-28 text-center">
+
+        {/* ── Navbar ── */}
+        <nav className="relative z-20 flex items-center justify-between px-6 md:px-12 py-4">
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logo} alt="ENT GROUP" className="h-10 w-auto" />
+          </Link>
+          <div className="flex items-center gap-2">
+            <Link to="/" className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors" title="หน้าแรก">
+              <Home size={18} />
+            </Link>
+            <QuoteCartButton />
+            <ThemeToggle />
+            <button
+              onClick={() => setAiChatOpen(true)}
+              className="p-2 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-surface-hover transition-colors"
+              aria-label="AI Assistant"
+              title="AI ผู้เชี่ยวชาญ"
+            >
+              <Bot size={18} />
+            </button>
+            {/* User menu */}
+            <div className="relative" ref={userMenuRef}>
+              <button
+                onClick={() => setUserMenuOpen(!userMenuOpen)}
+                className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                aria-label="บัญชีผู้ใช้"
+              >
+                <User size={20} />
+              </button>
+              {userMenuOpen && (
+                <div className="absolute right-0 top-full mt-2 w-48 rounded-xl bg-card border border-border shadow-xl py-1 z-50 animate-fade-in">
+                  {user ? (
+                    <>
+                      <div className="px-4 py-2 text-xs text-muted-foreground border-b border-border truncate">
+                        <span>{user.email}</span>
+                        {isAdmin && (
+                          <span className="ml-1.5 inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold border border-primary/20">
+                            <Shield size={9} /> {isSuperAdmin ? "Super Admin" : "Admin"}
+                          </span>
+                        )}
+                      </div>
+                      {isAdmin && (
+                        <Link to="/admin" onClick={() => setUserMenuOpen(false)} className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-primary font-medium hover:bg-primary/5 transition-colors">
+                          <Shield size={14} /> Admin Dashboard
+                        </Link>
+                      )}
+                      <Link to="/my-account" onClick={() => setUserMenuOpen(false)} className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors">
+                        <User size={14} /> บัญชีของฉัน
+                      </Link>
+                      <Link to="/my-account/quotes" onClick={() => setUserMenuOpen(false)} className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors">
+                        <FileText size={14} /> ใบเสนอราคา
+                      </Link>
+                      <Link to="/my-account/documents" onClick={() => setUserMenuOpen(false)} className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors">
+                        <FolderOpen size={14} /> ศูนย์เอกสาร
+                      </Link>
+                      <button onClick={async () => { setUserMenuOpen(false); await signOut(); }} className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors">
+                        <LogOut size={14} /> ออกจากระบบ
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/admin-login" onClick={() => setUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors">
+                        <LogIn size={14} /> เข้าสู่ระบบ
+                      </Link>
+                      <Link to="/member-register" onClick={() => setUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors">
+                        <UserPlus size={14} /> สมัครสมาชิก
+                      </Link>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </nav>
+
+        <div className="relative container max-w-6xl mx-auto px-4 py-16 md:py-24 text-center">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold mb-6">
             <Globe size={14} /> B2B Industrial Platform
           </span>
@@ -401,6 +498,7 @@ const PlatformTour = () => {
       </section>
 
       <FooterCompact />
+      <AIChatWidget open={aiChatOpen} onClose={() => setAiChatOpen(false)} />
     </div>
   );
 };
