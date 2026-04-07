@@ -81,6 +81,7 @@ const userFeatures = [
       "ประวัติสนทนาเก็บไว้ตลอด",
     ],
     screenshotPlaceholder: "ส่วน สนทนา/ต่อรอง ในหน้าใบเสนอราคา",
+    screenshot: "/images/platform/negotiation.png",
   },
   {
     id: "po-upload",
