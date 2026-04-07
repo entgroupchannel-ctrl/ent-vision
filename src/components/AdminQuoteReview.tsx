@@ -266,8 +266,12 @@ const AdminQuoteReview = () => {
           });
         }));
       }
-    } catch {}
-    setLineLoading(false);
+    } catch (err) {
+      console.error("[selectQuote] Failed to load line items:", err);
+      setItems([]);
+    } finally {
+      setLineLoading(false);
+    }
     // Check if order/billing already created for this quote
     checkExistingDocs(q.id);
   };

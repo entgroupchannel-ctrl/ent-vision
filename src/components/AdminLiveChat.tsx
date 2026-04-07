@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import {
@@ -28,46 +29,51 @@ type Message = {
 
 const AdminLiveChat = () => {
   const { user } = useAuth();
-  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const qc = useQueryClient();
   const [selectedConv, setSelectedConv] = useState<Conversation | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Load conversations
-  const loadConversations = useCallback(async () => {
-    setLoading(true);
-    const { data } = await supabase
-      .from("live_chat_conversations")
-      .select("*")
-      .order("last_message_at", { ascending: false });
+  /* ─── React Query: conversations + unread counts ───
+   * Auto-refetches on window focus (fixes spinner stuck after tab switch).
+   * Realtime channel below invalidates the cache when new conversations arrive.
+   */
+  const { data: conversations = [], isLoading: loading } = useQuery({
+    queryKey: ["admin", "live-chat-conversations"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("live_chat_conversations")
+        .select("*")
+        .order("last_message_at", { ascending: false });
+      if (error) throw error;
+      if (!data) return [] as Conversation[];
 
-    if (data) {
       // Count unread messages per conversation
       const convIds = data.map((c: any) => c.id);
-      const { data: unreadData } = await supabase
-        .from("live_chat_messages")
-        .select("conversation_id")
-        .in("conversation_id", convIds)
-        .eq("sender_type", "user")
-        .eq("read", false);
+      let unreadMap: Record<string, number> = {};
+      if (convIds.length > 0) {
+        const { data: unreadData } = await supabase
+          .from("live_chat_messages")
+          .select("conversation_id")
+          .in("conversation_id", convIds)
+          .eq("sender_type", "user")
+          .eq("read", false);
+        unreadData?.forEach((m: any) => {
+          unreadMap[m.conversation_id] = (unreadMap[m.conversation_id] || 0) + 1;
+        });
+      }
 
-      const unreadMap: Record<string, number> = {};
-      unreadData?.forEach((m: any) => {
-        unreadMap[m.conversation_id] = (unreadMap[m.conversation_id] || 0) + 1;
-      });
+      return data.map((c: any) => ({ ...c, unread_count: unreadMap[c.id] || 0 })) as Conversation[];
+    },
+  });
 
-      setConversations(
-        data.map((c: any) => ({ ...c, unread_count: unreadMap[c.id] || 0 }))
-      );
-    }
-    setLoading(false);
-  }, []);
-
-  useEffect(() => { loadConversations(); }, [loadConversations]);
+  // Helper to refetch — used by realtime channel and any save handlers
+  const loadConversations = () => {
+    qc.invalidateQueries({ queryKey: ["admin", "live-chat-conversations"] });
+  };
 
   // Realtime for new conversations
   useEffect(() => {
@@ -80,7 +86,8 @@ const AdminLiveChat = () => {
       )
       .subscribe();
     return () => { supabase.removeChannel(channel); };
-  }, [loadConversations]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Load messages for selected conversation
   useEffect(() => {
