@@ -3,56 +3,26 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Lock, LogIn, Eye, EyeOff, Loader2 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user, isAdmin, loading: authLoading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    let mounted = true;
-
-    // Simple check: if user has a session, send to /admin
-    // AdminDashboard has its own guard — will redirect back if not admin
-    const checkSession = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!mounted) return;
-        if (session) {
-          navigate("/admin", { replace: true });
-          return;
-        }
-      } catch (err) {
-        console.error("Session check error:", err);
-      } finally {
-        if (mounted) setChecking(false);
-      }
-    };
-
-    checkSession();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (!mounted) return;
-      if (event === "SIGNED_IN" && session) {
-        navigate("/admin", { replace: true });
-      }
-    });
-
-    // Failsafe: force show login after 3 seconds no matter what
-    const timeout = setTimeout(() => {
-      if (mounted) setChecking(false);
-    }, 3000);
-
-    return () => {
-      mounted = false;
-      subscription.unsubscribe();
-      clearTimeout(timeout);
-    };
-  }, [navigate]);
+    if (authLoading) return;
+    if (!user) return;
+    if (isAdmin) {
+      navigate("/admin", { replace: true });
+    } else {
+      navigate("/my-account", { replace: true });
+    }
+  }, [authLoading, user, isAdmin, navigate]);
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,7 +59,7 @@ const AdminLogin = () => {
     setLoading(false);
   };
 
-  if (checking) {
+  if (authLoading || user) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex items-center gap-2 text-muted-foreground text-sm">
