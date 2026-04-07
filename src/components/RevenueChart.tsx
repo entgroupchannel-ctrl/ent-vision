@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   CartesianGrid, Legend, Cell,
@@ -63,45 +64,57 @@ const RevenueChart = () => {
   const [mode, setMode] = useState<ViewMode>("month");
   const [year, setYear] = useState<number>(CURRENT_YEAR);
   const [showYoY, setShowYoY] = useState(true);
-  const [loading, setLoading] = useState(false);
 
-  const [monthly, setMonthly] = useState<MonthlyRow[]>([]);
-  const [monthlyPrev, setMonthlyPrev] = useState<MonthlyRow[]>([]);
-  const [quarterly, setQuarterly] = useState<QuarterlyRow[]>([]);
-  const [quarterlyPrev, setQuarterlyPrev] = useState<QuarterlyRow[]>([]);
-  const [yearly, setYearly] = useState<YearlyRow[]>([]);
-
-  /* ─── Fetch data ─── */
-  const fetchData = async () => {
-    setLoading(true);
-    try {
+  /* ─── React Query: Fetch revenue data based on mode/year/showYoY ───
+   * - Query key includes [mode, year, showYoY] so changing them triggers refetch
+   * - Auto-refetch on window focus (fixes spinner-stuck after tab switch)
+   * - No useState/useEffect/loading boilerplate
+   */
+  const { data, isLoading: loading } = useQuery({
+    queryKey: ["admin", "revenue", mode, year, showYoY],
+    queryFn: async () => {
       if (mode === "month") {
         const [curr, prev] = await Promise.all([
           supabase.rpc("get_monthly_revenue", { _year: year }),
           showYoY ? supabase.rpc("get_monthly_revenue", { _year: year - 1 }) : Promise.resolve({ data: [] }),
         ]);
-        setMonthly((curr.data || []) as MonthlyRow[]);
-        setMonthlyPrev((prev.data || []) as MonthlyRow[]);
+        return {
+          monthly: (curr.data || []) as MonthlyRow[],
+          monthlyPrev: (prev.data || []) as MonthlyRow[],
+          quarterly: [] as QuarterlyRow[],
+          quarterlyPrev: [] as QuarterlyRow[],
+          yearly: [] as YearlyRow[],
+        };
       } else if (mode === "quarter") {
         const [curr, prev] = await Promise.all([
           supabase.rpc("get_quarterly_revenue", { _year: year }),
           showYoY ? supabase.rpc("get_quarterly_revenue", { _year: year - 1 }) : Promise.resolve({ data: [] }),
         ]);
-        setQuarterly((curr.data || []) as QuarterlyRow[]);
-        setQuarterlyPrev((prev.data || []) as QuarterlyRow[]);
+        return {
+          monthly: [] as MonthlyRow[],
+          monthlyPrev: [] as MonthlyRow[],
+          quarterly: (curr.data || []) as QuarterlyRow[],
+          quarterlyPrev: (prev.data || []) as QuarterlyRow[],
+          yearly: [] as YearlyRow[],
+        };
       } else {
         const { data } = await supabase.rpc("get_yearly_revenue", { _years_back: 5 });
-        setYearly((data || []) as YearlyRow[]);
+        return {
+          monthly: [] as MonthlyRow[],
+          monthlyPrev: [] as MonthlyRow[],
+          quarterly: [] as QuarterlyRow[],
+          quarterlyPrev: [] as QuarterlyRow[],
+          yearly: (data || []) as YearlyRow[],
+        };
       }
-    } catch (err) {
-      console.error("Failed to fetch revenue data:", err);
-    }
-    setLoading(false);
-  };
+    },
+  });
 
-  useEffect(() => {
-    fetchData();
-  }, [mode, year, showYoY]);
+  const monthly = data?.monthly ?? [];
+  const monthlyPrev = data?.monthlyPrev ?? [];
+  const quarterly = data?.quarterly ?? [];
+  const quarterlyPrev = data?.quarterlyPrev ?? [];
+  const yearly = data?.yearly ?? [];
 
   /* ─── Build chart data ─── */
   const chartData: ChartPoint[] = useMemo(() => {

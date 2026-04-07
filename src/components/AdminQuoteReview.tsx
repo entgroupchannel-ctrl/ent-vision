@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   FileText, CheckCircle, Clock, Loader2, RefreshCw, Eye, Plus, Trash2, XCircle,
   Search, User, Building2, Phone, Mail, Upload, Info, X, ExternalLink,
@@ -90,13 +91,12 @@ const lbl = "text-[11px] font-medium text-muted-foreground mb-1 block";
 const AdminQuoteReview = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const qc = useQueryClient();
   const pdfRef = useRef<HTMLInputElement>(null);
 
-  const [quotes, setQuotes] = useState<QuoteRequest[]>([]);
-  const [loading, setLoading] = useState(false);
+  // Local UI state (not data — data lives in React Query below)
   const [selected, setSelected] = useState<QuoteRequest | null>(null);
   const [items, setItems] = useState<LineItem[]>([]);
-  const [catalog, setCatalog] = useState<CatalogProduct[]>([]);
   const [lineLoading, setLineLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [statusFilter, setStatusFilter] = useState("all");
@@ -107,11 +107,7 @@ const AdminQuoteReview = () => {
   const [catSearch, setCatSearch] = useState("");
   const [pdfUp, setPdfUp] = useState(false);
   const [showDocPick, setShowDocPick] = useState(false);
-  const [docLib, setDocLib] = useState<DocLibraryItem[]>([]);
-  const [salesTeam, setSalesTeam] = useState<SalesTeamMember[]>([]);
-  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [assignFilter, setAssignFilter] = useState<string>("all");
-  const [companySettings, setCompanySettings] = useState<any>(null);
   const [hasOrder, setHasOrder] = useState(false);
   const [hasBilling, setHasBilling] = useState(false);
   const [creatingDocs, setCreatingDocs] = useState(false);
@@ -121,6 +117,58 @@ const AdminQuoteReview = () => {
     delivery_terms: "ส่งฟรีทั่วประเทศ", pdf_url: "", notes: "",
     include_vat: true, include_withholding_tax: false,
   });
+
+  /* ─── React Query: All admin quote-review data in 1 query ───
+   * - Loads in parallel: quotes, catalog, doc lib, sales team, super-admin role, company settings
+   * - Auto-refetch on window focus (fixes visibility-change stuck bug)
+   * - Single loading state for all 6 fetches
+   */
+  const { data: qrData, isLoading: loading } = useQuery({
+    queryKey: ["admin", "quote-review", user?.id],
+    enabled: !!user?.id,
+    queryFn: async () => {
+      const [quotesRes, catalogRes, docLibRes, salesTeamRes, superAdminRes, companyRes] = await Promise.all([
+        (supabase.from as any)("quote_requests")
+          .select("*")
+          .order("created_at", { ascending: false }),
+        (supabase.from as any)("product_catalog")
+          .select("id, model, name_th, category, base_price, specs, description")
+          .eq("is_active", true).order("category").order("model"),
+        (supabase.from as any)("document_library")
+          .select("id, title, file_url, category")
+          .order("title"),
+        supabase.rpc("get_sales_team").then(r => r, () => ({ data: null, error: null })),
+        user?.id
+          ? supabase.rpc("has_role", { _user_id: user.id, _role: "super_admin" }).then(r => r, () => ({ data: false, error: null }))
+          : Promise.resolve({ data: false, error: null }),
+        (supabase.from as any)("company_settings").select("*").eq("id", "default").single().then((r: any) => r, () => ({ data: null, error: null })),
+      ]);
+      if (quotesRes.error) {
+        toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: quotesRes.error.message, variant: "destructive" });
+        throw quotesRes.error;
+      }
+      return {
+        quotes: (quotesRes.data || []) as QuoteRequest[],
+        catalog: (catalogRes.data || []) as CatalogProduct[],
+        docLib: (docLibRes.data || []) as DocLibraryItem[],
+        salesTeam: (salesTeamRes.data || []) as SalesTeamMember[],
+        isSuperAdmin: !!superAdminRes.data,
+        companySettings: companyRes.data ?? null,
+      };
+    },
+  });
+
+  const quotes = qrData?.quotes ?? [];
+  const catalog = qrData?.catalog ?? [];
+  const docLib = qrData?.docLib ?? [];
+  const salesTeam = qrData?.salesTeam ?? [];
+  const isSuperAdmin = qrData?.isSuperAdmin ?? false;
+  const companySettings = qrData?.companySettings ?? null;
+
+  // Helpers for save handlers + Refresh button — invalidate cache → React Query auto refetch
+  const fetchQuotes = (_silent?: boolean) => {
+    qc.invalidateQueries({ queryKey: ["admin", "quote-review", user?.id] });
+  };
 
   // Derived: categories from catalog
   const categories = useMemo(() => {
@@ -148,96 +196,7 @@ const AdminQuoteReview = () => {
     return result;
   }, [catalog, catFilter, catSearch]);
 
-  /* ─── Fetch ─── */
-  // FIX 3: Silent mode option — skip spinner during background refresh
-  const fetchQuotes = async (silent = false) => {
-    if (!silent) setLoading(true);
-    try {
-      const { data, error } = await (supabase.from as any)("quote_requests").select("*").order("created_at", { ascending: false });
-      if (error) {
-        console.error("Failed to fetch quotes:", error);
-        if (!silent) toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: error.message, variant: "destructive" });
-        if (!silent) setQuotes([]);
-      } else {
-        setQuotes(data || []);
-      }
-    } catch (err: any) {
-      console.error("fetchQuotes crashed:", err);
-      if (!silent) setQuotes([]);
-    } finally {
-      if (!silent) setLoading(false);
-    }
-  };
-
-  const fetchCatalog = async () => {
-    const { data } = await (supabase.from as any)("product_catalog")
-      .select("id, model, name_th, category, base_price, specs, description")
-      .eq("is_active", true).order("category").order("model");
-    if (data) setCatalog(data);
-  };
-
-  const fetchDocLib = async () => {
-    const { data } = await (supabase.from as any)("document_library").select("id, title, file_url, category").order("title");
-    if (data) setDocLib(data);
-  };
-
-  const fetchSalesTeam = async () => {
-    try {
-      const { data } = await supabase.rpc("get_sales_team");
-      if (data) setSalesTeam(data as SalesTeamMember[]);
-    } catch {}
-  };
-
-  const checkSuperAdmin = async () => {
-    if (!user) return;
-    try {
-      const { data } = await supabase.rpc("has_role", { _user_id: user.id, _role: "super_admin" });
-      setIsSuperAdmin(!!data);
-    } catch {}
-  };
-
-  const fetchCompanySettings = async () => {
-    try {
-      const { data } = await (supabase.from as any)("company_settings").select("*").eq("id", "default").single();
-      if (data) setCompanySettings(data);
-    } catch {}
-  };
-
-  // SIMPLIFIED: With conditional rendering in AdminDashboard, this component
-  // mounts fresh every time the user visits the tab. No need for guards.
-  // useEffect runs once per mount, fetches data, sets loading=false in finally.
-  useEffect(() => {
-    const userId = user?.id;
-    if (!userId) return;
-
-    let cancelled = false;
-
-    const loadAll = async () => {
-      setLoading(true);
-      try {
-        await Promise.all([
-          fetchQuotes(true), // silent — we manage loading here
-          fetchCatalog(),
-          fetchDocLib(),
-          fetchSalesTeam(),
-          checkSuperAdmin(),
-          fetchCompanySettings(),
-        ]);
-      } catch (err) {
-        console.error("[AdminQuoteReview] Initial load failed:", err);
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
-      }
-    };
-
-    loadAll();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [user?.id]);
+  /* ─── Old fetch functions removed — all data now comes from useQuery above ─── */
 
   // Listen for cross-component selection (e.g. from NotificationBell click)
   useEffect(() => {
