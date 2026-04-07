@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   FileText, CheckCircle, Clock, Loader2, RefreshCw, Eye, Plus, Trash2, XCircle,
   Search, User, Building2, Phone, Mail, Upload, Info, X, ExternalLink,
   FileUp, Paperclip, Printer, Share2, ChevronDown, CalendarDays, Link2,
-  UserCircle2, Users, ArrowRightLeft, FileCheck, AlertCircle, Package,
+  UserCircle2, Users, ArrowRightLeft, FileCheck, AlertCircle, Package, ArrowLeft,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -93,6 +94,24 @@ const AdminQuoteReview = () => {
   const { toast } = useToast();
   const qc = useQueryClient();
   const pdfRef = useRef<HTMLInputElement>(null);
+
+  // URL state — quoteId in URL drives detail mode (shareable, browser back works)
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlQuoteId = searchParams.get("quoteId");
+  const isDetailMode = !!urlQuoteId;
+
+  // Navigation helpers
+  const openQuoteDetail = (quoteId: string) => {
+    const next = new URLSearchParams(searchParams);
+    next.set("quoteId", quoteId);
+    setSearchParams(next, { replace: false });
+  };
+  const backToList = () => {
+    const next = new URLSearchParams(searchParams);
+    next.delete("quoteId");
+    setSearchParams(next, { replace: false });
+    setSelected(null);
+  };
 
   // Local UI state (not data — data lives in React Query below)
   const [selected, setSelected] = useState<QuoteRequest | null>(null);
@@ -198,6 +217,23 @@ const AdminQuoteReview = () => {
 
   /* ─── Old fetch functions removed — all data now comes from useQuery above ─── */
 
+  // Sync URL ?quoteId=... → selected quote (handles shareable URLs + browser back/forward)
+  useEffect(() => {
+    if (!urlQuoteId) {
+      // URL has no quoteId → list mode → clear selection
+      if (selected) setSelected(null);
+      return;
+    }
+    // URL has quoteId → find in loaded quotes and select
+    if (quotes.length === 0) return; // wait for quotes to load
+    if (selected?.id === urlQuoteId) return; // already selected
+    const found = quotes.find((q) => q.id === urlQuoteId);
+    if (found) {
+      selectQuote(found);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [urlQuoteId, quotes]);
+
   // Listen for cross-component selection (e.g. from NotificationBell click)
   useEffect(() => {
     const handler = (e: Event) => {
@@ -205,12 +241,13 @@ const AdminQuoteReview = () => {
       if (detail?.type === "quote" && detail?.id) {
         const found = quotes.find((q) => q.id === detail.id);
         if (found) {
-          selectQuote(found);
+          openQuoteDetail(found.id); // sync URL — useEffect above will select
         }
       }
     };
     window.addEventListener("admin-select-entity", handler);
     return () => window.removeEventListener("admin-select-entity", handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quotes]);
 
   /* ─── Select Quote ─── */
@@ -944,45 +981,79 @@ const AdminQuoteReview = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-        {/* ═══ LEFT — Quote List ═══ */}
-        <div className="lg:col-span-2 space-y-1.5 max-h-[80vh] overflow-y-auto pr-1">
+      {/* ═══ A3: Conditional layout — list mode OR detail mode ═══ */}
+      {!isDetailMode ? (
+        /* ─── LIST MODE: full-width list (no detail panel) ─── */
+        <div className="space-y-1.5">
           {loading ? <div className="text-center py-12"><Loader2 size={20} className="animate-spin text-muted-foreground" /></div>
           : filtered.length === 0 ? <div className="card-surface rounded-xl p-10 text-center text-muted-foreground text-sm">ไม่มีใบเสนอราคา</div>
           : filtered.map((q) => {
             const st = STATUS_CFG[q.status] || STATUS_CFG.new;
             return (
-              <button key={q.id} onClick={() => selectQuote(q)} className={`w-full text-left p-3 rounded-lg border transition-all ${selected?.id === q.id ? "border-primary bg-primary/5" : "border-border hover:border-primary/30"}`}>
-                <div className="flex items-center gap-2 mb-1">
+              <button
+                key={q.id}
+                onClick={() => openQuoteDetail(q.id)}
+                className="w-full text-left p-3 rounded-lg border border-border hover:border-primary/40 hover:bg-primary/5 transition-all flex items-center gap-4"
+              >
+                {/* Quote number + status (left) */}
+                <div className="flex items-center gap-2 min-w-[180px]">
                   <span className="text-sm font-bold text-foreground">{q.quote_number || "Q-draft"}</span>
                   <span className={`text-[10px] px-1.5 py-0.5 rounded-full border font-bold ${st.color}`}>{st.label}</span>
                 </div>
-                <p className="text-xs text-muted-foreground">{q.name} · {q.company || q.email}</p>
-                <div className="flex items-center gap-3 mt-1">
-                  <span className="text-[11px] text-muted-foreground">{fd(q.created_at)}</span>
-                  {q.grand_total > 0 && <span className="text-xs font-bold text-primary">฿{fp(q.grand_total)}</span>}
+                {/* Customer info (middle, flexible) */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-foreground truncate">{q.name}{q.company ? ` · ${q.company}` : ""}</p>
+                  <p className="text-[11px] text-muted-foreground truncate">{q.email}</p>
                 </div>
-                {q.assigned_to && (
-                  <div className="flex items-center gap-1 mt-1">
-                    <UserCircle2 size={11} className="text-muted-foreground" />
-                    <span className="text-[10px] text-muted-foreground">{getAdminShortName(q.assigned_to)}</span>
-                  </div>
-                )}
-                {!q.assigned_to && q.status !== "draft" && (
-                  <div className="flex items-center gap-1 mt-1">
-                    <UserCircle2 size={11} className="text-orange-400" />
-                    <span className="text-[10px] text-orange-400">ยังไม่มอบหมาย</span>
-                  </div>
-                )}
+                {/* Sale assigned (right-middle) */}
+                <div className="hidden md:flex items-center gap-1 min-w-[120px]">
+                  {q.assigned_to ? (
+                    <>
+                      <UserCircle2 size={12} className="text-muted-foreground" />
+                      <span className="text-[11px] text-muted-foreground truncate">{getAdminShortName(q.assigned_to)}</span>
+                    </>
+                  ) : q.status !== "draft" ? (
+                    <>
+                      <UserCircle2 size={12} className="text-orange-400" />
+                      <span className="text-[11px] text-orange-400">ยังไม่มอบหมาย</span>
+                    </>
+                  ) : null}
+                </div>
+                {/* Date (right) */}
+                <div className="hidden sm:block text-[11px] text-muted-foreground min-w-[80px] text-right">
+                  {fd(q.created_at)}
+                </div>
+                {/* Total (right-most) */}
+                <div className="text-sm font-bold text-primary min-w-[90px] text-right">
+                  {q.grand_total > 0 ? `฿${fp(q.grand_total)}` : "—"}
+                </div>
               </button>
             );
           })}
         </div>
+      ) : (
+        /* ─── DETAIL MODE: full-width detail with back button ─── */
+        <div className="space-y-3">
+          {/* Back button bar */}
+          <button
+            onClick={backToList}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors"
+          >
+            <ArrowLeft size={16} />
+            <span>กลับไปรายการใบเสนอราคา</span>
+          </button>
 
-        {/* ═══ RIGHT — Quote Detail ═══ */}
-        <div className="lg:col-span-3">
-          {selected ? (
-            <div className="card-surface rounded-xl p-5 space-y-5 sticky top-24 max-h-[85vh] overflow-y-auto">
+          {/* Detail panel — full width */}
+          {!selected ? (
+            <div className="card-surface rounded-xl p-10 text-center text-muted-foreground text-sm">
+              {loading ? (
+                <><Loader2 size={20} className="animate-spin mx-auto mb-2" /> กำลังโหลดใบเสนอราคา...</>
+              ) : (
+                <><Eye size={24} className="mx-auto mb-2 opacity-30" />ไม่พบใบเสนอราคานี้</>
+              )}
+            </div>
+          ) : (
+            <div className="card-surface rounded-xl p-5 space-y-5">
               {/* Header + Status Change + Actions */}
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <h3 className="text-lg font-bold text-foreground">{selected.quote_number || "Draft"}</h3>
@@ -1393,13 +1464,9 @@ const AdminQuoteReview = () => {
                 )}
               </div>
             </div>
-          ) : (
-            <div className="card-surface rounded-xl p-10 text-center text-muted-foreground text-sm">
-              <Eye size={24} className="mx-auto mb-2 opacity-30" />เลือกใบเสนอราคาเพื่อตรวจสอบ
-            </div>
           )}
         </div>
-      </div>
+      )}
 
       {/* Doc Picker Modal */}
       {showDocPick && (
