@@ -182,7 +182,25 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
     setMenuOpenId(null);
   };
 
-  /* ─── PO Upload Handler ─── */
+  const handleSubmitDraft = async (q: QuoteRequest) => {
+    if (submittingId) return;
+    if (!confirm(`ส่งใบเสนอราคา ${q.quote_number || "Draft"} ให้ Admin ตรวจสอบ?`)) return;
+    setSubmittingId(q.id);
+    try {
+      const { error } = await (supabase.from as any)("quote_requests")
+        .update({ status: "new" })
+        .eq("id", q.id);
+      if (error) throw error;
+      toast({ title: "ส่งใบเสนอราคาเรียบร้อย!", description: "ทีมขายจะตรวจสอบและอนุมัติภายใน 2 ชม." });
+      setMenuOpenId(null);
+      fetchQuotes();
+    } catch (err: any) {
+      toast({ title: "ส่งไม่สำเร็จ", description: err.message, variant: "destructive" });
+    } finally {
+      setSubmittingId(null);
+    }
+  };
+
   const handlePoUpload = async (quoteId: string, file: File) => {
     if (!user) return;
     setPoUploading(true);
