@@ -137,11 +137,11 @@ const AdminQuoteReview = () => {
         (supabase.from as any)("document_library")
           .select("id, title, file_url, category")
           .order("title"),
-        supabase.rpc("get_sales_team").then(r => r).catch(() => ({ data: null })),
+        supabase.rpc("get_sales_team").then(r => r, () => ({ data: null, error: null })),
         user?.id
-          ? supabase.rpc("has_role", { _user_id: user.id, _role: "super_admin" }).then(r => r).catch(() => ({ data: false }))
-          : Promise.resolve({ data: false }),
-        (supabase.from as any)("company_settings").select("*").eq("id", "default").single().then((r: any) => r).catch(() => ({ data: null })),
+          ? supabase.rpc("has_role", { _user_id: user.id, _role: "super_admin" }).then(r => r, () => ({ data: false, error: null }))
+          : Promise.resolve({ data: false, error: null }),
+        (supabase.from as any)("company_settings").select("*").eq("id", "default").single().then((r: any) => r, () => ({ data: null, error: null })),
       ]);
       if (quotesRes.error) {
         toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: quotesRes.error.message, variant: "destructive" });
