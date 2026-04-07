@@ -574,6 +574,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
   };
 
   const currentMilestone = getMilestoneStep(currentDraftStatus);
+  const isReadOnly = !!currentDraftId && currentDraftStatus !== "draft";
 
   return (
     <div className="space-y-6">
