@@ -79,18 +79,6 @@ const AdminDashboard = () => {
   const { user, isAdmin, isSuperAdmin, loading: authLoading, signOut } = useAuth();
   const { t } = useI18n();
   const [tab, setTab] = useState<Tab>("dashboard");
-  // KEEP-MOUNTED: Track which tabs user has visited.
-  // Tabs are lazy-mounted on first visit, then kept alive (display:none when not active).
-  // This preserves state (filters, scroll, selections) and avoids re-fetching data.
-  const [visitedTabs, setVisitedTabs] = useState<Set<Tab>>(new Set(["dashboard"]));
-  useEffect(() => {
-    setVisitedTabs((prev) => {
-      if (prev.has(tab)) return prev;
-      const next = new Set(prev);
-      next.add(tab);
-      return next;
-    });
-  }, [tab]);
   const [contacts, setContacts] = useState<any[]>([]);
   const [quotes, setQuotes] = useState<any[]>([]);
   const [subscribers, setSubscribers] = useState<any[]>([]);
@@ -456,99 +444,54 @@ const AdminDashboard = () => {
             {/* Stats row removed — only show on dashboard tab */}
 
         {/* Engagement Analytics Tab — full width, no filter/export */}
-        {/* KEEP-MOUNTED PATTERN: Components stay mounted after first visit.
-            This preserves state (filters, selections, scroll) across tab switches
-            and avoids re-fetching data when returning to a tab.
-            Each tab is mounted lazily on first visit, then kept alive. */}
-
-        {/* Dashboard tab — always mounted (initial tab) */}
-        <div style={{ display: tab === "dashboard" ? "block" : "none" }}>
-          {visitedTabs.has("dashboard") && (
-            <div className="space-y-4">
-              {/* Sales overview stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { label: "ยอดขายรวม / Total Sales", value: stats.totalQuotes, icon: TrendingUp, color: "text-green-500" },
-                  { label: "ใบเสนอราคา / Quotes", value: stats.totalQuotes, icon: FileText, color: "text-purple-400" },
-                  { label: "ติดต่อใหม่ / New Leads", value: stats.newLeads, icon: Users, color: "text-yellow-400" },
-                  { label: "Lead คุณภาพสูง / High Quality", value: stats.highScoreLeads, icon: Star, color: "text-primary" },
-                ].map((s) => (
-                  <div key={s.label} className="card-surface rounded-xl p-5">
-                    <div className="flex items-center gap-2 mb-2">
-                      <s.icon size={16} className={s.color} />
-                      <span className="text-xs text-muted-foreground">{s.label}</span>
-                    </div>
-                    <span className="text-3xl font-bold text-foreground">{s.value}</span>
+        {tab === "dashboard" ? (
+          <div className="space-y-4">
+            {/* Sales overview stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { label: "ยอดขายรวม / Total Sales", value: stats.totalQuotes, icon: TrendingUp, color: "text-green-500" },
+                { label: "ใบเสนอราคา / Quotes", value: stats.totalQuotes, icon: FileText, color: "text-purple-400" },
+                { label: "ติดต่อใหม่ / New Leads", value: stats.newLeads, icon: Users, color: "text-yellow-400" },
+                { label: "Lead คุณภาพสูง / High Quality", value: stats.highScoreLeads, icon: Star, color: "text-primary" },
+              ].map((s) => (
+                <div key={s.label} className="card-surface rounded-xl p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <s.icon size={16} className={s.color} />
+                    <span className="text-xs text-muted-foreground">{s.label}</span>
                   </div>
-                ))}
-              </div>
-              {/* Revenue chart */}
-              <RevenueChart />
+                  <span className="text-3xl font-bold text-foreground">{s.value}</span>
+                </div>
+              ))}
             </div>
-          )}
-        </div>
 
-        {/* Lazy-mounted, keep-alive admin manager tabs */}
-        {visitedTabs.has("engagement") && (
-          <div style={{ display: tab === "engagement" ? "block" : "none" }}>
-            <EngagementAnalytics />
+            {/* Revenue chart */}
+            <RevenueChart />
           </div>
-        )}
-        {visitedTabs.has("documents") && (
-          <div style={{ display: tab === "documents" ? "block" : "none" }}>
-            <AdminDocumentManager />
-          </div>
-        )}
-        {visitedTabs.has("catalog") && (
-          <div style={{ display: tab === "catalog" ? "block" : "none" }}>
-            <AdminProductCatalog />
-          </div>
-        )}
-        {visitedTabs.has("quote_review") && (
-          <div style={{ display: tab === "quote_review" ? "block" : "none" }}>
-            <AdminQuoteReview />
-          </div>
-        )}
-        {visitedTabs.has("sales_orders") && (
-          <div style={{ display: tab === "sales_orders" ? "block" : "none" }}>
-            <AdminSalesOrders />
-          </div>
-        )}
-        {visitedTabs.has("billing") && (
-          <div style={{ display: tab === "billing" ? "block" : "none" }}>
-            <AdminBillingManager />
-          </div>
-        )}
-        {visitedTabs.has("invoices") && (
-          <div style={{ display: tab === "invoices" ? "block" : "none" }}>
-            <AdminInvoiceManager />
-          </div>
-        )}
-        {visitedTabs.has("delivery") && (
-          <div style={{ display: tab === "delivery" ? "block" : "none" }}>
-            <AdminDeliveryManager />
-          </div>
-        )}
-        {visitedTabs.has("payments") && (
-          <div style={{ display: tab === "payments" ? "block" : "none" }}>
-            <AdminPaymentManager />
-          </div>
-        )}
-        {visitedTabs.has("users") && (
-          <div style={{ display: tab === "users" ? "block" : "none" }}>
-            <AdminUserManagement />
-          </div>
-        )}
-        {visitedTabs.has("livechat") && (
-          <div style={{ display: tab === "livechat" ? "block" : "none" }}>
-            <Suspense fallback={<div className="text-center py-12 text-muted-foreground text-sm">กำลังโหลด...</div>}>
-              <AdminLiveChat />
-            </Suspense>
-          </div>
-        )}
-
-        {/* Legacy fallback for tabs that don't have dedicated managers (contacts, chatleads, software, subscribers) */}
-        {!["dashboard", "engagement", "documents", "catalog", "quote_review", "sales_orders", "billing", "invoices", "delivery", "payments", "users", "livechat"].includes(tab) && (
+        ) : tab === "engagement" ? (
+          <EngagementAnalytics />
+        ) : tab === "documents" ? (
+          <AdminDocumentManager />
+        ) : tab === "catalog" ? (
+          <AdminProductCatalog />
+        ) : tab === "quote_review" ? (
+          <AdminQuoteReview />
+        ) : tab === "sales_orders" ? (
+          <AdminSalesOrders />
+        ) : tab === "billing" ? (
+          <AdminBillingManager />
+        ) : tab === "invoices" ? (
+          <AdminInvoiceManager />
+        ) : tab === "delivery" ? (
+          <AdminDeliveryManager />
+        ) : tab === "payments" ? (
+          <AdminPaymentManager />
+        ) : tab === "users" ? (
+          <AdminUserManagement />
+        ) : tab === "livechat" ? (
+          <Suspense fallback={<div className="text-center py-12 text-muted-foreground text-sm">กำลังโหลด...</div>}>
+            <AdminLiveChat />
+          </Suspense>
+        ) : (
         <>
         {/* Filter & Export */}
         {tab === "chatleads" ? (
