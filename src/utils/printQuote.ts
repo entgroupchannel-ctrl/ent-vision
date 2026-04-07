@@ -330,21 +330,27 @@ export const printQuote = (
 
   const html = `<!DOCTYPE html><html lang="${lang}"><head><meta charset="utf-8">
 <title>${t.title} ${q.quote_number || ""}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Sarabun','THSarabunNew','Helvetica','Arial',sans-serif;font-size:10pt;color:#333;padding:0;margin:0}
 
 /* ── A4 Page Setup ── */
 @media print{
   body{padding:0}
-  @page{size:A4;margin:20mm 15mm 25mm 15mm}
+  @page{size:A4 portrait;margin:15mm 12mm 15mm 12mm}
   .page-break{page-break-before:always}
   .no-break{page-break-inside:avoid}
+  .print-tip{display:none !important}
 }
 @media screen{
   body{max-width:210mm;margin:0 auto;padding:20mm 15mm;background:#f0f0f0}
   .page-container{background:#fff;padding:20mm 15mm;min-height:297mm;box-shadow:0 2px 20px rgba(0,0,0,0.15);margin-bottom:10mm}
+  .print-tip{position:fixed;top:10px;left:50%;transform:translateX(-50%);background:#fff8e1;border:1px solid #ffc107;border-radius:8px;padding:10px 16px;font-size:11pt;color:#5d4037;box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:9999;max-width:90%;text-align:center;font-family:'Sarabun',sans-serif}
+  .print-tip strong{color:#e65100}
+  .print-tip button{margin-left:12px;padding:4px 12px;background:#e87722;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:10pt;font-family:inherit}
 }
 
 /* ── Colors ── */
@@ -438,6 +444,10 @@ table.items tr:nth-child(even){background:#fafbfc}
 .page-footer{text-align:center;padding-top:12px;border-top:1px solid #e5e7eb;font-size:8pt;color:#999;margin-top:24px}
 .page-footer .page-num{margin-top:4px;font-size:9pt;color:var(--text-light);text-align:right}
 </style></head><body>
+<div class="print-tip">
+  💡 <strong>เคล็ดลับ:</strong> เพื่อให้ใบเสนอราคาดูสวยที่สุด ใน print dialog กรุณาเลือก <strong>"More settings"</strong> แล้วปิด <strong>"Headers and footers"</strong>
+  <button onclick="window.print()">พิมพ์อีกครั้ง</button>
+</div>
 
 <div class="page-container">
 
@@ -562,7 +572,29 @@ ${c.quote_terms ? `<div class="terms-section no-break">
   if (w) {
     w.document.write(html);
     w.document.close();
-    setTimeout(() => w.print(), 500);
+    // รอ font ภาษาไทยโหลดเสร็จก่อน print เพื่อป้องกันสระ/วรรณยุกต์ซ้อน
+    const triggerPrint = () => {
+      try {
+        const fontsReady = (w.document as any).fonts?.ready;
+        if (fontsReady && typeof fontsReady.then === "function") {
+          fontsReady.then(() => {
+            setTimeout(() => w.print(), 300);
+          }).catch(() => {
+            setTimeout(() => w.print(), 1500);
+          });
+        } else {
+          // Fallback สำหรับ browser ที่ไม่มี document.fonts API
+          setTimeout(() => w.print(), 1500);
+        }
+      } catch {
+        setTimeout(() => w.print(), 1500);
+      }
+    };
+    if (w.document.readyState === "complete") {
+      triggerPrint();
+    } else {
+      w.addEventListener("load", triggerPrint);
+    }
   }
 };
 
