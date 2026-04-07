@@ -1068,7 +1068,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
             {/* Send Button — only for draft or new */}
             {(!currentDraftId || currentDraftStatus === "draft") && (
               <button
-                onClick={handleSubmit}
+                onClick={() => setConfirmSubmitOpen(true)}
                 disabled={cart.length === 0 || submitting}
                 className="w-full mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-50"
               >
