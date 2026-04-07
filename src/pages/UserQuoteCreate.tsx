@@ -904,6 +904,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                               onChange={(e) => updateCartItem(i, "customModel", e.target.value)}
                               className={inputClass}
                               placeholder="เช่น GT9000"
+                              disabled={isReadOnly}
                             />
                           </div>
                           <div>
@@ -913,6 +914,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                               onChange={(e) => updateCartItem(i, "customCategory", e.target.value)}
                               className={inputClass}
                               placeholder="เช่น GT Series — Mini PC"
+                              disabled={isReadOnly}
                             />
                           </div>
                         </div>
@@ -948,7 +950,8 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                             <div className="flex items-center border border-border rounded-lg">
                               <button
                                 onClick={() => updateCartItem(i, "qty", Math.max(1, item.qty - 1))}
-                                className="w-9 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/60 rounded-l-lg"
+                                disabled={isReadOnly}
+                                className="w-9 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/60 rounded-l-lg disabled:opacity-50"
                               >
                                 <Minus size={12} />
                               </button>
@@ -958,10 +961,12 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                                 value={item.qty}
                                 onChange={(e) => updateCartItem(i, "qty", Math.max(1, parseInt(e.target.value) || 1))}
                                 className="w-full text-center text-sm font-bold bg-transparent border-none focus:outline-none"
+                                disabled={isReadOnly}
                               />
                               <button
                                 onClick={() => updateCartItem(i, "qty", item.qty + 1)}
-                                className="w-9 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/60 rounded-r-lg"
+                                disabled={isReadOnly}
+                                className="w-9 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/60 rounded-r-lg disabled:opacity-50"
                               >
                                 <Plus size={12} />
                               </button>
@@ -975,6 +980,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                               onChange={(e) => updateCartItem(i, "unitPrice", parseFloat(e.target.value) || 0)}
                               className={inputClass}
                               placeholder="ทีมขายจะกำหนดให้"
+                              disabled={isReadOnly}
                             />
                           </div>
                           <div className="flex items-end">
