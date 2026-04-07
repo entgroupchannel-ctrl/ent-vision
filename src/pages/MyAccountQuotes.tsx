@@ -45,6 +45,7 @@ interface LineItem {
   id: string; model: string; category: string | null; qty: number;
   unit_price: number; discount_percent: number; line_total: number;
   custom_specs: Record<string, string>; admin_notes: string | null;
+  description: string | null;
   _name?: string; _specs?: Record<string, string>;
 }
 
@@ -404,10 +405,12 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                                 {item.category && <span className="text-[10px] px-1.5 py-0.5 rounded bg-secondary text-muted-foreground">{item.category}</span>}
                               </div>
                               {item._name && <p className="text-xs text-muted-foreground mt-1">{item._name}</p>}
+                              {item.description && (
+                                <p className="text-xs text-foreground/80 mt-1.5 whitespace-pre-line leading-relaxed">{item.description}</p>
+                              )}
                               {item._specs && Object.keys(item._specs).length > 0 && (
                                 <div className="mt-1.5">{renderSpecs(item._specs)}</div>
                               )}
-                              {item.admin_notes && <p className="text-[10px] text-primary mt-1">* {item.admin_notes}</p>}
                             </div>
                             <div className="text-right shrink-0 ml-4">
                               <div className="text-xs text-muted-foreground">{item.qty} × ฿{fp(item.unit_price)}</div>
