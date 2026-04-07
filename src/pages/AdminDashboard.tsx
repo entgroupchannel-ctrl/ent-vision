@@ -457,7 +457,7 @@ const AdminDashboard = () => {
           </div>
 
           {/* ═══ Main Content ═══ */}
-          <main className="flex-1 min-w-0">
+          <main className="flex-1 min-w-0 admin-content-area">
             {/* Show sidebar button when hidden */}
             {sidebarMode === "hidden" && (
               <button

@@ -158,3 +158,88 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* ─── Admin Dashboard Content — Larger & Bolder Text ─── */
+/* Scoped to .admin-content-area only — does NOT affect sidebar */
+
+.admin-content-area {
+  font-size: 15px;
+}
+
+.admin-content-area .text-xs {
+  font-size: 0.8125rem !important; /* 13px (was 12px) */
+  line-height: 1.5 !important;
+}
+
+.admin-content-area .text-sm {
+  font-size: 0.9375rem !important; /* 15px (was 14px) */
+  line-height: 1.55 !important;
+}
+
+.admin-content-area .text-base {
+  font-size: 1rem !important; /* 16px stays */
+  line-height: 1.6 !important;
+}
+
+/* Make body text in tables and cards slightly bolder for readability */
+.admin-content-area td,
+.admin-content-area .card-surface p,
+.admin-content-area .card-surface span:not(.text-muted-foreground) {
+  font-weight: 500;
+}
+
+/* Headings — bigger and bolder */
+.admin-content-area h1 {
+  font-size: 1.875rem !important; /* 30px */
+  font-weight: 700 !important;
+}
+
+.admin-content-area h2 {
+  font-size: 1.5rem !important; /* 24px */
+  font-weight: 700 !important;
+}
+
+.admin-content-area h3 {
+  font-size: 1.25rem !important; /* 20px */
+  font-weight: 600 !important;
+}
+
+/* Table headers — bolder */
+.admin-content-area table thead th {
+  font-weight: 700 !important;
+  font-size: 0.875rem !important; /* 14px */
+}
+
+/* Numbers and amounts — make them stand out */
+.admin-content-area .font-bold,
+.admin-content-area .font-semibold {
+  font-weight: 700 !important;
+}
+
+/* Form inputs — bigger */
+.admin-content-area input[type="text"],
+.admin-content-area input[type="email"],
+.admin-content-area input[type="number"],
+.admin-content-area input[type="search"],
+.admin-content-area textarea,
+.admin-content-area select {
+  font-size: 0.9375rem !important;
+}
+
+/* Buttons inside content — slightly bigger label */
+.admin-content-area button {
+  font-weight: 500;
+}
+
+/* On smaller screens, scale down slightly to avoid overflow */
+@media (max-width: 768px) {
+  .admin-content-area {
+    font-size: 14px;
+  }
+  .admin-content-area .text-xs {
+    font-size: 0.75rem !important;
+  }
+  .admin-content-area .text-sm {
+    font-size: 0.875rem !important;
+  }
+}
