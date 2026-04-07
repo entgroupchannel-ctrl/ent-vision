@@ -346,7 +346,7 @@ const PlatformTour = () => {
 
           {/* Admin Dashboard Screenshot */}
           <div className="relative rounded-xl border border-white/10 overflow-hidden shadow-2xl max-w-4xl mx-auto">
-            <img src="/images/platform/admin-dashboard.png" alt="Admin Dashboard — ภาพรวมระบบหลังบ้าน" className="w-full h-auto" loading="lazy" />
+            <img src="/images/platform/admin-dashboard-illust.png" alt="Admin Dashboard — ภาพรวมระบบหลังบ้าน" className="w-full h-auto" loading="lazy" />
           </div>
         </div>
       </section>
