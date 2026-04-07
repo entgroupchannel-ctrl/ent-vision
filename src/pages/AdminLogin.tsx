@@ -59,7 +59,7 @@ const AdminLogin = () => {
     setLoading(false);
   };
 
-  if (checking) {
+  if (authLoading || user) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex items-center gap-2 text-muted-foreground text-sm">
