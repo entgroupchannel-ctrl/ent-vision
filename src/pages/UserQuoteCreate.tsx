@@ -14,6 +14,16 @@ import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 import { useQuoteCart } from "@/hooks/useQuoteCart";
 import QuoteTimeline from "@/components/QuoteTimeline";
 import { notifyQuoteStatus, getSaleInfo, productSummaryText } from "@/utils/notifyQuoteStatus";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 // ─── Types ───
 interface CatalogProduct {
@@ -111,6 +121,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [generalNotes, setGeneralNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [confirmSubmitOpen, setConfirmSubmitOpen] = useState(false);
 
   // Draft management
   const [savedDrafts, setSavedDrafts] = useState<{ id: string; quote_number: string; products: any[]; created_at: string; grand_total: number; status?: string }[]>([]);
