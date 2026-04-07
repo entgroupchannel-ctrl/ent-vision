@@ -28,6 +28,7 @@ const userFeatures = [
       "ระบบแนะนำสินค้า Product Advisor",
     ],
     screenshotPlaceholder: "หน้า Product Catalog + Filter",
+    screenshot: "/images/platform/product-catalog.png",
   },
   {
     id: "wishlist",
