@@ -17,6 +17,7 @@ import AdminDocumentManager from "@/components/AdminDocumentManager";
 import AdminProductCatalog from "@/components/AdminProductCatalog";
 import AdminQuoteReview from "@/components/AdminQuoteReview";
 import AdminSalesOrders from "@/components/AdminSalesOrders";
+import RevenueChart from "@/components/RevenueChart";
 import AdminInvoiceManager from "@/components/AdminInvoiceManager";
 import AdminBillingManager from "@/components/AdminBillingManager";
 import AdminDeliveryManager from "@/components/AdminDeliveryManager";
@@ -443,7 +444,12 @@ const AdminDashboard = () => {
         ) : tab === "quote_review" ? (
           <AdminQuoteReview />
         ) : tab === "sales_orders" ? (
-          <AdminSalesOrders />
+          <>
+            <RevenueChart />
+            <div className="mt-6">
+              <AdminSalesOrders />
+            </div>
+          </>
         ) : tab === "billing" ? (
           <AdminBillingManager />
         ) : tab === "invoices" ? (
