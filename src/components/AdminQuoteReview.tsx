@@ -203,20 +203,24 @@ const AdminQuoteReview = () => {
     } catch {}
   };
 
-  // FIX 1+2: Use user?.id (primitive) instead of user (object) + abort guard
-  // Prevents re-fetch cascade when token refreshes
-  // CRITICAL: Use cancellation pattern + state-based guard to handle React Strict Mode
-  // double-mount in dev. Track which user.id we've successfully fetched for.
-  const fetchedForUserIdRef = useRef<string | null>(null);
+  // FIX: Use state-based guard (not ref) to ensure correct reset on remount.
+  // useRef can persist across remounts in some edge cases (Strict Mode, HMR, Lovable preview).
+  // useState is guaranteed to reset on every fresh mount.
+  const [hasInitialFetch, setHasInitialFetch] = useState(false);
 
   useEffect(() => {
     const userId = user?.id;
-    if (!userId) return;
-
-    // Already successfully fetched for this user — skip
-    if (fetchedForUserIdRef.current === userId) return;
+    if (!userId) {
+      console.log("[AdminQuoteReview] Skipping fetch — no user");
+      return;
+    }
+    if (hasInitialFetch) {
+      console.log("[AdminQuoteReview] Skipping fetch — already loaded for", userId);
+      return;
+    }
 
     let cancelled = false;
+    console.log("[AdminQuoteReview] Starting initial fetch for", userId);
 
     const loadAll = async () => {
       try {
@@ -228,14 +232,17 @@ const AdminQuoteReview = () => {
           checkSuperAdmin(),
           fetchCompanySettings(),
         ]);
-        // Only mark as fetched if we completed without being cancelled
         if (!cancelled) {
-          fetchedForUserIdRef.current = userId;
+          console.log("[AdminQuoteReview] Initial fetch completed");
+          setHasInitialFetch(true);
+        } else {
+          console.log("[AdminQuoteReview] Initial fetch completed but cancelled");
         }
       } catch (err) {
-        console.error("Initial load failed:", err);
+        console.error("[AdminQuoteReview] Initial load failed:", err);
         if (!cancelled) {
           setLoading(false);
+          // Don't set hasInitialFetch — allow retry on next render
         }
       }
     };
@@ -243,10 +250,10 @@ const AdminQuoteReview = () => {
     loadAll();
 
     return () => {
+      console.log("[AdminQuoteReview] Cleanup (cancelled in-flight fetch)");
       cancelled = true;
-      // Don't reset fetchedForUserIdRef here — we only update it on success
     };
-  }, [user?.id]);
+  }, [user?.id, hasInitialFetch]);
 
   // Listen for cross-component selection (e.g. from NotificationBell click)
   useEffect(() => {
