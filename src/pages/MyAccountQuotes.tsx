@@ -76,10 +76,21 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
   const fetchQuotes = async () => {
     if (!user) return;
     setLoading(true);
-    const { data } = await (supabase.from as any)("quote_requests")
-      .select("*").eq("user_id", user.id).order("created_at", { ascending: false });
-    if (data) setQuotes(data);
-    setLoading(false);
+    try {
+      const { data, error } = await (supabase.from as any)("quote_requests")
+        .select("*").eq("user_id", user.id).order("created_at", { ascending: false });
+      if (error) throw error;
+      if (data) setQuotes(data);
+    } catch (err: any) {
+      console.error("[MyAccountQuotes] fetchQuotes failed:", err);
+      toast({
+        title: "โหลดข้อมูลไม่สำเร็จ",
+        description: err?.message || "กรุณาลองใหม่อีกครั้ง",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fetchCatalog = async () => {
