@@ -3,7 +3,7 @@ import {
   FileText, Clock, CheckCircle, ChevronUp, Loader2, CalendarClock,
   Download, ThumbsUp, MessageSquare, Plus, MoreHorizontal,
   Printer, Share2, Copy, Trash2, RefreshCw, Info, Package,
-  Upload, FileCheck, AlertCircle,
+  Upload, FileCheck, AlertCircle, Send,
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { supabase } from "@/integrations/supabase/client";
@@ -67,6 +67,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
   const menuRef = useRef<HTMLDivElement>(null);
   const poFileRef = useRef<HTMLInputElement>(null);
   const [poUploading, setPoUploading] = useState(false);
+  const [submittingId, setSubmittingId] = useState<string | null>(null);
   const [poNumber, setPoNumber] = useState("");
   const [poNotes, setPoNotes] = useState("");
   const [companySettings, setCompanySettings] = useState<any>(null);
@@ -388,6 +389,18 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                         </TooltipProvider>
                         {menuOpenId === q.id && (
                           <div className="absolute right-2 top-10 z-20 bg-card border border-border rounded-xl shadow-xl py-1.5 w-52 animate-fade-in">
+                            {q.status === "draft" && (
+                              <>
+                                <button
+                                  onClick={() => handleSubmitDraft(q)}
+                                  disabled={submittingId === q.id}
+                                  className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-primary/10 text-primary font-medium disabled:opacity-50"
+                                >
+                                  <Send size={14} /> {submittingId === q.id ? "กำลังส่ง..." : "ส่งให้ Admin ตรวจสอบ"}
+                                </button>
+                                <div className="border-t border-border my-1"></div>
+                              </>
+                            )}
                             <button onClick={() => handleExpand(q.id)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><FileText size={14} /> ดูรายละเอียด</button>
                             <button onClick={() => { fetchLineItems(q.id); setTimeout(() => handlePrintQuote(q), 500); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Printer size={14} /> พิมพ์ใบเสนอราคา</button>
                             <button onClick={() => handleShare(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Share2 size={14} /> แชร์ให้ผู้เกี่ยวข้อง</button>
