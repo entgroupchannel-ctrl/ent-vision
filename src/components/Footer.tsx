@@ -92,6 +92,7 @@ const footerSections = [
   {
     title: "บริการ & ข้อมูล",
     links: [
+      { label: "ขั้นตอนการใช้งาน", href: "/platform" },
       { label: "กรณีศึกษาลูกค้า", href: "/case-studies" },
       { label: "ราคาองค์กร / Volume", href: "/corporate-pricing" },
       { label: "บทความเทคนิค", href: "/blog" },
