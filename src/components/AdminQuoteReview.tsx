@@ -953,7 +953,7 @@ const AdminQuoteReview = () => {
             <option value="value_high">↓ ราคาสูง</option>
             <option value="value_low">↑ ราคาต่ำ</option>
           </select>
-          <button onClick={fetchQuotes} className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><RefreshCw size={12} className={loading ? "animate-spin" : ""} /></button>
+          <button onClick={() => fetchQuotes()} className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><RefreshCw size={12} className={loading ? "animate-spin" : ""} /></button>
         </div>
       </div>
 
