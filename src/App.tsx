@@ -65,6 +65,7 @@ const BlogDetail = lazy(() => import("./pages/BlogDetail.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const MyAccount = lazy(() => import("./pages/MyAccount.tsx"));
 const QuoteBuilder = lazy(() => import("./pages/QuoteBuilder.tsx"));
+const PlatformTour = lazy(() => import("./pages/PlatformTour.tsx"));
 
 /* ── Loading fallback ── */
 const PageLoader = () => (
@@ -184,6 +185,7 @@ const App = () => (
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogDetail />} />
                 <Route path="/my-account/*" element={<MyAccount />} />
+                <Route path="/platform" element={<PlatformTour />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
