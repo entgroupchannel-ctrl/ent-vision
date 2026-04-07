@@ -83,7 +83,7 @@ const AdminDeliveryManager = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [deliveries, setDeliveries] = useState<DeliveryNote[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedDelivery, setSelectedDelivery] = useState<DeliveryNote | null>(null);

@@ -131,7 +131,7 @@ const AdminContactsManager = () => {
   const [staff, setStaff] = useState<StaffMember[]>([]);
   const [selected, setSelected] = useState<ContactSubmission | null>(null);
   const [activities, setActivities] = useState<Activity[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
 
   // Filters

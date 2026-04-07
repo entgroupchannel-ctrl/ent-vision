@@ -53,7 +53,7 @@ const AdminCustomerManager = () => {
 
   const [customers, setCustomers] = useState<CustomerProfile[]>([]);
   const [salesTeam, setSalesTeam] = useState<SalesUser[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [filterTier, setFilterTier] = useState<string>("all");
 

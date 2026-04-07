@@ -203,46 +203,31 @@ const AdminQuoteReview = () => {
     } catch {}
   };
 
-  // FIX: Use state-based guard (not ref) to ensure correct reset on remount.
-  // useRef can persist across remounts in some edge cases (Strict Mode, HMR, Lovable preview).
-  // useState is guaranteed to reset on every fresh mount.
-  const [hasInitialFetch, setHasInitialFetch] = useState(false);
-
+  // SIMPLIFIED: With conditional rendering in AdminDashboard, this component
+  // mounts fresh every time the user visits the tab. No need for guards.
+  // useEffect runs once per mount, fetches data, sets loading=false in finally.
   useEffect(() => {
     const userId = user?.id;
-    if (!userId) {
-      console.log("[AdminQuoteReview] Skipping fetch — no user");
-      return;
-    }
-    if (hasInitialFetch) {
-      console.log("[AdminQuoteReview] Skipping fetch — already loaded for", userId);
-      return;
-    }
+    if (!userId) return;
 
     let cancelled = false;
-    console.log("[AdminQuoteReview] Starting initial fetch for", userId);
 
     const loadAll = async () => {
+      setLoading(true);
       try {
         await Promise.all([
-          fetchQuotes(),
+          fetchQuotes(true), // silent — we manage loading here
           fetchCatalog(),
           fetchDocLib(),
           fetchSalesTeam(),
           checkSuperAdmin(),
           fetchCompanySettings(),
         ]);
-        if (!cancelled) {
-          console.log("[AdminQuoteReview] Initial fetch completed");
-          setHasInitialFetch(true);
-        } else {
-          console.log("[AdminQuoteReview] Initial fetch completed but cancelled");
-        }
       } catch (err) {
         console.error("[AdminQuoteReview] Initial load failed:", err);
+      } finally {
         if (!cancelled) {
           setLoading(false);
-          // Don't set hasInitialFetch — allow retry on next render
         }
       }
     };
@@ -250,10 +235,9 @@ const AdminQuoteReview = () => {
     loadAll();
 
     return () => {
-      console.log("[AdminQuoteReview] Cleanup (cancelled in-flight fetch)");
       cancelled = true;
     };
-  }, [user?.id, hasInitialFetch]);
+  }, [user?.id]);
 
   // Listen for cross-component selection (e.g. from NotificationBell click)
   useEffect(() => {

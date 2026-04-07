@@ -155,7 +155,7 @@ const AdminInvoiceManager = () => {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [taxInvoices, setTaxInvoices] = useState<TaxInvoice[]>([]);
   const [receipts, setReceipts] = useState<ReceiptDoc[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null);
   const [invoiceItems, setInvoiceItems] = useState<InvoiceItem[]>([]);

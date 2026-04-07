@@ -86,7 +86,7 @@ const AdminBillingManager = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [billings, setBillings] = useState<BillingNote[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedBilling, setSelectedBilling] = useState<BillingNote | null>(null);
