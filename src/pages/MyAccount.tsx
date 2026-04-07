@@ -181,15 +181,16 @@ const MyAccount = () => {
 
       {/* Header */}
       <div className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-10">
-        <div className="container max-w-6xl mx-auto px-6 py-5">
+        <div className="container max-w-6xl mx-auto px-4 sm:px-6 py-3.5">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <Link to="/" className="text-sm text-primary hover:underline flex items-center gap-1.5">
                 <ArrowLeft size={14} /> กลับหน้าหลัก
               </Link>
-              <h1 className="text-xl font-display font-bold text-foreground">บัญชีของฉัน</h1>
+              <div className="w-px h-5 bg-border hidden sm:block" />
+              <h1 className="text-lg font-display font-bold text-foreground hidden sm:block">บัญชีของฉัน</h1>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {isAdmin && (
                 <Link
                   to="/admin"
@@ -198,10 +199,10 @@ const MyAccount = () => {
                   <Shield size={12} /> Admin Dashboard
                 </Link>
               )}
-              <span className="text-sm text-muted-foreground hidden sm:block">{user.email}</span>
+              <span className="text-xs text-muted-foreground hidden sm:block truncate max-w-[180px]">{user.email}</span>
               <button
                 onClick={signOut}
-                className="flex items-center gap-1.5 text-sm text-red-400 hover:text-red-300 transition-colors"
+                className="flex items-center gap-1.5 text-xs text-red-400 hover:text-red-300 transition-colors"
               >
                 <LogOut size={16} /> ออก
               </button>
@@ -210,7 +211,7 @@ const MyAccount = () => {
         </div>
       </div>
 
-      <div className="container max-w-6xl mx-auto px-6 py-6">
+      <div className="container max-w-6xl mx-auto px-4 sm:px-6 py-5">
         <div className="flex gap-0">
           {/* ═══ Sidebar — collapsible groups ═══ */}
           {sidebarMode !== "hidden" && (
@@ -220,7 +221,7 @@ const MyAccount = () => {
               }`}
               style={{ marginRight: sidebarMode === "full" ? 20 : 10 }}
             >
-              <nav className="card-surface rounded-xl p-2 sticky top-20">
+              <nav className="card-surface rounded-xl p-2.5 sticky top-16">
                 {/* Toggle */}
                 <button
                   onClick={() => setSidebarMode(sidebarMode === "full" ? "icon" : "full")}
@@ -301,7 +302,7 @@ const MyAccount = () => {
           )}
 
           {/* ═══ Mobile tab bar ═══ */}
-          <div className="md:hidden w-full mb-4 overflow-x-auto flex gap-1 border-b border-border pb-2">
+          <div className="md:hidden w-full mb-4 overflow-x-auto flex gap-1.5 border-b border-border pb-2.5 -mx-1 px-1">
             {allItems.map((item) => (
               <button
                 key={item.id}

@@ -355,13 +355,13 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-          <FileText size={20} className="text-primary" /> ใบเสนอราคาของฉัน
+        <h2 className="text-lg font-bold text-foreground flex items-center gap-2.5">
+          <FileText size={18} className="text-primary" /> ใบเสนอราคาของฉัน
         </h2>
-        <button onClick={fetchQuotes} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
-          <RefreshCw size={14} className={loading ? "animate-spin" : ""} /> รีเฟรช
+        <button onClick={fetchQuotes} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors px-2.5 py-1.5 rounded-lg hover:bg-secondary/60">
+          <RefreshCw size={13} className={loading ? "animate-spin" : ""} /> รีเฟรช
         </button>
       </div>
 
@@ -377,13 +377,13 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-border bg-secondary/30">
-                  <th className="text-left px-4 py-3 text-muted-foreground font-medium">วันที่</th>
-                  <th className="text-left px-4 py-3 text-muted-foreground font-medium">เลขที่</th>
-                  <th className="text-left px-4 py-3 text-muted-foreground font-medium">สินค้า</th>
-                  <th className="text-right px-4 py-3 text-muted-foreground font-medium">ยอดรวม</th>
-                  <th className="text-center px-4 py-3 text-muted-foreground font-medium">สถานะ</th>
-                  <th className="w-12"></th>
+               <tr className="border-b border-border bg-secondary/30">
+                  <th className="text-left px-4 py-2.5 text-xs text-muted-foreground font-semibold uppercase tracking-wide">วันที่</th>
+                  <th className="text-left px-4 py-2.5 text-xs text-muted-foreground font-semibold uppercase tracking-wide">เลขที่</th>
+                  <th className="text-left px-4 py-2.5 text-xs text-muted-foreground font-semibold uppercase tracking-wide">สินค้า</th>
+                  <th className="text-right px-4 py-2.5 text-xs text-muted-foreground font-semibold uppercase tracking-wide">ยอดรวม</th>
+                  <th className="text-center px-4 py-2.5 text-xs text-muted-foreground font-semibold uppercase tracking-wide">สถานะ</th>
+                  <th className="w-10"></th>
                 </tr>
               </thead>
               <tbody>
@@ -395,8 +395,8 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                   const isQuoted = ["quoted", "negotiating"].includes(q.status);
 
                   return (
-                    <tr key={q.id} className="border-b border-border/50 hover:bg-secondary/20 transition-colors cursor-pointer" onClick={() => handleEditDraft(q)}>
-                      <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">{fd(q.created_at)}</td>
+                    <tr key={q.id} className="border-b border-border/50 hover:bg-secondary/20 transition-colors cursor-pointer group" onClick={() => handleEditDraft(q)}>
+                      <td className="px-4 py-3 text-xs text-muted-foreground whitespace-nowrap tabular-nums">{fd(q.created_at)}</td>
                       <td className="px-4 py-3">
                         <button onClick={(e) => { e.stopPropagation(); handleExpand(q.id); }} className="text-left hover:text-primary transition-colors">
                           <span className="font-bold text-foreground">{q.quote_number || "Draft"}</span>
@@ -405,8 +405,8 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                           )}
                         </button>
                       </td>
-                      <td className="px-4 py-3 text-muted-foreground"><span className="line-clamp-1">{productSummary(q.products)}</span></td>
-                      <td className="px-4 py-3 text-right font-bold">{hasPrice ? `฿${fp(q.grand_total)}` : <span className="text-muted-foreground font-normal">รอราคา</span>}</td>
+                      <td className="px-4 py-3 text-xs text-muted-foreground"><span className="line-clamp-1">{productSummary(q.products)}</span></td>
+                      <td className="px-4 py-3 text-right text-sm font-bold tabular-nums">{hasPrice ? `฿${fp(q.grand_total)}` : <span className="text-muted-foreground font-normal text-xs">รอราคา</span>}</td>
                       <td className="px-4 py-3 text-center">
                         <div className="flex items-center justify-center gap-2">
                           <span className={`inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full border font-medium ${status.color}`}>{status.label}</span>
@@ -488,9 +488,9 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
               const status = statusConfig[q.status] || statusConfig.new;
 
               return (
-                <div className="border-t-2 border-primary/20 bg-secondary/5 p-5 animate-fade-in">
+                <div className="border-t-2 border-primary/20 bg-secondary/5 p-5 sm:p-6 animate-fade-in">
                   {/* Header */}
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-5">
                     <div className="flex items-center gap-3 flex-wrap">
                       <h3 className="text-base font-bold text-foreground">{q.quote_number || "Draft"}</h3>
                       <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${status.color}`}>{status.label}</span>
@@ -685,7 +685,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                   )}
 
                   {/* Actions */}
-                  <div className="flex flex-wrap gap-2 pt-3 border-t border-border">
+                  <div className="flex flex-wrap gap-2.5 pt-4 border-t border-border">
                     {q.pdf_url && (
                       <a href={q.pdf_url} target="_blank" rel="noopener noreferrer"
                         className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors">
