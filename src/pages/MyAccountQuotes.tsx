@@ -207,36 +207,42 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
       }).eq("id", quoteId);
       if (dbErr) throw dbErr;
 
-      // Notify assigned sales person (if any) — fallback to all admins
+      // Notify admin — use REAL user IDs (notifications.user_id is NOT NULL in current schema)
+      const q = quotes.find((qq) => qq.id === quoteId);
       try {
-        const q = quotes.find((qq) => qq.id === quoteId);
         const targetUserId = (q as any)?.assigned_to || null;
+        const notifTitle = `📥 ลูกค้าส่ง PO — ${q?.quote_number || ""}`;
+        const notifMessage = `${q?.name || "ลูกค้า"} ส่ง PO: ${poNumber || file.name}`;
 
         if (targetUserId) {
           // Notify the assigned sales person
           await (supabase.from as any)("notifications").insert({
             user_id: targetUserId,
-            type: "contact_assigned",
-            title: "📥 มี PO ใหม่รอตรวจสอบ",
-            message: `ลูกค้า ${q?.name || ""} ส่ง PO สำหรับ ${q?.quote_number || "#"} — กรุณาตรวจสอบภายใน 24 ชม.`,
-            link_type: "quote",
-            link_id: quoteId,
-            metadata: { po_number: poNumber || null, file_name: file.name },
+            type: "po_uploaded",
+            title: notifTitle,
+            message: notifMessage,
+            link: `/admin?tab=quote_review&quote=${quoteId}`,
           });
         } else {
-          // Fallback: notify all admins (best effort, ignored if fails)
-          const { data: admins } = await (supabase.rpc as any)("get_internal_staff");
-          if (Array.isArray(admins)) {
-            for (const admin of admins) {
-              await (supabase.from as any)("notifications").insert({
-                user_id: (admin as any).id,
-                type: "contact_assigned",
-                title: "📥 มี PO ใหม่ (ยังไม่มอบหมาย)",
-                message: `ลูกค้า ${q?.name || ""} ส่ง PO สำหรับ ${q?.quote_number || "#"}`,
-                link_type: "quote",
-                link_id: quoteId,
-              });
+          // Fallback: notify all internal staff (admin/super_admin/sales)
+          try {
+            const { data: staff } = await (supabase.rpc as any)("get_internal_staff");
+            if (Array.isArray(staff) && staff.length > 0) {
+              const inserts = staff
+                .filter((s: any) => s?.id)
+                .map((s: any) => ({
+                  user_id: s.id,
+                  type: "po_uploaded",
+                  title: notifTitle,
+                  message: notifMessage,
+                  link: `/admin?tab=quote_review&quote=${quoteId}`,
+                }));
+              if (inserts.length > 0) {
+                await (supabase.from as any)("notifications").insert(inserts);
+              }
             }
+          } catch (err) {
+            console.warn("Failed to notify all staff:", err);
           }
         }
       } catch (err) {
@@ -245,8 +251,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
 
       toast({ title: "อัปโหลด PO สำเร็จ", description: "ทีมขายจะตรวจสอบและดำเนินการต่อ" });
 
-      // Send email: po_uploaded
-      const q = quotes.find((qq) => qq.id === quoteId);
+      // Send email: po_uploaded (q already declared above for notification)
       if (q) {
         const saleInfo = await getSaleInfo((q as any).assigned_to || null);
         notifyQuoteStatus({
