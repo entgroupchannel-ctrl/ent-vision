@@ -221,7 +221,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
           sort_order: i,
         }));
         const { error: liErr } = await (supabase.from as any)("quote_line_items").insert(lineItems);
-        if (liErr) console.warn("Line items insert warning:", liErr.message);
+        if (liErr) throw new Error(`บันทึกรายการสินค้าไม่สำเร็จ: ${liErr.message}`);
 
         toast({ title: "บันทึก Draft สำเร็จ", description: "ใบเสนอราคาถูกอัพเดทแล้ว" });
       } else {
@@ -258,7 +258,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
             sort_order: i,
           }));
           const { error: liErr } = await (supabase.from as any)("quote_line_items").insert(lineItems);
-          if (liErr) console.warn("Line items insert warning:", liErr.message);
+          if (liErr) throw new Error(`บันทึกรายการสินค้าไม่สำเร็จ: ${liErr.message}`);
         }
         toast({ title: "บันทึก Draft สำเร็จ", description: "สามารถกลับมาแก้ไขได้ภายหลัง" });
       }
@@ -455,6 +455,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
     }
 
     setSubmitting(true);
+    let quoteId: string | null = currentDraftId;
     try {
       let profileData: any = {};
       try {
@@ -468,7 +469,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
         qty: item.qty,
       }));
 
-      let quoteId = currentDraftId;
+      quoteId = currentDraftId;
 
       if (currentDraftId) {
         // Update existing draft → change status to "new" (sent)
@@ -521,7 +522,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
           sort_order: i,
         }));
         const { error: liErr } = await (supabase.from as any)("quote_line_items").insert(lineItems);
-        if (liErr) console.warn("Line items insert warning:", liErr.message);
+        if (liErr) throw new Error(`ส่งรายการสินค้าไม่สำเร็จ: ${liErr.message}`);
       }
 
       // Track
@@ -556,7 +557,27 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
       globalCart.clearCart();
       navigate("/my-account/quotes");
     } catch (err: any) {
-      toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+      // Rollback: ถ้า quote ถูก update/insert ไปแล้ว แต่ line items fail
+      try {
+        if (currentDraftId) {
+          // มี draft อยู่แล้ว — revert status กลับเป็น draft
+          await (supabase.from as any)("quote_requests")
+            .update({ status: "draft" })
+            .eq("id", currentDraftId);
+        } else if (quoteId) {
+          // เพิ่งสร้างใหม่ — ลบ quote ที่สร้างค้างไว้
+          await (supabase.from as any)("quote_requests")
+            .delete()
+            .eq("id", quoteId);
+        }
+      } catch (rollbackErr) {
+        console.error("Rollback failed:", rollbackErr);
+      }
+      toast({
+        title: "ส่งใบเสนอราคาไม่สำเร็จ",
+        description: err.message + "\nกรุณาลองใหม่อีกครั้ง — ข้อมูลของคุณยังอยู่ในแบบร่าง",
+        variant: "destructive"
+      });
     } finally {
       setSubmitting(false);
     }
