@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   FileText, Receipt, FileCheck, Plus, Eye, RefreshCw, Search,
   Clock, CheckCircle, Send, AlertCircle, Loader2, ChevronDown,
@@ -151,11 +152,8 @@ const fmtDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "n
 const AdminInvoiceManager = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const qc = useQueryClient();
   const [docTab, setDocTab] = useState<DocTab>("invoices");
-  const [invoices, setInvoices] = useState<Invoice[]>([]);
-  const [taxInvoices, setTaxInvoices] = useState<TaxInvoice[]>([]);
-  const [receipts, setReceipts] = useState<ReceiptDoc[]>([]);
-  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null);
   const [invoiceItems, setInvoiceItems] = useState<InvoiceItem[]>([]);
@@ -172,32 +170,34 @@ const AdminInvoiceManager = () => {
   const [confirmedPayments, setConfirmedPayments] = useState<PaymentForDoc[]>([]);
   const [payDocLoading, setPayDocLoading] = useState(false);
 
-  /* ─── Fetch ─── */
-  const fetchAll = async () => {
-    setLoading(true);
-    try {
+  /* ─── React Query: Invoices + Tax Invoices + Receipts ─── */
+  const { data: invoiceData, isLoading: loading } = useQuery({
+    queryKey: ["admin", "invoices"],
+    queryFn: async () => {
       const [inv, tiv, rcp] = await Promise.all([
         supabase.from("invoices").select("*").order("created_at", { ascending: false }),
         supabase.from("tax_invoices").select("*").order("created_at", { ascending: false }),
         supabase.from("receipts").select("*").order("created_at", { ascending: false }),
       ]);
-      if (inv.error) console.error("invoices error:", inv.error);
-      if (tiv.error) console.error("tax_invoices error:", tiv.error);
-      if (rcp.error) console.error("receipts error:", rcp.error);
-      setInvoices((inv.data || []) as any);
-      setTaxInvoices((tiv.data || []) as any);
-      setReceipts((rcp.data || []) as any);
-    } catch (err: any) {
-      console.error("fetchAll (invoices) crashed:", err);
-      setInvoices([]);
-      setTaxInvoices([]);
-      setReceipts([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+      if (inv.error) throw inv.error;
+      if (tiv.error) throw tiv.error;
+      if (rcp.error) throw rcp.error;
+      return {
+        invoices: (inv.data || []) as Invoice[],
+        taxInvoices: (tiv.data || []) as TaxInvoice[],
+        receipts: (rcp.data || []) as ReceiptDoc[],
+      };
+    },
+  });
 
-  useEffect(() => { fetchAll(); }, []);
+  const invoices = invoiceData?.invoices ?? [];
+  const taxInvoices = invoiceData?.taxInvoices ?? [];
+  const receipts = invoiceData?.receipts ?? [];
+
+  // Helper for save handlers + refresh button
+  const fetchAll = () => {
+    qc.invalidateQueries({ queryKey: ["admin", "invoices"] });
+  };
 
   const fetchInvoiceItems = async (invoiceId: string) => {
     const { data } = await supabase

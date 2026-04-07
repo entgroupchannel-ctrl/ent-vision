@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Truck, Package, CheckCircle, Clock, Loader2, RefreshCw, Search,
   Eye, MapPin, Hash, AlertCircle, XCircle, Send, Calendar,
@@ -82,8 +83,7 @@ const fmt = (n: number) => n.toLocaleString("th-TH", { minimumFractionDigits: 2 
 const AdminDeliveryManager = () => {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [deliveries, setDeliveries] = useState<DeliveryNote[]>([]);
-  const [loading, setLoading] = useState(false);
+  const qc = useQueryClient();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedDelivery, setSelectedDelivery] = useState<DeliveryNote | null>(null);
@@ -102,26 +102,25 @@ const AdminDeliveryManager = () => {
   const [sourceLoading, setSourceLoading] = useState(false);
 
   /* ─── Fetch ─── */
-  const fetchDeliveries = async () => {
-    setLoading(true);
-    try {
-      const { data, error } = await supabase.from("delivery_notes").select("*").order("created_at", { ascending: false });
+  /* ─── React Query: Auto-refetch on tab focus, no stuck state ─── */
+  const { data: deliveries = [], isLoading: loading } = useQuery({
+    queryKey: ["admin", "deliveries"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("delivery_notes")
+        .select("*")
+        .order("created_at", { ascending: false });
       if (error) {
-        console.error("Failed to fetch delivery_notes:", error);
         toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: error.message, variant: "destructive" });
-        setDeliveries([]);
-      } else {
-        setDeliveries((data || []) as any);
+        throw error;
       }
-    } catch (err: any) {
-      console.error("fetchDeliveries crashed:", err);
-      setDeliveries([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+      return (data || []) as DeliveryNote[];
+    },
+  });
 
-  useEffect(() => { fetchDeliveries(); }, []);
+  const fetchDeliveries = () => {
+    qc.invalidateQueries({ queryKey: ["admin", "deliveries"] });
+  };
 
   const fetchItems = async (deliveryId: string) => {
     const { data } = await supabase.from("delivery_note_items").select("*").eq("delivery_note_id", deliveryId).order("sort_order");

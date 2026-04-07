@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   FileText, Send, CheckCircle, Clock, Loader2, RefreshCw, Search,
   Eye, ChevronDown, Building2, Phone, Mail, Hash, ArrowRight,
@@ -85,8 +86,7 @@ const fmtDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "n
 const AdminBillingManager = () => {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [billings, setBillings] = useState<BillingNote[]>([]);
-  const [loading, setLoading] = useState(false);
+  const qc = useQueryClient();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedBilling, setSelectedBilling] = useState<BillingNote | null>(null);
@@ -98,29 +98,26 @@ const AdminBillingManager = () => {
   const [poLoading, setPOLoading] = useState(false);
 
   /* ─── Fetch ─── */
-  const fetchBillings = async () => {
-    setLoading(true);
-    try {
+  /* ─── React Query: Auto-handles refetch on tab focus, dedupe, retry ─── */
+  const { data: billings = [], isLoading: loading } = useQuery({
+    queryKey: ["admin", "billings"],
+    queryFn: async () => {
       const { data, error } = await supabase
         .from("billing_notes")
         .select("*")
         .order("created_at", { ascending: false });
       if (error) {
-        console.error("Failed to fetch billing_notes:", error);
         toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: error.message, variant: "destructive" });
-        setBillings([]);
-      } else {
-        setBillings((data || []) as any);
+        throw error;
       }
-    } catch (err: any) {
-      console.error("fetchBillings crashed:", err);
-      setBillings([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+      return (data || []) as BillingNote[];
+    },
+  });
 
-  useEffect(() => { fetchBillings(); }, []);
+  // Helper to trigger refetch (used by save handlers + refresh button)
+  const fetchBillings = () => {
+    qc.invalidateQueries({ queryKey: ["admin", "billings"] });
+  };
 
   const fetchBillingItems = async (billingId: string) => {
     const { data } = await supabase
