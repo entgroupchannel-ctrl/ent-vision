@@ -77,8 +77,12 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
     if (!user) return;
     setLoading(true);
     try {
-      const { data, error } = await (supabase.from as any)("quote_requests")
+      const queryPromise = (supabase.from as any)("quote_requests")
         .select("*").eq("user_id", user.id).order("created_at", { ascending: false });
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("โหลดข้อมูลใช้เวลานานเกินไป กรุณาลองใหม่")), 15000)
+      );
+      const { data, error } = await Promise.race([queryPromise, timeoutPromise]) as any;
       if (error) throw error;
       if (data) setQuotes(data);
     } catch (err: any) {
@@ -107,7 +111,8 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
         if (data) setCompanySettings(data);
       } catch {}
     })();
-  }, [user]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
