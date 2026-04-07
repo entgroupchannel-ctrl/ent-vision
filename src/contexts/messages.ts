@@ -231,7 +231,7 @@ export const messages = {
       dashboard: "Overview / Dashboard",
       sales: "Sales",
       contacts: "Contacts",
-      quotes: "Quotations/RFQ",
+      quotes: "Quotations",
       salesOrders: "Sales Orders",
       billing: "Billing Notes",
       invoices: "Invoices",
