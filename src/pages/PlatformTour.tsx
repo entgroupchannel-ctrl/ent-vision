@@ -202,7 +202,7 @@ const PlatformTour = () => {
               </Button>
             </Link>
             <a href="#workflow">
-              <Button variant="outline" size="lg" className="gap-2 border-white/20 text-white hover:bg-white/10">
+              <Button variant="outline" size="lg" className="gap-2 border-white/40 text-white bg-white/10 hover:bg-white/20 font-bold">
                 <Eye size={18} /> ดูขั้นตอนการใช้งาน
               </Button>
             </a>
