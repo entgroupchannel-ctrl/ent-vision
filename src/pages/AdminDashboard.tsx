@@ -98,7 +98,7 @@ const AdminDashboard = () => {
     engagement: "marketing.engagement",
     subscribers: "marketing.subscribers",
     users: "system.users",
-    livechat: "sales.contacts",
+    livechat: "marketing.engagement",
     sales_orders: "sales.quote_review",
     invoices: "sales.quote_review",
     billing: "sales.quote_review",
@@ -254,7 +254,6 @@ const AdminDashboard = () => {
                   { id: "invoices" as Tab, label: "ใบแจ้งหนี้", icon: Receipt, count: 0 },
                   { id: "delivery" as Tab, label: "ใบส่งสินค้า", icon: Package, count: 0 },
                   { id: "payments" as Tab, label: "บันทึกจ่ายเงิน", icon: Wallet, count: 0 },
-                  { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
@@ -284,6 +283,7 @@ const AdminDashboard = () => {
                 {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
                 {([
                   { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
+                  { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
                   { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
                   { id: "engagement" as Tab, label: "Engagement", icon: BarChart3, count: 0 },
                   { id: "subscribers" as Tab, label: "สมาชิก", icon: Mail, count: 0 },
@@ -382,12 +382,12 @@ const AdminDashboard = () => {
               { id: "delivery" as Tab, label: "ใบส่งสินค้า" },
               { id: "payments" as Tab, label: "จ่ายเงิน" },
               { id: "catalog" as Tab, label: "สินค้า" },
+              { id: "chatleads" as Tab, label: "Chat Leads" },
+              { id: "livechat" as Tab, label: "Live Chat" },
               { id: "engagement" as Tab, label: "Engagement" },
               { id: "documents" as Tab, label: "เอกสาร" },
-              { id: "chatleads" as Tab, label: "Chat Leads" },
               { id: "subscribers" as Tab, label: "สมาชิก" },
               { id: "software" as Tab, label: "ซอฟต์แวร์" },
-              { id: "livechat" as Tab, label: "Live Chat" },
             ]).map((t) => (
               <button
                 key={t.id}
