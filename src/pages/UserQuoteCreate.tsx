@@ -774,11 +774,13 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                 onFocus={() => setShowCatalog(true)}
                 className={`${inputClass} pl-9`}
                 placeholder="พิมพ์ชื่อรุ่น เช่น GT9000, GK1506..."
+                disabled={isReadOnly}
               />
             </div>
             <button
               onClick={() => setShowCatalog(!showCatalog)}
-              className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors whitespace-nowrap"
+              disabled={isReadOnly}
+              className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors whitespace-nowrap disabled:opacity-50"
             >
               <Package size={14} /> เรียกดูทั้งหมด
             </button>
@@ -860,13 +862,25 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
               <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
                 <ShoppingCart size={14} className="text-primary" /> รายการสินค้า ({cart.length})
               </h3>
-              <button
-                onClick={addCustomItem}
-                className="flex items-center gap-1 text-sm text-primary hover:underline font-medium"
-              >
-                <Plus size={14} /> เพิ่มรายการเอง
-              </button>
+              {!isReadOnly && (
+                <button
+                  onClick={addCustomItem}
+                  className="flex items-center gap-1 text-sm text-primary hover:underline font-medium"
+                >
+                  <Plus size={14} /> เพิ่มรายการเอง
+                </button>
+              )}
             </div>
+
+            {isReadOnly && (
+              <div className="mb-3 px-4 py-3 rounded-lg bg-blue-500/10 border border-blue-500/20 text-xs text-blue-600 dark:text-blue-400 flex items-start gap-2">
+                <FileText size={14} className="shrink-0 mt-0.5" />
+                <span>
+                  ใบเสนอราคานี้ส่งให้ทีมขายแล้ว — อยู่ในโหมดอ่านอย่างเดียว
+                  ไม่สามารถแก้ไขรายการได้ หากต้องการเปลี่ยนแปลง กรุณาติดต่อทีมขายผ่านช่องทาง "สนทนา / ต่อรอง"
+                </span>
+              </div>
+            )}
 
             {cart.length === 0 ? (
               <div className="text-center py-8">
