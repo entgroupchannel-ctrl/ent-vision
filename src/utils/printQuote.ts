@@ -343,6 +343,7 @@ body{font-family:'Sarabun','THSarabunNew','Helvetica','Arial',sans-serif;font-si
   @page{size:A4 portrait;margin:15mm 12mm 15mm 12mm}
   .page-break{page-break-before:always}
   .no-break{page-break-inside:avoid}
+  .print-tip{display:none !important}
 }
 @media screen{
   body{max-width:210mm;margin:0 auto;padding:20mm 15mm;background:#f0f0f0}
