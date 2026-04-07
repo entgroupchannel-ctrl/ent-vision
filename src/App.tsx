@@ -6,6 +6,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/hooks/use-theme";
+import { I18nProvider } from "@/contexts/I18nContext";
 import { AuthProvider } from "@/hooks/useAuth";
 import { QuoteCartProvider } from "@/hooks/useQuoteCart";
 import Index from "./pages/Index.tsx";
