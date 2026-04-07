@@ -93,7 +93,7 @@ const AdminQuoteReview = () => {
   const pdfRef = useRef<HTMLInputElement>(null);
 
   const [quotes, setQuotes] = useState<QuoteRequest[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<QuoteRequest | null>(null);
   const [items, setItems] = useState<LineItem[]>([]);
   const [catalog, setCatalog] = useState<CatalogProduct[]>([]);
@@ -203,20 +203,49 @@ const AdminQuoteReview = () => {
     } catch {}
   };
 
-  // FIX 1+2: Use user?.id (primitive) instead of user (object) + initialLoaded guard
+  // FIX 1+2: Use user?.id (primitive) instead of user (object) + abort guard
   // Prevents re-fetch cascade when token refreshes
-  const initialLoadedRef = useRef(false);
+  // CRITICAL: Use cancellation pattern + state-based guard to handle React Strict Mode
+  // double-mount in dev. Track which user.id we've successfully fetched for.
+  const fetchedForUserIdRef = useRef<string | null>(null);
 
   useEffect(() => {
-    if (!user?.id) return;
-    if (initialLoadedRef.current) return; // Guard: only run once per user
-    initialLoadedRef.current = true;
-    fetchQuotes();
-    fetchCatalog();
-    fetchDocLib();
-    fetchSalesTeam();
-    checkSuperAdmin();
-    fetchCompanySettings();
+    const userId = user?.id;
+    if (!userId) return;
+
+    // Already successfully fetched for this user — skip
+    if (fetchedForUserIdRef.current === userId) return;
+
+    let cancelled = false;
+
+    const loadAll = async () => {
+      try {
+        await Promise.all([
+          fetchQuotes(),
+          fetchCatalog(),
+          fetchDocLib(),
+          fetchSalesTeam(),
+          checkSuperAdmin(),
+          fetchCompanySettings(),
+        ]);
+        // Only mark as fetched if we completed without being cancelled
+        if (!cancelled) {
+          fetchedForUserIdRef.current = userId;
+        }
+      } catch (err) {
+        console.error("Initial load failed:", err);
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadAll();
+
+    return () => {
+      cancelled = true;
+      // Don't reset fetchedForUserIdRef here — we only update it on success
+    };
   }, [user?.id]);
 
   /* ─── Select Quote ─── */
