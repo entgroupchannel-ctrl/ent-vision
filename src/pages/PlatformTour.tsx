@@ -498,6 +498,7 @@ const PlatformTour = () => {
       </section>
 
       <FooterCompact />
+      <AIChatWidget open={aiChatOpen} onClose={() => setAiChatOpen(false)} />
     </div>
   );
 };
