@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Clock, CheckCircle, XCircle, MessageSquare, Send, DollarSign,
   Truck, CreditCard, Shield, AlertTriangle, Loader2, ChevronDown,
@@ -69,10 +70,9 @@ const inp = "w-full px-3 py-2.5 rounded-lg border border-border bg-background te
 /* ─── Component ─── */
 const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, onQuoteUpdated }: QuoteTimelineProps) => {
   const { toast } = useToast();
+  const qc = useQueryClient();
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  const [messages, setMessages] = useState<QuoteMessage[]>([]);
-  const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
 
   // Send form
@@ -88,22 +88,24 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
   const [adminReply, setAdminReply] = useState("");
   const [adminCounterValue, setAdminCounterValue] = useState("");
 
-  /* ─── Fetch ─── */
-  const fetchMessages = async () => {
-    setLoading(true);
-    try {
-      const { data } = await (supabase.from as any)("quote_messages")
+  /* ─── React Query: messages for this quote ─── */
+  const { data: messages = [], isLoading: loading } = useQuery({
+    queryKey: ["quote-messages", quoteId],
+    enabled: !!quoteId,
+    queryFn: async () => {
+      const { data, error } = await (supabase.from as any)("quote_messages")
         .select("*")
         .eq("quote_id", quoteId)
         .order("created_at", { ascending: true });
-      if (data) setMessages(data);
-    } catch {}
-    setLoading(false);
-  };
+      if (error) throw error;
+      return (data || []) as QuoteMessage[];
+    },
+  });
 
-  useEffect(() => {
-    if (quoteId) fetchMessages();
-  }, [quoteId]);
+  // Backward-compat helper for save handlers — invalidate cache → React Query refetches
+  const fetchMessages = () => {
+    qc.invalidateQueries({ queryKey: ["quote-messages", quoteId] });
+  };
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
