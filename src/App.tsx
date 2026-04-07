@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, QueryCache } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -77,13 +77,42 @@ const PageLoader = () => (
 );
 
 const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error: any) => {
+      const status = error?.status ?? error?.code ?? error?.statusCode;
+      const message = String(error?.message || "").toLowerCase();
+      const is401 =
+        status === 401 ||
+        status === "401" ||
+        status === "PGRST301" ||
+        message.includes("jwt expired") ||
+        message.includes("invalid jwt") ||
+        message.includes("unauthorized");
+
+      if (is401 && window.location.pathname.startsWith("/admin")) {
+        console.warn("[Auth] Session expired — redirecting to login");
+        try {
+          Object.keys(localStorage).forEach((k) => {
+            if (k.includes("auth-token") || k.includes("supabase")) {
+              localStorage.removeItem(k);
+            }
+          });
+        } catch {}
+        window.location.replace("/admin-login");
+      }
+    },
+  }),
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: true,
       refetchOnReconnect: true,
       staleTime: 30_000,
       gcTime: 5 * 60_000,
-      retry: 1,
+      retry: (failureCount, error: any) => {
+        const status = error?.status ?? error?.code;
+        if (status === 401 || status === "401" || status === "PGRST301") return false;
+        return failureCount < 1;
+      },
       retryDelay: 1000,
     },
     mutations: {
