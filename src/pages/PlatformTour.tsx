@@ -41,6 +41,7 @@ const userFeatures = [
       "ส่งต่อให้ทีมจัดซื้อได้ทันที",
     ],
     screenshotPlaceholder: "หน้า Wishlist",
+    screenshot: "/images/platform/wishlist.png",
   },
   {
     id: "quote-create",
