@@ -154,6 +154,7 @@ const App = () => (
         </TooltipProvider>
         </QuoteCartProvider>
       </AuthProvider>
+      </I18nProvider>
     </ThemeProvider>
   </QueryClientProvider>
   </HelmetProvider>
