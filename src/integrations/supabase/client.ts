@@ -13,5 +13,12 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
     storage: localStorage,
     persistSession: true,
     autoRefreshToken: true,
+    // CRITICAL FIX: Disable Supabase Auth lock to prevent deadlock during tab switches.
+    // Default LockManager can deadlock when a query is in-flight during component unmount
+    // and token refresh fires concurrently → fetch hangs forever with no console errors.
+    // Safe for single-tab apps. Ref: https://github.com/supabase/auth-js/issues/762
+    lock: async (_name, _acquireTimeout, fn) => {
+      return await fn();
+    },
   }
 });
