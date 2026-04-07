@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   CreditCard, CheckCircle, Clock, Loader2, RefreshCw, Search,
   Upload, Hash, XCircle, DollarSign, Calendar, Building2,
@@ -65,9 +66,7 @@ const fmtDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "n
 const AdminPaymentManager = () => {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [payments, setPayments] = useState<PaymentRecord[]>([]);
-  const [pendingInvoices, setPendingInvoices] = useState<PendingInvoice[]>([]);
-  const [loading, setLoading] = useState(false);
+  const qc = useQueryClient();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
 
@@ -83,28 +82,43 @@ const AdminPaymentManager = () => {
   const [paySlipFile, setPaySlipFile] = useState<File | null>(null);
   const [saving, setSaving] = useState(false);
 
-  /* ─── Fetch ─── */
-  const fetchAll = async () => {
-    setLoading(true);
-    try {
+  /* ─── React Query: Fetch payments + pending invoices ───
+   * - Auto-refetches when window regains focus (fixes the stuck-after-tab-switch bug)
+   * - Auto-refetches on network reconnect
+   * - 30s stale time (no spam refetch on tab visit)
+   * - Built-in dedupe, retry, error handling
+   * - No useState/useEffect/loading boilerplate to get stuck
+   */
+  const { data, isLoading: loading, refetch } = useQuery({
+    queryKey: ["admin", "payments"],
+    queryFn: async () => {
       const [payRes, invRes] = await Promise.all([
-        supabase.from("payment_records").select("*").order("created_at", { ascending: false }),
-        supabase.from("invoices").select("id, invoice_number, customer_name, customer_company, grand_total, status, billing_note_id, quote_id").in("status", ["sent", "draft"]).order("created_at", { ascending: false }),
+        supabase
+          .from("payment_records")
+          .select("*")
+          .order("created_at", { ascending: false }),
+        supabase
+          .from("invoices")
+          .select("id, invoice_number, customer_name, customer_company, grand_total, status, billing_note_id, quote_id")
+          .in("status", ["sent", "draft"])
+          .order("created_at", { ascending: false }),
       ]);
-      if (payRes.error) console.error("payment_records error:", payRes.error);
-      if (invRes.error) console.error("invoices error:", invRes.error);
-      setPayments((payRes.data || []) as any);
-      setPendingInvoices((invRes.data || []) as any);
-    } catch (err: any) {
-      console.error("fetchAll (payments) crashed:", err);
-      setPayments([]);
-      setPendingInvoices([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+      if (payRes.error) throw payRes.error;
+      if (invRes.error) throw invRes.error;
+      return {
+        payments: (payRes.data || []) as PaymentRecord[],
+        pendingInvoices: (invRes.data || []) as PendingInvoice[],
+      };
+    },
+  });
 
-  useEffect(() => { fetchAll(); }, []);
+  const payments = data?.payments ?? [];
+  const pendingInvoices = data?.pendingInvoices ?? [];
+
+  // Helper: trigger refetch (used by save handlers and refresh button)
+  const fetchAll = () => {
+    qc.invalidateQueries({ queryKey: ["admin", "payments"] });
+  };
 
   /* ─── Open dialog ─── */
   const openRecordPayment = (invoice: PendingInvoice) => {
