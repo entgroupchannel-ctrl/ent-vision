@@ -12,6 +12,8 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
+import { useI18n } from "@/contexts/I18nContext";
+import LangToggle from "@/components/LangToggle";
 import EngagementAnalytics from "@/components/EngagementAnalytics";
 import AdminDocumentManager from "@/components/AdminDocumentManager";
 import AdminProductCatalog from "@/components/AdminProductCatalog";
@@ -22,11 +24,11 @@ import AdminBillingManager from "@/components/AdminBillingManager";
 import AdminDeliveryManager from "@/components/AdminDeliveryManager";
 import AdminPaymentManager from "@/components/AdminPaymentManager";
 import AdminUserManagement from "@/components/AdminUserManagement";
-import AdminContactsManager from "@/components/AdminContactsManager";
+import RevenueChart from "@/components/RevenueChart";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
 const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
 
-type Tab = "contacts" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
+type Tab = "dashboard" | "contacts" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -75,7 +77,8 @@ const AdminDashboard = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { user, isAdmin, isSuperAdmin, loading: authLoading, signOut } = useAuth();
-  const [tab, setTab] = useState<Tab>("contacts");
+  const { t } = useI18n();
+  const [tab, setTab] = useState<Tab>("dashboard");
   const [contacts, setContacts] = useState<any[]>([]);
   const [quotes, setQuotes] = useState<any[]>([]);
   const [subscribers, setSubscribers] = useState<any[]>([]);
@@ -91,6 +94,7 @@ const AdminDashboard = () => {
 
   // Map tab → permission key
   const tabPermission: Record<Tab, PermissionKey> = {
+    dashboard: "sales.quote_review",  // Dashboard accessible to anyone with sales access
     contacts: "sales.contacts",
     quote_review: "sales.quote_review",
     chatleads: "sales.chatleads",
@@ -211,9 +215,9 @@ const AdminDashboard = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <Link to="/" className="text-sm text-primary hover:underline flex items-center gap-1.5">
-                <ArrowLeft size={14} /> กลับหน้าหลัก
+                <ArrowLeft size={14} /> {t("admin.backToHome")}
               </Link>
-              <h1 className="text-xl font-display font-bold text-foreground">Admin Dashboard</h1>
+              <h1 className="text-xl font-display font-bold text-foreground">{t("admin.adminDashboard")}</h1>
             </div>
             <div className="flex items-center gap-4">
               {isSuperAdmin && (
@@ -222,18 +226,19 @@ const AdminDashboard = () => {
                 </span>
               )}
               <span className="text-sm text-muted-foreground">{user?.email}</span>
+              <LangToggle variant="compact" />
               <ThemeToggle />
               <button
-                onClick={() => fetchData()}
+                onClick={fetchData}
                 className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                <RefreshCw size={16} className={loading ? "animate-spin" : ""} /> รีเฟรช
+                <RefreshCw size={16} className={loading ? "animate-spin" : ""} /> {t("common.refresh")}
               </button>
               <button
                 onClick={signOut}
                 className="flex items-center gap-1.5 text-sm text-red-400 hover:text-red-300 transition-colors"
               >
-                <LogOut size={16} /> ออกจากระบบ
+                <LogOut size={16} /> {t("common.logout")}
               </button>
             </div>
           </div>
@@ -260,19 +265,20 @@ const AdminDashboard = () => {
                   {sidebarMode === "full" ? <PanelLeftClose size={16} /> : <PanelLeft size={16} />}
                 </button>
 
-                {/* ─── งานขาย ─── */}
+                {/* ─── งานขาย / Sales ─── */}
                 {sidebarMode === "full" && (
-                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-2 pb-1">งานขาย</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-2 pb-1">{t("admin.sales")}</p>
                 )}
                 {([
-                  { id: "contacts" as Tab, label: "ติดต่อเข้ามา", icon: MessageSquare, count: contacts.filter(c => c.status === "new").length },
-                  { id: "quote_review" as Tab, label: "ใบเสนอราคา", icon: FileText, count: quotes.filter(q => q.status === "new").length },
-                  { id: "sales_orders" as Tab, label: "ยอดขาย / Order", icon: Package, count: 0 },
-                  { id: "billing" as Tab, label: "ใบวางบิล", icon: FileText, count: 0 },
-                  { id: "invoices" as Tab, label: "ใบแจ้งหนี้", icon: Receipt, count: 0 },
-                  { id: "delivery" as Tab, label: "ใบส่งสินค้า", icon: Package, count: 0 },
-                  { id: "payments" as Tab, label: "บันทึกจ่ายเงิน", icon: Wallet, count: 0 },
-                  { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
+                  { id: "dashboard" as Tab, label: t("admin.dashboard"), icon: BarChart3, count: 0 },
+                  { id: "contacts" as Tab, label: t("admin.contacts"), icon: MessageSquare, count: contacts.filter(c => c.status === "new").length },
+                  { id: "quote_review" as Tab, label: t("admin.quotes"), icon: FileText, count: quotes.filter(q => q.status === "new").length },
+                  { id: "sales_orders" as Tab, label: t("admin.salesOrders"), icon: Package, count: 0 },
+                  { id: "billing" as Tab, label: t("admin.billing"), icon: FileText, count: 0 },
+                  { id: "invoices" as Tab, label: t("admin.invoices"), icon: Receipt, count: 0 },
+                  { id: "delivery" as Tab, label: t("admin.delivery"), icon: Package, count: 0 },
+                  { id: "payments" as Tab, label: t("admin.payments"), icon: Wallet, count: 0 },
+                  { id: "livechat" as Tab, label: t("admin.liveChat"), icon: Headphones, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
@@ -295,16 +301,16 @@ const AdminDashboard = () => {
                   </button>
                 ))}
 
-                {/* ─── การตลาด ─── */}
+                {/* ─── การตลาด / Marketing ─── */}
                 {sidebarMode === "full" && (
-                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">การตลาด</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">{t("admin.marketing")}</p>
                 )}
                 {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
                 {([
-                  { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
-                  { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
-                  { id: "engagement" as Tab, label: "Engagement", icon: BarChart3, count: 0 },
-                  { id: "subscribers" as Tab, label: "สมาชิก", icon: Mail, count: 0 },
+                  { id: "chatleads" as Tab, label: t("admin.chatLeads"), icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
+                  { id: "software" as Tab, label: t("admin.software"), icon: Code2, count: 0 },
+                  { id: "engagement" as Tab, label: t("admin.engagement"), icon: BarChart3, count: 0 },
+                  { id: "subscribers" as Tab, label: t("admin.subscribers"), icon: Mail, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
@@ -327,14 +333,14 @@ const AdminDashboard = () => {
                   </button>
                 ))}
 
-                {/* ─── สินค้า / เอกสาร ─── */}
+                {/* ─── สินค้า / Products ─── */}
                 {sidebarMode === "full" && (
-                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">สินค้า</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">{t("admin.products")}</p>
                 )}
                 {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
                 {([
-                  { id: "catalog" as Tab, label: "สินค้า + ราคา", icon: Package },
-                  { id: "documents" as Tab, label: "คลังเอกสาร", icon: FolderOpen },
+                  { id: "catalog" as Tab, label: t("admin.catalog"), icon: Package },
+                  { id: "documents" as Tab, label: t("admin.documents"), icon: FolderOpen },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
@@ -351,11 +357,11 @@ const AdminDashboard = () => {
                   </button>
                 ))}
 
-                {/* ระบบ */}
+                {/* ระบบ / System */}
                 {can("system.users", "view") && (
                   <>
                     {sidebarMode === "full" && (
-                      <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">ระบบ</p>
+                      <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">{t("admin.system")}</p>
                     )}
                     {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
                     <button
@@ -365,10 +371,10 @@ const AdminDashboard = () => {
                           ? "bg-primary/10 text-primary"
                           : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
                       } ${sidebarMode === "icon" ? "justify-center" : ""}`}
-                      title={sidebarMode === "icon" ? "จัดการผู้ใช้" : undefined}
+                      title={sidebarMode === "icon" ? t("admin.users") : undefined}
                     >
                       <Shield size={16} className="shrink-0" />
-                      {sidebarMode === "full" && <span className="flex-1 text-left truncate">จัดการผู้ใช้</span>}
+                      {sidebarMode === "full" && <span className="flex-1 text-left truncate">{t("admin.users")}</span>}
                     </button>
                   </>
                 )}
@@ -391,6 +397,7 @@ const AdminDashboard = () => {
           {/* ═══ Mobile tab bar ═══ */}
           <div className="md:hidden w-full mb-4 overflow-x-auto flex gap-1 border-b border-border pb-2">
             {([
+              { id: "dashboard" as Tab, label: "ภาพรวม" },
               { id: "contacts" as Tab, label: "ติดต่อ" },
               { id: "quote_review" as Tab, label: "ใบเสนอราคา" },
               { id: "sales_orders" as Tab, label: "ยอดขาย" },
@@ -432,27 +439,50 @@ const AdminDashboard = () => {
               </button>
             )}
 
-            {/* Stats row */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            {/* Stats row — hidden on dashboard tab (has its own stats) */}
+            {tab !== "dashboard" && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                {[
+                  { label: "ติดต่อเข้ามา", value: stats.totalContacts, icon: MessageSquare, color: "text-blue-400" },
+                  { label: "ขอใบเสนอราคา", value: stats.totalQuotes, icon: FileText, color: "text-purple-400" },
+                  { label: "Lead ใหม่", value: stats.newLeads, icon: Users, color: "text-yellow-400" },
+                  { label: "Lead คุณภาพสูง", value: stats.highScoreLeads, icon: TrendingUp, color: "text-primary" },
+                ].map((s) => (
+                  <div key={s.label} className="card-surface rounded-xl p-5">
+                    <div className="flex items-center gap-2 mb-2">
+                      <s.icon size={16} className={s.color} />
+                      <span className="text-sm text-muted-foreground">{s.label}</span>
+                    </div>
+                    <span className="text-3xl font-bold text-foreground">{s.value}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+        {/* Engagement Analytics Tab — full width, no filter/export */}
+        {tab === "dashboard" ? (
+          <div className="space-y-4">
+            {/* Sales overview stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { label: "ติดต่อเข้ามา", value: stats.totalContacts, icon: MessageSquare, color: "text-blue-400" },
-                { label: "ขอใบเสนอราคา", value: stats.totalQuotes, icon: FileText, color: "text-purple-400" },
-                { label: "Lead ใหม่", value: stats.newLeads, icon: Users, color: "text-yellow-400" },
-                { label: "Lead คุณภาพสูง", value: stats.highScoreLeads, icon: TrendingUp, color: "text-primary" },
+                { label: "ยอดขายรวม / Total Sales", value: stats.totalQuotes, icon: TrendingUp, color: "text-green-500" },
+                { label: "ใบเสนอราคา / Quotes", value: stats.totalQuotes, icon: FileText, color: "text-purple-400" },
+                { label: "ติดต่อใหม่ / New Leads", value: stats.newLeads, icon: Users, color: "text-yellow-400" },
+                { label: "Lead คุณภาพสูง / High Quality", value: stats.highScoreLeads, icon: Star, color: "text-primary" },
               ].map((s) => (
                 <div key={s.label} className="card-surface rounded-xl p-5">
                   <div className="flex items-center gap-2 mb-2">
                     <s.icon size={16} className={s.color} />
-                    <span className="text-sm text-muted-foreground">{s.label}</span>
+                    <span className="text-xs text-muted-foreground">{s.label}</span>
                   </div>
                   <span className="text-3xl font-bold text-foreground">{s.value}</span>
                 </div>
               ))}
             </div>
 
-        {/* Engagement Analytics Tab — full width, no filter/export */}
-        {tab === "contacts" ? (
-          <AdminContactsManager />
+            {/* Revenue chart */}
+            <RevenueChart />
+          </div>
         ) : tab === "engagement" ? (
           <EngagementAnalytics />
         ) : tab === "documents" ? (
@@ -534,7 +564,10 @@ const AdminDashboard = () => {
               className="text-sm px-3 py-2 rounded-lg border border-border bg-background text-foreground"
             >
               <option value="all">ทั้งหมด</option>
-              {["new", "quoted", "negotiating", "won", "lost"].map((s) => (
+              {(tab === "contacts"
+                ? ["new", "contacted", "qualified", "closed"]
+                : ["new", "quoted", "negotiating", "won", "lost"]
+              ).map((s) => (
                 <option key={s} value={s}>{statusLabels[s]}</option>
               ))}
             </select>
@@ -547,6 +580,44 @@ const AdminDashboard = () => {
           <div className="lg:col-span-2 space-y-2">
             {loading ? (
               <div className="text-center py-12 text-muted-foreground text-sm">กำลังโหลด...</div>
+            ) : tab === "contacts" ? (
+              filteredContacts.length === 0 ? (
+                <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มีข้อมูล</div>
+              ) : filteredContacts.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setSelectedItem({ ...item, _type: "contact" })}
+                  className={`w-full text-left card-surface rounded-xl p-4 hover:border-primary/30 transition-colors ${
+                    selectedItem?.id === item.id ? "border-primary/50 ring-1 ring-primary/20" : ""
+                  }`}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <span className="text-base font-bold text-foreground">{item.name}</span>
+                      {item.company && (
+                        <span className="ml-2 text-xs text-muted-foreground flex items-center gap-1 inline-flex">
+                          <Building2 size={12} /> {item.company}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <LeadScoreBadge score={item.lead_score} />
+                      <span className={`text-[11px] px-2 py-0.5 rounded-full border ${statusColors[item.status]}`}>
+                        {statusLabels[item.status]}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground line-clamp-1 mb-1.5">{item.message}</p>
+                  <div className="flex items-center gap-3 text-[11px] text-muted-foreground/70">
+                    <span>{item.email}</span>
+                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={10} /> {item.phone}</span>}
+                    <span className="flex items-center gap-0.5"><Clock size={10} /> {formatDate(item.created_at)}</span>
+                    {item.business_card_data && (
+                      <span className="px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 text-[9px] font-bold">📇 นามบัตร</span>
+                    )}
+                  </div>
+                </button>
+              ))
             ) : tab === "software" ? (
               softwareInquiries.length === 0 ? (
                 <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มีการสอบถามซอฟต์แวร์</div>
