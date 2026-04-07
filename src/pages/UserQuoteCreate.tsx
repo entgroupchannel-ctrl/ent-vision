@@ -1120,6 +1120,40 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
           </div>
         </div>
       </div>
+
+      {/* Confirm Submit AlertDialog */}
+      <AlertDialog open={confirmSubmitOpen} onOpenChange={setConfirmSubmitOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>ยืนยันส่งใบเสนอราคา?</AlertDialogTitle>
+            <AlertDialogDescription asChild>
+              <div>
+                <p>ใบเสนอราคานี้จะถูกส่งให้ทีมขายตรวจสอบ</p>
+                <p className="mt-2 font-medium text-foreground">
+                  จำนวน {cart.length} รายการ
+                  {subtotal > 0 && (
+                    <> · ยอดรวมเบื้องต้น ฿{formatPrice(subtotal)}</>
+                  )}
+                </p>
+                <p className="mt-1 text-xs">ทีมขายจะตรวจสอบและอนุมัติให้ภายใน 2 ชั่วโมง</p>
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>ยกเลิก</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async (e) => {
+                e.preventDefault();
+                setConfirmSubmitOpen(false);
+                await handleSubmit();
+              }}
+              disabled={submitting}
+            >
+              {submitting ? "กำลังส่ง..." : "ยืนยันส่ง"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
