@@ -222,9 +222,24 @@ const MemberRegister = () => {
           <h1 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-2">
             สมัครสมาชิก
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground mb-4">
             สมัครสมาชิก ENT Group เพื่อรับสิทธิ์ดูราคา บริการพิเศษ และอื่นๆ
           </p>
+
+          {/* Platform Tour Banner */}
+          <Link to="/platform" className="inline-block w-full max-w-md mx-auto">
+            <div className="rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary/10 transition-colors p-4 text-left">
+              <p className="text-sm font-bold text-foreground mb-1">
+                🚀 6 ขั้นตอนง่ายๆ จากเลือกสินค้าถึงรับของ
+              </p>
+              <p className="text-xs text-muted-foreground">
+                ระบบออกแบบมาเพื่อลูกค้าองค์กร ลดขั้นตอนยุ่งยาก ทีมขายคอยช่วยเหลือทุกขั้นตอน
+              </p>
+              <span className="inline-flex items-center gap-1 text-xs text-primary font-semibold mt-2">
+                ดูขั้นตอนการใช้งาน →
+              </span>
+            </div>
+          </Link>
         </div>
       </section>
 
