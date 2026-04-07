@@ -66,6 +66,7 @@ const userFeatures = [
       "แจ้งเตือนเมื่อสถานะเปลี่ยน",
     ],
     screenshotPlaceholder: "หน้า ใบเสนอราคาของฉัน + Timeline",
+    screenshot: "/images/platform/quote-track.png",
   },
   {
     id: "negotiate",
