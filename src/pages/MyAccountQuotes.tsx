@@ -207,16 +207,41 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
       }).eq("id", quoteId);
       if (dbErr) throw dbErr;
 
-      // Notify admin
+      // Notify assigned sales person (if any) — fallback to all admins
       try {
-        await (supabase.from as any)("notifications").insert({
-          user_id: null,
-          type: "po_uploaded",
-          title: `ลูกค้าส่ง PO — ${quotes.find((q) => q.id === quoteId)?.quote_number || ""}`,
-          message: `PO: ${poNumber || file.name}`,
-          link: "/admin?tab=quotes",
-        });
-      } catch {}
+        const q = quotes.find((qq) => qq.id === quoteId);
+        const targetUserId = (q as any)?.assigned_to || null;
+
+        if (targetUserId) {
+          // Notify the assigned sales person
+          await (supabase.from as any)("notifications").insert({
+            user_id: targetUserId,
+            type: "contact_assigned",
+            title: "📥 มี PO ใหม่รอตรวจสอบ",
+            message: `ลูกค้า ${q?.name || ""} ส่ง PO สำหรับ ${q?.quote_number || "#"} — กรุณาตรวจสอบภายใน 24 ชม.`,
+            link_type: "quote",
+            link_id: quoteId,
+            metadata: { po_number: poNumber || null, file_name: file.name },
+          });
+        } else {
+          // Fallback: notify all admins (best effort, ignored if fails)
+          const { data: admins } = await (supabase.rpc as any)("get_internal_staff");
+          if (Array.isArray(admins)) {
+            for (const admin of admins) {
+              await (supabase.from as any)("notifications").insert({
+                user_id: (admin as any).id,
+                type: "contact_assigned",
+                title: "📥 มี PO ใหม่ (ยังไม่มอบหมาย)",
+                message: `ลูกค้า ${q?.name || ""} ส่ง PO สำหรับ ${q?.quote_number || "#"}`,
+                link_type: "quote",
+                link_id: quoteId,
+              });
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to send PO upload notification:", err);
+      }
 
       toast({ title: "อัปโหลด PO สำเร็จ", description: "ทีมขายจะตรวจสอบและดำเนินการต่อ" });
 

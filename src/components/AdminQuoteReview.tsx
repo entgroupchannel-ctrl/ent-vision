@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import {
-  FileText, CheckCircle, Clock, Loader2, RefreshCw, Eye, Plus, Trash2,
+  FileText, CheckCircle, Clock, Loader2, RefreshCw, Eye, Plus, Trash2, XCircle,
   Search, User, Building2, Phone, Mail, Upload, Info, X, ExternalLink,
   FileUp, Paperclip, Printer, Share2, ChevronDown, CalendarDays, Link2,
   UserCircle2, Users, ArrowRightLeft, FileCheck, AlertCircle, Package,
@@ -208,6 +208,24 @@ const AdminQuoteReview = () => {
     setSelected(q);
     setExpandItem(null);
     setCatFilter("all");
+
+    // Mark PO as viewed (audit log) — only if quote has a PO
+    if (q.po_status && q.po_file_url) {
+      try {
+        await (supabase.rpc as any)("mark_po_viewed", { _quote_id: q.id });
+        // Auto-transition uploaded → under_review on first view
+        if (q.po_status === "uploaded") {
+          await (supabase.from as any)("quote_requests")
+            .update({ po_status: "under_review", po_review_started_at: new Date().toISOString() })
+            .eq("id", q.id);
+          q = { ...q, po_status: "under_review" } as QuoteRequest;
+          setSelected(q);
+        }
+      } catch (err) {
+        console.warn("Failed to mark PO viewed:", err);
+      }
+    }
+
     const validDate = q.valid_until ? q.valid_until.split("T")[0] : addDays(15);
     setEdit({
       discount_amount: q.discount_amount || 0,
@@ -429,11 +447,19 @@ const AdminQuoteReview = () => {
     }
   };
 
-  /* ─── PO Approve / Reject ─── */
-  const handlePoAction = async (quoteId: string, action: "approved" | "rejected", reason?: string) => {
+  /* ─── PO Approve / Reject / Request Clarification ─── */
+  const handlePoAction = async (
+    quoteId: string,
+    action: "approved" | "rejected" | "pending_clarification",
+    reason?: string
+  ) => {
     setSaving(true);
     try {
-      const updates: any = { po_status: action };
+      const updates: any = {
+        po_status: action,
+        po_reviewed_by: user?.id || null,
+        po_reviewed_at: new Date().toISOString(),
+      };
       if (action === "approved") {
         updates.status = "po_received";
       }
@@ -441,23 +467,18 @@ const AdminQuoteReview = () => {
       if (error) throw error;
 
       const quote = quotes.find((q) => q.id === quoteId);
-      if (quote?.user_id) {
-        try {
-          await (supabase.from as any)("notifications").insert({
-            user_id: quote.user_id,
-            type: action === "approved" ? "po_approved" : "po_rejected",
-            title: action === "approved" ? "PO ได้รับการอนุมัติ" : "PO ถูกปฏิเสธ",
-            message: action === "approved"
-              ? `${quote.quote_number || "#"} — PO ได้รับการยืนยัน กำลังดำเนินการต่อ`
-              : `${quote.quote_number || "#"} — ${reason || "กรุณาส่ง PO ใหม่"}`,
-            link: "/my-account?tab=quotes",
-          });
-        } catch {}
-      }
 
-      toast({ title: action === "approved" ? "อนุมัติ PO สำเร็จ" : "ปฏิเสธ PO แล้ว" });
+      // Note: notification + audit log are handled by DB trigger now (log_po_state_change)
+      // No need to manually insert notifications here
 
-      if (quote?.email) {
+      const actionLabels: Record<string, string> = {
+        approved: "อนุมัติ PO สำเร็จ",
+        rejected: "ปฏิเสธ PO แล้ว",
+        pending_clarification: "ส่งคำขอข้อมูลเพิ่มเติมแล้ว",
+      };
+      toast({ title: actionLabels[action] });
+
+      if (quote?.email && action !== "pending_clarification") {
         const saleInfo = await getSaleInfo(quote.assigned_to);
         notifyQuoteStatus({
           event: action === "approved" ? "po_approved" : "po_rejected",
@@ -706,7 +727,16 @@ const AdminQuoteReview = () => {
 
   const filtered = quotes.filter((q) => {
     if (q.status === "draft") return false;
-    if (statusFilter !== "all" && q.status !== statusFilter) return false;
+
+    // Special "po_inbox" virtual filter — show only quotes with PO needing review
+    if (statusFilter === "po_inbox") {
+      if (!q.po_status || !["uploaded", "under_review", "pending_clarification"].includes(q.po_status)) return false;
+    } else if (statusFilter === "po_overdue") {
+      if (!q.po_status || !(q as any).po_overdue) return false;
+    } else if (statusFilter !== "all" && q.status !== statusFilter) {
+      return false;
+    }
+
     if (searchText) {
       const s = searchText.toLowerCase().trim();
       // Build searchable text from all relevant fields
@@ -737,6 +767,8 @@ const AdminQuoteReview = () => {
   });
 
   const newCount = quotes.filter((q) => q.status === "new").length;
+  const poInboxCount = quotes.filter((q) => q.po_status && ["uploaded", "under_review", "pending_clarification"].includes(q.po_status)).length;
+  const poOverdueCount = quotes.filter((q) => (q as any).po_overdue && q.po_status && ["uploaded", "under_review"].includes(q.po_status)).length;
 
   const renderSpecs = (specs: Record<string, string>) => (
     <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[10px]">
@@ -750,7 +782,35 @@ const AdminQuoteReview = () => {
     <div className="space-y-4">
       {/* Filters */}
       <div className="flex items-center justify-between flex-wrap gap-2">
-        <div className="flex gap-1 flex-wrap">
+        <div className="flex gap-1 flex-wrap items-center">
+          {/* PO Inbox - prominent at start */}
+          <button
+            onClick={() => setStatusFilter("po_inbox")}
+            className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 ${
+              statusFilter === "po_inbox"
+                ? "bg-teal-500/20 text-teal-700 dark:text-teal-400 ring-1 ring-teal-500/30"
+                : "bg-teal-500/5 text-teal-600 hover:bg-teal-500/10"
+            }`}
+          >
+            📥 PO Inbox
+            {poInboxCount > 0 && (
+              <span className="px-1.5 py-0.5 rounded-full bg-teal-500 text-white text-[10px] font-bold">{poInboxCount}</span>
+            )}
+          </button>
+          {poOverdueCount > 0 && (
+            <button
+              onClick={() => setStatusFilter("po_overdue")}
+              className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 ${
+                statusFilter === "po_overdue"
+                  ? "bg-red-500/20 text-red-700 dark:text-red-400 ring-1 ring-red-500/30"
+                  : "bg-red-500/5 text-red-600 hover:bg-red-500/10"
+              }`}
+            >
+              ⚠️ เลย SLA
+              <span className="px-1.5 py-0.5 rounded-full bg-red-500 text-white text-[10px] font-bold">{poOverdueCount}</span>
+            </button>
+          )}
+          <span className="w-px h-5 bg-border mx-1"></span>
           {[{ v: "all", l: "ทั้งหมด" }, { v: "new", l: `ใหม่ (${newCount})` }, { v: "quoted", l: "ส่งราคาแล้ว" }, { v: "negotiating", l: "เจรจา" }, { v: "won", l: "ตกลงราคา" }, { v: "po_received", l: "รับ PO" }, { v: "lost", l: "ไม่สำเร็จ" }].map((f) => (
             <button key={f.v} onClick={() => setStatusFilter(f.v)} className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${statusFilter === f.v ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary/60"}`}>{f.l}</button>
           ))}
@@ -1131,6 +1191,12 @@ const AdminQuoteReview = () => {
                         {selected.po_status === "uploaded" && (
                           <span className="text-[10px] px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-600 border border-yellow-500/20">รอตรวจสอบ</span>
                         )}
+                        {selected.po_status === "under_review" && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 border border-blue-500/20">กำลังตรวจ</span>
+                        )}
+                        {selected.po_status === "pending_clarification" && (
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-600 border border-orange-500/20">รอข้อมูลเพิ่ม</span>
+                        )}
                         {selected.po_status === "approved" && (
                           <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-600 border border-green-500/20">อนุมัติแล้ว</span>
                         )}
@@ -1140,15 +1206,40 @@ const AdminQuoteReview = () => {
                       </div>
                     </div>
 
-                    {/* Admin Actions for PO */}
-                    {selected.po_status === "uploaded" && (
-                      <div className="mt-3 pt-3 border-t border-teal-500/15 flex gap-2">
+                    {/* SLA indicator */}
+                    {(selected as any).po_review_due && ["uploaded", "under_review"].includes(selected.po_status || "") && (
+                      <div className="mt-2 pt-2 border-t border-teal-500/15">
+                        {(selected as any).po_overdue ? (
+                          <p className="text-[10px] text-red-500 font-bold flex items-center gap-1">
+                            <AlertCircle size={11} /> เลย SLA แล้ว — กำหนดตรวจ {new Date((selected as any).po_review_due).toLocaleString("th-TH", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                          </p>
+                        ) : (
+                          <p className="text-[10px] text-muted-foreground flex items-center gap-1">
+                            <Clock size={11} /> SLA: ตรวจภายใน {new Date((selected as any).po_review_due).toLocaleString("th-TH", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                          </p>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Admin Actions for PO — show for uploaded, under_review, pending_clarification */}
+                    {["uploaded", "under_review", "pending_clarification"].includes(selected.po_status || "") && (
+                      <div className="mt-3 pt-3 border-t border-teal-500/15 flex gap-2 flex-wrap">
                         <button
                           onClick={() => handlePoAction(selected.id, "approved")}
                           disabled={saving}
-                          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-green-500/10 text-green-600 text-xs font-bold hover:bg-green-500/20 transition-colors disabled:opacity-50"
+                          className="flex-1 min-w-[120px] flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-green-500/10 text-green-600 text-xs font-bold hover:bg-green-500/20 transition-colors disabled:opacity-50"
                         >
                           <CheckCircle size={13} /> อนุมัติ PO
+                        </button>
+                        <button
+                          onClick={() => {
+                            const reason = prompt("รายละเอียดที่ต้องการเพิ่มเติม:");
+                            if (reason) handlePoAction(selected.id, "pending_clarification", reason);
+                          }}
+                          disabled={saving}
+                          className="flex-1 min-w-[120px] flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-orange-500/10 text-orange-600 text-xs font-bold hover:bg-orange-500/20 transition-colors disabled:opacity-50"
+                        >
+                          <AlertCircle size={13} /> ขอข้อมูลเพิ่ม
                         </button>
                         <button
                           onClick={() => {
@@ -1156,9 +1247,9 @@ const AdminQuoteReview = () => {
                             if (reason !== null) handlePoAction(selected.id, "rejected", reason);
                           }}
                           disabled={saving}
-                          className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-red-500/10 text-red-500 text-xs font-bold hover:bg-red-500/20 transition-colors disabled:opacity-50"
+                          className="flex-1 min-w-[120px] flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-red-500/10 text-red-500 text-xs font-bold hover:bg-red-500/20 transition-colors disabled:opacity-50"
                         >
-                          <AlertCircle size={13} /> ปฏิเสธ
+                          <XCircle size={13} /> ปฏิเสธ
                         </button>
                       </div>
                     )}
