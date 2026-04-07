@@ -229,7 +229,7 @@ const AdminDashboard = () => {
               <LangToggle variant="compact" />
               <ThemeToggle />
               <button
-                onClick={fetchData}
+                onClick={() => fetchData()}
                 className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <RefreshCw size={16} className={loading ? "animate-spin" : ""} /> {t("common.refresh")}
