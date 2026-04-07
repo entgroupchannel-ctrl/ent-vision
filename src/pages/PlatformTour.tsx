@@ -1,14 +1,21 @@
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ShoppingCart, FileText, Send, Eye, MessageSquare, Shield,
   ClipboardList, Truck, CreditCard, BarChart3, Bell, Search,
   Heart, UserCheck, Headphones, ArrowRight, CheckCircle2,
   Package, Receipt, FileCheck, Users, Zap, Clock, ChevronRight,
-  Monitor, Lock, Globe
+  Monitor, Lock, Globe, Home, User, LogIn, UserPlus, LogOut,
+  FolderOpen, Bot, Menu, X
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SEOHead from "@/components/SEOHead";
 import FooterCompact from "@/components/FooterCompact";
+import ThemeToggle from "@/components/ThemeToggle";
+import AIChatWidget from "@/components/AIChatWidget";
+import QuoteCartButton from "@/components/QuoteCartButton";
+import { useAuth } from "@/hooks/useAuth";
+import logo from "@/assets/logo-entgroup.avif";
 
 /* ═══════════════════════════════════════════════════════════
  * Platform Tour — B2B Industrial Platform
