@@ -92,6 +92,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
   }, [open, user]);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const submittingRef = useRef(false);
   const [memberForm, setMemberForm] = useState({
     timeline: "",
     budget: "",
@@ -153,6 +154,8 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     setLoading(true);
     try {
       const { error } = await (supabase.from as any)("quote_requests").insert({
@@ -206,6 +209,7 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
       toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
     } finally {
       setLoading(false);
+      submittingRef.current = false;
     }
   };
 
