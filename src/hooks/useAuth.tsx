@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, createContext, useContext, ReactNode } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback, createContext, useContext, ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { User, Session } from "@supabase/supabase-js";
 
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const initDoneRef = useRef(false);
   const checkingRolesRef = useRef(false);
 
-  const checkRoles = async (userId: string) => {
+  const checkRoles = useCallback(async (userId: string) => {
     if (checkingRolesRef.current) return;
     checkingRolesRef.current = true;
     try {
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // On error preserve existing state - don't reset to false
     }
     checkingRolesRef.current = false;
-  };
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -77,25 +77,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (!mounted) return;
       if (!initDoneRef.current) return;
 
-      // Always update session reference (it changes on token refresh)
+      const newUserId = newSession?.user?.id ?? null;
+
+      // CRITICAL FIX: On TOKEN_REFRESHED, preserve session reference if user is the same.
+      // Updating session ref on every token refresh causes downstream re-render cascades.
+      if (event === "TOKEN_REFRESHED") {
+        setSession((prev) => {
+          const prevId = prev?.user?.id ?? null;
+          if (prevId === newUserId) {
+            // Same user — keep the same session reference to prevent re-renders
+            return prev;
+          }
+          return newSession;
+        });
+        // No role re-check on token refresh
+        return;
+      }
+
+      // For SIGNED_IN, SIGNED_OUT, USER_UPDATED — actually update session
       setSession(newSession);
 
-      // CRITICAL: Only update user state if user.id actually changed.
-      // This prevents downstream re-renders during TOKEN_REFRESHED events.
-      const newUserId = newSession?.user?.id ?? null;
+      // Only update user state if user.id actually changed
       setUser((prev) => {
         const prevId = prev?.id ?? null;
         if (prevId === newUserId) {
-          // Same user — keep the same reference to prevent useEffect cascades
           return prev;
         }
         return newSession?.user ?? null;
       });
-
-      // TOKEN_REFRESHED: never re-check roles or trigger downstream effects
-      if (event === "TOKEN_REFRESHED") {
-        return;
-      }
 
       if (event === "SIGNED_OUT") {
         setIsAdmin(false);
@@ -117,19 +126,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, []);
+  }, [checkRoles]);
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     await supabase.auth.signOut();
     setUser(null);
     setSession(null);
     setIsAdmin(false);
     setIsSuperAdmin(false);
     window.location.replace(window.location.origin + "/admin-login");
-  };
+  }, []);
+
+  // CRITICAL FIX: Memoize context value to prevent creating new object on every render.
+  // Without this, ALL consumers of useAuth() re-render whenever AuthProvider re-renders,
+  // even if all the values are unchanged.
+  const contextValue = useMemo<AuthContext>(
+    () => ({ user, session, isAdmin, isSuperAdmin, loading, signOut }),
+    [user, session, isAdmin, isSuperAdmin, loading, signOut]
+  );
 
   return (
-    <AuthCtx.Provider value={{ user, session, isAdmin, isSuperAdmin, loading, signOut }}>
+    <AuthCtx.Provider value={contextValue}>
       {children}
     </AuthCtx.Provider>
   );

@@ -225,7 +225,7 @@ const AdminContactsManager = () => {
       }
       return true;
     });
-  }, [contacts, statusFilter, caseFilter, priorityFilter, assignFilter, searchText, user]);
+  }, [contacts, statusFilter, caseFilter, priorityFilter, assignFilter, searchText, user?.id]);
 
   /* ─── Stats ─── */
   const stats = useMemo(() => ({
