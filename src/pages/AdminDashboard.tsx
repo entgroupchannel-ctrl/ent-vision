@@ -82,6 +82,8 @@ const AdminDashboard = () => {
   const [chatLeads, setChatLeads] = useState<any[]>([]);
   const [softwareInquiries, setSoftwareInquiries] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  // Track if initial fetch has completed — used to prevent spinner on background refreshes
+  const [initialLoaded, setInitialLoaded] = useState(false);
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [sidebarMode, setSidebarMode] = useState<"full" | "icon" | "hidden">("full");
@@ -110,21 +112,29 @@ const AdminDashboard = () => {
   // Check if current tab allows edit
   const canEditCurrentTab = can(tabPermission[tab], "edit");
 
-  const fetchData = async () => {
-    setLoading(true);
-    const [c, q, s, cl, sw] = await Promise.all([
-      (supabase.from as any)("contact_submissions").select("*").order("created_at", { ascending: false }),
-      (supabase.from as any)("quote_requests").select("*").order("created_at", { ascending: false }),
-      (supabase.from as any)("subscribers").select("*").order("created_at", { ascending: false }),
-      (supabase.from as any)("chat_leads").select("*").order("created_at", { ascending: false }),
-      (supabase.from as any)("software_inquiries").select("*").order("created_at", { ascending: false }),
-    ]);
-    if (c.data) setContacts(c.data);
-    if (q.data) setQuotes(q.data);
-    if (s.data) setSubscribers(s.data);
-    if (cl.data) setChatLeads(cl.data);
-    if (sw.data) setSoftwareInquiries(sw.data);
-    setLoading(false);
+  /**
+   * Fetch all dashboard data.
+   * @param silent - If true, don't show loading spinner (background refresh)
+   */
+  const fetchData = async (silent = false) => {
+    if (!silent) setLoading(true);
+    try {
+      const [c, q, s, cl, sw] = await Promise.all([
+        (supabase.from as any)("contact_submissions").select("*").order("created_at", { ascending: false }),
+        (supabase.from as any)("quote_requests").select("*").order("created_at", { ascending: false }),
+        (supabase.from as any)("subscribers").select("*").order("created_at", { ascending: false }),
+        (supabase.from as any)("chat_leads").select("*").order("created_at", { ascending: false }),
+        (supabase.from as any)("software_inquiries").select("*").order("created_at", { ascending: false }),
+      ]);
+      if (c.data) setContacts(c.data);
+      if (q.data) setQuotes(q.data);
+      if (s.data) setSubscribers(s.data);
+      if (cl.data) setChatLeads(cl.data);
+      if (sw.data) setSoftwareInquiries(sw.data);
+    } finally {
+      if (!silent) setLoading(false);
+      setInitialLoaded(true);
+    }
   };
 
   useEffect(() => {
@@ -136,7 +146,15 @@ const AdminDashboard = () => {
     }
   }, [authLoading, isAdmin, user, navigate]);
 
-  useEffect(() => { if (isAdmin) fetchData(); }, [isAdmin]);
+  // Initial fetch when isAdmin becomes true. Subsequent isAdmin changes won't re-trigger.
+  useEffect(() => {
+    if (isAdmin && !initialLoaded) {
+      fetchData();
+    }
+  }, [isAdmin, initialLoaded]);
+
+  // Background refresh for status updates — uses silent fetch to avoid spinner
+  const refreshSilently = () => fetchData(true);
 
   // Listen for cross-component tab switching (e.g. invoice → payments)
   useEffect(() => {
@@ -158,7 +176,7 @@ const AdminDashboard = () => {
       toast({ title: "Error", description: error.message, variant: "destructive" });
     } else {
       toast({ title: "อัปเดตสถานะเรียบร้อย" });
-      fetchData();
+      refreshSilently();
     }
   };
 
@@ -206,7 +224,7 @@ const AdminDashboard = () => {
               <span className="text-sm text-muted-foreground">{user?.email}</span>
               <ThemeToggle />
               <button
-                onClick={fetchData}
+                onClick={() => fetchData()}
                 className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <RefreshCw size={16} className={loading ? "animate-spin" : ""} /> รีเฟรช
