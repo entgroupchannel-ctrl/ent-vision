@@ -176,7 +176,7 @@ const AdminDashboard = () => {
       toast({ title: "Error", description: error.message, variant: "destructive" });
     } else {
       toast({ title: "อัปเดตสถานะเรียบร้อย" });
-      fetchData();
+      refreshSilently();
     }
   };
 
