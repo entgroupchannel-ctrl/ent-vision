@@ -193,13 +193,13 @@ const AdminInvoiceManager = () => {
     setInvoiceItems((data as any) || []);
   };
 
-  /* ─── Fetch PO-approved quotes for creating invoices ─── */
+  /* ─── Fetch quotes ready for invoice (po_approved OR won) ─── */
   const fetchPOQuotes = async () => {
     setPOLoading(true);
     const { data } = await supabase
       .from("quote_requests")
-      .select("id, quote_number, name, company, email, phone, po_number, subtotal, discount_amount, vat_amount, withholding_tax, grand_total, payment_terms, user_id, assigned_to")
-      .eq("po_status", "approved")
+      .select("id, quote_number, name, company, email, phone, po_number, subtotal, discount_amount, vat_amount, withholding_tax, grand_total, payment_terms, user_id, assigned_to, status, po_status")
+      .or("po_status.eq.approved,status.eq.won,status.eq.po_received")
       .order("created_at", { ascending: false });
 
     const existingQuoteIds = invoices.map(i => i.quote_id).filter(Boolean);
@@ -222,12 +222,15 @@ const AdminInvoiceManager = () => {
   /* ─── Create Invoice from PO Quote ─── */
   const createInvoiceFromQuote = async (quote: POQuote) => {
     try {
-      const { data: order } = await (supabase.from as any)("sales_orders").select("id").eq("quote_id", quote.id).single();
+      // Use maybeSingle — order/billing may not exist yet
+      const { data: order } = await (supabase.from as any)("sales_orders").select("id").eq("quote_id", quote.id).maybeSingle();
+      const { data: billing } = await (supabase.from as any)("billing_notes").select("id").eq("quote_id", quote.id).maybeSingle();
       const { data: lineItems } = await supabase.from("quote_line_items").select("*").eq("quote_id", quote.id).order("sort_order");
 
       const { data: inv, error } = await (supabase.from as any)("invoices").insert({
         quote_id: quote.id,
         order_id: order?.id || null,
+        billing_note_id: billing?.id || null,
         customer_name: quote.name,
         customer_company: quote.company,
         customer_email: quote.email,
@@ -262,6 +265,14 @@ const AdminInvoiceManager = () => {
         await (supabase.from as any)("invoice_items").insert(items);
       }
 
+      // If billing note exists and is still draft, mark it as invoiced
+      if (billing?.id) {
+        await (supabase.from as any)("billing_notes")
+          .update({ status: "invoiced", updated_at: new Date().toISOString() })
+          .eq("id", billing.id)
+          .eq("status", "draft");
+      }
+
       toast({ title: "สร้างใบแจ้งหนี้สำเร็จ", description: `เลขที่ ${(inv as any).invoice_number}` });
       setCreateDialogOpen(false);
       fetchAll();
@@ -273,7 +284,7 @@ const AdminInvoiceManager = () => {
   /* ─── Create from Sales Order (via sessionStorage) ─── */
   const createInvoiceFromOrder = async (orderId: string) => {
     try {
-      const { data: order } = await supabase.from("sales_orders").select("*").eq("id", orderId).single();
+      const { data: order } = await supabase.from("sales_orders").select("*").eq("id", orderId).maybeSingle();
       if (!order) throw new Error("ไม่พบ Order");
       const { data: orderItems } = await supabase.from("sales_order_items").select("*").eq("order_id", orderId).order("sort_order");
 
@@ -357,7 +368,7 @@ const AdminInvoiceManager = () => {
       let orderId: string | null = null;
 
       if (payment.invoice_id) {
-        const { data: inv } = await supabase.from("invoices").select("*").eq("id", payment.invoice_id).single();
+        const { data: inv } = await supabase.from("invoices").select("*").eq("id", payment.invoice_id).maybeSingle();
         if (inv) {
           const i = inv as any;
           customerName = i.customer_name;
@@ -423,7 +434,7 @@ const AdminInvoiceManager = () => {
       let orderId: string | null = null;
 
       if (payment.invoice_id) {
-        const { data: inv } = await supabase.from("invoices").select("*").eq("id", payment.invoice_id).single();
+        const { data: inv } = await supabase.from("invoices").select("*").eq("id", payment.invoice_id).maybeSingle();
         if (inv) {
           const i = inv as any;
           customerName = i.customer_name;

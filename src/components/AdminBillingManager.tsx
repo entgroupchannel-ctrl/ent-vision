@@ -116,13 +116,14 @@ const AdminBillingManager = () => {
     setBillingItems((data as any) || []);
   };
 
-  /* ─── Fetch PO-approved quotes without billing ─── */
+  /* ─── Fetch quotes ready for billing (po_approved OR won) without billing ─── */
   const fetchPOQuotes = async () => {
     setPOLoading(true);
+    // Fetch quotes that are EITHER po_approved OR won (ตกลงราคา)
     const { data } = await supabase
       .from("quote_requests")
-      .select("id, quote_number, name, company, email, phone, po_number, subtotal, discount_amount, vat_amount, withholding_tax, grand_total, payment_terms, user_id, assigned_to")
-      .eq("po_status", "approved")
+      .select("id, quote_number, name, company, email, phone, po_number, subtotal, discount_amount, vat_amount, withholding_tax, grand_total, payment_terms, user_id, assigned_to, status, po_status")
+      .or("po_status.eq.approved,status.eq.won,status.eq.po_received")
       .order("created_at", { ascending: false });
 
     // Filter out quotes that already have a billing note
@@ -135,11 +136,11 @@ const AdminBillingManager = () => {
   /* ─── Create Billing from PO Quote ─── */
   const createBillingFromQuote = async (quote: POQuote) => {
     try {
-      // Get order_id from sales_orders
+      // Get order_id from sales_orders (use maybeSingle — order may not exist yet)
       const { data: order } = await (supabase.from as any)("sales_orders")
         .select("id")
         .eq("quote_id", quote.id)
-        .single();
+        .maybeSingle();
 
       const { data: billing, error } = await (supabase.from as any)("billing_notes").insert({
         quote_id: quote.id,

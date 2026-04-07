@@ -186,7 +186,7 @@ const AdminDeliveryManager = () => {
       let phone: string | null = null;
 
       if (rcp.invoice_id) {
-        const { data: inv } = await supabase.from("invoices").select("customer_address, customer_phone").eq("id", rcp.invoice_id).single();
+        const { data: inv } = await supabase.from("invoices").select("customer_address, customer_phone").eq("id", rcp.invoice_id).maybeSingle();
         if (inv) { address = (inv as any).customer_address; phone = (inv as any).customer_phone; }
         const { data: invItems } = await supabase.from("invoice_items").select("*").eq("invoice_id", rcp.invoice_id).order("sort_order");
         items = (invItems || []) as any[];
