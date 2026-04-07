@@ -106,6 +106,7 @@ export type Database = {
           assigned_to: string | null
           billing_date: string
           billing_number: string
+          chain_number: string | null
           created_at: string
           created_by: string | null
           customer_address: string | null
@@ -135,6 +136,7 @@ export type Database = {
           assigned_to?: string | null
           billing_date?: string
           billing_number?: string
+          chain_number?: string | null
           created_at?: string
           created_by?: string | null
           customer_address?: string | null
@@ -164,6 +166,7 @@ export type Database = {
           assigned_to?: string | null
           billing_date?: string
           billing_number?: string
+          chain_number?: string | null
           created_at?: string
           created_by?: string | null
           customer_address?: string | null
@@ -466,6 +469,7 @@ export type Database = {
       delivery_notes: {
         Row: {
           billing_note_id: string | null
+          chain_number: string | null
           courier: string | null
           created_at: string
           created_by: string | null
@@ -487,6 +491,7 @@ export type Database = {
         }
         Insert: {
           billing_note_id?: string | null
+          chain_number?: string | null
           courier?: string | null
           created_at?: string
           created_by?: string | null
@@ -508,6 +513,7 @@ export type Database = {
         }
         Update: {
           billing_note_id?: string | null
+          chain_number?: string | null
           courier?: string | null
           created_at?: string
           created_by?: string | null
@@ -907,6 +913,7 @@ export type Database = {
         Row: {
           assigned_to: string | null
           billing_note_id: string | null
+          chain_number: string | null
           created_at: string
           created_by: string | null
           customer_address: string | null
@@ -935,6 +942,7 @@ export type Database = {
         Insert: {
           assigned_to?: string | null
           billing_note_id?: string | null
+          chain_number?: string | null
           created_at?: string
           created_by?: string | null
           customer_address?: string | null
@@ -963,6 +971,7 @@ export type Database = {
         Update: {
           assigned_to?: string | null
           billing_note_id?: string | null
+          chain_number?: string | null
           created_at?: string
           created_by?: string | null
           customer_address?: string | null
@@ -1124,6 +1133,7 @@ export type Database = {
           amount_paid: number
           bank_name: string | null
           billing_note_id: string | null
+          chain_number: string | null
           confirmed_at: string | null
           confirmed_by: string | null
           created_at: string
@@ -1143,6 +1153,7 @@ export type Database = {
           amount_paid?: number
           bank_name?: string | null
           billing_note_id?: string | null
+          chain_number?: string | null
           confirmed_at?: string | null
           confirmed_by?: string | null
           created_at?: string
@@ -1162,6 +1173,7 @@ export type Database = {
           amount_paid?: number
           bank_name?: string | null
           billing_note_id?: string | null
+          chain_number?: string | null
           confirmed_at?: string | null
           confirmed_by?: string | null
           created_at?: string
@@ -1453,6 +1465,7 @@ export type Database = {
           approved_by: string | null
           assigned_to: string | null
           callback_time: string | null
+          chain_number: string | null
           company: string | null
           created_at: string
           customer_response: string | null
@@ -1497,6 +1510,7 @@ export type Database = {
           approved_by?: string | null
           assigned_to?: string | null
           callback_time?: string | null
+          chain_number?: string | null
           company?: string | null
           created_at?: string
           customer_response?: string | null
@@ -1541,6 +1555,7 @@ export type Database = {
           approved_by?: string | null
           assigned_to?: string | null
           callback_time?: string | null
+          chain_number?: string | null
           company?: string | null
           created_at?: string
           customer_response?: string | null
@@ -1585,6 +1600,7 @@ export type Database = {
         Row: {
           amount_paid: number
           billing_note_id: string | null
+          chain_number: string | null
           created_at: string
           created_by: string | null
           customer_company: string | null
@@ -1604,6 +1620,7 @@ export type Database = {
         Insert: {
           amount_paid?: number
           billing_note_id?: string | null
+          chain_number?: string | null
           created_at?: string
           created_by?: string | null
           customer_company?: string | null
@@ -1623,6 +1640,7 @@ export type Database = {
         Update: {
           amount_paid?: number
           billing_note_id?: string | null
+          chain_number?: string | null
           created_at?: string
           created_by?: string | null
           customer_company?: string | null
@@ -1771,6 +1789,7 @@ export type Database = {
         Row: {
           admin_notes: string | null
           assigned_to: string | null
+          chain_number: string | null
           completed_at: string | null
           created_at: string
           customer_company: string | null
@@ -1804,6 +1823,7 @@ export type Database = {
         Insert: {
           admin_notes?: string | null
           assigned_to?: string | null
+          chain_number?: string | null
           completed_at?: string | null
           created_at?: string
           customer_company?: string | null
@@ -1837,6 +1857,7 @@ export type Database = {
         Update: {
           admin_notes?: string | null
           assigned_to?: string | null
+          chain_number?: string | null
           completed_at?: string | null
           created_at?: string
           customer_company?: string | null
@@ -1966,6 +1987,7 @@ export type Database = {
       }
       tax_invoices: {
         Row: {
+          chain_number: string | null
           created_at: string
           created_by: string | null
           customer_address: string | null
@@ -1986,6 +2008,7 @@ export type Database = {
           vat_amount: number | null
         }
         Insert: {
+          chain_number?: string | null
           created_at?: string
           created_by?: string | null
           customer_address?: string | null
@@ -2006,6 +2029,7 @@ export type Database = {
           vat_amount?: number | null
         }
         Update: {
+          chain_number?: string | null
           created_at?: string
           created_by?: string | null
           customer_address?: string | null
@@ -2092,6 +2116,11 @@ export type Database = {
         Returns: boolean
       }
       count_pending_negotiations: { Args: never; Returns: number }
+      format_doc_number: {
+        Args: { chain: string; prefix: string }
+        Returns: string
+      }
+      generate_chain_number: { Args: never; Returns: string }
       generate_doc_share_token: {
         Args: { _document_id: string }
         Returns: string
