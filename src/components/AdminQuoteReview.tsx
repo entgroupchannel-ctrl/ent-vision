@@ -406,6 +406,7 @@ const AdminQuoteReview = () => {
   /* ─── Approve ─── */
   const subtotal = items.reduce((s, i) => s + i.line_total, 0);
   const grand = subtotal - edit.discount_amount;
+  const hasZeroPriceItems = items.length > 0 && items.some((i) => !i.unit_price || i.unit_price === 0);
 
   const handleApprove = async () => {
     if (!selected || !user) return;
@@ -1439,6 +1440,15 @@ const AdminQuoteReview = () => {
                 <button onClick={handlePrint} className="px-4 py-3 rounded-xl border border-border text-sm font-medium hover:bg-secondary transition-colors flex items-center gap-2">
                   <Printer size={14} /> พิมพ์ใบเสนอราคา
                 </button>
+                {hasZeroPriceItems && !["won", "po_received"].includes(selected.status) && (
+                  <div className="mb-3 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-xs text-yellow-700 dark:text-yellow-400 flex items-start gap-2">
+                    <span className="text-base leading-none">⚠️</span>
+                    <div className="flex-1">
+                      <div className="font-bold mb-0.5">มีรายการที่ยังไม่ได้กำหนดราคา</div>
+                      <div className="opacity-90">กรุณากำหนดราคาทุกรายการก่อนอนุมัติ — ราคา 0 บาทไม่สามารถส่งให้ลูกค้าได้</div>
+                    </div>
+                  </div>
+                )}
                 {["won", "po_received"].includes(selected.status) ? (
                   <div className="flex-1 flex flex-col gap-2">
                     {hasOrder && hasBilling ? (
@@ -1457,9 +1467,13 @@ const AdminQuoteReview = () => {
                     )}
                   </div>
                 ) : (
-                  <button onClick={handleApprove} disabled={saving || items.length === 0} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60">
+                  <button
+                    onClick={handleApprove}
+                    disabled={saving || items.length === 0 || hasZeroPriceItems}
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60"
+                  >
                     {saving ? <Loader2 size={14} className="animate-spin" /> : <CheckCircle size={14} />}
-                    อนุมัติ + ส่งราคาให้ลูกค้า
+                    {hasZeroPriceItems ? "กรุณากำหนดราคาก่อนอนุมัติ" : "อนุมัติ + ส่งราคาให้ลูกค้า"}
                   </button>
                 )}
               </div>
