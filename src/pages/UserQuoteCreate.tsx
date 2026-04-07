@@ -149,6 +149,36 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
 
   useEffect(() => { fetchDrafts(); }, [user]);
 
+  // Auto-load draft from MyAccountQuotes navigation
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (catalogLoading) return;
+    if (!user) return;
+    let cancelled = false;
+    const tryLoadFromSession = async () => {
+      let draftId: string | null = null;
+      try {
+        draftId = sessionStorage.getItem("ent_edit_draft_id");
+      } catch { return; }
+      if (!draftId) return;
+      try {
+        sessionStorage.removeItem("ent_edit_draft_id");
+      } catch { /* silent */ }
+      try {
+        const { data } = await (supabase.from as any)("quote_requests")
+          .select("id, quote_number, products, created_at, grand_total, details, status")
+          .eq("id", draftId)
+          .single();
+        if (cancelled || !data) return;
+        await handleLoadDraft(data);
+      } catch (err) {
+        console.error("auto-load draft error:", err);
+      }
+    };
+    tryLoadFromSession();
+    return () => { cancelled = true; };
+  }, [catalogLoading, user]);
+
   // Save as draft (without sending)
   const handleSaveDraft = async () => {
     if (!user || cart.length === 0) return;
