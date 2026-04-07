@@ -10,6 +10,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import WishlistHeart from "@/components/WishlistHeart";
 import FooterCompact from "@/components/FooterCompact";
 import B2BCTABanner from "@/components/B2BCTABanner";
+import PlatformInviteBanner from "@/components/PlatformInviteBanner";
 import QuoteDialog from "@/components/QuoteDialog";
 import PriceDisclaimer from "@/components/PriceDisclaimer";
 import { Badge } from "@/components/ui/badge";
@@ -373,6 +374,7 @@ const AllInOnePC = () => {
         ))}
       </section>
 
+      <PlatformInviteBanner variant="compact" />
       <B2BCTABanner variant="compact" />
       <FooterCompact />
 
