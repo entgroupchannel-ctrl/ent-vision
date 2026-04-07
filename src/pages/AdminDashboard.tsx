@@ -17,7 +17,6 @@ import AdminDocumentManager from "@/components/AdminDocumentManager";
 import AdminProductCatalog from "@/components/AdminProductCatalog";
 import AdminQuoteReview from "@/components/AdminQuoteReview";
 import AdminSalesOrders from "@/components/AdminSalesOrders";
-import RevenueChart from "@/components/RevenueChart";
 import AdminInvoiceManager from "@/components/AdminInvoiceManager";
 import AdminBillingManager from "@/components/AdminBillingManager";
 import AdminDeliveryManager from "@/components/AdminDeliveryManager";
@@ -26,7 +25,7 @@ import AdminUserManagement from "@/components/AdminUserManagement";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
 const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
 
-type Tab = "contacts" | "quotes" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
+type Tab = "contacts" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -101,7 +100,7 @@ const AdminDashboard = () => {
     engagement: "marketing.engagement",
     subscribers: "marketing.subscribers",
     users: "system.users",
-    livechat: "marketing.engagement",
+    livechat: "sales.contacts",
     sales_orders: "sales.quote_review",
     invoices: "sales.quote_review",
     billing: "sales.quote_review",
@@ -146,7 +145,8 @@ const AdminDashboard = () => {
     }
   }, [authLoading, isAdmin, user, navigate]);
 
-  // Initial fetch when isAdmin becomes true. Subsequent isAdmin changes won't re-trigger.
+  // Initial fetch when isAdmin becomes true. Subsequent isAdmin changes (e.g.
+  // identity stays admin) won't re-trigger thanks to initialLoaded guard.
   useEffect(() => {
     if (isAdmin && !initialLoaded) {
       fetchData();
@@ -224,7 +224,7 @@ const AdminDashboard = () => {
               <span className="text-sm text-muted-foreground">{user?.email}</span>
               <ThemeToggle />
               <button
-                onClick={() => fetchData()}
+                onClick={fetchData}
                 className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <RefreshCw size={16} className={loading ? "animate-spin" : ""} /> รีเฟรช
@@ -266,13 +266,13 @@ const AdminDashboard = () => {
                 )}
                 {([
                   { id: "contacts" as Tab, label: "ติดต่อเข้ามา", icon: MessageSquare, count: contacts.filter(c => c.status === "new").length },
-                  { id: "quotes" as Tab, label: "ใบเสนอราคา", icon: FileText, count: quotes.filter(q => q.status === "new").length },
-                  { id: "quote_review" as Tab, label: "จัดการ Quote", icon: TrendingUp, count: 0 },
+                  { id: "quote_review" as Tab, label: "ใบเสนอราคา", icon: FileText, count: quotes.filter(q => q.status === "new").length },
                   { id: "sales_orders" as Tab, label: "ยอดขาย / Order", icon: Package, count: 0 },
                   { id: "billing" as Tab, label: "ใบวางบิล", icon: FileText, count: 0 },
                   { id: "invoices" as Tab, label: "ใบแจ้งหนี้", icon: Receipt, count: 0 },
                   { id: "delivery" as Tab, label: "ใบส่งสินค้า", icon: Package, count: 0 },
                   { id: "payments" as Tab, label: "บันทึกจ่ายเงิน", icon: Wallet, count: 0 },
+                  { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
@@ -302,7 +302,6 @@ const AdminDashboard = () => {
                 {sidebarMode === "icon" && <div className="border-t border-border/50 my-1" />}
                 {([
                   { id: "chatleads" as Tab, label: "AI Chat Leads", icon: MessageSquare, count: chatLeads.filter(c => c.status === "new").length },
-                  { id: "livechat" as Tab, label: "Live Chat", icon: Headphones, count: 0 },
                   { id: "software" as Tab, label: "สอบถามซอฟต์แวร์", icon: Code2, count: 0 },
                   { id: "engagement" as Tab, label: "Engagement", icon: BarChart3, count: 0 },
                   { id: "subscribers" as Tab, label: "สมาชิก", icon: Mail, count: 0 },
@@ -393,20 +392,19 @@ const AdminDashboard = () => {
           <div className="md:hidden w-full mb-4 overflow-x-auto flex gap-1 border-b border-border pb-2">
             {([
               { id: "contacts" as Tab, label: "ติดต่อ" },
-              { id: "quotes" as Tab, label: "ใบเสนอราคา" },
-              { id: "quote_review" as Tab, label: "จัดการ Quote" },
+              { id: "quote_review" as Tab, label: "ใบเสนอราคา" },
               { id: "sales_orders" as Tab, label: "ยอดขาย" },
               { id: "billing" as Tab, label: "ใบวางบิล" },
               { id: "invoices" as Tab, label: "ใบแจ้งหนี้" },
               { id: "delivery" as Tab, label: "ใบส่งสินค้า" },
               { id: "payments" as Tab, label: "จ่ายเงิน" },
               { id: "catalog" as Tab, label: "สินค้า" },
-              { id: "chatleads" as Tab, label: "Chat Leads" },
-              { id: "livechat" as Tab, label: "Live Chat" },
               { id: "engagement" as Tab, label: "Engagement" },
               { id: "documents" as Tab, label: "เอกสาร" },
+              { id: "chatleads" as Tab, label: "Chat Leads" },
               { id: "subscribers" as Tab, label: "สมาชิก" },
               { id: "software" as Tab, label: "ซอฟต์แวร์" },
+              { id: "livechat" as Tab, label: "Live Chat" },
             ]).map((t) => (
               <button
                 key={t.id}
@@ -462,12 +460,7 @@ const AdminDashboard = () => {
         ) : tab === "quote_review" ? (
           <AdminQuoteReview />
         ) : tab === "sales_orders" ? (
-          <>
-            <RevenueChart />
-            <div className="mt-6">
-              <AdminSalesOrders />
-            </div>
-          </>
+          <AdminSalesOrders />
         ) : tab === "billing" ? (
           <AdminBillingManager />
         ) : tab === "invoices" ? (
@@ -590,43 +583,6 @@ const AdminDashboard = () => {
                     {item.business_card_data && (
                       <span className="px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 text-[9px] font-bold">📇 นามบัตร</span>
                     )}
-                  </div>
-                </button>
-              ))
-            ) : tab === "quotes" ? (
-              filteredQuotes.length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มีข้อมูล</div>
-              ) : filteredQuotes.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => setSelectedItem({ ...item, _type: "quote" })}
-                  className={`w-full text-left card-surface rounded-xl p-4 hover:border-primary/30 transition-colors ${
-                    selectedItem?.id === item.id ? "border-primary/50 ring-1 ring-primary/20" : ""
-                  }`}
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <span className="text-base font-bold text-foreground">{item.name}</span>
-                      {item.company && (
-                        <span className="ml-2 text-xs text-muted-foreground inline-flex items-center gap-1">
-                          <Building2 size={12} /> {item.company}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <LeadScoreBadge score={item.lead_score} />
-                      <span className={`text-[11px] px-2 py-0.5 rounded-full border ${statusColors[item.status]}`}>
-                        {statusLabels[item.status]}
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-xs text-muted-foreground mb-1">
-                    สินค้า: {Array.isArray(item.products) ? item.products.filter((p: any) => p.category).map((p: any) => p.category).join(", ") || "ไม่ระบุ" : "ไม่ระบุ"}
-                  </p>
-                  <div className="flex items-center gap-3 text-[11px] text-muted-foreground/70">
-                    <span>{item.email}</span>
-                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={10} /> {item.phone}</span>}
-                    <span className="flex items-center gap-0.5"><Clock size={10} /> {formatDate(item.created_at)}</span>
                   </div>
                 </button>
               ))
