@@ -94,6 +94,7 @@ const userFeatures = [
       "ระบบแจ้ง Admin อัตโนมัติ",
     ],
     screenshotPlaceholder: "ส่วน Upload PO + ปุ่มยืนยัน",
+    screenshot: "/images/platform/po-upload.png",
   },
   {
     id: "notifications",
