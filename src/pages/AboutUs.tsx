@@ -108,8 +108,8 @@ const AboutUs = () => {
             เกี่ยวกับ <span className="text-primary">ENT Group</span>
           </h1>
           <p className="text-white/70 max-w-2xl text-sm md:text-base leading-relaxed">
-            บริษัท อี เอ็น ที กรุ๊ป จำกัด — IT Service Specialist ที่มีประสบการณ์มากกว่า 10 ปี
-            เชี่ยวชาญด้านการให้คำปรึกษา ออกแบบ วางระบบ และติดตั้งโซลูชันไอทีครบวงจร
+            บริษัท อีเอ็นที กรุ๊ป จำกัด — แพลตฟอร์มจัดซื้อ Industrial PC สำหรับองค์กร
+            ครบทั้งฮาร์ดแวร์ ซอฟต์แวร์ไลเซนส์ และบริการออกแบบติดตั้ง ด้วยประสบการณ์กว่า 10 ปี
           </p>
         </div>
       </section>
@@ -156,7 +156,7 @@ const AboutUs = () => {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="card-surface rounded-xl p-6">
               <Globe size={20} className="text-primary mb-3" />
-              <h3 className="text-sm font-bold text-foreground mb-2">IT Service Specialist — งานไอที งานถนัด</h3>
+              <h3 className="text-sm font-bold text-foreground mb-2">B2B Industrial Platform — แพลตฟอร์มจัดซื้ออุตสาหกรรมแบบครบวงจร</h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 เราคือบริษัทไอทีที่มีทักษะขั้นสูง มีความเชี่ยวชาญเฉพาะด้าน มีภารกิจช่วยเหลือลูกค้าให้มีระบบไอทีที่ทันสมัย
                 มีมาตรฐาน ผ่านการนำเข้าสินค้าจากโรงงานโดยตรง ทำให้ต้นทุนและราคาขายประหยัดกว่าเมื่อเทียบกับเจ้าอื่นในตลาด
