@@ -1006,7 +1006,8 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                       </div>
                       <button
                         onClick={() => removeCartItem(i)}
-                        className="text-muted-foreground/30 hover:text-destructive transition-colors pt-2"
+                        disabled={isReadOnly}
+                        className="text-muted-foreground/30 hover:text-destructive transition-colors pt-2 disabled:opacity-50"
                       >
                         <Trash2 size={14} />
                       </button>
