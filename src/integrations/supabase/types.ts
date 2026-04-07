@@ -2152,6 +2152,15 @@ export type Database = {
         Args: { _permission_key: string; _user_id: string }
         Returns: string
       }
+      get_quarterly_revenue: {
+        Args: { _year?: number }
+        Returns: {
+          order_count: number
+          quarter_label: string
+          quarter_num: number
+          total_revenue: number
+        }[]
+      }
       get_sales_dashboard: {
         Args: { _year?: number }
         Returns: {
@@ -2174,6 +2183,15 @@ export type Database = {
           full_name: string
           role: string
           user_id: string
+        }[]
+      }
+      get_yearly_revenue: {
+        Args: { _years_back?: number }
+        Returns: {
+          order_count: number
+          total_revenue: number
+          year_label: string
+          year_num: number
         }[]
       }
       has_role: {
