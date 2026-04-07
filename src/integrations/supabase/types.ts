@@ -1340,6 +1340,91 @@ export type Database = {
           },
         ]
       }
+      po_files: {
+        Row: {
+          document_type: string | null
+          file_name: string
+          file_size: number | null
+          file_type: string | null
+          file_url: string
+          id: string
+          notes: string | null
+          quote_id: string
+          uploaded_at: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          document_type?: string | null
+          file_name: string
+          file_size?: number | null
+          file_type?: string | null
+          file_url: string
+          id?: string
+          notes?: string | null
+          quote_id: string
+          uploaded_at?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          document_type?: string | null
+          file_name?: string
+          file_size?: number | null
+          file_type?: string | null
+          file_url?: string
+          id?: string
+          notes?: string | null
+          quote_id?: string
+          uploaded_at?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "po_files_quote_id_fkey"
+            columns: ["quote_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      po_review_log: {
+        Row: {
+          action: string
+          comment: string | null
+          created_at: string
+          id: string
+          metadata: Json | null
+          performed_by: string | null
+          quote_id: string
+        }
+        Insert: {
+          action: string
+          comment?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          performed_by?: string | null
+          quote_id: string
+        }
+        Update: {
+          action?: string
+          comment?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          performed_by?: string | null
+          quote_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "po_review_log_quote_id_fkey"
+            columns: ["quote_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       product_catalog: {
         Row: {
           base_price: number
@@ -1621,6 +1706,12 @@ export type Database = {
           po_file_url: string | null
           po_notes: string | null
           po_number: string | null
+          po_overdue: boolean | null
+          po_priority: string | null
+          po_review_due: string | null
+          po_review_started_at: string | null
+          po_reviewed_at: string | null
+          po_reviewed_by: string | null
           po_status: string | null
           po_uploaded_at: string | null
           po_uploaded_by: string | null
@@ -1666,6 +1757,12 @@ export type Database = {
           po_file_url?: string | null
           po_notes?: string | null
           po_number?: string | null
+          po_overdue?: boolean | null
+          po_priority?: string | null
+          po_review_due?: string | null
+          po_review_started_at?: string | null
+          po_reviewed_at?: string | null
+          po_reviewed_by?: string | null
           po_status?: string | null
           po_uploaded_at?: string | null
           po_uploaded_by?: string | null
@@ -1711,6 +1808,12 @@ export type Database = {
           po_file_url?: string | null
           po_notes?: string | null
           po_number?: string | null
+          po_overdue?: boolean | null
+          po_priority?: string | null
+          po_review_due?: string | null
+          po_review_started_at?: string | null
+          po_reviewed_at?: string | null
+          po_reviewed_by?: string | null
           po_status?: string | null
           po_uploaded_at?: string | null
           po_uploaded_by?: string | null
@@ -2271,6 +2374,10 @@ export type Database = {
       }
     }
     Functions: {
+      calculate_po_review_due: {
+        Args: { _priority?: string; _start?: string }
+        Returns: string
+      }
       calculate_sla_dues: {
         Args: { _case_type: string; _priority: string; _start_time?: string }
         Returns: {
@@ -2283,6 +2390,7 @@ export type Database = {
         Returns: boolean
       }
       count_pending_negotiations: { Args: never; Returns: number }
+      detect_po_sla_breaches: { Args: never; Returns: number }
       detect_sla_breaches: {
         Args: never
         Returns: {
@@ -2335,6 +2443,19 @@ export type Database = {
       get_permission: {
         Args: { _permission_key: string; _user_id: string }
         Returns: string
+      }
+      get_po_inbox_stats: {
+        Args: never
+        Returns: {
+          approved: number
+          overdue: number
+          pending_clarification: number
+          pending_review: number
+          rejected: number
+          total: number
+          under_review: number
+          urgent: number
+        }[]
       }
       get_quarterly_revenue: {
         Args: { _year?: number }
@@ -2396,6 +2517,7 @@ export type Database = {
         }[]
       }
       mark_notifications_read: { Args: { _ids?: string[] }; Returns: number }
+      mark_po_viewed: { Args: { _quote_id: string }; Returns: undefined }
       reassign_quote: {
         Args: { _new_admin_id: string; _quote_id: string }
         Returns: undefined
