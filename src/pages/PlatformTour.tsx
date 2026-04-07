@@ -215,8 +215,9 @@ const PlatformTour = () => {
 
         {/* ── Navbar ── */}
         <nav className="relative z-20 flex items-center justify-between px-6 md:px-12 py-4">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="ENT GROUP" className="h-10 w-auto" />
+          <Link to="/" className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors">
+            <ArrowLeft size={14} />
+            กลับหน้าหลัก
           </Link>
           <div className="flex items-center gap-2">
             <Link to="/" className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors" title="หน้าแรก">
