@@ -102,7 +102,7 @@ function buildEmails(event: EventType, d: TemplateData): EmailSet {
               `สินค้า: ${d.products}`,
             ])}
             ${highlight('⚡ กรุณาตรวจสอบและส่งราคาภายใน 24 ชม.')}
-            ${ctaButton('ไปจัดการ Quote', `${SITE_URL}/admin?tab=quotes`)}`)
+            ${ctaButton('ไปจัดการ Quote', `${SITE_URL}/admin?tab=quote_review`)}`)
         },
       }
 
@@ -135,7 +135,7 @@ function buildEmails(event: EventType, d: TemplateData): EmailSet {
               d.counterValue ? `ข้อเสนอ: <strong>${d.counterValue}</strong>` : '',
             ].filter(Boolean))}
             ${highlight('⏰ กรุณาตอบกลับภายใน 24 ชม. (SLA)')}
-            ${ctaButton('ไปตอบกลับ', `${SITE_URL}/admin?tab=quotes`)}`)
+            ${ctaButton('ไปตอบกลับ', `${SITE_URL}/admin?tab=quote_review`)}`)
         },
       }
 
@@ -193,7 +193,7 @@ function buildEmails(event: EventType, d: TemplateData): EmailSet {
               `มูลค่า: <strong style="color:#0f9d7a;">฿${fp(d.grandTotal)}</strong>`,
             ])}
             ${highlight('⚡ กรุณาตรวจสอบและอนุมัติ PO โดยเร็ว')}
-            ${ctaButton('ไปตรวจสอบ PO', `${SITE_URL}/admin?tab=quotes`)}`)
+            ${ctaButton('ไปตรวจสอบ PO', `${SITE_URL}/admin?tab=quote_review`)}`)
         },
       }
 
