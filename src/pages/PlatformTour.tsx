@@ -344,17 +344,9 @@ const PlatformTour = () => {
             ))}
           </div>
 
-          {/* Admin Screenshot Placeholder */}
-          <div className="relative rounded-xl border-2 border-dashed border-white/10 bg-white/5 aspect-[16/8] flex flex-col items-center justify-center gap-3 p-6 max-w-4xl mx-auto">
-            <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center">
-              <Shield size={28} className="text-primary/60" />
-            </div>
-            <p className="text-sm text-white/40 text-center font-medium">
-              📸 หน้า Admin Dashboard — ภาพรวมระบบหลังบ้าน
-            </p>
-            <p className="text-[10px] text-white/25">
-              Screenshot จะถูกเพิ่มในลำดับถัดไป
-            </p>
+          {/* Admin Dashboard Screenshot */}
+          <div className="relative rounded-xl border border-white/10 overflow-hidden shadow-2xl max-w-4xl mx-auto">
+            <img src="/images/platform/admin-dashboard.png" alt="Admin Dashboard — ภาพรวมระบบหลังบ้าน" className="w-full h-auto" loading="lazy" />
           </div>
         </div>
       </section>
