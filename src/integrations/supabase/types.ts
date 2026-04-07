@@ -2390,7 +2390,16 @@ export type Database = {
         Returns: boolean
       }
       count_pending_negotiations: { Args: never; Returns: number }
-      detect_po_sla_breaches: { Args: never; Returns: number }
+      detect_po_sla_breaches: {
+        Args: never
+        Returns: {
+          assigned_to: string
+          customer_name: string
+          hours_overdue: number
+          quote_id: string
+          quote_number: string
+        }[]
+      }
       detect_sla_breaches: {
         Args: never
         Returns: {

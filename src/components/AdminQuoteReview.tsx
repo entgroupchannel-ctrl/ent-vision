@@ -248,6 +248,21 @@ const AdminQuoteReview = () => {
     };
   }, [user?.id]);
 
+  // Listen for cross-component selection (e.g. from NotificationBell click)
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail?.type === "quote" && detail?.id) {
+        const found = quotes.find((q) => q.id === detail.id);
+        if (found) {
+          selectQuote(found);
+        }
+      }
+    };
+    window.addEventListener("admin-select-entity", handler);
+    return () => window.removeEventListener("admin-select-entity", handler);
+  }, [quotes]);
+
   /* ─── Select Quote ─── */
   const selectQuote = async (q: QuoteRequest) => {
     setSelected(q);
