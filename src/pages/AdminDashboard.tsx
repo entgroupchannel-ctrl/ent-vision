@@ -82,6 +82,8 @@ const AdminDashboard = () => {
   const [chatLeads, setChatLeads] = useState<any[]>([]);
   const [softwareInquiries, setSoftwareInquiries] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  // Track if initial fetch has completed — used to prevent spinner on background refreshes
+  const [initialLoaded, setInitialLoaded] = useState(false);
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [sidebarMode, setSidebarMode] = useState<"full" | "icon" | "hidden">("full");
