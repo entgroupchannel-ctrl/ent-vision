@@ -1162,22 +1162,42 @@ const GTSeries = () => {
               <div className="card-surface overflow-hidden rounded-2xl">
                 <div className="p-5 border-b border-border flex items-center gap-3">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-                  <h3 className="text-lg font-display font-bold text-foreground">🎙️ Podcast — GT1000 Introduction</h3>
+                  <h3 className="text-lg font-display font-bold text-foreground">🎙️ Podcast — GT1000</h3>
                 </div>
                 <div className="p-5">
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-secondary/40 border border-border">
-                    <div className="shrink-0 w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Episode 1 — Introduction */}
+                    <div className="flex items-start gap-4 p-4 rounded-xl bg-secondary/40 border border-border">
+                      <div className="shrink-0 w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-bold text-foreground">GT1000 Introduction</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">แนะนำ GT1000 — Mini PC สำหรับงานอุตสาหกรรม</p>
+                        <audio controls className="w-full mt-3 h-10" preload="metadata">
+                          <source src="/audio/GT1000_introduction.wav" type="audio/wav" />
+                          เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
+                        </audio>
+                        <div className="mt-3">
+                          <ShareButtons url={window.location.origin + "/gt-series?tab=gt1000"} title="GT1000 Podcast — ENT GROUP" />
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-foreground">GT1000 Introduction</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">แนะนำ GT1000 — Mini PC สำหรับงานอุตสาหกรรม</p>
-                      <audio controls className="w-full mt-3 h-10" preload="metadata">
-                        <source src="/audio/GT1000_introduction.wav" type="audio/wav" />
-                        เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
-                      </audio>
-                      <div className="mt-3">
-                        <ShareButtons url={window.location.origin + "/gt-series?tab=gt1000"} title="GT1000 Podcast — ENT GROUP" />
+                    {/* Episode 2 — Detail Specification */}
+                    <div className="flex items-start gap-4 p-4 rounded-xl bg-secondary/40 border border-border">
+                      <div className="shrink-0 w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-bold text-foreground">GT1000 Detail Specification</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">สเปกเจาะลึก GT1000 — CPU, RAM, Port, ขนาด</p>
+                        <audio controls className="w-full mt-3 h-10" preload="metadata">
+                          <source src="/audio/GT1000_Detail_Specification.wav" type="audio/wav" />
+                          เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
+                        </audio>
+                        <div className="mt-3">
+                          <ShareButtons url={window.location.origin + "/gt-series?tab=gt1000"} title="GT1000 Detail Spec Podcast — ENT GROUP" />
+                        </div>
                       </div>
                     </div>
                   </div>
