@@ -149,22 +149,23 @@ const AdminQuoteReview = () => {
   }, [catalog, catFilter, catSearch]);
 
   /* ─── Fetch ─── */
-  const fetchQuotes = async () => {
-    setLoading(true);
+  // FIX 3: Silent mode option — skip spinner during background refresh
+  const fetchQuotes = async (silent = false) => {
+    if (!silent) setLoading(true);
     try {
       const { data, error } = await (supabase.from as any)("quote_requests").select("*").order("created_at", { ascending: false });
       if (error) {
         console.error("Failed to fetch quotes:", error);
-        toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: error.message, variant: "destructive" });
-        setQuotes([]);
+        if (!silent) toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: error.message, variant: "destructive" });
+        if (!silent) setQuotes([]);
       } else {
         setQuotes(data || []);
       }
     } catch (err: any) {
       console.error("fetchQuotes crashed:", err);
-      setQuotes([]);
+      if (!silent) setQuotes([]);
     } finally {
-      setLoading(false);
+      if (!silent) setLoading(false);
     }
   };
 
@@ -202,7 +203,21 @@ const AdminQuoteReview = () => {
     } catch {}
   };
 
-  useEffect(() => { fetchQuotes(); fetchCatalog(); fetchDocLib(); fetchSalesTeam(); checkSuperAdmin(); fetchCompanySettings(); }, [user]);
+  // FIX 1+2: Use user?.id (primitive) instead of user (object) + initialLoaded guard
+  // Prevents re-fetch cascade when token refreshes
+  const initialLoadedRef = useRef(false);
+
+  useEffect(() => {
+    if (!user?.id) return;
+    if (initialLoadedRef.current) return; // Guard: only run once per user
+    initialLoadedRef.current = true;
+    fetchQuotes();
+    fetchCatalog();
+    fetchDocLib();
+    fetchSalesTeam();
+    checkSuperAdmin();
+    fetchCompanySettings();
+  }, [user?.id]);
 
   /* ─── Select Quote ─── */
   const selectQuote = async (q: QuoteRequest) => {

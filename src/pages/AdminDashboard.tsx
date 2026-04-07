@@ -140,6 +140,8 @@ const AdminDashboard = () => {
     }
   };
 
+  // FIX 1: Use user?.id (primitive) instead of user (object)
+  // Prevents re-evaluation when token refreshes (user ref may change but ID stays same)
   useEffect(() => {
     if (!authLoading && user && !isAdmin) {
       navigate("/admin-login", { replace: true });
@@ -147,7 +149,7 @@ const AdminDashboard = () => {
     if (!authLoading && !user) {
       navigate("/admin-login", { replace: true });
     }
-  }, [authLoading, isAdmin, user, navigate]);
+  }, [authLoading, isAdmin, user?.id, navigate]);
 
   // Initial fetch when isAdmin becomes true. Subsequent isAdmin changes (e.g.
   // identity stays admin) won't re-trigger thanks to initialLoaded guard.
