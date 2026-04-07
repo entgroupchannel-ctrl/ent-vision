@@ -1339,6 +1339,7 @@ export type Database = {
           category: string | null
           created_at: string
           custom_specs: Json | null
+          description: string | null
           discount_percent: number | null
           id: string
           line_total: number | null
@@ -1354,6 +1355,7 @@ export type Database = {
           category?: string | null
           created_at?: string
           custom_specs?: Json | null
+          description?: string | null
           discount_percent?: number | null
           id?: string
           line_total?: number | null
@@ -1369,6 +1371,7 @@ export type Database = {
           category?: string | null
           created_at?: string
           custom_specs?: Json | null
+          description?: string | null
           discount_percent?: number | null
           id?: string
           line_total?: number | null
