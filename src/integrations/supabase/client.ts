@@ -5,20 +5,24 @@ import type { Database } from './types';
 const SUPABASE_URL = "https://nqfadzcuckorbhtjbxoh.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5xZmFkemN1Y2tvcmJodGpieG9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxOTgyMzMsImV4cCI6MjA5MDc3NDIzM30.nok94BIKvDpRA9fKVkP3Xe7kgthcF34QBK4_h2oT_ew";
 
-// Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
-
+/**
+ * Supabase client with proper auth refresh.
+ *
+ * Key settings:
+ * - autoRefreshToken: true → automatically refreshes JWT before expiry
+ * - persistSession: true → stores session in localStorage so it survives reload
+ * - detectSessionInUrl: true → handles auth callbacks
+ *
+ * NOTE: We use the default LockManager (no custom `lock` override).
+ * The previous no-op lock was causing token refresh failures because
+ * concurrent refresh attempts had no synchronization → race conditions →
+ * 401 errors after JWT expired → spinner stuck because all queries fail.
+ */
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
     storage: localStorage,
     persistSession: true,
     autoRefreshToken: true,
-    // CRITICAL FIX: Disable Supabase Auth lock to prevent deadlock during tab switches.
-    // Default LockManager can deadlock when a query is in-flight during component unmount
-    // and token refresh fires concurrently → fetch hangs forever with no console errors.
-    // Safe for single-tab apps. Ref: https://github.com/supabase/auth-js/issues/762
-    lock: async (_name, _acquireTimeout, fn) => {
-      return await fn();
-    },
+    detectSessionInUrl: true,
   }
 });
