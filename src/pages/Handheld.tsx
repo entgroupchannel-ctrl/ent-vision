@@ -17,6 +17,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
 import B2BCTABanner from "@/components/B2BCTABanner";
+import PlatformInviteBanner from "@/components/PlatformInviteBanner";
 import QuoteDialog from "@/components/QuoteDialog";
 import WishlistHeart from "@/components/WishlistHeart";
 import ShareButtons from "@/components/ShareButtons";
@@ -356,6 +357,7 @@ const Handheld = () => {
         ))}
       </section>
 
+      <PlatformInviteBanner variant="compact" />
       <B2BCTABanner variant="compact" />
       <FooterCompact />
     </div>

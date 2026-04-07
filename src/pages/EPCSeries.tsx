@@ -6,6 +6,7 @@ import WishlistHeart from "@/components/WishlistHeart";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink, Monitor, Cpu, Shield, Puzzle, Droplets, ThermometerSun, Download, ChevronLeft, ChevronRight, FileText, Play, Headphones, Youtube, Star, Zap, Clock, Volume2, Thermometer, Wrench, Sun } from "lucide-react";
 import B2BCTABanner from "@/components/B2BCTABanner";
+import PlatformInviteBanner from "@/components/PlatformInviteBanner";
 import { Checkbox } from "@/components/ui/checkbox";
 import MultiSelectQuoteBar, { useMultiSelect } from "@/components/MultiSelectQuoteBar";
 import badgeMotherboard from "@/assets/epc-badge-motherboard.png";
@@ -901,6 +902,7 @@ const EPCSeries = () => {
         productCategory="EPC Series"
       />
       <MultiSelectQuoteBar selectedProducts={selectedProducts} onClear={clearSelection} productCategory="EPC Series" />
+      <PlatformInviteBanner variant="compact" />
       <B2BCTABanner variant="compact" />
       <FooterCompact />
     </div>

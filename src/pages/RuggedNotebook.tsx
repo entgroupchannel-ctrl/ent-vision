@@ -16,6 +16,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import ProductJsonLd from "@/components/ProductJsonLd";
 import FooterCompact from "@/components/FooterCompact";
 import B2BCTABanner from "@/components/B2BCTABanner";
+import PlatformInviteBanner from "@/components/PlatformInviteBanner";
 import PriceDisclaimer from "@/components/PriceDisclaimer";
 import QuoteButton from "@/components/QuoteButton";
 import QuoteDialog from "@/components/QuoteDialog";
@@ -406,6 +407,7 @@ const RuggedNotebookPage = () => {
         ))}
       </section>
 
+      <PlatformInviteBanner variant="compact" />
       <B2BCTABanner variant="compact" />
       <FooterCompact />
     </div>
