@@ -359,7 +359,7 @@ const HeroSection = () => {
           {/* Left: Headline + Search + CTA */}
           <div className="max-w-2xl">
             <p className="text-sm md:text-base text-primary font-semibold tracking-widest uppercase mb-4 animate-fade-up">
-              Mini PC Factory Outlet — นำเข้าจากโรงงานโดยตรง
+              B2B Industrial Platform — แพลตฟอร์มจัดซื้ออุตสาหกรรมแบบครบวงจร
             </p>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-black leading-[1.1] mb-6 animate-fade-up text-white" style={{ animationDelay: "0.1s" }}>
               โซลูชัน{" "}
