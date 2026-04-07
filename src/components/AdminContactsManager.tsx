@@ -157,12 +157,24 @@ const AdminContactsManager = () => {
   /* ─── Fetch ─── */
   const fetchContacts = async () => {
     setLoading(true);
-    const { data } = await supabase
-      .from("contact_submissions")
-      .select("*")
-      .order("created_at", { ascending: false });
-    setContacts((data || []) as ContactSubmission[]);
-    setLoading(false);
+    try {
+      const { data, error } = await supabase
+        .from("contact_submissions")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) {
+        console.error("Failed to fetch contacts:", error);
+        toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: error.message, variant: "destructive" });
+        setContacts([]);
+      } else {
+        setContacts((data || []) as ContactSubmission[]);
+      }
+    } catch (err: any) {
+      console.error("fetchContacts crashed:", err);
+      setContacts([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fetchStaff = async () => {

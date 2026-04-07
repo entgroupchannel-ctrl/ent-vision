@@ -104,9 +104,21 @@ const AdminDeliveryManager = () => {
   /* ─── Fetch ─── */
   const fetchDeliveries = async () => {
     setLoading(true);
-    const { data } = await supabase.from("delivery_notes").select("*").order("created_at", { ascending: false });
-    if (data) setDeliveries(data as any);
-    setLoading(false);
+    try {
+      const { data, error } = await supabase.from("delivery_notes").select("*").order("created_at", { ascending: false });
+      if (error) {
+        console.error("Failed to fetch delivery_notes:", error);
+        toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: error.message, variant: "destructive" });
+        setDeliveries([]);
+      } else {
+        setDeliveries((data || []) as any);
+      }
+    } catch (err: any) {
+      console.error("fetchDeliveries crashed:", err);
+      setDeliveries([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { fetchDeliveries(); }, []);

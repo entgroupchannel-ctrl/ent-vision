@@ -100,13 +100,24 @@ const AdminBillingManager = () => {
   /* ─── Fetch ─── */
   const fetchBillings = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from("billing_notes")
-      .select("*")
-      .order("created_at", { ascending: false });
-    if (data) setBillings(data as any);
-    if (error) console.error(error);
-    setLoading(false);
+    try {
+      const { data, error } = await supabase
+        .from("billing_notes")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) {
+        console.error("Failed to fetch billing_notes:", error);
+        toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: error.message, variant: "destructive" });
+        setBillings([]);
+      } else {
+        setBillings((data || []) as any);
+      }
+    } catch (err: any) {
+      console.error("fetchBillings crashed:", err);
+      setBillings([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { fetchBillings(); }, []);

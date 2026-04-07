@@ -175,15 +175,26 @@ const AdminInvoiceManager = () => {
   /* ─── Fetch ─── */
   const fetchAll = async () => {
     setLoading(true);
-    const [inv, tiv, rcp] = await Promise.all([
-      supabase.from("invoices").select("*").order("created_at", { ascending: false }),
-      supabase.from("tax_invoices").select("*").order("created_at", { ascending: false }),
-      supabase.from("receipts").select("*").order("created_at", { ascending: false }),
-    ]);
-    if (inv.data) setInvoices(inv.data as any);
-    if (tiv.data) setTaxInvoices(tiv.data as any);
-    if (rcp.data) setReceipts(rcp.data as any);
-    setLoading(false);
+    try {
+      const [inv, tiv, rcp] = await Promise.all([
+        supabase.from("invoices").select("*").order("created_at", { ascending: false }),
+        supabase.from("tax_invoices").select("*").order("created_at", { ascending: false }),
+        supabase.from("receipts").select("*").order("created_at", { ascending: false }),
+      ]);
+      if (inv.error) console.error("invoices error:", inv.error);
+      if (tiv.error) console.error("tax_invoices error:", tiv.error);
+      if (rcp.error) console.error("receipts error:", rcp.error);
+      setInvoices((inv.data || []) as any);
+      setTaxInvoices((tiv.data || []) as any);
+      setReceipts((rcp.data || []) as any);
+    } catch (err: any) {
+      console.error("fetchAll (invoices) crashed:", err);
+      setInvoices([]);
+      setTaxInvoices([]);
+      setReceipts([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { fetchAll(); }, []);

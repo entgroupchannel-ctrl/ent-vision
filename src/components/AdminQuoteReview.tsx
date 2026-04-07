@@ -150,9 +150,21 @@ const AdminQuoteReview = () => {
   /* ─── Fetch ─── */
   const fetchQuotes = async () => {
     setLoading(true);
-    const { data } = await (supabase.from as any)("quote_requests").select("*").order("created_at", { ascending: false });
-    if (data) setQuotes(data);
-    setLoading(false);
+    try {
+      const { data, error } = await (supabase.from as any)("quote_requests").select("*").order("created_at", { ascending: false });
+      if (error) {
+        console.error("Failed to fetch quotes:", error);
+        toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: error.message, variant: "destructive" });
+        setQuotes([]);
+      } else {
+        setQuotes(data || []);
+      }
+    } catch (err: any) {
+      console.error("fetchQuotes crashed:", err);
+      setQuotes([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fetchCatalog = async () => {
