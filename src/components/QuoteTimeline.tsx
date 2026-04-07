@@ -172,15 +172,46 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
         last_action_at: new Date().toISOString(),
       }).eq("id", quoteId);
 
-      // Notify admin
+      // Notify admin/sales (assigned or all internal staff)
       try {
-        await (supabase.from as any)("notifications").insert({
-          user_id: null, // TODO: send to admin users
-          type: "negotiation",
-          title: `ลูกค้าส่งข้อเสนอเพิ่มเติม — ${quoteNumber}`,
-          message: `เรื่อง: ${subjectLabel} — ${negReason.trim().slice(0, 80)}`,
-          link: "/admin?tab=quotes",
-        });
+        // Get quote's assigned_to
+        const { data: qData } = await (supabase.from as any)("quote_requests")
+          .select("assigned_to")
+          .eq("id", quoteId).single();
+        const assignedId = qData?.assigned_to || null;
+        const notifTitle = `ลูกค้าส่งข้อเสนอเพิ่มเติม — ${quoteNumber}`;
+        const notifMessage = `เรื่อง: ${subjectLabel} — ${negReason.trim().slice(0, 80)}`;
+
+        if (assignedId) {
+          await (supabase.from as any)("notifications").insert({
+            user_id: assignedId,
+            type: "negotiation",
+            title: notifTitle,
+            message: notifMessage,
+            link: `/admin?tab=quote_review&quote=${quoteId}`,
+            link_type: "quote",
+            link_id: quoteId,
+          });
+        } else {
+          // Fallback: notify all internal staff
+          const { data: staff } = await (supabase.rpc as any)("get_internal_staff");
+          if (Array.isArray(staff) && staff.length > 0) {
+            const inserts = staff
+              .filter((s: any) => s?.id)
+              .map((s: any) => ({
+                user_id: s.id,
+                type: "negotiation",
+                title: notifTitle,
+                message: notifMessage,
+                link: `/admin?tab=quote_review&quote=${quoteId}`,
+                link_type: "quote",
+                link_id: quoteId,
+              }));
+            if (inserts.length > 0) {
+              await (supabase.from as any)("notifications").insert(inserts);
+            }
+          }
+        }
       } catch {}
 
       toast({ title: "ส่งข้อเสนอเรียบร้อยแล้ว", description: "ทีมงานจะตอบกลับภายใน 24 ชม." });

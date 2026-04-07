@@ -222,6 +222,8 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
             title: notifTitle,
             message: notifMessage,
             link: `/admin?tab=quote_review&quote=${quoteId}`,
+            link_type: "quote",
+            link_id: quoteId,
           });
         } else {
           // Fallback: notify all internal staff (admin/super_admin/sales)
@@ -236,6 +238,8 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                   title: notifTitle,
                   message: notifMessage,
                   link: `/admin?tab=quote_review&quote=${quoteId}`,
+                  link_type: "quote",
+                  link_id: quoteId,
                 }));
               if (inserts.length > 0) {
                 await (supabase.from as any)("notifications").insert(inserts);
