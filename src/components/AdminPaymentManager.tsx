@@ -86,13 +86,22 @@ const AdminPaymentManager = () => {
   /* ─── Fetch ─── */
   const fetchAll = async () => {
     setLoading(true);
-    const [payRes, invRes] = await Promise.all([
-      supabase.from("payment_records").select("*").order("created_at", { ascending: false }),
-      supabase.from("invoices").select("id, invoice_number, customer_name, customer_company, grand_total, status, billing_note_id, quote_id").in("status", ["sent", "draft"]).order("created_at", { ascending: false }),
-    ]);
-    if (payRes.data) setPayments(payRes.data as any);
-    if (invRes.data) setPendingInvoices(invRes.data as any);
-    setLoading(false);
+    try {
+      const [payRes, invRes] = await Promise.all([
+        supabase.from("payment_records").select("*").order("created_at", { ascending: false }),
+        supabase.from("invoices").select("id, invoice_number, customer_name, customer_company, grand_total, status, billing_note_id, quote_id").in("status", ["sent", "draft"]).order("created_at", { ascending: false }),
+      ]);
+      if (payRes.error) console.error("payment_records error:", payRes.error);
+      if (invRes.error) console.error("invoices error:", invRes.error);
+      setPayments((payRes.data || []) as any);
+      setPendingInvoices((invRes.data || []) as any);
+    } catch (err: any) {
+      console.error("fetchAll (payments) crashed:", err);
+      setPayments([]);
+      setPendingInvoices([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { fetchAll(); }, []);

@@ -556,6 +556,7 @@ export type Database = {
       }
       delivery_notes: {
         Row: {
+          assigned_to: string | null
           billing_note_id: string | null
           chain_number: string | null
           courier: string | null
@@ -568,16 +569,23 @@ export type Database = {
           delivery_address: string | null
           delivery_date: string | null
           delivery_number: string
+          discount_amount: number | null
+          grand_total: number | null
           id: string
           invoice_id: string | null
           notes: string | null
           order_id: string | null
           quote_id: string | null
           status: string
+          subtotal: number | null
           tracking_number: string | null
           updated_at: string | null
+          user_id: string | null
+          vat_amount: number | null
+          withholding_tax: number | null
         }
         Insert: {
+          assigned_to?: string | null
           billing_note_id?: string | null
           chain_number?: string | null
           courier?: string | null
@@ -590,16 +598,23 @@ export type Database = {
           delivery_address?: string | null
           delivery_date?: string | null
           delivery_number?: string
+          discount_amount?: number | null
+          grand_total?: number | null
           id?: string
           invoice_id?: string | null
           notes?: string | null
           order_id?: string | null
           quote_id?: string | null
           status?: string
+          subtotal?: number | null
           tracking_number?: string | null
           updated_at?: string | null
+          user_id?: string | null
+          vat_amount?: number | null
+          withholding_tax?: number | null
         }
         Update: {
+          assigned_to?: string | null
           billing_note_id?: string | null
           chain_number?: string | null
           courier?: string | null
@@ -612,14 +627,20 @@ export type Database = {
           delivery_address?: string | null
           delivery_date?: string | null
           delivery_number?: string
+          discount_amount?: number | null
+          grand_total?: number | null
           id?: string
           invoice_id?: string | null
           notes?: string | null
           order_id?: string | null
           quote_id?: string | null
           status?: string
+          subtotal?: number | null
           tracking_number?: string | null
           updated_at?: string | null
+          user_id?: string | null
+          vat_amount?: number | null
+          withholding_tax?: number | null
         }
         Relationships: [
           {
@@ -1231,6 +1252,7 @@ export type Database = {
       payment_records: {
         Row: {
           amount_paid: number
+          assigned_to: string | null
           bank_name: string | null
           billing_note_id: string | null
           chain_number: string | null
@@ -1248,9 +1270,11 @@ export type Database = {
           reference_number: string | null
           slip_url: string | null
           status: string
+          user_id: string | null
         }
         Insert: {
           amount_paid?: number
+          assigned_to?: string | null
           bank_name?: string | null
           billing_note_id?: string | null
           chain_number?: string | null
@@ -1268,9 +1292,11 @@ export type Database = {
           reference_number?: string | null
           slip_url?: string | null
           status?: string
+          user_id?: string | null
         }
         Update: {
           amount_paid?: number
+          assigned_to?: string | null
           bank_name?: string | null
           billing_note_id?: string | null
           chain_number?: string | null
@@ -1288,6 +1314,7 @@ export type Database = {
           reference_number?: string | null
           slip_url?: string | null
           status?: string
+          user_id?: string | null
         }
         Relationships: [
           {
