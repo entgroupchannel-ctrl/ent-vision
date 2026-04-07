@@ -1056,6 +1056,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                 className={`${inputClass} resize-none`}
                 rows={3}
                 placeholder="เช่น ต้องการ RAM เพิ่ม, OS พิเศษ, ส่วนลดกรณีซื้อจำนวนมาก..."
+                disabled={isReadOnly}
               />
             </div>
 
