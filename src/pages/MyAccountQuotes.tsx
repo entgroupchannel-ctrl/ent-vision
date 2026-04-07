@@ -127,6 +127,16 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
     setMenuOpenId(null);
   };
 
+  const handleEditDraft = (q: QuoteRequest) => {
+    if (q.status !== "draft") return;
+    try {
+      sessionStorage.setItem("ent_edit_draft_id", q.id);
+    } catch { /* silent */ }
+    if (onNavigate) {
+      onNavigate("quote_create");
+    }
+  };
+
   const handleCustomerResponse = async (qid: string, response: string) => {
     setResponding(true);
     try {
@@ -359,10 +369,10 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                   const isQuoted = ["quoted", "negotiating"].includes(q.status);
 
                   return (
-                    <tr key={q.id} className="border-b border-border/50 hover:bg-secondary/20 transition-colors">
+                    <tr key={q.id} className="border-b border-border/50 hover:bg-secondary/20 transition-colors cursor-pointer" onClick={() => { if (q.status === "draft") { handleEditDraft(q); } else { handleExpand(q.id); } }}>
                       <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">{fd(q.created_at)}</td>
                       <td className="px-4 py-3">
-                        <button onClick={() => handleExpand(q.id)} className="text-left hover:text-primary transition-colors">
+                        <button onClick={(e) => { e.stopPropagation(); handleExpand(q.id); }} className="text-left hover:text-primary transition-colors">
                           <span className="font-bold text-foreground">{q.quote_number || "Draft"}</span>
                           {q.customer_response === "accepted" && (
                             <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">ยอมรับแล้ว</span>
@@ -410,7 +420,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                             {q.status === "draft" && (
                               <>
                                 <button
-                                  onClick={() => handleSubmitDraft(q)}
+                                  onClick={(e) => { e.stopPropagation(); handleSubmitDraft(q); }}
                                   disabled={submittingId === q.id}
                                   className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-primary/10 text-primary font-medium disabled:opacity-50"
                                 >
@@ -419,14 +429,14 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                                 <div className="border-t border-border my-1"></div>
                               </>
                             )}
-                            <button onClick={() => handleExpand(q.id)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><FileText size={14} /> ดูรายละเอียด</button>
-                            <button onClick={() => { fetchLineItems(q.id); setTimeout(() => handlePrintQuote(q), 500); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Printer size={14} /> พิมพ์ใบเสนอราคา</button>
-                            <button onClick={() => handleShare(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Share2 size={14} /> แชร์ให้ผู้เกี่ยวข้อง</button>
-                            {q.pdf_url && <a href={q.pdf_url} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpenId(null)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Download size={14} /> ดาวน์โหลด PDF</a>}
-                            <button onClick={() => handleCopyLink(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Copy size={14} /> คัดลอกลิงก์</button>
-                            <button onClick={() => handleDuplicate(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Plus size={14} /> สร้างใบเสนอราคาใหม่จากรายการนี้</button>
+                            <button onClick={(e) => { e.stopPropagation(); handleExpand(q.id); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><FileText size={14} /> ดูรายละเอียด</button>
+                            <button onClick={(e) => { e.stopPropagation(); fetchLineItems(q.id); setTimeout(() => handlePrintQuote(q), 500); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Printer size={14} /> พิมพ์ใบเสนอราคา</button>
+                            <button onClick={(e) => { e.stopPropagation(); handleShare(q); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Share2 size={14} /> แชร์ให้ผู้เกี่ยวข้อง</button>
+                            {q.pdf_url && <a href={q.pdf_url} target="_blank" rel="noopener noreferrer" onClick={(e) => { e.stopPropagation(); setMenuOpenId(null); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Download size={14} /> ดาวน์โหลด PDF</a>}
+                            <button onClick={(e) => { e.stopPropagation(); handleCopyLink(q); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Copy size={14} /> คัดลอกลิงก์</button>
+                            <button onClick={(e) => { e.stopPropagation(); handleDuplicate(q); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm hover:bg-secondary/60"><Plus size={14} /> สร้างใบเสนอราคาใหม่จากรายการนี้</button>
                             <div className="border-t border-border my-1"></div>
-                            <button onClick={() => handleDelete(q)} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm text-red-400 hover:bg-red-500/10"><Trash2 size={14} /> ลบใบเสนอราคา</button>
+                            <button onClick={(e) => { e.stopPropagation(); handleDelete(q); }} className="w-full flex items-center gap-2.5 px-4 py-2 text-sm text-red-400 hover:bg-red-500/10"><Trash2 size={14} /> ลบใบเสนอราคา</button>
                           </div>
                         )}
                       </td>

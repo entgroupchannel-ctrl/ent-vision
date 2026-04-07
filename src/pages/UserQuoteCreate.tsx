@@ -14,6 +14,16 @@ import { useEngagementTracker } from "@/hooks/useEngagementTracker";
 import { useQuoteCart } from "@/hooks/useQuoteCart";
 import QuoteTimeline from "@/components/QuoteTimeline";
 import { notifyQuoteStatus, getSaleInfo, productSummaryText } from "@/utils/notifyQuoteStatus";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 // ─── Types ───
 interface CatalogProduct {
@@ -111,6 +121,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [generalNotes, setGeneralNotes] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [confirmSubmitOpen, setConfirmSubmitOpen] = useState(false);
 
   // Draft management
   const [savedDrafts, setSavedDrafts] = useState<{ id: string; quote_number: string; products: any[]; created_at: string; grand_total: number; status?: string }[]>([]);
@@ -137,6 +148,36 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
   };
 
   useEffect(() => { fetchDrafts(); }, [user]);
+
+  // Auto-load draft from MyAccountQuotes navigation
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (catalogLoading) return;
+    if (!user) return;
+    let cancelled = false;
+    const tryLoadFromSession = async () => {
+      let draftId: string | null = null;
+      try {
+        draftId = sessionStorage.getItem("ent_edit_draft_id");
+      } catch { return; }
+      if (!draftId) return;
+      try {
+        sessionStorage.removeItem("ent_edit_draft_id");
+      } catch { /* silent */ }
+      try {
+        const { data } = await (supabase.from as any)("quote_requests")
+          .select("id, quote_number, products, created_at, grand_total, details, status")
+          .eq("id", draftId)
+          .single();
+        if (cancelled || !data) return;
+        await handleLoadDraft(data);
+      } catch (err) {
+        console.error("auto-load draft error:", err);
+      }
+    };
+    tryLoadFromSession();
+    return () => { cancelled = true; };
+  }, [catalogLoading, user]);
 
   // Save as draft (without sending)
   const handleSaveDraft = async () => {
@@ -1027,7 +1068,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
             {/* Send Button — only for draft or new */}
             {(!currentDraftId || currentDraftStatus === "draft") && (
               <button
-                onClick={handleSubmit}
+                onClick={() => setConfirmSubmitOpen(true)}
                 disabled={cart.length === 0 || submitting}
                 className="w-full mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-50"
               >
@@ -1079,6 +1120,40 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
           </div>
         </div>
       </div>
+
+      {/* Confirm Submit AlertDialog */}
+      <AlertDialog open={confirmSubmitOpen} onOpenChange={setConfirmSubmitOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>ยืนยันส่งใบเสนอราคา?</AlertDialogTitle>
+            <AlertDialogDescription asChild>
+              <div>
+                <p>ใบเสนอราคานี้จะถูกส่งให้ทีมขายตรวจสอบ</p>
+                <p className="mt-2 font-medium text-foreground">
+                  จำนวน {cart.length} รายการ
+                  {subtotal > 0 && (
+                    <> · ยอดรวมเบื้องต้น ฿{formatPrice(subtotal)}</>
+                  )}
+                </p>
+                <p className="mt-1 text-xs">ทีมขายจะตรวจสอบและอนุมัติให้ภายใน 2 ชั่วโมง</p>
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>ยกเลิก</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async (e) => {
+                e.preventDefault();
+                setConfirmSubmitOpen(false);
+                await handleSubmit();
+              }}
+              disabled={submitting}
+            >
+              {submitting ? "กำลังส่ง..." : "ยืนยันส่ง"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
