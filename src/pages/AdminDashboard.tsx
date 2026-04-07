@@ -22,6 +22,7 @@ import AdminBillingManager from "@/components/AdminBillingManager";
 import AdminDeliveryManager from "@/components/AdminDeliveryManager";
 import AdminPaymentManager from "@/components/AdminPaymentManager";
 import AdminUserManagement from "@/components/AdminUserManagement";
+import AdminContactsManager from "@/components/AdminContactsManager";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
 const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
 
@@ -91,7 +92,6 @@ const AdminDashboard = () => {
   // Map tab → permission key
   const tabPermission: Record<Tab, PermissionKey> = {
     contacts: "sales.contacts",
-    quotes: "sales.quotes",
     quote_review: "sales.quote_review",
     chatleads: "sales.chatleads",
     software: "sales.software",
@@ -224,7 +224,7 @@ const AdminDashboard = () => {
               <span className="text-sm text-muted-foreground">{user?.email}</span>
               <ThemeToggle />
               <button
-                onClick={fetchData}
+                onClick={() => fetchData()}
                 className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <RefreshCw size={16} className={loading ? "animate-spin" : ""} /> รีเฟรช
@@ -451,7 +451,9 @@ const AdminDashboard = () => {
             </div>
 
         {/* Engagement Analytics Tab — full width, no filter/export */}
-        {tab === "engagement" ? (
+        {tab === "contacts" ? (
+          <AdminContactsManager />
+        ) : tab === "engagement" ? (
           <EngagementAnalytics />
         ) : tab === "documents" ? (
           <AdminDocumentManager />
@@ -532,10 +534,7 @@ const AdminDashboard = () => {
               className="text-sm px-3 py-2 rounded-lg border border-border bg-background text-foreground"
             >
               <option value="all">ทั้งหมด</option>
-              {(tab === "contacts"
-                ? ["new", "contacted", "qualified", "closed"]
-                : ["new", "quoted", "negotiating", "won", "lost"]
-              ).map((s) => (
+              {["new", "quoted", "negotiating", "won", "lost"].map((s) => (
                 <option key={s} value={s}>{statusLabels[s]}</option>
               ))}
             </select>
@@ -548,44 +547,6 @@ const AdminDashboard = () => {
           <div className="lg:col-span-2 space-y-2">
             {loading ? (
               <div className="text-center py-12 text-muted-foreground text-sm">กำลังโหลด...</div>
-            ) : tab === "contacts" ? (
-              filteredContacts.length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มีข้อมูล</div>
-              ) : filteredContacts.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => setSelectedItem({ ...item, _type: "contact" })}
-                  className={`w-full text-left card-surface rounded-xl p-4 hover:border-primary/30 transition-colors ${
-                    selectedItem?.id === item.id ? "border-primary/50 ring-1 ring-primary/20" : ""
-                  }`}
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <span className="text-base font-bold text-foreground">{item.name}</span>
-                      {item.company && (
-                        <span className="ml-2 text-xs text-muted-foreground flex items-center gap-1 inline-flex">
-                          <Building2 size={12} /> {item.company}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <LeadScoreBadge score={item.lead_score} />
-                      <span className={`text-[11px] px-2 py-0.5 rounded-full border ${statusColors[item.status]}`}>
-                        {statusLabels[item.status]}
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground line-clamp-1 mb-1.5">{item.message}</p>
-                  <div className="flex items-center gap-3 text-[11px] text-muted-foreground/70">
-                    <span>{item.email}</span>
-                    {item.phone && <span className="flex items-center gap-0.5"><Phone size={10} /> {item.phone}</span>}
-                    <span className="flex items-center gap-0.5"><Clock size={10} /> {formatDate(item.created_at)}</span>
-                    {item.business_card_data && (
-                      <span className="px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 text-[9px] font-bold">📇 นามบัตร</span>
-                    )}
-                  </div>
-                </button>
-              ))
             ) : tab === "software" ? (
               softwareInquiries.length === 0 ? (
                 <div className="text-center py-12 text-muted-foreground text-sm">ยังไม่มีการสอบถามซอฟต์แวร์</div>

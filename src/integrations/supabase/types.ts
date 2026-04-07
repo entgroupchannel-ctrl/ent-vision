@@ -371,14 +371,60 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_activities: {
+        Row: {
+          activity_type: string
+          contact_id: string
+          content: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          metadata: Json | null
+        }
+        Insert: {
+          activity_type: string
+          contact_id: string
+          content?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          metadata?: Json | null
+        }
+        Update: {
+          activity_type?: string
+          contact_id?: string
+          content?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          metadata?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_activities_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contact_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       contact_submissions: {
         Row: {
+          assigned_team: string | null
+          assigned_to: string | null
           business_card_data: Json | null
           callback_time: string | null
+          case_type: string | null
           category: string | null
+          closed_at: string | null
+          closed_by: string | null
           company: string | null
+          converted_to_quote_id: string | null
           created_at: string
+          created_by: string | null
           email: string
+          follow_up_date: string | null
           id: string
           lead_score: number
           line_id: string | null
@@ -386,16 +432,26 @@ export type Database = {
           name: string
           notes: string | null
           phone: string | null
+          priority: string | null
+          source: string | null
           status: string
           whatsapp: string | null
         }
         Insert: {
+          assigned_team?: string | null
+          assigned_to?: string | null
           business_card_data?: Json | null
           callback_time?: string | null
+          case_type?: string | null
           category?: string | null
+          closed_at?: string | null
+          closed_by?: string | null
           company?: string | null
+          converted_to_quote_id?: string | null
           created_at?: string
+          created_by?: string | null
           email: string
+          follow_up_date?: string | null
           id?: string
           lead_score?: number
           line_id?: string | null
@@ -403,16 +459,26 @@ export type Database = {
           name: string
           notes?: string | null
           phone?: string | null
+          priority?: string | null
+          source?: string | null
           status?: string
           whatsapp?: string | null
         }
         Update: {
+          assigned_team?: string | null
+          assigned_to?: string | null
           business_card_data?: Json | null
           callback_time?: string | null
+          case_type?: string | null
           category?: string | null
+          closed_at?: string | null
+          closed_by?: string | null
           company?: string | null
+          converted_to_quote_id?: string | null
           created_at?: string
+          created_by?: string | null
           email?: string
+          follow_up_date?: string | null
           id?: string
           lead_score?: number
           line_id?: string | null
@@ -420,10 +486,20 @@ export type Database = {
           name?: string
           notes?: string | null
           phone?: string | null
+          priority?: string | null
+          source?: string | null
           status?: string
           whatsapp?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "contact_submissions_converted_to_quote_id_fkey"
+            columns: ["converted_to_quote_id"]
+            isOneToOne: false
+            referencedRelation: "quote_requests"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       delivery_note_items: {
         Row: {
@@ -2138,6 +2214,15 @@ export type Database = {
           user_id: string
         }[]
       }
+      get_internal_staff: {
+        Args: never
+        Returns: {
+          email: string
+          full_name: string
+          roles: string[]
+          user_id: string
+        }[]
+      }
       get_monthly_revenue: {
         Args: { _year?: number }
         Returns: {
@@ -2217,7 +2302,14 @@ export type Database = {
       remove_admin_user: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
-      app_role: "super_admin" | "admin" | "moderator" | "user"
+      app_role:
+        | "super_admin"
+        | "admin"
+        | "moderator"
+        | "user"
+        | "sales"
+        | "service"
+        | "support"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -2345,7 +2437,15 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["super_admin", "admin", "moderator", "user"],
+      app_role: [
+        "super_admin",
+        "admin",
+        "moderator",
+        "user",
+        "sales",
+        "service",
+        "support",
+      ],
     },
   },
 } as const
