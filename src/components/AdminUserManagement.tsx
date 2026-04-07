@@ -46,7 +46,7 @@ const AdminUserManagement = () => {
   const { user, isSuperAdmin } = useAuth();
   const { toast } = useToast();
   const [adminUsers, setAdminUsers] = useState<AdminUser[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
   const [editPerms, setEditPerms] = useState<Record<PermissionKey, AccessLevel>>({} as any);
   const [saving, setSaving] = useState(false);

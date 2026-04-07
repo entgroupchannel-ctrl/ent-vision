@@ -67,7 +67,7 @@ const AdminPaymentManager = () => {
   const { toast } = useToast();
   const [payments, setPayments] = useState<PaymentRecord[]>([]);
   const [pendingInvoices, setPendingInvoices] = useState<PendingInvoice[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
 

@@ -93,7 +93,7 @@ const AdminSalesOrders = () => {
   const { toast } = useToast();
 
   const [orders, setOrders] = useState<SalesOrder[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<SalesOrder | null>(null);
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [itemsLoading, setItemsLoading] = useState(false);
