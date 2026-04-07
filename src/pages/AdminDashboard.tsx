@@ -22,6 +22,7 @@ import AdminBillingManager from "@/components/AdminBillingManager";
 import AdminDeliveryManager from "@/components/AdminDeliveryManager";
 import AdminPaymentManager from "@/components/AdminPaymentManager";
 import AdminUserManagement from "@/components/AdminUserManagement";
+import AdminContactsManager from "@/components/AdminContactsManager";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
 const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
 
@@ -91,7 +92,6 @@ const AdminDashboard = () => {
   // Map tab → permission key
   const tabPermission: Record<Tab, PermissionKey> = {
     contacts: "sales.contacts",
-    quotes: "sales.quotes",
     quote_review: "sales.quote_review",
     chatleads: "sales.chatleads",
     software: "sales.software",
@@ -224,7 +224,7 @@ const AdminDashboard = () => {
               <span className="text-sm text-muted-foreground">{user?.email}</span>
               <ThemeToggle />
               <button
-                onClick={fetchData}
+                onClick={() => fetchData()}
                 className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <RefreshCw size={16} className={loading ? "animate-spin" : ""} /> รีเฟรช
@@ -451,7 +451,9 @@ const AdminDashboard = () => {
             </div>
 
         {/* Engagement Analytics Tab — full width, no filter/export */}
-        {tab === "engagement" ? (
+        {tab === "contacts" ? (
+          <AdminContactsManager />
+        ) : tab === "engagement" ? (
           <EngagementAnalytics />
         ) : tab === "documents" ? (
           <AdminDocumentManager />
