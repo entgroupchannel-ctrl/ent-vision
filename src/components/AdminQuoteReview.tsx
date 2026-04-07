@@ -103,6 +103,7 @@ const AdminQuoteReview = () => {
   const [searchText, setSearchText] = useState("");
   const [expandItem, setExpandItem] = useState<number | null>(null);
   const [catFilter, setCatFilter] = useState("all");
+  const [catSearch, setCatSearch] = useState("");
   const [pdfUp, setPdfUp] = useState(false);
   const [showDocPick, setShowDocPick] = useState(false);
   const [docLib, setDocLib] = useState<DocLibraryItem[]>([]);
@@ -127,9 +128,24 @@ const AdminQuoteReview = () => {
   }, [catalog]);
 
   const filteredCatalog = useMemo(() => {
-    if (catFilter === "all") return catalog;
-    return catalog.filter((p) => p.category === catFilter);
-  }, [catalog, catFilter]);
+    let result = catalog;
+    if (catFilter !== "all") {
+      result = result.filter((p) => p.category === catFilter);
+    }
+    if (catSearch.trim()) {
+      const s = catSearch.toLowerCase().trim();
+      result = result.filter((p) => {
+        const haystack = [
+          p.model || "",
+          p.name_th || "",
+          p.category || "",
+          p.description || "",
+        ].join(" ").toLowerCase();
+        return haystack.includes(s);
+      });
+    }
+    return result;
+  }, [catalog, catFilter, catSearch]);
 
   /* ─── Fetch ─── */
   const fetchQuotes = async () => {
@@ -880,15 +896,38 @@ const AdminQuoteReview = () => {
                   <button onClick={addLine} className="flex items-center gap-1 text-xs text-primary hover:underline font-medium"><Plus size={12} /> เพิ่มรายการ</button>
                 </div>
 
-                {/* Category filter for product dropdown */}
+                {/* Filter row: category + keyword search */}
                 <div className="flex items-center gap-2 mb-3">
-                  <label className="text-[11px] text-muted-foreground shrink-0">กรองหมวด:</label>
-                  <select value={catFilter} onChange={(e) => setCatFilter(e.target.value)} className={`${inp} text-xs py-1.5`}>
-                    <option value="all">ทุกหมวด ({catalog.length} รุ่น)</option>
+                  <select value={catFilter} onChange={(e) => setCatFilter(e.target.value)} className={`${inp} text-xs py-1.5 w-44 shrink-0`}>
+                    <option value="all">ทุกหมวด ({catalog.length})</option>
                     {categories.map((c) => (
                       <option key={c} value={c}>{c} ({catalog.filter((p) => p.category === c).length})</option>
                     ))}
                   </select>
+                  <div className="relative flex-1">
+                    <Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                    <input
+                      type="text"
+                      placeholder="ค้นหารุ่น, ชื่อ, รายละเอียด..."
+                      value={catSearch}
+                      onChange={(e) => setCatSearch(e.target.value)}
+                      className={`${inp} pl-7 pr-7 text-xs py-1.5`}
+                    />
+                    {catSearch && (
+                      <button
+                        type="button"
+                        onClick={() => setCatSearch("")}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                      >
+                        <X size={12} />
+                      </button>
+                    )}
+                  </div>
+                  {(catFilter !== "all" || catSearch) && (
+                    <span className="text-[10px] text-muted-foreground shrink-0">
+                      {filteredCatalog.length} รายการ
+                    </span>
+                  )}
                 </div>
 
                 {lineLoading ? <div className="py-4 text-center"><Loader2 size={16} className="animate-spin text-muted-foreground mx-auto" /></div>
@@ -958,7 +997,6 @@ const AdminQuoteReview = () => {
                           />
                         </div>
 
-                        <div className="px-3 pb-2"><input value={item.admin_notes || ""} onChange={(e) => updateLine(i, "admin_notes", e.target.value)} placeholder="หมายเหตุภายใน (config, lead time) — ลูกค้าไม่เห็น" className={`${inp} text-[11px]`} /></div>
                         <div className="px-3 pb-3 text-right text-xs font-bold text-primary">฿{fp(item.line_total)}</div>
                       </div>
                     ))}
