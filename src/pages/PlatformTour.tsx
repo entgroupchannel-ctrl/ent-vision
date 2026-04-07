@@ -107,6 +107,7 @@ const userFeatures = [
       "สรุปรายวัน (กำลังพัฒนา)",
     ],
     screenshotPlaceholder: "Notification Bell + รายการแจ้งเตือน",
+    screenshot: "/images/platform/notifications-illust.png",
   },
   {
     id: "account",
@@ -119,6 +120,7 @@ const userFeatures = [
       "ขอเอกสาร ใบรับประกัน ใบกำกับภาษี",
     ],
     screenshotPlaceholder: "หน้า My Account Overview",
+    screenshot: "/images/platform/account-illust.png",
   },
 ];
 
