@@ -53,6 +53,7 @@ const userFeatures = [
       "ยืนยันก่อนส่งด้วย Dialog ปลอดภัย",
     ],
     screenshotPlaceholder: "หน้า สร้างใบเสนอราคา",
+    screenshot: "/images/platform/quote-create.png",
   },
   {
     id: "quote-track",
@@ -281,19 +282,25 @@ const PlatformTour = () => {
                   </ul>
                 </div>
 
-                {/* Screenshot Placeholder */}
+                {/* Screenshot or Placeholder */}
                 <div className="flex-1 min-w-0 w-full">
-                  <div className="relative rounded-xl border-2 border-dashed border-border bg-muted/30 aspect-[16/10] flex flex-col items-center justify-center gap-3 p-6">
-                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
-                      <Monitor size={24} className="text-muted-foreground/50" />
+                  {f.screenshot ? (
+                    <div className="relative rounded-xl border border-border overflow-hidden shadow-lg">
+                      <img src={f.screenshot} alt={f.screenshotPlaceholder} className="w-full h-auto" loading="lazy" />
                     </div>
-                    <p className="text-xs text-muted-foreground text-center font-medium">
-                      📸 {f.screenshotPlaceholder}
-                    </p>
-                    <p className="text-[10px] text-muted-foreground/50">
-                      Screenshot จะถูกเพิ่มในลำดับถัดไป
-                    </p>
-                  </div>
+                  ) : (
+                    <div className="relative rounded-xl border-2 border-dashed border-border bg-muted/30 aspect-[16/10] flex flex-col items-center justify-center gap-3 p-6">
+                      <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
+                        <Monitor size={24} className="text-muted-foreground/50" />
+                      </div>
+                      <p className="text-xs text-muted-foreground text-center font-medium">
+                        📸 {f.screenshotPlaceholder}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground/50">
+                        Screenshot จะถูกเพิ่มในลำดับถัดไป
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
