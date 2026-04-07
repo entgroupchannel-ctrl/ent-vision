@@ -92,8 +92,13 @@ export function usePermissions() {
   const [permissions, setPermissions] = useState<PermissionsMap | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // CRITICAL: Depend on user.id (primitive) instead of user object reference.
+  // This prevents re-querying when user reference changes but identity is the same
+  // (e.g. on TOKEN_REFRESHED).
+  const userId = user?.id ?? null;
+
   useEffect(() => {
-    if (!user) {
+    if (!userId) {
       setPermissions(null);
       setLoading(false);
       return;
@@ -108,11 +113,15 @@ export function usePermissions() {
       return;
     }
 
+    let cancelled = false;
+
     (async () => {
       try {
         const { data } = await (supabase.from as any)("admin_permissions")
           .select("permission_key, access_level")
-          .eq("user_id", user.id);
+          .eq("user_id", userId);
+
+        if (cancelled) return;
 
         const map: PermissionsMap = Object.fromEntries(
           PERMISSION_KEYS.map((k) => [k, "none"])
@@ -128,12 +137,16 @@ export function usePermissions() {
 
         setPermissions(map);
       } catch {
-        setPermissions(null);
+        if (!cancelled) setPermissions(null);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     })();
-  }, [user, isSuperAdmin]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId, isSuperAdmin]);
 
   const can = useCallback(
     (key: PermissionKey, level: AccessLevel = "view"): boolean => {

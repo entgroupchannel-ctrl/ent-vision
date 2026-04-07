@@ -73,19 +73,29 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     init();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, newSession) => {
       if (!mounted) return;
       if (!initDoneRef.current) return;
 
-      // TOKEN_REFRESHED: update session silently, don't touch admin state
+      // Always update session reference (it changes on token refresh)
+      setSession(newSession);
+
+      // CRITICAL: Only update user state if user.id actually changed.
+      // This prevents downstream re-renders during TOKEN_REFRESHED events.
+      const newUserId = newSession?.user?.id ?? null;
+      setUser((prev) => {
+        const prevId = prev?.id ?? null;
+        if (prevId === newUserId) {
+          // Same user — keep the same reference to prevent useEffect cascades
+          return prev;
+        }
+        return newSession?.user ?? null;
+      });
+
+      // TOKEN_REFRESHED: never re-check roles or trigger downstream effects
       if (event === "TOKEN_REFRESHED") {
-        setSession(session);
-        setUser(session?.user ?? null);
         return;
       }
-
-      setSession(session);
-      setUser(session?.user ?? null);
 
       if (event === "SIGNED_OUT") {
         setIsAdmin(false);
@@ -93,9 +103,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         return;
       }
 
-      if (session?.user) {
+      if (newSession?.user) {
         if (event === "SIGNED_IN") {
-          await checkRoles(session.user.id);
+          await checkRoles(newSession.user.id);
         }
       } else {
         setIsAdmin(false);
