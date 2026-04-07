@@ -96,6 +96,10 @@ interface POQuote {
   payment_terms: string | null;
   user_id: string | null;
   assigned_to: string | null;
+  // For tracking already-created invoices
+  hasInvoice?: boolean;
+  existingInvoiceNumber?: string | null;
+  existingInvoiceStatus?: string | null;
 }
 
 interface PaymentForDoc {
@@ -193,7 +197,7 @@ const AdminInvoiceManager = () => {
     setInvoiceItems((data as any) || []);
   };
 
-  /* ─── Fetch quotes ready for invoice (po_approved OR won) ─── */
+  /* ─── Fetch ALL quotes ready for invoice (po_approved OR won) — show all + mark which already have invoice ─── */
   const fetchPOQuotes = async () => {
     setPOLoading(true);
     const { data } = await supabase
@@ -202,8 +206,29 @@ const AdminInvoiceManager = () => {
       .or("po_status.eq.approved,status.eq.won,status.eq.po_received")
       .order("created_at", { ascending: false });
 
-    const existingQuoteIds = invoices.map(i => i.quote_id).filter(Boolean);
-    setPOQuotes((data || []).filter((q: any) => !existingQuoteIds.includes(q.id)) as POQuote[]);
+    // Mark each quote whether it already has an invoice
+    const invoiceMap = new Map<string, Invoice>();
+    invoices.forEach(i => {
+      if (i.quote_id) invoiceMap.set(i.quote_id, i);
+    });
+
+    const enriched = (data || []).map((q: any) => {
+      const existing = invoiceMap.get(q.id);
+      return {
+        ...q,
+        hasInvoice: !!existing,
+        existingInvoiceNumber: existing?.invoice_number || null,
+        existingInvoiceStatus: existing?.status || null,
+      };
+    }) as POQuote[];
+
+    // Sort: not-yet-created first, already-created last
+    enriched.sort((a, b) => {
+      if (a.hasInvoice === b.hasInvoice) return 0;
+      return a.hasInvoice ? 1 : -1;
+    });
+
+    setPOQuotes(enriched);
     setPOLoading(false);
   };
 
@@ -901,7 +926,26 @@ const AdminInvoiceManager = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setCreateDialogOpen(false)}>
           <div className="bg-card border border-border rounded-2xl p-6 w-full max-w-xl shadow-xl max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
             <h3 className="text-lg font-bold mb-1 text-foreground">สร้างใบแจ้งหนี้จาก PO</h3>
-            <p className="text-xs text-muted-foreground mb-4">เลือก PO ที่อนุมัติแล้วเพื่อสร้างใบแจ้งหนี้</p>
+            <p className="text-xs text-muted-foreground mb-4">
+              เลือก PO ที่อนุมัติแล้วเพื่อสร้างใบแจ้งหนี้
+              {poQuotes.length > 0 && (
+                <>
+                  {" — "}
+                  <span className="font-medium text-foreground">
+                    {poQuotes.filter(q => !q.hasInvoice).length}
+                  </span>{" "}
+                  พร้อมสร้าง
+                  {poQuotes.filter(q => q.hasInvoice).length > 0 && (
+                    <>
+                      {" · "}
+                      <span className="text-muted-foreground/60">
+                        {poQuotes.filter(q => q.hasInvoice).length} สร้างแล้ว
+                      </span>
+                    </>
+                  )}
+                </>
+              )}
+            </p>
             {poLoading ? (
               <div className="text-center py-12 text-muted-foreground text-sm"><Loader2 size={16} className="animate-spin inline mr-2" />กำลังโหลด...</div>
             ) : poQuotes.length === 0 ? (
@@ -910,24 +954,65 @@ const AdminInvoiceManager = () => {
               </div>
             ) : (
               <div className="space-y-2">
-                {poQuotes.map(q => (
-                  <div key={q.id} className="border border-border rounded-lg p-3 hover:border-primary/40 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="text-sm font-bold text-foreground">{q.quote_number || "—"}</div>
-                        <div className="text-xs text-muted-foreground">{q.name}{q.company ? ` · ${q.company}` : ""}</div>
-                        {q.po_number && <div className="text-[10px] text-muted-foreground mt-0.5"><Hash size={9} className="inline mr-0.5" />PO: {q.po_number}</div>}
-                      </div>
-                      <div className="text-right">
-                        <div className="text-sm font-bold text-foreground">฿{fmt(q.grand_total)}</div>
-                        <button onClick={() => createInvoiceFromQuote(q)}
-                          className="mt-1 px-3 py-1 rounded-lg bg-primary text-primary-foreground text-[10px] font-bold hover:bg-primary/90">
-                          <Plus size={10} className="inline mr-0.5" /> สร้าง
-                        </button>
+                {poQuotes.map(q => {
+                  const isCreated = q.hasInvoice;
+                  return (
+                    <div
+                      key={q.id}
+                      className={`border rounded-lg p-3 transition-colors ${
+                        isCreated
+                          ? "border-border/40 bg-muted/30 opacity-60"
+                          : "border-border hover:border-primary/40"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <div className={`text-sm font-bold ${isCreated ? "text-muted-foreground" : "text-foreground"}`}>
+                              {q.quote_number || "—"}
+                            </div>
+                            {isCreated && (
+                              <div className="px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-600 border border-green-500/20 text-[9px] font-bold flex items-center gap-1">
+                                <CheckCircle size={9} /> สร้างแล้ว
+                              </div>
+                            )}
+                          </div>
+                          <div className={`text-xs ${isCreated ? "text-muted-foreground/70" : "text-muted-foreground"}`}>
+                            {q.name}{q.company ? ` · ${q.company}` : ""}
+                          </div>
+                          {q.po_number && (
+                            <div className="text-[10px] text-muted-foreground/80 mt-0.5">
+                              <Hash size={9} className="inline mr-0.5" />PO: {q.po_number}
+                            </div>
+                          )}
+                          {isCreated && q.existingInvoiceNumber && (
+                            <div className="text-[10px] text-green-600/80 mt-0.5">
+                              → ใบแจ้งหนี้: <span className="font-medium">{q.existingInvoiceNumber}</span>
+                              {q.existingInvoiceStatus && (
+                                <span className="text-muted-foreground/60"> · {INV_STATUS[q.existingInvoiceStatus]?.label || q.existingInvoiceStatus}</span>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                        <div className="text-right ml-3 shrink-0">
+                          <div className={`text-sm font-bold ${isCreated ? "text-muted-foreground" : "text-foreground"}`}>
+                            ฿{fmt(q.grand_total)}
+                          </div>
+                          {isCreated ? (
+                            <div className="mt-1 px-3 py-1 rounded-lg bg-muted text-muted-foreground/60 text-[10px] font-medium cursor-not-allowed inline-flex items-center gap-0.5">
+                              <CheckCircle size={10} /> สร้างแล้ว
+                            </div>
+                          ) : (
+                            <button onClick={() => createInvoiceFromQuote(q)}
+                              className="mt-1 px-3 py-1 rounded-lg bg-primary text-primary-foreground text-[10px] font-bold hover:bg-primary/90">
+                              <Plus size={10} className="inline mr-0.5" /> สร้าง
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
             <div className="mt-4 flex justify-end">
