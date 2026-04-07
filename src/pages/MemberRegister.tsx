@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import {
   UserPlus, Mail, Lock, Eye, EyeOff, Building2, Phone, MapPin,
-  ArrowLeft, Briefcase, Factory, Camera, Sparkles, Loader2,
+  ArrowLeft, Briefcase, Factory, Camera, Sparkles, Loader2, Rocket, ArrowRight,
 } from "lucide-react";
 import FooterCompact from "@/components/FooterCompact";
 
@@ -229,14 +229,14 @@ const MemberRegister = () => {
           {/* Platform Tour Banner */}
           <Link to="/platform" className="inline-block w-full max-w-md mx-auto">
             <div className="rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary/10 transition-colors p-4 text-left">
-              <p className="text-sm font-bold text-foreground mb-1">
-                🚀 6 ขั้นตอนง่ายๆ จากเลือกสินค้าถึงรับของ
+              <p className="text-sm font-bold text-foreground mb-1 flex items-center gap-2">
+                <Rocket size={16} className="text-primary" /> 6 ขั้นตอนง่ายๆ จากเลือกสินค้าถึงรับของ
               </p>
               <p className="text-xs text-muted-foreground">
                 ระบบออกแบบมาเพื่อลูกค้าองค์กร ลดขั้นตอนยุ่งยาก ทีมขายคอยช่วยเหลือทุกขั้นตอน
               </p>
               <span className="inline-flex items-center gap-1 text-xs text-primary font-semibold mt-2">
-                ดูขั้นตอนการใช้งาน →
+                ดูขั้นตอนการใช้งาน <ArrowRight size={12} />
               </span>
             </div>
           </Link>
