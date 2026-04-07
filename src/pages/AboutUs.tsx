@@ -167,7 +167,7 @@ const AboutUs = () => {
               <h3 className="text-sm font-bold text-foreground mb-2">One-Stop Service — ครบจบที่เดียว</h3>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 ผลิตภัณฑ์ที่ครบวงจรทั้งฮาร์ดแวร์ ซอฟต์แวร์ไลเซ่นส์ และงานบริการออกแบบติดตั้ง
-                ลูกค้าสามารถคัดสรรเลือกได้จากที่เดียว ภายใต้สโลแกน "Mini PC Factory Outlet"
+                ลูกค้าสามารถคัดสรรเลือกได้จากที่เดียว ภายใต้สโลแกน "B2B Industrial Platform"
                 — ร้านคอมพิวเตอร์ที่เลือกซื้อสินค้าเหมาะกับตัวเอง ภายใต้งบประมาณที่กำหนด
               </p>
             </div>

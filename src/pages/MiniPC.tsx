@@ -855,7 +855,7 @@ const MiniPC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
         </div>
         <div className="relative container max-w-7xl mx-auto px-4 py-16 md:py-24">
-          <Badge className="bg-primary/10 text-primary border-primary/20 mb-4">Mini PC Factory Outlet</Badge>
+          <Badge className="bg-primary/10 text-primary border-primary/20 mb-4">B2B Industrial Platform</Badge>
           <h1 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-4 max-w-2xl">
             Mini PC <span className="text-gradient">Series</span>
           </h1>

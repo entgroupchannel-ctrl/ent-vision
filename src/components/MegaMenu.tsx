@@ -437,7 +437,7 @@ const MegaMenu = ({
               {/* Bottom quick links */}
               <div className="mt-3 pt-3 border-t border-gray-200 dark:border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-4 text-[10px] text-gray-400 dark:text-white/25">
-                  <span className="flex items-center gap-1"><Factory size={10} /> นำเข้าจากโรงงานโดยตรง</span>
+                  <span className="flex items-center gap-1"><Factory size={10} /> แพลตฟอร์มจัดซื้ออุตสาหกรรมแบบครบวงจร</span>
                   <span className="flex items-center gap-1"><Zap size={10} /> รับประกัน 1–3 ปี</span>
                   <span className="flex items-center gap-1"><Server size={10} /> สต๊อกพร้อมส่งในไทย</span>
                 </div>
