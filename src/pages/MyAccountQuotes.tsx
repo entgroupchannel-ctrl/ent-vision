@@ -128,7 +128,6 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
   };
 
   const handleEditDraft = (q: QuoteRequest) => {
-    if (q.status !== "draft") return;
     try {
       sessionStorage.setItem("ent_edit_draft_id", q.id);
     } catch { /* silent */ }
@@ -369,7 +368,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                   const isQuoted = ["quoted", "negotiating"].includes(q.status);
 
                   return (
-                    <tr key={q.id} className="border-b border-border/50 hover:bg-secondary/20 transition-colors cursor-pointer" onClick={() => { if (q.status === "draft") { handleEditDraft(q); } else { handleExpand(q.id); } }}>
+                    <tr key={q.id} className="border-b border-border/50 hover:bg-secondary/20 transition-colors cursor-pointer" onClick={() => handleEditDraft(q)}>
                       <td className="px-4 py-3 text-muted-foreground whitespace-nowrap">{fd(q.created_at)}</td>
                       <td className="px-4 py-3">
                         <button onClick={(e) => { e.stopPropagation(); handleExpand(q.id); }} className="text-left hover:text-primary transition-colors">
