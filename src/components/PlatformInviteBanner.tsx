@@ -38,7 +38,7 @@ const PlatformInviteBanner = ({ variant = "full" }: PlatformInviteBannerProps) =
         <div className="w-12 h-12 rounded-xl bg-primary/15 border border-primary/25 flex items-center justify-center mx-auto mb-5">
           <Rocket size={24} className="text-primary" />
         </div>
-        <h2 className="text-xl md:text-2xl font-display font-bold text-white mb-3">
+        <h2 className="text-xl font-display font-bold text-white mb-3 md:text-3xl">
           แพลตฟอร์มจัดซื้ออุตสาหกรรม<br className="hidden md:block" />แบบครบวงจร
         </h2>
         <p className="text-sm text-white/55 max-w-2xl mx-auto mb-7 leading-relaxed">
