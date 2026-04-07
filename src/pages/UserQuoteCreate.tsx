@@ -574,6 +574,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
   };
 
   const currentMilestone = getMilestoneStep(currentDraftStatus);
+  const isReadOnly = !!currentDraftId && currentDraftStatus !== "draft";
 
   return (
     <div className="space-y-6">
@@ -773,11 +774,13 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                 onFocus={() => setShowCatalog(true)}
                 className={`${inputClass} pl-9`}
                 placeholder="พิมพ์ชื่อรุ่น เช่น GT9000, GK1506..."
+                disabled={isReadOnly}
               />
             </div>
             <button
               onClick={() => setShowCatalog(!showCatalog)}
-              className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors whitespace-nowrap"
+              disabled={isReadOnly}
+              className="flex items-center gap-1.5 px-3 py-2.5 rounded-lg border border-border text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors whitespace-nowrap disabled:opacity-50"
             >
               <Package size={14} /> เรียกดูทั้งหมด
             </button>
@@ -859,13 +862,25 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
               <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
                 <ShoppingCart size={14} className="text-primary" /> รายการสินค้า ({cart.length})
               </h3>
-              <button
-                onClick={addCustomItem}
-                className="flex items-center gap-1 text-sm text-primary hover:underline font-medium"
-              >
-                <Plus size={14} /> เพิ่มรายการเอง
-              </button>
+              {!isReadOnly && (
+                <button
+                  onClick={addCustomItem}
+                  className="flex items-center gap-1 text-sm text-primary hover:underline font-medium"
+                >
+                  <Plus size={14} /> เพิ่มรายการเอง
+                </button>
+              )}
             </div>
+
+            {isReadOnly && (
+              <div className="mb-3 px-4 py-3 rounded-lg bg-blue-500/10 border border-blue-500/20 text-xs text-blue-600 dark:text-blue-400 flex items-start gap-2">
+                <FileText size={14} className="shrink-0 mt-0.5" />
+                <span>
+                  ใบเสนอราคานี้ส่งให้ทีมขายแล้ว — อยู่ในโหมดอ่านอย่างเดียว
+                  ไม่สามารถแก้ไขรายการได้ หากต้องการเปลี่ยนแปลง กรุณาติดต่อทีมขายผ่านช่องทาง "สนทนา / ต่อรอง"
+                </span>
+              </div>
+            )}
 
             {cart.length === 0 ? (
               <div className="text-center py-8">
@@ -889,6 +904,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                               onChange={(e) => updateCartItem(i, "customModel", e.target.value)}
                               className={inputClass}
                               placeholder="เช่น GT9000"
+                              disabled={isReadOnly}
                             />
                           </div>
                           <div>
@@ -898,6 +914,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                               onChange={(e) => updateCartItem(i, "customCategory", e.target.value)}
                               className={inputClass}
                               placeholder="เช่น GT Series — Mini PC"
+                              disabled={isReadOnly}
                             />
                           </div>
                         </div>
@@ -933,7 +950,8 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                             <div className="flex items-center border border-border rounded-lg">
                               <button
                                 onClick={() => updateCartItem(i, "qty", Math.max(1, item.qty - 1))}
-                                className="w-9 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/60 rounded-l-lg"
+                                disabled={isReadOnly}
+                                className="w-9 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/60 rounded-l-lg disabled:opacity-50"
                               >
                                 <Minus size={12} />
                               </button>
@@ -943,10 +961,12 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                                 value={item.qty}
                                 onChange={(e) => updateCartItem(i, "qty", Math.max(1, parseInt(e.target.value) || 1))}
                                 className="w-full text-center text-sm font-bold bg-transparent border-none focus:outline-none"
+                                disabled={isReadOnly}
                               />
                               <button
                                 onClick={() => updateCartItem(i, "qty", item.qty + 1)}
-                                className="w-9 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/60 rounded-r-lg"
+                                disabled={isReadOnly}
+                                className="w-9 h-9 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/60 rounded-r-lg disabled:opacity-50"
                               >
                                 <Plus size={12} />
                               </button>
@@ -960,6 +980,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                               onChange={(e) => updateCartItem(i, "unitPrice", parseFloat(e.target.value) || 0)}
                               className={inputClass}
                               placeholder="ทีมขายจะกำหนดให้"
+                              disabled={isReadOnly}
                             />
                           </div>
                           <div className="flex items-end">
@@ -985,7 +1006,8 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                       </div>
                       <button
                         onClick={() => removeCartItem(i)}
-                        className="text-muted-foreground/30 hover:text-destructive transition-colors pt-2"
+                        disabled={isReadOnly}
+                        className="text-muted-foreground/30 hover:text-destructive transition-colors pt-2 disabled:opacity-50"
                       >
                         <Trash2 size={14} />
                       </button>
@@ -1034,6 +1056,7 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
                 className={`${inputClass} resize-none`}
                 rows={3}
                 placeholder="เช่น ต้องการ RAM เพิ่ม, OS พิเศษ, ส่วนลดกรณีซื้อจำนวนมาก..."
+                disabled={isReadOnly}
               />
             </div>
 
