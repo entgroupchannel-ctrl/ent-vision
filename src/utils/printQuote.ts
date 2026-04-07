@@ -108,6 +108,7 @@ interface PrintLineItem {
   discount_percent: number;
   line_total: number;
   admin_notes: string | null;
+  description?: string | null;
   _name?: string;
   _desc?: string;
   _specs?: Record<string, string>;
@@ -303,7 +304,8 @@ export const printQuote = (
   /* ── Item rows ── */
   const itemRows = items.map((item, i) => {
     const specs = item._specs || item.custom_specs || {};
-    const rawDesc = item._desc || item._name || "";
+    // Prefer admin's edited description, fall back to catalog description
+    const rawDesc = item.description || item._desc || item._name || "";
     const desc = cleanDescription(rawDesc);
     const specHtml = formatSpecLines(specs);
     const lineDiscount = item.discount_percent > 0 ? Math.round(item.unit_price * item.qty * item.discount_percent / 100 * 100) / 100 : 0;
@@ -314,7 +316,6 @@ export const printQuote = (
         <div class="product-name">${item.model}</div>
         ${desc ? `<div class="product-desc">${desc}</div>` : ""}
         ${specHtml ? `<div class="spec-block">${specHtml}</div>` : ""}
-        ${item.admin_notes ? `<div class="admin-note">* ${item.admin_notes}</div>` : ""}
       </td>
       <td class="c">${item.qty}</td>
       <td class="r">${fp(item.unit_price)}</td>

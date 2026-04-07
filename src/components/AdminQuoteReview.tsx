@@ -15,9 +15,10 @@ import { printQuote } from "@/utils/printQuote";
 
 /* ─── Types ─── */
 interface QuoteRequest {
-  id: string; quote_number: string | null; created_at: string; status: string;
+  id: string; quote_number: string | null; chain_number: string | null; created_at: string; status: string;
   products: any[]; details: string | null; name: string; email: string;
-  phone: string | null; company: string | null; user_id: string | null;
+  phone: string | null; line_id: string | null; whatsapp: string | null;
+  company: string | null; user_id: string | null;
   subtotal: number; discount_amount: number; grand_total: number;
   valid_until: string | null; payment_terms: string | null; delivery_terms: string | null;
   approved_by: string | null; approved_at: string | null; pdf_url: string | null;
@@ -37,6 +38,7 @@ interface LineItem {
   id: string; quote_id: string; product_id: string | null; model: string;
   category: string | null; qty: number; unit_price: number; discount_percent: number;
   line_total: number; custom_specs: Record<string, string>; admin_notes: string | null;
+  description: string | null;
   sort_order: number;
   _name?: string; _desc?: string; _specs?: Record<string, string>;
 }
@@ -202,7 +204,9 @@ const AdminQuoteReview = () => {
             category: p.category || cat?.category || "", qty: p.qty || 1,
             unit_price: cat?.base_price || 0, discount_percent: 0,
             line_total: (cat?.base_price || 0) * (p.qty || 1),
-            custom_specs: cat?.specs || {}, admin_notes: null, sort_order: i,
+            custom_specs: cat?.specs || {}, admin_notes: null,
+            description: cat?.description || null,
+            sort_order: i,
           });
         }));
       }
@@ -221,7 +225,9 @@ const AdminQuoteReview = () => {
   const addLine = () => setItems((p) => [...p, {
     id: `t-${Date.now()}`, quote_id: selected?.id || "", product_id: null,
     model: "", category: "", qty: 1, unit_price: 0, discount_percent: 0,
-    line_total: 0, custom_specs: {}, admin_notes: null, sort_order: p.length,
+    line_total: 0, custom_specs: {}, admin_notes: null,
+    description: null,
+    sort_order: p.length,
     _name: "", _desc: "", _specs: {},
   }]);
 
@@ -241,9 +247,13 @@ const AdminQuoteReview = () => {
     if (!p) return;
     setItems((prev) => {
       const u = [...prev];
+      // Auto-fill description from catalog ONLY if line description is empty
+      // (don't overwrite admin's custom description when changing model)
+      const newDesc = u[i].description && u[i].description.trim() !== "" ? u[i].description : (p.description || null);
       u[i] = { ...u[i], product_id: p.id, model: p.model, category: p.category,
         unit_price: p.base_price, line_total: p.base_price * u[i].qty,
-        custom_specs: p.specs, _name: p.name_th, _desc: p.description, _specs: p.specs };
+        custom_specs: p.specs, description: newDesc,
+        _name: p.name_th, _desc: p.description, _specs: p.specs };
       return u;
     });
   };
@@ -309,7 +319,9 @@ const AdminQuoteReview = () => {
         quote_id: selected.id, product_id: it.product_id, model: it.model,
         category: it.category, qty: it.qty, unit_price: it.unit_price,
         discount_percent: it.discount_percent, custom_specs: it.custom_specs,
-        admin_notes: it.admin_notes, sort_order: i,
+        admin_notes: it.admin_notes,
+        description: it.description,
+        sort_order: i,
       }));
       if (toInsert.length) {
         const { error } = await (supabase.from as any)("quote_line_items").insert(toInsert);
@@ -491,14 +503,14 @@ const AdminQuoteReview = () => {
         if (orderErr) throw orderErr;
         orderId = order.id;
 
-        // Copy line items
+        // Copy line items — use admin's edited description if available
         const orderItems = items.map((li, i) => ({
           order_id: orderId,
           product_id: li.product_id,
           model: li.model,
           category: li.category,
           name_th: li._name,
-          description: li._desc,
+          description: li.description || li._desc,
           qty: li.qty,
           unit_price: li.unit_price,
           discount_percent: li.discount_percent,
@@ -536,13 +548,13 @@ const AdminQuoteReview = () => {
         if (billingErr) throw billingErr;
         billingId = billing.id;
 
-        // Copy line items
+        // Copy line items — use admin's edited description if available
         const billingItems = items.map((li, i) => ({
           billing_note_id: billingId,
           product_id: li.product_id,
           model: li.model,
           category: li.category,
-          description: li._desc || li._name || li.model,
+          description: li.description || li._desc || li._name || li.model,
           qty: li.qty,
           unit_price: li.unit_price,
           discount_percent: li.discount_percent,
@@ -667,7 +679,28 @@ const AdminQuoteReview = () => {
   const filtered = quotes.filter((q) => {
     if (q.status === "draft") return false;
     if (statusFilter !== "all" && q.status !== statusFilter) return false;
-    if (searchText) { const s = searchText.toLowerCase(); if (![q.name, q.email, q.quote_number || "", q.company || ""].some((f) => f.toLowerCase().includes(s))) return false; }
+    if (searchText) {
+      const s = searchText.toLowerCase().trim();
+      // Build searchable text from all relevant fields
+      const productsText = Array.isArray(q.products)
+        ? q.products.map((p: any) => `${p?.model || ""} ${p?.name || ""} ${p?.category || ""}`).join(" ")
+        : "";
+      const searchable = [
+        q.name,
+        q.email,
+        q.quote_number || "",
+        q.chain_number || "",       // ค้นด้วย chain number (เช่น "2026-0042" หรือ "0042")
+        q.company || "",
+        q.phone || "",
+        q.line_id || "",            // LINE ID
+        q.whatsapp || "",           // WhatsApp
+        q.po_number || "",          // เลข PO
+        q.details || "",            // รายละเอียด
+        q.notes || "",              // โน้ต admin
+        productsText,               // สินค้า/รุ่น/หมวดหมู่
+      ].join(" ").toLowerCase();
+      if (!searchable.includes(s)) return false;
+    }
     // Assignment filter
     if (assignFilter === "mine" && q.assigned_to !== user?.id) return false;
     if (assignFilter === "unassigned" && q.assigned_to !== null) return false;
@@ -709,7 +742,23 @@ const AdminQuoteReview = () => {
           </div>
           <div className="relative">
             <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
-            <input type="text" placeholder="ค้นหา..." value={searchText} onChange={(e) => setSearchText(e.target.value)} className={`${inp} pl-8 py-1.5 text-xs w-40`} />
+            <input
+              type="text"
+              placeholder="ค้นหา: ชื่อ, เบอร์, เลข, สินค้า, PO..."
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              className={`${inp} pl-8 pr-7 py-1.5 text-xs w-64`}
+            />
+            {searchText && (
+              <button
+                type="button"
+                onClick={() => setSearchText("")}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                aria-label="ล้างการค้นหา"
+              >
+                <X size={12} />
+              </button>
+            )}
           </div>
           <button onClick={fetchQuotes} className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><RefreshCw size={12} className={loading ? "animate-spin" : ""} /></button>
         </div>
@@ -884,7 +933,32 @@ const AdminQuoteReview = () => {
                           <div><label className={lbl}>ราคา/หน่วย</label><input type="number" value={item.unit_price} onChange={(e) => updateLine(i, "unit_price", parseFloat(e.target.value) || 0)} className={`${inp} text-xs`} /></div>
                           <div><label className={lbl}>ส่วนลด %</label><input type="number" min="0" max="100" value={item.discount_percent} onChange={(e) => updateLine(i, "discount_percent", parseFloat(e.target.value) || 0)} className={`${inp} text-xs`} /></div>
                         </div>
-                        <div className="px-3 pb-2"><input value={item.admin_notes || ""} onChange={(e) => updateLine(i, "admin_notes", e.target.value)} placeholder="หมายเหตุ (config, lead time)" className={`${inp} text-[11px]`} /></div>
+
+                        {/* รายละเอียดสินค้า — แสดงให้ลูกค้าเห็น */}
+                        <div className="px-3 pb-2">
+                          <div className="flex items-center justify-between mb-1">
+                            <label className={lbl}>รายละเอียดสินค้า <span className="text-[9px] text-muted-foreground/70">(ลูกค้าจะเห็น)</span></label>
+                            {item._desc && item.description !== item._desc && (
+                              <button
+                                type="button"
+                                onClick={() => updateLine(i, "description", item._desc || null)}
+                                className="text-[9px] text-primary hover:underline"
+                                title="ใช้รายละเอียดจากคลังสินค้า"
+                              >
+                                ↺ คืนค่าเดิม
+                              </button>
+                            )}
+                          </div>
+                          <textarea
+                            value={item.description || ""}
+                            onChange={(e) => updateLine(i, "description", e.target.value)}
+                            placeholder={item._desc ? "ปรับแต่งรายละเอียดสำหรับใบเสนอราคานี้..." : "เพิ่มรายละเอียดสินค้า (ดึงจากคลังสินค้าอัตโนมัติเมื่อเลือกรุ่น)"}
+                            rows={3}
+                            className={`${inp} text-[11px] resize-y min-h-[60px]`}
+                          />
+                        </div>
+
+                        <div className="px-3 pb-2"><input value={item.admin_notes || ""} onChange={(e) => updateLine(i, "admin_notes", e.target.value)} placeholder="หมายเหตุภายใน (config, lead time) — ลูกค้าไม่เห็น" className={`${inp} text-[11px]`} /></div>
                         <div className="px-3 pb-3 text-right text-xs font-bold text-primary">฿{fp(item.line_total)}</div>
                       </div>
                     ))}
