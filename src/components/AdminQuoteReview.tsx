@@ -100,6 +100,7 @@ const AdminQuoteReview = () => {
   const [lineLoading, setLineLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [statusFilter, setStatusFilter] = useState("all");
+  const [sortBy, setSortBy] = useState<"newest" | "oldest" | "value_high" | "value_low">("newest");
   const [searchText, setSearchText] = useState("");
   const [expandItem, setExpandItem] = useState<number | null>(null);
   const [catFilter, setCatFilter] = useState("all");
@@ -764,11 +765,36 @@ const AdminQuoteReview = () => {
     if (assignFilter === "unassigned" && q.assigned_to !== null) return false;
     if (assignFilter !== "all" && assignFilter !== "mine" && assignFilter !== "unassigned" && q.assigned_to !== assignFilter) return false;
     return true;
+  }).sort((a, b) => {
+    // Apply user-selected sort order
+    switch (sortBy) {
+      case "oldest":
+        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+      case "value_high":
+        return (b.grand_total || 0) - (a.grand_total || 0);
+      case "value_low":
+        return (a.grand_total || 0) - (b.grand_total || 0);
+      case "newest":
+      default:
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    }
   });
 
   const newCount = quotes.filter((q) => q.status === "new").length;
   const poInboxCount = quotes.filter((q) => q.po_status && ["uploaded", "under_review", "pending_clarification"].includes(q.po_status)).length;
   const poOverdueCount = quotes.filter((q) => (q as any).po_overdue && q.po_status && ["uploaded", "under_review"].includes(q.po_status)).length;
+
+  // Count per status (for badges) — exclude drafts
+  const nonDraft = quotes.filter((q) => q.status !== "draft");
+  const statusCounts = {
+    all: nonDraft.length,
+    new: nonDraft.filter((q) => q.status === "new").length,
+    quoted: nonDraft.filter((q) => q.status === "quoted").length,
+    negotiating: nonDraft.filter((q) => q.status === "negotiating").length,
+    won: nonDraft.filter((q) => q.status === "won").length,
+    po_received: nonDraft.filter((q) => q.status === "po_received").length,
+    lost: nonDraft.filter((q) => q.status === "lost").length,
+  };
 
   const renderSpecs = (specs: Record<string, string>) => (
     <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[10px]">
@@ -811,8 +837,31 @@ const AdminQuoteReview = () => {
             </button>
           )}
           <span className="w-px h-5 bg-border mx-1"></span>
-          {[{ v: "all", l: "ทั้งหมด" }, { v: "new", l: `ใหม่ (${newCount})` }, { v: "quoted", l: "ส่งราคาแล้ว" }, { v: "negotiating", l: "เจรจา" }, { v: "won", l: "ตกลงราคา" }, { v: "po_received", l: "รับ PO" }, { v: "lost", l: "ไม่สำเร็จ" }].map((f) => (
-            <button key={f.v} onClick={() => setStatusFilter(f.v)} className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${statusFilter === f.v ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary/60"}`}>{f.l}</button>
+          {[
+            { v: "all",         l: "ทั้งหมด",      c: statusCounts.all },
+            { v: "new",         l: "ใหม่",         c: statusCounts.new },
+            { v: "quoted",      l: "ส่งราคาแล้ว",  c: statusCounts.quoted },
+            { v: "negotiating", l: "เจรจา",        c: statusCounts.negotiating },
+            { v: "won",         l: "ตกลงราคา",     c: statusCounts.won },
+            { v: "po_received", l: "รับ PO",       c: statusCounts.po_received },
+            { v: "lost",        l: "ไม่สำเร็จ",    c: statusCounts.lost },
+          ].map((f) => (
+            <button
+              key={f.v}
+              onClick={() => setStatusFilter(f.v)}
+              className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 ${
+                statusFilter === f.v ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary/60"
+              }`}
+            >
+              {f.l}
+              {f.c > 0 && (
+                <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
+                  statusFilter === f.v ? "bg-primary/20 text-primary" : "bg-secondary text-muted-foreground"
+                }`}>
+                  {f.c}
+                </span>
+              )}
+            </button>
           ))}
         </div>
         <div className="flex items-center gap-2">
@@ -848,9 +897,39 @@ const AdminQuoteReview = () => {
               </button>
             )}
           </div>
+          {/* Sort dropdown */}
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as any)}
+            className={`${inp} text-xs py-1.5 w-32`}
+            title="เรียงลำดับ"
+          >
+            <option value="newest">↓ ใหม่สุด</option>
+            <option value="oldest">↑ เก่าสุด</option>
+            <option value="value_high">↓ ราคาสูง</option>
+            <option value="value_low">↑ ราคาต่ำ</option>
+          </select>
           <button onClick={fetchQuotes} className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><RefreshCw size={12} className={loading ? "animate-spin" : ""} /></button>
         </div>
       </div>
+
+      {/* Result count + active filter info */}
+      {(searchText || statusFilter !== "all" || assignFilter !== "all") && (
+        <div className="flex items-center gap-2 text-[11px] text-muted-foreground -mt-1">
+          <span>พบ <strong className="text-foreground">{filtered.length}</strong> รายการ</span>
+          {searchText && (
+            <span>· ค้นหา: <strong className="text-foreground">"{searchText}"</strong></span>
+          )}
+          {(searchText || statusFilter !== "all" || assignFilter !== "all") && (
+            <button
+              onClick={() => { setSearchText(""); setStatusFilter("all"); setAssignFilter("all"); }}
+              className="text-primary hover:underline ml-1"
+            >
+              ล้างทั้งหมด
+            </button>
+          )}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
         {/* ═══ LEFT — Quote List ═══ */}
