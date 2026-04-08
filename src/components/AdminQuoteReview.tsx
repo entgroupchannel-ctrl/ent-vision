@@ -694,19 +694,21 @@ const AdminQuoteReview = () => {
       });
       if (error) throw error;
 
+      const result = data as any;
+
       // Show SO+BL info if created
-      if (data?.so_number) {
+      if (result?.so_number) {
         toast({
           title: "อนุมัติ PO แล้ว",
-          description: `สร้าง SO (${data.so_number}) และ BL (${data.bl_number}) อัตโนมัติแล้ว`,
+          description: `สร้าง SO (${result.so_number}) และ BL (${result.bl_number}) อัตโนมัติแล้ว`,
         });
       } else {
         toast({ title: "เปลี่ยนสถานะแล้ว", description: `→ ${(STATUS_CFG[newStatus] || { label: newStatus }).label}` });
       }
 
       fetchQuotes();
-      const finalStatus = data?.status || newStatus;
-      if (selected?.id === quoteId) selectQuote({ ...quote, status: finalStatus });
+      const finalStatus = result?.status || newStatus;
+      if (selected?.id === quoteId) selectQuote({ ...quote, status: finalStatus as string });
     } catch (err: any) {
       toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
     }
