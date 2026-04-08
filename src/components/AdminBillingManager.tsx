@@ -97,6 +97,15 @@ const AdminBillingManager = () => {
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [poQuotes, setPOQuotes] = useState<POQuote[]>([]);
   const [poLoading, setPOLoading] = useState(false);
+  const [companySettings, setCompanySettings] = useState<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await (supabase.from as any)("company_settings")
+        .select("*").limit(1).maybeSingle();
+      if (data) setCompanySettings(data);
+    })();
+  }, []);
 
   /* ─── Fetch ─── */
   /* ─── React Query: Auto-handles refetch on tab focus, dedupe, retry ─── */
@@ -293,6 +302,59 @@ const AdminBillingManager = () => {
       .eq("id", id);
     if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
     else { toast({ title: "อัปเดตสถานะสำเร็จ" }); fetchBillings(); }
+  };
+
+  /* ─── Print Billing ─── */
+  const handlePrintBilling = async (b: BillingNote) => {
+    try {
+      const { data: items } = await supabase
+        .from("billing_note_items")
+        .select("*")
+        .eq("billing_note_id", b.id)
+        .order("sort_order");
+
+      const printItems = (items || []).map((it: any) => ({
+        model: it.model,
+        qty: it.qty,
+        unit_price: it.unit_price,
+        discount_percent: it.discount_percent || 0,
+        line_total: it.line_total,
+        admin_notes: null,
+        description: it.description,
+        _name: it.model,
+        _desc: it.description || "",
+      }));
+
+      printQuote(
+        {
+          quote_number: b.billing_number,
+          name: b.customer_name,
+          email: b.customer_email || "",
+          phone: b.customer_phone,
+          company: b.customer_company,
+          details: b.notes,
+          company_address: b.customer_address,
+          tax_id: b.customer_tax_id,
+        },
+        printItems,
+        {
+          discount_amount: b.discount_amount || 0,
+          valid_until: b.due_date || "",
+          payment_terms: b.payment_terms || "",
+          delivery_terms: "",
+          include_vat: (b.vat_amount || 0) > 0,
+          vat_percent: 7,
+        },
+        companySettings || undefined,
+        undefined,
+        undefined,
+        undefined,
+        'th',
+        'billing',
+      );
+    } catch (err: any) {
+      toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message, variant: "destructive" });
+    }
   };
 
   /* ─── Filter ─── */
