@@ -127,6 +127,10 @@ const AdminDeliveryManager = () => {
       }
       return (data || []) as DeliveryNote[];
     },
+    enabled: !!user?.id,
+    staleTime: 30_000,
+    gcTime: 5 * 60_000,
+    refetchOnMount: "always",
   });
 
   const fetchDeliveries = () => {
