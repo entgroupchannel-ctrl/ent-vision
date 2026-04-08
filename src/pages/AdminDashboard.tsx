@@ -424,6 +424,20 @@ const AdminDashboard = () => {
                       <Shield size={16} className="shrink-0" />
                       {sidebarMode === "full" && <span className="flex-1 text-left truncate">{t("admin.users")}</span>}
                     </button>
+                    {isSuperAdmin && (
+                      <button
+                        onClick={() => { setTab("session_monitor"); setStatusFilter("all"); setSelectedItem(null); }}
+                        className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                          tab === "session_monitor"
+                            ? "bg-primary/10 text-primary"
+                            : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                        } ${sidebarMode === "icon" ? "justify-center" : ""}`}
+                        title={sidebarMode === "icon" ? "Session Monitor" : undefined}
+                      >
+                        <Activity size={16} className="shrink-0" />
+                        {sidebarMode === "full" && <span className="flex-1 text-left truncate">Session Monitor</span>}
+                      </button>
+                    )}
                   </>
                 )}
 
@@ -534,6 +548,7 @@ const AdminDashboard = () => {
         {tab === "delivery" && <AdminDeliveryManager />}
         {tab === "payments" && <AdminPaymentManager />}
         {tab === "users" && <AdminUserManagement />}
+        {tab === "session_monitor" && <AdminSessionMonitor />}
 
         {/* Legacy fallback for tabs that don't have dedicated managers (contacts, chatleads, software, subscribers) */}
         {!["dashboard", "engagement", "documents", "catalog", "quote_review", "sales_orders", "billing", "invoices", "delivery", "payments", "users"].includes(tab) && (
