@@ -40,7 +40,7 @@ const MyProfile = () => {
         const { data } = await (supabase.from as any)("profiles")
           .select("*")
           .eq("id", user.id)
-          .single();
+          .maybeSingle();
         if (data) {
           setProfile({
             full_name: data.full_name || user.user_metadata?.full_name || "",
