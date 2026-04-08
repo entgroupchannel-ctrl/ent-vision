@@ -3,7 +3,7 @@
 /* ── i18n ── */
 type Lang = 'th' | 'en';
 
-export type DocumentType = 'quote' | 'sales_order' | 'billing' | 'invoice' | 'delivery';
+export type DocumentType = 'quote' | 'sales_order' | 'billing' | 'invoice' | 'delivery' | 'receipt_full' | 'receipt_simple';
 
 const DOC_TITLES: Record<Lang, Record<DocumentType, string>> = {
   th: {
@@ -12,6 +12,8 @@ const DOC_TITLES: Record<Lang, Record<DocumentType, string>> = {
     billing: 'ใบวางบิล',
     invoice: 'ใบกำกับภาษี',
     delivery: 'ใบส่งของ',
+    receipt_full: 'ใบเสร็จรับเงิน/ใบกำกับภาษี',
+    receipt_simple: 'ใบเสร็จรับเงิน',
   },
   en: {
     quote: 'Quotation',
@@ -19,6 +21,8 @@ const DOC_TITLES: Record<Lang, Record<DocumentType, string>> = {
     billing: 'Billing Note',
     invoice: 'Tax Invoice',
     delivery: 'Delivery Note',
+    receipt_full: 'Receipt / Tax Invoice',
+    receipt_simple: 'Receipt',
   },
 };
 
@@ -35,6 +39,12 @@ const i18n: Record<Lang, Record<string, string>> = {
     email: 'อีเมล',
     phone: 'โทร',
     tax_id: 'เลขประจำตัวผู้เสียภาษี',
+    payment_date_label: 'วันที่ชำระเงิน',
+    payment_method_label: 'วิธีชำระเงิน',
+    amount_paid: 'จำนวนเงินที่รับ',
+    receiver_signature: 'ผู้รับเงิน',
+    receiver_position: 'ตำแหน่ง',
+    signed_date: 'วันที่',
     item_no: '#',
     description: 'รายละเอียด',
     quantity: 'จำนวน',
@@ -74,6 +84,12 @@ const i18n: Record<Lang, Record<string, string>> = {
     email: 'Email',
     phone: 'Tel',
     tax_id: 'Tax ID',
+    payment_date_label: 'Payment Date',
+    payment_method_label: 'Payment Method',
+    amount_paid: 'Amount Paid',
+    receiver_signature: 'Receiver',
+    receiver_position: 'Position',
+    signed_date: 'Date',
     item_no: '#',
     description: 'Description',
     quantity: 'Qty',
@@ -120,6 +136,11 @@ interface PrintQuote {
   company_address?: string | null;
   tax_id?: string | null;
   branch?: string | null;
+  payment_date?: string | null;
+  payment_method?: string | null;
+  amount_paid?: number | null;
+  receiver_name?: string | null;
+  receiver_position?: string | null;
 }
 
 interface PrintLineItem {
@@ -314,7 +335,7 @@ export const printQuote = (
   const afterDiscount = subtotal - extraDiscount;
   const beforeVat = afterDiscount;
   // บังคับ VAT สำหรับใบกำกับภาษีและใบวางบิล (กฎหมายสรรพากรไทย)
-  const forceVat = documentType === 'invoice' || documentType === 'billing';
+  const forceVat = documentType === 'invoice' || documentType === 'billing' || documentType === 'receipt_full';
   const includeVat = forceVat || terms.include_vat !== false;
   const vatPercent = includeVat ? (terms.vat_percent || c.vat_percent || 7) : 0;
   const vatAmount = vatPercent > 0 ? Math.round(beforeVat * vatPercent / 100 * 100) / 100 : 0;
@@ -479,6 +500,27 @@ table.items td:nth-child(4),
 table.items td:nth-child(5),
 table.items td:nth-child(6) { display: none !important; }
 ` : ''}
+${documentType === 'receipt_simple' ? `
+table.items { display: none !important; }
+` : ''}
+
+/* ── Payment Info (Receipt) ── */
+.payment-info-section{margin:16px 0;padding:14px 18px;border:1.5px solid var(--primary);border-radius:8px;background:var(--bg-light)}
+.payment-info-grid{display:flex;flex-direction:column;gap:6px}
+.payment-info-row{display:flex;justify-content:space-between;align-items:center;font-size:10pt}
+.payment-lb{color:var(--text-light);font-weight:500}
+.payment-vl{color:var(--text-dark);font-weight:600}
+.payment-amount-row{margin-top:6px;padding-top:8px;border-top:1px dashed var(--border)}
+.payment-amount{color:var(--primary);font-size:14pt;font-weight:700}
+
+/* ── Signature Block (Receipt) ── */
+.receipt-signature-section{margin-top:32px;display:flex;justify-content:flex-end}
+.receipt-signature-box{width:240px;text-align:center}
+.receipt-signature-line{border-top:1px solid var(--text-dark);margin-bottom:6px;height:1px}
+.receipt-signature-label{font-size:10pt;color:var(--text-light);margin-bottom:2px}
+.receipt-signature-name{font-size:11pt;color:var(--text-dark);font-weight:600;margin-bottom:2px}
+.receipt-signature-position{font-size:9pt;color:var(--text-light);margin-bottom:6px}
+.receipt-signature-date{font-size:9pt;color:var(--text-light);margin-top:8px}
 </style></head><body>
 <div class="print-tip">
   💡 <strong>เคล็ดลับ:</strong> เพื่อให้ใบเสนอราคาดูสวยที่สุด ใน print dialog กรุณาเลือก <strong>"More settings"</strong> แล้วปิด <strong>"Headers and footers"</strong>
@@ -544,7 +586,7 @@ table.items td:nth-child(6) { display: none !important; }
   </tbody>
 </table>
 
-${documentType !== 'delivery' ? `
+${(documentType !== 'delivery' && documentType !== 'receipt_simple') ? `
 <!-- ═══ TOTALS ═══ -->
 <div class="totals-section no-break">
   <div class="totals">
@@ -600,6 +642,38 @@ ${c.quote_terms ? `<div class="terms-section no-break">
     </div>
   </div>
 </div>
+
+${(documentType === 'receipt_full' || documentType === 'receipt_simple') ? `
+<!-- ═══ PAYMENT INFO ═══ -->
+<div class="payment-info-section no-break">
+  <div class="payment-info-grid">
+    <div class="payment-info-row">
+      <span class="payment-lb">${t.payment_date_label}:</span>
+      <span class="payment-vl">${q.payment_date ? new Date(q.payment_date).toLocaleDateString("th-TH", { day: "2-digit", month: "2-digit", year: "numeric" }) : "—"}</span>
+    </div>
+    <div class="payment-info-row">
+      <span class="payment-lb">${t.payment_method_label}:</span>
+      <span class="payment-vl">${q.payment_method || "—"}</span>
+    </div>
+    <div class="payment-info-row payment-amount-row">
+      <span class="payment-lb">${t.amount_paid}:</span>
+      <span class="payment-amount">${fp(q.amount_paid || 0)} ${t.currency}</span>
+    </div>
+  </div>
+  ${documentType === 'receipt_simple' ? `<div class="thai-text" style="margin:8px 0 0;text-align:center">(${lang === 'th' ? numberToThaiText(q.amount_paid || 0) : numberToEnglishText(q.amount_paid || 0)})</div>` : ''}
+</div>
+
+<!-- ═══ RECEIPT SIGNATURE ═══ -->
+<div class="receipt-signature-section">
+  <div class="receipt-signature-box">
+    <div class="receipt-signature-line"></div>
+    <div class="receipt-signature-label">${t.receiver_signature}</div>
+    ${q.receiver_name ? `<div class="receipt-signature-name">(${q.receiver_name})</div>` : `<div class="receipt-signature-name">(...........................)</div>`}
+    ${q.receiver_position ? `<div class="receipt-signature-position">${t.receiver_position}: ${q.receiver_position}</div>` : ''}
+    <div class="receipt-signature-date">${t.signed_date}: ........./........./...........</div>
+  </div>
+</div>
+` : ''}
 
 <!-- ═══ FOOTER ═══ -->
 <div class="page-footer">

@@ -39,6 +39,10 @@ interface ReceiptRow {
   payment_date: string;
   customer_name: string;
   customer_company: string | null;
+  customer_address: string | null;
+  customer_tax_id: string | null;
+  customer_phone: string | null;
+  receipt_type: string | null;
   amount_paid: number;
   payment_method: string | null;
   status: string;
@@ -93,6 +97,10 @@ const MyInvoices = () => {
   const [invoiceItems, setInvoiceItems] = useState<InvoiceItem[]>([]);
   const [detailOpen, setDetailOpen] = useState(false);
   const [companySettings, setCompanySettings] = useState<any>(null);
+  const [selectedReceipt, setSelectedReceipt] = useState<ReceiptRow | null>(null);
+  const [receiptDetailOpen, setReceiptDetailOpen] = useState(false);
+  const [receiptInvoiceData, setReceiptInvoiceData] = useState<any>(null);
+  const [receiptItemsData, setReceiptItemsData] = useState<any[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -175,6 +183,75 @@ const MyInvoices = () => {
         undefined,
         'th',
         'invoice',
+      );
+    } catch (err: any) {
+      toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message, variant: "destructive" });
+    }
+  };
+
+  const openReceiptDetail = async (rcp: ReceiptRow) => {
+    setSelectedReceipt(rcp);
+    setReceiptDetailOpen(true);
+    if (rcp.receipt_type === "full" && rcp.invoice_id) {
+      const { data: inv } = await supabase.from("invoices").select("*").eq("id", rcp.invoice_id).maybeSingle();
+      setReceiptInvoiceData(inv);
+      const { data: items } = await supabase.from("invoice_items").select("*").eq("invoice_id", rcp.invoice_id).order("sort_order");
+      setReceiptItemsData((items as any[]) || []);
+    } else {
+      setReceiptInvoiceData(null);
+      setReceiptItemsData([]);
+    }
+  };
+
+  const handlePrintReceipt = (rcp: ReceiptRow) => {
+    try {
+      const docType = rcp.receipt_type === "simple" ? "receipt_simple" as const : "receipt_full" as const;
+
+      const printItems = docType === "receipt_full"
+        ? receiptItemsData.map((it: any) => ({
+            model: it.model,
+            qty: it.qty,
+            unit_price: it.unit_price,
+            discount_percent: it.discount_percent || 0,
+            line_total: it.line_total,
+            admin_notes: null,
+            description: it.description,
+            _name: it.model,
+            _desc: it.description || "",
+          }))
+        : [];
+
+      printQuote(
+        {
+          quote_number: rcp.receipt_number,
+          name: rcp.customer_name,
+          email: receiptInvoiceData?.customer_email || "",
+          phone: rcp.customer_phone,
+          company: rcp.customer_company,
+          details: rcp.notes,
+          company_address: rcp.customer_address || receiptInvoiceData?.customer_address || null,
+          tax_id: rcp.customer_tax_id || receiptInvoiceData?.customer_tax_id || null,
+          payment_date: rcp.payment_date,
+          payment_method: rcp.payment_method,
+          amount_paid: rcp.amount_paid,
+          receiver_name: companySettings?.receiver_name || null,
+          receiver_position: companySettings?.receiver_position || null,
+        },
+        printItems,
+        {
+          discount_amount: receiptInvoiceData?.discount_amount || 0,
+          valid_until: "",
+          payment_terms: "",
+          delivery_terms: "",
+          include_vat: docType === "receipt_full",
+          vat_percent: 7,
+        },
+        companySettings || undefined,
+        undefined,
+        undefined,
+        undefined,
+        'th',
+        docType,
       );
     } catch (err: any) {
       toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message, variant: "destructive" });
@@ -355,7 +432,8 @@ const MyInvoices = () => {
                     <TableHead className="text-xs font-semibold">วันที่ชำระ</TableHead>
                     <TableHead className="text-xs font-semibold hidden sm:table-cell">วิธีชำระ</TableHead>
                     <TableHead className="text-xs font-semibold text-right">จำนวนเงิน</TableHead>
-                    <TableHead className="text-xs font-semibold text-center">สถานะ</TableHead>
+                     <TableHead className="text-xs font-semibold text-center">สถานะ</TableHead>
+                    <TableHead className="text-xs font-semibold text-center w-20"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -366,6 +444,11 @@ const MyInvoices = () => {
                       <TableCell className="text-xs hidden sm:table-cell capitalize">{rcp.payment_method || "-"}</TableCell>
                       <TableCell className="text-xs text-right font-medium">฿{fmt(rcp.amount_paid)}</TableCell>
                       <TableCell className="text-center"><StatusBadge status={rcp.status} /></TableCell>
+                      <TableCell className="text-center">
+                        <Button variant="ghost" size="sm" onClick={() => openReceiptDetail(rcp)} className="h-7 w-7 p-0">
+                          <Eye size={14} />
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -465,6 +548,68 @@ const MyInvoices = () => {
               {selectedInvoice.notes && (
                 <div className="text-xs text-muted-foreground bg-muted/20 rounded-lg p-3">
                   <strong>หมายเหตุ:</strong> {selectedInvoice.notes}
+                </div>
+              )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Receipt Detail Dialog */}
+      <Dialog open={receiptDetailOpen} onOpenChange={setReceiptDetailOpen}>
+        <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <div className="flex items-center justify-between">
+              <DialogTitle className="flex items-center gap-2">
+                <Receipt size={18} className="text-primary" />
+                {selectedReceipt?.receipt_number}
+              </DialogTitle>
+              {selectedReceipt && (
+                <Button variant="outline" size="sm" onClick={() => handlePrintReceipt(selectedReceipt)} className="gap-1.5 text-xs mr-6">
+                  <Printer size={14} /> พิมพ์
+                </Button>
+              )}
+            </div>
+          </DialogHeader>
+
+          {selectedReceipt && (
+            <div className="space-y-4">
+              {/* Receipt Type Badge */}
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="text-xs">
+                  {selectedReceipt.receipt_type === "simple" ? "แบบย่อ" : "เต็มรูปแบบ (มี VAT)"}
+                </Badge>
+              </div>
+
+              {/* Info Grid */}
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <span className="text-muted-foreground">วันที่ชำระ:</span>
+                  <span className="ml-2 font-medium">{fmtDate(selectedReceipt.payment_date)}</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">วิธีชำระ:</span>
+                  <span className="ml-2 font-medium">{selectedReceipt.payment_method || "-"}</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">ลูกค้า:</span>
+                  <span className="ml-2 font-medium">{selectedReceipt.customer_name}</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">สถานะ:</span>
+                  <span className="ml-2"><StatusBadge status={selectedReceipt.status} /></span>
+                </div>
+              </div>
+
+              {/* Amount */}
+              <div className="bg-muted/30 rounded-lg p-4 text-center">
+                <p className="text-xs text-muted-foreground mb-1">จำนวนเงินที่รับ</p>
+                <p className="text-2xl font-bold text-primary">฿{fmt(selectedReceipt.amount_paid)}</p>
+              </div>
+
+              {selectedReceipt.notes && (
+                <div className="text-xs text-muted-foreground bg-muted/20 rounded-lg p-3">
+                  <strong>หมายเหตุ:</strong> {selectedReceipt.notes}
                 </div>
               )}
             </div>

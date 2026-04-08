@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   CreditCard, CheckCircle, Clock, Loader2, RefreshCw, Search,
   Upload, Hash, XCircle, DollarSign, Calendar, Building2,
-  Receipt, AlertCircle, ExternalLink, FileText,
+  Receipt, AlertCircle, ExternalLink, FileText, Printer,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { printQuote } from "@/utils/printQuote";
 
 /* ─── Types ─── */
 interface PaymentRecord {
@@ -81,6 +82,16 @@ const AdminPaymentManager = () => {
   const [payNotes, setPayNotes] = useState("");
   const [paySlipFile, setPaySlipFile] = useState<File | null>(null);
   const [saving, setSaving] = useState(false);
+  const [receiptType, setReceiptType] = useState<"full" | "simple">("full");
+  const [companySettings, setCompanySettings] = useState<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await (supabase.from as any)("company_settings")
+        .select("*").limit(1).maybeSingle();
+      if (data) setCompanySettings(data);
+    })();
+  }, []);
 
   /* ─── React Query: Fetch payments + pending invoices ───
    * - Auto-refetches when window regains focus (fixes the stuck-after-tab-switch bug)
@@ -130,6 +141,7 @@ const AdminPaymentManager = () => {
     setPayDate(new Date().toISOString().split("T")[0]);
     setPayNotes("");
     setPaySlipFile(null);
+    setReceiptType("full");
     setDialogOpen(true);
   };
 
@@ -188,6 +200,7 @@ const AdminPaymentManager = () => {
         payment_method: payMethod,
         payment_date: payDate,
         status: "issued",
+        receipt_type: receiptType,
         created_by: user?.id,
       }).select().single();
 
@@ -215,6 +228,78 @@ const AdminPaymentManager = () => {
     await (supabase.from as any)("payment_records").update(updates).eq("id", id);
     toast({ title: "อัปเดตสถานะสำเร็จ" });
     fetchAll();
+  };
+
+  const handlePrintReceipt = async (paymentRecordId: string) => {
+    try {
+      const { data: rcp } = await (supabase.from as any)("receipts")
+        .select("*")
+        .eq("payment_record_id", paymentRecordId)
+        .maybeSingle();
+
+      if (!rcp) {
+        toast({ title: "ไม่พบใบเสร็จ", variant: "destructive" });
+        return;
+      }
+
+      const docType = rcp.receipt_type === "simple" ? "receipt_simple" as const : "receipt_full" as const;
+
+      let printItems: any[] = [];
+      let invoiceData: any = null;
+      if (docType === "receipt_full" && rcp.invoice_id) {
+        const { data: inv } = await (supabase.from as any)("invoices")
+          .select("*").eq("id", rcp.invoice_id).maybeSingle();
+        invoiceData = inv;
+        const { data: items } = await (supabase.from as any)("invoice_items")
+          .select("*").eq("invoice_id", rcp.invoice_id).order("sort_order");
+        printItems = (items || []).map((it: any) => ({
+          model: it.model,
+          qty: it.qty,
+          unit_price: it.unit_price,
+          discount_percent: it.discount_percent || 0,
+          line_total: it.line_total,
+          admin_notes: null,
+          description: it.description,
+          _name: it.model,
+          _desc: it.description || "",
+        }));
+      }
+
+      printQuote(
+        {
+          quote_number: rcp.receipt_number,
+          name: rcp.customer_name,
+          email: invoiceData?.customer_email || "",
+          phone: invoiceData?.customer_phone || null,
+          company: rcp.customer_company,
+          details: rcp.notes,
+          company_address: invoiceData?.customer_address || null,
+          tax_id: invoiceData?.customer_tax_id || null,
+          payment_date: rcp.payment_date,
+          payment_method: rcp.payment_method,
+          amount_paid: rcp.amount_paid,
+          receiver_name: companySettings?.receiver_name || null,
+          receiver_position: companySettings?.receiver_position || null,
+        },
+        printItems,
+        {
+          discount_amount: invoiceData?.discount_amount || 0,
+          valid_until: "",
+          payment_terms: "",
+          delivery_terms: "",
+          include_vat: docType === "receipt_full",
+          vat_percent: 7,
+        },
+        companySettings || undefined,
+        undefined,
+        undefined,
+        undefined,
+        'th',
+        docType,
+      );
+    } catch (err: any) {
+      toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message, variant: "destructive" });
+    }
   };
 
   /* ─── Filter ─── */
@@ -349,6 +434,14 @@ const AdminPaymentManager = () => {
                     </button>
                   </div>
                 )}
+                {p.status === "confirmed" && (
+                  <div className="mt-2">
+                    <button onClick={() => handlePrintReceipt(p.id)}
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-primary/10 text-primary text-[10px] font-bold hover:bg-primary/20">
+                      <Printer size={10} /> พิมพ์ใบเสร็จ
+                    </button>
+                  </div>
+                )}
               </div>
             );
           })}
@@ -408,6 +501,22 @@ const AdminPaymentManager = () => {
                 <label className="text-xs font-medium text-muted-foreground mb-1 block">แนบ Pay-in Slip</label>
                 <input type="file" accept="image/*,.pdf" onChange={e => setPaySlipFile(e.target.files?.[0] || null)}
                   className="w-full text-sm file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border file:border-border file:text-xs file:bg-accent file:text-foreground" />
+              </div>
+
+              <div>
+                <label className="text-xs font-medium text-muted-foreground mb-1 block">รูปแบบใบเสร็จ *</label>
+                <div className="flex gap-2">
+                  <button type="button" onClick={() => setReceiptType("full")}
+                    className={`flex-1 px-3 py-2 rounded-lg border text-xs font-medium transition-all ${receiptType === "full" ? "bg-primary/10 border-primary text-primary" : "border-border text-muted-foreground hover:border-primary/30"}`}>
+                    เต็มรูปแบบ
+                    <span className="block text-[9px] mt-0.5 opacity-70">มี VAT + รายการสินค้า</span>
+                  </button>
+                  <button type="button" onClick={() => setReceiptType("simple")}
+                    className={`flex-1 px-3 py-2 rounded-lg border text-xs font-medium transition-all ${receiptType === "simple" ? "bg-primary/10 border-primary text-primary" : "border-border text-muted-foreground hover:border-primary/30"}`}>
+                    แบบย่อ
+                    <span className="block text-[9px] mt-0.5 opacity-70">จำนวนเงินรวมเท่านั้น</span>
+                  </button>
+                </div>
               </div>
 
               <div>
