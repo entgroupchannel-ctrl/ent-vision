@@ -125,26 +125,60 @@ const queryClient = new QueryClient({
 });
 
 const AppInner = () => {
-  // Auto-reload to prevent session timeout (debug fix for 15-min hang issue)
   useEffect(() => {
-    const RELOAD_INTERVAL = 12 * 60 * 1000; // 12 minutes
-    const IDLE_THRESHOLD = 10 * 60 * 1000; // 10 minutes of no activity
+    // ═══════════════════════════════════════════════════════════════════════
+    // Session Recovery & Tab Visibility Handler
+    // ═══════════════════════════════════════════════════════════════════════
+    // Problem: After switching browser tabs, Supabase client can become stale
+    // because browsers throttle background tabs. When user returns, requests
+    // hang indefinitely showing "กำลังโหลด..." spinner.
+    //
+    // Solution: When tab becomes visible again after being hidden for >2min,
+    // we force reload to get a fresh client. This is the most reliable fix.
+    // ═══════════════════════════════════════════════════════════════════════
 
+    let lastHiddenTime: number | null = null;
+    const STALE_THRESHOLD = 2 * 60 * 1000; // 2 minutes hidden = stale
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        lastHiddenTime = Date.now();
+        console.log('[Session] Tab hidden at', new Date().toLocaleTimeString());
+      } else {
+        if (lastHiddenTime !== null) {
+          const hiddenDuration = Date.now() - lastHiddenTime;
+          console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 'seconds');
+
+          if (hiddenDuration >= STALE_THRESHOLD) {
+            console.log('[Session] Tab was hidden for >2min — reloading to recover...');
+            setTimeout(() => {
+              window.location.reload();
+            }, 100);
+            return;
+          }
+        }
+        lastHiddenTime = null;
+      }
+    };
+
+    // Also handle idle timeout (original logic)
+    const RELOAD_INTERVAL = 12 * 60 * 1000;
+    const IDLE_THRESHOLD = 10 * 60 * 1000;
     let lastActivity = Date.now();
 
     const updateActivity = () => {
       lastActivity = Date.now();
     };
 
-    // Track user activity
     window.addEventListener('click', updateActivity);
     window.addEventListener('keydown', updateActivity);
     window.addEventListener('scroll', updateActivity);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     const intervalId = setInterval(() => {
       const idleTime = Date.now() - lastActivity;
       if (idleTime >= IDLE_THRESHOLD) {
-        console.log('[Auto-reload] User idle for 10+ min, reloading to prevent session hang...');
+        console.log('[Session] User idle for 10+ min, reloading to prevent session hang...');
         window.location.reload();
       }
     }, RELOAD_INTERVAL);
@@ -154,6 +188,7 @@ const AppInner = () => {
       window.removeEventListener('click', updateActivity);
       window.removeEventListener('keydown', updateActivity);
       window.removeEventListener('scroll', updateActivity);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 
