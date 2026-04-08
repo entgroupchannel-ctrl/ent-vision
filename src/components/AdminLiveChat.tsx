@@ -189,7 +189,7 @@ const AdminLiveChat = () => {
       )
       .subscribe();
     return () => { supabase.removeChannel(channel); };
-  }, [selectedConv]);
+  }, [selectedConv?.id]);
 
   // Scroll to bottom
   useEffect(() => {
