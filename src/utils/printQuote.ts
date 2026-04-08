@@ -31,6 +31,7 @@ const i18n: Record<Lang, Record<string, string>> = {
     salesperson: 'ผู้ขาย',
     job_name: 'ชื่องาน',
     customer: 'ลูกค้า',
+    contact: 'ผู้ติดต่อ',
     email: 'อีเมล',
     phone: 'โทร',
     tax_id: 'เลขประจำตัวผู้เสียภาษี',
@@ -69,6 +70,7 @@ const i18n: Record<Lang, Record<string, string>> = {
     salesperson: 'Salesperson',
     job_name: 'Job Name',
     customer: 'Customer',
+    contact: 'Contact',
     email: 'Email',
     phone: 'Tel',
     tax_id: 'Tax ID',
@@ -503,7 +505,7 @@ table.items td:nth-child(6) { display: none !important; }
     <div class="info-box">
       <div class="info-row"><span class="lb">${t.quote_number}:</span><span class="vl">${q.quote_number || "—"}</span></div>
       <div class="info-row"><span class="lb">${t.date}:</span><span class="vl">${today}</span></div>
-      <div class="info-row"><span class="lb">${t.valid_until}:</span><span class="vl">${validDate}</span></div>
+      ${documentType === 'quote' ? `<div class="info-row"><span class="lb">${t.valid_until}:</span><span class="vl">${validDate}</span></div>` : ""}
       ${saleName || saleEmail ? `<div class="info-row"><span class="lb">${t.salesperson}:</span><span class="vl">${saleName || ""}</span></div>` : ""}
       ${saleEmail ? `<div class="info-row"><span class="lb"></span><span class="vl" style="font-size:9pt;color:var(--text-light)">${saleEmail}</span></div>` : ""}
       ${salePhone ? `<div class="info-row"><span class="lb"></span><span class="vl" style="font-size:9pt;color:var(--text-light)">${salePhone}</span></div>` : ""}
@@ -515,7 +517,11 @@ table.items td:nth-child(6) { display: none !important; }
 <!-- ═══ CUSTOMER INFO ═══ -->
 <div class="customer-box">
   <div class="section-label">${t.customer}</div>
-  <p class="cust-name">${q.company ? `${q.company}` : ""} ${q.name}${q.branch ? ` (${q.branch})` : ""}</p>
+  ${q.company
+    ? `<p class="cust-name">${q.company}${q.branch ? ` (${q.branch})` : ""}</p>
+       ${q.name ? `<p style="font-size:9.5pt;color:#666">${t.contact}: ${q.name}</p>` : ""}`
+    : `<p class="cust-name">${q.name}${q.branch ? ` (${q.branch})` : ""}</p>`
+  }
   ${q.company_address ? `<p>${q.company_address}</p>` : ""}
   ${q.tax_id ? `<p style="font-size:9pt;color:#888">${t.tax_id} ${q.tax_id}</p>` : ""}
   <p><span style="color:#888">${t.email}:</span> ${q.email}${q.phone ? ` | <span style="color:#888">${t.phone}:</span> ${q.phone}` : ""}</p>
