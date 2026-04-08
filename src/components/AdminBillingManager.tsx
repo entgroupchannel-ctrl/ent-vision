@@ -667,7 +667,7 @@ const AdminBillingManager = () => {
             )}
 
             <div className="mt-4 flex justify-end">
-              <button onClick={() => setCreateDialogOpen(false)} className="px-4 py-2 rounded-lg border border-border text-sm hover:bg-accent">
+              <button onClick={() => setCreateDialogOpen(false)} className="px-4 py-2.5 rounded-lg border border-border text-sm font-medium hover:bg-secondary transition-colors">
                 ปิด
               </button>
             </div>

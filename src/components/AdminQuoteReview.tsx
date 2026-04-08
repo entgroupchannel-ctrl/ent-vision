@@ -984,8 +984,8 @@ const AdminQuoteReview = () => {
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <h3 className="text-lg font-bold text-foreground">{selected.quote_number || "Draft"}</h3>
                 <div className="flex items-center gap-2">
-                  <button onClick={handlePrint} className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors" title="พิมพ์"><Printer size={16} /></button>
-                  <button onClick={handleShare} className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors" title="แชร์"><Share2 size={16} /></button>
+                  <button onClick={handleShare} className="px-4 py-2.5 rounded-lg border border-border text-sm font-medium hover:bg-secondary transition-colors flex items-center gap-2"><Share2 size={14} /> แชร์</button>
+                  <button onClick={handlePrint} className="px-4 py-2.5 rounded-lg border border-border text-sm font-medium hover:bg-secondary transition-colors flex items-center gap-2"><Printer size={14} /> พิมพ์</button>
                   {/* Status Dropdown */}
                   <select
                     value={selected.status}
@@ -1001,7 +1001,7 @@ const AdminQuoteReview = () => {
                   <button
                     onClick={() => handleResetStatus(selected.id)}
                     disabled={saving || selected.status === "pending"}
-                    className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors disabled:opacity-30"
+                    className="p-2.5 rounded-lg border border-border hover:bg-secondary transition-colors disabled:opacity-30"
                     title="เคลียร์สถานะ (รีเซ็ตกลับเป็นรอตอบกลับ ข้อมูลไม่หาย)"
                   >
                     <RefreshCw size={14} />
@@ -1381,9 +1381,7 @@ const AdminQuoteReview = () => {
 
               {/* Actions */}
               <div className="flex gap-2 pt-2 border-t border-border">
-                <button onClick={handlePrint} className="px-4 py-3 rounded-xl border border-border text-sm font-medium hover:bg-secondary transition-colors flex items-center gap-2">
-                  <Printer size={14} /> พิมพ์ใบเสนอราคา
-                </button>
+                {/* ปุ่ม Print ถูกย้ายไปบนขวาแล้ว */}
                 {hasZeroPriceItems && !["completed", "po_approved"].includes(selected.status) && (
                   <div className="mb-3 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-xs text-yellow-700 dark:text-yellow-400 flex items-start gap-2">
                     <span className="text-base leading-none">⚠️</span>
