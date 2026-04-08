@@ -311,7 +311,6 @@ const AdminDashboard = () => {
                   { id: "invoices" as Tab, label: t("admin.invoices"), icon: Receipt, count: 0 },
                   { id: "delivery" as Tab, label: t("admin.delivery"), icon: Package, count: 0 },
                   { id: "payments" as Tab, label: t("admin.payments"), icon: Wallet, count: 0 },
-                  { id: "livechat" as Tab, label: t("admin.liveChat"), icon: Headphones, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
@@ -444,7 +443,6 @@ const AdminDashboard = () => {
               { id: "chatleads" as Tab, label: "Chat Leads" },
               { id: "subscribers" as Tab, label: "สมาชิก" },
               { id: "software" as Tab, label: "ซอฟต์แวร์" },
-              { id: "livechat" as Tab, label: "Live Chat" },
             ]).map((t) => (
               <button
                 key={t.id}

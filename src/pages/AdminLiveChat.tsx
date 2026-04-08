@@ -1,0 +1,58 @@
+import { useEffect, lazy, Suspense } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { usePermissions } from "@/hooks/usePermissions";
+import { ArrowLeft, Headphones, Loader2 } from "lucide-react";
+
+const AdminLiveChatComponent = lazy(() => import("@/components/AdminLiveChat"));
+
+const AdminLiveChatPage = () => {
+  const { user, loading: authLoading } = useAuth();
+  const { isAdmin, loading: permLoading } = usePermissions();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!authLoading && !permLoading && (!user || !isAdmin)) {
+      navigate("/admin-login");
+    }
+  }, [user, isAdmin, authLoading, permLoading, navigate]);
+
+  if (authLoading || permLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-6 h-6 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!user || !isAdmin) return null;
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Header */}
+      <div className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-30">
+        <div className="flex items-center gap-3 px-4 py-3">
+          <button
+            onClick={() => navigate("/admin")}
+            className="p-2 rounded-lg hover:bg-muted transition-colors"
+          >
+            <ArrowLeft size={18} />
+          </button>
+          <div className="flex items-center gap-2">
+            <Headphones size={18} className="text-primary" />
+            <h1 className="text-lg font-bold text-foreground">Live Chat</h1>
+          </div>
+        </div>
+      </div>
+
+      {/* Chat Component - Full Height */}
+      <div className="flex-1 overflow-hidden">
+        <Suspense fallback={<div className="text-center py-12 text-muted-foreground text-sm">กำลังโหลด...</div>}>
+          <AdminLiveChatComponent />
+        </Suspense>
+      </div>
+    </div>
+  );
+};
+
+export default AdminLiveChatPage;
