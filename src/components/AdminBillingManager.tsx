@@ -122,6 +122,10 @@ const AdminBillingManager = () => {
       }
       return (data || []) as BillingNote[];
     },
+    enabled: !!user?.id,
+    staleTime: 30_000,
+    gcTime: 5 * 60_000,
+    refetchOnMount: "always",
   });
 
   // Helper to trigger refetch (used by save handlers + refresh button)

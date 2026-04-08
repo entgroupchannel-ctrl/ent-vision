@@ -198,6 +198,10 @@ const AdminInvoiceManager = () => {
         receipts: (rcp.data || []) as ReceiptDoc[],
       };
     },
+    enabled: !!user?.id,
+    staleTime: 30_000,
+    gcTime: 5 * 60_000,
+    refetchOnMount: "always",
   });
 
   const invoices = invoiceData?.invoices ?? [];
