@@ -35,8 +35,11 @@ const MyDemos = () => {
           .eq("email", user.email)
           .order("created_at", { ascending: false });
         if (data) setDemos(data);
-      } catch { /* silent */ }
-      setLoading(false);
+      } catch {
+        /* silent */
+      } finally {
+        setLoading(false);
+      }
     })();
   }, [user]);
 
