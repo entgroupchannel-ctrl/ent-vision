@@ -3,6 +3,25 @@
 /* ── i18n ── */
 type Lang = 'th' | 'en';
 
+export type DocumentType = 'quote' | 'sales_order' | 'billing' | 'invoice' | 'delivery';
+
+const DOC_TITLES: Record<Lang, Record<DocumentType, string>> = {
+  th: {
+    quote: 'ใบเสนอราคา',
+    sales_order: 'ใบสั่งขาย',
+    billing: 'ใบวางบิล',
+    invoice: 'ใบกำกับภาษี',
+    delivery: 'ใบส่งของ',
+  },
+  en: {
+    quote: 'Quotation',
+    sales_order: 'Sales Order',
+    billing: 'Billing Note',
+    invoice: 'Tax Invoice',
+    delivery: 'Delivery Note',
+  },
+};
+
 const i18n: Record<Lang, Record<string, string>> = {
   th: {
     title: 'ใบเสนอราคา',
@@ -271,6 +290,7 @@ export const printQuote = (
   salePhone?: string,
   saleEmail?: string,
   lang: Lang = 'th',
+  documentType: DocumentType = 'quote',
 ) => {
   const c = { ...DEFAULT_COMPANY, ...company };
   const t = i18n[lang];
@@ -329,7 +349,7 @@ export const printQuote = (
   const coNameFull = lang === 'th' ? c.company_name_th : c.company_name_en;
 
   const html = `<!DOCTYPE html><html lang="${lang}"><head><meta charset="utf-8">
-<title>${t.title} ${q.quote_number || ""}</title>
+<title>${DOC_TITLES[lang][documentType]} ${q.quote_number || ""}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap">
@@ -355,12 +375,12 @@ body{font-family:'Sarabun','THSarabunNew','Helvetica','Arial',sans-serif;font-si
 
 /* ── Colors ── */
 :root{
-  --primary:#E87722;
-  --primary-dark:#C45D10;
+  --primary:#13AE8F;
+  --primary-dark:#0F8971;
   --text-dark:#333333;
   --text-light:#666666;
   --border:#E0E0E0;
-  --bg-light:#FFF8F0;
+  --bg-light:#F0FAF7;
   --table-header:#F5F5F5;
 }
 
@@ -465,7 +485,7 @@ table.items tr:nth-child(even){background:#fafbfc}
     ${c.website}
   </div>
   <div class="header-right">
-    <div class="title">${t.title}</div>
+    <div class="title">${DOC_TITLES[lang][documentType]}</div>
     <div class="info-box">
       <div class="info-row"><span class="lb">${t.quote_number}:</span><span class="vl">${q.quote_number || "—"}</span></div>
       <div class="info-row"><span class="lb">${t.date}:</span><span class="vl">${today}</span></div>
