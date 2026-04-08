@@ -1683,8 +1683,11 @@ export type Database = {
           chain_number: string | null
           company: string | null
           created_at: string
+          customer_address: string | null
+          customer_branch: string | null
           customer_response: string | null
           customer_sla_hours: number | null
+          customer_tax_id: string | null
           delivery_terms: string | null
           details: string | null
           discount_amount: number | null
@@ -1734,8 +1737,11 @@ export type Database = {
           chain_number?: string | null
           company?: string | null
           created_at?: string
+          customer_address?: string | null
+          customer_branch?: string | null
           customer_response?: string | null
           customer_sla_hours?: number | null
+          customer_tax_id?: string | null
           delivery_terms?: string | null
           details?: string | null
           discount_amount?: number | null
@@ -1785,8 +1791,11 @@ export type Database = {
           chain_number?: string | null
           company?: string | null
           created_at?: string
+          customer_address?: string | null
+          customer_branch?: string | null
           customer_response?: string | null
           customer_sla_hours?: number | null
+          customer_tax_id?: string | null
           delivery_terms?: string | null
           details?: string | null
           discount_amount?: number | null
@@ -2025,10 +2034,12 @@ export type Database = {
           chain_number: string | null
           completed_at: string | null
           created_at: string
+          customer_address: string | null
           customer_company: string | null
           customer_email: string | null
           customer_name: string
           customer_phone: string | null
+          customer_tax_id: string | null
           delivered_at: string | null
           delivery_terms: string | null
           discount_amount: number | null
@@ -2059,10 +2070,12 @@ export type Database = {
           chain_number?: string | null
           completed_at?: string | null
           created_at?: string
+          customer_address?: string | null
           customer_company?: string | null
           customer_email?: string | null
           customer_name: string
           customer_phone?: string | null
+          customer_tax_id?: string | null
           delivered_at?: string | null
           delivery_terms?: string | null
           discount_amount?: number | null
@@ -2093,10 +2106,12 @@ export type Database = {
           chain_number?: string | null
           completed_at?: string | null
           created_at?: string
+          customer_address?: string | null
           customer_company?: string | null
           customer_email?: string | null
           customer_name?: string
           customer_phone?: string | null
+          customer_tax_id?: string | null
           delivered_at?: string | null
           delivery_terms?: string | null
           discount_amount?: number | null
