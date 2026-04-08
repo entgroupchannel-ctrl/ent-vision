@@ -27,11 +27,11 @@ import AdminUserManagement from "@/components/AdminUserManagement";
 import NotificationBell from "@/components/NotificationBell";
 import RevenueChart from "@/components/RevenueChart";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
-const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
+
 import AddContactForm from "@/components/AddContactForm";
 import AddSoftwareInquiryDialog from "@/components/AddSoftwareInquiryDialog";
 
-type Tab = "dashboard" | "contacts" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
+type Tab = "dashboard" | "contacts" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
