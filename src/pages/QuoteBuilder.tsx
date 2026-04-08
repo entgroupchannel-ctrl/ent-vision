@@ -128,7 +128,7 @@ const QuoteBuilder = () => {
       // Get profile for auto-fill
       let profileData: any = {};
       try {
-        const { data } = await (supabase.from as any)("profiles").select("*").eq("id", user.id).single();
+        const { data } = await (supabase.from as any)("profiles").select("*").eq("id", user.id).maybeSingle();
         if (data) profileData = data;
       } catch { /* silent */ }
 
