@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Truck, Package, CheckCircle, Clock, Loader2, RefreshCw, Search,
@@ -6,6 +6,7 @@ import {
   Building2, Phone, Printer, ArrowRight, Plus, FileText,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { printQuote } from "@/utils/printQuote";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 
@@ -100,6 +101,16 @@ const AdminDeliveryManager = () => {
   const [invoicesForCreate, setInvoicesForCreate] = useState<InvoiceForDelivery[]>([]);
   const [receiptsForCreate, setReceiptsForCreate] = useState<ReceiptForDelivery[]>([]);
   const [sourceLoading, setSourceLoading] = useState(false);
+
+  const [companySettings, setCompanySettings] = useState<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await (supabase.from as any)("company_settings")
+        .select("*").limit(1).maybeSingle();
+      if (data) setCompanySettings(data);
+    })();
+  }, []);
 
   /* ─── Fetch ─── */
   /* ─── React Query: Auto-refetch on tab focus, no stuck state ─── */
@@ -258,6 +269,63 @@ const AdminDeliveryManager = () => {
     if (!error) { toast({ title: "บันทึกส่งมอบสำเร็จ" }); fetchDeliveries(); }
   };
 
+  /* ─── Print Delivery Note ─── */
+  const handlePrintDelivery = async (d: DeliveryNote) => {
+    try {
+      const { data: items } = await supabase
+        .from("delivery_note_items")
+        .select("*")
+        .eq("delivery_note_id", d.id)
+        .order("sort_order");
+
+      const printItems = (items || []).map((it: any) => ({
+        model: it.model,
+        qty: it.qty,
+        unit_price: 0,
+        discount_percent: 0,
+        line_total: 0,
+        admin_notes: it.serial_numbers && it.serial_numbers.length > 0
+          ? `S/N: ${it.serial_numbers.join(", ")}`
+          : null,
+        description: it.description,
+        _name: it.model,
+        _desc: it.description || "",
+      }));
+
+      printQuote(
+        {
+          quote_number: d.delivery_number,
+          name: d.customer_name,
+          email: "",
+          phone: d.customer_phone,
+          company: d.customer_company,
+          details: d.notes,
+          company_address: d.delivery_address || d.customer_address,
+          tax_id: null,
+        },
+        printItems,
+        {
+          discount_amount: 0,
+          valid_until: d.delivery_date || "",
+          payment_terms: "",
+          delivery_terms: d.courier
+            ? `${d.courier}${d.tracking_number ? ` — Tracking: ${d.tracking_number}` : ""}`
+            : "",
+          include_vat: false,
+          vat_percent: 0,
+        },
+        companySettings || undefined,
+        undefined,
+        undefined,
+        undefined,
+        'th',
+        'delivery',
+      );
+    } catch (err: any) {
+      toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message, variant: "destructive" });
+    }
+  };
+
   /* ─── Filter ─── */
   const filtered = deliveries.filter(d => {
     const matchSearch = !search || d.delivery_number.toLowerCase().includes(search.toLowerCase()) || d.customer_name.toLowerCase().includes(search.toLowerCase()) || (d.tracking_number || "").toLowerCase().includes(search.toLowerCase());
@@ -410,6 +478,12 @@ const AdminDeliveryManager = () => {
                           <CheckCircle size={12} /> ยืนยันส่งมอบแล้ว
                         </button>
                       )}
+                      <button
+                        onClick={() => handlePrintDelivery(d)}
+                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20"
+                      >
+                        <Printer size={12} /> พิมพ์
+                      </button>
                     </div>
                   </div>
                 )}
