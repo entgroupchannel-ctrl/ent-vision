@@ -131,12 +131,11 @@ const AppInner = () => {
 
   useEffect(() => {
     // ═══════════════════════════════════════════════════════════════════════
-    // Session Recovery Handler (No Reload Version)
+    // Session Recovery Handler — Tab Switch Spinner Fix
     // ═══════════════════════════════════════════════════════════════════════
-    // When tab becomes visible after being hidden for >30s, we:
-    // 1. Refresh Supabase session (in case token expired while away)
-    // 2. Invalidate React Query cache (triggers refetch of all queries)
-    // This recovers from stale state WITHOUT full page reload.
+    // Uses refreshSession() with 5s timeout instead of getSession().
+    // Falls back to page reload if refresh fails/hangs.
+    // Includes periodic health check to proactively refresh expiring tokens.
     // ═══════════════════════════════════════════════════════════════════════
 
     let lastHiddenTime: number | null = null;
@@ -145,28 +144,49 @@ const AppInner = () => {
     const handleVisibilityChange = async () => {
       if (document.hidden) {
         lastHiddenTime = Date.now();
-        console.log('[Session] Tab hidden');
+        console.log('[Session] Tab hidden at', new Date().toLocaleTimeString());
       } else {
         const hiddenDuration = lastHiddenTime ? Date.now() - lastHiddenTime : 0;
         console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 'seconds');
 
         if (hiddenDuration >= STALE_THRESHOLD) {
-          console.log('[Session] Recovering session (no reload)...');
-          
+          console.log('[Session] Recovering session...');
+
           try {
-            // 1. Force refresh Supabase session
-            const { data, error } = await supabase.auth.getSession();
+            // Force refresh token with 5s timeout to prevent hang
+            const refreshPromise = supabase.auth.refreshSession();
+            const timeoutPromise = new Promise((_, reject) =>
+              setTimeout(() => reject(new Error('Refresh timeout')), 5000)
+            );
+
+            const { data, error } = await Promise.race([
+              refreshPromise,
+              timeoutPromise,
+            ]) as any;
+
             if (error) {
-              console.error('[Session] getSession error:', error);
-            } else {
-              console.log('[Session] Session status:', data.session ? 'valid' : 'none');
+              console.error('[Session] Refresh failed:', error.message);
+              console.log('[Session] Forcing reload...');
+              window.location.reload();
+              return;
             }
 
-            // 2. Invalidate all React Query caches → triggers refetch
+            if (data?.session) {
+              const expiresIn = Math.round(
+                (new Date(data.session.expires_at || 0).getTime() - Date.now()) / 1000
+              );
+              console.log('[Session] Token refreshed successfully, expires in', expiresIn, 's');
+            } else {
+              console.warn('[Session] No session after refresh');
+            }
+
+            // Invalidate all queries to refetch with fresh token
             qc.invalidateQueries();
             console.log('[Session] All queries invalidated');
-          } catch (e) {
-            console.error('[Session] Recovery error:', e);
+          } catch (e: any) {
+            console.error('[Session] Recovery error:', e.message);
+            console.log('[Session] Forcing reload as fallback...');
+            window.location.reload();
           }
         }
 
@@ -176,30 +196,32 @@ const AppInner = () => {
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // Idle timeout - only reload after 10 min of complete inactivity
-    const RELOAD_INTERVAL = 12 * 60 * 1000;
-    const IDLE_THRESHOLD = 10 * 60 * 1000;
-    let lastActivity = Date.now();
+    // ── Periodic health check (every 2 min) ──
+    // Proactively refresh token if it expires in < 2 minutes
+    const healthCheckInterval = setInterval(async () => {
+      if (document.hidden) return;
 
-    const updateActivity = () => { lastActivity = Date.now(); };
+      try {
+        const { data } = await supabase.auth.getSession();
+        if (!data.session) return;
 
-    window.addEventListener('click', updateActivity);
-    window.addEventListener('keydown', updateActivity);
-    window.addEventListener('scroll', updateActivity);
+        const expiresAt = new Date(data.session.expires_at || 0).getTime();
+        const timeLeft = Math.round((expiresAt - Date.now()) / 1000);
+        console.log('[Session Health] Token expires in', timeLeft, 's');
 
-    const intervalId = setInterval(() => {
-      if (Date.now() - lastActivity >= IDLE_THRESHOLD) {
-        console.log('[Session] User idle for 10+ min, reloading...');
-        window.location.reload();
+        if (timeLeft < 120) {
+          console.log('[Session Health] Token expiring soon, refreshing...');
+          await supabase.auth.refreshSession();
+          qc.invalidateQueries();
+        }
+      } catch (e) {
+        console.error('[Session Health] Check failed:', e);
       }
-    }, RELOAD_INTERVAL);
+    }, 2 * 60 * 1000);
 
     return () => {
-      clearInterval(intervalId);
+      clearInterval(healthCheckInterval);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('click', updateActivity);
-      window.removeEventListener('keydown', updateActivity);
-      window.removeEventListener('scroll', updateActivity);
     };
   }, [qc]);
 
