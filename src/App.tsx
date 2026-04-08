@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/hooks/use-theme";
 import { I18nProvider } from "@/contexts/I18nContext";
 import { AuthProvider } from "@/hooks/useAuth";
 import { QuoteCartProvider } from "@/hooks/useQuoteCart";
+import { supabase } from "@/integrations/supabase/client";
 import Index from "./pages/Index.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
