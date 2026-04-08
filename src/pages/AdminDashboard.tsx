@@ -95,6 +95,7 @@ const AdminDashboard = () => {
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [sidebarMode, setSidebarMode] = useState<"full" | "icon" | "hidden">("full");
   const { can, getLevel } = usePermissions();
+  const [addContactOpen, setAddContactOpen] = useState(false);
 
   // Map tab → permission key
   const tabPermission: Record<Tab, PermissionKey> = {
@@ -588,6 +589,14 @@ const AdminDashboard = () => {
                 <option key={s} value={s}>{statusLabels[s]}</option>
               ))}
             </select>
+            {tab === "contacts" && (
+              <button
+                onClick={() => setAddContactOpen(true)}
+                className="ml-auto flex items-center gap-1.5 px-3 py-2 rounded-lg bg-green-600 text-white text-sm font-medium hover:bg-green-700 transition-colors"
+              >
+                <span className="text-lg leading-none">+</span> เพิ่มติดต่อ
+              </button>
+            )}
           </div>
         )}
 
