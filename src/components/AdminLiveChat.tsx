@@ -75,6 +75,46 @@ const AdminLiveChat = () => {
     qc.invalidateQueries({ queryKey: ["admin", "live-chat-conversations"] });
   };
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Visibility Change Handler: Reconnect realtime + refetch when tab returns
+  // ═══════════════════════════════════════════════════════════════════════════
+  useEffect(() => {
+    let lastHiddenTime: number | null = null;
+    const STALE_THRESHOLD = 30 * 1000; // 30 seconds
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        lastHiddenTime = Date.now();
+      } else {
+        const hiddenDuration = lastHiddenTime ? Date.now() - lastHiddenTime : 0;
+        
+        if (hiddenDuration >= STALE_THRESHOLD) {
+          console.log('[AdminLiveChat] Tab returned after', Math.round(hiddenDuration / 1000), 's — refreshing...');
+          
+          // Refetch conversations
+          loadConversations();
+          
+          // Reload messages for selected conversation
+          if (selectedConv) {
+            (async () => {
+              const { data } = await supabase
+                .from("live_chat_messages")
+                .select("*")
+                .eq("conversation_id", selectedConv.id)
+                .order("created_at", { ascending: true });
+              if (data) setMessages(data as Message[]);
+            })();
+          }
+        }
+        
+        lastHiddenTime = null;
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [selectedConv, qc]);
+
   // Realtime for new conversations
   useEffect(() => {
     const channel = supabase
