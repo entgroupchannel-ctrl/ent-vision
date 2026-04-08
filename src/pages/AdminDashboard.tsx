@@ -28,7 +28,7 @@ import NotificationBell from "@/components/NotificationBell";
 import RevenueChart from "@/components/RevenueChart";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
 const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
-import AddContactDialog from "@/components/AddContactDialog";
+import AddContactForm from "@/components/AddContactForm";
 
 type Tab = "dashboard" | "contacts" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
 
