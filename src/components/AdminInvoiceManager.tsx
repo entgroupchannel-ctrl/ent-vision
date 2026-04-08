@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   FileText, Receipt, FileCheck, Plus, Eye, RefreshCw, Search,
@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import DocCrossLinks from "@/components/admin/DocCrossLinks";
+import { printQuote } from "@/utils/printQuote";
 
 /* ─── Types ─── */
 interface Invoice {
@@ -169,6 +170,15 @@ const AdminInvoiceManager = () => {
   const [rcpFromPayOpen, setRcpFromPayOpen] = useState(false);
   const [confirmedPayments, setConfirmedPayments] = useState<PaymentForDoc[]>([]);
   const [payDocLoading, setPayDocLoading] = useState(false);
+  const [companySettings, setCompanySettings] = useState<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await (supabase.from as any)("company_settings")
+        .select("*").limit(1).maybeSingle();
+      if (data) setCompanySettings(data);
+    })();
+  }, []);
 
   /* ─── React Query: Invoices + Tax Invoices + Receipts ─── */
   const { data: invoiceData, isLoading: loading } = useQuery({
@@ -560,6 +570,59 @@ const AdminInvoiceManager = () => {
     const { error } = await supabase.from("receipts").update({ status, updated_at: new Date().toISOString() } as any).eq("id", id);
     if (error) toast({ title: "Error", description: error.message, variant: "destructive" });
     else { toast({ title: "อัปเดตสถานะสำเร็จ" }); fetchAll(); }
+  };
+
+  /* ─── Print Invoice ─── */
+  const handlePrintInvoice = async (inv: Invoice) => {
+    try {
+      const { data: items } = await supabase
+        .from("invoice_items")
+        .select("*")
+        .eq("invoice_id", inv.id)
+        .order("sort_order");
+
+      const printItems = (items || []).map((it: any) => ({
+        model: it.model,
+        qty: it.qty,
+        unit_price: it.unit_price,
+        discount_percent: it.discount_percent || 0,
+        line_total: it.line_total,
+        admin_notes: null,
+        description: it.description,
+        _name: it.model,
+        _desc: it.description || "",
+      }));
+
+      printQuote(
+        {
+          quote_number: inv.invoice_number,
+          name: inv.customer_name,
+          email: inv.customer_email || "",
+          phone: inv.customer_phone,
+          company: inv.customer_company,
+          details: inv.notes,
+          company_address: inv.customer_address,
+          tax_id: inv.customer_tax_id,
+        },
+        printItems,
+        {
+          discount_amount: inv.discount_amount || 0,
+          valid_until: inv.due_date || "",
+          payment_terms: inv.payment_terms || "",
+          delivery_terms: "",
+          include_vat: (inv.vat_amount || 0) > 0,
+          vat_percent: 7,
+        },
+        companySettings || undefined,
+        undefined,
+        undefined,
+        undefined,
+        'th',
+        'invoice',
+      );
+    } catch (err: any) {
+      toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message, variant: "destructive" });
+    }
   };
 
   /* ─── Filter ─── */
