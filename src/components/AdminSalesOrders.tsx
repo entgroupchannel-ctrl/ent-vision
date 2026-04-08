@@ -11,6 +11,8 @@ import { printQuote } from "@/utils/printQuote";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import DocCrossLinks from "@/components/admin/DocCrossLinks";
+import DocumentCrossReference from "@/components/admin/DocumentCrossReference";
+import SLAConfiguration from "@/components/admin/SLAConfiguration";
 
 /* ─── Types ─── */
 interface SalesOrder {
@@ -570,9 +572,33 @@ const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
                     </button>
                   </div>
 
-                  {/* Related Documents */}
+                  {/* Document Cross Reference Flow */}
                   <div className="border-t border-border pt-3">
-                    <DocCrossLinks quoteId={selected.quote_id} orderId={selected.id} exclude={["order"]} />
+                    <DocumentCrossReference
+                      currentDoc={{ type: 'so', number: selected.order_number, id: selected.id }}
+                      relatedDocs={[
+                        { type: 'quote' as const, number: '—', id: selected.quote_id },
+                        ...(selected.po_number ? [{ type: 'po' as const, number: selected.po_number, id: selected.id }] : []),
+                        { type: 'so' as const, number: selected.order_number, id: selected.id },
+                      ]}
+                      onNavigate={(docType) => {
+                        if (docType === 'quote') window.dispatchEvent(new CustomEvent("admin-switch-tab", { detail: "quote_review" }));
+                        if (docType === 'bl') window.dispatchEvent(new CustomEvent("admin-switch-tab", { detail: "billing" }));
+                      }}
+                    />
+                    <div className="mt-2">
+                      <DocCrossLinks quoteId={selected.quote_id} orderId={selected.id} exclude={["order"]} />
+                    </div>
+                  </div>
+
+                  {/* SLA Configuration */}
+                  <div className="border-t border-border pt-3">
+                    <SLAConfiguration
+                      orderId={selected.id}
+                      onSave={async (config) => {
+                        toast({ title: "บันทึก SLA แล้ว", description: `Processing: ${config.processingHours} ${config.processingUnit === 'hours' ? 'ชม.' : 'วัน'}, Shipping: ${config.shippingDays} ${config.shippingUnit === 'hours' ? 'ชม.' : 'วัน'}` });
+                      }}
+                    />
                   </div>
 
                   {/* Print */}
