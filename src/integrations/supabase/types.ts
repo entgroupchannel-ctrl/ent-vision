@@ -319,6 +319,8 @@ export type Database = {
           phone: string | null
           province: string | null
           quote_terms: string | null
+          receiver_name: string | null
+          receiver_position: string | null
           tax_id: string | null
           updated_at: string | null
           vat_percent: number | null
@@ -341,6 +343,8 @@ export type Database = {
           phone?: string | null
           province?: string | null
           quote_terms?: string | null
+          receiver_name?: string | null
+          receiver_position?: string | null
           tax_id?: string | null
           updated_at?: string | null
           vat_percent?: number | null
@@ -363,6 +367,8 @@ export type Database = {
           phone?: string | null
           province?: string | null
           quote_terms?: string | null
+          receiver_name?: string | null
+          receiver_position?: string | null
           tax_id?: string | null
           updated_at?: string | null
           vat_percent?: number | null
@@ -1856,6 +1862,7 @@ export type Database = {
           payment_record_id: string | null
           quote_id: string | null
           receipt_number: string
+          receipt_type: string | null
           status: string
           updated_at: string | null
         }
@@ -1876,6 +1883,7 @@ export type Database = {
           payment_record_id?: string | null
           quote_id?: string | null
           receipt_number: string
+          receipt_type?: string | null
           status?: string
           updated_at?: string | null
         }
@@ -1896,6 +1904,7 @@ export type Database = {
           payment_record_id?: string | null
           quote_id?: string | null
           receipt_number?: string
+          receipt_type?: string | null
           status?: string
           updated_at?: string | null
         }
