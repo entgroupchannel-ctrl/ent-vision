@@ -114,6 +114,16 @@ const AdminSalesOrders = () => {
   const [editProvider, setEditProvider] = useState("");
   const [editNotes, setEditNotes] = useState("");
 
+  const [companySettings, setCompanySettings] = useState<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await (supabase.from as any)("company_settings")
+        .select("*").limit(1).maybeSingle();
+      if (data) setCompanySettings(data);
+    })();
+  }, []);
+
   /* ─── Fetch ─── */
   const fetchOrders = async () => {
     setLoading(true);
