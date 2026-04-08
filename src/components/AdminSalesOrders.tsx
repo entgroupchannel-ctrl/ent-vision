@@ -100,7 +100,7 @@ const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
   const { toast } = useToast();
 
   const [orders, setOrders] = useState<SalesOrder[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<SalesOrder | null>(null);
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [itemsLoading, setItemsLoading] = useState(false);
@@ -162,7 +162,29 @@ const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
     setItemsLoading(false);
   };
 
-  useEffect(() => { fetchOrders(); fetchStats(); }, []);
+  useEffect(() => {
+    let cancelled = false;
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const [ordersRes, statsRes, monthlyRes] = await Promise.all([
+          (supabase.from as any)("sales_orders").select("*").order("created_at", { ascending: false }),
+          supabase.rpc("get_sales_dashboard", { _year: new Date().getFullYear() }).then(r => r, () => ({ data: null })),
+          supabase.rpc("get_monthly_revenue", { _year: new Date().getFullYear() }).then(r => r, () => ({ data: null })),
+        ]);
+        if (cancelled) return;
+        if (ordersRes.data) setOrders(ordersRes.data);
+        if (statsRes.data) setSalesStats(statsRes.data as SaleStat[]);
+        if (monthlyRes.data) setMonthlyRevenue(monthlyRes.data as MonthlyRevenue[]);
+      } catch (err) {
+        console.error("[AdminSalesOrders] Load failed:", err);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+    loadData();
+    return () => { cancelled = true; };
+  }, []);
 
   const selectOrder = (o: SalesOrder) => {
     setSelected(o);
