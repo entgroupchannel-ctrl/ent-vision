@@ -15,6 +15,8 @@ type GuestInfo = { name: string; email: string };
 
 const LiveChatWidget = () => {
   const { user } = useAuth();
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
