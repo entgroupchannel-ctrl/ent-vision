@@ -1007,9 +1007,28 @@ const AdminQuoteReview = () => {
                     <RefreshCw size={14} />
                   </button>
                 </div>
-              </div>
+               </div>
 
-              {/* Customer Info */}
+              {/* ═══ Quote Status Timeline ═══ */}
+              <QuoteStatusTimeline status={selected.status} className="my-2" />
+
+              {/* ═══ Admin Quick Actions ═══ */}
+              <QuoteActions
+                status={selected.status}
+                userRole="admin"
+                onDownloadPDF={selected.pdf_url ? () => window.open(selected.pdf_url!, '_blank') : undefined}
+                onViewPO={selected.po_file_url ? () => window.open(selected.po_file_url!, '_blank') : undefined}
+                onApprovePO={selected.po_status && ["uploaded", "under_review", "pending_clarification"].includes(selected.po_status) ? () => handlePoAction(selected.id, "approved") : undefined}
+                onRejectPO={selected.po_status && ["uploaded", "under_review", "pending_clarification"].includes(selected.po_status) ? () => {
+                  const reason = prompt("เหตุผลที่ปฏิเสธ PO:");
+                  if (reason !== null) handlePoAction(selected.id, "rejected", reason);
+                } : undefined}
+                onViewSO={() => window.dispatchEvent(new CustomEvent("admin-switch-tab", { detail: "sales_orders" }))}
+                onViewBL={() => window.dispatchEvent(new CustomEvent("admin-switch-tab", { detail: "billing" }))}
+                loading={saving}
+              />
+
+
               <div className="p-4 rounded-xl bg-secondary/30 border border-border space-y-2">
                 <h4 className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">ข้อมูลลูกค้า</h4>
                 <div className="grid grid-cols-2 gap-2 text-sm">
