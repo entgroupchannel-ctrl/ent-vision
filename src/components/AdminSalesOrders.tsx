@@ -20,6 +20,8 @@ interface SalesOrder {
   customer_email: string | null;
   customer_phone: string | null;
   customer_company: string | null;
+  customer_address: string | null;
+  customer_tax_id: string | null;
   assigned_to: string | null;
   po_number: string | null;
   po_file_url: string | null;
@@ -236,8 +238,8 @@ const AdminSalesOrders = () => {
           phone: o.customer_phone,
           company: o.customer_company,
           details: o.admin_notes,
-          company_address: null,
-          tax_id: null,
+          company_address: o.customer_address,
+          tax_id: o.customer_tax_id,
         },
         printItems,
         {
