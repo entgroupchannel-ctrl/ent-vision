@@ -107,8 +107,9 @@ const queryClient = new QueryClient({
     queries: {
       refetchOnWindowFocus: true,
       refetchOnReconnect: true,
-      staleTime: 30_000,
-      gcTime: 5 * 60_000,
+      staleTime: 60_000,
+      gcTime: 30 * 60_000,
+      networkMode: "always",
       retry: (failureCount, error: any) => {
         const status = error?.status ?? error?.code;
         if (status === 401 || status === "401" || status === "PGRST301") return false;
@@ -118,6 +119,7 @@ const queryClient = new QueryClient({
     },
     mutations: {
       retry: 0,
+      networkMode: "always",
     },
   },
 });
