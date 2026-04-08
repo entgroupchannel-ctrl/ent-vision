@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { recordPermissionLoad } from "@/hooks/useSessionMetrics";
 
 export type AccessLevel = "none" | "view" | "edit";
 
@@ -133,6 +134,7 @@ export function usePermissions() {
     const fetchPermissions = async () => {
       const MAX_RETRIES = 2;
       let retryCount = 0;
+      const t0 = performance.now();
 
       try {
         // ✅ FIX: Check session before query
@@ -194,6 +196,7 @@ export function usePermissions() {
 
           setPermissions(map);
           setLoading(false);
+          recordPermissionLoad(performance.now() - t0);
           if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
             timeoutRef.current = null;

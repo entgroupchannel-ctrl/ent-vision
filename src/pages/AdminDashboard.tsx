@@ -6,7 +6,7 @@ import {
   Filter, RefreshCw, Eye, Clock, CheckCircle, XCircle,
   Star, Phone, Building2, MessageSquare, LogOut, Shield, Download,
   CalendarClock, Hash, Wallet, Code2, Cloud,
-  PanelLeftClose, PanelLeft, Package, FolderOpen, BarChart3, Headphones,
+  PanelLeftClose, PanelLeft, Package, FolderOpen, BarChart3, Headphones, Activity,
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { supabase } from "@/integrations/supabase/client";
@@ -27,11 +27,12 @@ import AdminUserManagement from "@/components/AdminUserManagement";
 import NotificationBell from "@/components/NotificationBell";
 import RevenueChart from "@/components/RevenueChart";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
+import AdminSessionMonitor from "@/components/AdminSessionMonitor";
 
 import AddContactForm from "@/components/AddContactForm";
 import AddSoftwareInquiryDialog from "@/components/AddSoftwareInquiryDialog";
 
-type Tab = "dashboard" | "contacts" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
+type Tab = "dashboard" | "contacts" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments" | "session_monitor";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -117,6 +118,7 @@ const AdminDashboard = () => {
     billing: "sales.quote_review",
     delivery: "sales.quote_review",
     payments: "sales.quote_review",
+    session_monitor: "system.users",
   };
 
   // Check if current tab allows edit
@@ -422,6 +424,20 @@ const AdminDashboard = () => {
                       <Shield size={16} className="shrink-0" />
                       {sidebarMode === "full" && <span className="flex-1 text-left truncate">{t("admin.users")}</span>}
                     </button>
+                    {isSuperAdmin && (
+                      <button
+                        onClick={() => { setTab("session_monitor"); setStatusFilter("all"); setSelectedItem(null); }}
+                        className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                          tab === "session_monitor"
+                            ? "bg-primary/10 text-primary"
+                            : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                        } ${sidebarMode === "icon" ? "justify-center" : ""}`}
+                        title={sidebarMode === "icon" ? "Session Monitor" : undefined}
+                      >
+                        <Activity size={16} className="shrink-0" />
+                        {sidebarMode === "full" && <span className="flex-1 text-left truncate">Session Monitor</span>}
+                      </button>
+                    )}
                   </>
                 )}
 
@@ -532,9 +548,10 @@ const AdminDashboard = () => {
         {tab === "delivery" && <AdminDeliveryManager />}
         {tab === "payments" && <AdminPaymentManager />}
         {tab === "users" && <AdminUserManagement />}
+        {tab === "session_monitor" && <AdminSessionMonitor />}
 
         {/* Legacy fallback for tabs that don't have dedicated managers (contacts, chatleads, software, subscribers) */}
-        {!["dashboard", "engagement", "documents", "catalog", "quote_review", "sales_orders", "billing", "invoices", "delivery", "payments", "users"].includes(tab) && (
+        {!["dashboard", "engagement", "documents", "catalog", "quote_review", "sales_orders", "billing", "invoices", "delivery", "payments", "users", "session_monitor"].includes(tab) && (
         <>
         {/* Filter & Export */}
         {tab === "chatleads" ? (
