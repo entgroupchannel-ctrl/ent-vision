@@ -20,6 +20,7 @@ interface SalesOrder {
   customer_tax_id: string | null;
   customer_email: string | null;
   customer_phone: string | null;
+  po_number: string | null;
   po_file_url: string | null;
   subtotal: number;
   discount_amount: number;
