@@ -293,8 +293,6 @@ const MyOrders = () => {
                 { type: 'so' as const, number: order.order_number, id: order.id },
               ]}
             />
-            )}
-
             {/* Line Items */}
             <div>
               <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">รายการสินค้า</h4>
