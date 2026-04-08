@@ -11,7 +11,14 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 
 /* ─── Types ─── */
-type ViewMode = "month" | "quarter" | "year";
+type ViewMode = "week" | "month" | "quarter" | "year";
+
+interface WeeklyRow {
+  day_of_week: number;
+  day_name: string;
+  total_revenue: number;
+  order_count: number;
+}
 
 interface MonthlyRow {
   month_num: number;
@@ -59,26 +66,35 @@ const calcGrowth = (curr: number, prev: number): number => {
 
 const CURRENT_YEAR = new Date().getFullYear();
 
+const DAY_ORDER = ["จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์", "อาทิตย์"];
+
 /* ─── Component ─── */
 const RevenueChart = () => {
   const [mode, setMode] = useState<ViewMode>("month");
   const [year, setYear] = useState<number>(CURRENT_YEAR);
   const [showYoY, setShowYoY] = useState(true);
+  const [weekOffset, setWeekOffset] = useState(0);
 
-  /* ─── React Query: Fetch revenue data based on mode/year/showYoY ───
-   * - Query key includes [mode, year, showYoY] so changing them triggers refetch
-   * - Auto-refetch on window focus (fixes spinner-stuck after tab switch)
-   * - No useState/useEffect/loading boilerplate
-   */
   const { data, isLoading: loading } = useQuery({
-    queryKey: ["admin", "revenue", mode, year, showYoY],
+    queryKey: ["admin", "revenue", mode, year, showYoY, weekOffset],
     queryFn: async () => {
-      if (mode === "month") {
+      if (mode === "week") {
+        const { data } = await supabase.rpc("get_weekly_revenue", { _week_offset: weekOffset } as any);
+        return {
+          weekly: (data || []) as WeeklyRow[],
+          monthly: [] as MonthlyRow[],
+          monthlyPrev: [] as MonthlyRow[],
+          quarterly: [] as QuarterlyRow[],
+          quarterlyPrev: [] as QuarterlyRow[],
+          yearly: [] as YearlyRow[],
+        };
+      } else if (mode === "month") {
         const [curr, prev] = await Promise.all([
           supabase.rpc("get_monthly_revenue", { _year: year }),
           showYoY ? supabase.rpc("get_monthly_revenue", { _year: year - 1 }) : Promise.resolve({ data: [] }),
         ]);
         return {
+          weekly: [] as WeeklyRow[],
           monthly: (curr.data || []) as MonthlyRow[],
           monthlyPrev: (prev.data || []) as MonthlyRow[],
           quarterly: [] as QuarterlyRow[],
@@ -91,6 +107,7 @@ const RevenueChart = () => {
           showYoY ? supabase.rpc("get_quarterly_revenue", { _year: year - 1 }) : Promise.resolve({ data: [] }),
         ]);
         return {
+          weekly: [] as WeeklyRow[],
           monthly: [] as MonthlyRow[],
           monthlyPrev: [] as MonthlyRow[],
           quarterly: (curr.data || []) as QuarterlyRow[],
@@ -100,6 +117,7 @@ const RevenueChart = () => {
       } else {
         const { data } = await supabase.rpc("get_yearly_revenue", { _years_back: 5 });
         return {
+          weekly: [] as WeeklyRow[],
           monthly: [] as MonthlyRow[],
           monthlyPrev: [] as MonthlyRow[],
           quarterly: [] as QuarterlyRow[],
@@ -110,6 +128,7 @@ const RevenueChart = () => {
     },
   });
 
+  const weekly = data?.weekly ?? [];
   const monthly = data?.monthly ?? [];
   const monthlyPrev = data?.monthlyPrev ?? [];
   const quarterly = data?.quarterly ?? [];
@@ -118,6 +137,16 @@ const RevenueChart = () => {
 
   /* ─── Build chart data ─── */
   const chartData: ChartPoint[] = useMemo(() => {
+    if (mode === "week") {
+      return DAY_ORDER.map((dayName) => {
+        const dayData = weekly.find((w) => w.day_name === dayName);
+        return {
+          label: dayName,
+          current: dayData ? Number(dayData.total_revenue) || 0 : 0,
+          count: dayData ? Number(dayData.order_count) || 0 : 0,
+        };
+      });
+    }
     if (mode === "month") {
       return monthly.map((m) => {
         const prev = monthlyPrev.find((p) => p.month_num === m.month_num);
@@ -147,7 +176,7 @@ const RevenueChart = () => {
       current: Number(y.total_revenue) || 0,
       count: Number(y.order_count) || 0,
     }));
-  }, [mode, monthly, monthlyPrev, quarterly, quarterlyPrev, yearly]);
+  }, [mode, weekly, monthly, monthlyPrev, quarterly, quarterlyPrev, yearly]);
 
   /* ─── Stats ─── */
   const stats = useMemo(() => {
@@ -163,6 +192,16 @@ const RevenueChart = () => {
     return { totalCurrent, totalPrev, totalCount, growth, avgPerPeriod, bestPeriod };
   }, [chartData]);
 
+  /* ─── Week label ─── */
+  const weekLabel = useMemo(() => {
+    if (weekOffset === 0) return "สัปดาห์นี้";
+    if (weekOffset === -1) return "สัปดาห์ก่อน";
+    return `${Math.abs(weekOffset)} สัปดาห์ก่อน`;
+  }, [weekOffset]);
+
+  /* ─── Period label for stats ─── */
+  const periodLabel = mode === "week" ? "วัน" : mode === "month" ? "เดือน" : mode === "quarter" ? "ไตรมาส" : "ปี";
+
   /* ─── Custom tooltip ─── */
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (!active || !payload || !payload.length) return null;
@@ -175,7 +214,7 @@ const RevenueChart = () => {
         {curr && (
           <div className="flex items-center gap-2 mb-1">
             <div className="w-2 h-2 rounded-sm bg-primary"></div>
-            <span className="text-muted-foreground">{year}:</span>
+            <span className="text-muted-foreground">{mode === "week" ? weekLabel : String(year)}:</span>
             <span className="font-bold text-foreground">฿{fmtFull(curr.value)}</span>
           </div>
         )}
@@ -213,13 +252,15 @@ const RevenueChart = () => {
           <h3 className="text-base font-bold text-foreground flex items-center gap-2">
             <DollarSign size={16} className="text-primary" />
             กราฟรายได้
-            {mode !== "year" && <span className="text-muted-foreground font-normal"> · {year}</span>}
+            {mode === "week" && <span className="text-muted-foreground font-normal"> · {weekLabel}</span>}
+            {mode !== "year" && mode !== "week" && <span className="text-muted-foreground font-normal"> · {year}</span>}
           </h3>
           <p className="text-[11px] text-muted-foreground mt-0.5">
+            {mode === "week" && "รายได้รายวัน (จันทร์–อาทิตย์)"}
             {mode === "month" && "รายได้รายเดือน"}
             {mode === "quarter" && "รายได้รายไตรมาส"}
             {mode === "year" && "รายได้รายปี (5 ปีล่าสุด)"}
-            {showYoY && mode !== "year" && ` · เทียบกับปี ${year - 1}`}
+            {showYoY && mode !== "year" && mode !== "week" && ` · เทียบกับปี ${year - 1}`}
           </p>
         </div>
 
@@ -227,6 +268,7 @@ const RevenueChart = () => {
           {/* Mode toggle */}
           <div className="inline-flex rounded-lg border border-border bg-background p-0.5">
             {([
+              { v: "week", l: "รายสัปดาห์" },
               { v: "month", l: "รายเดือน" },
               { v: "quarter", l: "ไตรมาส" },
               { v: "year", l: "รายปี" },
@@ -243,8 +285,30 @@ const RevenueChart = () => {
             ))}
           </div>
 
+          {/* Week selector */}
+          {mode === "week" && (
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setWeekOffset(weekOffset - 1)}
+                className="px-2 py-1.5 rounded-lg border border-border text-xs hover:bg-secondary"
+              >
+                ←
+              </button>
+              <span className="px-3 py-1.5 text-xs font-medium min-w-[100px] text-center">
+                {weekLabel}
+              </span>
+              <button
+                onClick={() => setWeekOffset(Math.min(0, weekOffset + 1))}
+                disabled={weekOffset >= 0}
+                className="px-2 py-1.5 rounded-lg border border-border text-xs hover:bg-secondary disabled:opacity-30"
+              >
+                →
+              </button>
+            </div>
+          )}
+
           {/* Year selector */}
-          {mode !== "year" && (
+          {mode !== "year" && mode !== "week" && (
             <select
               value={year}
               onChange={(e) => setYear(Number(e.target.value))}
@@ -257,7 +321,7 @@ const RevenueChart = () => {
           )}
 
           {/* YoY toggle */}
-          {mode !== "year" && (
+          {mode !== "year" && mode !== "week" && (
             <button
               onClick={() => setShowYoY(!showYoY)}
               className={`px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
@@ -278,7 +342,7 @@ const RevenueChart = () => {
         <div className="rounded-xl border border-border bg-background/50 p-3">
           <div className="text-[10px] text-muted-foreground">รายได้รวม</div>
           <div className="text-lg font-bold text-foreground mt-0.5">{fmtBaht(stats.totalCurrent)}</div>
-          {showYoY && stats.totalPrev > 0 && mode !== "year" && (
+          {showYoY && stats.totalPrev > 0 && mode !== "year" && mode !== "week" && (
             <div className={`text-[10px] mt-1 flex items-center gap-1 ${
               stats.growth > 0 ? "text-green-500" : stats.growth < 0 ? "text-red-500" : "text-muted-foreground"
             }`}>
@@ -297,12 +361,12 @@ const RevenueChart = () => {
         </div>
 
         <div className="rounded-xl border border-border bg-background/50 p-3">
-          <div className="text-[10px] text-muted-foreground">เฉลี่ย/{mode === "month" ? "เดือน" : mode === "quarter" ? "ไตรมาส" : "ปี"}</div>
+          <div className="text-[10px] text-muted-foreground">เฉลี่ย/{periodLabel}</div>
           <div className="text-lg font-bold text-foreground mt-0.5">{fmtBaht(stats.avgPerPeriod)}</div>
         </div>
 
         <div className="rounded-xl border border-border bg-background/50 p-3">
-          <div className="text-[10px] text-muted-foreground">{mode === "month" ? "เดือน" : mode === "quarter" ? "ไตรมาส" : "ปี"}สูงสุด</div>
+          <div className="text-[10px] text-muted-foreground">{periodLabel}สูงสุด</div>
           <div className="text-lg font-bold text-foreground mt-0.5">
             {stats.bestPeriod ? fmtBaht(stats.bestPeriod.current) : "-"}
           </div>
@@ -345,13 +409,13 @@ const RevenueChart = () => {
                 tickFormatter={fmtBaht}
               />
               <Tooltip content={<CustomTooltip />} cursor={{ fill: "hsl(var(--muted))", opacity: 0.3 }} />
-              {showYoY && mode !== "year" && (
+              {showYoY && mode !== "year" && mode !== "week" && (
                 <Legend
                   wrapperStyle={{ fontSize: "11px", paddingTop: "10px" }}
                   formatter={(value) => (value === "current" ? `ปี ${year}` : `ปี ${year - 1}`)}
                 />
               )}
-              {showYoY && mode !== "year" && (
+              {showYoY && mode !== "year" && mode !== "week" && (
                 <Bar
                   dataKey="previous"
                   fill="hsl(var(--muted-foreground))"
@@ -364,12 +428,12 @@ const RevenueChart = () => {
                 dataKey="current"
                 fill="hsl(var(--primary))"
                 radius={[6, 6, 0, 0]}
-                maxBarSize={mode === "quarter" ? 80 : 40}
+                maxBarSize={mode === "week" ? 60 : mode === "quarter" ? 80 : 40}
               >
                 {chartData.map((entry, idx) => (
                   <Cell
                     key={`cell-${idx}`}
-                    fill={entry.label === stats.bestPeriod?.label ? "hsl(var(--primary))" : "hsl(var(--primary))"}
+                    fill="hsl(var(--primary))"
                     fillOpacity={entry.label === stats.bestPeriod?.label ? 1 : 0.85}
                   />
                 ))}
