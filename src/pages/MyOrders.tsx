@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Package, Truck, CheckCircle, Clock, MapPin, Loader2, RefreshCw,
   FileText, ChevronUp, ExternalLink, Copy, Box, XCircle,
-  CreditCard, Download, Printer,
+  CreditCard, Download,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import { printQuote } from "@/utils/printQuote";
 
 /* ─── Types ─── */
 interface SalesOrder {
@@ -16,8 +15,6 @@ interface SalesOrder {
   quote_id: string;
   customer_name: string;
   customer_company: string | null;
-  customer_address: string | null;
-  customer_tax_id: string | null;
   customer_email: string | null;
   customer_phone: string | null;
   po_number: string | null;
@@ -96,66 +93,6 @@ const MyOrders = () => {
 
   useEffect(() => { fetchOrders(); }, [user]);
 
-  const [companySettings, setCompanySettings] = useState<any>(null);
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await (supabase.from as any)("company_settings")
-        .select("*").limit(1).maybeSingle();
-      if (data) setCompanySettings(data);
-    })();
-  }, []);
-
-  const handlePrintOrder = async (order: SalesOrder) => {
-    try {
-      const { data: items } = await (supabase.from as any)("sales_order_items")
-        .select("*")
-        .eq("order_id", order.id)
-        .order("sort_order");
-
-      const printItems = (items || []).map((it: any) => ({
-        model: it.model,
-        qty: it.qty,
-        unit_price: it.unit_price,
-        discount_percent: it.discount_percent || 0,
-        line_total: it.line_total,
-        admin_notes: it.admin_notes || null,
-        description: it.description,
-        _name: it.name_th || it.model,
-        _desc: it.description || "",
-      }));
-
-      printQuote(
-        {
-          quote_number: order.order_number,
-          name: order.customer_name,
-          email: order.customer_email || "",
-          phone: order.customer_phone,
-          company: order.customer_company,
-          details: order.admin_notes,
-          company_address: order.customer_address,
-          tax_id: order.customer_tax_id,
-        },
-        printItems,
-        {
-          discount_amount: order.discount_amount || 0,
-          valid_until: "",
-          payment_terms: order.payment_terms || "",
-          delivery_terms: order.delivery_terms || "",
-          include_vat: true,
-          vat_percent: 7,
-        },
-        companySettings || undefined,
-        undefined,
-        undefined,
-        undefined,
-        'th',
-        'sales_order',
-      );
-    } catch (err: any) {
-      toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message, variant: "destructive" });
-    }
-  };
 
   const handleExpand = (id: string) => {
     if (expandedId === id) {
@@ -377,15 +314,9 @@ const MyOrders = () => {
               <div className="flex justify-between text-base font-bold pt-1 border-t border-border"><span>ยอดรวม</span><span className="text-primary">฿{fpd(order.grand_total)}</span></div>
             </div>
 
-            {/* Actions */}
-            <div className="flex items-center justify-center gap-3">
-              <button
-                onClick={() => handlePrintOrder(order)}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 transition-colors border border-primary/20"
-              >
-                <Printer size={14} /> พิมพ์ใบสั่งขาย
-              </button>
-              <button onClick={() => setExpandedId(null)} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 px-3 py-2">
+            {/* Close */}
+            <div className="flex items-center justify-center">
+              <button onClick={() => setExpandedId(null)} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 mx-auto">
                 <ChevronUp size={12} /> ปิด
               </button>
             </div>

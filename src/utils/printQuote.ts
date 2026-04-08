@@ -3,7 +3,7 @@
 /* ── i18n ── */
 type Lang = 'th' | 'en';
 
-export type DocumentType = 'quote' | 'sales_order' | 'billing' | 'invoice' | 'delivery';
+export type DocumentType = 'quote' | 'sales_order' | 'billing' | 'invoice' | 'delivery' | 'receipt_full' | 'receipt_simple';
 
 const DOC_TITLES: Record<Lang, Record<DocumentType, string>> = {
   th: {
@@ -12,6 +12,8 @@ const DOC_TITLES: Record<Lang, Record<DocumentType, string>> = {
     billing: 'ใบวางบิล',
     invoice: 'ใบกำกับภาษี',
     delivery: 'ใบส่งของ',
+    receipt_full: 'ใบเสร็จรับเงิน/ใบกำกับภาษี',
+    receipt_simple: 'ใบเสร็จรับเงิน',
   },
   en: {
     quote: 'Quotation',
@@ -19,6 +21,8 @@ const DOC_TITLES: Record<Lang, Record<DocumentType, string>> = {
     billing: 'Billing Note',
     invoice: 'Tax Invoice',
     delivery: 'Delivery Note',
+    receipt_full: 'Receipt / Tax Invoice',
+    receipt_simple: 'Receipt',
   },
 };
 
@@ -35,6 +39,12 @@ const i18n: Record<Lang, Record<string, string>> = {
     email: 'อีเมล',
     phone: 'โทร',
     tax_id: 'เลขประจำตัวผู้เสียภาษี',
+    payment_date_label: 'วันที่ชำระเงิน',
+    payment_method_label: 'วิธีชำระเงิน',
+    amount_paid: 'จำนวนเงินที่รับ',
+    receiver_signature: 'ผู้รับเงิน',
+    receiver_position: 'ตำแหน่ง',
+    signed_date: 'วันที่',
     item_no: '#',
     description: 'รายละเอียด',
     quantity: 'จำนวน',
@@ -74,6 +84,12 @@ const i18n: Record<Lang, Record<string, string>> = {
     email: 'Email',
     phone: 'Tel',
     tax_id: 'Tax ID',
+    payment_date_label: 'Payment Date',
+    payment_method_label: 'Payment Method',
+    amount_paid: 'Amount Paid',
+    receiver_signature: 'Receiver',
+    receiver_position: 'Position',
+    signed_date: 'Date',
     item_no: '#',
     description: 'Description',
     quantity: 'Qty',
@@ -120,6 +136,11 @@ interface PrintQuote {
   company_address?: string | null;
   tax_id?: string | null;
   branch?: string | null;
+  payment_date?: string | null;
+  payment_method?: string | null;
+  amount_paid?: number | null;
+  receiver_name?: string | null;
+  receiver_position?: string | null;
 }
 
 interface PrintLineItem {
@@ -314,7 +335,7 @@ export const printQuote = (
   const afterDiscount = subtotal - extraDiscount;
   const beforeVat = afterDiscount;
   // บังคับ VAT สำหรับใบกำกับภาษีและใบวางบิล (กฎหมายสรรพากรไทย)
-  const forceVat = documentType === 'invoice' || documentType === 'billing';
+  const forceVat = documentType === 'invoice' || documentType === 'billing' || documentType === 'receipt_full';
   const includeVat = forceVat || terms.include_vat !== false;
   const vatPercent = includeVat ? (terms.vat_percent || c.vat_percent || 7) : 0;
   const vatAmount = vatPercent > 0 ? Math.round(beforeVat * vatPercent / 100 * 100) / 100 : 0;
