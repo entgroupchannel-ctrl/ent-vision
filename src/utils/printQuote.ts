@@ -360,7 +360,7 @@ export const printQuote = (
 <title>${DOC_TITLES[lang][documentType]} ${q.quote_number || ""}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=block">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Sarabun','THSarabunNew','Helvetica','Arial',sans-serif;font-size:10pt;color:#333;padding:0;margin:0}
@@ -617,19 +617,27 @@ ${c.quote_terms ? `<div class="terms-section no-break">
     // รอ font ภาษาไทยโหลดเสร็จก่อน print เพื่อป้องกันสระ/วรรณยุกต์ซ้อน
     const triggerPrint = () => {
       try {
-        const fontsReady = (w.document as any).fonts?.ready;
-        if (fontsReady && typeof fontsReady.then === "function") {
-          fontsReady.then(() => {
-            setTimeout(() => w.print(), 300);
+        const docFonts = (w.document as any).fonts;
+        if (docFonts && typeof docFonts.load === "function") {
+          // โหลดทุก weight ของ Sarabun ที่ใช้ในเอกสาร แบบ explicit
+          Promise.all([
+            docFonts.load('300 10pt Sarabun'),
+            docFonts.load('400 10pt Sarabun'),
+            docFonts.load('600 11pt Sarabun'),
+            docFonts.load('700 14pt Sarabun'),
+            docFonts.load('700 22pt Sarabun'),
+          ]).then(() => {
+            // เพิ่ม delay เพื่อให้ browser layout ภาษาไทยเสร็จ
+            setTimeout(() => w.print(), 500);
           }).catch(() => {
-            setTimeout(() => w.print(), 1500);
+            setTimeout(() => w.print(), 2000);
           });
         } else {
-          // Fallback สำหรับ browser ที่ไม่มี document.fonts API
-          setTimeout(() => w.print(), 1500);
+          // Fallback สำหรับ browser เก่าที่ไม่มี document.fonts API
+          setTimeout(() => w.print(), 2000);
         }
       } catch {
-        setTimeout(() => w.print(), 1500);
+        setTimeout(() => w.print(), 2000);
       }
     };
     if (w.document.readyState === "complete") {
