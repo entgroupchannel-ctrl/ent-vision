@@ -6,7 +6,7 @@ import {
   Filter, RefreshCw, Eye, Clock, CheckCircle, XCircle,
   Star, Phone, Building2, MessageSquare, LogOut, Shield, Download,
   CalendarClock, Hash, Wallet, Code2, Cloud,
-  PanelLeftClose, PanelLeft, Package, FolderOpen, BarChart3, Headphones,
+  PanelLeftClose, PanelLeft, Package, FolderOpen, BarChart3, Headphones, Activity,
 } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { supabase } from "@/integrations/supabase/client";
