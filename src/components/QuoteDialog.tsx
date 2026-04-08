@@ -100,6 +100,20 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
     requirements: "",
   });
 
+  // Validation for Member Mode form
+  const memberValidationErrors: { timeline?: string; quantity?: string; products?: string } = {};
+  if (user && !memberForm.timeline) {
+    memberValidationErrors.timeline = "กรุณาเลือกระยะเวลาที่ต้องการ";
+  }
+  if (user && (!memberForm.quantity || parseInt(memberForm.quantity) < 1)) {
+    memberValidationErrors.quantity = "กรุณากรอกจำนวนที่ต้องการ";
+  }
+  const validProducts = products.filter((p) => p.category || p.model);
+  if (user && validProducts.length === 0) {
+    memberValidationErrors.products = "กรุณาเลือกสินค้าอย่างน้อย 1 รายการ";
+  }
+  const isMemberFormValid = Object.keys(memberValidationErrors).length === 0;
+
   // Login form state
   const [authMode, setAuthMode] = useState<"login" | "register">("register");
   const [authForm, setAuthForm] = useState({ email: "", password: "", name: "" });
@@ -157,6 +171,14 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
     if (submittingRef.current) return;
     submittingRef.current = true;
     setLoading(true);
+    // Member mode validation guard
+    if (user && !isMemberFormValid) {
+      const firstError = Object.values(memberValidationErrors)[0];
+      toast({ title: "กรุณากรอกข้อมูลให้ครบ", description: firstError, variant: "destructive" });
+      setLoading(false);
+      submittingRef.current = false;
+      return;
+    }
     try {
       const { error } = await (supabase.from as any)("quote_requests").insert({
         user_id: user?.id || null,
@@ -452,11 +474,13 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-foreground mb-1">ระยะเวลาที่ต้องการ</label>
+                <label className="block text-xs font-medium text-foreground mb-1">
+                  ระยะเวลาที่ต้องการ <span className="text-red-500">*</span>
+                </label>
                 <select
                   value={memberForm.timeline}
                   onChange={(e) => setMemberForm({ ...memberForm, timeline: e.target.value })}
-                  className={inputClass}
+                  className={`${inputClass} ${memberValidationErrors.timeline ? "border-red-500" : ""}`}
                 >
                   <option value="">เลือกระยะเวลา</option>
                   <option value="เร่งด่วน (ภายใน 1 สัปดาห์)">เร่งด่วน (ภายใน 1 สัปดาห์)</option>
@@ -464,16 +488,24 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
                   <option value="1 เดือน">1 เดือน</option>
                   <option value="ยังไม่แน่ใจ">ยังไม่แน่ใจ</option>
                 </select>
+                {memberValidationErrors.timeline && (
+                  <p className="text-xs text-red-500 mt-1">{memberValidationErrors.timeline}</p>
+                )}
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-foreground mb-1">จำนวนที่ต้องการ</label>
+                <label className="block text-xs font-medium text-foreground mb-1">
+                  จำนวนที่ต้องการ <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="number" min="1" placeholder="จำนวนหน่วย"
                   value={memberForm.quantity}
                   onChange={(e) => setMemberForm({ ...memberForm, quantity: e.target.value })}
-                  className={inputClass}
+                  className={`${inputClass} ${memberValidationErrors.quantity ? "border-red-500" : ""}`}
                 />
+                {memberValidationErrors.quantity && (
+                  <p className="text-xs text-red-500 mt-1">{memberValidationErrors.quantity}</p>
+                )}
               </div>
 
               <div>
@@ -513,7 +545,10 @@ const QuoteDialog = ({ open, onClose, productName = "", productCategory = "", in
               <span className="text-xs text-muted-foreground">สมัครรับข่าวสาร โปรโมชั่น และอัปเดตจาก ENT Group</span>
             </label>
 
-            <button type="submit" disabled={loading}
+            {memberValidationErrors.products && (
+              <p className="text-xs text-red-500">{memberValidationErrors.products}</p>
+            )}
+            <button type="submit" disabled={loading || (!!user && !isMemberFormValid)}
               className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-60">
               {loading ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
               {loading ? "กำลังส่ง..." : "ส่งคำขอใบเสนอราคา"}
