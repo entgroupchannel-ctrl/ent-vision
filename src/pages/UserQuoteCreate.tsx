@@ -45,6 +45,8 @@ interface CartItem {
   qty: number;
   unitPrice: number;
   notes: string;
+  discountPercent?: number;
+  lineTotal?: number;
 }
 
 // ─── Quote Status Config ───
@@ -284,6 +286,8 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
           qty: li.qty || 1,
           unitPrice: li.unit_price || 0,
           notes: li.admin_notes || "",
+          discountPercent: li.discount_percent || 0,
+          lineTotal: li.line_total || 0,
         }));
         setCart(loaded);
       } else {
@@ -439,7 +443,15 @@ const UserQuoteCreate = ({ onNavigate }: { onNavigate?: () => void }) => {
   };
 
   // Totals
-  const subtotal = cart.reduce((sum, item) => sum + (item.unitPrice || 0) * item.qty, 0);
+  const subtotal = cart.reduce((sum, item) => {
+    // ถ้ามี lineTotal จาก DB (admin กำหนดราคาแล้ว) → ใช้ค่านั้น
+    if (item.lineTotal && item.lineTotal > 0) {
+      return sum + item.lineTotal;
+    }
+    // ถ้าไม่มี → คำนวณจาก unitPrice × qty × (1 - discount)
+    const discount = (item.discountPercent || 0) / 100;
+    return sum + (item.unitPrice || 0) * item.qty * (1 - discount);
+  }, 0);
   const hasAnyPrice = cart.some((item) => item.unitPrice > 0);
 
   const formatPrice = (n: number) =>
