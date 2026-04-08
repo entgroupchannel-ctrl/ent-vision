@@ -130,10 +130,13 @@ const DocCrossLinks = ({ quoteId, orderId, billingId, invoiceId, exclude = [] }:
       }
     } catch {}
 
-    // De-duplicate by id
-    const unique = results.filter((r, i, arr) => arr.findIndex((a) => a.id === r.id) === i);
-    setDocs(unique.filter((d) => !exclude.includes(d.type)));
-    setLoading(false);
+    try {
+      // De-duplicate by id
+      const unique = results.filter((r, i, arr) => arr.findIndex((a) => a.id === r.id) === i);
+      setDocs(unique.filter((d) => !exclude.includes(d.type)));
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleNavigate = (doc: RelatedDoc) => {
