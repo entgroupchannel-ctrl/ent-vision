@@ -504,6 +504,22 @@ const AdminPaymentManager = () => {
               </div>
 
               <div>
+                <label className="text-xs font-medium text-muted-foreground mb-1 block">รูปแบบใบเสร็จ *</label>
+                <div className="flex gap-2">
+                  <button type="button" onClick={() => setReceiptType("full")}
+                    className={`flex-1 px-3 py-2 rounded-lg border text-xs font-medium transition-all ${receiptType === "full" ? "bg-primary/10 border-primary text-primary" : "border-border text-muted-foreground hover:border-primary/30"}`}>
+                    เต็มรูปแบบ
+                    <span className="block text-[9px] mt-0.5 opacity-70">มี VAT + รายการสินค้า</span>
+                  </button>
+                  <button type="button" onClick={() => setReceiptType("simple")}
+                    className={`flex-1 px-3 py-2 rounded-lg border text-xs font-medium transition-all ${receiptType === "simple" ? "bg-primary/10 border-primary text-primary" : "border-border text-muted-foreground hover:border-primary/30"}`}>
+                    แบบย่อ
+                    <span className="block text-[9px] mt-0.5 opacity-70">จำนวนเงินรวมเท่านั้น</span>
+                  </button>
+                </div>
+              </div>
+
+              <div>
                 <label className="text-xs font-medium text-muted-foreground mb-1 block">หมายเหตุ</label>
                 <textarea value={payNotes} onChange={e => setPayNotes(e.target.value)} rows={2} placeholder="หมายเหตุเพิ่มเติม..."
                   className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm resize-none" />
