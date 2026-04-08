@@ -305,10 +305,16 @@ export const printQuote = (
   const discountAmt = items.reduce((s, i) => {
     return s + (i.discount_percent > 0 ? Math.round(i.unit_price * i.qty * i.discount_percent / 100 * 100) / 100 : 0);
   }, 0);
-  const totalDiscount = (terms.discount_amount || 0) + discountAmt;
-  const afterDiscount = subtotal;
+  // terms.discount_amount = ส่วนลดท้ายบิล (เพิ่มเติมจาก discount per item)
+  const extraDiscount = terms.discount_amount || 0;
+  const totalDiscount = extraDiscount + discountAmt;
+  // ฐาน VAT = subtotal (ที่หัก discount per-item แล้วใน line_total) - extraDiscount (ส่วนลดท้ายบิล)
+  const afterDiscount = subtotal - extraDiscount;
   const beforeVat = afterDiscount;
-  const vatPercent = terms.include_vat !== false ? (terms.vat_percent || c.vat_percent || 7) : 0;
+  // บังคับ VAT สำหรับใบกำกับภาษีและใบวางบิล (กฎหมายสรรพากรไทย)
+  const forceVat = documentType === 'invoice' || documentType === 'billing';
+  const includeVat = forceVat || terms.include_vat !== false;
+  const vatPercent = includeVat ? (terms.vat_percent || c.vat_percent || 7) : 0;
   const vatAmount = vatPercent > 0 ? Math.round(beforeVat * vatPercent / 100 * 100) / 100 : 0;
   const grandTotal = beforeVat + vatAmount;
   const whtPercent = terms.include_withholding_tax ? (terms.withholding_tax_percent || c.withholding_tax_percent || 3) : 0;
@@ -463,6 +469,14 @@ table.items tr:nth-child(even){background:#fafbfc}
 /* ── Footer ── */
 .page-footer{text-align:center;padding-top:12px;border-top:1px solid #e5e7eb;font-size:8pt;color:#999;margin-top:24px}
 .page-footer .page-num{margin-top:4px;font-size:9pt;color:var(--text-light);text-align:right}
+${documentType === 'delivery' ? `
+table.items th:nth-child(4),
+table.items th:nth-child(5),
+table.items th:nth-child(6),
+table.items td:nth-child(4),
+table.items td:nth-child(5),
+table.items td:nth-child(6) { display: none !important; }
+` : ''}
 </style></head><body>
 <div class="print-tip">
   💡 <strong>เคล็ดลับ:</strong> เพื่อให้ใบเสนอราคาดูสวยที่สุด ใน print dialog กรุณาเลือก <strong>"More settings"</strong> แล้วปิด <strong>"Headers and footers"</strong>
@@ -524,6 +538,7 @@ table.items tr:nth-child(even){background:#fafbfc}
   </tbody>
 </table>
 
+${documentType !== 'delivery' ? `
 <!-- ═══ TOTALS ═══ -->
 <div class="totals-section no-break">
   <div class="totals">
@@ -537,6 +552,7 @@ table.items tr:nth-child(even){background:#fafbfc}
   </div>
 </div>
 <div class="thai-text">(${amountText})</div>
+` : ''}
 
 <!-- ═══ NOTES & BANK ═══ -->
 <div class="notes-section no-break">
