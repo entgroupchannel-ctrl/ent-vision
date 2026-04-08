@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, Search, Plus, Minus, Trash2, FileText,
-  Send, Loader2, ShoppingCart, Package, ChevronDown,
+  Send, Loader2, ShoppingCart, Package, ChevronDown, MessageSquare,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -168,9 +168,13 @@ const QuoteBuilder = () => {
           sort_order: i,
         }));
 
-        try {
-          await (supabase.from as any)("quote_line_items").insert(lineItems);
-        } catch {}
+        const { error: lineError } = await (supabase.from as any)("quote_line_items").insert(lineItems);
+        if (lineError) {
+          console.error("Failed to save line items:", lineError);
+          // Rollback: delete orphaned quote_request
+          await (supabase.from as any)("quote_requests").delete().eq("id", quoteData.id);
+          throw new Error("ไม่สามารถบันทึกรายการสินค้าได้ กรุณาลองใหม่อีกครั้ง");
+        }
       }
 
       // Track engagement
@@ -318,7 +322,18 @@ const QuoteBuilder = () => {
                   </div>
 
                   {catalogLoading ? (
-                    <div className="p-6 text-center"><Loader2 size={16} className="animate-spin text-muted-foreground mx-auto" /></div>
+                    <div className="p-3 space-y-2">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="flex items-center gap-3 p-2 animate-pulse">
+                          <div className="w-9 h-9 rounded-lg bg-secondary/60 shrink-0" />
+                          <div className="flex-1 space-y-1.5">
+                            <div className="h-3 bg-secondary/60 rounded w-24" />
+                            <div className="h-2.5 bg-secondary/40 rounded w-40" />
+                          </div>
+                          <div className="h-3 bg-secondary/60 rounded w-16 shrink-0" />
+                        </div>
+                      ))}
+                    </div>
                   ) : filteredCatalog.length === 0 ? (
                     <div className="p-6 text-center text-xs text-muted-foreground">
                       {catalog.length === 0 ? "ยังไม่มีสินค้าในระบบ" : "ไม่พบสินค้าที่ค้นหา"}
@@ -381,7 +396,13 @@ const QuoteBuilder = () => {
                 {cart.length === 0 ? (
                   <div className="text-center py-8 text-sm text-muted-foreground">
                     <ShoppingCart size={32} className="mx-auto mb-3 opacity-20" />
-                    <p>ยังไม่มีสินค้า — ค้นหาหรือเลือกจากรายการด้านบน</p>
+                    <p>ยังไม่มีสินค้า</p>
+                    <button
+                      onClick={() => { setShowCatalog(true); }}
+                      className="mt-2 px-4 py-1.5 rounded-lg bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition-colors"
+                    >
+                      <Package size={12} className="inline mr-1" /> เลือกสินค้า
+                    </button>
                   </div>
                 ) : (
                   <div className="overflow-x-auto">
@@ -406,6 +427,25 @@ const QuoteBuilder = () => {
                                 {item.product.category}
                                 {item.product.specs?.cpu && ` · ${item.product.specs.cpu}`}
                               </span>
+                              {/* Notes per item */}
+                              <div className="mt-1">
+                                <div className="flex items-center gap-1">
+                                  <MessageSquare size={9} className="text-muted-foreground/50" />
+                                  <input
+                                    value={item.notes}
+                                    onChange={(e) => {
+                                      const val = e.target.value;
+                                      setCart((prev) =>
+                                        prev.map((c) =>
+                                          c.product.id === item.product.id ? { ...c, notes: val } : c
+                                        )
+                                      );
+                                    }}
+                                    className="w-full text-[10px] bg-transparent border-b border-transparent focus:border-primary/30 text-muted-foreground placeholder:text-muted-foreground/30 outline-none py-0.5 transition-colors"
+                                    placeholder="หมายเหตุสำหรับรายการนี้..."
+                                  />
+                                </div>
+                              </div>
                             </td>
                             <td className="py-2.5 text-center">
                               <div className="inline-flex items-center gap-0.5 border border-border rounded-lg">
@@ -502,6 +542,29 @@ const QuoteBuilder = () => {
           </div>
         )}
       </div>
+
+      {/* Mobile Bottom Summary Bar */}
+      {!submitted && cart.length > 0 && (
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur border-t border-border p-3 z-40">
+          <div className="flex items-center justify-between gap-3 max-w-5xl mx-auto">
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-foreground">{cart.length} รุ่น · {totalItems} ชิ้น</p>
+              <p className="text-sm font-bold text-primary">฿{formatPrice(grandTotal)}</p>
+            </div>
+            <button
+              onClick={() => { setStep(2); handleSubmit(); }}
+              disabled={submitting}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors disabled:opacity-50 shrink-0"
+            >
+              {submitting ? (
+                <><Loader2 size={14} className="animate-spin" /> กำลังส่ง...</>
+              ) : (
+                <><Send size={14} /> ส่งคำขอ</>
+              )}
+            </button>
+          </div>
+        </div>
+      )}
 
       <FooterCompact />
     </div>
