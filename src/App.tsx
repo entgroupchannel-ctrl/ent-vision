@@ -131,32 +131,31 @@ const AppInner = () => {
 
   useEffect(() => {
     // ═══════════════════════════════════════════════════════════════════════
-    // Session Recovery v2 — Fixes "silent death" after tab switch
+    // Session Recovery v3 — Complete Auth State Sync Fix
     // ═══════════════════════════════════════════════════════════════════════
-    // Key fixes:
-    // 1. expires_at is Unix seconds → multiply by 1000 for JS Date
-    // 2. In-flight guard prevents concurrent refresh from visibility + health check
-    // 3. Only refetch active queries instead of global invalidateQueries()
-    // 4. Skip refresh if token still has > 2 min left
+    // 1. expires_at: Unix seconds → milliseconds
+    // 2. Token refresh with 5s timeout + in-flight guard
+    // 3. setSession() to force auth state sync after refresh
+    // 4. invalidateQueries() instead of refetchQueries() — lets RQ use new token
+    // 5. refetchOnWindowFocus=false — we handle refetch ourselves
     // ═══════════════════════════════════════════════════════════════════════
 
     let lastHiddenTime: number | null = null;
     let isRefreshing = false;
-    const STALE_THRESHOLD = 30 * 1000; // 30 seconds
+    const STALE_THRESHOLD = 30 * 1000;
 
     /** Convert Supabase expires_at (Unix seconds) to milliseconds */
     const expiresAtToMs = (expiresAt: number | string | undefined | null): number => {
       if (!expiresAt) return 0;
       const num = typeof expiresAt === 'string' ? parseInt(expiresAt, 10) : expiresAt;
-      // Supabase returns Unix seconds; if it looks like seconds (< year 2100 in seconds), convert
       if (num < 10_000_000_000) return num * 1000;
-      return num; // already milliseconds
+      return num;
     };
 
-    /** Guarded session refresh — prevents concurrent calls */
+    /** Guarded session refresh with auth state sync */
     const guardedRefresh = async (source: string): Promise<boolean> => {
       if (isRefreshing) {
-        console.log(`[Session] Skipping ${source} — refresh already in-flight`);
+        console.log(`[Session] Skipping ${source} — refresh in-flight`);
         return false;
       }
       isRefreshing = true;
@@ -172,16 +171,33 @@ const AppInner = () => {
         ]) as any;
 
         if (error) {
-          console.error(`[Session] ${source} refresh failed:`, error.message);
+          console.error(`[Session] ${source} failed:`, error.message);
           return false;
         }
 
-        if (data?.session) {
-          const expiresIn = Math.round(
-            (expiresAtToMs(data.session.expires_at) - Date.now()) / 1000
-          );
-          console.log(`[Session] ${source} refreshed OK, expires in ${expiresIn}s`);
+        if (!data?.session) {
+          console.warn(`[Session] ${source} — no session returned`);
+          return false;
         }
+
+        const expiresIn = Math.round(
+          (expiresAtToMs(data.session.expires_at) - Date.now()) / 1000
+        );
+        console.log(`[Session] ${source} OK — expires in ${expiresIn}s`);
+
+        // ✅ CRITICAL: Force auth state sync so AuthContext gets the new token
+        try {
+          await supabase.auth.setSession({
+            access_token: data.session.access_token,
+            refresh_token: data.session.refresh_token,
+          });
+          // Wait for onAuthStateChange to propagate to AuthContext
+          await new Promise((r) => setTimeout(r, 300));
+          console.log(`[Session] ${source} — auth state synced`);
+        } catch (syncErr: any) {
+          console.warn(`[Session] ${source} sync warning:`, syncErr.message);
+        }
+
         return true;
       } catch (e: any) {
         console.error(`[Session] ${source} error:`, e.message);
@@ -200,36 +216,49 @@ const AppInner = () => {
       const hiddenDuration = lastHiddenTime ? Date.now() - lastHiddenTime : 0;
       lastHiddenTime = null;
 
-      // Short switch (< 5s): no action needed, data is still fresh (staleTime=60s)
+      // Short switch (< 5s): data still fresh (staleTime=60s)
       if (hiddenDuration < 5_000) return;
 
-      // Give Supabase auto-refresh a moment to settle before we check session
+      // Let Supabase auto-refresh settle first
       await new Promise((r) => setTimeout(r, 300));
 
       console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 's');
 
       try {
         const { data } = await supabase.auth.getSession();
-        if (!data.session) return; // not logged in
+
+        if (!data?.session) {
+          console.warn('[Session] No session found');
+          if (
+            window.location.pathname.startsWith('/admin') ||
+            window.location.pathname.startsWith('/my-account')
+          ) {
+            window.location.href = '/admin-login';
+          }
+          return;
+        }
 
         const timeLeftMs = expiresAtToMs(data.session.expires_at) - Date.now();
         const timeLeftS = Math.round(timeLeftMs / 1000);
 
         if (timeLeftS > 120) {
           console.log(`[Session] Token valid (${timeLeftS}s left)`);
-          // Token is fine — just refetch stale queries
+          // Token fine — invalidate stale queries so RQ refetches with valid token
           if (hiddenDuration >= STALE_THRESHOLD) {
-            qc.refetchQueries({ type: 'active' });
+            qc.invalidateQueries({ type: 'active' });
           }
           return;
         }
 
+        // Token expiring soon — refresh + sync
         console.log(`[Session] Token expiring soon (${timeLeftS}s), refreshing...`);
         const ok = await guardedRefresh('visibility');
         if (ok) {
-          qc.refetchQueries({ type: 'active' });
+          await new Promise((r) => setTimeout(r, 100));
+          qc.invalidateQueries({ type: 'active' });
+          console.log('[Session] Recovery complete');
         } else {
-          console.log('[Session] Forcing reload as fallback...');
+          console.log('[Session] Refresh failed, reloading...');
           window.location.reload();
         }
       } catch (e: any) {
@@ -240,32 +269,30 @@ const AppInner = () => {
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // ── Periodic health check (every 4 min instead of 2) ──
+    // ── Health check (every 4 min) ──
     const healthCheckInterval = setInterval(async () => {
       if (document.hidden) return;
-
       try {
         const { data } = await supabase.auth.getSession();
-        if (!data.session) return;
+        if (!data?.session) return;
 
         const timeLeftS = Math.round(
           (expiresAtToMs(data.session.expires_at) - Date.now()) / 1000
         );
 
-        // Only log if something interesting
         if (timeLeftS < 300) {
-          console.log('[Session Health] Token expires in', timeLeftS, 's');
+          console.log('[Health] Token expires in', timeLeftS, 's');
         }
 
         if (timeLeftS < 120) {
-          console.log('[Session Health] Token expiring soon, refreshing...');
+          console.log('[Health] Refreshing token...');
           const ok = await guardedRefresh('health-check');
           if (ok) {
-            qc.refetchQueries({ type: 'active' });
+            qc.invalidateQueries({ type: 'active' });
           }
         }
-      } catch (e) {
-        console.error('[Session Health] Check failed:', e);
+      } catch (e: any) {
+        console.error('[Health] Check failed:', e.message);
       }
     }, 4 * 60 * 1000);
 
