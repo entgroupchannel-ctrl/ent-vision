@@ -70,7 +70,7 @@ const LiveChatWidget = () => {
 
   // Realtime subscription
   useEffect(() => {
-    if (!conversationId) return;
+    if (!conversationId || isAdminRoute) return;
 
     const channel = supabase
       .channel(`live-chat-${conversationId}`)
