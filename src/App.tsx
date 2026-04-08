@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider, QueryCache } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
@@ -123,6 +123,42 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+const AppInner = () => {
+  // Auto-reload to prevent session timeout (debug fix for 15-min hang issue)
+  useEffect(() => {
+    const RELOAD_INTERVAL = 12 * 60 * 1000; // 12 minutes
+    const IDLE_THRESHOLD = 10 * 60 * 1000; // 10 minutes of no activity
+
+    let lastActivity = Date.now();
+
+    const updateActivity = () => {
+      lastActivity = Date.now();
+    };
+
+    // Track user activity
+    window.addEventListener('click', updateActivity);
+    window.addEventListener('keydown', updateActivity);
+    window.addEventListener('scroll', updateActivity);
+
+    const intervalId = setInterval(() => {
+      const idleTime = Date.now() - lastActivity;
+      if (idleTime >= IDLE_THRESHOLD) {
+        console.log('[Auto-reload] User idle for 10+ min, reloading to prevent session hang...');
+        window.location.reload();
+      }
+    }, RELOAD_INTERVAL);
+
+    return () => {
+      clearInterval(intervalId);
+      window.removeEventListener('click', updateActivity);
+      window.removeEventListener('keydown', updateActivity);
+      window.removeEventListener('scroll', updateActivity);
+    };
+  }, []);
+
+  return null;
+};
 
 const App = () => (
   <HelmetProvider>
