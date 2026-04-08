@@ -7,6 +7,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import DocumentCrossReference from "@/components/admin/DocumentCrossReference";
 
 /* ─── Types ─── */
 interface SalesOrder {
@@ -281,6 +282,17 @@ const MyOrders = () => {
                   <ExternalLink size={11} /> ดูไฟล์ PO
                 </a>
               </div>
+            )}
+
+            {/* Document Cross Reference */}
+            <DocumentCrossReference
+              currentDoc={{ type: 'so', number: order.order_number, id: order.id }}
+              relatedDocs={[
+                ...(order.quote_id ? [{ type: 'quote' as const, number: `Quote`, id: order.quote_id }] : []),
+                ...(order.po_number ? [{ type: 'po' as const, number: order.po_number, id: order.id }] : []),
+                { type: 'so' as const, number: order.order_number, id: order.id },
+              ]}
+            />
             )}
 
             {/* Line Items */}

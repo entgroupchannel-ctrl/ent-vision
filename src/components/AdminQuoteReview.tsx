@@ -1396,9 +1396,17 @@ const AdminQuoteReview = () => {
                 {["completed", "po_approved"].includes(selected.status) ? (
                   <div className="flex-1 flex flex-col gap-2">
                     {hasOrder && hasBilling ? (
-                      <div className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-500/10 text-green-600 border border-green-500/20 text-sm font-bold">
-                        <CheckCircle size={14} /> สร้าง Order + ใบวางบิลแล้ว
-                      </div>
+                      <>
+                        <div className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-500/10 text-green-600 border border-green-500/20 text-sm font-bold">
+                          <CheckCircle size={14} /> สร้าง Order + ใบวางบิลแล้ว
+                        </div>
+                        <button
+                          onClick={() => window.dispatchEvent(new CustomEvent("admin-switch-tab", { detail: "sales_orders" }))}
+                          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-500/10 text-blue-600 border border-blue-500/20 text-xs font-bold hover:bg-blue-500/20 transition-colors"
+                        >
+                          <Package size={14} /> ดู Sales Order
+                        </button>
+                      </>
                     ) : (
                       <button
                         onClick={() => manualCreateOrderAndBilling(selected.id)}
