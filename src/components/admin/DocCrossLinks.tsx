@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
 import {
   FileText, Package, CreditCard, Receipt, Truck, DollarSign,
   ExternalLink, Loader2, Link2,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useQuery } from "@tanstack/react-query";
 
 interface RelatedDoc {
   type: "quote" | "order" | "billing" | "invoice" | "delivery" | "payment" | "receipt";
@@ -31,42 +31,48 @@ interface DocCrossLinksProps {
   exclude?: string[];
 }
 
-const DocCrossLinks = ({ quoteId, orderId, billingId, invoiceId, exclude = [] }: DocCrossLinksProps) => {
-  const [docs, setDocs] = useState<RelatedDoc[]>([]);
-  const [loading, setLoading] = useState(true);
+async function fetchRelatedDocs(
+  quoteId: string | null | undefined,
+  orderId: string | null | undefined,
+  billingId: string | null | undefined,
+  invoiceId: string | null | undefined,
+  exclude: string[],
+): Promise<RelatedDoc[]> {
+  // Build all 7 queries in parallel
+  const promises: Promise<RelatedDoc[]>[] = [];
 
-  useEffect(() => {
-    fetchRelated();
-  }, [quoteId, orderId, billingId, invoiceId]);
+  // 1. Quote
+  promises.push(
+    (async () => {
+      if (!quoteId) return [];
+      const { data } = await supabase
+        .from("quote_requests")
+        .select("id, quote_number, status")
+        .eq("id", quoteId)
+        .single();
+      if (!data) return [];
+      return [{ type: "quote" as const, number: (data as any).quote_number || "—", status: (data as any).status, id: (data as any).id }];
+    })(),
+  );
 
-  const fetchRelated = async () => {
-    setLoading(true);
-    const results: RelatedDoc[] = [];
-
-    try {
-      // Fetch quote
-      if (quoteId) {
-        const { data } = await supabase
-          .from("quote_requests")
-          .select("id, quote_number, status")
-          .eq("id", quoteId)
-          .single();
-        if (data) results.push({ type: "quote", number: (data as any).quote_number || "—", status: (data as any).status, id: (data as any).id });
-      }
-
-      // Fetch sales order by quote_id or order_id
+  // 2. Sales order
+  promises.push(
+    (async () => {
       const orderQuery = orderId
         ? (supabase.from as any)("sales_orders").select("id, order_number, status").eq("id", orderId)
         : quoteId
         ? (supabase.from as any)("sales_orders").select("id, order_number, status").eq("quote_id", quoteId)
         : null;
-      if (orderQuery) {
-        const { data } = orderId ? await orderQuery.single() : await orderQuery;
-        const items = orderId ? (data ? [data] : []) : (data || []);
-        items.forEach((o: any) => results.push({ type: "order", number: o.order_number, status: o.status, id: o.id }));
-      }
+      if (!orderQuery) return [];
+      const { data } = orderId ? await orderQuery.single() : await orderQuery;
+      const items = orderId ? (data ? [data] : []) : (data || []);
+      return items.map((o: any) => ({ type: "order" as const, number: o.order_number, status: o.status, id: o.id }));
+    })(),
+  );
 
-      // Fetch billing notes
+  // 3. Billing notes
+  promises.push(
+    (async () => {
       const billingQuery = billingId
         ? supabase.from("billing_notes").select("id, billing_number, status").eq("id", billingId)
         : quoteId
@@ -74,12 +80,15 @@ const DocCrossLinks = ({ quoteId, orderId, billingId, invoiceId, exclude = [] }:
         : orderId
         ? supabase.from("billing_notes").select("id, billing_number, status").eq("order_id", orderId)
         : null;
-      if (billingQuery) {
-        const { data } = await billingQuery;
-        (data || []).forEach((b: any) => results.push({ type: "billing", number: b.billing_number, status: b.status, id: b.id }));
-      }
+      if (!billingQuery) return [];
+      const { data } = await billingQuery;
+      return (data || []).map((b: any) => ({ type: "billing" as const, number: b.billing_number, status: b.status, id: b.id }));
+    })(),
+  );
 
-      // Fetch invoices
+  // 4. Invoices
+  promises.push(
+    (async () => {
       const invoiceQuery = invoiceId
         ? supabase.from("invoices").select("id, invoice_number, status").eq("id", invoiceId)
         : billingId
@@ -89,23 +98,29 @@ const DocCrossLinks = ({ quoteId, orderId, billingId, invoiceId, exclude = [] }:
         : orderId
         ? supabase.from("invoices").select("id, invoice_number, status").eq("order_id", orderId)
         : null;
-      if (invoiceQuery) {
-        const { data } = await invoiceQuery;
-        (data || []).forEach((inv: any) => results.push({ type: "invoice", number: inv.invoice_number, status: inv.status, id: inv.id }));
-      }
+      if (!invoiceQuery) return [];
+      const { data } = await invoiceQuery;
+      return (data || []).map((inv: any) => ({ type: "invoice" as const, number: inv.invoice_number, status: inv.status, id: inv.id }));
+    })(),
+  );
 
-      // Fetch delivery notes
+  // 5. Delivery notes
+  promises.push(
+    (async () => {
       const dnQuery = quoteId
         ? (supabase.from as any)("delivery_notes").select("id, delivery_number, status").eq("quote_id", quoteId)
         : orderId
         ? (supabase.from as any)("delivery_notes").select("id, delivery_number, status").eq("order_id", orderId)
         : null;
-      if (dnQuery) {
-        const { data } = await dnQuery;
-        (data || []).forEach((d: any) => results.push({ type: "delivery", number: d.delivery_number, status: d.status, id: d.id }));
-      }
+      if (!dnQuery) return [];
+      const { data } = await dnQuery;
+      return (data || []).map((d: any) => ({ type: "delivery" as const, number: d.delivery_number, status: d.status, id: d.id }));
+    })(),
+  );
 
-      // Fetch payment records
+  // 6. Payment records
+  promises.push(
+    (async () => {
       const payQuery = quoteId
         ? (supabase.from as any)("payment_records").select("id, payment_number, status").eq("quote_id", quoteId)
         : invoiceId
@@ -113,31 +128,49 @@ const DocCrossLinks = ({ quoteId, orderId, billingId, invoiceId, exclude = [] }:
         : billingId
         ? (supabase.from as any)("payment_records").select("id, payment_number, status").eq("billing_note_id", billingId)
         : null;
-      if (payQuery) {
-        const { data } = await payQuery;
-        (data || []).forEach((p: any) => results.push({ type: "payment", number: p.payment_number, status: p.status, id: p.id }));
-      }
+      if (!payQuery) return [];
+      const { data } = await payQuery;
+      return (data || []).map((p: any) => ({ type: "payment" as const, number: p.payment_number, status: p.status, id: p.id }));
+    })(),
+  );
 
-      // Fetch receipts
+  // 7. Receipts
+  promises.push(
+    (async () => {
       const rcpQuery = invoiceId
         ? supabase.from("receipts").select("id, receipt_number, status").eq("invoice_id", invoiceId)
         : orderId
         ? supabase.from("receipts").select("id, receipt_number, status").eq("order_id", orderId)
         : null;
-      if (rcpQuery) {
-        const { data } = await rcpQuery;
-        (data || []).forEach((r: any) => results.push({ type: "receipt", number: r.receipt_number, status: r.status, id: r.id }));
-      }
-    } catch {}
+      if (!rcpQuery) return [];
+      const { data } = await rcpQuery;
+      return (data || []).map((r: any) => ({ type: "receipt" as const, number: r.receipt_number, status: r.status, id: r.id }));
+    })(),
+  );
 
-    try {
-      // De-duplicate by id
-      const unique = results.filter((r, i, arr) => arr.findIndex((a) => a.id === r.id) === i);
-      setDocs(unique.filter((d) => !exclude.includes(d.type)));
-    } finally {
-      setLoading(false);
-    }
-  };
+  const allResults = await Promise.all(promises);
+  const results = allResults.flat();
+
+  // De-duplicate by id
+  const unique = results.filter((r, i, arr) => arr.findIndex((a) => a.id === r.id) === i);
+  return unique.filter((d) => !exclude.includes(d.type));
+}
+
+const DocCrossLinks = ({ quoteId, orderId, billingId, invoiceId, exclude = [] }: DocCrossLinksProps) => {
+  // Stable primitive values for queryKey
+  const qId = quoteId ?? "";
+  const oId = orderId ?? "";
+  const bId = billingId ?? "";
+  const iId = invoiceId ?? "";
+
+  const hasAnyId = !!(quoteId || orderId || billingId || invoiceId);
+
+  const { data: docs = [], isLoading: loading } = useQuery({
+    queryKey: ["doc-cross-links", qId, oId, bId, iId],
+    queryFn: () => fetchRelatedDocs(quoteId, orderId, billingId, invoiceId, exclude),
+    enabled: hasAnyId,
+    staleTime: 30_000,
+  });
 
   const handleNavigate = (doc: RelatedDoc) => {
     const cfg = DOC_CFG[doc.type];
