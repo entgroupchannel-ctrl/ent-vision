@@ -379,7 +379,8 @@ const MyOrders = () => {
 
             {/* Actions */}
             <div className="flex items-center justify-center gap-3">
-              <button onClick={() => handlePrintOrder(order)}
+              <button
+                onClick={() => handlePrintOrder(order)}
                 className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 transition-colors border border-primary/20"
               >
                 <Printer size={14} /> พิมพ์ใบสั่งขาย
@@ -387,7 +388,6 @@ const MyOrders = () => {
               <button onClick={() => setExpandedId(null)} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 px-3 py-2">
                 <ChevronUp size={12} /> ปิด
               </button>
-            </div>
             </div>
           </div>
         )}
@@ -397,4 +397,3 @@ const MyOrders = () => {
 };
 
 export default MyOrders;
-
