@@ -107,7 +107,7 @@ const queryClient = new QueryClient({
   }),
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: true, // ENABLED: Auto-refetch when tab becomes visible
+      refetchOnWindowFocus: false, // DISABLED: We handle refetch manually in AppInner after token recovery
       refetchOnReconnect: true,
       staleTime: 60_000,
       gcTime: 30 * 60_000,
@@ -200,11 +200,14 @@ const AppInner = () => {
       const hiddenDuration = lastHiddenTime ? Date.now() - lastHiddenTime : 0;
       lastHiddenTime = null;
 
-      if (hiddenDuration < STALE_THRESHOLD) return;
+      // Short switch (< 5s): no action needed, data is still fresh (staleTime=60s)
+      if (hiddenDuration < 5_000) return;
+
+      // Give Supabase auto-refresh a moment to settle before we check session
+      await new Promise((r) => setTimeout(r, 300));
 
       console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 's');
 
-      // Check if token actually needs refresh before hitting the network
       try {
         const { data } = await supabase.auth.getSession();
         if (!data.session) return; // not logged in
@@ -213,9 +216,11 @@ const AppInner = () => {
         const timeLeftS = Math.round(timeLeftMs / 1000);
 
         if (timeLeftS > 120) {
-          console.log(`[Session] Token still valid (${timeLeftS}s left), skipping refresh`);
-          // Just refetch active queries with existing valid token
-          qc.refetchQueries({ type: 'active' });
+          console.log(`[Session] Token valid (${timeLeftS}s left)`);
+          // Token is fine — just refetch stale queries
+          if (hiddenDuration >= STALE_THRESHOLD) {
+            qc.refetchQueries({ type: 'active' });
+          }
           return;
         }
 
@@ -224,7 +229,6 @@ const AppInner = () => {
         if (ok) {
           qc.refetchQueries({ type: 'active' });
         } else {
-          // Last resort: reload page
           console.log('[Session] Forcing reload as fallback...');
           window.location.reload();
         }
