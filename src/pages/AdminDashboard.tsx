@@ -501,6 +501,8 @@ const AdminDashboard = () => {
             </div>
             {/* Revenue chart */}
             <RevenueChart />
+            {/* Sales Dashboard (moved from sales_orders sub-tab) */}
+            <AdminSalesOrders viewMode="dashboard" />
           </div>
         )}
 
@@ -508,7 +510,7 @@ const AdminDashboard = () => {
         {tab === "documents" && <AdminDocumentManager />}
         {tab === "catalog" && <AdminProductCatalog />}
         {tab === "quote_review" && <AdminQuoteReview />}
-        {tab === "sales_orders" && <AdminSalesOrders />}
+        {tab === "sales_orders" && <AdminSalesOrders viewMode="orders" />}
         {tab === "billing" && <AdminBillingManager />}
         {tab === "invoices" && <AdminInvoiceManager />}
         {tab === "delivery" && <AdminDeliveryManager />}

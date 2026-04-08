@@ -91,7 +91,11 @@ const STATUS_FLOW = ["confirmed", "processing", "shipped", "delivered", "complet
 const inp = "w-full px-3 py-2 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all";
 
 /* ─── Component ─── */
-const AdminSalesOrders = () => {
+interface AdminSalesOrdersProps {
+  viewMode?: "orders" | "dashboard";
+}
+
+const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -289,23 +293,15 @@ const AdminSalesOrders = () => {
 
   return (
     <div className="space-y-4">
-      {/* Tab Toggle */}
-      <div className="flex items-center gap-2">
-        <button onClick={() => setActiveTab("dashboard")}
-          className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "dashboard" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary"}`}>
-          <BarChart3 size={14} /> Dashboard ยอดขาย
-        </button>
-        <button onClick={() => setActiveTab("orders")}
-          className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === "orders" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary"}`}>
-          <Package size={14} /> จัดการ Order ({orders.length})
-        </button>
-        <button onClick={() => { fetchOrders(); fetchStats(); }} className="ml-auto text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+      {/* Refresh button only (tab toggle removed) */}
+      <div className="flex items-center gap-2 justify-end">
+        <button onClick={() => { fetchOrders(); fetchStats(); }} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
           <RefreshCw size={12} className={loading ? "animate-spin" : ""} />
         </button>
       </div>
 
-      {/* ═══════ Dashboard Tab ═══════ */}
-      {activeTab === "dashboard" && (
+      {/* ═══════ Dashboard View ═══════ */}
+      {viewMode === "dashboard" && (
         <div className="space-y-4">
           {/* Summary Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -379,7 +375,7 @@ const AdminSalesOrders = () => {
       )}
 
       {/* ═══════ Orders Tab ═══════ */}
-      {activeTab === "orders" && (
+      {viewMode === "orders" && (
         <>
           {/* Filters */}
           <div className="flex items-center gap-2 flex-wrap">
