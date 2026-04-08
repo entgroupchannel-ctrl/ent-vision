@@ -56,12 +56,12 @@ interface DocLibraryItem { id: string; title: string; file_url: string; category
 
 /* ─── Constants ─── */
 const STATUS_CFG: Record<string, { label: string; color: string; order: number }> = {
-  new: { label: "ใหม่", color: "bg-blue-500/10 text-blue-500 border-blue-500/20", order: 0 },
-  quoted: { label: "ส่งราคาแล้ว", color: "bg-purple-500/10 text-purple-500 border-purple-500/20", order: 1 },
-  negotiating: { label: "เจรจา", color: "bg-orange-500/10 text-orange-500 border-orange-500/20", order: 2 },
-  won: { label: "ตกลงราคา", color: "bg-green-500/10 text-green-500 border-green-500/20", order: 3 },
-  po_received: { label: "รับ PO แล้ว", color: "bg-teal-500/10 text-teal-600 border-teal-500/20", order: 4 },
-  lost: { label: "ไม่สำเร็จ", color: "bg-red-500/10 text-red-400 border-red-500/20", order: 5 },
+  pending: { label: "รอตอบกลับ", color: "bg-blue-500/10 text-blue-500 border-blue-500/20", order: 0 },
+  quote_sent: { label: "ส่งใบเสนอราคาแล้ว", color: "bg-purple-500/10 text-purple-500 border-purple-500/20", order: 1 },
+  po_uploaded: { label: "รับ PO แล้ว", color: "bg-orange-500/10 text-orange-500 border-orange-500/20", order: 2 },
+  po_approved: { label: "อนุมัติ PO", color: "bg-green-500/10 text-green-500 border-green-500/20", order: 3 },
+  completed: { label: "เสร็จสิ้น", color: "bg-teal-500/10 text-teal-600 border-teal-500/20", order: 4 },
+  cancelled: { label: "ยกเลิก", color: "bg-red-500/10 text-red-400 border-red-500/20", order: 5 },
 };
 
 const DELIVERY_OPTS = [
@@ -428,7 +428,7 @@ const AdminQuoteReview = () => {
         if (error) throw error;
       }
       const { error: qErr } = await (supabase.from as any)("quote_requests").update({
-        status: "quoted", subtotal, discount_amount: edit.discount_amount, grand_total: grand,
+        status: "quote_sent", subtotal, discount_amount: edit.discount_amount, grand_total: grand,
         valid_until: edit.valid_until || null, payment_terms: edit.payment_terms || null,
         delivery_terms: edit.delivery_terms || null, pdf_url: edit.pdf_url || null,
         notes: edit.notes || null, approved_by: user.id, approved_at: new Date().toISOString(),
@@ -515,7 +515,7 @@ const AdminQuoteReview = () => {
         po_reviewed_at: new Date().toISOString(),
       };
       if (action === "approved") {
-        updates.status = "po_received";
+        updates.status = "po_uploaded";
       }
       const { error } = await (supabase.from as any)("quote_requests").update(updates).eq("id", quoteId);
       if (error) throw error;
@@ -680,57 +680,35 @@ const AdminQuoteReview = () => {
     const quote = quotes.find((q) => q.id === quoteId);
     if (!quote) return;
 
-    // Confirm if changing to important states
-    if (newStatus === "won" && !confirm("ยืนยันเปลี่ยนเป็น 'ตกลงราคา'?\n\n• ระบบจะสร้าง Sales Order + ใบวางบิลอัตโนมัติ\n• ลูกค้าจะได้รับแจ้งเตือน")) return;
-    if (newStatus === "lost" && !confirm("ยืนยันปิดเป็น 'ไม่สำเร็จ'?")) return;
+    // Confirm important transitions
+    if (newStatus === "po_approved" && !confirm("ยืนยันอนุมัติ PO?\n\n• ระบบจะสร้าง Sales Order + ใบวางบิลอัตโนมัติ\n• สถานะจะเปลี่ยนเป็น 'เสร็จสิ้น'\n• ลูกค้าจะได้รับแจ้งเตือน")) return;
+    if (newStatus === "cancelled" && !confirm("ยืนยันยกเลิกใบเสนอราคานี้?")) return;
 
     setSaving(true);
     try {
-      const updates: any = { status: newStatus };
-
-      // If moving to quoted, auto-set approved fields
-      if (newStatus === "quoted" && !quote.approved_by) {
-        updates.approved_by = user.id;
-        updates.approved_at = new Date().toISOString();
-      }
-
-      const { error } = await (supabase.from as any)("quote_requests").update(updates).eq("id", quoteId);
+      // Use RPC for status transitions (handles auto SO+BL on po_approved)
+      const { data, error } = await supabase.rpc("update_quote_status", {
+        p_quote_id: quoteId,
+        p_new_status: newStatus,
+        p_admin_id: user.id,
+      });
       if (error) throw error;
 
-      // Log status change as a message (preserves history)
-      try {
-        await (supabase.from as any)("quote_messages").insert({
-          quote_id: quoteId,
-          sender_id: user.id,
-          sender_role: "admin",
-          message_type: "status_change",
-          content: `เปลี่ยนสถานะจาก "${(STATUS_CFG[quote.status] || { label: quote.status }).label}" เป็น "${(STATUS_CFG[newStatus] || { label: newStatus }).label}"`,
-          old_value: quote.status,
-          new_value: newStatus,
-        });
-      } catch {}
+      const result = data as any;
 
-      // Notify customer for important status changes
-      if (quote.user_id && ["quoted", "won", "lost"].includes(newStatus)) {
-        try {
-          const titles: Record<string, string> = {
-            quoted: "ใบเสนอราคาพร้อมแล้ว",
-            won: "ยืนยันตกลงราคา",
-            lost: "ใบเสนอราคาถูกปิด",
-          };
-          await (supabase.from as any)("notifications").insert({
-            user_id: quote.user_id,
-            type: "quote_status",
-            title: titles[newStatus] || "สถานะใบเสนอราคาเปลี่ยน",
-            message: `${quote.quote_number || "#"} — ${(STATUS_CFG[newStatus] || { label: newStatus }).label}`,
-            link: "/my-account?tab=quotes",
-          });
-        } catch {}
+      // Show SO+BL info if created
+      if (result?.so_number) {
+        toast({
+          title: "อนุมัติ PO แล้ว",
+          description: `สร้าง SO (${result.so_number}) และ BL (${result.bl_number}) อัตโนมัติแล้ว`,
+        });
+      } else {
+        toast({ title: "เปลี่ยนสถานะแล้ว", description: `→ ${(STATUS_CFG[newStatus] || { label: newStatus }).label}` });
       }
 
-      toast({ title: "เปลี่ยนสถานะแล้ว", description: `→ ${(STATUS_CFG[newStatus] || { label: newStatus }).label}` });
       fetchQuotes();
-      if (selected?.id === quoteId) selectQuote({ ...quote, ...updates });
+      const finalStatus = result?.status || newStatus;
+      if (selected?.id === quoteId) selectQuote({ ...quote, status: finalStatus as string });
     } catch (err: any) {
       toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
     }
@@ -742,7 +720,7 @@ const AdminQuoteReview = () => {
     const quote = quotes.find((q) => q.id === quoteId);
     if (!quote) return;
     if (!confirm(
-      `เคลียร์สถานะใบเสนอราคา ${quote.quote_number || ""} กลับเป็น "ใหม่"?\n\n` +
+      `เคลียร์สถานะใบเสนอราคา ${quote.quote_number || ""} กลับเป็น "รอตอบกลับ"?\n\n` +
       "• ข้อความ/สนทนาทั้งหมดจะยังคงอยู่\n" +
       "• ไฟล์ PO/เอกสารจะไม่ถูกลบ\n" +
       "• เฉพาะสถานะที่จะถูกรีเซ็ต"
@@ -750,29 +728,16 @@ const AdminQuoteReview = () => {
 
     setSaving(true);
     try {
-      const { error } = await (supabase.from as any)("quote_requests").update({
-        status: "new",
-        customer_response: null,
-        po_status: null,
-      }).eq("id", quoteId);
+      const { data, error } = await supabase.rpc("update_quote_status", {
+        p_quote_id: quoteId,
+        p_new_status: "pending",
+        p_admin_id: user?.id || null,
+      });
       if (error) throw error;
-
-      // Log reset as a message
-      try {
-        await (supabase.from as any)("quote_messages").insert({
-          quote_id: quoteId,
-          sender_id: user?.id || null,
-          sender_role: "admin",
-          message_type: "status_change",
-          content: `รีเซ็ตสถานะจาก "${(STATUS_CFG[quote.status] || { label: quote.status }).label}" กลับเป็น "ใหม่" (ข้อความและไฟล์ยังคงอยู่)`,
-          old_value: quote.status,
-          new_value: "new",
-        });
-      } catch {}
 
       toast({ title: "รีเซ็ตสถานะแล้ว", description: "ข้อความและไฟล์ยังคงอยู่ครบ" });
       fetchQuotes();
-      if (selected?.id === quoteId) selectQuote({ ...quote, status: "new", customer_response: null, po_status: null });
+      if (selected?.id === quoteId) selectQuote({ ...quote, status: "pending", customer_response: null, po_status: null });
     } catch (err: any) {
       toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
     }
@@ -782,11 +747,9 @@ const AdminQuoteReview = () => {
   const filtered = quotes.filter((q) => {
     if (q.status === "draft") return false;
 
-    // Special "po_inbox" virtual filter — show only quotes with PO needing review
-    if (statusFilter === "po_inbox") {
-      if (!q.po_status || !["uploaded", "under_review", "pending_clarification"].includes(q.po_status)) return false;
-    } else if (statusFilter === "po_overdue") {
-      if (!q.po_status || !(q as any).po_overdue) return false;
+    // Filter by status
+    if (statusFilter === "po_uploaded") {
+      if (q.status !== "po_uploaded") return false;
     } else if (statusFilter !== "all" && q.status !== statusFilter) {
       return false;
     }
@@ -833,20 +796,15 @@ const AdminQuoteReview = () => {
     }
   });
 
-  const newCount = quotes.filter((q) => q.status === "new").length;
-  const poInboxCount = quotes.filter((q) => q.po_status && ["uploaded", "under_review", "pending_clarification"].includes(q.po_status)).length;
-  const poOverdueCount = quotes.filter((q) => (q as any).po_overdue && q.po_status && ["uploaded", "under_review"].includes(q.po_status)).length;
-
   // Count per status (for badges) — exclude drafts
   const nonDraft = quotes.filter((q) => q.status !== "draft");
   const statusCounts = {
     all: nonDraft.length,
-    new: nonDraft.filter((q) => q.status === "new").length,
-    quoted: nonDraft.filter((q) => q.status === "quoted").length,
-    negotiating: nonDraft.filter((q) => q.status === "negotiating").length,
-    won: nonDraft.filter((q) => q.status === "won").length,
-    po_received: nonDraft.filter((q) => q.status === "po_received").length,
-    lost: nonDraft.filter((q) => q.status === "lost").length,
+    pending: nonDraft.filter((q) => q.status === "pending").length,
+    quote_sent: nonDraft.filter((q) => q.status === "quote_sent").length,
+    po_uploaded: nonDraft.filter((q) => q.status === "po_uploaded").length,
+    completed: nonDraft.filter((q) => q.status === "completed").length,
+    cancelled: nonDraft.filter((q) => q.status === "cancelled").length,
   };
 
   const renderSpecs = (specs: Record<string, string>) => (
@@ -862,42 +820,13 @@ const AdminQuoteReview = () => {
       {/* Filters */}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div className="flex gap-1 flex-wrap items-center">
-          {/* PO Inbox - prominent at start */}
-          <button
-            onClick={() => { setStatusFilter("po_inbox"); if (urlQuoteId) backToList(); }}
-            className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 ${
-              statusFilter === "po_inbox"
-                ? "bg-teal-500/20 text-teal-700 dark:text-teal-400 ring-1 ring-teal-500/30"
-                : "bg-teal-500/5 text-teal-600 hover:bg-teal-500/10"
-            }`}
-          >
-            📥 PO Inbox
-            {poInboxCount > 0 && (
-              <span className="px-1.5 py-0.5 rounded-full bg-teal-500 text-white text-[10px] font-bold">{poInboxCount}</span>
-            )}
-          </button>
-          {poOverdueCount > 0 && (
-            <button
-              onClick={() => { setStatusFilter("po_overdue"); if (urlQuoteId) backToList(); }}
-              className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 ${
-                statusFilter === "po_overdue"
-                  ? "bg-red-500/20 text-red-700 dark:text-red-400 ring-1 ring-red-500/30"
-                  : "bg-red-500/5 text-red-600 hover:bg-red-500/10"
-              }`}
-            >
-              ⚠️ เลย SLA
-              <span className="px-1.5 py-0.5 rounded-full bg-red-500 text-white text-[10px] font-bold">{poOverdueCount}</span>
-            </button>
-          )}
-          <span className="w-px h-5 bg-border mx-1"></span>
           {[
-            { v: "all",         l: "ทั้งหมด",      c: statusCounts.all },
-            { v: "new",         l: "ใหม่",         c: statusCounts.new },
-            { v: "quoted",      l: "ส่งราคาแล้ว",  c: statusCounts.quoted },
-            { v: "negotiating", l: "เจรจา",        c: statusCounts.negotiating },
-            { v: "won",         l: "ตกลงราคา",     c: statusCounts.won },
-            { v: "po_received", l: "รับ PO",       c: statusCounts.po_received },
-            { v: "lost",        l: "ไม่สำเร็จ",    c: statusCounts.lost },
+            { v: "all",          l: "ทั้งหมด",         c: statusCounts.all },
+            { v: "pending",      l: "รอตอบกลับ",       c: statusCounts.pending },
+            { v: "quote_sent",   l: "ส่งราคาแล้ว",     c: statusCounts.quote_sent },
+            { v: "po_uploaded",  l: "รอตรวจ PO",       c: statusCounts.po_uploaded },
+            { v: "completed",    l: "เสร็จสิ้น",       c: statusCounts.completed },
+            { v: "cancelled",    l: "ยกเลิก",          c: statusCounts.cancelled },
           ].map((f) => (
             <button
               key={f.v}
@@ -983,7 +912,7 @@ const AdminQuoteReview = () => {
           {loading ? <div className="text-center py-12"><Loader2 size={20} className="animate-spin text-muted-foreground" /></div>
           : filtered.length === 0 ? <div className="card-surface rounded-xl p-10 text-center text-muted-foreground text-sm">ไม่มีใบเสนอราคา</div>
           : filtered.map((q) => {
-            const st = STATUS_CFG[q.status] || STATUS_CFG.new;
+            const st = STATUS_CFG[q.status] || STATUS_CFG.pending;
             return (
               <button
                 key={q.id}
@@ -1060,7 +989,7 @@ const AdminQuoteReview = () => {
                     value={selected.status}
                     onChange={(e) => handleStatusChange(selected.id, e.target.value)}
                     disabled={saving}
-                    className={`text-xs px-2.5 py-1.5 rounded-lg border font-bold cursor-pointer transition-colors ${(STATUS_CFG[selected.status] || STATUS_CFG.new).color}`}
+                    className={`text-xs px-2.5 py-1.5 rounded-lg border font-bold cursor-pointer transition-colors ${(STATUS_CFG[selected.status] || STATUS_CFG.pending).color}`}
                   >
                     {Object.entries(STATUS_CFG).map(([key, cfg]) => (
                       <option key={key} value={key}>{cfg.label}</option>
@@ -1069,9 +998,9 @@ const AdminQuoteReview = () => {
                   {/* Reset Button */}
                   <button
                     onClick={() => handleResetStatus(selected.id)}
-                    disabled={saving || selected.status === "new"}
+                    disabled={saving || selected.status === "pending"}
                     className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors disabled:opacity-30"
-                    title="เคลียร์สถานะ (รีเซ็ตกลับเป็นใหม่ ข้อมูลไม่หาย)"
+                    title="เคลียร์สถานะ (รีเซ็ตกลับเป็นรอตอบกลับ ข้อมูลไม่หาย)"
                   >
                     <RefreshCw size={14} />
                   </button>
@@ -1416,14 +1345,14 @@ const AdminQuoteReview = () => {
               )}
 
               {/* No PO yet but status is won */}
-              {!selected.po_file_url && selected.status === "won" && (
+              {!selected.po_file_url && selected.status === "quote_sent" && (
                 <div className="p-3 rounded-lg bg-yellow-500/5 border border-yellow-500/15 text-xs text-yellow-700 flex items-center gap-2">
                   <Clock size={13} /> รอลูกค้าส่งใบสั่งซื้อ (PO)
                 </div>
               )}
 
               {/* Cross-reference links */}
-              {["won", "po_received"].includes(selected.status) && (
+              {["completed", "po_approved"].includes(selected.status) && (
                 <div className="p-3 rounded-xl bg-secondary/20 border border-border">
                   <DocCrossLinks quoteId={selected.id} exclude={["quote"]} />
                 </div>
@@ -1434,7 +1363,7 @@ const AdminQuoteReview = () => {
                 <button onClick={handlePrint} className="px-4 py-3 rounded-xl border border-border text-sm font-medium hover:bg-secondary transition-colors flex items-center gap-2">
                   <Printer size={14} /> พิมพ์ใบเสนอราคา
                 </button>
-                {hasZeroPriceItems && !["won", "po_received"].includes(selected.status) && (
+                {hasZeroPriceItems && !["completed", "po_approved"].includes(selected.status) && (
                   <div className="mb-3 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-xs text-yellow-700 dark:text-yellow-400 flex items-start gap-2">
                     <span className="text-base leading-none">⚠️</span>
                     <div className="flex-1">
@@ -1443,7 +1372,7 @@ const AdminQuoteReview = () => {
                     </div>
                   </div>
                 )}
-                {["won", "po_received"].includes(selected.status) ? (
+                {["completed", "po_approved"].includes(selected.status) ? (
                   <div className="flex-1 flex flex-col gap-2">
                     {hasOrder && hasBilling ? (
                       <div className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-500/10 text-green-600 border border-green-500/20 text-sm font-bold">

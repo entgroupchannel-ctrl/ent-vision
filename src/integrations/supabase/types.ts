@@ -2566,6 +2566,14 @@ export type Database = {
       }
       remove_admin_user: { Args: { _user_id: string }; Returns: boolean }
       send_followup_reminders: { Args: never; Returns: number }
+      send_quotation: {
+        Args: { p_admin_id: string; p_pdf_url: string; p_quote_id: string }
+        Returns: undefined
+      }
+      update_quote_status: {
+        Args: { p_admin_id?: string; p_new_status: string; p_quote_id: string }
+        Returns: Json
+      }
     }
     Enums: {
       app_role:
