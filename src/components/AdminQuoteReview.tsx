@@ -1352,7 +1352,7 @@ const AdminQuoteReview = () => {
               )}
 
               {/* Cross-reference links */}
-              {["won", "po_received"].includes(selected.status) && (
+              {["completed", "po_approved"].includes(selected.status) && (
                 <div className="p-3 rounded-xl bg-secondary/20 border border-border">
                   <DocCrossLinks quoteId={selected.id} exclude={["quote"]} />
                 </div>
@@ -1363,7 +1363,7 @@ const AdminQuoteReview = () => {
                 <button onClick={handlePrint} className="px-4 py-3 rounded-xl border border-border text-sm font-medium hover:bg-secondary transition-colors flex items-center gap-2">
                   <Printer size={14} /> พิมพ์ใบเสนอราคา
                 </button>
-                {hasZeroPriceItems && !["won", "po_received"].includes(selected.status) && (
+                {hasZeroPriceItems && !["completed", "po_approved"].includes(selected.status) && (
                   <div className="mb-3 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-xs text-yellow-700 dark:text-yellow-400 flex items-start gap-2">
                     <span className="text-base leading-none">⚠️</span>
                     <div className="flex-1">
@@ -1372,7 +1372,7 @@ const AdminQuoteReview = () => {
                     </div>
                   </div>
                 )}
-                {["won", "po_received"].includes(selected.status) ? (
+                {["completed", "po_approved"].includes(selected.status) ? (
                   <div className="flex-1 flex flex-col gap-2">
                     {hasOrder && hasBilling ? (
                       <div className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-500/10 text-green-600 border border-green-500/20 text-sm font-bold">
