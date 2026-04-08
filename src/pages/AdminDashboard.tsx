@@ -95,7 +95,7 @@ const AdminDashboard = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [sidebarMode, setSidebarMode] = useState<"full" | "icon" | "hidden">("full");
-  const { can, getLevel } = usePermissions();
+  const { can, getLevel, loading: permsLoading } = usePermissions();
   const [addContactOpen, setAddContactOpen] = useState(false);
   const [addSoftwareOpen, setAddSoftwareOpen] = useState(false);
 
@@ -208,10 +208,15 @@ const AdminDashboard = () => {
     day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit",
   });
 
-  if (authLoading) {
+  if (authLoading || permsLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-muted-foreground text-sm">กำลังตรวจสอบสิทธิ์...</div>
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          <span className="text-sm text-muted-foreground">
+            {authLoading ? "กำลังตรวจสอบสิทธิ์..." : "กำลังโหลดสิทธิ์การใช้งาน..."}
+          </span>
+        </div>
       </div>
     );
   }

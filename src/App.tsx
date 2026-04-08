@@ -131,73 +131,112 @@ const AppInner = () => {
 
   useEffect(() => {
     // ═══════════════════════════════════════════════════════════════════════
-    // Session Recovery Handler — Tab Switch Spinner Fix
+    // Session Recovery v2 — Fixes "silent death" after tab switch
     // ═══════════════════════════════════════════════════════════════════════
-    // Uses refreshSession() with 5s timeout instead of getSession().
-    // Falls back to page reload if refresh fails/hangs.
-    // Includes periodic health check to proactively refresh expiring tokens.
+    // Key fixes:
+    // 1. expires_at is Unix seconds → multiply by 1000 for JS Date
+    // 2. In-flight guard prevents concurrent refresh from visibility + health check
+    // 3. Only refetch active queries instead of global invalidateQueries()
+    // 4. Skip refresh if token still has > 2 min left
     // ═══════════════════════════════════════════════════════════════════════
 
     let lastHiddenTime: number | null = null;
+    let isRefreshing = false;
     const STALE_THRESHOLD = 30 * 1000; // 30 seconds
+
+    /** Convert Supabase expires_at (Unix seconds) to milliseconds */
+    const expiresAtToMs = (expiresAt: number | string | undefined | null): number => {
+      if (!expiresAt) return 0;
+      const num = typeof expiresAt === 'string' ? parseInt(expiresAt, 10) : expiresAt;
+      // Supabase returns Unix seconds; if it looks like seconds (< year 2100 in seconds), convert
+      if (num < 10_000_000_000) return num * 1000;
+      return num; // already milliseconds
+    };
+
+    /** Guarded session refresh — prevents concurrent calls */
+    const guardedRefresh = async (source: string): Promise<boolean> => {
+      if (isRefreshing) {
+        console.log(`[Session] Skipping ${source} — refresh already in-flight`);
+        return false;
+      }
+      isRefreshing = true;
+      try {
+        const refreshPromise = supabase.auth.refreshSession();
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Refresh timeout')), 5000)
+        );
+
+        const { data, error } = await Promise.race([
+          refreshPromise,
+          timeoutPromise,
+        ]) as any;
+
+        if (error) {
+          console.error(`[Session] ${source} refresh failed:`, error.message);
+          return false;
+        }
+
+        if (data?.session) {
+          const expiresIn = Math.round(
+            (expiresAtToMs(data.session.expires_at) - Date.now()) / 1000
+          );
+          console.log(`[Session] ${source} refreshed OK, expires in ${expiresIn}s`);
+        }
+        return true;
+      } catch (e: any) {
+        console.error(`[Session] ${source} error:`, e.message);
+        return false;
+      } finally {
+        isRefreshing = false;
+      }
+    };
 
     const handleVisibilityChange = async () => {
       if (document.hidden) {
         lastHiddenTime = Date.now();
-        console.log('[Session] Tab hidden at', new Date().toLocaleTimeString());
-      } else {
-        const hiddenDuration = lastHiddenTime ? Date.now() - lastHiddenTime : 0;
-        console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 'seconds');
+        return;
+      }
 
-        if (hiddenDuration >= STALE_THRESHOLD) {
-          console.log('[Session] Recovering session...');
+      const hiddenDuration = lastHiddenTime ? Date.now() - lastHiddenTime : 0;
+      lastHiddenTime = null;
 
-          try {
-            // Force refresh token with 5s timeout to prevent hang
-            const refreshPromise = supabase.auth.refreshSession();
-            const timeoutPromise = new Promise((_, reject) =>
-              setTimeout(() => reject(new Error('Refresh timeout')), 5000)
-            );
+      if (hiddenDuration < STALE_THRESHOLD) return;
 
-            const { data, error } = await Promise.race([
-              refreshPromise,
-              timeoutPromise,
-            ]) as any;
+      console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 's');
 
-            if (error) {
-              console.error('[Session] Refresh failed:', error.message);
-              console.log('[Session] Forcing reload...');
-              window.location.reload();
-              return;
-            }
+      // Check if token actually needs refresh before hitting the network
+      try {
+        const { data } = await supabase.auth.getSession();
+        if (!data.session) return; // not logged in
 
-            if (data?.session) {
-              const expiresIn = Math.round(
-                (new Date(data.session.expires_at || 0).getTime() - Date.now()) / 1000
-              );
-              console.log('[Session] Token refreshed successfully, expires in', expiresIn, 's');
-            } else {
-              console.warn('[Session] No session after refresh');
-            }
+        const timeLeftMs = expiresAtToMs(data.session.expires_at) - Date.now();
+        const timeLeftS = Math.round(timeLeftMs / 1000);
 
-            // Invalidate all queries to refetch with fresh token
-            qc.invalidateQueries();
-            console.log('[Session] All queries invalidated');
-          } catch (e: any) {
-            console.error('[Session] Recovery error:', e.message);
-            console.log('[Session] Forcing reload as fallback...');
-            window.location.reload();
-          }
+        if (timeLeftS > 120) {
+          console.log(`[Session] Token still valid (${timeLeftS}s left), skipping refresh`);
+          // Just refetch active queries with existing valid token
+          qc.refetchQueries({ type: 'active' });
+          return;
         }
 
-        lastHiddenTime = null;
+        console.log(`[Session] Token expiring soon (${timeLeftS}s), refreshing...`);
+        const ok = await guardedRefresh('visibility');
+        if (ok) {
+          qc.refetchQueries({ type: 'active' });
+        } else {
+          // Last resort: reload page
+          console.log('[Session] Forcing reload as fallback...');
+          window.location.reload();
+        }
+      } catch (e: any) {
+        console.error('[Session] Recovery error:', e.message);
+        window.location.reload();
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // ── Periodic health check (every 2 min) ──
-    // Proactively refresh token if it expires in < 2 minutes
+    // ── Periodic health check (every 4 min instead of 2) ──
     const healthCheckInterval = setInterval(async () => {
       if (document.hidden) return;
 
@@ -205,19 +244,26 @@ const AppInner = () => {
         const { data } = await supabase.auth.getSession();
         if (!data.session) return;
 
-        const expiresAt = new Date(data.session.expires_at || 0).getTime();
-        const timeLeft = Math.round((expiresAt - Date.now()) / 1000);
-        console.log('[Session Health] Token expires in', timeLeft, 's');
+        const timeLeftS = Math.round(
+          (expiresAtToMs(data.session.expires_at) - Date.now()) / 1000
+        );
 
-        if (timeLeft < 120) {
+        // Only log if something interesting
+        if (timeLeftS < 300) {
+          console.log('[Session Health] Token expires in', timeLeftS, 's');
+        }
+
+        if (timeLeftS < 120) {
           console.log('[Session Health] Token expiring soon, refreshing...');
-          await supabase.auth.refreshSession();
-          qc.invalidateQueries();
+          const ok = await guardedRefresh('health-check');
+          if (ok) {
+            qc.refetchQueries({ type: 'active' });
+          }
         }
       } catch (e) {
         console.error('[Session Health] Check failed:', e);
       }
-    }, 2 * 60 * 1000);
+    }, 4 * 60 * 1000);
 
     return () => {
       clearInterval(healthCheckInterval);
