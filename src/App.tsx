@@ -1,6 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import { QueryClient, QueryClientProvider, QueryCache } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, QueryCache, useQueryClient } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -107,7 +106,7 @@ const queryClient = new QueryClient({
   }),
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: true,
+      refetchOnWindowFocus: true, // ENABLED: Auto-refetch when tab becomes visible
       refetchOnReconnect: true,
       staleTime: 60_000,
       gcTime: 30 * 60_000,
@@ -130,8 +129,17 @@ const AppInner = () => {
   const qc = useQueryClient();
 
   useEffect(() => {
+    // ═══════════════════════════════════════════════════════════════════════
+    // Session Recovery Handler (No Reload Version)
+    // ═══════════════════════════════════════════════════════════════════════
+    // When tab becomes visible after being hidden for >30s, we:
+    // 1. Refresh Supabase session (in case token expired while away)
+    // 2. Invalidate React Query cache (triggers refetch of all queries)
+    // This recovers from stale state WITHOUT full page reload.
+    // ═══════════════════════════════════════════════════════════════════════
+
     let lastHiddenTime: number | null = null;
-    const STALE_THRESHOLD = 30 * 1000;
+    const STALE_THRESHOLD = 30 * 1000; // 30 seconds
 
     const handleVisibilityChange = async () => {
       if (document.hidden) {
@@ -139,33 +147,39 @@ const AppInner = () => {
         console.log('[Session] Tab hidden');
       } else {
         const hiddenDuration = lastHiddenTime ? Date.now() - lastHiddenTime : 0;
-        console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 's');
+        console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 'seconds');
 
         if (hiddenDuration >= STALE_THRESHOLD) {
-          console.log('[Session] Recovering session...');
+          console.log('[Session] Recovering session (no reload)...');
+          
           try {
+            // 1. Force refresh Supabase session
             const { data, error } = await supabase.auth.getSession();
             if (error) {
               console.error('[Session] getSession error:', error);
             } else {
-              console.log('[Session] Session refreshed:', data.session ? 'valid' : 'none');
+              console.log('[Session] Session status:', data.session ? 'valid' : 'none');
             }
+
+            // 2. Invalidate all React Query caches → triggers refetch
             qc.invalidateQueries();
-            console.log('[Session] Queries invalidated');
+            console.log('[Session] All queries invalidated');
           } catch (e) {
             console.error('[Session] Recovery error:', e);
           }
         }
+
         lastHiddenTime = null;
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // Idle timeout
+    // Idle timeout - only reload after 10 min of complete inactivity
     const RELOAD_INTERVAL = 12 * 60 * 1000;
     const IDLE_THRESHOLD = 10 * 60 * 1000;
     let lastActivity = Date.now();
+
     const updateActivity = () => { lastActivity = Date.now(); };
 
     window.addEventListener('click', updateActivity);
