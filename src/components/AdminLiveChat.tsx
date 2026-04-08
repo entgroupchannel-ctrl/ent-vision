@@ -133,11 +133,19 @@ const AdminLiveChat = () => {
   useEffect(() => {
     if (!selectedConv) return;
     const load = async () => {
-      const { data } = await supabase
+      console.log('[AdminLiveChat] Loading messages for:', selectedConv.id);
+      const { data, error } = await supabase
         .from("live_chat_messages")
         .select("*")
         .eq("conversation_id", selectedConv.id)
         .order("created_at", { ascending: true });
+      
+      if (error) {
+        console.error('[AdminLiveChat] Error loading messages:', error);
+        return;
+      }
+      
+      console.log('[AdminLiveChat] Loaded messages:', data?.length || 0);
       if (data) setMessages(data as Message[]);
 
       // Mark user messages as read
