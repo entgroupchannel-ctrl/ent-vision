@@ -605,7 +605,7 @@ const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
                   <div className="border-t border-border pt-3">
                     <button
                       onClick={() => handlePrintOrder(selected)}
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 transition-colors border border-primary/20 w-full justify-center"
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors w-full justify-center"
                     >
                       <Printer size={14} /> พิมพ์ใบสั่งขาย
                     </button>

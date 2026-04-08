@@ -519,7 +519,7 @@ const AdminDeliveryManager = () => {
               <div className="flex gap-2 pt-2">
                 <button onClick={handleShip} disabled={!shipCourier}
                   className="flex-1 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 disabled:opacity-40">ยืนยันจัดส่ง</button>
-                <button onClick={() => setShipDialogOpen(false)} className="px-4 py-2.5 rounded-lg border border-border text-sm hover:bg-accent">ยกเลิก</button>
+                <button onClick={() => setShipDialogOpen(false)} className="px-4 py-2.5 rounded-lg border border-border text-sm font-medium hover:bg-secondary transition-colors">ยกเลิก</button>
               </div>
             </div>
           </div>
@@ -558,7 +558,7 @@ const AdminDeliveryManager = () => {
               </div>
             )}
             <div className="mt-4 flex justify-end">
-              <button onClick={() => setCreateSource(null)} className="px-4 py-2 rounded-lg border border-border text-sm hover:bg-accent">ปิด</button>
+              <button onClick={() => setCreateSource(null)} className="px-4 py-2.5 rounded-lg border border-border text-sm font-medium hover:bg-secondary transition-colors">ปิด</button>
             </div>
           </div>
         </div>
@@ -596,7 +596,7 @@ const AdminDeliveryManager = () => {
               </div>
             )}
             <div className="mt-4 flex justify-end">
-              <button onClick={() => setCreateSource(null)} className="px-4 py-2 rounded-lg border border-border text-sm hover:bg-accent">ปิด</button>
+              <button onClick={() => setCreateSource(null)} className="px-4 py-2.5 rounded-lg border border-border text-sm font-medium hover:bg-secondary transition-colors">ปิด</button>
             </div>
           </div>
         </div>
