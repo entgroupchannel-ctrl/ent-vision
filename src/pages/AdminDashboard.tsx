@@ -600,6 +600,10 @@ const AdminDashboard = () => {
           </div>
         )}
 
+        {tab === "contacts" && addContactOpen && (
+          <AddContactForm onSuccess={() => fetchData(true)} onClose={() => setAddContactOpen(false)} />
+        )}
+
         {/* Content */}
         <div className="grid lg:grid-cols-3 gap-4">
           {/* List */}
