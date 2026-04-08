@@ -551,7 +551,7 @@ const AdminDashboard = () => {
         {tab === "session_monitor" && <AdminSessionMonitor />}
 
         {/* Legacy fallback for tabs that don't have dedicated managers (contacts, chatleads, software, subscribers) */}
-        {!["dashboard", "engagement", "documents", "catalog", "quote_review", "sales_orders", "billing", "invoices", "delivery", "payments", "users"].includes(tab) && (
+        {!["dashboard", "engagement", "documents", "catalog", "quote_review", "sales_orders", "billing", "invoices", "delivery", "payments", "users", "session_monitor"].includes(tab) && (
         <>
         {/* Filter & Export */}
         {tab === "chatleads" ? (
