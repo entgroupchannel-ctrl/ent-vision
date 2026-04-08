@@ -118,13 +118,12 @@ const AddContactForm = ({ onSuccess, onClose }: AddContactFormProps) => {
           <Select value={form.source} onValueChange={(v) => set("source", v)}>
             <SelectTrigger className="h-9 text-sm"><SelectValue placeholder="เลือกแหล่งที่มา" /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="โทรศัพท์">โทรศัพท์</SelectItem>
-              <SelectItem value="walk_in">Walk-in</SelectItem>
+              <SelectItem value="phone">โทรศัพท์</SelectItem>
+              <SelectItem value="walkin">Walk-in</SelectItem>
               <SelectItem value="line">Line</SelectItem>
               <SelectItem value="email">Email</SelectItem>
-              <SelectItem value="งานแสดงสินค้า">งานแสดงสินค้า</SelectItem>
-              <SelectItem value="แนะนำจากลูกค้า">แนะนำจากลูกค้า</SelectItem>
-              <SelectItem value="อื่นๆ">อื่นๆ</SelectItem>
+              <SelectItem value="web_form">เว็บฟอร์ม</SelectItem>
+              <SelectItem value="other">อื่นๆ</SelectItem>
             </SelectContent>
           </Select>
         </div>
