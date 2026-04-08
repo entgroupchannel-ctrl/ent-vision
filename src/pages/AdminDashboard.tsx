@@ -111,7 +111,7 @@ const AdminDashboard = () => {
     engagement: "marketing.engagement",
     subscribers: "marketing.subscribers",
     users: "system.users",
-    livechat: "sales.contacts",
+    
     sales_orders: "sales.quote_review",
     invoices: "sales.quote_review",
     billing: "sales.quote_review",
