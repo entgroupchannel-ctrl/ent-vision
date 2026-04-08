@@ -230,6 +230,78 @@ const AdminPaymentManager = () => {
     fetchAll();
   };
 
+  const handlePrintReceipt = async (paymentRecordId: string) => {
+    try {
+      const { data: rcp } = await (supabase.from as any)("receipts")
+        .select("*")
+        .eq("payment_record_id", paymentRecordId)
+        .maybeSingle();
+
+      if (!rcp) {
+        toast({ title: "ไม่พบใบเสร็จ", variant: "destructive" });
+        return;
+      }
+
+      const docType = rcp.receipt_type === "simple" ? "receipt_simple" as const : "receipt_full" as const;
+
+      let printItems: any[] = [];
+      let invoiceData: any = null;
+      if (docType === "receipt_full" && rcp.invoice_id) {
+        const { data: inv } = await (supabase.from as any)("invoices")
+          .select("*").eq("id", rcp.invoice_id).maybeSingle();
+        invoiceData = inv;
+        const { data: items } = await (supabase.from as any)("invoice_items")
+          .select("*").eq("invoice_id", rcp.invoice_id).order("sort_order");
+        printItems = (items || []).map((it: any) => ({
+          model: it.model,
+          qty: it.qty,
+          unit_price: it.unit_price,
+          discount_percent: it.discount_percent || 0,
+          line_total: it.line_total,
+          admin_notes: null,
+          description: it.description,
+          _name: it.model,
+          _desc: it.description || "",
+        }));
+      }
+
+      printQuote(
+        {
+          quote_number: rcp.receipt_number,
+          name: rcp.customer_name,
+          email: invoiceData?.customer_email || "",
+          phone: invoiceData?.customer_phone || null,
+          company: rcp.customer_company,
+          details: rcp.notes,
+          company_address: invoiceData?.customer_address || null,
+          tax_id: invoiceData?.customer_tax_id || null,
+          payment_date: rcp.payment_date,
+          payment_method: rcp.payment_method,
+          amount_paid: rcp.amount_paid,
+          receiver_name: companySettings?.receiver_name || null,
+          receiver_position: companySettings?.receiver_position || null,
+        },
+        printItems,
+        {
+          discount_amount: invoiceData?.discount_amount || 0,
+          valid_until: "",
+          payment_terms: "",
+          delivery_terms: "",
+          include_vat: docType === "receipt_full",
+          vat_percent: 7,
+        },
+        companySettings || undefined,
+        undefined,
+        undefined,
+        undefined,
+        'th',
+        docType,
+      );
+    } catch (err: any) {
+      toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message, variant: "destructive" });
+    }
+  };
+
   /* ─── Filter ─── */
   const filtered = payments.filter(p => {
     const matchSearch = !search || p.payment_number.toLowerCase().includes(search.toLowerCase()) || (p.reference_number || "").toLowerCase().includes(search.toLowerCase());
@@ -359,6 +431,14 @@ const AdminPaymentManager = () => {
                     <button onClick={() => updatePaymentStatus(p.id, "rejected")}
                       className="px-2.5 py-1 rounded-lg text-[10px] text-muted-foreground hover:text-red-400">
                       <XCircle size={10} className="inline mr-1" />ปฏิเสธ
+                    </button>
+                  </div>
+                )}
+                {p.status === "confirmed" && (
+                  <div className="mt-2">
+                    <button onClick={() => handlePrintReceipt(p.id)}
+                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-primary/10 text-primary text-[10px] font-bold hover:bg-primary/20">
+                      <Printer size={10} /> พิมพ์ใบเสร็จ
                     </button>
                   </div>
                 )}
