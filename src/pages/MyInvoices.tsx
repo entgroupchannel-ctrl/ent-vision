@@ -189,6 +189,75 @@ const MyInvoices = () => {
     }
   };
 
+  const openReceiptDetail = async (rcp: ReceiptRow) => {
+    setSelectedReceipt(rcp);
+    setReceiptDetailOpen(true);
+    if (rcp.receipt_type === "full" && rcp.invoice_id) {
+      const { data: inv } = await supabase.from("invoices").select("*").eq("id", rcp.invoice_id).maybeSingle();
+      setReceiptInvoiceData(inv);
+      const { data: items } = await supabase.from("invoice_items").select("*").eq("invoice_id", rcp.invoice_id).order("sort_order");
+      setReceiptItemsData((items as any[]) || []);
+    } else {
+      setReceiptInvoiceData(null);
+      setReceiptItemsData([]);
+    }
+  };
+
+  const handlePrintReceipt = (rcp: ReceiptRow) => {
+    try {
+      const docType = rcp.receipt_type === "simple" ? "receipt_simple" as const : "receipt_full" as const;
+
+      const printItems = docType === "receipt_full"
+        ? receiptItemsData.map((it: any) => ({
+            model: it.model,
+            qty: it.qty,
+            unit_price: it.unit_price,
+            discount_percent: it.discount_percent || 0,
+            line_total: it.line_total,
+            admin_notes: null,
+            description: it.description,
+            _name: it.model,
+            _desc: it.description || "",
+          }))
+        : [];
+
+      printQuote(
+        {
+          quote_number: rcp.receipt_number,
+          name: rcp.customer_name,
+          email: receiptInvoiceData?.customer_email || "",
+          phone: rcp.customer_phone,
+          company: rcp.customer_company,
+          details: rcp.notes,
+          company_address: rcp.customer_address || receiptInvoiceData?.customer_address || null,
+          tax_id: rcp.customer_tax_id || receiptInvoiceData?.customer_tax_id || null,
+          payment_date: rcp.payment_date,
+          payment_method: rcp.payment_method,
+          amount_paid: rcp.amount_paid,
+          receiver_name: companySettings?.receiver_name || null,
+          receiver_position: companySettings?.receiver_position || null,
+        },
+        printItems,
+        {
+          discount_amount: receiptInvoiceData?.discount_amount || 0,
+          valid_until: "",
+          payment_terms: "",
+          delivery_terms: "",
+          include_vat: docType === "receipt_full",
+          vat_percent: 7,
+        },
+        companySettings || undefined,
+        undefined,
+        undefined,
+        undefined,
+        'th',
+        docType,
+      );
+    } catch (err: any) {
+      toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message, variant: "destructive" });
+    }
+  };
+
   const fmt = (n: number | null) => (n ?? 0).toLocaleString("th-TH", { minimumFractionDigits: 2 });
   const fmtDate = (d: string | null) => d ? new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" }) : "-";
 
