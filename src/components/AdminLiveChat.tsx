@@ -113,7 +113,7 @@ const AdminLiveChat = () => {
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, [selectedConv, qc]);
+  }, [selectedConv?.id, qc]);
 
   // Realtime for new conversations
   useEffect(() => {
@@ -189,7 +189,7 @@ const AdminLiveChat = () => {
       )
       .subscribe();
     return () => { supabase.removeChannel(channel); };
-  }, [selectedConv]);
+  }, [selectedConv?.id]);
 
   // Scroll to bottom
   useEffect(() => {
@@ -299,7 +299,7 @@ const AdminLiveChat = () => {
               {activeConvs.map((c) => (
                 <button
                   key={c.id}
-                  onClick={() => setSelectedConv(c)}
+                  onClick={() => setSelectedConv(prev => prev?.id === c.id ? prev : c)}
                   className={`w-full text-left px-3 py-2.5 hover:bg-muted/50 transition-colors border-b border-border/50 ${
                     selectedConv?.id === c.id ? "bg-primary/5 border-l-2 border-l-primary" : ""
                   }`}
@@ -329,7 +329,7 @@ const AdminLiveChat = () => {
               {closedConvs.slice(0, 10).map((c) => (
                 <button
                   key={c.id}
-                  onClick={() => setSelectedConv(c)}
+                  onClick={() => setSelectedConv(prev => prev?.id === c.id ? prev : c)}
                   className={`w-full text-left px-3 py-2 hover:bg-muted/50 transition-colors border-b border-border/50 opacity-60 ${
                     selectedConv?.id === c.id ? "bg-primary/5 opacity-100" : ""
                   }`}
