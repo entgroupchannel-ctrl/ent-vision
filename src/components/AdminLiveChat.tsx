@@ -299,7 +299,7 @@ const AdminLiveChat = () => {
               {activeConvs.map((c) => (
                 <button
                   key={c.id}
-                  onClick={() => setSelectedConv(c)}
+                  onClick={() => setSelectedConv(prev => prev?.id === c.id ? prev : c)}
                   className={`w-full text-left px-3 py-2.5 hover:bg-muted/50 transition-colors border-b border-border/50 ${
                     selectedConv?.id === c.id ? "bg-primary/5 border-l-2 border-l-primary" : ""
                   }`}
