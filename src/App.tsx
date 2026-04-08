@@ -107,7 +107,7 @@ const queryClient = new QueryClient({
   }),
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: true, // ENABLED: Auto-refetch when tab becomes visible
+      refetchOnWindowFocus: false, // DISABLED: We handle refetch manually in AppInner after token recovery
       refetchOnReconnect: true,
       staleTime: 60_000,
       gcTime: 30 * 60_000,
