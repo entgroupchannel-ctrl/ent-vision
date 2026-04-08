@@ -105,8 +105,9 @@ const AdminCustomerManager = () => {
       );
     } catch (err: any) {
       toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: err.message, variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const openEdit = (c: CustomerProfile) => {

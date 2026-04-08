@@ -66,7 +66,7 @@ const AdminUserManagement = () => {
     try {
       const { data: users, error } = await supabase.rpc("get_admin_users");
       if (error) throw error;
-      if (!users) { setAdminUsers([]); setLoading(false); return; }
+      if (!users) { setAdminUsers([]); return; }
 
       // Fetch permissions
       const userIds = users.map((u: any) => u.user_id);
@@ -95,8 +95,9 @@ const AdminUserManagement = () => {
     } catch (err: any) {
       console.error("Failed to fetch admin users:", err);
       toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: err.message, variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => { fetchAdminUsers(); }, []);

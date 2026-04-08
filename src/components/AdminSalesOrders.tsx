@@ -120,8 +120,9 @@ const AdminSalesOrders = () => {
       const { data } = await (supabase.from as any)("sales_orders")
         .select("*").order("created_at", { ascending: false });
       if (data) setOrders(data);
-    } catch {}
-    setLoading(false);
+    } catch {} finally {
+      setLoading(false);
+    }
   };
 
   const fetchStats = async () => {

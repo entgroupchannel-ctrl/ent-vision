@@ -98,8 +98,9 @@ const AdminProductCatalog = () => {
         .order("category", { ascending: true })
         .order("model", { ascending: true });
       if (data) setProducts(data);
-    } catch {}
-    setLoading(false);
+    } catch {} finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { fetchProducts(); }, []);
