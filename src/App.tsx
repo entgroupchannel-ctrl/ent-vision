@@ -69,6 +69,7 @@ const MyAccount = lazy(() => import("./pages/MyAccount.tsx"));
 const QuoteBuilder = lazy(() => import("./pages/QuoteBuilder.tsx"));
 const PlatformTour = lazy(() => import("./pages/PlatformTour.tsx"));
 const AdminLiveChatPage = lazy(() => import("./pages/AdminLiveChat.tsx"));
+const DebugTest = lazy(() => import("./pages/DebugTest.tsx"));
 
 /* ── Loading fallback ── */
 const PageLoader = () => (
@@ -376,6 +377,7 @@ const App = () => (
                 <Route path="/my-account/*" element={<MyAccount />} />
                 <Route path="/platform" element={<PlatformTour />} />
                 <Route path="/admin/livechat" element={<AdminLiveChatPage />} />
+                <Route path="/debug-test" element={<DebugTest />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
