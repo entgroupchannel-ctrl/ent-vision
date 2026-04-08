@@ -29,6 +29,7 @@ import RevenueChart from "@/components/RevenueChart";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
 const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
 import AddContactForm from "@/components/AddContactForm";
+import AddSoftwareInquiryDialog from "@/components/AddSoftwareInquiryDialog";
 
 type Tab = "dashboard" | "contacts" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
 
@@ -96,6 +97,7 @@ const AdminDashboard = () => {
   const [sidebarMode, setSidebarMode] = useState<"full" | "icon" | "hidden">("full");
   const { can, getLevel } = usePermissions();
   const [addContactOpen, setAddContactOpen] = useState(false);
+  const [addSoftwareOpen, setAddSoftwareOpen] = useState(false);
 
   // Map tab → permission key
   const tabPermission: Record<Tab, PermissionKey> = {
@@ -597,12 +599,26 @@ const AdminDashboard = () => {
                 <span className="text-lg leading-none">+</span> เพิ่มติดต่อ
               </button>
             )}
+            {tab === "software" && (
+              <button
+                onClick={() => setAddSoftwareOpen(true)}
+                className="ml-auto flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+              >
+                <span className="text-lg leading-none">+</span> เพิ่มสอบถามซอฟต์แวร์
+              </button>
+            )}
           </div>
         )}
 
         {tab === "contacts" && addContactOpen && (
           <AddContactForm onSuccess={() => fetchData(true)} onClose={() => setAddContactOpen(false)} />
         )}
+
+        <AddSoftwareInquiryDialog
+          open={addSoftwareOpen}
+          onOpenChange={setAddSoftwareOpen}
+          onSuccess={() => fetchData(true)}
+        />
 
         {/* Content */}
         <div className="grid lg:grid-cols-3 gap-4">
