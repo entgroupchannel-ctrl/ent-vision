@@ -500,6 +500,27 @@ table.items td:nth-child(4),
 table.items td:nth-child(5),
 table.items td:nth-child(6) { display: none !important; }
 ` : ''}
+${documentType === 'receipt_simple' ? `
+table.items { display: none !important; }
+` : ''}
+
+/* ── Payment Info (Receipt) ── */
+.payment-info-section{margin:16px 0;padding:14px 18px;border:1.5px solid var(--primary);border-radius:8px;background:var(--bg-light)}
+.payment-info-grid{display:flex;flex-direction:column;gap:6px}
+.payment-info-row{display:flex;justify-content:space-between;align-items:center;font-size:10pt}
+.payment-lb{color:var(--text-light);font-weight:500}
+.payment-vl{color:var(--text-dark);font-weight:600}
+.payment-amount-row{margin-top:6px;padding-top:8px;border-top:1px dashed var(--border)}
+.payment-amount{color:var(--primary);font-size:14pt;font-weight:700}
+
+/* ── Signature Block (Receipt) ── */
+.receipt-signature-section{margin-top:32px;display:flex;justify-content:flex-end}
+.receipt-signature-box{width:240px;text-align:center}
+.receipt-signature-line{border-top:1px solid var(--text-dark);margin-bottom:6px;height:1px}
+.receipt-signature-label{font-size:10pt;color:var(--text-light);margin-bottom:2px}
+.receipt-signature-name{font-size:11pt;color:var(--text-dark);font-weight:600;margin-bottom:2px}
+.receipt-signature-position{font-size:9pt;color:var(--text-light);margin-bottom:6px}
+.receipt-signature-date{font-size:9pt;color:var(--text-light);margin-top:8px}
 </style></head><body>
 <div class="print-tip">
   💡 <strong>เคล็ดลับ:</strong> เพื่อให้ใบเสนอราคาดูสวยที่สุด ใน print dialog กรุณาเลือก <strong>"More settings"</strong> แล้วปิด <strong>"Headers and footers"</strong>
@@ -565,7 +586,7 @@ table.items td:nth-child(6) { display: none !important; }
   </tbody>
 </table>
 
-${documentType !== 'delivery' ? `
+${(documentType !== 'delivery' && documentType !== 'receipt_simple') ? `
 <!-- ═══ TOTALS ═══ -->
 <div class="totals-section no-break">
   <div class="totals">
