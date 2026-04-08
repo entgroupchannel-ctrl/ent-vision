@@ -76,8 +76,9 @@ const NotificationBell = ({ onNavigate }: NotificationBellProps) => {
       setNotifications((data || []) as Notification[]);
     } catch {
       // ignore
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const markAsRead = async (id: string) => {

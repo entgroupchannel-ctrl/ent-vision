@@ -13,17 +13,21 @@ const ForgotPassword = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
-    });
-
-    if (error) {
-      toast({ title: "ส่งอีเมลไม่สำเร็จ", description: error.message, variant: "destructive" });
-    } else {
-      setSent(true);
+      if (error) {
+        toast({ title: "ส่งอีเมลไม่สำเร็จ", description: error.message, variant: "destructive" });
+      } else {
+        setSent(true);
+      }
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err?.message || "ไม่สามารถส่งอีเมลได้", variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   if (sent) {

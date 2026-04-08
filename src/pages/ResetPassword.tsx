@@ -44,16 +44,21 @@ const ResetPassword = () => {
     }
 
     setLoading(true);
-    const { error } = await supabase.auth.updateUser({ password });
+    try {
+      const { error } = await supabase.auth.updateUser({ password });
 
-    if (error) {
-      toast({ title: "เปลี่ยนรหัสผ่านไม่สำเร็จ", description: error.message, variant: "destructive" });
-    } else {
-      toast({ title: "เปลี่ยนรหัสผ่านสำเร็จ!", description: "กรุณาเข้าสู่ระบบด้วยรหัสผ่านใหม่" });
-      await supabase.auth.signOut();
-      navigate("/admin-login", { replace: true });
+      if (error) {
+        toast({ title: "เปลี่ยนรหัสผ่านไม่สำเร็จ", description: error.message, variant: "destructive" });
+      } else {
+        toast({ title: "เปลี่ยนรหัสผ่านสำเร็จ!", description: "กรุณาเข้าสู่ระบบด้วยรหัสผ่านใหม่" });
+        await supabase.auth.signOut();
+        navigate("/admin-login", { replace: true });
+      }
+    } catch (err: any) {
+      toast({ title: "เกิดข้อผิดพลาด", description: err?.message || "ไม่สามารถเปลี่ยนรหัสผ่านได้", variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   if (checking) {

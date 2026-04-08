@@ -39,8 +39,9 @@ const AdminLogin = () => {
       }
     } catch (err: any) {
       toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleGoogleLogin = async () => {
@@ -55,8 +56,9 @@ const AdminLogin = () => {
       }
     } catch (err: any) {
       toast({ title: "เกิดข้อผิดพลาด", description: err.message, variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   if (authLoading || user) {

@@ -42,8 +42,11 @@ const MyNotifications = () => {
         .order("created_at", { ascending: false })
         .limit(50);
       if (data) setNotifications(data);
-    } catch { /* silent */ }
-    setLoading(false);
+    } catch {
+      /* silent */
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { fetchNotifications(); }, [user]);
