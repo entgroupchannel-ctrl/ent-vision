@@ -129,16 +129,16 @@ const AppInner = () => {
     // ═══════════════════════════════════════════════════════════════════════
     // Session Recovery & Tab Visibility Handler
     // ═══════════════════════════════════════════════════════════════════════
-    // Problem: After switching browser tabs, Supabase client can become stale
-    // because browsers throttle background tabs. When user returns, requests
-    // hang indefinitely showing "กำลังโหลด..." spinner.
+    // Problem: After switching browser tabs for even 30-60 seconds, Supabase 
+    // client becomes stale. When user returns, requests hang showing spinner.
     //
-    // Solution: When tab becomes visible again after being hidden for >2min,
-    // we force reload to get a fresh client. This is the most reliable fix.
+    // Solution: 
+    // 1. For short absences (>30s): Force reload to get fresh client
+    // 2. This is aggressive but guarantees recovery since hard refresh works
     // ═══════════════════════════════════════════════════════════════════════
 
     let lastHiddenTime: number | null = null;
-    const STALE_THRESHOLD = 2 * 60 * 1000; // 2 minutes hidden = stale
+    const STALE_THRESHOLD = 30 * 1000; // 30 seconds hidden = stale (was 2 min, too long)
 
     const handleVisibilityChange = () => {
       if (document.hidden) {
@@ -150,7 +150,7 @@ const AppInner = () => {
           console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 'seconds');
 
           if (hiddenDuration >= STALE_THRESHOLD) {
-            console.log('[Session] Tab was hidden for >2min — reloading to recover...');
+            console.log('[Session] Tab was hidden for >30s — reloading to recover...');
             setTimeout(() => {
               window.location.reload();
             }, 100);
