@@ -113,7 +113,7 @@ const AdminLiveChat = () => {
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, [selectedConv, qc]);
+  }, [selectedConv?.id, qc]);
 
   // Realtime for new conversations
   useEffect(() => {
