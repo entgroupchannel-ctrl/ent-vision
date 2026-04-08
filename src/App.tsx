@@ -150,7 +150,7 @@ const AppInner = () => {
           console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 'seconds');
 
           if (hiddenDuration >= STALE_THRESHOLD) {
-            console.log('[Session] Tab was hidden for >2min — reloading to recover...');
+            console.log('[Session] Tab was hidden for >30s — reloading to recover...');
             setTimeout(() => {
               window.location.reload();
             }, 100);
