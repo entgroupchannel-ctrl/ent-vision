@@ -66,7 +66,7 @@ const LiveChatWidget = () => {
       }
     };
     loadConversation();
-  }, [user]);
+  }, [user, isAdminRoute]);
 
   // Realtime subscription
   useEffect(() => {
