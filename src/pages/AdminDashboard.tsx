@@ -1009,6 +1009,7 @@ const AdminDashboard = () => {
           </main>
         </div>
       </div>
+      <AddContactDialog open={addContactOpen} onOpenChange={setAddContactOpen} onSuccess={() => fetchData(true)} />
     </div>
   );
 };
