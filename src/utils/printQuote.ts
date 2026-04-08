@@ -643,6 +643,38 @@ ${c.quote_terms ? `<div class="terms-section no-break">
   </div>
 </div>
 
+${(documentType === 'receipt_full' || documentType === 'receipt_simple') ? `
+<!-- ═══ PAYMENT INFO ═══ -->
+<div class="payment-info-section no-break">
+  <div class="payment-info-grid">
+    <div class="payment-info-row">
+      <span class="payment-lb">${t.payment_date_label}:</span>
+      <span class="payment-vl">${q.payment_date ? new Date(q.payment_date).toLocaleDateString("th-TH", { day: "2-digit", month: "2-digit", year: "numeric" }) : "—"}</span>
+    </div>
+    <div class="payment-info-row">
+      <span class="payment-lb">${t.payment_method_label}:</span>
+      <span class="payment-vl">${q.payment_method || "—"}</span>
+    </div>
+    <div class="payment-info-row payment-amount-row">
+      <span class="payment-lb">${t.amount_paid}:</span>
+      <span class="payment-amount">${fp(q.amount_paid || 0)} ${t.currency}</span>
+    </div>
+  </div>
+  ${documentType === 'receipt_simple' ? `<div class="thai-text" style="margin:8px 0 0;text-align:center">(${lang === 'th' ? numberToThaiText(q.amount_paid || 0) : numberToEnglishText(q.amount_paid || 0)})</div>` : ''}
+</div>
+
+<!-- ═══ RECEIPT SIGNATURE ═══ -->
+<div class="receipt-signature-section">
+  <div class="receipt-signature-box">
+    <div class="receipt-signature-line"></div>
+    <div class="receipt-signature-label">${t.receiver_signature}</div>
+    ${q.receiver_name ? `<div class="receipt-signature-name">(${q.receiver_name})</div>` : `<div class="receipt-signature-name">(...........................)</div>`}
+    ${q.receiver_position ? `<div class="receipt-signature-position">${t.receiver_position}: ${q.receiver_position}</div>` : ''}
+    <div class="receipt-signature-date">${t.signed_date}: ........./........./...........</div>
+  </div>
+</div>
+` : ''}
+
 <!-- ═══ FOOTER ═══ -->
 <div class="page-footer">
   <p>${coNameFull} | ${t.phone}. ${c.phone} | ${c.website} | ${c.email}</p>
