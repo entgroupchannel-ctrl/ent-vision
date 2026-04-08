@@ -51,7 +51,7 @@ const LiveChatWidget = () => {
   // Load existing conversation on mount
   useEffect(() => {
     const loadConversation = async () => {
-      if (!user) return;
+      if (!user || isAdminRoute) return;
       const { data } = await supabase
         .from("live_chat_conversations")
         .select("id")
