@@ -11,6 +11,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import QuoteTimeline from "@/components/QuoteTimeline";
+import QuoteStatusTimeline from "@/components/QuoteStatusTimeline";
+import QuoteActions from "@/components/QuoteActions";
 import DocCrossLinks from "@/components/admin/DocCrossLinks";
 import { notifyQuoteStatus, getSaleInfo, productSummaryText } from "@/utils/notifyQuoteStatus";
 import { printQuote } from "@/utils/printQuote";
