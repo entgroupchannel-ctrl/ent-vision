@@ -170,6 +170,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
+          <AppInner />
           <BrowserRouter>
             <ScrollToTop />
             <Suspense fallback={null}>
