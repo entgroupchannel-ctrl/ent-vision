@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { MessageCircle, X, Send, User, Headphones, Loader2, Minus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useLocation } from "react-router-dom";
 
 type Message = {
   id: string;
@@ -14,6 +15,8 @@ type GuestInfo = { name: string; email: string };
 
 const LiveChatWidget = () => {
   const { user } = useAuth();
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -48,7 +51,7 @@ const LiveChatWidget = () => {
   // Load existing conversation on mount
   useEffect(() => {
     const loadConversation = async () => {
-      if (!user) return;
+      if (!user || isAdminRoute) return;
       const { data } = await supabase
         .from("live_chat_conversations")
         .select("id")
@@ -63,11 +66,11 @@ const LiveChatWidget = () => {
       }
     };
     loadConversation();
-  }, [user]);
+  }, [user, isAdminRoute]);
 
   // Realtime subscription
   useEffect(() => {
-    if (!conversationId) return;
+    if (!conversationId || isAdminRoute) return;
 
     const channel = supabase
       .channel(`live-chat-${conversationId}`)
@@ -97,7 +100,12 @@ const LiveChatWidget = () => {
       .subscribe();
 
     return () => { supabase.removeChannel(channel); };
-  }, [conversationId]);
+  }, [conversationId, isAdminRoute]);
+
+  // Don't render LiveChatWidget on admin pages
+  // (admins use AdminLiveChat instead, and the persistent realtime
+  // websocket here causes connection issues after 5-10 min idle)
+  if (isAdminRoute) return null;
 
   const loadMessages = async (convId: string) => {
     const { data } = await supabase
