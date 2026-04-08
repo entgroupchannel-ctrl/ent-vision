@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -91,13 +91,18 @@ export function usePermissions() {
   const { user, isSuperAdmin } = useAuth();
   const [permissions, setPermissions] = useState<PermissionsMap | null>(null);
   const [loading, setLoading] = useState(true);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // CRITICAL: Depend on user.id (primitive) instead of user object reference.
-  // This prevents re-querying when user reference changes but identity is the same
-  // (e.g. on TOKEN_REFRESHED).
   const userId = user?.id ?? null;
 
   useEffect(() => {
+    // Clear previous timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+
     if (!userId) {
       setPermissions(null);
       setLoading(false);
@@ -114,37 +119,115 @@ export function usePermissions() {
     }
 
     let cancelled = false;
+    setLoading(true);
 
-    (async () => {
+    // ✅ FIX: 10s timeout — force setLoading(false) to prevent infinite stuck
+    timeoutRef.current = setTimeout(() => {
+      if (!cancelled) {
+        console.error('[usePermissions] ⏱️ TIMEOUT after 10s — forcing loading=false');
+        setLoading(false);
+        setPermissions(null);
+      }
+    }, 10_000);
+
+    const fetchPermissions = async () => {
+      const MAX_RETRIES = 2;
+      let retryCount = 0;
+
       try {
-        const { data } = await (supabase.from as any)("admin_permissions")
-          .select("permission_key, access_level")
-          .eq("user_id", userId);
+        // ✅ FIX: Check session before query
+        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
 
-        if (cancelled) return;
-
-        const map: PermissionsMap = Object.fromEntries(
-          PERMISSION_KEYS.map((k) => [k, "none"])
-        ) as PermissionsMap;
-
-        if (data) {
-          data.forEach((row: { permission_key: string; access_level: string }) => {
-            if (row.permission_key in map) {
-              map[row.permission_key as PermissionKey] = row.access_level as AccessLevel;
-            }
-          });
+        if (sessionError || !sessionData?.session) {
+          console.warn('[usePermissions] No valid session');
+          if (!cancelled) {
+            setPermissions(null);
+            setLoading(false);
+          }
+          return;
         }
 
-        setPermissions(map);
-      } catch {
-        if (!cancelled) setPermissions(null);
+        // ✅ FIX: Smart retry on JWT errors
+        while (retryCount <= MAX_RETRIES) {
+          const { data, error } = await supabase
+            .from("admin_permissions")
+            .select("permission_key, access_level")
+            .eq("user_id", userId);
+
+          if (error) {
+            const isJWTError =
+              error.code === 'PGRST301' ||
+              String(error.message || '').toLowerCase().includes('jwt') ||
+              String(error.message || '').toLowerCase().includes('expired');
+
+            if (isJWTError && retryCount < MAX_RETRIES) {
+              console.warn(`[usePermissions] JWT error, refreshing session (${retryCount + 1}/${MAX_RETRIES})`);
+              const { error: refreshError } = await supabase.auth.refreshSession();
+              if (refreshError) {
+                console.error('[usePermissions] Session refresh failed');
+                break;
+              }
+              retryCount++;
+              await new Promise((r) => setTimeout(r, 500));
+              continue;
+            }
+
+            // Non-JWT error or max retries
+            console.error('[usePermissions] Query error:', error.message);
+            break;
+          }
+
+          // Success
+          if (cancelled) return;
+
+          const map: PermissionsMap = Object.fromEntries(
+            PERMISSION_KEYS.map((k) => [k, "none"])
+          ) as PermissionsMap;
+
+          if (data) {
+            data.forEach((row: { permission_key: string; access_level: string }) => {
+              if (row.permission_key in map) {
+                map[row.permission_key as PermissionKey] = row.access_level as AccessLevel;
+              }
+            });
+          }
+
+          setPermissions(map);
+          setLoading(false);
+          if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+            timeoutRef.current = null;
+          }
+          return;
+        }
+
+        // All retries failed
+        if (!cancelled) {
+          setPermissions(null);
+          setLoading(false);
+        }
+      } catch (err: any) {
+        if (!cancelled) {
+          console.error('[usePermissions] Error:', err?.message);
+          setPermissions(null);
+          setLoading(false);
+        }
       } finally {
-        if (!cancelled) setLoading(false);
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+          timeoutRef.current = null;
+        }
       }
-    })();
+    };
+
+    fetchPermissions();
 
     return () => {
       cancelled = true;
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
     };
   }, [userId, isSuperAdmin]);
 
