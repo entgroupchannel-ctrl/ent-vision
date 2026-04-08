@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Package, TrendingUp, Users, DollarSign, Truck, CheckCircle,
   Clock, Loader2, RefreshCw, Search, Eye, ChevronDown,
@@ -98,15 +99,18 @@ interface AdminSalesOrdersProps {
 const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const qc = useQueryClient();
 
-  const [orders, setOrders] = useState<SalesOrder[]>([]);
-  const [loading, setLoading] = useState(true);
+  // ═══════════════════════════════════════════════════════════════════════════
+  // MIGRATED TO REACT QUERY: Prevents spinner-stuck when switching browser tabs
+  // - Auto-refetch on window focus (if enabled in App.tsx)
+  // - Invalidation via queryClient.invalidateQueries() triggers refetch
+  // - Built-in loading/error states
+  // ═══════════════════════════════════════════════════════════════════════════
+
   const [selected, setSelected] = useState<SalesOrder | null>(null);
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [itemsLoading, setItemsLoading] = useState(false);
-
-  const [salesStats, setSalesStats] = useState<SaleStat[]>([]);
-  const [monthlyRevenue, setMonthlyRevenue] = useState<MonthlyRevenue[]>([]);
 
   const [statusFilter, setStatusFilter] = useState("all");
   const [searchText, setSearchText] = useState("");
@@ -130,28 +134,43 @@ const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
     })();
   }, []);
 
-  /* ─── Fetch ─── */
-  const fetchOrders = async () => {
-    setLoading(true);
-    try {
-      const { data } = await (supabase.from as any)("sales_orders")
+  /* ─── React Query: Fetch all data ─── */
+  const currentYear = new Date().getFullYear();
+
+  const { data: ordersData, isLoading: ordersLoading } = useQuery({
+    queryKey: ["admin", "sales-orders"],
+    queryFn: async () => {
+      const { data, error } = await (supabase.from as any)("sales_orders")
         .select("*").order("created_at", { ascending: false });
-      if (data) setOrders(data);
-    } catch {} finally {
-      setLoading(false);
-    }
-  };
+      if (error) throw error;
+      return (data || []) as SalesOrder[];
+    },
+    staleTime: 30_000,
+    gcTime: 5 * 60_000,
+  });
 
-  const fetchStats = async () => {
-    try {
-      const year = new Date().getFullYear();
-      const { data: stats } = await supabase.rpc("get_sales_dashboard", { _year: year });
-      if (stats) setSalesStats(stats as SaleStat[]);
-      const { data: monthly } = await supabase.rpc("get_monthly_revenue", { _year: year });
-      if (monthly) setMonthlyRevenue(monthly as MonthlyRevenue[]);
-    } catch {}
-  };
+  const { data: statsData, isLoading: statsLoading } = useQuery({
+    queryKey: ["admin", "sales-stats", currentYear],
+    queryFn: async () => {
+      const [statsRes, monthlyRes] = await Promise.all([
+        supabase.rpc("get_sales_dashboard", { _year: currentYear }),
+        supabase.rpc("get_monthly_revenue", { _year: currentYear }),
+      ]);
+      return {
+        salesStats: (statsRes.data || []) as SaleStat[],
+        monthlyRevenue: (monthlyRes.data || []) as MonthlyRevenue[],
+      };
+    },
+    staleTime: 60_000,
+    gcTime: 5 * 60_000,
+  });
 
+  const orders = ordersData ?? [];
+  const salesStats = statsData?.salesStats ?? [];
+  const monthlyRevenue = statsData?.monthlyRevenue ?? [];
+  const loading = ordersLoading || statsLoading;
+
+  /* ─── Fetch order items (still uses useState for selected item) ─── */
   const fetchOrderItems = async (orderId: string) => {
     setItemsLoading(true);
     try {
@@ -162,29 +181,11 @@ const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
     setItemsLoading(false);
   };
 
-  useEffect(() => {
-    let cancelled = false;
-    const loadData = async () => {
-      setLoading(true);
-      try {
-        const [ordersRes, statsRes, monthlyRes] = await Promise.all([
-          (supabase.from as any)("sales_orders").select("*").order("created_at", { ascending: false }),
-          supabase.rpc("get_sales_dashboard", { _year: new Date().getFullYear() }).then(r => r, () => ({ data: null })),
-          supabase.rpc("get_monthly_revenue", { _year: new Date().getFullYear() }).then(r => r, () => ({ data: null })),
-        ]);
-        if (cancelled) return;
-        if (ordersRes.data) setOrders(ordersRes.data);
-        if (statsRes.data) setSalesStats(statsRes.data as SaleStat[]);
-        if (monthlyRes.data) setMonthlyRevenue(monthlyRes.data as MonthlyRevenue[]);
-      } catch (err) {
-        console.error("[AdminSalesOrders] Load failed:", err);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    };
-    loadData();
-    return () => { cancelled = true; };
-  }, []);
+  /* ─── Refresh helper ─── */
+  const refreshData = () => {
+    qc.invalidateQueries({ queryKey: ["admin", "sales-orders"] });
+    qc.invalidateQueries({ queryKey: ["admin", "sales-stats"] });
+  };
 
   const selectOrder = (o: SalesOrder) => {
     setSelected(o);
@@ -207,8 +208,7 @@ const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
       if (error) throw error;
 
       toast({ title: `อัปเดตสถานะเป็น "${STATUS_CFG[newStatus]?.label || newStatus}"` });
-      fetchOrders();
-      fetchStats();
+      refreshData();
       if (selected) setSelected({ ...selected, status: newStatus, ...updates });
     } catch (err: any) {
       toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
@@ -229,7 +229,7 @@ const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
       }).eq("id", selected.id);
       if (error) throw error;
       toast({ title: "บันทึกแล้ว" });
-      fetchOrders();
+      refreshData();
     } catch (err: any) {
       toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
     }
@@ -317,7 +317,7 @@ const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
     <div className="space-y-4">
       {/* Refresh button only (tab toggle removed) */}
       <div className="flex items-center gap-2 justify-end">
-        <button onClick={() => { fetchOrders(); fetchStats(); }} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+        <button onClick={refreshData} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
           <RefreshCw size={12} className={loading ? "animate-spin" : ""} />
         </button>
       </div>
