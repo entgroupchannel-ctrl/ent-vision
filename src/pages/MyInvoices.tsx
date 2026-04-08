@@ -39,6 +39,10 @@ interface ReceiptRow {
   payment_date: string;
   customer_name: string;
   customer_company: string | null;
+  customer_address: string | null;
+  customer_tax_id: string | null;
+  customer_phone: string | null;
+  receipt_type: string | null;
   amount_paid: number;
   payment_method: string | null;
   status: string;
@@ -93,6 +97,10 @@ const MyInvoices = () => {
   const [invoiceItems, setInvoiceItems] = useState<InvoiceItem[]>([]);
   const [detailOpen, setDetailOpen] = useState(false);
   const [companySettings, setCompanySettings] = useState<any>(null);
+  const [selectedReceipt, setSelectedReceipt] = useState<ReceiptRow | null>(null);
+  const [receiptDetailOpen, setReceiptDetailOpen] = useState(false);
+  const [receiptInvoiceData, setReceiptInvoiceData] = useState<any>(null);
+  const [receiptItemsData, setReceiptItemsData] = useState<any[]>([]);
 
   useEffect(() => {
     (async () => {
