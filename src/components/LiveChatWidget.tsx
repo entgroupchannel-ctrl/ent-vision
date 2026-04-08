@@ -100,7 +100,7 @@ const LiveChatWidget = () => {
       .subscribe();
 
     return () => { supabase.removeChannel(channel); };
-  }, [conversationId]);
+  }, [conversationId, isAdminRoute]);
 
   // Don't render LiveChatWidget on admin pages
   // (admins use AdminLiveChat instead, and the persistent realtime
