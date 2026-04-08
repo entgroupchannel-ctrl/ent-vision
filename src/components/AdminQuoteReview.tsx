@@ -515,7 +515,7 @@ const AdminQuoteReview = () => {
         po_reviewed_at: new Date().toISOString(),
       };
       if (action === "approved") {
-        updates.status = "po_received";
+        updates.status = "po_uploaded";
       }
       const { error } = await (supabase.from as any)("quote_requests").update(updates).eq("id", quoteId);
       if (error) throw error;
@@ -912,7 +912,7 @@ const AdminQuoteReview = () => {
           {loading ? <div className="text-center py-12"><Loader2 size={20} className="animate-spin text-muted-foreground" /></div>
           : filtered.length === 0 ? <div className="card-surface rounded-xl p-10 text-center text-muted-foreground text-sm">ไม่มีใบเสนอราคา</div>
           : filtered.map((q) => {
-            const st = STATUS_CFG[q.status] || STATUS_CFG.new;
+            const st = STATUS_CFG[q.status] || STATUS_CFG.pending;
             return (
               <button
                 key={q.id}
@@ -989,7 +989,7 @@ const AdminQuoteReview = () => {
                     value={selected.status}
                     onChange={(e) => handleStatusChange(selected.id, e.target.value)}
                     disabled={saving}
-                    className={`text-xs px-2.5 py-1.5 rounded-lg border font-bold cursor-pointer transition-colors ${(STATUS_CFG[selected.status] || STATUS_CFG.new).color}`}
+                    className={`text-xs px-2.5 py-1.5 rounded-lg border font-bold cursor-pointer transition-colors ${(STATUS_CFG[selected.status] || STATUS_CFG.pending).color}`}
                   >
                     {Object.entries(STATUS_CFG).map(([key, cfg]) => (
                       <option key={key} value={key}>{cfg.label}</option>
@@ -998,9 +998,9 @@ const AdminQuoteReview = () => {
                   {/* Reset Button */}
                   <button
                     onClick={() => handleResetStatus(selected.id)}
-                    disabled={saving || selected.status === "new"}
+                    disabled={saving || selected.status === "pending"}
                     className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors disabled:opacity-30"
-                    title="เคลียร์สถานะ (รีเซ็ตกลับเป็นใหม่ ข้อมูลไม่หาย)"
+                    title="เคลียร์สถานะ (รีเซ็ตกลับเป็นรอตอบกลับ ข้อมูลไม่หาย)"
                   >
                     <RefreshCw size={14} />
                   </button>
@@ -1345,7 +1345,7 @@ const AdminQuoteReview = () => {
               )}
 
               {/* No PO yet but status is won */}
-              {!selected.po_file_url && selected.status === "won" && (
+              {!selected.po_file_url && selected.status === "quote_sent" && (
                 <div className="p-3 rounded-lg bg-yellow-500/5 border border-yellow-500/15 text-xs text-yellow-700 flex items-center gap-2">
                   <Clock size={13} /> รอลูกค้าส่งใบสั่งซื้อ (PO)
                 </div>
