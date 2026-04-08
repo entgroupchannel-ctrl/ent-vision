@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { QueryClient, QueryClientProvider, QueryCache } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
@@ -9,6 +10,7 @@ import { ThemeProvider } from "@/hooks/use-theme";
 import { I18nProvider } from "@/contexts/I18nContext";
 import { AuthProvider } from "@/hooks/useAuth";
 import { QuoteCartProvider } from "@/hooks/useQuoteCart";
+import { supabase } from "@/integrations/supabase/client";
 import Index from "./pages/Index.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 import SocialRibbon from "./components/SocialRibbon.tsx";
@@ -105,7 +107,7 @@ const queryClient = new QueryClient({
   }),
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
       refetchOnReconnect: true,
       staleTime: 60_000,
       gcTime: 30 * 60_000,
@@ -125,38 +127,66 @@ const queryClient = new QueryClient({
 });
 
 const AppInner = () => {
-  // Auto-reload to prevent session timeout (debug fix for 15-min hang issue)
-  // NOTE: visibility change handler was removed because it caused white screen issues
+  const qc = useQueryClient();
+
   useEffect(() => {
-    const RELOAD_INTERVAL = 12 * 60 * 1000; // 12 minutes
-    const IDLE_THRESHOLD = 10 * 60 * 1000; // 10 minutes of no activity
+    let lastHiddenTime: number | null = null;
+    const STALE_THRESHOLD = 30 * 1000;
 
-    let lastActivity = Date.now();
+    const handleVisibilityChange = async () => {
+      if (document.hidden) {
+        lastHiddenTime = Date.now();
+        console.log('[Session] Tab hidden');
+      } else {
+        const hiddenDuration = lastHiddenTime ? Date.now() - lastHiddenTime : 0;
+        console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 's');
 
-    const updateActivity = () => {
-      lastActivity = Date.now();
+        if (hiddenDuration >= STALE_THRESHOLD) {
+          console.log('[Session] Recovering session...');
+          try {
+            const { data, error } = await supabase.auth.getSession();
+            if (error) {
+              console.error('[Session] getSession error:', error);
+            } else {
+              console.log('[Session] Session refreshed:', data.session ? 'valid' : 'none');
+            }
+            qc.invalidateQueries();
+            console.log('[Session] Queries invalidated');
+          } catch (e) {
+            console.error('[Session] Recovery error:', e);
+          }
+        }
+        lastHiddenTime = null;
+      }
     };
 
-    // Track user activity
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Idle timeout
+    const RELOAD_INTERVAL = 12 * 60 * 1000;
+    const IDLE_THRESHOLD = 10 * 60 * 1000;
+    let lastActivity = Date.now();
+    const updateActivity = () => { lastActivity = Date.now(); };
+
     window.addEventListener('click', updateActivity);
     window.addEventListener('keydown', updateActivity);
     window.addEventListener('scroll', updateActivity);
 
     const intervalId = setInterval(() => {
-      const idleTime = Date.now() - lastActivity;
-      if (idleTime >= IDLE_THRESHOLD) {
-        console.log('[Auto-reload] User idle for 10+ min, reloading to prevent session hang...');
+      if (Date.now() - lastActivity >= IDLE_THRESHOLD) {
+        console.log('[Session] User idle for 10+ min, reloading...');
         window.location.reload();
       }
     }, RELOAD_INTERVAL);
 
     return () => {
       clearInterval(intervalId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('click', updateActivity);
       window.removeEventListener('keydown', updateActivity);
       window.removeEventListener('scroll', updateActivity);
     };
-  }, []);
+  }, [qc]);
 
   return null;
 };
