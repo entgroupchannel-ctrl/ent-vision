@@ -21,6 +21,8 @@ interface QuoteRequest {
   products: any[]; details: string | null; name: string; email: string;
   phone: string | null; line_id: string | null; whatsapp: string | null;
   company: string | null; user_id: string | null;
+  customer_address: string | null;
+  customer_tax_id: string | null;
   subtotal: number; discount_amount: number; grand_total: number;
   valid_until: string | null; payment_terms: string | null; delivery_terms: string | null;
   approved_by: string | null; approved_at: string | null; pdf_url: string | null;
@@ -376,7 +378,7 @@ const AdminQuoteReview = () => {
     if (!selected) return;
     const saleInfo = salesTeam.find((s) => s.user_id === selected.assigned_to);
     printQuote(
-      { quote_number: selected.quote_number, name: selected.name, email: selected.email, phone: selected.phone, company: selected.company, details: selected.details },
+      { quote_number: selected.quote_number, name: selected.name, email: selected.email, phone: selected.phone, company: selected.company, details: selected.details, company_address: selected.customer_address, tax_id: selected.customer_tax_id },
       items.map((it) => ({ ...it, _name: it._name, _desc: it._desc, _specs: it._specs, _unit: (it as any)._unit })),
       {
         discount_amount: edit.discount_amount, valid_until: edit.valid_until,

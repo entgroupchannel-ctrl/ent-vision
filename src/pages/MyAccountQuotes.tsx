@@ -37,6 +37,8 @@ interface QuoteRequest {
   valid_until: string | null; payment_terms: string | null; delivery_terms: string | null;
   pdf_url: string | null; customer_response: string | null;
   phone: string | null; company: string | null;
+  customer_address: string | null;
+  customer_tax_id: string | null;
   po_file_url: string | null; po_file_name: string | null; po_number: string | null;
   po_uploaded_at: string | null; po_status: string | null; po_notes: string | null;
 }
@@ -180,7 +182,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
       const freshItems = await fetchLineItems(q.id);
       const saleInfo = await getSaleInfo((q as any).assigned_to || null);
       printQuote(
-        { quote_number: q.quote_number, name: q.name, email: q.email, phone: q.phone, company: q.company, details: q.details },
+        { quote_number: q.quote_number, name: q.name, email: q.email, phone: q.phone, company: q.company, details: q.details, company_address: q.customer_address, tax_id: q.customer_tax_id },
         freshItems.map((it) => ({ ...it, _name: it._name, _specs: it._specs })),
         {
           discount_amount: q.discount_amount, valid_until: q.valid_until || "",
