@@ -338,7 +338,7 @@ const AdminPaymentManager = () => {
           { label: "ยอดรับชำระ", value: `฿${fmt(stats.totalAmount)}`, color: "text-primary" },
         ].map(s => (
           <div key={s.label} className="bg-card border border-border rounded-xl p-3 text-center">
-            <div className={`text-lg font-bold ${s.color}`}>{s.value}</div>
+            <div className={`text-xl font-bold ${s.color}`}>{s.value}</div>
             <div className="text-[10px] text-muted-foreground">{s.label}</div>
           </div>
         ))}
