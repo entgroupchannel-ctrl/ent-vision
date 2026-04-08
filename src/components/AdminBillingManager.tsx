@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   FileText, Send, CheckCircle, Clock, Loader2, RefreshCw, Search,
@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import DocCrossLinks from "@/components/admin/DocCrossLinks";
+import { printQuote } from "@/utils/printQuote";
 
 /* ─── Types ─── */
 interface BillingNote {
