@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   CreditCard, CheckCircle, Clock, Loader2, RefreshCw, Search,
   Upload, Hash, XCircle, DollarSign, Calendar, Building2,
-  Receipt, AlertCircle, ExternalLink, FileText,
+  Receipt, AlertCircle, ExternalLink, FileText, Printer,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { printQuote } from "@/utils/printQuote";
 
 /* ─── Types ─── */
 interface PaymentRecord {
@@ -81,6 +82,16 @@ const AdminPaymentManager = () => {
   const [payNotes, setPayNotes] = useState("");
   const [paySlipFile, setPaySlipFile] = useState<File | null>(null);
   const [saving, setSaving] = useState(false);
+  const [receiptType, setReceiptType] = useState<"full" | "simple">("full");
+  const [companySettings, setCompanySettings] = useState<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await (supabase.from as any)("company_settings")
+        .select("*").limit(1).maybeSingle();
+      if (data) setCompanySettings(data);
+    })();
+  }, []);
 
   /* ─── React Query: Fetch payments + pending invoices ───
    * - Auto-refetches when window regains focus (fixes the stuck-after-tab-switch bug)
@@ -130,6 +141,7 @@ const AdminPaymentManager = () => {
     setPayDate(new Date().toISOString().split("T")[0]);
     setPayNotes("");
     setPaySlipFile(null);
+    setReceiptType("full");
     setDialogOpen(true);
   };
 
@@ -188,6 +200,7 @@ const AdminPaymentManager = () => {
         payment_method: payMethod,
         payment_date: payDate,
         status: "issued",
+        receipt_type: receiptType,
         created_by: user?.id,
       }).select().single();
 
