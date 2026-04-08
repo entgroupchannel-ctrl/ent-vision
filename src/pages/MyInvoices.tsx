@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { FileText, Receipt, Download, Eye, Clock, CheckCircle, AlertCircle, Filter } from "lucide-react";
+import { FileText, Receipt, Download, Eye, Clock, CheckCircle, AlertCircle, Filter, Printer } from "lucide-react";
+import { printQuote } from "@/utils/printQuote";
+import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +18,10 @@ interface Invoice {
   due_date: string | null;
   customer_name: string;
   customer_company: string | null;
+  customer_address: string | null;
+  customer_tax_id: string | null;
+  customer_email: string | null;
+  customer_phone: string | null;
   subtotal: number;
   discount_amount: number;
   vat_amount: number;
@@ -78,6 +84,7 @@ const statusConfig: Record<string, { label: string; variant: "default" | "second
 
 const MyInvoices = () => {
   const { user } = useAuth();
+  const { toast } = useToast();
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [receipts, setReceipts] = useState<ReceiptRow[]>([]);
   const [taxInvoices, setTaxInvoices] = useState<TaxInvoice[]>([]);
@@ -85,6 +92,15 @@ const MyInvoices = () => {
   const [selectedInvoice, setSelectedInvoice] = useState<Invoice | null>(null);
   const [invoiceItems, setInvoiceItems] = useState<InvoiceItem[]>([]);
   const [detailOpen, setDetailOpen] = useState(false);
+  const [companySettings, setCompanySettings] = useState<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await (supabase.from as any)("company_settings")
+        .select("*").limit(1).maybeSingle();
+      if (data) setCompanySettings(data);
+    })();
+  }, []);
 
   useEffect(() => {
     if (!user) return;
@@ -111,6 +127,58 @@ const MyInvoices = () => {
     setDetailOpen(true);
     const { data } = await supabase.from("invoice_items").select("*").eq("invoice_id", inv.id).order("sort_order");
     setInvoiceItems((data as any[]) || []);
+  };
+
+  const handlePrintInvoice = async (inv: Invoice) => {
+    try {
+      const { data: items } = await supabase
+        .from("invoice_items")
+        .select("*")
+        .eq("invoice_id", inv.id)
+        .order("sort_order");
+
+      const printItems = (items || []).map((it: any) => ({
+        model: it.model,
+        qty: it.qty,
+        unit_price: it.unit_price,
+        discount_percent: it.discount_percent || 0,
+        line_total: it.line_total,
+        admin_notes: null,
+        description: it.description,
+        _name: it.model,
+        _desc: it.description || "",
+      }));
+
+      printQuote(
+        {
+          quote_number: inv.invoice_number,
+          name: inv.customer_name,
+          email: inv.customer_email || "",
+          phone: inv.customer_phone,
+          company: inv.customer_company,
+          details: inv.notes,
+          company_address: inv.customer_address,
+          tax_id: inv.customer_tax_id,
+        },
+        printItems,
+        {
+          discount_amount: inv.discount_amount || 0,
+          valid_until: inv.due_date || "",
+          payment_terms: inv.payment_terms || "",
+          delivery_terms: "",
+          include_vat: (inv.vat_amount || 0) > 0,
+          vat_percent: 7,
+        },
+        companySettings || undefined,
+        undefined,
+        undefined,
+        undefined,
+        'th',
+        'invoice',
+      );
+    } catch (err: any) {
+      toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message, variant: "destructive" });
+    }
   };
 
   const fmt = (n: number | null) => (n ?? 0).toLocaleString("th-TH", { minimumFractionDigits: 2 });
@@ -311,10 +379,17 @@ const MyInvoices = () => {
       <Dialog open={detailOpen} onOpenChange={setDetailOpen}>
         <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <FileText size={18} className="text-primary" />
-              {selectedInvoice?.invoice_number}
-            </DialogTitle>
+            <div className="flex items-center justify-between">
+              <DialogTitle className="flex items-center gap-2">
+                <FileText size={18} className="text-primary" />
+                {selectedInvoice?.invoice_number}
+              </DialogTitle>
+              {selectedInvoice && (
+                <Button variant="outline" size="sm" onClick={() => handlePrintInvoice(selectedInvoice)} className="gap-1.5 text-xs mr-6">
+                  <Printer size={14} /> พิมพ์
+                </Button>
+              )}
+            </div>
           </DialogHeader>
 
           {selectedInvoice && (
