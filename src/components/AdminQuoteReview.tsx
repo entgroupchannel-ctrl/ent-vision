@@ -56,12 +56,12 @@ interface DocLibraryItem { id: string; title: string; file_url: string; category
 
 /* ─── Constants ─── */
 const STATUS_CFG: Record<string, { label: string; color: string; order: number }> = {
-  new: { label: "ใหม่", color: "bg-blue-500/10 text-blue-500 border-blue-500/20", order: 0 },
-  quoted: { label: "ส่งราคาแล้ว", color: "bg-purple-500/10 text-purple-500 border-purple-500/20", order: 1 },
-  negotiating: { label: "เจรจา", color: "bg-orange-500/10 text-orange-500 border-orange-500/20", order: 2 },
-  won: { label: "ตกลงราคา", color: "bg-green-500/10 text-green-500 border-green-500/20", order: 3 },
-  po_received: { label: "รับ PO แล้ว", color: "bg-teal-500/10 text-teal-600 border-teal-500/20", order: 4 },
-  lost: { label: "ไม่สำเร็จ", color: "bg-red-500/10 text-red-400 border-red-500/20", order: 5 },
+  pending: { label: "รอตอบกลับ", color: "bg-blue-500/10 text-blue-500 border-blue-500/20", order: 0 },
+  quote_sent: { label: "ส่งใบเสนอราคาแล้ว", color: "bg-purple-500/10 text-purple-500 border-purple-500/20", order: 1 },
+  po_uploaded: { label: "รับ PO แล้ว", color: "bg-orange-500/10 text-orange-500 border-orange-500/20", order: 2 },
+  po_approved: { label: "อนุมัติ PO", color: "bg-green-500/10 text-green-500 border-green-500/20", order: 3 },
+  completed: { label: "เสร็จสิ้น", color: "bg-teal-500/10 text-teal-600 border-teal-500/20", order: 4 },
+  cancelled: { label: "ยกเลิก", color: "bg-red-500/10 text-red-400 border-red-500/20", order: 5 },
 };
 
 const DELIVERY_OPTS = [
@@ -428,7 +428,7 @@ const AdminQuoteReview = () => {
         if (error) throw error;
       }
       const { error: qErr } = await (supabase.from as any)("quote_requests").update({
-        status: "quoted", subtotal, discount_amount: edit.discount_amount, grand_total: grand,
+        status: "quote_sent", subtotal, discount_amount: edit.discount_amount, grand_total: grand,
         valid_until: edit.valid_until || null, payment_terms: edit.payment_terms || null,
         delivery_terms: edit.delivery_terms || null, pdf_url: edit.pdf_url || null,
         notes: edit.notes || null, approved_by: user.id, approved_at: new Date().toISOString(),
@@ -680,57 +680,33 @@ const AdminQuoteReview = () => {
     const quote = quotes.find((q) => q.id === quoteId);
     if (!quote) return;
 
-    // Confirm if changing to important states
-    if (newStatus === "won" && !confirm("ยืนยันเปลี่ยนเป็น 'ตกลงราคา'?\n\n• ระบบจะสร้าง Sales Order + ใบวางบิลอัตโนมัติ\n• ลูกค้าจะได้รับแจ้งเตือน")) return;
-    if (newStatus === "lost" && !confirm("ยืนยันปิดเป็น 'ไม่สำเร็จ'?")) return;
+    // Confirm important transitions
+    if (newStatus === "po_approved" && !confirm("ยืนยันอนุมัติ PO?\n\n• ระบบจะสร้าง Sales Order + ใบวางบิลอัตโนมัติ\n• สถานะจะเปลี่ยนเป็น 'เสร็จสิ้น'\n• ลูกค้าจะได้รับแจ้งเตือน")) return;
+    if (newStatus === "cancelled" && !confirm("ยืนยันยกเลิกใบเสนอราคานี้?")) return;
 
     setSaving(true);
     try {
-      const updates: any = { status: newStatus };
-
-      // If moving to quoted, auto-set approved fields
-      if (newStatus === "quoted" && !quote.approved_by) {
-        updates.approved_by = user.id;
-        updates.approved_at = new Date().toISOString();
-      }
-
-      const { error } = await (supabase.from as any)("quote_requests").update(updates).eq("id", quoteId);
+      // Use RPC for status transitions (handles auto SO+BL on po_approved)
+      const { data, error } = await supabase.rpc("update_quote_status", {
+        p_quote_id: quoteId,
+        p_new_status: newStatus,
+        p_admin_id: user.id,
+      });
       if (error) throw error;
 
-      // Log status change as a message (preserves history)
-      try {
-        await (supabase.from as any)("quote_messages").insert({
-          quote_id: quoteId,
-          sender_id: user.id,
-          sender_role: "admin",
-          message_type: "status_change",
-          content: `เปลี่ยนสถานะจาก "${(STATUS_CFG[quote.status] || { label: quote.status }).label}" เป็น "${(STATUS_CFG[newStatus] || { label: newStatus }).label}"`,
-          old_value: quote.status,
-          new_value: newStatus,
+      // Show SO+BL info if created
+      if (data?.so_number) {
+        toast({
+          title: "อนุมัติ PO แล้ว",
+          description: `สร้าง SO (${data.so_number}) และ BL (${data.bl_number}) อัตโนมัติแล้ว`,
         });
-      } catch {}
-
-      // Notify customer for important status changes
-      if (quote.user_id && ["quoted", "won", "lost"].includes(newStatus)) {
-        try {
-          const titles: Record<string, string> = {
-            quoted: "ใบเสนอราคาพร้อมแล้ว",
-            won: "ยืนยันตกลงราคา",
-            lost: "ใบเสนอราคาถูกปิด",
-          };
-          await (supabase.from as any)("notifications").insert({
-            user_id: quote.user_id,
-            type: "quote_status",
-            title: titles[newStatus] || "สถานะใบเสนอราคาเปลี่ยน",
-            message: `${quote.quote_number || "#"} — ${(STATUS_CFG[newStatus] || { label: newStatus }).label}`,
-            link: "/my-account?tab=quotes",
-          });
-        } catch {}
+      } else {
+        toast({ title: "เปลี่ยนสถานะแล้ว", description: `→ ${(STATUS_CFG[newStatus] || { label: newStatus }).label}` });
       }
 
-      toast({ title: "เปลี่ยนสถานะแล้ว", description: `→ ${(STATUS_CFG[newStatus] || { label: newStatus }).label}` });
       fetchQuotes();
-      if (selected?.id === quoteId) selectQuote({ ...quote, ...updates });
+      const finalStatus = data?.status || newStatus;
+      if (selected?.id === quoteId) selectQuote({ ...quote, status: finalStatus });
     } catch (err: any) {
       toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
     }
@@ -742,7 +718,7 @@ const AdminQuoteReview = () => {
     const quote = quotes.find((q) => q.id === quoteId);
     if (!quote) return;
     if (!confirm(
-      `เคลียร์สถานะใบเสนอราคา ${quote.quote_number || ""} กลับเป็น "ใหม่"?\n\n` +
+      `เคลียร์สถานะใบเสนอราคา ${quote.quote_number || ""} กลับเป็น "รอตอบกลับ"?\n\n` +
       "• ข้อความ/สนทนาทั้งหมดจะยังคงอยู่\n" +
       "• ไฟล์ PO/เอกสารจะไม่ถูกลบ\n" +
       "• เฉพาะสถานะที่จะถูกรีเซ็ต"
@@ -750,29 +726,16 @@ const AdminQuoteReview = () => {
 
     setSaving(true);
     try {
-      const { error } = await (supabase.from as any)("quote_requests").update({
-        status: "new",
-        customer_response: null,
-        po_status: null,
-      }).eq("id", quoteId);
+      const { data, error } = await supabase.rpc("update_quote_status", {
+        p_quote_id: quoteId,
+        p_new_status: "pending",
+        p_admin_id: user?.id || null,
+      });
       if (error) throw error;
-
-      // Log reset as a message
-      try {
-        await (supabase.from as any)("quote_messages").insert({
-          quote_id: quoteId,
-          sender_id: user?.id || null,
-          sender_role: "admin",
-          message_type: "status_change",
-          content: `รีเซ็ตสถานะจาก "${(STATUS_CFG[quote.status] || { label: quote.status }).label}" กลับเป็น "ใหม่" (ข้อความและไฟล์ยังคงอยู่)`,
-          old_value: quote.status,
-          new_value: "new",
-        });
-      } catch {}
 
       toast({ title: "รีเซ็ตสถานะแล้ว", description: "ข้อความและไฟล์ยังคงอยู่ครบ" });
       fetchQuotes();
-      if (selected?.id === quoteId) selectQuote({ ...quote, status: "new", customer_response: null, po_status: null });
+      if (selected?.id === quoteId) selectQuote({ ...quote, status: "pending", customer_response: null, po_status: null });
     } catch (err: any) {
       toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
     }
