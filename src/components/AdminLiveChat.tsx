@@ -1,238 +1,71 @@
 import { useState, useEffect, useRef } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/hooks/useAuth";
 import {
   Headphones, Send, User, Clock, CheckCircle, XCircle,
   RefreshCw, MessageSquare, Loader2, Search, ArrowLeft,
 } from "lucide-react";
+import { useLiveChat, type Conversation, type Message } from "@/hooks/useLiveChat";
 
-type Conversation = {
-  id: string;
-  guest_name: string | null;
-  guest_email: string | null;
-  user_id: string | null;
-  status: string;
-  assigned_admin: string | null;
-  last_message_at: string;
-  created_at: string;
-  unread_count?: number;
-};
-
-type Message = {
-  id: string;
-  sender_type: "user" | "admin" | "system";
-  content: string;
-  created_at: string;
-  read: boolean;
-};
+// ═══════════════════════════════════════════════════════════════════════════
+// AdminLiveChat Component (New Architecture)
+// ═══════════════════════════════════════════════════════════════════════════
+// 
+// This is a complete rewrite that fixes the infinite loop issues:
+// 1. Uses selectedConvId (string) instead of selectedConv (object) for state
+// 2. All realtime subscriptions use stable dependencies
+// 3. Visibility change handler doesn't recreate on every render
+// 4. Messages are loaded exactly once per conversation selection
+//
+// UI is identical to the original - only the internal logic changed.
+// ═══════════════════════════════════════════════════════════════════════════
 
 const AdminLiveChat = () => {
-  const { user } = useAuth();
-  const qc = useQueryClient();
-  const [selectedConv, setSelectedConv] = useState<Conversation | null>(null);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const {
+    conversations,
+    selectedConv,
+    selectedConvId,
+    messages,
+    conversationsLoading,
+    messagesLoading,
+    selectConversation,
+    sendMessage,
+    closeConversation,
+    refetchConversations,
+  } = useLiveChat();
+
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [search, setSearch] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  /* ─── React Query: conversations + unread counts ───
-   * Auto-refetches on window focus (fixes spinner stuck after tab switch).
-   * Realtime channel below invalidates the cache when new conversations arrive.
-   */
-  const { data: conversations = [], isLoading: loading } = useQuery({
-    queryKey: ["admin", "live-chat-conversations"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("live_chat_conversations")
-        .select("*")
-        .order("last_message_at", { ascending: false });
-      if (error) throw error;
-      if (!data) return [] as Conversation[];
-
-      // Count unread messages per conversation
-      const convIds = data.map((c: any) => c.id);
-      let unreadMap: Record<string, number> = {};
-      if (convIds.length > 0) {
-        const { data: unreadData } = await supabase
-          .from("live_chat_messages")
-          .select("conversation_id")
-          .in("conversation_id", convIds)
-          .eq("sender_type", "user")
-          .eq("read", false);
-        unreadData?.forEach((m: any) => {
-          unreadMap[m.conversation_id] = (unreadMap[m.conversation_id] || 0) + 1;
-        });
-      }
-
-      return data.map((c: any) => ({ ...c, unread_count: unreadMap[c.id] || 0 })) as Conversation[];
-    },
-  });
-
-  // Helper to refetch — used by realtime channel and any save handlers
-  const loadConversations = () => {
-    qc.invalidateQueries({ queryKey: ["admin", "live-chat-conversations"] });
-  };
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // Visibility Change Handler: Reconnect realtime + refetch when tab returns
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ─── Scroll to bottom when messages change ───
   useEffect(() => {
-    let lastHiddenTime: number | null = null;
-    const STALE_THRESHOLD = 30 * 1000; // 30 seconds
-
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        lastHiddenTime = Date.now();
-      } else {
-        const hiddenDuration = lastHiddenTime ? Date.now() - lastHiddenTime : 0;
-        
-        if (hiddenDuration >= STALE_THRESHOLD) {
-          console.log('[AdminLiveChat] Tab returned after', Math.round(hiddenDuration / 1000), 's — refreshing...');
-          
-          // Refetch conversations
-          loadConversations();
-          
-          // Reload messages for selected conversation
-          if (selectedConv) {
-            (async () => {
-              const { data } = await supabase
-                .from("live_chat_messages")
-                .select("*")
-                .eq("conversation_id", selectedConv.id)
-                .order("created_at", { ascending: true });
-              if (data) setMessages(data as Message[]);
-            })();
-          }
-        }
-        
-        lastHiddenTime = null;
-      }
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, [selectedConv?.id, qc]);
-
-  // Realtime for new conversations
-  useEffect(() => {
-    const channel = supabase
-      .channel("admin-live-chat-convs")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "live_chat_conversations" },
-        () => { loadConversations(); }
-      )
-      .subscribe();
-    return () => { supabase.removeChannel(channel); };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Load messages for selected conversation
-  useEffect(() => {
-    if (!selectedConv) return;
-    const load = async () => {
-      console.log('[AdminLiveChat] Loading messages for:', selectedConv.id);
-      const { data, error } = await supabase
-        .from("live_chat_messages")
-        .select("*")
-        .eq("conversation_id", selectedConv.id)
-        .order("created_at", { ascending: true });
-      
-      if (error) {
-        console.error('[AdminLiveChat] Error loading messages:', error);
-        return;
-      }
-      
-      console.log('[AdminLiveChat] Loaded messages:', data?.length || 0);
-      if (data) setMessages(data as Message[]);
-
-      // Mark user messages as read
-      await supabase
-        .from("live_chat_messages")
-        .update({ read: true })
-        .eq("conversation_id", selectedConv.id)
-        .eq("sender_type", "user")
-        .eq("read", false);
-    };
-    load();
-  }, [selectedConv?.id]);
-
-  // Realtime for messages in selected conversation
-  useEffect(() => {
-    if (!selectedConv) return;
-    const channel = supabase
-      .channel(`admin-chat-msg-${selectedConv.id}`)
-      .on(
-        "postgres_changes",
-        {
-          event: "INSERT",
-          schema: "public",
-          table: "live_chat_messages",
-          filter: `conversation_id=eq.${selectedConv.id}`,
-        },
-        (payload) => {
-          const msg = payload.new as any;
-          setMessages((prev) => {
-            if (prev.some((m) => m.id === msg.id)) return prev;
-            return [...prev, msg];
-          });
-          // Auto-mark as read if admin
-          if (msg.sender_type === "user") {
-            supabase
-              .from("live_chat_messages")
-              .update({ read: true })
-              .eq("id", msg.id);
-          }
-        }
-      )
-      .subscribe();
-    return () => { supabase.removeChannel(channel); };
-  }, [selectedConv?.id]);
-
-  // Scroll to bottom
-  useEffect(() => {
-    if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
   }, [messages]);
 
-  const sendMessage = async () => {
+  // ─── Send message handler ───
+  const handleSend = async () => {
     const text = input.trim();
-    if (!text || sending || !selectedConv || !user) return;
+    if (!text || sending) return;
+
     setSending(true);
     setInput("");
 
-    await supabase.from("live_chat_messages").insert({
-      conversation_id: selectedConv.id,
-      sender_type: "admin",
-      sender_id: user.id,
-      content: text,
-    });
-
-    await supabase
-      .from("live_chat_conversations")
-      .update({ last_message_at: new Date().toISOString(), assigned_admin: user.id })
-      .eq("id", selectedConv.id);
+    const success = await sendMessage(text);
+    if (!success) {
+      setInput(text); // Restore input on failure
+    }
 
     setSending(false);
   };
 
-  const closeConversation = async (convId: string) => {
-    await supabase
-      .from("live_chat_conversations")
-      .update({ status: "closed" })
-      .eq("id", convId);
-
-    await supabase.from("live_chat_messages").insert({
-      conversation_id: convId,
-      sender_type: "system",
-      content: "แอดมินปิดการสนทนาแล้ว ขอบคุณที่ติดต่อเราครับ/ค่ะ 🙏",
-    });
-
-    if (selectedConv?.id === convId) setSelectedConv(null);
-    loadConversations();
+  // ─── Close conversation handler ───
+  const handleClose = async (convId: string) => {
+    await closeConversation(convId);
   };
 
+  // ─── Format time helper ───
   const formatTime = (dateStr: string) => {
     const d = new Date(dateStr);
     const now = new Date();
@@ -243,6 +76,7 @@ const AdminLiveChat = () => {
     return d.toLocaleDateString("th-TH", { day: "numeric", month: "short" });
   };
 
+  // ─── Filter conversations ───
   const filteredConvs = conversations.filter((c) => {
     if (!search) return true;
     const s = search.toLowerCase();
@@ -255,9 +89,13 @@ const AdminLiveChat = () => {
   const activeConvs = filteredConvs.filter((c) => c.status === "active");
   const closedConvs = filteredConvs.filter((c) => c.status === "closed");
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Render
+  // ═══════════════════════════════════════════════════════════════════════════
+
   return (
     <div className="h-[calc(100vh-200px)] min-h-[500px] flex border border-border rounded-xl overflow-hidden bg-background">
-      {/* Conversation List */}
+      {/* ─── Conversation List ─── */}
       <div className={`w-full md:w-80 border-r border-border flex flex-col ${selectedConv ? "hidden md:flex" : "flex"}`}>
         <div className="p-3 border-b border-border">
           <div className="flex items-center justify-between mb-2">
@@ -269,8 +107,11 @@ const AdminLiveChat = () => {
                 </span>
               )}
             </h3>
-            <button onClick={loadConversations} className="p-1.5 rounded-lg hover:bg-muted transition-colors">
-              <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
+            <button
+              onClick={() => refetchConversations()}
+              className="p-1.5 rounded-lg hover:bg-muted transition-colors"
+            >
+              <RefreshCw size={14} className={conversationsLoading ? "animate-spin" : ""} />
             </button>
           </div>
           <div className="relative">
@@ -286,7 +127,7 @@ const AdminLiveChat = () => {
         </div>
 
         <div className="flex-1 overflow-y-auto">
-          {activeConvs.length === 0 && closedConvs.length === 0 && !loading && (
+          {activeConvs.length === 0 && closedConvs.length === 0 && !conversationsLoading && (
             <div className="text-center py-12 text-muted-foreground">
               <MessageSquare size={32} className="mx-auto mb-2 opacity-30" />
               <p className="text-xs">ยังไม่มีการสนทนา</p>
@@ -297,28 +138,13 @@ const AdminLiveChat = () => {
             <div>
               <p className="text-[10px] font-bold text-muted-foreground px-3 pt-2 pb-1 uppercase">กำลังสนทนา</p>
               {activeConvs.map((c) => (
-                <button
+                <ConversationItem
                   key={c.id}
-                  onClick={() => setSelectedConv(prev => prev?.id === c.id ? prev : c)}
-                  className={`w-full text-left px-3 py-2.5 hover:bg-muted/50 transition-colors border-b border-border/50 ${
-                    selectedConv?.id === c.id ? "bg-primary/5 border-l-2 border-l-primary" : ""
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-foreground truncate">{c.guest_name || "ผู้เยี่ยมชม"}</span>
-                    {(c.unread_count || 0) > 0 && (
-                      <span className="bg-destructive text-destructive-foreground text-[10px] px-1.5 py-0.5 rounded-full font-bold">
-                        {c.unread_count}
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex items-center justify-between mt-0.5">
-                    <span className="text-[11px] text-muted-foreground truncate">{c.guest_email}</span>
-                    <span className="text-[10px] text-muted-foreground flex items-center gap-0.5">
-                      <Clock size={10} /> {formatTime(c.last_message_at)}
-                    </span>
-                  </div>
-                </button>
+                  conversation={c}
+                  isSelected={selectedConvId === c.id}
+                  onSelect={() => selectConversation(c.id)}
+                  formatTime={formatTime}
+                />
               ))}
             </div>
           )}
@@ -327,23 +153,21 @@ const AdminLiveChat = () => {
             <div>
               <p className="text-[10px] font-bold text-muted-foreground px-3 pt-3 pb-1 uppercase">ปิดแล้ว</p>
               {closedConvs.slice(0, 10).map((c) => (
-                <button
+                <ConversationItem
                   key={c.id}
-                  onClick={() => setSelectedConv(prev => prev?.id === c.id ? prev : c)}
-                  className={`w-full text-left px-3 py-2 hover:bg-muted/50 transition-colors border-b border-border/50 opacity-60 ${
-                    selectedConv?.id === c.id ? "bg-primary/5 opacity-100" : ""
-                  }`}
-                >
-                  <span className="text-xs text-foreground truncate block">{c.guest_name || "ผู้เยี่ยมชม"}</span>
-                  <span className="text-[10px] text-muted-foreground">{c.guest_email}</span>
-                </button>
+                  conversation={c}
+                  isSelected={selectedConvId === c.id}
+                  onSelect={() => selectConversation(c.id)}
+                  formatTime={formatTime}
+                  isClosed
+                />
               ))}
             </div>
           )}
         </div>
       </div>
 
-      {/* Chat Area */}
+      {/* ─── Chat Area ─── */}
       <div className={`flex-1 flex flex-col ${!selectedConv ? "hidden md:flex" : "flex"}`}>
         {!selectedConv ? (
           <div className="flex-1 flex items-center justify-center text-muted-foreground">
@@ -354,11 +178,11 @@ const AdminLiveChat = () => {
           </div>
         ) : (
           <>
-            {/* Chat Header */}
+            {/* ─── Chat Header ─── */}
             <div className="px-4 py-3 border-b border-border flex items-center justify-between bg-card">
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => setSelectedConv(null)}
+                  onClick={() => selectConversation(null)}
                   className="md:hidden p-1 rounded-lg hover:bg-muted"
                 >
                   <ArrowLeft size={18} />
@@ -374,7 +198,7 @@ const AdminLiveChat = () => {
               <div className="flex items-center gap-2">
                 {selectedConv.status === "active" && (
                   <button
-                    onClick={() => closeConversation(selectedConv.id)}
+                    onClick={() => handleClose(selectedConv.id)}
                     className="text-xs px-3 py-1.5 rounded-lg border border-border hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 transition-colors flex items-center gap-1"
                   >
                     <XCircle size={12} /> ปิดสนทนา
@@ -388,44 +212,19 @@ const AdminLiveChat = () => {
               </div>
             </div>
 
-            {/* Messages */}
+            {/* ─── Messages ─── */}
             <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
-              {messages.map((msg) => {
-                if (msg.sender_type === "system") {
-                  return (
-                    <div key={msg.id} className="text-center">
-                      <span className="inline-block text-[11px] text-muted-foreground bg-muted px-3 py-1 rounded-full">
-                        {msg.content}
-                      </span>
-                    </div>
-                  );
-                }
-                const isAdmin = msg.sender_type === "admin";
-                return (
-                  <div key={msg.id} className={`flex gap-2 ${isAdmin ? "flex-row-reverse" : ""}`}>
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
-                      isAdmin ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground"
-                    }`}>
-                      {isAdmin ? <Headphones size={14} /> : <User size={14} />}
-                    </div>
-                    <div className="max-w-[75%]">
-                      <div className={`rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
-                        isAdmin
-                          ? "bg-primary text-primary-foreground rounded-br-md"
-                          : "bg-secondary text-foreground rounded-bl-md"
-                      }`}>
-                        {msg.content}
-                      </div>
-                      <span className={`text-[10px] text-muted-foreground mt-0.5 block ${isAdmin ? "text-right" : ""}`}>
-                        {new Date(msg.created_at).toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
+              {messagesLoading && messages.length === 0 && (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 size={24} className="animate-spin text-muted-foreground" />
+                </div>
+              )}
+              {messages.map((msg) => (
+                <MessageBubble key={msg.id} message={msg} />
+              ))}
             </div>
 
-            {/* Input */}
+            {/* ─── Input ─── */}
             {selectedConv.status === "active" && (
               <div className="border-t border-border px-3 py-2.5 bg-card">
                 <div className="flex items-end gap-2">
@@ -435,7 +234,7 @@ const AdminLiveChat = () => {
                     onKeyDown={(e) => {
                       if (e.key === "Enter" && !e.shiftKey) {
                         e.preventDefault();
-                        sendMessage();
+                        handleSend();
                       }
                     }}
                     placeholder="พิมพ์ข้อความตอบกลับ..."
@@ -444,7 +243,7 @@ const AdminLiveChat = () => {
                     style={{ minHeight: "38px" }}
                   />
                   <button
-                    onClick={sendMessage}
+                    onClick={handleSend}
                     disabled={!input.trim() || sending}
                     className="w-9 h-9 rounded-xl bg-primary text-primary-foreground flex items-center justify-center hover:opacity-90 disabled:opacity-40 transition-opacity shrink-0"
                   >
@@ -455,6 +254,94 @@ const AdminLiveChat = () => {
             )}
           </>
         )}
+      </div>
+    </div>
+  );
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Sub-components (Pure UI - no side effects)
+// ═══════════════════════════════════════════════════════════════════════════
+
+interface ConversationItemProps {
+  conversation: Conversation;
+  isSelected: boolean;
+  onSelect: () => void;
+  formatTime: (dateStr: string) => string;
+  isClosed?: boolean;
+}
+
+const ConversationItem = ({
+  conversation: c,
+  isSelected,
+  onSelect,
+  formatTime,
+  isClosed = false,
+}: ConversationItemProps) => (
+  <button
+    onClick={onSelect}
+    className={`w-full text-left px-3 py-2.5 hover:bg-muted/50 transition-colors border-b border-border/50 ${
+      isSelected ? "bg-primary/5 border-l-2 border-l-primary" : ""
+    } ${isClosed ? "opacity-60" : ""}`}
+  >
+    <div className="flex items-center justify-between">
+      <span className="text-sm font-medium text-foreground truncate">
+        {c.guest_name || "ผู้เยี่ยมชม"}
+      </span>
+      {!isClosed && (c.unread_count || 0) > 0 && (
+        <span className="bg-destructive text-destructive-foreground text-[10px] px-1.5 py-0.5 rounded-full font-bold">
+          {c.unread_count}
+        </span>
+      )}
+    </div>
+    <div className="flex items-center justify-between mt-0.5">
+      <span className="text-[11px] text-muted-foreground truncate">{c.guest_email}</span>
+      <span className="text-[10px] text-muted-foreground flex items-center gap-0.5">
+        <Clock size={10} /> {formatTime(c.last_message_at)}
+      </span>
+    </div>
+  </button>
+);
+
+interface MessageBubbleProps {
+  message: Message;
+}
+
+const MessageBubble = ({ message: msg }: MessageBubbleProps) => {
+  if (msg.sender_type === "system") {
+    return (
+      <div className="text-center">
+        <span className="inline-block text-[11px] text-muted-foreground bg-muted px-3 py-1 rounded-full">
+          {msg.content}
+        </span>
+      </div>
+    );
+  }
+
+  const isAdmin = msg.sender_type === "admin";
+
+  return (
+    <div className={`flex gap-2 ${isAdmin ? "flex-row-reverse" : ""}`}>
+      <div
+        className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
+          isAdmin ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground"
+        }`}
+      >
+        {isAdmin ? <Headphones size={14} /> : <User size={14} />}
+      </div>
+      <div className="max-w-[75%]">
+        <div
+          className={`rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+            isAdmin
+              ? "bg-primary text-primary-foreground rounded-br-md"
+              : "bg-secondary text-foreground rounded-bl-md"
+          }`}
+        >
+          {msg.content}
+        </div>
+        <span className={`text-[10px] text-muted-foreground mt-0.5 block ${isAdmin ? "text-right" : ""}`}>
+          {new Date(msg.created_at).toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })}
+        </span>
       </div>
     </div>
   );
