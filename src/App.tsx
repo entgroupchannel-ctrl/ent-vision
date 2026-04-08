@@ -16,6 +16,7 @@ import SocialRibbon from "./components/SocialRibbon.tsx";
 import LiveChatWidget from "./components/LiveChatWidget.tsx";
 import FloatingQuoteBar from "./components/FloatingQuoteBar.tsx";
 import GlobalFloatingToolbar from "./components/GlobalFloatingToolbar.tsx";
+import { recordRefresh, recordTabSwitch, updateTokenExpiry } from "@/hooks/useSessionMetrics";
 
 /* ── Lazy-loaded pages ── */
 const GTSeries = lazy(() => import("./pages/GTSeries.tsx"));
@@ -223,6 +224,7 @@ const AppInner = () => {
       await new Promise((r) => setTimeout(r, 300));
 
       console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 's');
+      recordTabSwitch(hiddenDuration);
 
       try {
         const { data } = await supabase.auth.getSession();
@@ -240,6 +242,7 @@ const AppInner = () => {
 
         const timeLeftMs = expiresAtToMs(data.session.expires_at) - Date.now();
         const timeLeftS = Math.round(timeLeftMs / 1000);
+        updateTokenExpiry(expiresAtToMs(data.session.expires_at));
 
         if (timeLeftS > 120) {
           console.log(`[Session] Token valid (${timeLeftS}s left)`);
@@ -257,8 +260,10 @@ const AppInner = () => {
           await new Promise((r) => setTimeout(r, 100));
           qc.invalidateQueries({ type: 'active' });
           console.log('[Session] Recovery complete');
+          recordRefresh(true, 'visibility');
         } else {
           console.log('[Session] Refresh failed, reloading...');
+          recordRefresh(false, 'visibility');
           window.location.reload();
         }
       } catch (e: any) {
