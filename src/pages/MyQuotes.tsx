@@ -61,18 +61,23 @@ const MyQuotes = () => {
 
   const fetchQuotes = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from("quote_requests")
-      .select("*")
-      .eq("user_id", user!.id)
-      .order("created_at", { ascending: false });
+    try {
+      const { data, error } = await supabase
+        .from("quote_requests")
+        .select("*")
+        .eq("user_id", user!.id)
+        .order("created_at", { ascending: false });
 
-    if (error) {
-      toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: error.message, variant: "destructive" });
-    } else {
-      setQuotes((data as QuoteRequest[]) || []);
+      if (error) {
+        toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: error.message, variant: "destructive" });
+      } else {
+        setQuotes((data as QuoteRequest[]) || []);
+      }
+    } catch (err: any) {
+      toast({ title: "โหลดข้อมูลไม่สำเร็จ", description: err?.message || "เกิดข้อผิดพลาด", variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const formatDate = (d: string) =>
