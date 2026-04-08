@@ -906,6 +906,12 @@ const AdminInvoiceManager = () => {
                               <Receipt size={12} /> สร้างใบเสร็จรับเงิน
                             </button>
                           )}
+                          <button
+                            onClick={() => handlePrintInvoice(inv)}
+                            className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20"
+                          >
+                            <Printer size={12} /> พิมพ์
+                          </button>
                           {inv.status !== "cancelled" && inv.status !== "paid" && (
                             <button onClick={() => updateInvoiceStatus(inv.id, "cancelled")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs text-muted-foreground hover:text-red-400">
                               <XCircle size={12} /> ยกเลิก
