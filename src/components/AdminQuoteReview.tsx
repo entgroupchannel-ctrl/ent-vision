@@ -973,14 +973,6 @@ const AdminQuoteReview = () => {
           {searchText && (
             <span>· ค้นหา: <strong className="text-foreground">"{searchText}"</strong></span>
           )}
-          {(searchText || statusFilter !== "all" || assignFilter !== "all") && (
-            <button
-              onClick={() => { setSearchText(""); setStatusFilter("all"); setAssignFilter("all"); }}
-              className="text-primary hover:underline ml-1"
-            >
-              ล้างทั้งหมด
-            </button>
-          )}
         </div>
       )}
 
