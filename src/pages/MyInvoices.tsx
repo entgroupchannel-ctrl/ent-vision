@@ -126,8 +126,11 @@ const MyInvoices = () => {
       setInvoices((invRes.data as any[]) || []);
       setReceipts((rcpRes.data as any[]) || []);
       setTaxInvoices((tivRes.data as any[]) || []);
-    } catch { /* silent */ }
-    setLoading(false);
+    } catch {
+      /* silent */
+    } finally {
+      setLoading(false);
+    }
   };
 
   const openDetail = async (inv: Invoice) => {

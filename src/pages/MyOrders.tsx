@@ -78,8 +78,11 @@ const MyOrders = () => {
         .eq("user_id", user.id)
         .order("created_at", { ascending: false });
       if (data) setOrders(data);
-    } catch {}
-    setLoading(false);
+    } catch {
+      // silent — no toast
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fetchItems = async (orderId: string) => {
