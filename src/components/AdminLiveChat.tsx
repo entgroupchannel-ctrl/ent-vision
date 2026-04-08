@@ -157,7 +157,7 @@ const AdminLiveChat = () => {
         .eq("read", false);
     };
     load();
-  }, [selectedConv]);
+  }, [selectedConv?.id]);
 
   // Realtime for messages in selected conversation
   useEffect(() => {
