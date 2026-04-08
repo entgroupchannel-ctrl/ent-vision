@@ -102,6 +102,11 @@ const LiveChatWidget = () => {
     return () => { supabase.removeChannel(channel); };
   }, [conversationId]);
 
+  // Don't render LiveChatWidget on admin pages
+  // (admins use AdminLiveChat instead, and the persistent realtime
+  // websocket here causes connection issues after 5-10 min idle)
+  if (isAdminRoute) return null;
+
   const loadMessages = async (convId: string) => {
     const { data } = await supabase
       .from("live_chat_messages")
