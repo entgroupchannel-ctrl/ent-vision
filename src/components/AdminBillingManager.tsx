@@ -540,6 +540,12 @@ const AdminBillingManager = () => {
                           <ArrowRight size={12} /> สร้างใบแจ้งหนี้จากใบวางบิลนี้
                         </button>
                       )}
+                      <button
+                        onClick={() => handlePrintBilling(b)}
+                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20"
+                      >
+                        <Printer size={12} /> พิมพ์
+                      </button>
                       {b.status !== "cancelled" && b.status !== "invoiced" && (
                         <button onClick={() => updateStatus(b.id, "cancelled")} className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs text-muted-foreground hover:text-red-400">
                           <XCircle size={12} /> ยกเลิก
