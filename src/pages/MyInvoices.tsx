@@ -554,6 +554,68 @@ const MyInvoices = () => {
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Receipt Detail Dialog */}
+      <Dialog open={receiptDetailOpen} onOpenChange={setReceiptDetailOpen}>
+        <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <div className="flex items-center justify-between">
+              <DialogTitle className="flex items-center gap-2">
+                <Receipt size={18} className="text-primary" />
+                {selectedReceipt?.receipt_number}
+              </DialogTitle>
+              {selectedReceipt && (
+                <Button variant="outline" size="sm" onClick={() => handlePrintReceipt(selectedReceipt)} className="gap-1.5 text-xs mr-6">
+                  <Printer size={14} /> พิมพ์
+                </Button>
+              )}
+            </div>
+          </DialogHeader>
+
+          {selectedReceipt && (
+            <div className="space-y-4">
+              {/* Receipt Type Badge */}
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="text-xs">
+                  {selectedReceipt.receipt_type === "simple" ? "แบบย่อ" : "เต็มรูปแบบ (มี VAT)"}
+                </Badge>
+              </div>
+
+              {/* Info Grid */}
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <span className="text-muted-foreground">วันที่ชำระ:</span>
+                  <span className="ml-2 font-medium">{fmtDate(selectedReceipt.payment_date)}</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">วิธีชำระ:</span>
+                  <span className="ml-2 font-medium">{selectedReceipt.payment_method || "-"}</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">ลูกค้า:</span>
+                  <span className="ml-2 font-medium">{selectedReceipt.customer_name}</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">สถานะ:</span>
+                  <span className="ml-2"><StatusBadge status={selectedReceipt.status} /></span>
+                </div>
+              </div>
+
+              {/* Amount */}
+              <div className="bg-muted/30 rounded-lg p-4 text-center">
+                <p className="text-xs text-muted-foreground mb-1">จำนวนเงินที่รับ</p>
+                <p className="text-2xl font-bold text-primary">฿{fmt(selectedReceipt.amount_paid)}</p>
+              </div>
+
+              {selectedReceipt.notes && (
+                <div className="text-xs text-muted-foreground bg-muted/20 rounded-lg p-3">
+                  <strong>หมายเหตุ:</strong> {selectedReceipt.notes}
+                </div>
+              )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
