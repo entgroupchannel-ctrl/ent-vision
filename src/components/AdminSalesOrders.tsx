@@ -577,10 +577,10 @@ const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
                     <DocumentCrossReference
                       currentDoc={{ type: 'so', number: selected.order_number, id: selected.id }}
                       relatedDocs={[
-                        { type: 'quote', number: selected.quote_id ? '—' : '—', id: selected.quote_id },
+                        { type: 'quote' as const, number: '—', id: selected.quote_id },
                         ...(selected.po_number ? [{ type: 'po' as const, number: selected.po_number, id: selected.id }] : []),
-                        { type: 'so', number: selected.order_number, id: selected.id },
-                      ].filter(Boolean)}
+                        { type: 'so' as const, number: selected.order_number, id: selected.id },
+                      ]}
                       onNavigate={(docType) => {
                         if (docType === 'quote') window.dispatchEvent(new CustomEvent("admin-switch-tab", { detail: "quote_review" }));
                         if (docType === 'bl') window.dispatchEvent(new CustomEvent("admin-switch-tab", { detail: "billing" }));
