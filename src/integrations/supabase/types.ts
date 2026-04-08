@@ -2524,6 +2524,15 @@ export type Database = {
         }[]
       }
       get_unread_notification_count: { Args: never; Returns: number }
+      get_weekly_revenue: {
+        Args: { _week_offset?: number }
+        Returns: {
+          day_name: string
+          day_of_week: number
+          order_count: number
+          total_revenue: number
+        }[]
+      }
       get_yearly_revenue: {
         Args: { _years_back?: number }
         Returns: {
