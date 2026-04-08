@@ -864,7 +864,7 @@ const AdminQuoteReview = () => {
         <div className="flex gap-1 flex-wrap items-center">
           {/* PO Inbox - prominent at start */}
           <button
-            onClick={() => setStatusFilter("po_inbox")}
+            onClick={() => { setStatusFilter("po_inbox"); if (urlQuoteId) backToList(); }}
             className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 ${
               statusFilter === "po_inbox"
                 ? "bg-teal-500/20 text-teal-700 dark:text-teal-400 ring-1 ring-teal-500/30"
@@ -878,7 +878,7 @@ const AdminQuoteReview = () => {
           </button>
           {poOverdueCount > 0 && (
             <button
-              onClick={() => setStatusFilter("po_overdue")}
+              onClick={() => { setStatusFilter("po_overdue"); if (urlQuoteId) backToList(); }}
               className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 ${
                 statusFilter === "po_overdue"
                   ? "bg-red-500/20 text-red-700 dark:text-red-400 ring-1 ring-red-500/30"
@@ -901,7 +901,7 @@ const AdminQuoteReview = () => {
           ].map((f) => (
             <button
               key={f.v}
-              onClick={() => setStatusFilter(f.v)}
+              onClick={() => { setStatusFilter(f.v); if (urlQuoteId) backToList(); }}
               className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 ${
                 statusFilter === f.v ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary/60"
               }`}
