@@ -43,6 +43,10 @@ export function useLiveChat() {
   // ─── Refs for cleanup and preventing stale closures ───
   const messagesChannelRef = useRef<ReturnType<typeof supabase.channel> | null>(null);
   const isMountedRef = useRef(true);
+  const selectedConvIdRef = useRef<string | null>(null);
+  
+  // Keep ref in sync with state
+  selectedConvIdRef.current = selectedConvId;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // Conversations Query (React Query handles caching & refetch)
@@ -100,6 +104,12 @@ export function useLiveChat() {
 
   const loadMessages = useCallback(async (convId: string) => {
     if (!convId) return;
+    
+    // Guard: Only load if this is still the selected conversation
+    if (convId !== selectedConvIdRef.current) {
+      console.log("[useLiveChat] Skipping load for:", convId, "(not selected)");
+      return;
+    }
 
     setMessagesLoading(true);
     console.log("[useLiveChat] Loading messages for:", convId);
@@ -117,6 +127,12 @@ export function useLiveChat() {
       }
 
       if (!isMountedRef.current) return;
+      
+      // Guard again after async: selection might have changed
+      if (convId !== selectedConvIdRef.current) {
+        console.log("[useLiveChat] Selection changed during load, discarding results");
+        return;
+      }
 
       console.log("[useLiveChat] Loaded messages:", data?.length || 0);
       setMessages((data as Message[]) || []);
