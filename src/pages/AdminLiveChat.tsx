@@ -1,23 +1,21 @@
 import { useEffect, lazy, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { usePermissions } from "@/hooks/usePermissions";
 import { ArrowLeft, Headphones, Loader2 } from "lucide-react";
 
 const AdminLiveChatComponent = lazy(() => import("@/components/AdminLiveChat"));
 
 const AdminLiveChatPage = () => {
-  const { user, loading: authLoading } = useAuth();
-  const { isAdmin, loading: permLoading } = usePermissions();
+  const { user, isAdmin, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!authLoading && !permLoading && (!user || !isAdmin)) {
+    if (!authLoading && (!user || !isAdmin)) {
       navigate("/admin-login");
     }
-  }, [user, isAdmin, authLoading, permLoading, navigate]);
+  }, [user, isAdmin, authLoading, navigate]);
 
-  if (authLoading || permLoading) {
+  if (authLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Loader2 className="w-6 h-6 animate-spin text-primary" />
