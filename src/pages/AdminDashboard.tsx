@@ -527,14 +527,9 @@ const AdminDashboard = () => {
         {tab === "delivery" && <AdminDeliveryManager />}
         {tab === "payments" && <AdminPaymentManager />}
         {tab === "users" && <AdminUserManagement />}
-        {tab === "livechat" && (
-          <Suspense fallback={<div className="text-center py-12 text-muted-foreground text-sm">กำลังโหลด...</div>}>
-            <AdminLiveChat />
-          </Suspense>
-        )}
 
         {/* Legacy fallback for tabs that don't have dedicated managers (contacts, chatleads, software, subscribers) */}
-        {!["dashboard", "engagement", "documents", "catalog", "quote_review", "sales_orders", "billing", "invoices", "delivery", "payments", "users", "livechat"].includes(tab) && (
+        {!["dashboard", "engagement", "documents", "catalog", "quote_review", "sales_orders", "billing", "invoices", "delivery", "payments", "users"].includes(tab) && (
         <>
         {/* Filter & Export */}
         {tab === "chatleads" ? (
