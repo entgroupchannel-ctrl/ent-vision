@@ -83,7 +83,8 @@ const MyAccount = () => {
         .eq("read", false);
       setUnreadCount(count || 0);
     } catch { /* silent */ }
-  }, [user]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
 
   useEffect(() => { fetchUnread(); }, [fetchUnread, tab]);
 
@@ -117,7 +118,8 @@ const MyAccount = () => {
       .subscribe();
 
     return () => { supabase.removeChannel(channel); };
-  }, [user]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
 
   if (authLoading) {
     return (

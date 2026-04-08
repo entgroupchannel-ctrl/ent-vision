@@ -57,7 +57,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
   const { user } = useAuth();
   const { toast } = useToast();
   const [quotes, setQuotes] = useState<QuoteRequest[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [lineItems, setLineItems] = useState<Record<string, LineItem[]>>({});
   const [catalog, setCatalog] = useState<CatalogProduct[]>([]);
@@ -74,7 +74,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
   const [companySettings, setCompanySettings] = useState<any>(null);
 
   const fetchQuotes = async () => {
-    if (!user) return;
+    if (!user) { setLoading(false); return; }
     setLoading(true);
     try {
       const { data, error } = await (supabase.from as any)("quote_requests")
