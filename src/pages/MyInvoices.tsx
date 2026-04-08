@@ -432,7 +432,8 @@ const MyInvoices = () => {
                     <TableHead className="text-xs font-semibold">วันที่ชำระ</TableHead>
                     <TableHead className="text-xs font-semibold hidden sm:table-cell">วิธีชำระ</TableHead>
                     <TableHead className="text-xs font-semibold text-right">จำนวนเงิน</TableHead>
-                    <TableHead className="text-xs font-semibold text-center">สถานะ</TableHead>
+                     <TableHead className="text-xs font-semibold text-center">สถานะ</TableHead>
+                    <TableHead className="text-xs font-semibold text-center w-20"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -443,6 +444,11 @@ const MyInvoices = () => {
                       <TableCell className="text-xs hidden sm:table-cell capitalize">{rcp.payment_method || "-"}</TableCell>
                       <TableCell className="text-xs text-right font-medium">฿{fmt(rcp.amount_paid)}</TableCell>
                       <TableCell className="text-center"><StatusBadge status={rcp.status} /></TableCell>
+                      <TableCell className="text-center">
+                        <Button variant="ghost" size="sm" onClick={() => openReceiptDetail(rcp)} className="h-7 w-7 p-0">
+                          <Eye size={14} />
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
