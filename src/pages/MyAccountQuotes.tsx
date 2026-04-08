@@ -74,18 +74,18 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
   const [companySettings, setCompanySettings] = useState<any>(null);
 
   const fetchQuotes = async () => {
-    console.log("[MAQ] fetchQuotes called", { hasUser: !!user, userId: user?.id, time: new Date().toISOString() });
+    
     if (!user) {
-      console.log("[MAQ] fetchQuotes early return (no user)");
+      
       setLoading(false);
       return;
     }
     setLoading(true);
-    console.log("[MAQ] fetchQuotes querying...");
+    
     try {
       const { data, error } = await (supabase.from as any)("quote_requests")
         .select("*").eq("user_id", user.id).order("created_at", { ascending: false });
-      console.log("[MAQ] fetchQuotes query returned", { hasData: !!data, hasError: !!error, count: data?.length });
+      
       if (error) throw error;
       if (data) setQuotes(data);
     } catch (err: any) {
@@ -96,7 +96,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
         variant: "destructive",
       });
     } finally {
-      console.log("[MAQ] fetchQuotes finally — setLoading(false)");
+      
       setLoading(false);
     }
   };
@@ -108,7 +108,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
   };
 
   useEffect(() => {
-    console.log("[MAQ] useEffect run", { userId: user?.id });
+    
     fetchQuotes(); fetchCatalog();
     (async () => {
       try {
@@ -363,7 +363,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
     </div>
   );
 
-  console.log("[MAQ] render", { loading, hasUser: !!user, userId: user?.id, quotesCount: quotes.length });
+  
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
