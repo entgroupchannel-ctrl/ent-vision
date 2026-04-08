@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Receipt,
@@ -27,11 +27,11 @@ import AdminUserManagement from "@/components/AdminUserManagement";
 import NotificationBell from "@/components/NotificationBell";
 import RevenueChart from "@/components/RevenueChart";
 import { usePermissions, type PermissionKey } from "@/hooks/usePermissions";
-const AdminLiveChat = lazy(() => import("@/components/AdminLiveChat"));
+
 import AddContactForm from "@/components/AddContactForm";
 import AddSoftwareInquiryDialog from "@/components/AddSoftwareInquiryDialog";
 
-type Tab = "dashboard" | "contacts" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "livechat" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
+type Tab = "dashboard" | "contacts" | "subscribers" | "chatleads" | "software" | "engagement" | "documents" | "catalog" | "quote_review" | "users" | "sales_orders" | "invoices" | "billing" | "delivery" | "payments";
 
 const statusColors: Record<string, string> = {
   new: "bg-blue-500/10 text-blue-400 border-blue-500/20",
@@ -111,7 +111,7 @@ const AdminDashboard = () => {
     engagement: "marketing.engagement",
     subscribers: "marketing.subscribers",
     users: "system.users",
-    livechat: "sales.contacts",
+    
     sales_orders: "sales.quote_review",
     invoices: "sales.quote_review",
     billing: "sales.quote_review",
@@ -311,7 +311,6 @@ const AdminDashboard = () => {
                   { id: "invoices" as Tab, label: t("admin.invoices"), icon: Receipt, count: 0 },
                   { id: "delivery" as Tab, label: t("admin.delivery"), icon: Package, count: 0 },
                   { id: "payments" as Tab, label: t("admin.payments"), icon: Wallet, count: 0 },
-                  { id: "livechat" as Tab, label: t("admin.liveChat"), icon: Headphones, count: 0 },
                 ]).filter((item) => can(tabPermission[item.id], "view")).map((item) => (
                   <button
                     key={item.id}
@@ -334,6 +333,15 @@ const AdminDashboard = () => {
                   </button>
                 ))}
 
+                {/* Live Chat - External Link */}
+                <button
+                  onClick={() => navigate("/admin/livechat")}
+                  className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-secondary/60 ${sidebarMode === "icon" ? "justify-center" : ""}`}
+                  title={sidebarMode === "icon" ? "Live Chat" : undefined}
+                >
+                  <Headphones size={16} className="shrink-0" />
+                  {sidebarMode === "full" && <span className="flex-1 text-left truncate">Live Chat</span>}
+                </button>
                 {/* ─── การตลาด / Marketing ─── */}
                 {sidebarMode === "full" && (
                   <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/40 px-3 pt-3 pb-1">{t("admin.marketing")}</p>
@@ -444,7 +452,6 @@ const AdminDashboard = () => {
               { id: "chatleads" as Tab, label: "Chat Leads" },
               { id: "subscribers" as Tab, label: "สมาชิก" },
               { id: "software" as Tab, label: "ซอฟต์แวร์" },
-              { id: "livechat" as Tab, label: "Live Chat" },
             ]).map((t) => (
               <button
                 key={t.id}
@@ -520,14 +527,9 @@ const AdminDashboard = () => {
         {tab === "delivery" && <AdminDeliveryManager />}
         {tab === "payments" && <AdminPaymentManager />}
         {tab === "users" && <AdminUserManagement />}
-        {tab === "livechat" && (
-          <Suspense fallback={<div className="text-center py-12 text-muted-foreground text-sm">กำลังโหลด...</div>}>
-            <AdminLiveChat />
-          </Suspense>
-        )}
 
         {/* Legacy fallback for tabs that don't have dedicated managers (contacts, chatleads, software, subscribers) */}
-        {!["dashboard", "engagement", "documents", "catalog", "quote_review", "sales_orders", "billing", "invoices", "delivery", "payments", "users", "livechat"].includes(tab) && (
+        {!["dashboard", "engagement", "documents", "catalog", "quote_review", "sales_orders", "billing", "invoices", "delivery", "payments", "users"].includes(tab) && (
         <>
         {/* Filter & Export */}
         {tab === "chatleads" ? (
