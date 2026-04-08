@@ -747,11 +747,9 @@ const AdminQuoteReview = () => {
   const filtered = quotes.filter((q) => {
     if (q.status === "draft") return false;
 
-    // Special "po_inbox" virtual filter — show only quotes with PO needing review
-    if (statusFilter === "po_inbox") {
-      if (!q.po_status || !["uploaded", "under_review", "pending_clarification"].includes(q.po_status)) return false;
-    } else if (statusFilter === "po_overdue") {
-      if (!q.po_status || !(q as any).po_overdue) return false;
+    // Filter by status
+    if (statusFilter === "po_uploaded") {
+      if (q.status !== "po_uploaded") return false;
     } else if (statusFilter !== "all" && q.status !== statusFilter) {
       return false;
     }
@@ -798,20 +796,15 @@ const AdminQuoteReview = () => {
     }
   });
 
-  const newCount = quotes.filter((q) => q.status === "new").length;
-  const poInboxCount = quotes.filter((q) => q.po_status && ["uploaded", "under_review", "pending_clarification"].includes(q.po_status)).length;
-  const poOverdueCount = quotes.filter((q) => (q as any).po_overdue && q.po_status && ["uploaded", "under_review"].includes(q.po_status)).length;
-
   // Count per status (for badges) — exclude drafts
   const nonDraft = quotes.filter((q) => q.status !== "draft");
   const statusCounts = {
     all: nonDraft.length,
-    new: nonDraft.filter((q) => q.status === "new").length,
-    quoted: nonDraft.filter((q) => q.status === "quoted").length,
-    negotiating: nonDraft.filter((q) => q.status === "negotiating").length,
-    won: nonDraft.filter((q) => q.status === "won").length,
-    po_received: nonDraft.filter((q) => q.status === "po_received").length,
-    lost: nonDraft.filter((q) => q.status === "lost").length,
+    pending: nonDraft.filter((q) => q.status === "pending").length,
+    quote_sent: nonDraft.filter((q) => q.status === "quote_sent").length,
+    po_uploaded: nonDraft.filter((q) => q.status === "po_uploaded").length,
+    completed: nonDraft.filter((q) => q.status === "completed").length,
+    cancelled: nonDraft.filter((q) => q.status === "cancelled").length,
   };
 
   const renderSpecs = (specs: Record<string, string>) => (
@@ -827,42 +820,13 @@ const AdminQuoteReview = () => {
       {/* Filters */}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div className="flex gap-1 flex-wrap items-center">
-          {/* PO Inbox - prominent at start */}
-          <button
-            onClick={() => { setStatusFilter("po_inbox"); if (urlQuoteId) backToList(); }}
-            className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 ${
-              statusFilter === "po_inbox"
-                ? "bg-teal-500/20 text-teal-700 dark:text-teal-400 ring-1 ring-teal-500/30"
-                : "bg-teal-500/5 text-teal-600 hover:bg-teal-500/10"
-            }`}
-          >
-            📥 PO Inbox
-            {poInboxCount > 0 && (
-              <span className="px-1.5 py-0.5 rounded-full bg-teal-500 text-white text-[10px] font-bold">{poInboxCount}</span>
-            )}
-          </button>
-          {poOverdueCount > 0 && (
-            <button
-              onClick={() => { setStatusFilter("po_overdue"); if (urlQuoteId) backToList(); }}
-              className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 ${
-                statusFilter === "po_overdue"
-                  ? "bg-red-500/20 text-red-700 dark:text-red-400 ring-1 ring-red-500/30"
-                  : "bg-red-500/5 text-red-600 hover:bg-red-500/10"
-              }`}
-            >
-              ⚠️ เลย SLA
-              <span className="px-1.5 py-0.5 rounded-full bg-red-500 text-white text-[10px] font-bold">{poOverdueCount}</span>
-            </button>
-          )}
-          <span className="w-px h-5 bg-border mx-1"></span>
           {[
-            { v: "all",         l: "ทั้งหมด",      c: statusCounts.all },
-            { v: "new",         l: "ใหม่",         c: statusCounts.new },
-            { v: "quoted",      l: "ส่งราคาแล้ว",  c: statusCounts.quoted },
-            { v: "negotiating", l: "เจรจา",        c: statusCounts.negotiating },
-            { v: "won",         l: "ตกลงราคา",     c: statusCounts.won },
-            { v: "po_received", l: "รับ PO",       c: statusCounts.po_received },
-            { v: "lost",        l: "ไม่สำเร็จ",    c: statusCounts.lost },
+            { v: "all",          l: "ทั้งหมด",         c: statusCounts.all },
+            { v: "pending",      l: "รอตอบกลับ",       c: statusCounts.pending },
+            { v: "quote_sent",   l: "ส่งราคาแล้ว",     c: statusCounts.quote_sent },
+            { v: "po_uploaded",  l: "รอตรวจ PO",       c: statusCounts.po_uploaded },
+            { v: "completed",    l: "เสร็จสิ้น",       c: statusCounts.completed },
+            { v: "cancelled",    l: "ยกเลิก",          c: statusCounts.cancelled },
           ].map((f) => (
             <button
               key={f.v}
