@@ -95,7 +95,7 @@ const AdminDashboard = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [sidebarMode, setSidebarMode] = useState<"full" | "icon" | "hidden">("full");
-  const { can, getLevel } = usePermissions();
+  const { can, getLevel, loading: permsLoading } = usePermissions();
   const [addContactOpen, setAddContactOpen] = useState(false);
   const [addSoftwareOpen, setAddSoftwareOpen] = useState(false);
 
