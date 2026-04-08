@@ -3,9 +3,10 @@ import {
   Package, TrendingUp, Users, DollarSign, Truck, CheckCircle,
   Clock, Loader2, RefreshCw, Search, Eye, ChevronDown,
   FileText, ExternalLink, Copy, MapPin, CreditCard, BarChart3,
-  ArrowRight, AlertCircle, XCircle, Box,
+  ArrowRight, AlertCircle, XCircle, Box, Printer,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { printQuote } from "@/utils/printQuote";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import DocCrossLinks from "@/components/admin/DocCrossLinks";
@@ -195,6 +196,58 @@ const AdminSalesOrders = () => {
       toast({ title: "ผิดพลาด", description: err.message, variant: "destructive" });
     }
     setSaving(false);
+  };
+
+  /* ─── Print Sales Order ─── */
+  const handlePrintOrder = async (o: SalesOrder) => {
+    try {
+      const { data: items } = await (supabase.from as any)("sales_order_items")
+        .select("*")
+        .eq("order_id", o.id)
+        .order("sort_order");
+
+      const printItems = (items || []).map((it: any) => ({
+        model: it.model,
+        qty: it.qty,
+        unit_price: it.unit_price,
+        discount_percent: it.discount_percent || 0,
+        line_total: it.line_total,
+        admin_notes: it.admin_notes || null,
+        description: it.description,
+        _name: it.name_th || it.model,
+        _desc: it.description || "",
+      }));
+
+      printQuote(
+        {
+          quote_number: o.order_number,
+          name: o.customer_name,
+          email: o.customer_email || "",
+          phone: o.customer_phone,
+          company: o.customer_company,
+          details: o.admin_notes,
+          company_address: null,
+          tax_id: null,
+        },
+        printItems,
+        {
+          discount_amount: o.discount_amount || 0,
+          valid_until: "",
+          payment_terms: o.payment_terms || "",
+          delivery_terms: o.delivery_terms || "",
+          include_vat: true,
+          vat_percent: 7,
+        },
+        companySettings || undefined,
+        undefined,
+        undefined,
+        undefined,
+        'th',
+        'sales_order',
+      );
+    } catch (err: any) {
+      toast({ title: "พิมพ์ไม่สำเร็จ", description: err.message, variant: "destructive" });
+    }
   };
 
   /* ─── Helpers ─── */
@@ -490,6 +543,16 @@ const AdminSalesOrders = () => {
                   {/* Related Documents */}
                   <div className="border-t border-border pt-3">
                     <DocCrossLinks quoteId={selected.quote_id} orderId={selected.id} exclude={["order"]} />
+                  </div>
+
+                  {/* Print */}
+                  <div className="border-t border-border pt-3">
+                    <button
+                      onClick={() => handlePrintOrder(selected)}
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 transition-colors border border-primary/20 w-full justify-center"
+                    >
+                      <Printer size={14} /> พิมพ์ใบสั่งขาย
+                    </button>
                   </div>
 
                   {/* Create Documents */}
