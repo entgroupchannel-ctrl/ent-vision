@@ -120,7 +120,7 @@ const MyDocuments = () => {
       const { data } = await (supabase.from as any)("profiles")
         .select("customer_tier")
         .eq("id", user.id)
-        .single();
+        .maybeSingle();
       if (data?.customer_tier) setUserTier(data.customer_tier);
     } catch {}
   };
