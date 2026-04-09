@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider, QueryCache, useQueryClient } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
@@ -128,7 +128,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const AppInner = () => {
+const AppInner = ({ onRecoveryComplete }: { onRecoveryComplete: () => void }) => {
   const qc = useQueryClient();
 
   useEffect(() => {
@@ -207,6 +207,11 @@ const AppInner = () => {
       } finally {
         isRefreshing = false;
       }
+    };
+
+    const notifyRecoveryComplete = (reason: string) => {
+      console.log(`[Session] Remounting app after ${reason}`);
+      onRecoveryComplete();
     };
 
     const handleVisibilityChange = async () => {
@@ -297,6 +302,15 @@ const AppInner = () => {
           const ok = await guardedRefresh('invalid-expiry');
           if (!ok) {
             window.location.reload();
+            return;
+          }
+
+          try {
+            qc.invalidateQueries({ type: 'active' });
+            notifyRecoveryComplete('invalid-expiry recovery');
+          } catch (qError: any) {
+            console.error('[Session] Query invalidation error:', qError.message);
+            window.location.reload();
           }
           return;
         }
@@ -307,6 +321,7 @@ const AppInner = () => {
           if (hiddenDuration >= STALE_THRESHOLD) {
             try {
               qc.invalidateQueries({ type: 'active' });
+              notifyRecoveryComplete('visibility recovery');
             } catch (qError: any) {
               console.error('[Session] Query invalidation error:', qError.message);
               window.location.reload();
@@ -322,6 +337,7 @@ const AppInner = () => {
           await new Promise((r) => setTimeout(r, 100));
           try {
             qc.invalidateQueries({ type: 'active' });
+            notifyRecoveryComplete('token refresh');
             console.log('[Session] ✅ Recovery complete');
           } catch (qError: any) {
             console.error('[Session] Query invalidation error:', qError.message);
@@ -374,95 +390,109 @@ const AppInner = () => {
       clearInterval(healthCheckInterval);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [qc]);
+  }, [onRecoveryComplete, qc]);
 
   return null;
 };
 
-const App = () => (
-  <HelmetProvider>
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <I18nProvider>
-      <AuthProvider>
-        <QuoteCartProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <AppInner />
-          <BrowserRouter>
-            <ScrollToTop />
-            <Suspense fallback={null}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/gt-series" element={<GTSeries />} />
-                <Route path="/gb-series" element={<GBSeries />} />
-                <Route path="/epc-box-series" element={<EPCBoxSeries />} />
-                <Route path="/gk-series" element={<GKSeries />} />
-                <Route path="/mini-pc" element={<MiniPC />} />
-                <Route path="/waterproof-pc" element={<WaterproofPC />} />
-                <Route path="/volktek" element={<Volktek />} />
-                <Route path="/epc-series" element={<EPCSeries />} />
-                <Route path="/rugged-tablet" element={<RuggedTablet />} />
-                <Route path="/handheld" element={<Handheld />} />
-                <Route path="/panel-pc-gtg" element={<PanelPCGTG />} />
-                <Route path="/smart-display" element={<SmartDisplay />} />
-                <Route path="/promotions" element={<Promotions />} />
-                <Route path="/utc-series" element={<UTCSeries />} />
-                <Route path="/minipc-firewall" element={<MiniPCFirewall />} />
-                <Route path="/mini-pc-firewall" element={<MiniPCFirewall />} />
-                <Route path="/vcloudpoint" element={<VCloudPoint />} />
-                <Route path="/about-us" element={<AboutUs />} />
-                <Route path="/contact" element={<ContactUs />} />
-                <Route path="/quote" element={<QuoteRequest />} />
-                <Route path="/quote-builder" element={<QuoteBuilder />} />
-                <Route path="/admin-login" element={<AdminLogin />} />
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/member-register" element={<MemberRegister />} />
-                <Route path="/my-quotes" element={<MyQuotes />} />
-                <Route path="/welcome-member" element={<WelcomeMember />} />
-                <Route path="/warrantys" element={<Warrantys />} />
-                <Route path="/payment" element={<Payment />} />
-                <Route path="/delivery" element={<Delivery />} />
-                <Route path="/cabinets" element={<Cabinets />} />
-                <Route path="/ibox-series" element={<IBoxSeries />} />
-                <Route path="/ibox-series/:id" element={<IBoxDetail />} />
-                <Route path="/handheld/:id" element={<RuggedHandheldDetail />} />
-                <Route path="/rugged-tablet/:id" element={<RuggedTabletDetail />} />
-                <Route path="/wishlist" element={<WishlistPage />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
-                <Route path="/product-advisor" element={<ProductAdvisor />} />
-                <Route path="/rugged-notebook" element={<RuggedNotebook />} />
-                <Route path="/rugged-notebook/:id" element={<RuggedNotebookDetail />} />
-                <Route path="/aio" element={<AllInOnePC />} />
-                <Route path="/aio/:id" element={<AIODetail />} />
-                <Route path="/case-studies" element={<CaseStudies />} />
-                <Route path="/case-studies/:id" element={<CaseStudyDetail />} />
-                <Route path="/corporate-pricing" element={<CorporatePricing />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:id" element={<BlogDetail />} />
-                <Route path="/my-account/*" element={<MyAccount />} />
-                <Route path="/platform" element={<PlatformTour />} />
-                <Route path="/admin/livechat" element={<AdminLiveChatPage />} />
-                <Route path="/debug-test" element={<DebugTest />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-            
-            <SocialRibbon />
-            <FloatingQuoteBar />
-            <GlobalFloatingToolbar />
-            <LiveChatWidget />
-          </BrowserRouter>
-        </TooltipProvider>
-        </QuoteCartProvider>
-      </AuthProvider>
-      </I18nProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
-  </HelmetProvider>
+const AppShell = ({ recoveryKey }: { recoveryKey: number }) => (
+  <>
+    <ScrollToTop />
+    <Suspense fallback={null}>
+      <Routes key={recoveryKey}>
+        <Route path="/" element={<Index />} />
+        <Route path="/gt-series" element={<GTSeries />} />
+        <Route path="/gb-series" element={<GBSeries />} />
+        <Route path="/epc-box-series" element={<EPCBoxSeries />} />
+        <Route path="/gk-series" element={<GKSeries />} />
+        <Route path="/mini-pc" element={<MiniPC />} />
+        <Route path="/waterproof-pc" element={<WaterproofPC />} />
+        <Route path="/volktek" element={<Volktek />} />
+        <Route path="/epc-series" element={<EPCSeries />} />
+        <Route path="/rugged-tablet" element={<RuggedTablet />} />
+        <Route path="/handheld" element={<Handheld />} />
+        <Route path="/panel-pc-gtg" element={<PanelPCGTG />} />
+        <Route path="/smart-display" element={<SmartDisplay />} />
+        <Route path="/promotions" element={<Promotions />} />
+        <Route path="/utc-series" element={<UTCSeries />} />
+        <Route path="/minipc-firewall" element={<MiniPCFirewall />} />
+        <Route path="/mini-pc-firewall" element={<MiniPCFirewall />} />
+        <Route path="/vcloudpoint" element={<VCloudPoint />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/quote" element={<QuoteRequest />} />
+        <Route path="/quote-builder" element={<QuoteBuilder />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/member-register" element={<MemberRegister />} />
+        <Route path="/my-quotes" element={<MyQuotes />} />
+        <Route path="/welcome-member" element={<WelcomeMember />} />
+        <Route path="/warrantys" element={<Warrantys />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/delivery" element={<Delivery />} />
+        <Route path="/cabinets" element={<Cabinets />} />
+        <Route path="/ibox-series" element={<IBoxSeries />} />
+        <Route path="/ibox-series/:id" element={<IBoxDetail />} />
+        <Route path="/handheld/:id" element={<RuggedHandheldDetail />} />
+        <Route path="/rugged-tablet/:id" element={<RuggedTabletDetail />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/product-advisor" element={<ProductAdvisor />} />
+        <Route path="/rugged-notebook" element={<RuggedNotebook />} />
+        <Route path="/rugged-notebook/:id" element={<RuggedNotebookDetail />} />
+        <Route path="/aio" element={<AllInOnePC />} />
+        <Route path="/aio/:id" element={<AIODetail />} />
+        <Route path="/case-studies" element={<CaseStudies />} />
+        <Route path="/case-studies/:id" element={<CaseStudyDetail />} />
+        <Route path="/corporate-pricing" element={<CorporatePricing />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogDetail />} />
+        <Route path="/my-account/*" element={<MyAccount />} />
+        <Route path="/platform" element={<PlatformTour />} />
+        <Route path="/admin/livechat" element={<AdminLiveChatPage />} />
+        <Route path="/debug-test" element={<DebugTest />} />
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
+
+    <SocialRibbon />
+    <FloatingQuoteBar />
+    <GlobalFloatingToolbar />
+    <LiveChatWidget />
+  </>
 );
+
+const App = () => {
+  const [recoveryKey, setRecoveryKey] = useState(0);
+
+  const handleRecoveryComplete = useCallback(() => {
+    setRecoveryKey((prev) => prev + 1);
+  }, []);
+
+  return (
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <I18nProvider>
+            <AuthProvider>
+              <QuoteCartProvider>
+                <TooltipProvider>
+                  <Toaster />
+                  <Sonner />
+                  <AppInner onRecoveryComplete={handleRecoveryComplete} />
+                  <BrowserRouter>
+                    <AppShell recoveryKey={recoveryKey} />
+                  </BrowserRouter>
+                </TooltipProvider>
+              </QuoteCartProvider>
+            </AuthProvider>
+          </I18nProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
+  );
+};
 
 export default App;
