@@ -244,17 +244,12 @@ const AppInner = ({ onRecoveryComplete }: { onRecoveryComplete: () => void }) =>
       // Short switch (< 5s): data still fresh (staleTime=60s)
       if (hiddenDuration < 5_000) return;
 
-      // ── Time corruption protection ──
-      if (hiddenSeconds > 3600 || hiddenSeconds < 0) {
-        console.warn('[Session] Time corruption detected:', hiddenSeconds, 's');
-        try {
-          const { data } = await supabase.auth.getSession();
-          if (!data?.session) {
-            window.location.reload();
-          }
-        } catch {
-          window.location.reload();
-        }
+      // ── Long sleep (>5 min) or time corruption: just reload ──
+      // Supabase client internal state is unreliable after long sleep
+      // getSession() itself can hang, so don't even try — reload is fastest
+      if (hiddenSeconds > 300 || hiddenSeconds < 0) {
+        console.warn(`[Session] Long sleep (${hiddenSeconds}s) — reloading page`);
+        window.location.reload();
         return;
       }
 
