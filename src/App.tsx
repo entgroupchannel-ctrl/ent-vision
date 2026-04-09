@@ -210,41 +210,71 @@ const AppInner = () => {
     };
 
     const handleVisibilityChange = async () => {
+      // ── Tab HIDDEN: proactively close Realtime channels ──
       if (document.hidden) {
         lastHiddenTime = Date.now();
+        // Force close Realtime channels with timeout protection
+        const channels = supabase.getChannels();
+        if (channels.length > 0) {
+          try {
+            console.log(`[Session] Tab hidden — closing ${channels.length} Realtime channels`);
+            const removePromise = supabase.removeAllChannels();
+            const timeoutPromise = new Promise<never>((_, reject) =>
+              setTimeout(() => reject(new Error('channel cleanup timeout')), 2000)
+            );
+            await Promise.race([removePromise, timeoutPromise]);
+          } catch (e: any) {
+            console.warn('[Session] Channel cleanup timeout, force disconnect');
+            try { (supabase as any).realtime?.disconnect(); } catch {}
+          }
+        }
         return;
       }
 
+      // ── Tab VISIBLE: recovery logic ──
       const hiddenDuration = lastHiddenTime ? Date.now() - lastHiddenTime : 0;
       lastHiddenTime = null;
+      const hiddenSeconds = Math.round(hiddenDuration / 1000);
 
       // Short switch (< 5s): data still fresh (staleTime=60s)
       if (hiddenDuration < 5_000) return;
 
+      // ── Time corruption protection ──
+      if (hiddenSeconds > 3600 || hiddenSeconds < 0) {
+        console.warn('[Session] Time corruption detected:', hiddenSeconds, 's');
+        try {
+          const { data } = await supabase.auth.getSession();
+          if (!data?.session) {
+            window.location.reload();
+          }
+        } catch {
+          window.location.reload();
+        }
+        return;
+      }
+
       // Let Supabase auto-refresh settle first
       await new Promise((r) => setTimeout(r, 300));
 
-      console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 's');
+      console.log('[Session] Tab visible after', hiddenSeconds, 's');
       recordTabSwitch(hiddenDuration);
 
-      // ── CRITICAL: Kill stale Realtime WebSocket channels BEFORE any auth call ──
-      // When tab is hidden for a long time, WebSocket connections go stale.
-      // Supabase client tries to reconnect on the broken socket, blocking HTTP requests.
-      // Removing all channels forces clean reconnection when components re-subscribe.
-      if (hiddenDuration >= STALE_THRESHOLD) {
-        try {
-          const channels = supabase.getChannels();
-          if (channels.length > 0) {
-            console.log(`[Session] Removing ${channels.length} stale Realtime channels`);
-            await supabase.removeAllChannels();
-          }
-        } catch (e: any) {
-          console.warn('[Session] Channel cleanup warning:', e.message);
-        }
-      }
-
       try {
-        const { data } = await supabase.auth.getSession();
+        // ── Session check with 3s timeout ──
+        const sessionPromise = supabase.auth.getSession();
+        const sessionTimeout = new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error('getSession timeout')), 3000)
+        );
+        const { data, error: sessionError } = await Promise.race([
+          sessionPromise,
+          sessionTimeout,
+        ]) as Awaited<ReturnType<typeof supabase.auth.getSession>>;
+
+        if (sessionError) {
+          console.error('[Session] getSession error:', sessionError.message);
+          window.location.reload();
+          return;
+        }
 
         if (!data?.session) {
           console.warn('[Session] No session found');
@@ -261,11 +291,26 @@ const AppInner = () => {
         const timeLeftS = Math.round(timeLeftMs / 1000);
         updateTokenExpiry(expiresAtToMs(data.session.expires_at));
 
+        // ── Token expiry validation ──
+        if (timeLeftS < 0 || timeLeftS > 86400) {
+          console.warn('[Session] Invalid token expiry:', timeLeftS, 's');
+          const ok = await guardedRefresh('invalid-expiry');
+          if (!ok) {
+            window.location.reload();
+          }
+          return;
+        }
+
         if (timeLeftS > 120) {
           console.log(`[Session] Token valid (${timeLeftS}s left)`);
           // Token fine — invalidate stale queries so RQ refetches with valid token
           if (hiddenDuration >= STALE_THRESHOLD) {
-            qc.invalidateQueries({ type: 'active' });
+            try {
+              qc.invalidateQueries({ type: 'active' });
+            } catch (qError: any) {
+              console.error('[Session] Query invalidation error:', qError.message);
+              window.location.reload();
+            }
           }
           return;
         }
@@ -275,8 +320,14 @@ const AppInner = () => {
         const ok = await guardedRefresh('visibility');
         if (ok) {
           await new Promise((r) => setTimeout(r, 100));
-          qc.invalidateQueries({ type: 'active' });
-          console.log('[Session] Recovery complete');
+          try {
+            qc.invalidateQueries({ type: 'active' });
+            console.log('[Session] ✅ Recovery complete');
+          } catch (qError: any) {
+            console.error('[Session] Query invalidation error:', qError.message);
+            window.location.reload();
+            return;
+          }
           recordRefresh(true, 'visibility');
         } else {
           console.log('[Session] Refresh failed, reloading...');
@@ -284,8 +335,9 @@ const AppInner = () => {
           window.location.reload();
         }
       } catch (e: any) {
-        console.error('[Session] Recovery error:', e.message);
-        window.location.reload();
+        console.error('[Session] ❌ Recovery error:', e.message);
+        // Small delay to let logs flush
+        setTimeout(() => window.location.reload(), 500);
       }
     };
 
