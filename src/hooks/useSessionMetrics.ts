@@ -48,6 +48,7 @@ let version = 0;
 
 function notify() {
   version++;
+  saveToStorage();
   listeners.forEach((l) => l());
 }
 
