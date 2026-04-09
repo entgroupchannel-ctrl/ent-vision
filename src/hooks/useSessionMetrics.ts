@@ -18,23 +18,37 @@ export interface SessionMetrics {
 }
 
 const MAX_EVENTS = 30;
+const STORAGE_KEY = "ent_session_metrics";
 
-let metrics: SessionMetrics = {
-  jwtRefreshCount: 0,
-  jwtRefreshErrors: 0,
-  tabSwitchCount: 0,
-  permissionLoadTimeMs: 0,
-  lastRefreshTimestamp: null,
-  tokenExpiresAt: null,
-  sessionStatus: "none",
-  events: [],
-};
+function loadFromStorage(): SessionMetrics {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch { /* ignore */ }
+  return {
+    jwtRefreshCount: 0,
+    jwtRefreshErrors: 0,
+    tabSwitchCount: 0,
+    permissionLoadTimeMs: 0,
+    lastRefreshTimestamp: null,
+    tokenExpiresAt: null,
+    sessionStatus: "none",
+    events: [],
+  };
+}
+
+function saveToStorage() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(metrics)); } catch { /* ignore */ }
+}
+
+let metrics: SessionMetrics = loadFromStorage();
 
 let listeners = new Set<() => void>();
 let version = 0;
 
 function notify() {
   version++;
+  saveToStorage();
   listeners.forEach((l) => l());
 }
 
