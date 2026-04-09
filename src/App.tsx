@@ -227,6 +227,22 @@ const AppInner = () => {
       console.log('[Session] Tab visible after', Math.round(hiddenDuration / 1000), 's');
       recordTabSwitch(hiddenDuration);
 
+      // ── CRITICAL: Kill stale Realtime WebSocket channels BEFORE any auth call ──
+      // When tab is hidden for a long time, WebSocket connections go stale.
+      // Supabase client tries to reconnect on the broken socket, blocking HTTP requests.
+      // Removing all channels forces clean reconnection when components re-subscribe.
+      if (hiddenDuration >= STALE_THRESHOLD) {
+        try {
+          const channels = supabase.getChannels();
+          if (channels.length > 0) {
+            console.log(`[Session] Removing ${channels.length} stale Realtime channels`);
+            await supabase.removeAllChannels();
+          }
+        } catch (e: any) {
+          console.warn('[Session] Channel cleanup warning:', e.message);
+        }
+      }
+
       try {
         const { data } = await supabase.auth.getSession();
 
