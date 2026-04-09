@@ -98,7 +98,7 @@ const MyNotifications = () => {
     if (hours < 24) return `${hours} ชั่วโมงที่แล้ว`;
     const days = Math.floor(hours / 24);
     if (days < 7) return `${days} วันที่แล้ว`;
-    return new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" });
+    return new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric" });
   };
 
   return (

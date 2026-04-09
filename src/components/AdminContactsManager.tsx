@@ -107,7 +107,7 @@ const lbl = "text-xs font-medium text-muted-foreground mb-1 block";
 /* ─── Utilities ─── */
 const fmtDate = (s: string) => {
   const d = new Date(s);
-  return d.toLocaleString("th-TH", { day: "2-digit", month: "short", year: "2-digit", hour: "2-digit", minute: "2-digit" });
+  return d.toLocaleString("th-TH", { timeZone: "Asia/Bangkok", day: "2-digit", month: "short", year: "2-digit", hour: "2-digit", minute: "2-digit" });
 };
 
 const fmtRelative = (s: string) => {

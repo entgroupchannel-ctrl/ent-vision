@@ -77,7 +77,7 @@ const COURIERS = [
   "DHL Express", "Ninja Van", "BEST Express", "จัดส่งเอง", "อื่นๆ",
 ];
 
-const fmtDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" });
+const fmtDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric" });
 const fmt = (n: number) => n.toLocaleString("th-TH", { minimumFractionDigits: 2 });
 
 /* ═══════════════════════════════════════════════════ */

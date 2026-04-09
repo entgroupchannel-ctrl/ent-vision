@@ -293,7 +293,7 @@ const AdminSalesOrders = ({ viewMode = "orders" }: AdminSalesOrdersProps) => {
   /* ─── Helpers ─── */
   const fp = (n: number) => new Intl.NumberFormat("th-TH").format(Math.round(n));
   const fpd = (n: number) => new Intl.NumberFormat("th-TH", { minimumFractionDigits: 2 }).format(n);
-  const fd = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" });
+  const fd = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric" });
 
   const totalRevenue = orders.filter((o) => o.status !== "cancelled").reduce((s, o) => s + o.grand_total, 0);
   const completedRevenue = orders.filter((o) => o.status === "completed").reduce((s, o) => s + o.grand_total, 0);

@@ -474,7 +474,7 @@ const AdminQuoteReview = () => {
 
   /* ─── Helpers ─── */
   const fp = (n: number) => new Intl.NumberFormat("th-TH").format(n);
-  const fd = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+  const fd = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
   const addDays = (d: number) => { const dt = new Date(); dt.setDate(dt.getDate() + d); return dt.toISOString().split("T")[0]; };
 
   const getAdminName = (uid: string | null): string => {
@@ -1288,7 +1288,7 @@ const AdminQuoteReview = () => {
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-bold text-foreground">{selected.po_file_name || "PO Document"}</p>
                         {selected.po_number && <p className="text-xs text-muted-foreground">เลข PO: <span className="font-medium text-foreground">{selected.po_number}</span></p>}
-                        {selected.po_uploaded_at && <p className="text-[10px] text-muted-foreground">อัปโหลดเมื่อ {new Date(selected.po_uploaded_at).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</p>}
+                        {selected.po_uploaded_at && <p className="text-[10px] text-muted-foreground">อัปโหลดเมื่อ {new Date(selected.po_uploaded_at).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</p>}
                         {selected.po_notes && <p className="text-xs text-muted-foreground mt-1">หมายเหตุ: {selected.po_notes}</p>}
                         <a href={selected.po_file_url} target="_blank" rel="noopener noreferrer"
                           className="mt-2 inline-flex items-center gap-1.5 text-xs text-primary hover:underline font-medium">
@@ -1319,11 +1319,11 @@ const AdminQuoteReview = () => {
                       <div className="mt-2 pt-2 border-t border-teal-500/15">
                         {(selected as any).po_overdue ? (
                           <p className="text-[10px] text-red-500 font-bold flex items-center gap-1">
-                            <AlertCircle size={11} /> เลย SLA แล้ว — กำหนดตรวจ {new Date((selected as any).po_review_due).toLocaleString("th-TH", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                            <AlertCircle size={11} /> เลย SLA แล้ว — กำหนดตรวจ {new Date((selected as any).po_review_due).toLocaleString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
                           </p>
                         ) : (
                           <p className="text-[10px] text-muted-foreground flex items-center gap-1">
-                            <Clock size={11} /> SLA: ตรวจภายใน {new Date((selected as any).po_review_due).toLocaleString("th-TH", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                            <Clock size={11} /> SLA: ตรวจภายใน {new Date((selected as any).po_review_due).toLocaleString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
                           </p>
                         )}
                       </div>

@@ -347,7 +347,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
   };
 
   const fp = (n: number) => new Intl.NumberFormat("th-TH").format(n);
-  const fd = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "2-digit", month: "2-digit", year: "numeric" });
+  const fd = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "2-digit", month: "2-digit", year: "numeric" });
 
   const productSummary = (products: any[]) => {
     if (!products?.length) return "";
@@ -506,7 +506,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                     <div className="flex items-center gap-3 flex-wrap">
                       <h3 className="text-base font-bold text-foreground">{q.quote_number || "Draft"}</h3>
                       <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${status.color}`}>{status.label}</span>
-                      {q.valid_until && <span className="text-xs text-muted-foreground flex items-center gap-1"><CalendarClock size={12} /> ยืนราคาถึง {new Date(q.valid_until).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" })}</span>}
+                      {q.valid_until && <span className="text-xs text-muted-foreground flex items-center gap-1"><CalendarClock size={12} /> ยืนราคาถึง {new Date(q.valid_until).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric" })}</span>}
                     </div>
                     <button onClick={() => setExpandedId(null)} className="text-muted-foreground hover:text-foreground"><ChevronUp size={16} /></button>
                   </div>
@@ -568,7 +568,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                     <div className="p-3 rounded-lg bg-secondary/30 border border-border mb-4">
                       <h4 className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-2">เงื่อนไข</h4>
                       <div className="grid grid-cols-2 gap-2 text-xs">
-                        {q.valid_until && <div><span className="text-muted-foreground">ราคายืนถึง:</span> <span className="font-medium">{new Date(q.valid_until).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" })}</span></div>}
+                        {q.valid_until && <div><span className="text-muted-foreground">ราคายืนถึง:</span> <span className="font-medium">{new Date(q.valid_until).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric" })}</span></div>}
                         {q.payment_terms && <div><span className="text-muted-foreground">เงื่อนไขชำระ:</span> <span className="font-medium">{q.payment_terms}</span></div>}
                         {q.delivery_terms && <div><span className="text-muted-foreground">เงื่อนไขจัดส่ง:</span> <span className="font-medium">{q.delivery_terms}</span></div>}
                         <div><span className="text-muted-foreground">การรับประกัน:</span> <span className="font-medium">1 ปี Carry-in</span></div>
@@ -606,7 +606,7 @@ const MyAccountQuotes = ({ onNavigate }: { onNavigate?: (tab: string) => void })
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-bold text-foreground">{q.po_file_name || "PO Document"}</p>
                                 {q.po_number && <p className="text-xs text-muted-foreground mt-0.5">เลข PO: <span className="font-medium text-foreground">{q.po_number}</span></p>}
-                                {q.po_uploaded_at && <p className="text-[10px] text-muted-foreground mt-0.5">อัปโหลดเมื่อ {new Date(q.po_uploaded_at).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</p>}
+                                {q.po_uploaded_at && <p className="text-[10px] text-muted-foreground mt-0.5">อัปโหลดเมื่อ {new Date(q.po_uploaded_at).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}</p>}
                                 {q.po_notes && <p className="text-xs text-muted-foreground mt-1">{q.po_notes}</p>}
                               </div>
                               <div className="shrink-0 flex flex-col items-end gap-1.5">

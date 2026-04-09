@@ -318,9 +318,9 @@ export const printQuote = (
   const c = { ...DEFAULT_COMPANY, ...company };
   const t = i18n[lang];
   const fp = (n: number) => new Intl.NumberFormat("th-TH", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(n);
-  const today = new Date().toLocaleDateString("th-TH", { day: "2-digit", month: "2-digit", year: "numeric" });
+  const today = new Date().toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "2-digit", month: "2-digit", year: "numeric" });
   const validDate = terms.valid_until
-    ? new Date(terms.valid_until).toLocaleDateString("th-TH", { day: "2-digit", month: "2-digit", year: "numeric" })
+    ? new Date(terms.valid_until).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "2-digit", month: "2-digit", year: "numeric" })
     : "—";
 
   /* ── Financial calc ── */
@@ -649,7 +649,7 @@ ${(documentType === 'receipt_full' || documentType === 'receipt_simple') ? `
   <div class="payment-info-grid">
     <div class="payment-info-row">
       <span class="payment-lb">${t.payment_date_label}:</span>
-      <span class="payment-vl">${q.payment_date ? new Date(q.payment_date).toLocaleDateString("th-TH", { day: "2-digit", month: "2-digit", year: "numeric" }) : "—"}</span>
+      <span class="payment-vl">${q.payment_date ? new Date(q.payment_date).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "2-digit", month: "2-digit", year: "numeric" }) : "—"}</span>
     </div>
     <div class="payment-info-row">
       <span class="payment-lb">${t.payment_method_label}:</span>

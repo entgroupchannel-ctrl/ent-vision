@@ -217,7 +217,7 @@ const LiveChatWidget = () => {
 
   const formatTime = (dateStr: string) => {
     const d = new Date(dateStr);
-    return d.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" });
+    return d.toLocaleTimeString("th-TH", { timeZone: "Asia/Bangkok", hour: "2-digit", minute: "2-digit" });
   };
 
   // Minimized state button - always visible

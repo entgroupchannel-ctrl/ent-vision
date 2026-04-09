@@ -343,7 +343,7 @@ const QuoteTimeline = ({ quoteId, quoteNumber, currentUserId, isAdmin = false, o
   };
 
   /* ─── Helpers ─── */
-  const fmt = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+  const fmt = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
   const isOverdue = (deadline: string | null) => deadline ? new Date(deadline) < new Date() : false;
 
   /* ─── Render ─── */

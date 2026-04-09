@@ -355,7 +355,7 @@ const AdminDocumentManager = () => {
   };
 
   /* ─── Helpers ─── */
-  const fmt = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+  const fmt = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
   const fmtSize = (b: number | null) => {
     if (!b) return "—";
     if (b < 1024) return `${b} B`;

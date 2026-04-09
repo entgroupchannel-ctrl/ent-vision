@@ -147,7 +147,7 @@ const PAYMENT_METHODS: Record<string, string> = {
 };
 
 const fmt = (n: number) => n.toLocaleString("th-TH", { minimumFractionDigits: 2 });
-const fmtDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" });
+const fmtDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric" });
 
 /* ═══════════════════════════════════════════════════ */
 const AdminInvoiceManager = () => {

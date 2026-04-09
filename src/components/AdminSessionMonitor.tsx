@@ -50,7 +50,7 @@ const AdminSessionMonitor = () => {
 
   const formatTime = (ts: number) => {
     const d = new Date(ts);
-    return d.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    return d.toLocaleTimeString("th-TH", { timeZone: "Asia/Bangkok", hour: "2-digit", minute: "2-digit", second: "2-digit" });
   };
 
   return (
