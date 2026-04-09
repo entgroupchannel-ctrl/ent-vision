@@ -38,7 +38,7 @@ const fmtRelative = (s: string) => {
   if (hours < 24) return `${hours} ชม.`;
   const days = Math.floor(hours / 24);
   if (days < 7) return `${days} วัน`;
-  return new Date(s).toLocaleDateString("th-TH");
+  return new Date(s).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok" });
 };
 
 interface NotificationBellProps {

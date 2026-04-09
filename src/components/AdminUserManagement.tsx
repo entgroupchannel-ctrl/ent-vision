@@ -393,7 +393,7 @@ const AdminUserManagement = () => {
                       <div className="flex items-center gap-4 text-sm text-muted-foreground font-medium">
                         <span className="flex items-center gap-1.5"><Pencil size={13} /> {editCount} edit</span>
                         <span className="flex items-center gap-1.5"><Eye size={13} /> {viewCount} view</span>
-                        <span className="flex items-center gap-1.5"><Clock size={13} /> {new Date(u.role_created_at).toLocaleDateString("th-TH")}</span>
+                        <span className="flex items-center gap-1.5"><Clock size={13} /> {new Date(u.role_created_at).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok" })}</span>
                       </div>
                     </button>
 
@@ -425,7 +425,7 @@ const AdminUserManagement = () => {
                     <span className={`text-sm px-3 py-1 rounded-full border font-bold ${roleColors[selectedUser.role] || roleColors.admin}`}>
                       {roleLabels[selectedUser.role] || selectedUser.role}
                     </span>
-                    <span className="text-sm text-muted-foreground font-medium">สมาชิกตั้งแต่ {new Date(selectedUser.user_created_at).toLocaleDateString("th-TH")}</span>
+                    <span className="text-sm text-muted-foreground font-medium">สมาชิกตั้งแต่ {new Date(selectedUser.user_created_at).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok" })}</span>
                   </div>
                 </div>
                 <select

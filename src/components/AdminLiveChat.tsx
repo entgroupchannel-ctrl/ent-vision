@@ -72,8 +72,8 @@ const AdminLiveChat = () => {
     const diff = now.getTime() - d.getTime();
     if (diff < 60000) return "เมื่อสักครู่";
     if (diff < 3600000) return `${Math.floor(diff / 60000)} นาที`;
-    if (diff < 86400000) return d.toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" });
-    return d.toLocaleDateString("th-TH", { day: "numeric", month: "short" });
+    if (diff < 86400000) return d.toLocaleTimeString("th-TH", { timeZone: "Asia/Bangkok", hour: "2-digit", minute: "2-digit" });
+    return d.toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short" });
   };
 
   // ─── Filter conversations ───
@@ -340,7 +340,7 @@ const MessageBubble = ({ message: msg }: MessageBubbleProps) => {
           {msg.content}
         </div>
         <span className={`text-[10px] text-muted-foreground mt-0.5 block ${isAdmin ? "text-right" : ""}`}>
-          {new Date(msg.created_at).toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" })}
+          {new Date(msg.created_at).toLocaleTimeString("th-TH", { timeZone: "Asia/Bangkok", hour: "2-digit", minute: "2-digit" })}
         </span>
       </div>
     </div>

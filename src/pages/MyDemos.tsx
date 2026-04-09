@@ -44,7 +44,7 @@ const MyDemos = () => {
   }, [user]);
 
   const formatDate = (d: string) =>
-    new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+    new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
 
   return (
     <div className="space-y-6">

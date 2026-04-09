@@ -206,7 +206,7 @@ const AdminDashboard = () => {
   const filteredContacts = statusFilter === "all" ? contacts : contacts.filter(c => c.status === statusFilter);
   const filteredQuotes = statusFilter === "all" ? quotes : quotes.filter(q => q.status === statusFilter);
 
-  const formatDate = (d: string) => new Date(d).toLocaleDateString("th-TH", {
+  const formatDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok",
     day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit",
   });
 
@@ -874,7 +874,7 @@ const AdminDashboard = () => {
                               <div className="text-xs"><span className="text-muted-foreground">ที่อยู่:</span> <span className="text-foreground">{selectedItem.business_card_data.address}</span></div>
                             )}
                             <div className="text-[11px] text-muted-foreground/60 pt-1">
-                              สแกนเมื่อ: {selectedItem.business_card_data.scanned_at ? new Date(selectedItem.business_card_data.scanned_at).toLocaleString("th-TH") : "-"}
+                              สแกนเมื่อ: {selectedItem.business_card_data.scanned_at ? new Date(selectedItem.business_card_data.scanned_at).toLocaleString("th-TH", { timeZone: "Asia/Bangkok" }) : "-"}
                             </div>
                           </div>
                         </div>

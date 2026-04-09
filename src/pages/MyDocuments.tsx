@@ -196,7 +196,7 @@ const MyDocuments = () => {
   };
 
   /* ─── Helpers ─── */
-  const fmt = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" });
+  const fmt = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric" });
   const fmtSize = (b: number | null) => {
     if (!b) return "";
     if (b < 1024) return `${b} B`;

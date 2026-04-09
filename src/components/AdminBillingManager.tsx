@@ -81,7 +81,7 @@ const STATUS_CFG: Record<string, { label: string; color: string; icon: typeof Cl
 };
 
 const fmt = (n: number) => n.toLocaleString("th-TH", { minimumFractionDigits: 2 });
-const fmtDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" });
+const fmtDate = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric" });
 
 /* ═══════════════════════════════════════════════════ */
 const AdminBillingManager = () => {

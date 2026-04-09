@@ -77,7 +77,7 @@ function timeAgo(dateStr: string): string {
 }
 
 function formatDate(d: string) {
-  return new Date(d).toLocaleDateString("th-TH", {
+  return new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok",
     day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit",
   });
 }

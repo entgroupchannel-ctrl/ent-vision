@@ -262,7 +262,7 @@ const MyInvoices = () => {
   };
 
   const fmt = (n: number | null) => (n ?? 0).toLocaleString("th-TH", { minimumFractionDigits: 2 });
-  const fmtDate = (d: string | null) => d ? new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" }) : "-";
+  const fmtDate = (d: string | null) => d ? new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric" }) : "-";
 
   const StatusBadge = ({ status }: { status: string }) => {
     const cfg = statusConfig[status] || { label: status, variant: "outline" as const, icon: Clock };

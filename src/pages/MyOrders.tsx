@@ -109,8 +109,8 @@ const MyOrders = () => {
 
   const fp = (n: number) => new Intl.NumberFormat("th-TH").format(Math.round(n));
   const fpd = (n: number) => new Intl.NumberFormat("th-TH", { minimumFractionDigits: 2 }).format(n);
-  const fd = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "2-digit", month: "2-digit", year: "numeric" });
-  const fdt = (d: string) => new Date(d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+  const fd = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "2-digit", month: "2-digit", year: "numeric" });
+  const fdt = (d: string) => new Date(d).toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
 
   const activeOrders = orders.filter((o) => !["completed", "cancelled"].includes(o.status));
   const pastOrders = orders.filter((o) => ["completed", "cancelled"].includes(o.status));
